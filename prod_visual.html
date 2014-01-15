@@ -42,6 +42,14 @@
         fill: #3300CC;
       }
 
+      .Medsphere {
+        fill: #FF00FF;
+      }
+
+      .Oroville {
+        fill: #660000;
+      }
+
       path.link {
         fill: none;
         stroke: #ccc;
@@ -78,7 +86,7 @@ var m = [10, 120, 10, 120],
     root;
 
 var selectedIndex = 0;
-var catcolors = ["black", "#FF0000", "#3300CC", "#080"];
+var catcolors = ["black", "#FF0000", "#3300CC", "#080", "#FF00FF", "#660000"];
 
 var tree = d3.layout.tree()
     .size([h, w]);
@@ -110,7 +118,10 @@ d3.json("packages.json", function(json) {
   toggle(root.children[0].children[2]);
   toggle(root.children[0].children[3]);
   toggle(root.children[1]);
-  toggle(root.children[1].children[3]);
+  toggle(root.children[1].children[0]);
+  toggle(root.children[1].children[4]);
+  toggle(root.children[4]);
+  toggle(root.children[4].children[0]);
 
   update(root);
 });
@@ -290,7 +301,7 @@ function node_onMouseOver(d) {
 }
 
 
-var categories = ["All", "OSEHRA", "VA", "DSS"];
+var categories = ["All", "OSEHRA", "VA", "DSS", "Medsphere", "Oroville"];
 
 // Legend.
 var legend = vis.selectAll("g.legend")

@@ -1,6 +1,8 @@
 import csv
 import json
 
+DISTR_LIST = ("VA","OSEHRA","DSS","Medsphere","Oroville")
+
 def convert_pkg_cat_csv_json():
   pkg_catagory = csv.DictReader(open("ProductDefinition.csv",'r'))
   pkgCatDict = dict() # create a package info direct from csv file
@@ -26,9 +28,7 @@ def convert_pkg_cat_csv_json():
         catPkgDict[curCat][curCap].add(pkgName)
       else:
         print "error"
-      pkg = fields['DSS Package']
-      pkgCatDict[pkgName] = [fields['DSS Package'], fields['VA Package'],
-          fields['OSEHRA Package']]
+      pkgCatDict[pkgName] = [fields[x] for x in DISTR_LIST]
 
   packageJson = generate_output_json_dict(catPkgDict, pkgCatDict)
   output = json.dumps(packageJson)
@@ -72,21 +72,11 @@ def generate_output_json_dict(inputDict, pkgCatDict):
               outPkg['prefixes'] = pkgNamePrex[pkg]
             else:
               outPkg['hasLink'] = False
-            if pkg in pkgCatDict:
-              infoLst = pkgCatDict[pkg]
-              outPkg['category'] = []
-              if pkg in pkgNameSet:
-                outPkg['category'].extend(['VA Packages', 'OSEHRA Packages'])
-              else:
-                outPkg['category'].extend(['DSS Packages'])
-              """ comment out this part until we have a distribution list
-              if infoLst[0] == '1':
-                outPkg['category'].append('DSS Package')
-              if infoLst[1] == '1':
-                outPkg['category'].append('VA Package')
-              if infoLst[2] == '1':
-                outPkg['category'].append('OSEHRA Package')
-              """
+            outPkg['category'] = []
+            infoLst = pkgCatDict[pkg]
+            for idx, item in enumerate(infoLst):
+              if item:
+                outPkg['category'].append(DISTR_LIST[idx] + " Packages")
             outCapItem['children'].append(outPkg)
         outItem['children'].append(outCapItem)
     packageJson['children'].append(outItem)
