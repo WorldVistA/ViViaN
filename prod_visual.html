@@ -71,6 +71,9 @@
       <br>Thanks to our corporate members for allowing the use of their names.</br>
     </div>
     <div class="hint">click or option-click to expand or collapse</div>
+    <br>
+    <div><button onclick="collapseAllNode()">Collapse All</button></div>
+    <div><button onclick="resetAllNode()">Reset All</button></div>
   </div>
   <!-- Tooltip -->
 <div id="toolTip" class="tooltip" style="opacity:0;">
@@ -84,7 +87,7 @@
 
 var m = [10, 120, 10, 120],
     w = 1280 - m[1] - m[3],
-    h = 900 - m[0] - m[2],
+    h = 1050 - m[0] - m[2],
     i = 0,
     root;
 
@@ -108,15 +111,34 @@ d3.json("packages.json", function(json) {
   root.x0 = h / 2;
   root.y0 = 0;
 
-  function toggleAll(d) {
-    if (d.children) {
-      d.children.forEach(toggleAll);
-      toggle(d);
-    }
+  resetAllNode();
+});
+
+function toggleAll(d) {
+  if (d.children) {
+    d.children.forEach(toggleAll);
+    toggle(d);
   }
+}
+
+function collapseAllNode() {
+  //root.children.forEach(toggleAll);
+  root.children.forEach(collapseAll);
+  update(root);
+}
+
+function collapseAll(d) {
+  collapse(d);
+  if (d.children) {
+    d.children.forEach(collapseAll);
+  }
+}
+
+function resetAllNode() {
+  root.children.forEach(toggleAll);
+  root.children.forEach(resetAll);
 
   // Initialize the display to show a few nodes.
-  root.children.forEach(toggleAll);
   toggle(root.children[0]);
   toggle(root.children[0].children[2]);
   toggle(root.children[0].children[3]);
@@ -125,9 +147,30 @@ d3.json("packages.json", function(json) {
   toggle(root.children[1].children[4]);
   toggle(root.children[4]);
   toggle(root.children[4].children[0]);
-
   update(root);
-});
+}
+
+function resetAll(d) {
+  if (d.children) {
+    d.children.forEach(resetAll);
+    reset(d);
+  }
+}
+
+function reset(d) {
+  if (d.children) {
+    d._children = d.children;
+    d.children = null;
+  }
+}
+
+// Collapse children.
+function collapse(d) {
+  if (d._children) {
+    d.children = d._children;
+    d._children = null;
+  }
+}
 
 var package_link_url = "http://code.osehra.org/dox/Package_";
 var toolTip = d3.select(document.getElementById("toolTip"));
