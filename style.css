@@ -114,6 +114,7 @@ div.tooltip {
     box-shadow: 0 1px 5px rgba(0,0,0,0.4);
     -moz-box-shadow: 0 1px 5px rgba(0,0,0,0.4);
     border:1px solid rgba(200,200,200,0.85);
+    z-index: 10000;
 }
 
 div.tooltipTail {
