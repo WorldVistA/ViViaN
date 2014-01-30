@@ -34,6 +34,7 @@ body {
   top: 680px;
   right: 140px;
   text-align: right;
+  font-size: 22px;
 }
 
 rect {
@@ -92,6 +93,9 @@ a:hover {
   font-size: 9px;
 }
 
+.underline {
+  text-decoration: underline;
+}
 /* Tooltip */
 
 div.tooltip {
