@@ -61,7 +61,9 @@
     </style>
     <script>
       $(function() {
-        $( "#radio" ).buttonset();
+        $( "button" ).button().click(function(event){
+          event.preventDefault();
+        });
       });
     </script>
   </head>
@@ -72,13 +74,11 @@
     <img src="http://www.osehra.org/profiles/drupal_commons/themes/commons_osehra_earth/logo.png"
     style="border-width:0" alt="OSEHRA" /></a>
     <!-- <select id="category"></select> -->
-    <form>
-      <div id="radio" style="font-size:10px; position:absolute; left:300px; top:30px;">
-        <input type="radio" id="radio1" name="radio" onclick="expandAllNode()"><label for="radio1">Expand All</label>
-        <input type="radio" id="radio2" name="radio" onclick="collapseAllNode()"><label for="radio2">Collapse All</label>
-        <input type="radio" id="radio3" name="radio" onclick="resetAllNode()"><label for="radio3">Reset</label>
-      </div>
-    </form>
+    <div style="font-size:10px; position:absolute; left:300px; top:30px;">
+      <button onclick="expandAllNode()">Expand All</button>
+      <button onclick="collapseAllNode()">Collapse All</button>
+      <button onclick="resetAllNode()">Reset</button>
+    </div>
   </div>
   <div id="footer" style="position:absolute; right:10px; top:0px;">
     VIVIAN (<u>Vi</u>sualizing <u>Vi</u>stA <u>A</u>nd <u>N</u>amespace) Demonstration Site
@@ -158,14 +158,16 @@ function resetAllNode() {
   expand(root);
   root.children.forEach(collapseAll);
   // Initialize the display to show a few nodes.
-  toggle(root.children[0]);
-  toggle(root.children[0].children[2]);
-  toggle(root.children[0].children[3]);
-  toggle(root.children[1]);
-  toggle(root.children[1].children[0]);
-  toggle(root.children[1].children[4]);
-  toggle(root.children[4]);
-  toggle(root.children[4].children[0]);
+  expandAll(root.children[0]);
+  //root.children[0].forEach(toggleAll);
+  //toggle(root.children[0]);
+  //toggle(root.children[0].children[2]);
+  //toggle(root.children[0].children[3]);
+  //toggle(root.children[1]);
+  //toggle(root.children[1].children[0]);
+  //toggle(root.children[1].children[4]);
+  //toggle(root.children[4]);
+  //toggle(root.children[4].children[0]);
   update(root);
 }
 
