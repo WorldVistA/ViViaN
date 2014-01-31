@@ -189,11 +189,11 @@ div.header4 {
 /* Navigation */
 .nytg-navBar {
     border-top: solid 1px #DDD;
-    padding: 15px 0 0;
+    padding: 10px 0 0;
     margin: 0 10px;
     z-index: 100;
     position: absolute;
-    width: 950px;
+    width: 550px;
 }
 
 

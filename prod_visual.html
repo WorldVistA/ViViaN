@@ -3,6 +3,10 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
     <link type="text/css" rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    
     <script src="d3/d3.v3.min.js" charset="utf-8"></script>
     <style type="text/css">
       .node circle {
@@ -55,14 +59,26 @@
         stroke-width: 1.5px;
       }
     </style>
+    <script>
+      $(function() {
+        $( "#radio" ).buttonset();
+      });
+    </script>
   </head>
 
-<body style="height:900; width:1280px; overflow:auto">
+<body style="height:1050px; width:1280px; overflow:auto">
   <div class="nytg-navBar">
     <a href="http://www.osehra.org">
     <img src="http://www.osehra.org/profiles/drupal_commons/themes/commons_osehra_earth/logo.png"
     style="border-width:0" alt="OSEHRA" /></a>
     <!-- <select id="category"></select> -->
+    <form>
+      <div id="radio" style="font-size:10px; position:absolute; left:300px; top:30px;">
+        <input type="radio" id="radio1" name="radio" onclick="expandAllNode()"><label for="radio1">Expand All</label>
+        <input type="radio" id="radio2" name="radio" onclick="collapseAllNode()"><label for="radio2">Collapse All</label>
+        <input type="radio" id="radio3" name="radio" onclick="resetAllNode()"><label for="radio3">Reset</label>
+      </div>
+    </form>
   </div>
   <div id="footer" style="position:absolute; right:10px; top:0px;">
     VIVIAN (<u>Vi</u>sualizing <u>Vi</u>stA <u>A</u>nd <u>N</u>amespace) Demonstration Site
@@ -71,9 +87,6 @@
       <br>We acknowledge with thanks our corporate members whose names appear on this page.</br>
     </div>
     <div class="hint">click or option-click to expand or collapse</div>
-    <br>
-    <div><button onclick="collapseAllNode()">Collapse All</button></div>
-    <div><button onclick="resetAllNode()">Reset All</button></div>
   </div>
   <!-- Tooltip -->
 <div id="toolTip" class="tooltip" style="opacity:0;">
@@ -121,22 +134,29 @@ function toggleAll(d) {
   }
 }
 
-function collapseAllNode() {
+function expandAllNode() {
   //root.children.forEach(toggleAll);
-  root.children.forEach(collapseAll);
+  expand(root)
+  root.children.forEach(expandAll);
   update(root);
 }
 
-function collapseAll(d) {
-  collapse(d);
+function collapseAllNode() {
+  root.children.forEach(collapseAll);
+  collapse(root)
+  update(root);
+}
+
+function expandAll(d) {
+  expand(d);
   if (d.children) {
-    d.children.forEach(collapseAll);
+    d.children.forEach(expandAll);
   }
 }
 
 function resetAllNode() {
-  root.children.forEach(resetAll);
-
+  expand(root);
+  root.children.forEach(collapseAll);
   // Initialize the display to show a few nodes.
   toggle(root.children[0]);
   toggle(root.children[0].children[2]);
@@ -149,22 +169,23 @@ function resetAllNode() {
   update(root);
 }
 
-function resetAll(d) {
+function collapseAll(d) {
   if (d.children) {
-    d.children.forEach(resetAll);
-    reset(d);
+    d.children.forEach(collapseAll);
+    collapse(d);
   }
 }
 
-function reset(d) {
+// Collapse Node.
+function collapse(d) {
   if (d.children) {
     d._children = d.children;
     d.children = null;
   }
 }
 
-// Collapse children.
-function collapse(d) {
+// Expand children.
+function expand(d) {
   if (d._children) {
     d.children = d._children;
     d._children = null;
