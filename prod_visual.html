@@ -19,7 +19,6 @@
       .node text {
         font-size: 12px;
         cursor: hand;
-        cursor: pointer;
       }
 
       .legend circle {
@@ -59,11 +58,13 @@
         stroke-width: 1.5px;
       }
     </style>
+    <!-- JQuery Buttons -->
     <script>
       $(function() {
         $( "button" ).button().click(function(event){
           event.preventDefault();
         });
+        $("#accordion").accordion().hide();
       });
     </script>
   </head>
@@ -95,6 +96,24 @@
 </div>
 
 <div id="body" style="position: absolute; left:80px; top:50px">
+</div>
+<div id="dialog-modal" title="Package Details">
+  <div id="accordion">
+      <h3><a href="#">Description</a></h3>
+      <div> <p> This is Package Description </p> </div>
+      <h3><a href="#">Names</a></h3>
+      <div> <p> This is Package Name </p> </div>
+      <h3><a href="#">Namespaces</a></h3>
+      <div> <p> This is Section 3 </p>
+          <ul>
+              <li>List item one</li>
+              <li>List item two</li>
+              <li>List item three</li>
+          </ul>
+      </div>
+      <h3><a href="#">Interface</a></h3>
+      <div> <p> This is Section 4 </p> <p> This is Section 5 </p> </div>
+  </div>
 </div>
 <script type="text/javascript">
 
@@ -218,9 +237,20 @@ function update(source) {
       .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
       .on("click", function(d) {
           if (d.hasLink) {
-            var pkgUrl = package_link_url + d.name.replace(/ /g, '_') + ".html";
-            var win = window.open(pkgUrl, '_black');
-            win.focus();
+            var overlayDialogObj = {
+              autoOpen: true,
+              height: 400,
+              width: 400,
+              modal: true,
+              open: function(){
+                  $('#accordion').accordion(
+                      {heightStyle: "fill", collapsible: true}).show();
+              },
+           };
+           $('#dialog-modal').dialog(overlayDialogObj).show();
+            // var pkgUrl = package_link_url + d.name.replace(/ /g, '_') + ".html";
+            // var win = window.open(pkgUrl, '_black');
+            // win.focus();
             return;
           }
           toggle(d);
@@ -250,6 +280,7 @@ function update(source) {
       .attr("fill", function(node){
         return change_node_color(node)
       })
+      .attr("cursor", function(d){ return d.hasLink !== undefined && d.hasLink ? "pointer" : "hand";})
       .style("fill-opacity", 1e-6);
   
   // Transition nodes to their new position.
