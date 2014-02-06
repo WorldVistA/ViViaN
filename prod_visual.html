@@ -64,7 +64,6 @@
         $( "button" ).button().click(function(event){
           event.preventDefault();
         });
-        $("#accordion").accordion().hide();
       });
     </script>
   </head>
@@ -97,26 +96,19 @@
 
 <div id="body" style="position: absolute; left:80px; top:50px">
 </div>
-<div id="dialog-modal" title="Package Details">
+<div id="dialog-modal">
   <div id="accordion">
       <h3><a href="#">Description</a></h3>
-      <div> <p> This is Package Description </p> </div>
-      <h3><a href="#">Names</a></h3>
-      <div> <p> This is Package Name </p> </div>
+      <div id="description"></div>
       <h3><a href="#">Namespaces</a></h3>
-      <div> <p> This is Section 3 </p>
-          <ul>
-              <li>List item one</li>
-              <li>List item two</li>
-              <li>List item three</li>
-          </ul>
-      </div>
+      <div id="namespaces"></div>
       <h3><a href="#">Interface</a></h3>
-      <div> <p> This is Section 4 </p> <p> This is Section 5 </p> </div>
+      <div id="interface"></div>
   </div>
 </div>
 <script type="text/javascript">
 
+$("#accordion").accordion().hide();
 var m = [10, 120, 10, 120],
     w = 1280 - m[1] - m[3],
     h = 1050 - m[0] - m[2],
@@ -216,6 +208,25 @@ function expand(d) {
 var package_link_url = "http://code.osehra.org/dox/Package_";
 var toolTip = d3.select(document.getElementById("toolTip"));
 var header = d3.select(document.getElementById("head"));
+var intf = d3.select(document.getElementById("interface"));
+
+var sddesc = "The VistA Scheduling package allows a user to Schedule appointments for" +
+"the following types of appointments:" +
+"                Scheduled" +
+"               C and P" +
+"                Collateral" +
+"It also allows entry of an unscheduled appointment at any time during a day" +
+"on which the clinic being scheduled into meets.  From these appointments," +
+"various output reports are produced such as, but not limited to, file room" +
+"list, appointment list, routing slips, letters for cancellations, no-shows," +
+"and pre-appointment.  There is an additional capability where additional" +
+"clinic stop credits can be directly entered and associated with a particular" +
+"patient and date.  AMIS reporting is handled via a set of extract routines" +
+"that summarize the data found by reading through the appointments and" +
+"additional clinic stops and the 10/10 and unscheduled visits (outpatient" +
+"credit given to Admitting/Screening) and storing the information by patient" +
+"and visit date in the OCP File.  The AMIS 223 report and the OPC" +
+"file to be sent to the Austin DPC are generated using this file.";
 
 
 function update(source) {
@@ -239,12 +250,20 @@ function update(source) {
           if (d.hasLink) {
             var overlayDialogObj = {
               autoOpen: true,
-              height: 400,
-              width: 400,
+              height: 500,
+              width: 700,
               modal: true,
+              title: "Package: " + d.name,
               open: function(){
-                  $('#accordion').accordion(
-                      {heightStyle: "fill", collapsible: true}).show();
+                  intf.text("This is the new interface");
+                  $('#namespaces').html(d.prefixes)
+                  $('#description').text(sddesc);
+                  $('#accordion').accordion({
+                     heightStyle: "auto",
+                     collapsible: true}).show();
+                  $('#accordion').accordion("option", "active", 0);
+                  $('#accordion').accordion("refresh");
+                  $('#accordion').blur();
               },
            };
            $('#dialog-modal').dialog(overlayDialogObj).show();
