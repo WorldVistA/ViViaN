@@ -57,6 +57,8 @@
         stroke: #ccc;
         stroke-width: 1.5px;
       }
+      A:hover { text-decoration: none; background-color: #f2f2ff }
+      A:link { text-decoration: underline;}
     </style>
     <!-- JQuery Buttons -->
     <script>
@@ -104,6 +106,8 @@
       <div id="namespaces"></div>
       <h3><a href="#">Interface</a></h3>
       <div id="interface"></div>
+      <h3><a href="#">Dependency</a></h3>
+      <div id="dependency"></div>
   </div>
 </div>
 <script type="text/javascript">
@@ -208,25 +212,24 @@ function expand(d) {
 var package_link_url = "http://code.osehra.org/dox/Package_";
 var toolTip = d3.select(document.getElementById("toolTip"));
 var header = d3.select(document.getElementById("head"));
-var intf = d3.select(document.getElementById("interface"));
 
-var sddesc = "The VistA Scheduling package allows a user to Schedule appointments for" +
-"the following types of appointments:" +
-"                Scheduled" +
-"               C and P" +
-"                Collateral" +
-"It also allows entry of an unscheduled appointment at any time during a day" +
-"on which the clinic being scheduled into meets.  From these appointments," +
-"various output reports are produced such as, but not limited to, file room" +
-"list, appointment list, routing slips, letters for cancellations, no-shows," +
-"and pre-appointment.  There is an additional capability where additional" +
-"clinic stop credits can be directly entered and associated with a particular" +
-"patient and date.  AMIS reporting is handled via a set of extract routines" +
-"that summarize the data found by reading through the appointments and" +
-"additional clinic stops and the 10/10 and unscheduled visits (outpatient" +
-"credit given to Admitting/Screening) and storing the information by patient" +
-"and visit date in the OCP File.  The AMIS 223 report and the OPC" +
-"file to be sent to the Austin DPC are generated using this file.";
+var sddesc = "<p>The VistA Scheduling package allows a user to Schedule appointments for" +
+" the following types of appointments:" +
+"<ul><li>Scheduled</li>" +
+"<li>C and P</li>" +
+"<li>Collateral</li></ul>" +
+" It also allows entry of an unscheduled appointment at any time during a day" +
+" on which the clinic being scheduled into meets.  From these appointments," +
+" various output reports are produced such as, but not limited to, file room" +
+" list, appointment list, routing slips, letters for cancellations, no-shows," +
+" and pre-appointment.  There is an additional capability where additional" +
+" clinic stop credits can be directly entered and associated with a particular" +
+" patient and date.  AMIS reporting is handled via a set of extract routines" +
+" that summarize the data found by reading through the appointments and" +
+" additional clinic stops and the 10/10 and unscheduled visits (outpatient" +
+" credit given to Admitting/Screening) and storing the information by patient" +
+" and visit date in the OCP File.  The AMIS 223 report and the OPC" +
+" file to be sent to the Austin DPC are generated using this file.</p>";
 
 
 function update(source) {
@@ -241,7 +244,7 @@ function update(source) {
   // Update the nodes
   var node = vis.selectAll("g.node")
       .data(nodes, function(d) { return d.id || (d.id = ++i); });
-  
+
   // Enter any new nodes at the parent's previous position.
   var nodeEnter = node.enter().append("svg:g")
       .attr("class", "node")
@@ -250,16 +253,24 @@ function update(source) {
           if (d.hasLink) {
             var overlayDialogObj = {
               autoOpen: true,
-              height: 500,
+              height: 700,
               width: 700,
               modal: true,
               title: "Package: " + d.name,
               open: function(){
-                  intf.text("This is the new interface");
-                  $('#namespaces').html(d.prefixes)
-                  $('#description').text(sddesc);
+                  htmlLnk = getInterfaceHtml(d.name);
+                  $('#interface').html(htmlLnk);
+                  $('#namespaces').html(getNamespaceHtml(d.prefixes))
+                  if (d.name === 'Scheduling'){
+                    $('#description').html(sddesc);
+                  }
+                  else{
+                    $('#description').html(d.name);
+                  }
+                  depLink = getDependencyContentHtml(d.name)
+                  $('#dependency').html(depLink);
                   $('#accordion').accordion({
-                     heightStyle: "auto",
+                     heightStyle: "fill",
                      collapsible: true}).show();
                   $('#accordion').accordion("option", "active", 0);
                   $('#accordion').accordion("refresh");
@@ -361,6 +372,47 @@ function update(source) {
     d.x0 = d.x;
     d.y0 = d.y;
   });
+}
+
+function getPackageDoxLink(pkgName) {
+  var doxLinkName = pkgName.replace(/ /g, '_').replace(/-/g, '_')
+  return package_link_url + doxLinkName + ".html";
+}
+
+function getNamespaceHtml(namespace) {
+  var i=0, len=namespace.length;
+  var htmlLnk = "<ul>";
+  for (; i<len; i++) {
+    htmlLnk += "<li>" + namespace[i] + "</li>";
+  }
+  htmlLnk += "</ul>";
+  return htmlLnk;
+}
+
+function getInterfaceHtml(pkgName) {
+  var htmlLnk = "<ul>";
+  if (pkgName === 'Order Entry Results Reporting'){
+    htmlLnk += "<li><a href=\"http://www.osehra.org/content/vista-api?quicktabs_vista_api=0#quicktabs-vista_api\" target=\"_blank\">M API</a></li>";
+    htmlLnk += "<li><a href=\"http://www.osehra.org/content/vista-api?quicktabs_vista_api=1#quicktabs-vista_api\" target=\"_blank\">Remote Procedure Call</a></li>";
+    htmlLnk += "<li><a href=\"http://www.osehra.org/content/vista-api?quicktabs_vista_api=2#quicktabs-vista_api\" target=\"_blank\">Web Service API</a></li>";
+    htmlLnk += "<li>HL7</li>";
+    htmlLnk += "</ul>";
+  }
+  else{
+    htmlLnk += "<li>M API</li>";
+    htmlLnk += "<li>Remote Procedure Call</li>";
+    htmlLnk += "<li>Web Service API</li>";
+    htmlLnk += "<li>HL7</li>";
+    htmlLnk += "</ul>";
+  }
+  return htmlLnk;
+}
+
+function getDependencyContentHtml(pkgName) {
+  var pkgUrl = getPackageDoxLink(pkgName)
+  depLink = "<ul><li><a href=\"" + pkgUrl + "\" target=\"_blank\">";
+  depLink += "Visual Cross-Reference Documentation" + "</a></li></ul>";
+  return depLink
 }
 
 // Toggle children.
