@@ -112,7 +112,7 @@
 </div>
 <script type="text/javascript">
 
-$("#accordion").accordion().hide();
+  $("#accordion").accordion({heightStyle: 'content'}).hide();
 var m = [10, 120, 10, 120],
     w = 1280 - m[1] - m[3],
     h = 1050 - m[0] - m[2],
@@ -269,15 +269,12 @@ function update(source) {
                   }
                   depLink = getDependencyContentHtml(d.name)
                   $('#dependency').html(depLink);
-                  $('#accordion').accordion({
-                     heightStyle: "fill",
-                     collapsible: true}).show();
                   $('#accordion').accordion("option", "active", 0);
                   $('#accordion').accordion("refresh");
-                  $('#accordion').blur();
+                  $('#accordion').accordion({heightStyle: 'content'}).show();
               },
            };
-           $('#dialog-modal').dialog(overlayDialogObj).show();
+           $('#dialog-modal').dialog(overlayDialogObj).open();
             // var pkgUrl = package_link_url + d.name.replace(/ /g, '_') + ".html";
             // var win = window.open(pkgUrl, '_black');
             // win.focus();
