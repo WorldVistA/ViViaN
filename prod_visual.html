@@ -99,20 +99,19 @@
 <div id="body" style="position: absolute; left:80px; top:50px">
 </div>
 <div id="dialog-modal">
+  <div id='namespaces'></div>
+  <div id='dependencies'></div>
   <div id="accordion">
+      <h3><a href="#">Interfaces</a></h3>
+      <div id="interface"></div>
       <h3><a href="#">Description</a></h3>
       <div id="description"></div>
-      <h3><a href="#">Namespaces</a></h3>
-      <div id="namespaces"></div>
-      <h3><a href="#">Interface</a></h3>
-      <div id="interface"></div>
-      <h3><a href="#">Dependency</a></h3>
-      <div id="dependency"></div>
   </div>
 </div>
 <script type="text/javascript">
-
-  $("#accordion").accordion({heightStyle: 'content'}).hide();
+$('#namespaces').hide();
+$('#dependencies').hide();
+$("#accordion").accordion({heightStyle: 'content', collapsible: true}).hide();
 var m = [10, 120, 10, 120],
     w = 1280 - m[1] - m[3],
     h = 1050 - m[0] - m[2],
@@ -256,12 +255,13 @@ function update(source) {
               height: 'auto',
               width: 700,
               modal: true,
-              position: ["center",],
+              position: ["center","center-50"],
               title: "Package: " + d.name,
               open: function(){
                   htmlLnk = getInterfaceHtml(d.name);
                   $('#interface').html(htmlLnk);
                   $('#namespaces').html(getNamespaceHtml(d.prefixes))
+                  $('#namespaces').show();
                   if (d.name === 'Scheduling'){
                     $('#description').html(sddesc);
                   }
@@ -269,13 +269,14 @@ function update(source) {
                     $('#description').html(d.name);
                   }
                   depLink = getDependencyContentHtml(d.name)
-                  $('#dependency').html(depLink);
+                  $('#dependencies').html(depLink);
+                  $('#dependencies').show();
                   $('#accordion').accordion("option", "active", 0);
                   $('#accordion').accordion("refresh");
                   $('#accordion').accordion({heightStyle: 'content'}).show();
               },
            };
-           $('#dialog-modal').dialog(overlayDialogObj).open();
+           $('#dialog-modal').dialog(overlayDialogObj).show();
             // var pkgUrl = package_link_url + d.name.replace(/ /g, '_') + ".html";
             // var win = window.open(pkgUrl, '_black');
             // win.focus();
@@ -379,11 +380,11 @@ function getPackageDoxLink(pkgName) {
 
 function getNamespaceHtml(namespace) {
   var i=0, len=namespace.length;
-  var htmlLnk = "<ul>";
-  for (; i<len; i++) {
-    htmlLnk += "<li>" + namespace[i] + "</li>";
+  var htmlLnk = "<h4>Namespaces: </h4>";
+  for (; i<len-1; i++) {
+    htmlLnk += "&nbsp;" + namespace[i] + ",&nbsp;";
   }
-  htmlLnk += "</ul>";
+  htmlLnk += "&nbsp;" + namespace[i];
   return htmlLnk;
 }
 
@@ -408,9 +409,9 @@ function getInterfaceHtml(pkgName) {
 
 function getDependencyContentHtml(pkgName) {
   var pkgUrl = getPackageDoxLink(pkgName)
-  depLink = "<ul><li><a href=\"" + pkgUrl + "\" target=\"_blank\">";
-  depLink += "Visual Cross-Reference Documentation" + "</a></li></ul>";
-  return depLink
+  depLink = "<h4><a href=\"" + pkgUrl + "\" target=\"_blank\">";
+  depLink += "Dependencies & Code View" + "</a></h4>";
+  return depLink;
 }
 
 // Toggle children.
