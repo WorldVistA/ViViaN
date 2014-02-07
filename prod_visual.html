@@ -253,9 +253,10 @@ function update(source) {
           if (d.hasLink) {
             var overlayDialogObj = {
               autoOpen: true,
-              height: 700,
+              height: 'auto',
               width: 700,
               modal: true,
+              position: ["center",],
               title: "Package: " + d.name,
               open: function(){
                   htmlLnk = getInterfaceHtml(d.name);
