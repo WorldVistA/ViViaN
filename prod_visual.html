@@ -99,8 +99,8 @@
 <div id="body" style="position: absolute; left:80px; top:50px">
 </div>
 <div id="dialog-modal">
-  <div id='namespaces'></div>
-  <div id='dependencies'></div>
+  <div id='namespaces' style="display:none"></div>
+  <div id='dependencies' style="display:none"></div>
   <div id="accordion">
       <h3><a href="#">Interfaces</a></h3>
       <div id="interface"></div>
@@ -109,8 +109,6 @@
   </div>
 </div>
 <script type="text/javascript">
-$('#namespaces').hide();
-$('#dependencies').hide();
 $("#accordion").accordion({heightStyle: 'content', collapsible: true}).hide();
 var m = [10, 120, 10, 120],
     w = 1280 - m[1] - m[3],
