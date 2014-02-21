@@ -1,0 +1,50 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>ORRC ORDERS VERIFY (1743)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>ORRC ORDERS VERIFY</td></tr><tr>
+<td>TAG</td><td>VERIFY</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_ORRCOR.html">ORRCOR</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>SUBSCRIPTION</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This call accepts a list of order IDs to be marked as verified.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>USER</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the pointer to the user in the New Person file #200.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>ORDERS</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is a list of order identifiers in the form ORV:order#;action#, where
+order# is the pointer to the Orders file #100 and action# is the IEN in
+the Order Actions sub-file.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+This call returns a list of the order identifiers passed into the call as
+well as a flag indicating if the requested update was successful, in the
+form ID^1 or ID^0^error if not.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

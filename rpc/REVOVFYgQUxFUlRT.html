@@ -1,0 +1,50 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DENTV ALERTS (2087)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DENTV ALERTS</td></tr><tr>
+<td>TAG</td><td>GAL</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DENTVUTL.html">DENTVUTL</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This RPC gets Dental Alerts from file 220.  It also sets them into 220.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>DFN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>30</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+The patient ien to look up Dental Alerts in file 220.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>ALERTS</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>30</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+List of Alert text entries to be added to the dental patient, e.g.:
+Sedation Premed
+Travel Issue
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Returns list of Alert text for the patient in parameter 1.
+Or, returns "-1^error message"
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

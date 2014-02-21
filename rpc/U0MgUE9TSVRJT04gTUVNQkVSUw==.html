@@ -1,0 +1,50 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>SC POSITION MEMBERS (35)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>SC POSITION MEMBERS</td></tr><tr>
+<td>TAG</td><td>PSLST</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_SCUTBK11.html">SCUTBK11</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>PUBLIC</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Returns an array of positions.  For each position, the standard role,
+team member currently filling, and the preceptor (if any) for the 
+team member.   Returns both Internal and external values.
+Piece 1:  Team Ien
+|TAB|  2:  Position Ien
+|TAB|  3:  Team member Ien (File #200)
+|TAB|  4:  Team member's name
+      5:  Precpetor's Ien (File #200)
+|TAB|  6:  Preceptor's Name
+|TAB|  7:  Primary Care role (if any) for position.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>LIST ATTRIBUTES</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>512</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>DESCRIPTION:</dt><dd><pre>
+   DFN  : Patient's dfn
+   BEGIN:   Beginning date range
+   END  :   Ending date range
+</pre>
+</dd></li></ol></td></tbody>
+</table>
+</body></html>

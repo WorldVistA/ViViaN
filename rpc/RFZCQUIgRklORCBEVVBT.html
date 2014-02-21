@@ -1,0 +1,68 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DVBAB FIND DUPS (2041)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DVBAB FIND DUPS</td></tr><tr>
+<td>TAG</td><td>DUP</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DVBAB84.html">DVBAB84</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>SUBSCRIPTION</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Find potential duplicates within the PATIENT File (#2)
+ 
+At least one of NAM, DOB, or SSN must be passed
+Possible matches are "better" when more than one of these is passed
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>NAM</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+Name of possible patient
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>DOB</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>7</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+Date of Birth of possible patient
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>SSN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>10</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+Social Security Number of possible patient
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+BYREF - Passed by reference, will contain name of a TMP Global housing the results
+ 
+Subscript 0:  -1^ERROR_MESSAGE (in the event of an error)
+ 
+   OR
+ 
+Subscript    0:  Number of potential matches found (if no errors)
+Subscript  1-K:  Patient's matching ALL 3 of NAM, DOB, SSN have a weighting of 3 (see Note)
+Subscript K+1-L: Patient's matching ANY 2 of NAM, DOB, SSN have a weighting of 2 (see Note)
+Subscript L+1-M: Patient's matching ONLY 1 of NAM, DOB, SSN have a weighting of 1 (see Note)
+ 
+^TMP(1-M) = DFN^ZERO_NODE
+    where   DFN is the Patient IEN
+            ZERO_NODE is the data from ^DPT(DFN,0)
+ 
+NOTE: Potential matches within a weighting (if any) will be sorted by Patient Name
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

@@ -1,0 +1,51 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIR ADD ANNOTATION (2081)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIR ADD ANNOTATION</td></tr><tr>
+<td>TAG</td><td>ADDANNO</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSIROI.html">DSIROI</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This RPC adds entries into file 19620.98 which is for internal 
+annotations on patients pertinent to the ROI department.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>PATIENT</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>999</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the pointer to either the Patient File #2 or the DSIR 
+Non-Computerized Patient file #19620.96.
+ 
+Example values:
+ 
+        2345;DPT(
+        23111;DSIR(19620.96,
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+-1^Missing/Invalid Patient Pointer!
+-2^Unable to add record!
+NNNN - File Entry Number of added record in 19620.98
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

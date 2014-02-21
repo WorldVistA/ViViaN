@@ -1,0 +1,52 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>MAGV DICOM GET COUNT (3107)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>MAGV DICOM GET COUNT</td></tr><tr>
+<td>TAG</td><td>DCRCTCNT</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_MAGVRS51.html">MAGVRS51</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This RPC returns the count of entries in the DICOM FAILED IMAGES
+(#2006.575) file with machine IDs and service types provided to the
+RPC.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>MACHID</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>24</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+The machine ID to be matched to the machine ID in the DICOM FAILED
+IMAGES (#2006.575) file.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>SERVTYPE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>20</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+The service type to be matched to the service type in the DICOM
+FAILED IMAGES (#2006.575) file.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Returns the integer count of entries in the DICOM FAILED IMAGES
+(#2006.575) file with the machine IDs and service types provided to the
+RPC.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

@@ -1,0 +1,97 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIC GET VISITS/APPOINTMENT (1598)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIC GET VISITS/APPOINTMENT</td></tr><tr>
+<td>TAG</td><td>VSIT</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSICVT0.html">DSICVT0</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This will call the DSIC GET SCHED APPTS rpc to get the scheduled
+appointments for the user inputted date range.  It uses SELECTED^VSIT to 
+find all visits.  It uses IN5^VADPT to get the current admission.  It 
+will also get historical admission data, but manipulate the hospital 
+location pointer values to the Visit LOCATION (#9999999.06) file,
+that points to the INSTITUTION (#4) file.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>DATA</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+ DATA - required - DFN ^ BEG ^ END ^ ZLOC ^ FLG ^ MODS ^ CAT
+  DFN - required - pointer to file 2
+  BEG - optional - starting Fileman date/time
+  END - optional - ending fileman date/time - default = DT+.5
+ ZLOC - optional - clinic, either name or file 44 ien retained for
+                   backwards compatibility
+  FLG - optional - type of appts to return
+        0 - active/kept appts (past) - default
+        1 - future appts only
+        2 - both past and future appts
+ MODS - optional - string of codes determine which encounters to return
+                   default value = ASV
+                   MODS["A" - return current admission regardless of date
+                   MODS["S" - return schedule appts
+                   MODS["V" - return visit file entries (#9000010)
+  CAT - optional - default value is 0 screen visits by service category
+        1 - return all visits
+        0 or &lt;null&gt; - do not return historical type visits
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>SCR</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>250</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+SCR - optional - added 7/3/2002 - sgm
+      passed by reference
+      format:  SCR(subscript) = code ^ value   where
+               code = C for hospital location #44
+                      D for medical center division #40.8
+                      S for 3-digit stop code from file 40.7 (not ien)
+               value = for codes C,D - any unique lookup value or ien
+                       for code S - 3-digit stop code (not ien to 40.7)
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+It returns to the broker, via the global array ^TMP("DSIC",$J,"VSIT",#)
+  1. All visits and current admission
+  2. Any scheduled visit for which there is no corresponding visit file
+     entry for the same date/time and clinic.
+  3. Format of data returned  p1^p2^p3^p4^p5^p6 where
+      p1 := A (if admission)  V (if visit)  S (if scheduled appt)
+      p2 := visit file ien
+      p3 := date/time in external format
+      p4 := location name (from file 44)
+      p5 := date/time in internal fileman format
+      p6 := location file (#44) ien
+ 
+      p4 &amp; p6 may be entries from the INSTITUTION (#4) file.  The 
+      SELECTED^VSIT API has different meanings for historical 
+      hospitalizations versus Outpatient Visits.  For visits, the 
+      meanings above apply.  For Hospitalizations, p6 is a pointer to the 
+      INSTITUTION (#4) file and p4 is null.
+ 
+ 
+  4. If no matching data was found then return
+      -1^Invalid patient DFN
+      -1^No visits or appointments found
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

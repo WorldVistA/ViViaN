@@ -1,0 +1,69 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIC LOCK (2099)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIC LOCK</td></tr><tr>
+<td>TAG</td><td>LOCK</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSICLOCK.html">DSICLOCK</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This will allow a GUI application issue a LOCK or UNLOCK on a global node 
+or a record in a file.  If the LOCK is issued, it is the responsibility 
+of the application to issue the UNLOCK.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>REF</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>128</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+This can be a closed form of a global or it can be a file number.  If it 
+is a file number, then IFN is also required.  The file number can be the 
+file number of the entire file or the subfile number of corresponding to 
+the ^DD() value.  If it is a subfile, then the IFN parameter must be set 
+accordingly.
+ 
+Examples of globals:
+  ^DSI(19621,0) - since there is no record number the global name has to
+                  be passed
+  ^DSI(19621,"B")
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>IFN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>15</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the internal entry number (record number) of the record that you 
+wish to lock or unlock in the file specified in the REF parameter.  IFN 
+is required if the REF parameter is a file or subfile number.
+ 
+IFN is the IEN if you are locking the entire record.  If you are locking 
+a subrecord in a multiple, the IFN must be a proper IENS at the 
+appropriate level as documented in the Fileman DBS manuals.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>FLAG</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>2</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+This flag indicates whether or not the global reference should be locked 
+or unlocked.  The default value is 1 which means to lock the global.  If 
+it has a value of -1 then unlock the global reference.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+If the operation was successful, return 1
+Else return -1^message
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

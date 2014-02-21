@@ -1,0 +1,94 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>ORWRP REPORT LISTS (244)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>ORWRP REPORT LISTS</td></tr><tr>
+<td>TAG</td><td>LIST</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_ORWRP.html">ORWRP</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>SUBSCRIPTION</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This remote procedure call returns a list of reports,
+Health Summary types and date ranges that can be displayed
+at the workstation.
+
+There are no input parameters fo this rpc.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td>8994.02, , {}</td></tr><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+This rpc returns the list of reports, health summary types
+and date ranges allowed on the Report tab.
+
+Note: Health Summary Types returned are based on the
+      ORWRP HEALTH SUMMARY TYPE LIST parameter defintion in file
+      PARAMETERS(#8989.5) and PARAMETER DEFINITION FILE(#8989.51).
+
+
+Format:
+
+[REPORT LIST]
+&lt;id&gt; ^ &lt;name&gt; ^ &lt;ask date range&gt; ^ &lt;ask health summary type&gt; ^ &lt;right margin&gt;
+  .
+  .
+  .
+$$END
+[HEALTH SUMMARY TYPES]
+&lt;internal entry number to HEALTH SUMMARY TYPE file&gt; ^ &lt;name of type&gt;
+  .
+  .
+  .
+$$END
+[DATE RANGES]
+&lt;days for TODAY&gt; ^ &lt;display text&gt;
+  .
+  .
+  .
+$$END
+
+
+Example:
+[REPORT LIST]
+&lt;id&gt; ^ &lt;name&gt; ^ &lt;ask date range&gt; ^ &lt;ask health summary type&gt; ^ &lt;right margin&gt;
+1^Health Summary^N^Y^80
+  .
+  .
+  .
+$$END
+[HEALTH SUMMARY TYPES]
+23^Current RX's
+  .
+  .
+  .
+$$END
+[DATE RANGES]
+0^Today
+  .
+  .
+  .
+$$END
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

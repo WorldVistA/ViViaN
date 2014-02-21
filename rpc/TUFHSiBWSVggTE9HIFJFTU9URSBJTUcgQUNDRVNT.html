@@ -1,0 +1,59 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>MAGJ VIX LOG REMOTE IMG ACCESS (2735)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>MAGJ VIX LOG REMOTE IMG ACCESS</td></tr><tr>
+<td>TAG</td><td>LOGRIA</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_MAGJVAPI.html">MAGJVAPI</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>INACTIVE</td><td>ACTIVE</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>VERSION</td><td>.1</td></tr><tr>
+<td>APP PROXY ALLOWED</td><td>No</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Log ViX-enabled Remote Image Access Events.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>DATA</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>256</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+CARET DELIMITED AS FOLLOWS:
+  ^01: ACTION ... "VR-RV"_ subset member from ACTION+1^MAGGTAU
+  ^02: RADFN .... IEN of PATIENT file (#2)
+  ^03: MAGIEN ... IEN of IMAGE file (#2005)
+  ^04: NIMGS .... VRad Image Count
+  ^05: REMOTE ... VRad Remote Read Flag
+  ^06: MAGJVRV .. VRad Version
+  ^07: USERCLS .. VRad User Class
+  ^08: VIXTXID .. VRad VIX Transaction ID
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+CARET-DELIMITED (IF NECESSARY):
+ 
+       __EXPECTED__  ______ON_ERROR______
+  ^01: 1             0
+  ^02:               Error msg. (optional)
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

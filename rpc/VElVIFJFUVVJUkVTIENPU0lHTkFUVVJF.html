@@ -1,0 +1,52 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>TIU REQUIRES COSIGNATURE (93)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>TIU REQUIRES COSIGNATURE</td></tr><tr>
+<td>TAG</td><td>REQCOS</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_TIUSRVA.html">TIUSRVA</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>AVAILABILITY</td><td>SUBSCRIPTION</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This Boolean RPC simply evaluates whether the current user requires
+cosignature for TIU DOCUMENTS, and returns a 1 if true, or a 0 if false.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>TIUTYP</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>DESCRIPTION:</dt><dd><pre>
+Pointer to the TIU DOCUMENT DEFINITION FILE (#8925.1).
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>TIUDA</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>DESCRIPTION:</dt><dd><pre>
+Pointer to the TIU DOCUMENT FILE (#8925).  References the document to be
+edited/signed.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>USER</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>DESCRIPTION:</dt><dd><pre>
+Optional parameter.  Pointer to the NEW PERSON FILE (#200).  Pass this in if 
+author is NOT the current user (e.g., User is a transcriptionist.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Boolean result: 0 if FALSE, OR 1 if TRUE.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

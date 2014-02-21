@@ -1,0 +1,73 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>SPN INPAT CARE (2818)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>SPN INPAT CARE</td></tr><tr>
+<td>TAG</td><td>COL</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_SPNJRPIC.html">SPNJRPIC</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>INACTIVE</td><td>ACTIVE</td></tr><tr>
+<td>APP PROXY ALLOWED</td><td>Yes</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Returns detailed information for Applications for Inpatient Care for a 
+list of given patients (list of ICNs) based on a date range. 
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>ICNLIST</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>DESCRIPTION:</dt><dd><pre>
+Patient's ICNs in string format (ICN^ICN^ICN^ICN^ICN...) 
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>FDATE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>DESCRIPTION:</dt><dd><pre>
+Date to start search from.  
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>TDATE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>DESCRIPTION:</dt><dd><pre>
+Date to end search at.  
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+ 
+Return format:
+ 
+HDR999: headings for reporting
+ 
+detail level: Patient name ^ last four digits of SSN ^ Date of 
+disposition ^ Description of disposition ^ Type of benefit ^ end of line 
+marker
+ 
+ 
+Sample of return:
+ 
+HDR999^PATIENT^DATE OF DISPOSITION^DISPOSITION^TYPE OF BENEFIT^EOL999
+ 
+SPINALCORD,FIFTEEN (S0015)^10/10/02^SCHEDULE FUTURE 
+APPOINTMENT^OUTPATIENT DENTAL^EOL999
+ 
+SPINALCORD,NINE (S0009)^9/6/01^SCHEDULE FUTURE APPOINTMENT^OUTPATIENT 
+DENTAL^EOL999
+ 
+SPINALCORD,TWELVE (S0012)^3/25/03^NO CARE OR TREATMENT REQUIRED^NURSING 
+HOME CARE^EOL999
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

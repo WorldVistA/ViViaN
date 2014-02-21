@@ -1,0 +1,74 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>ORRC VITALS BY PATIENT (1738)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>ORRC VITALS BY PATIENT</td></tr><tr>
+<td>TAG</td><td>LIST</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_ORRCVIT.html">ORRCVIT</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>SUBSCRIPTION</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This call returns recent vitals measurements taken for the patient.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>PATIENT</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the pointer to the patient in the Patient file #2.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>START</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the date to start searching for vitals, in the form YYYYMMDDHHMMSS;
+if no date range is specified, up to 5 sets of measurements will be 
+returned.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>STOP</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the date to stop searching for vitals, in the form YYYYMMDDHHMMSS;
+if no date range is specified, up to 5 sets of measurements will be
+returned.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>DETAILS</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>4</dd><dt>DESCRIPTION:</dt><dd><pre>
+This flag indicates whether to return the details of each vital sign
+taken (true), or just the list of measurement set IDs (false).
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+This call returns recent sets of vitals measurements for a patient, in the
+form:
+  "Item=" _ ID ^ ^ Measurement Date in the form YYYMMDDHHMMSS
+and also if DETAILS is true
+  "Data=" _ Vital ^ Value ^ Unit ^ Metric ^ Unit ^ BMI ^ SO2 ^ Abn ^ Qual
+where ID     = "VIT:" _ Patient pointer _";"_ measurement date
+      Vital  = name of vital measurement
+      Value  = value of measurement (alphanumeric)
+      Unit   = unit of measure
+      Metric = metric version of value, available for temp, weight, height,
+                circumference/girth
+      Unit   = metric unit of measure, when Metric is returned
+      BMI    = Body Mass Index, returned only for Weight
+      SO2    = Supplemental Oxygen (numeric), returned only for Pulse 
+                Oximetry (PO2)
+      Abn    = abnormal flag (* if value is considered critical else null)
+      Qual   = list of qualifiers, as Q1;Q2;...;Qn
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

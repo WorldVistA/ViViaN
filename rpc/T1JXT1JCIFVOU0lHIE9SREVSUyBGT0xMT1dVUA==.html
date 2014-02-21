@@ -1,0 +1,70 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>ORWORB UNSIG ORDERS FOLLOWUP (699)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>ORWORB UNSIG ORDERS FOLLOWUP</td></tr><tr>
+<td>TAG</td><td>ESORD</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_ORWORB.html">ORWORB</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+After viewing unsigned orders for a patient via an alert, evaluates
+whether the alert should be deleted for the current user.
+ 
+The following two exception conditions exist when determining how alert
+deletion will occur.  In all other cases, alert deletion will occur when
+the patient has no unsigned orders.
+ 
+1)      If the recipient of this alert does NOT have the ORES key, the
+alert will be deleted for that recipient after he reviews the unsigned
+orders. 
+ 
+2)      If the recipient has the ORES key and is NOT linked to the patient
+as attending, inpatient primary provider or via OE/RR teams, his alert
+will be deleted when his unsigned orders are signed.  (If unsigned orders
+written by other providers for the patient remain, alerts for these other 
+providers will not be deleted.)  For example, a consulting surgeon (with
+ORES) places three unsigned orders for a patient.  He then receives an
+"Order requires electronic signature" alert for the patient.  He uses the 
+View Alerts follow-up action and is presented with ten unsigned orders for
+the patient.  Only three of the ten orders are his.  The surgeon signs his
+three unsigned orders.  If the surgeon is not linked to the patient as
+attending, inpatient primary providers or via OE/RR teams, the alert will 
+be deleted (for him only.)  
+ 
+In most cases alert deletion will occur when the patient has no unsigned
+orders.  For example, if a recipient has the ORES key and is linked to the
+patient as attending, inpatient primary provider or via OE/RR teams, all
+unsigned orders for the patient must be signed before his alert is
+deleted.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>XQAID</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>60</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>DESCRIPTION:</dt><dd><pre>
+The alert ID.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Nothing returned.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

@@ -1,0 +1,48 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIF PAY VENDOR DETAILS (2589)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIF PAY VENDOR DETAILS</td></tr><tr>
+<td>TAG</td><td>VENDISP</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSIFPAY0.html">DSIFPAY0</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>VERSION</td><td>2</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>FBDA</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>23</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+IEN of the Vendor in file Fee Basis Vendor File
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+  ^TMP($J,"DSIFPAY0",0)=1^Vendor details or -1^ERROR MESSAGE
+           ,1)=NAME^ID #^PRICER EXEMPT (Y OR 
+"")^SPECIALITY^ADDRESS1^ADDRESS2^CITY^STATE^ZIP^COUNTY^PHONE^FAX
+           ,2)=DEL FLAG (OR AWAITING AUSTIN APPROVAL)^TYPE^PARTICIPATION
+CODE^MEDICARE ID^CHAIN^TYPE(FPDS)
+           ,3)=Group (FPDS)^Group (FPDS)^Group (FPDS)^Group (FPDS)^Group
+(FPDS)
+           ,4)=AUSTIN NAME^CHANGE TO DATE^CHANGE FROM DATE
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

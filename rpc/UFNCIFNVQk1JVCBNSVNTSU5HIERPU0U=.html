@@ -1,0 +1,81 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>PSB SUBMIT MISSING DOSE (376)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>PSB SUBMIT MISSING DOSE</td></tr><tr>
+<td>TAG</td><td>RPC</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_PSBMD.html">PSBMD</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>PUBLIC</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>VERSION</td><td>2</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Allows the client to submit a missing dose interactively.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>PSBDFN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+Patient DFN (IEN)
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PSBDRUG</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the IEN of the drug from File #50.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PSBDOSE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+Dosage.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PSBRSN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>4</dd><dt>DESCRIPTION:</dt><dd><pre>
+Missing Dose reason.
+ 
+INTERNALLY-STORED CODE: 1   WILL STAND FOR: DROPPED
+INTERNALLY-STORED CODE: 2   WILL STAND FOR: EMPTY PACKAGE
+INTERNALLY-STORED CODE: 3   WILL STAND FOR: NOT AVAILABLE
+INTERNALLY-STORED CODE: 4   WILL STAND FOR: WRONG DOSE/DRUG DELIVERED
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PSBADMIN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>5</dd><dt>DESCRIPTION:</dt><dd><pre>
+Administration time of the medication.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PSBNEED</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>6</dd><dt>DESCRIPTION:</dt><dd><pre>
+Needed date/time of the medication
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PSBUID</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>7</dd><dt>DESCRIPTION:</dt><dd><pre>
+Unique ID of an IV bag if it's an IV order.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PSBON</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>8</dd><dt>DESCRIPTION:</dt><dd><pre>
+Order Number
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PSBSCHD</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>9</dd><dt>DESCRIPTION:</dt><dd><pre>
+Medication Schedule.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PSBCLIN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>30</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>10</dd><dt>DESCRIPTION:</dt><dd><pre>
+Clinic Name
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PSBCLNIEN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>11</dd><dt>DESCRIPTION:</dt><dd><pre>
+Clinic pointer to the HOSPITAL LOCATION file (#44) for a clinic 
+submitting a missing dose request.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Results[0] = 1^Missing Dose Submitted^351
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

@@ -1,0 +1,55 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>EC GETPATPROCS (908)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>EC GETPATPROCS</td></tr><tr>
+<td>TAG</td><td>PATPROC</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_ECUERPC.html">ECUERPC</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Returns an array of patient entries from EVENT CAPTURE PATIENT FILE #721 that 
+matches a location, DSS unit, patient DFN, start date and end date.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>ECARY</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>DESCRIPTION:</dt><dd><pre>
+Input variable ECARY contains the following values separated by up-arrows:-
+  1.  ECLOC  - Location ien
+  2.  ECPAT  - Patient DFN ien
+  3.  ECUNT  - DSS unit ien
+  4.  ECSD   - Start Date
+  5.  ECED   - End Date
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Returns an array with Event Capture Patient entries with the following data:-
+  1. 721 IEN                              6. Provider
+  2. Procedure date and time              7. Ordering Section
+  3. Category                             8. Associated Clinic
+  4. Procedure                            9. Primary Diagnoses
+  5. Volume                              10. Provider IEN
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

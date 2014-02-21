@@ -1,0 +1,43 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>OOPS SENSITIVE DATA (1571)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>OOPS SENSITIVE DATA</td></tr><tr>
+<td>TAG</td><td>SENSDATA</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_OOPSGUI7.html">OOPSGUI7</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>AVAILABILITY</td><td>PUBLIC</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This Broker call is used to pass data to the bulletin routine for supervisors
+accessing sensitive data and not creating an ASISTS case. 
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>SDUZ</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the DUZ of the supervisor accessing the Employee's data.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>EMP</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the Employee's name for which the sensitive date has been viewed.
+</pre>
+</dd></li></ol></td></tbody>
+</table>
+</body></html>

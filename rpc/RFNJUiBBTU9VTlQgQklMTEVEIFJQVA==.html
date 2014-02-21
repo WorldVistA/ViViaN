@@ -1,0 +1,56 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIR AMOUNT BILLED RPT (2077)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIR AMOUNT BILLED RPT</td></tr><tr>
+<td>TAG</td><td>AMTBILD</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSIRBIR0.html">DSIRBIR0</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This RPC returns the data for the Amount Billed report.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>Start Date</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>7</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+Pass in the FileMan format date to start the reporting period.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>End Date</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>7</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+Pass the FileMan format ending date for the reporting period.  This 
+parameter will default to the current date.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>Divisions</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>512</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is a variable '^' delimited containing selected Divisions from which
+the user may see data.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Global Array '^' delimited
+ 
+-1^Missing Start Date!
+-2^No bills entered in selected date range!
+Bill IEN ^ Patient Name/FOIA ^ Requestor ^ Open Date ^ Bill Entered Date 
+     ^ Current Status ^ Amount Billed ^ Division ^ Division Name
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

@@ -1,0 +1,70 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIV EXCEPTION REPORT (2556)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIV EXCEPTION REPORT</td></tr><tr>
+<td>TAG</td><td>RRPT</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSIVICR2.html">DSIVICR2</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Retrieves ICB Exception data from 19625.1.  A nightly job queued from 
+option DSIV NIGHTLY REPORT processes the report - this rpc now just 
+returns the data.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>SDT</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>30</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+Contains the start date for the report.  This is the report date in file 
+19625.1.  Since reports are run each night, it is the same as the 
+appointment date.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>EDT</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>30</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+Contains the end date for the report.  Defaults to current date if not 
+sent.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>MORE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>3</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+Contains a flag to denote recursive calls to get the Exception Report 
+data.  MORE=0 is the starting condition (start at the start date in 
+parameter 1), MORE=1 is to continue getting the records until the value 
+~END~ is received.  The number of records returned for each call is based 
+on the DSIV MAX NUM ENTRIES parameter.  The MORE parameter and recursive 
+calling to the rpc prevents network timeouts when a lot of data is being 
+returned (e.g. one month of Exception data).
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>LOCS</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>50</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>4</dd><dt>DESCRIPTION:</dt><dd><pre>
+Contains an array of clinics to include or exclude from the report.  The 
+array is in the format:
+ LOCS(1)="INCLUDE"   (or "EXCLUDE" to exclude the clinics)
+ LOCS(n)=228  (clinic IEN from file 44)
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Returns the following global array data:
+ Ret(n)=clinic^appt dt/tm^patient^check-in user^check-out user^FM appt dt
+ ~END~ is sent to denote the end of the report.  
+ -1^error denotes error.
+ The FM (Fileman) appt date at the end helps the GUI re-sort the data.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

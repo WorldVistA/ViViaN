@@ -1,0 +1,61 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIROI4 GETDEM GET DEMOGRAPHIC (3002)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIROI4 GETDEM GET DEMOGRAPHIC</td></tr><tr>
+<td>TAG</td><td>GETDEM</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSIROI4.html">DSIROI4</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Returns limited demographic data required for processing a request.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>IFN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>30</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+IFN - Patient IFN.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+RETURNS THE FOLLOWING LABELS WITH VALUES
+   1 "NAME"
+   2 "FIRST"
+   3 "MIDDLE"
+   4 "LAST"
+   5 "SUFFIX"
+   6 "GENDER"
+   7 "DOB"
+   8 "DOD"
+   9 "WORK PHONE"
+  10 "SSN"
+  11 "ADDRESS TYPE"
+  12 "ADDRESS STREET 1"
+  13 "ADDRESS STREET 2"
+  14 "ADDRESS STREET 3"
+  15 "ADDRESS CITY"
+  16 "ADDRESS STATE"
+  17 "ADDRESS ZIP"
+  18 "ADDRESS COUNTY"
+  19 "HOME PHONE"
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

@@ -1,0 +1,38 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>ORQQCN ISPROSVC (2864)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>ORQQCN ISPROSVC</td></tr><tr>
+<td>TAG</td><td>ISPROSVC</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_ORQQCN2.html">ORQQCN2</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>AVAILABILITY</td><td>SUBSCRIPTION</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+RPC will return 1 or 0 if the supplied file entry from 123.5 is marked as 
+part of the Consults-Prosthetics interface.  This RPC is used to disable 
+the Earliest Appropriate Date field and value when ordering Prosthetics 
+requests via CPRS GUI.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

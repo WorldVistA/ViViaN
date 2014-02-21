@@ -1,0 +1,60 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>SPN LIST ICDS/CPTS (2806)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>SPN LIST ICDS/CPTS</td></tr><tr>
+<td>TAG</td><td>COL</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_SPNJRPC0.html">SPNJRPC0</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>INACTIVE</td><td>ACTIVE</td></tr><tr>
+<td>APP PROXY ALLOWED</td><td>Yes</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Returns full list of ICD or CPT codes and descriptions.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>TYPE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>DESCRIPTION:</dt><dd><pre>
+Type of code that is desired (CPT or ICD)
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+ 
+Return format:
+ 
+ICD/CPT code ^ ICD/CPT description ^ end of line marker
+ 
+ 
+Sample of return:
+ 
+001.0 ^CHOLERA DUE TO VIBRIO CHOLERAE^EOL999
+001.1 ^CHOLERA DUE TO VIBRIO CHOLERAE EL TOR^EOL999
+001.9 ^CHOLERA, UNSPECIFIED^EOL999
+002.0 ^TYPHOID FEVER^EOL999
+002.1 ^PARATYPHOID FEVER A^EOL999
+002.2 ^PARATYPHOID FEVER B^EOL999
+002.3 ^PARATYPHOID FEVER C^EOL999
+002.9 ^PARATYPHOID FEVER, UNSPECIFIED^EOL999
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

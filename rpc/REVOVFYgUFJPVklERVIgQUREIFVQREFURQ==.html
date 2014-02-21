@@ -1,0 +1,49 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DENTV PROVIDER ADD UPDATE (1929)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DENTV PROVIDER ADD UPDATE</td></tr><tr>
+<td>TAG</td><td>EDIT</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DENTVRP5.html">DENTVRP5</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This RPC allows Dental Record Manager to add/edit their Dental Providers.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>DATA</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+The input array contains the Dental Provider information to be 
+added/updated into file 220.5.  The following fields are sent:
+  DATA("PERSON")=pointer to file 200 (PERSON)
+  DATA("IEN")=pointer to file 220.5 (only for update records)
+  DATA("PROVNUM")=8 character Dental Provider Number
+  DATA("INACTIVE")=-1 if inactive, else = 0.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Returns ien^message if the filing was without errors, or
+        -1^error message if there were filing errors.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

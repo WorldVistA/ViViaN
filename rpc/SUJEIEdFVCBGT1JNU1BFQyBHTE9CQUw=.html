@@ -1,0 +1,42 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>IBD GET FORMSPEC GLOBAL (1568)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>IBD GET FORMSPEC GLOBAL</td></tr><tr>
+<td>TAG</td><td>GETFS1</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_IBDFBK1.html">IBDFBK1</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>PUBLIC</td></tr><tr>
+<td>INACTIVE</td><td>INACTIVE</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>IBDF</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>30</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>DESCRIPTION:</dt><dd><pre>
+This will contain the form id and version of paper keyboard
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+The value returned in the formspec file from file 359.2.  This is to be
+stored by the AICS workstation as an EFnnn.fs or EF32_OInnnn.fs
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

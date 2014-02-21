@@ -1,0 +1,60 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>MPIF REMOTE ICN UPDATE (1251)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>MPIF REMOTE ICN UPDATE</td></tr><tr>
+<td>TAG</td><td>UPDATE</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_MPIFRPC2.html">MPIFRPC2</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>VERSION</td><td>1</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This remote procedure call (RPC) allows the remote update of the 
+INTEGRATION CONTROL NUMBER (#991.01), ICN CHECKSUM (#991.02), and 
+COORDINATING MASTER OF RECORD (#991.03) fields in the PATIENT (#2) file 
+at a specified site. The patient is found based upon social security 
+number.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>SSN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>9</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+Social Security Number of the patient to be updated.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>ICN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>16</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+ICN - without the checksum to be updated in field 991.01
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>CHECK</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>6</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>4</dd><dt>DESCRIPTION:</dt><dd><pre>
+ CHECKSUM for the patient to be stored in field 991.02
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>CMOR</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>3</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>5</dd><dt>DESCRIPTION:</dt><dd><pre>
+ Station Number to be stored as the CMOR in field 991.03.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>A08</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>1</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>6</dd><dt>DESCRIPTION:</dt><dd><pre>
+If an A08 message needs to be sent this flag should be set to 1.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+ 1 for successful update
+ -1^error message if not successfully updated.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

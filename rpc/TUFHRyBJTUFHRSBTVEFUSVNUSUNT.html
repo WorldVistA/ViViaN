@@ -1,0 +1,177 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>MAGG IMAGE STATISTICS (2569)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>MAGG IMAGE STATISTICS</td></tr><tr>
+<td>TAG</td><td>IMGQUERY</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_MAGGA03.html">MAGGA03</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+The MAGG IMAGE STATISTICS remote procedure queries the image file(s) and 
+returns various statistics/summary data. Currently, 2 queries are 
+implemented:
+ 
+  Counts of images captured in the provided date range 
+  grouped by the image status codes.
+ 
+  Counts of images captured in the provided date range
+  grouped by users and image status codes.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>FLAGS</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+Flags that control the execution (can be combined):
+ 
+  C  Capture date range. If this flag is provided,
+     then the remote procedure uses values of the
+     FROMDATE and TODATE parameters to select images
+     that were captured in this date range (see the
+     DATE/TIME IMAGE SAVED field (7) and the "AD"
+     cross-reference).
+ 
+     Otherwise, values of those parameters are
+     treated as the date range when procedures were
+     performed (see the PROCEDURE/EXAM DATE/TIME
+     field (15) and cross-references "APDTPX" and
+     "APDT").
+ 
+  D  Include only deleted images (file #2005.1)
+  E  Include only existing images (file #2005)
+ 
+  S  Return image counts grouped by status
+  U  Return image counts grouped by users and status
+ 
+If neither 'E' nor 'D' flag is provided, then an error code (-6) is
+returned.
+ 
+If neither 'S' nor 'U' flag is provided, then an error code (-6) is
+returned.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>FROMDATE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+Beginning of the date range for image selection. Dates can be in internal
+or external FileMan format. If the parameter is not defined or empty, then
+the date range remains open on this side.
+ 
+Depending on the value of the FLAGS parameter, the date range filter is
+applied either to the exam/procedure dates (PROCEDURE/EXAM DATE/TIME field
+(15)) or image capture dates (DATE/TIME IMAGE SAVED field (7)).
+ 
+Time parts of date range parameters are ignored and both ends of the date
+range are included in the search. For example, in order to search images
+for May 21, 2008, the internal value of both parameters should be 3080521.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>TODATE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+End of the date range for image selection. Dates can be in internal or
+external FileMan format. If the parameter is not defined or empty, then
+the date range remains open on this side.
+ 
+Depending on the value of the FLAGS parameter, the date range filter is
+applied either to the exam/procedure dates (PROCEDURE/EXAM DATE/TIME field
+(15)) or image capture dates (DATE/TIME IMAGE SAVED field (7)).
+ 
+Time parts of date range parameters are ignored and both ends of the date
+range are included in the search. For example, in order to search images
+for May 21, 2008, the internal value of both parameters should be 3080521.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Zero value of the first '^'-piece of the Results[0] indicates that an
+error occurred during the execution of the procedure. In this case, the
+errors are returned in the Results array as shown below:
+  
+  Results[0]            Result descriptor
+                          ^01: 0
+                          ^02: Message
+  
+  Results[i]            Error descriptor
+                          ^01: Error code
+                          ^02: Message
+                          ^03: Error location
+                          ^04: Message type
+ 
+  Results[j]            Line of the additional info (optional)
+                          ^01: ""
+                          ^02: Text  
+ 
+Otherwise, '1^Ok' is returned in the Results[0] and subsequent nodes 
+contain requested data:
+ 
+  Results[i]            Header of the counts grouped by status
+                          ^01: "S"
+                          ^02: empty
+                          ^03: Number of "S"-items
+                          ^04: empty
+                          ^05: "Totals"
+                          ^06: Number of image entries
+                          ^07: Number of images/pages
+         
+  Results[i+j]          Image status record
+                          ^01: "S"
+                          ^02: Sequential number of the "S"-item
+                          ^03: empty
+                          ^04: Internal value of the STATUS field (113).
+                               If this piece is empty or 0, then the
+                               record contains counts of images with 
+                               empty STATUS field.
+                          ^05: External value of the STATUS field (113)
+                          ^06: Number of image entries
+                          ^07: Number of images/pages
+        
+  Results[i]            Header of the counts grouped by users and status
+                          ^01: "U"
+                          ^02: empty
+                          ^03: Number of "U"-items
+                          ^04: empty
+                          ^05: "Totals"
+                          ^06: Number of image entries
+                          ^07: Number of images/pages
+         
+  Results[i+j]          User record
+                          ^01: "U"
+                          ^02: Sequential number of the "U"-item
+                          ^03: Number of "US"-items
+                          ^04: User IEN (DUZ).
+                               If this piece is empty or 0, then the
+                               record contains counts of images that 
+                               are not associated with a user.
+                          ^05: User name
+                          ^06: Number of image entries
+                          ^07: Number of images/pages
+                          ^08: Percentage of verified images
+         
+  Results[i+j+k]        User/status record
+                          ^01: "US"
+                          ^02: Sequential number of the "US"-item
+                          ^03: empty
+                          ^04: Internal value of the STATUS field (113).
+                               If this piece is empty or 0, then the
+                               record contains counts of images with 
+                               empty STATUS field.
+                          ^05: External value of the STATUS field (113)
+                          ^06: Number of image entries
+                          ^07: Number of images/pages
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

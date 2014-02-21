@@ -1,0 +1,85 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIF BATCH LIST REJECTED ITEMS (3058)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIF BATCH LIST REJECTED ITEMS</td></tr><tr>
+<td>TAG</td><td>LSTREJ</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSIFLRJ.html">DSIFLRJ</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>VERSION</td><td>3.2</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+ ; Input: Batch # (IEN, if passed in as "nnn;")
+ ; Output:
+ ;   
+ ; If B9
+ ;   
+ ; ^TMP($J,"DSIFLRJ",1)=ien of 162.5 invoice file
+ ;
+ ; If B3
+ ;
+ ; ^TMP($J,"DSIFLRJ",x)=ien of 162 payment file.  (may be multiple lines 
+rejected)
+ ;
+ ; ^TMP($J,"DSIFLRJ",x)=ien of 162 payment file.  (may be multiple lines 
+rejected)
+ ;
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>FBBAT</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>10</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+Batch IEN or number
+ 
+IEN;NUMBER
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>FBTYPE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>2</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+Batch type (required)
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>FROM</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>7</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+Date beginning from
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>TODATE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>7</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>4</dd><dt>DESCRIPTION:</dt><dd><pre>
+Until date
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>FBFROM</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+ ; Output:
+ ;   
+ ; If B9
+ ;   
+ ; ^TMP($J,"DSIFLRJ",X)=ien of 162.5 invoice file. (may be multiple lines)
+ ;
+ ; If B3
+ ;
+ ; ^TMP($J,"DSIFLRJ",x)=ien of 162 payment file.  (may be multiple lines 
+rejected)
+ ;
+ ; If B3
+ ;
+ ; ^TMP($J,"DSIFLRJ",x)=ien of 162 payment file.  (may be multiple lines 
+rejected)
+ ;
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

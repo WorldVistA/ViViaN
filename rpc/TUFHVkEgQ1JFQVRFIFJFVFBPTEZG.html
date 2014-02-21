@@ -1,0 +1,46 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>MAGVA CREATE RETPOLFF (3181)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>MAGVA CREATE RETPOLFF</td></tr><tr>
+<td>TAG</td><td>ADDARPF</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_MAGVAC01.html">MAGVAC01</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>INACTIVE</td><td>ACTIVE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Add a new record to RETENTION POLICY FULFILLMENT file (#2006.922)
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>MAGPARAM</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+ MAGPARAM("ARTIFACT RETENTION POLICY")  = A pointer to ARTIFACT RETENTION POLICY file (#2006.921)
+ MAGPARAM("ARTIFACT INSTANCE")   = A pointer to ARTIFACT INSTANCE file (#2006.918)
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+ if error MAGRY = Failure status ^ Error message
+ if success MAGRY = Success status ^^IEN - IEN of the new record 
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

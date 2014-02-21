@@ -1,0 +1,81 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>MAG4 FILTER SAVE (1946)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>MAG4 FILTER SAVE</td></tr><tr>
+<td>TAG</td><td>SET</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_MAGGSFL1.html">MAGGSFL1</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Stores the new filter to the IMAGE LIST FILTERS file (#2005.87) or updates
+properties of the existing filter.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>MAGGZ</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+List that stores the filter data and related parameters.
+ 
+Each list item has 2 pieces separated by '^': 
+ 
+  ^01: Field number
+  ^02: Field value
+ 
+The following special names can be used in place of field numbers:
+ 
+  FLAGS - Value contains flags that control the execution 
+          (can be combined):
+ 
+            S  Selective save. If this flag is
+               provided, then only the fields listed
+               in the MAGZ array are updated; other
+               filter properties are not changed.
+ 
+               By default, all filter properties,
+               which do not have new values in the
+               MAGZ array, are cleared.
+ 
+  IEN   - Value is the Internal Entry Number of the filter 
+          that has to be modified.
+ 
+  USER  - Value is the IEN of the user who this filter is 
+          saved for.
+ 
+Example:
+ 
+  with RPCBroker.Param[0] do
+    begin
+      PType := list;
+      Mult[1] := 'IEN^23';
+      Mult[2] := 'FLAGS^S';
+      Mult[3] := '15^Column Description';
+    end;
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+The return literal is two piece "^" delimited string
+If successful:    Filter IEN ^ Filter NAME
+If an Error:  0^error message
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

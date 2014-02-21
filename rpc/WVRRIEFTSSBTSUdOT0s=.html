@@ -1,0 +1,45 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>YTQ ASI SIGNOK (2339)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>YTQ ASI SIGNOK</td></tr><tr>
+<td>TAG</td><td>SIGNOK</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_YTQAPI14.html">YTQAPI14</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>SUBSCRIPTION</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This API evaluates wheher one of 3 conditions is meet for the stored ASI 
+in file Addiction Severity Index (#604).
+ 
+ 
+ Input: IENS as iens for 604
+ Output: 1^OK TO SIGN
+         0^MISSING REQUIRED FIELDS
+         2^A G12 RECORD
+ 
+ 
+Missing fields are listed in YSDATA(3...x)
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

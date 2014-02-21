@@ -1,0 +1,62 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>VBECS HCPCS CODES LOOKUP (2481)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>VBECS HCPCS CODES LOOKUP</td></tr><tr>
+<td>TAG</td><td>HCPCS</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_VBECRPCH.html">VBECRPCH</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This RPC returns XML containing a list of active HCPCS codes from the CPT
+file with a CPT Category of Pathology and Laboratory Services for use in
+VBECS.
+ 
+XML Mapping:
+Code element = CPT file (#81) / CODE field (#.01)
+Name element = CPT file (#81) / SHORT NAME field (#2)
+ 
+XML Example:
+&lt;Root&gt;
+    &lt;HCPCS&gt;
+        &lt;Code&gt;P2028&lt;/Code&gt;
+        &lt;Name&gt;Cephalin floculation test&lt;/Name&gt;
+    &lt;/HCPCS&gt;
+    &lt;HCPCS&gt;
+        &lt;Code&gt;P2029&lt;/Code&gt;
+        &lt;Name&gt;Congo red blood test&lt;/Name&gt;
+    &lt;/HCPCS&gt;
+    &lt;HCPCS&gt;
+        &lt;Code&gt;P2031&lt;/Code&gt;
+        &lt;Name&gt;Hair analysis&lt;/Name&gt;
+    &lt;/HCPCS&gt;
+&lt;/Root&gt;
+</pre>
+</td></tr><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+XML document containing a list of HCPCS codes for the Pathology and
+Laboratory Services CPT CATAGORY.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

@@ -1,0 +1,93 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>ROR GET REGISTRY INFO (1775)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>ROR GET REGISTRY INFO</td></tr><tr>
+<td>TAG</td><td>REGINFO</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_RORRP014.html">RORRP014</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>PUBLIC</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>VERSION</td><td>1</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+The ROR GET REGISTRY INFO remote procedure returns basic information about
+the registry.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>REGISTRY</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+The REGISTRY parameter should contain either a registry IEN or a registry 
+name.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+A negative value of the first "^"-piece of the Results[0] indicates that
+an error occurred during the execution of the remote procedure. In this
+case, the second piece of the Results[0] will contain number of the error
+descriptors returned in the subsequent nodes of the Results array:
+ 
+  Results[0]            Result Descriptor
+                          ^01: The last error code
+                          ^02: Number of the error descriptors
+ 
+  Results[i]            Error Descriptor
+                          ^01: Error code
+                          ^02: Message
+                          ^03: Place of the error
+ 
+Otherwise, zero is returned in the Results[0] and the subsequent nodes of 
+the Results array contain the registry information:
+ 
+  Results[0]            0
+ 
+  Results[1]            Registry
+                          ^01: IEN
+                          ^02: Name
+ 
+  Results[2]            National (0/1)
+ 
+  Results[3]            Registry Description
+ 
+  Results[4]            Last Registry Update Date (FileMan)
+ 
+  Results[5]            Last Data Extraction Date (FileMan)
+ 
+  Results[6]            Number of Patients
+ 
+  Results[7]            Number of Active Patients
+ 
+  Results[8]            Registry Status
+                          ^01: Internal value (0-Active, 1-Inactive)
+                          ^02: External value
+ 
+  Results[9]            reserved (former Awaiting Acknowledgement)
+ 
+  Results[10]           Version Information
+                          ^01: Package version
+                          ^02: Latest patch number
+                          ^03: Date of the latest patch (FileMan)
+                          ^02: Latest patch number
+                          ^03: Date of the latest patch (FileMan)
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

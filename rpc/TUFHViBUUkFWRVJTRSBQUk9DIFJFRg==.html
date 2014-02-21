@@ -1,0 +1,60 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>MAGV TRAVERSE PROC REF (3159)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>MAGV TRAVERSE PROC REF</td></tr><tr>
+<td>TAG</td><td>TRAVPROC</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_MAGVRS09.html">MAGVRS09</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>INACTIVE</td><td>ACTIVE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This RPC allows the user to traverse the entries on the IMAGING PROCEDURE 
+REFERENCE File (#2005.61) that are indexed under an entry on the IMAGING 
+PATIENT REFERENCE File (#2005.6).
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>IEN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>20</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the internal entry number of the entry on the IMAGING PATIENT 
+REFERENCE File (#2005.6) whose child entries on the IMAGING PROCEDURE 
+REFERENCE File (#2005.61) are to be traversed.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>DIR</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>10</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the direction of traversal:  FIRST, NEXT, PREV, or LAST.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>CHILDIEN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>10</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the internal entry number of the entry on the IMAGING PROCEDURE
+REFERENCE File (#2005.61) from which to proceed.  It should be specified
+only for the NEXT and PREV traversal commands.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+The RPC returns a string in three pieces delimited by backtick (`).
+Piece 1 is 0 (FALSE) if there was no error, nonzero otherwise.
+Piece 2 is the error message if piece 1 is not FALSE.
+Piece 3 is the requested child IEN, or TOP or BOTTOM.  It is defined only 
+if there was no error.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

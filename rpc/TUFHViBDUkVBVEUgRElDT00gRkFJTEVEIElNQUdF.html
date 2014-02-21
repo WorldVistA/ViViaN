@@ -1,0 +1,54 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>MAGV CREATE DICOM FAILED IMAGE (3099)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>MAGV CREATE DICOM FAILED IMAGE</td></tr><tr>
+<td>TAG</td><td>DCRCTSET</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_MAGVRS51.html">MAGVRS51</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This RPC creates an entry in the DICOM FAILED IMAGES File (#2006.575).
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>ATTS</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>DESCRIPTION:</dt><dd><pre>
+Input parameters are name-value pairs sent as successive integer
+subscripts in an array that should be passed in by reference as the second
+argument to entry point DCRCTSET^MAGVRS51.  The first argument will
+contain the returned value in an array that should also be passed by
+reference.
+ 
+The values passed in should be in the format &lt;fname&gt;`&lt;value&gt;, where
+&lt;fname&gt; is a field name in the DICOM FAILED IMAGES File (#2006.575) 
+and &lt;value&gt; is the value to which that field should be set.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+The first and only element of the return array will be formatted as
+[ERRORCODE]`[TEXT]`[ASSIGNED IEN].  An ERRORCODE value of 0 indicates
+success; all others indicate failure, as described in TEXT, and no IEN
+will be assigned.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

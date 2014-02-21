@@ -1,0 +1,94 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>MAGV STUDY LOOKUP (3156)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>MAGV STUDY LOOKUP</td></tr><tr>
+<td>TAG</td><td>LOOKUP</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_MAGVSTDY.html">MAGVSTDY</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>INACTIVE</td><td>ACTIVE</td></tr><tr>
+<td>APP PROXY ALLOWED</td><td>Yes</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+ +---------------------------------------------------------------+
+ | Property of the US Government.                                |
+ | No permission to copy or redistribute this software is given. |
+ | Use of unreleased versions of this software requires the user |
+ | to execute a written test agreement with the VistA Imaging    |
+ | Development Office of the Department of Veterans Affairs,     |
+ | telephone (301) 734-0100.                                     |
+ |                                                               |
+ | The Food and Drug Administration classifies this software as  |
+ | a medical device.  As such, it may not be changed in any way. |
+ | Modifications to this software may result in an adulterated   |
+ | medical device under 21CFR820, the use of which is considered |
+ | to be a violation of US Federal Statutes.                     |
+ +---------------------------------------------------------------+
+ 
+Looks up the imaging case using the accession number provided by the
+calling application.   Obtains patient demographic data, and checks
+the data for accuracy. (MAG*3.0*118)
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>CASENUMB</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>16</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+CASENUMB = ACCESSION NUMBER PASSED FROM THE CLIENT.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>IMGSVC</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>3</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+RAD OR CON.  No other entries are allowed.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PNAMEDCM</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>64</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+Patient's Name from the DICOM header (0010,0010).
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PIDDCM</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>64</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>4</dd><dt>DESCRIPTION:</dt><dd><pre>
+Patient ID from DICOM header (0010,0020).
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PDOBDCM</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>8</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>5</dd><dt>DESCRIPTION:</dt><dd><pre>
+Patient's Birth Date from DICOM header (0010,0030).
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PSEXDCM</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>1</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>6</dd><dt>DESCRIPTION:</dt><dd><pre>
+Patient's Sex from DICOM header (0010,0040).
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PICNDCM</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>16</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>7</dd><dt>DESCRIPTION:</dt><dd><pre>
+Patient's VA Integration Control Number.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+           ----From MAGVORDR----  --From PIDCHECK--
+           Error     Success      Error    Success
+    "~"-1 -1         0
+       -2 Errmsg1    DFN
+       -3  ---       SITE ID
+       -4  ---       ----------&gt;  n&lt;1      0
+       -5  ---       ----------&gt;  Errmsg2  PID OK
+ 
+    Errmsg1____   If_________
+    BAD CASE #      RAD &amp; Any RADPTx is null
+                    RAD &amp; null Exam Status Pointer
+                    RAD &amp; null Exam Status
+    NO CASE #       RAD,CON &amp; Exam Status = CANCELLED
+                    RAD,CON &amp; null patient demographic file pointer
+                    CON     &amp; incomplete consult study
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

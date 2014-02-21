@@ -1,0 +1,57 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIF PAY FIX ALL REJ ITEMS (2609)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIF PAY FIX ALL REJ ITEMS</td></tr><tr>
+<td>TAG</td><td>ALLMEDR</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSIFPAY2.html">DSIFPAY2</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>VERSION</td><td>2</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+re-initiate all rejected line items in medical (B3) type batch
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>OLD BATCH</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>35</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+Old Batch IEN
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>NEW BATCH</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>35</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+New Batch IEN
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+^TMP($J,"DSIFPAY6",FBIN,0)="Split"^FBIN^message regarding split status
+              FBIN,new invoice number)="Message"^FBIN^"Re-initiated 
+lines are being assigned a new invoice number"^New invoice number
+ 
+              FBIN,2)="Void"^FBIN^"Invoice #: "^FBIN^" has a status of
+VOID
+                  ,0)="-1"^error message
+ 
+(or)
+^TMP($J,"DSIFPAY6",0)=-1^error message
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

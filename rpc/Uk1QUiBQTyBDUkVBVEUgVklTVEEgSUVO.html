@@ -1,0 +1,48 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>RMPR PO CREATE VISTA IEN (2054)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>RMPR PO CREATE VISTA IEN</td></tr><tr>
+<td>TAG</td><td>EN1</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_RMPR9CS.html">RMPR9CS</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>SUBSCRIPTION</td></tr><tr>
+<td>INACTIVE</td><td>ACTIVE</td></tr><tr>
+<td>WORD WRAP ON</td><td>FALSE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This will pass the array from Kernel Broker to create Patient 2319.
+Return will be Line Number^Vista IEN^Grouper Number.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>OUT</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>DESCRIPTION:</dt><dd><pre>
+ 
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+ 
+ 
+ 
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

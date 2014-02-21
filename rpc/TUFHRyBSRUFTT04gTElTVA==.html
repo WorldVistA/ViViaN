@@ -1,0 +1,122 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>MAGG REASON LIST (2564)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>MAGG REASON LIST</td></tr><tr>
+<td>TAG</td><td>LSTRSNS</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_MAGGA01.html">MAGGA01</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This remote procedure returns the list of reasons for actions performed on
+images. This data is loaded from the MAG REASON file (#2005.88).
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>TYPE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+This parameter defines the type(s) of reasons that are returned by the 
+remote procedure. Its value should consist of one or more of the following
+characters:
+ 
+  C  Reasons for copying images
+ 
+  D  Reasons for deleting images
+ 
+  P  Reasons for printing images
+ 
+  S  Reasons for changing image status
+ 
+For example, if the "CD" value is assigned to the parameter, the RPC
+returns the reasons for copying and deleting images.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>FLAGS</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+Flags that control execution (can be combined):
+ 
+  F  Include full details (description text, etc.)
+ 
+  I  Include inactivated reasons
+ 
+If this parameter is not defined or empty, only the summary data for
+currently active reasons is returned.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PART</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+The partial match restriction (case sensitive). For example, a PART value
+of "ZZ" would restrict the list to those entries starting with the letters
+"ZZ".
+ 
+If this parameter is not defined or empty, no text restrictions are 
+applied.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Zero value of the first '^'-piece of the Results[0] indicates that an
+error occurred during the execution of the procedure. In this case, the
+errors are returned in the Results array as shown below:
+  
+  Results[0]            Result descriptor
+                          ^01: 0
+                          ^02: Message
+  
+  Results[i]            Error descriptor
+                          ^01: Error code
+                          ^02: Message
+                          ^03: Error location
+                          ^04: Message type
+ 
+  Results[j]            Line of the additional info (optional)
+                          ^01: ""
+                          ^02: Text
+ 
+Otherwise, the Results[0] contains '1^OK' and the list of reasons is
+returned in the subsequent elements of the Results array as follows:
+ 
+  Results[i]            Reason summary
+                          ^01: IEN of the reason (file #2005.88)
+                          ^02: Text of the reason
+                          ^03: Types of the reason (combination of "C",
+                               "D", "P", and/or "S")
+                          ^04: Date of inactivation (FileMan). 
+                               This piece is always empty if the value
+                               of the FLAGS parameter does not contain
+                               "I". Otherwise, a date in internal FileMan
+                               format is returned here for inactivated
+                               reasons.
+                          ^05: Unique code of the reason (only for 
+                               standard reasons distributed nationally;
+                               reasons defined by the sites do not have
+                               codes).                        
+ 
+  Results[i+j]          Line of the description of the reason (optional)
+                          ^01: "D"
+                          ^02: Text line
+ 
+                        The description text is returned only if the
+                        value of the FLAGS parameter contains "F" and 
+                        the DESCRIPTION field (1) of the MAG REASON file
+                        (#2005.88) is not empty.
+ 
+The reasons are sorted alphabetically (case sensitive).
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

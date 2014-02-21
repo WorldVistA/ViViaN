@@ -1,0 +1,73 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DGRR SET PTLK PREFERENCES (2178)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DGRR SET PTLK PREFERENCES</td></tr><tr>
+<td>TAG</td><td>UPDATE</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DGRRLU4.html">DGRRLU4</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>PUBLIC</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>APP PROXY ALLOWED</td><td>No</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This remote procedure call updates the division/institutional preferences 
+passed to the call. It returns an xml document containing the station
+number and status.  If update was successful, status is returned as
+true.  If errors were encountered during the update, false is returned
+with an error message.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>PARAMS</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>DESCRIPTION:</dt><dd><pre>
+PARAMS("stationNumber")=station number for division/institution
+PARAMS("maxNumberPatients")=Number between 20 and 100
+PARAMS("patientsPerPage")=Number between 5 and 20
+PARAMS("patientType")=Disabled or Enabled
+PARAMS("gender")=Disabled or Enabled
+PARAMS("primaryEligibility")=Disabled or Enabled
+PARAMS("roomBed")=Disabled or Enabled
+PARAMS("serviceConnected")=Disabled or Enabled
+PARAMS("veteranStatus")=Disabled or Enabled
+PARAMS("ward")=Disabled or Enabled
+PARAMS("veteranImage")=Disabled or Enabled
+PARAMS("veteranStatus")=Disabled or Enabled
+PARAMS("ward")=Disabled or Enabled
+PARAMS("veteranImage")=Disabled or Enabled
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+XML file documenting error condition or successful update.
+ 
+Successful update xml format:
+ 
+  &lt;?xml version="1.0" encoding="utf-8" ?&gt; 
+- &lt;preferences&gt;
+  &lt;error /&gt; 
+- &lt;institutionPreferences&gt;
+  &lt;stationNumber&gt;500&lt;/stationNumber&gt; 
+  &lt;preferencesUpdated&gt;true&lt;/preferencesUpdated&gt; 
+  &lt;/institutionPreferences&gt;
+  &lt;/preferences&gt;
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

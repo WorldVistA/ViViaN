@@ -1,0 +1,46 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DGRR GET PTLK BUSINESS DATA (2174)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DGRR GET PTLK BUSINESS DATA</td></tr><tr>
+<td>TAG</td><td>BUS</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DGRRLU1.html">DGRRLU1</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>PUBLIC</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>VERSION</td><td>.001</td></tr><tr>
+<td>APP PROXY ALLOWED</td><td>No</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Returns XML document containing data needed to perform business logic
+checks on patient lookup.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>PARAM</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>DESCRIPTION:</dt><dd><pre>
+PARAM("PatientId_Type") = DFN (default) or ICN
+PARAM("PatientId") = value for dfn or ICN
+PARAM("UserId") = DUZ
+PARAM("UserInstitution") = division usage default to DUZ(2)
+</pre>
+</dd></li></ol></td></tbody>
+</table>
+</body></html>

@@ -1,0 +1,67 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>VAFC LOCAL GETCORRESPONDINGIDS (2729)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>VAFC LOCAL GETCORRESPONDINGIDS</td></tr><tr>
+<td>TAG</td><td>TFL</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_VAFCTFU2.html">VAFCTFU2</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>WORD PROCESSING</td></tr><tr>
+<td>AVAILABILITY</td><td>PUBLIC</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>VERSION</td><td>1</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Given a patient DFN, ICN, or EDIPI, this Remote Procedure Call returns a 
+list of Treating Facilities, including SOURCE ID, station number, and 
+IDENTIFIER STATUS.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>Patient Identifier</dd><dt>PARAMETER TYPE:</dt><dd>WORD PROCESSING</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>255</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+The patient identifier will either be the PATIENT file (#2) IEN (aka 
+DFN), Integration Control Number (aka ICN) or the DOD Identifier (aka 
+EDIPI).  Following this format:
+ 
+Id^IdType^AssigningAuthority^AssigningFacility
+ 
+Examples:
+ 
+ICN example:   1008520438V882204^NI^USVHA^200M
+DFN example:   100000511^PI^USVHA^500
+EDIPI example: 852043888^NI^USDOD^200DOD
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+This will return a list of treating facilities in the following format:
+ 
+ID^IDTYPE^AssigningAuthority^AssigningFacility^IDStatus
+ 
+Examples:
+ 
+RETURN(1)="27^PI^USVHA^500^H"
+RETURN(2)="7169806^PI^USVHA^500^A"
+RETURN(3)="^PI^USVHA^200PS"
+RETURN(4)="1^NI^USDOD^200DOD^A"
+RETURN(5)="2^NI^USDOD^200DOD^H"
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

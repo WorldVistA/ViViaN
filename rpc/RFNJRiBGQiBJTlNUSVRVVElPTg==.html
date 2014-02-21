@@ -1,0 +1,69 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIF FB INSTITUTION (3011)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIF FB INSTITUTION</td></tr><tr>
+<td>TAG</td><td>GETINST</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSIFUTL.html">DSIFUTL</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>SUBSCRIPTION</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>VERSION</td><td>3.2</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Input Station number, return all populated fields in file #4.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>STATION NUMBER</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>9</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+ Station number lookup, using "D" cross reference (FIELD 99) 1st, then by
+ name field.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+ Return populated fields in file #4:
+FIELD NUMBER^VALUE
+ 
+ (example)
+ 
+ ^TMP("DSIFUTL",33580,.01)=".01^BELLEVILLE IL CBOC"
+ ^TMP("DSIFUTL",33580,.02)=".02^ILLINOIS"
+ ^TMP("DSIFUTL",33580,1.01)="1.01^ARCADES CENTER"
+ ^TMP("DSIFUTL",33580,1.03)="1.03^BELLEVILLE"
+ ^TMP("DSIFUTL",33580,1.04)="1.04^62223"
+ ^TMP("DSIFUTL",33580,4.01)="4.01^ARCADES CENTER"
+ ^TMP("DSIFUTL",33580,4.03)="4.03^BELLEVILLE"
+ ^TMP("DSIFUTL",33580,4.04)="4.04^ILLINOIS"
+ ^TMP("DSIFUTL",33580,4.05)="4.05^62223"
+ ^TMP("DSIFUTL",33580,11)="11^National"
+ ^TMP("DSIFUTL",33580,95)="95^VA"
+ ^TMP("DSIFUTL",33580,97)="97^VA"
+ ^TMP("DSIFUTL",33580,99)="99^657GA"
+ ^TMP("DSIFUTL",33580,100)="100^BELLEVILLE IL CBOC (657GA)"
+ or
+ 
+ ^TMP("DSIFUTL",33580,0)="0^entry not found"
+ or
+ ^TMP("DSIFUTL",33580,0)="-1^Invalid entry"
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

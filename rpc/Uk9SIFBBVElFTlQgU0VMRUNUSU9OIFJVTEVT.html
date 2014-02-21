@@ -1,0 +1,79 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>ROR PATIENT SELECTION RULES (1786)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>ROR PATIENT SELECTION RULES</td></tr><tr>
+<td>TAG</td><td>PTRULES</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_RORRP022.html">RORRP022</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>VERSION</td><td>1</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+The ROR PATIENT SELECTION RULES remote procedure returns a list of 
+selection rules that have caused addition of the patient to the registry.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>REGIEN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+The REGIEN parameter should contain a valid registry IEN (IEN of the
+registry parameters record in the ROR REGISTRY PARAMETERS file #798.1).
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PATIEN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+Valid IEN of a registry patient should be assigned to the PATIEN
+parameter.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+A negative value of the first "^"-piece of the Results[0] indicates that
+an error occurred during the execution of the remote procedure. In this
+case, the second piece of the Results[0] will contain number of the error
+descriptors returned in the subsequent nodes of the Results array:
+  
+  Results[0]            Result Descriptor
+                          ^01: The last error code
+                          ^02: Number of the error descriptors
+                                                                      
+  Results[i]            Error Descriptor
+                          ^01: Error code
+                          ^02: Message
+                          ^03: Place of the error
+ 
+Otherwise, number of selection rules is returned in the Results[0] and the
+subsequent nodes of the array contain the rules.
+ 
+  Results[0]            Number of Selection Rules
+ 
+  Results[i]            Selection Rule
+                          ^01: IEN in the SELECTION RULE multiple
+                               of the ROR LOCAL REGISTRY file
+                          ^02: IEN of the Rule (in the
+                               ROR SELECTION RULE file)
+                          ^03: Name of the Rule
+                          ^04: Date (FileMan)
+                          ^05: Location IEN  (Institution IEN)
+                          ^06: Location Name (Institution Name)
+                          ^07: Short Description
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

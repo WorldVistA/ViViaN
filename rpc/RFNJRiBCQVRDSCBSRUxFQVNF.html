@@ -1,0 +1,58 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIF BATCH RELEASE (2614)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIF BATCH RELEASE</td></tr><tr>
+<td>TAG</td><td>RELBAT</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSIFBAT3.html">DSIFBAT3</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>WORD WRAP ON</td><td>FALSE</td></tr><tr>
+<td>VERSION</td><td>2</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>BATCH NUMBER</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>19</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+'*' Reimbursement to Patient   '+' Cancellation Activity
+If Type = B3 (Medical Payments) 
+   FBOUT(0)="Invoice"^B3^Invoice number^Totals
+   FBOUT(CNT)="Pat"^Patient Name^SSN (internal and ext)^Batch #^Date 
+received^Vendor name^Vendor ID^Invoice^Invoice date
+   FBOUT(CNT.1)="CPT"^Service Date^CPT-Modifier^Service 
+Provided^Claimed amt^Paid amt^Adj amt
+   
+If type = B9 CH/CNH (Civil Hospital/Contract Nursing Home)
+ FBOUT(CNT)="Pat"^Patient Name^SSN (internal and ext)^Batch #^Date 
+received^Vendor name^Vendor ID^Invoice^Invoice date
+ FBOUT(CNT.1)="CPT"^Service Date^CPT-Modifier^Service 
+Provided^Claimed amt^Paid amt^Adj amt
+ FBOUT(CNT.2)="FPPS"^FPPS Claim ID^FPPS Line^Discharge^???
+ FBOUT(CNT.3)="Dx"^Dx code^...(repeat for up to five Dx codes)
+ FBOUT(CNT.4)="Proc"^Procedure code^...(repeat for up to five 
+procedures)
+ FBOUT(CNT.5)="Check"^Check # ^Date Paid^Interest^Amount paid altered 
+to $ ^Date Check cancelled^Reason
+  ^R=Check WILL be replaced or C=Check WILL be re-issued or X=Check 
+WILL NOT be replaced
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

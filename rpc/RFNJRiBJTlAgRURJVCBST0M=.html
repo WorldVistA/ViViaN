@@ -1,0 +1,70 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIF INP EDIT ROC (3013)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIF INP EDIT ROC</td></tr><tr>
+<td>TAG</td><td>ROCEDIT</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSIFINP1.html">DSIFINP1</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>WORD WRAP ON</td><td>FALSE</td></tr><tr>
+<td>VERSION</td><td>3.2</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This RPC duplicates the logic of the FBCH EDIT ROC input template.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>IEN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>99</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+Internal Entry Number of Contact/Fee Notification (Required - Pointer to 
+file 162.2/161.5)
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>DATA</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>255</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+DATA(n)="Field^Value"
+File 161.5 MUST match #162.2
+ 
+5       TYPE OF CONTACT: telephone// 
+6.5     PHONE # OF PERSON CONTACTED: 
+7       STREET ADDRESS[1] OF CONTACT: 
+8       STREET ADDRESS[2] OF CONTACT: 
+9       CITY OF CONTACT: 
+10      STATE OF CONTACT: 
+11      ZIP CODE OF CONTACT: 
+12      ATTENDING PHYSICIAN: GONE// 
+13      ATTEND.PHYSICIAN TELEPHONE NO.: 
+16      MODE OF TRANSPORTATION: AMBULANCE//   (Ien of file #392.4)
+16.5    VETERAN HAVE OTHER INSURANCE: NO// 
+17      Select DATE/TIME OF CONTACT: JAN 30,1994@13:39// 
+18      APPROVING OFFICIAL:   (if present ien of file #200)
+NARR    narrative fields, which must be preceded by line number piece
+        ex) NARR^1^THIS IS LINE 1
+            NARR^2^THIS IS LINE 2
+ 
+(all are option, but some must exist)
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Return Values
+   -1 ^ error message!
+    1 ^ ROC edited successfully
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

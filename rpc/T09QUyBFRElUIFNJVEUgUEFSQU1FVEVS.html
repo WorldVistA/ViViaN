@@ -1,0 +1,47 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>OOPS EDIT SITE PARAMETER (1412)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>OOPS EDIT SITE PARAMETER</td></tr><tr>
+<td>TAG</td><td>PARMEDT</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_OOPSGUI6.html">OOPSGUI6</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This broker call files changes to the Site Parameter File (#2262) name and 
+District Office, if made.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>INPUT</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>256</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+This input parameter contains the IEN of the Site Parameter File (#2262), the
+Site Parameter Name, and the District Office.  The format is:
+IEN^SITE NAME^DISTRICT OFFICE NAME.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+The return parameter, RESULTS, contains a message indicating whether changes
+made to the top level record were successful (Update Site data Successful)
+or were not (Update Site data was NOT Successful) successful.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

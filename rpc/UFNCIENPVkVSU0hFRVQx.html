@@ -1,0 +1,313 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>PSB COVERSHEET1 (2090)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>PSB COVERSHEET1</td></tr><tr>
+<td>TAG</td><td>RPC</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_PSBCSUTL.html">PSBCSUTL</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>INACTIVE</td><td>ACTIVE</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>VERSION</td><td>3</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+(modified 05/08/2007)
+ 
+PSB COVERSHEET1 is to return order data per patient and construction of 
+BCMA Coversheet view as presented by the BCMA-HSC Coversheet Phase II
+SRS and SDD documentation.
+ 
+INPUT:  communications area -  "" 
+        patient's DFN       -  DFN     (patient ptr.)
+                            -  TIME RANGE (24/48/72)
+                            -  PSBSIOPI (SI/OPI Word Processing text line)
+                                  (true/false flag 1/0 default=0 - Opt)
+                            -  PSBCLINORD (Clinic Order request flag, 1/0)
+ 
+OUTPUT: results data        -  RESULTS array containing order data 
+                                per +/-TIME RANGE hours.
+ 
+ 
+ 
+ 
+Example "M" call and results:
+ 
+ 
+ 
+D RPC^PSBCSUTL("",783,24,1)
+ 
+RPC Call: PSB COVERSHEET1
+Results[0] = 90
+Results[1] = 1^0^1^1^COVERSHEET DATA FOLLOWS^1^4
+Results[2] = ORD^783^85U^85^U^C^Q6H^^NITROGLYCERIN PATCH^200MG 
+^EPIDURAL^3070501.115014^^^^455^0^0^PATCH^***^G^3070501.09^A^^^0^3070523.0
+718^3070501.115014^1
+Results[3] = ORC^!TEST MED THERAPY ANTIANGINALS
+Results[4] = DD^2313^NITROGLYCERIN PATCHES 10MG/24HR^1^
+Results[5] = 
+ADM^3070501.09^^100000746^G^3070501.115014^TEJ^10000000039^^3070501.1500
+Results[6] = CMT^THIS SHOULD SHOW ON THE MED THERAPY PER 56   
+ANTIANGINALS^^10000000039^TEJ^3070501.115014
+Results[7] = ADM^3070506.15^^^^^^^^3070501.1500
+Results[8] = ADM^3070506.21^^^^^^^^3070501.1500
+Results[9] = ADM^3070507.03^^^^^^^^3070501.1500
+Results[10] = ADM^3070507.09^^^^^^^^3070501.1500
+Results[11] = ADM^3070507.15^^^^^^^^3070501.1500
+Results[12] = ADM^3070507.21^^^^^^^^3070501.1500
+Results[13] = ADM^3070508.03^^^^^^^^3070501.1500
+Results[14] = ADM^3070508.09^^^^^^^^3070501.1500
+Results[15] = END
+Results[16] = ORD^783^83U^83^U^C^Q3H^^RANITIDINE TAB^150MG 
+^ORAL^3070405.12403^^^^558^0^0^TAB^***^R^3070430.1^A^^^0^3070602.1207^^1
+Results[17] = ORC^!TEST THE ADMIN TIMES REPORT W/ DATE RANGE +3DAYS
+Results[18] = DD^5094^RANITIDINE 150MG TAB^1^
+Results[19] = ADM^3070506.13^^^^^^^^3070430.1000
+Results[20] = ADM^3070506.16^^^^^^^^3070430.1000
+Results[21] = ADM^3070506.19^^^^^^^^3070430.1000
+Results[22] = ADM^3070506.22^^^^^^^^3070430.1000
+Results[23] = ADM^3070507.01^^^^^^^^3070430.1000
+Results[24] = ADM^3070507.04^^^^^^^^3070430.1000
+Results[25] = ADM^3070507.07^^^^^^^^3070430.1000
+Results[26] = ADM^3070507.1^^^^^^^^3070430.1000
+Results[27] = ADM^3070507.13^^^^^^^^3070430.1000
+Results[28] = ADM^3070507.16^^^^^^^^3070430.1000
+Results[29] = ADM^3070507.19^^^^^^^^3070430.1000
+Results[30] = ADM^3070507.22^^^^^^^^3070430.1000
+Results[31] = ADM^3070508.01^^^^^^^^3070430.1000
+Results[32] = ADM^3070508.04^^^^^^^^3070430.1000
+Results[33] = ADM^3070508.07^^^^^^^^3070430.1000
+Results[34] = ADM^3070508.1^^^^^^^^3070430.1000
+Results[35] = ADM^3070508.13^^^^^^^^3070430.1000
+Results[36] = END
+Results[37] = ORD^783^84U^84^U^C^Q3H^^ISOSORBIDE DINITRATE TAB,ORAL^40MG 
+^ORAL^^^^^354^0^0^TAB,ORAL^***^^3070501.07^A^^^0^3070603.04^^1
+Results[38] = ORC^!TEST MED THERAPY ANTIANGINALS
+Results[39] = DD^2191^ISOSORBIDE  20MG TAB ^2^
+Results[40] = ADM^3070506.13^^^^^^^^3070501.0700
+Results[41] = ADM^3070506.16^^^^^^^^3070501.0700
+Results[42] = ADM^3070506.19^^^^^^^^3070501.0700
+Results[43] = ADM^3070506.22^^^^^^^^3070501.0700
+Results[44] = ADM^3070507.01^^^^^^^^3070501.0700
+Results[45] = ADM^3070507.04^^^^^^^^3070501.0700
+Results[46] = ADM^3070507.07^^^^^^^^3070501.0700
+Results[47] = ADM^3070507.1^^^^^^^^3070501.0700
+Results[48] = ADM^3070507.13^^^^^^^^3070501.0700
+Results[49] = ADM^3070507.16^^^^^^^^3070501.0700
+Results[50] = ADM^3070507.19^^^^^^^^3070501.0700
+Results[51] = ADM^3070507.22^^^^^^^^3070501.0700
+Results[52] = ADM^3070508.01^^^^^^^^3070501.0700
+Results[53] = ADM^3070508.04^^^^^^^^3070501.0700
+Results[54] = ADM^3070508.07^^^^^^^^3070501.0700
+Results[55] = ADM^3070508.1^^^^^^^^3070501.0700
+Results[56] = ADM^3070508.13^^^^^^^^3070501.0700
+Results[57] = END
+Results[58] = ORD^783^86U^86^U^C^Q3H^^PENTAERYTHRITOL TETRANITRATE 
+TAB,ORAL^10MG 
+^ORAL^3070501.125733^^^^481^0^0^TAB,ORAL^***^G^3070501.09^A^^^0^3070614.06
+11^3070501.125733^1
+Results[59] = ORC^!TEST THIS ONE TOO ANTIANGINALS
+Results[60] = DD^251^PENTAERYTHRITOL  10MG TAB^1^
+Results[61] = 
+ADM^3070501.125733^^100000747^G^3070501.125733^TEJ^10000000039^^3070501.15
+00
+Results[62] = ADM^3070506.15^^^^^^^^3070501.1500
+Results[63] = ADM^3070506.18^^^^^^^^3070501.1500
+Results[64] = ADM^3070506.21^^^^^^^^3070501.1500
+Results[65] = ADM^3070506.24^^^^^^^^3070501.1500
+Results[66] = ADM^3070507.03^^^^^^^^3070501.1500
+Results[67] = ADM^3070507.06^^^^^^^^3070501.1500
+Results[68] = ADM^3070507.09^^^^^^^^3070501.1500
+Results[69] = ADM^3070507.12^^^^^^^^3070501.1500
+Results[70] = ADM^3070507.15^^^^^^^^3070501.1500
+Results[71] = ADM^3070507.18^^^^^^^^3070501.1500
+Results[72] = ADM^3070507.21^^^^^^^^3070501.1500
+Results[73] = ADM^3070507.24^^^^^^^^3070501.1500
+Results[74] = ADM^3070508.03^^^^^^^^3070501.1500
+Results[75] = ADM^3070508.06^^^^^^^^3070501.1500
+Results[76] = ADM^3070508.09^^^^^^^^3070501.1500
+Results[77] = ADM^3070508.12^^^^^^^^3070501.1500
+Results[78] = END
+Results[79] = ORD^783^56V^56^V^C^^^POTASSIUM (K) LIQUID,ORAL^ 780 
+ml/hr^INTRACARDIAC INTRA-ARTICULAR 
+INTRAVENOUS^3070125.142403^^^^512^0^0^^***^S^3070423.08^A^^^0^3070525.2204
+^^3
+Results[80] = ORC^!THERE WILL BE NO ACTION ON THIS ORDER!!  nox)
+Results[81] = ORF^CPRS^CPRS^REASON FOR THE CPRS FLAG...
+Results[82] = ORF^NOX^No Action Taken On Order
+Results[83] = ADD^24^KCL^78 MEQ^
+Results[84] = SOL^14^DEXTROSE 5% IN N. SALINE^1000 ML^
+Results[85] = ID^783V241^ADD;24^SOL;14
+Results[86] = ID^783V240^ADD;24^SOL;14
+Results[87] = ID^783V239^ADD;24^SOL;14
+Results[88] = ID^783V238^ADD;24^SOL;14
+Results[89] = ID^783V237^ADD;24^SOL;14
+Results[90] = SI^Watch for next hour for any reaction to this medication 
+Results[91] = SI^and stop administration if any side effects are observed
+Results[92] = SI^and call Provider immediately for consult.
+Results[93] = END
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>DFN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+DFN is the internal entity number per the patient file (file #2).
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>HRSBACK</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+HRSBACK - (optional) The number of hours in the past the coversheet will 
+supply order information for.  [default is 24 hours]
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PSBSIOPI</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>1</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+ This parameter is a true/false flag (1/0).  If true use the new SI/OP Wp
+ fields and return data in the Results array to the GUI Client.
+  
+ The field is not required, so a null will convert into a 0, for false,
+ making this backwards compatible.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PSBCLINORD</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>1</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>4</dd><dt>DESCRIPTION:</dt><dd><pre>
+This parameter is a True/False flag (1/0).  If true, then return only
+Clinic Orders and not Inpatient Medication orders to BCMA, else if false,
+return only Inpatient Medication orders to BCMA.
+ 
+The field is not required, so a null will convert into a 0, for a default
+false value, making this backwards compatible.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+(modified 05/08/2007)
+ 
+Remote Procedure Call - PSB COVERSHEET1
+RESULTS():
+The return data will be listed in the RESULTS "global".
+ 
+Results[0] =  ^1      Total lines in Results array
+ 
+Results[1] =  ^1      Data for the Unit Dose tab (0=no, 1=yes)
+              ^2      Data for the Piggy Back tab (0=no, 1=yes
+              ^3      Data for the IV tab (0=no, 1=yes)
+              ^4      1 = orders exist;  -1 = an error
+              ^5      if ^4 = 1, then COVERSHEET DATA FOLLOWS text
+                      if ^4 =-1, then error text
+              ^6      Inpatient Meds order count
+              ^7      Clinic orders count
+ 
+RESULTS data will be presented with "headers":
+ 
+ORD - Order data
+ Order specific data
+^1  "ORD"-header
+^2  Patient's IEN
+^3  Order #_Order type
+^4  Order #
+^5  Order type
+^6  Schedule type
+^7  Schedule
+^8  Self med
+^9  Drug name
+^10 Dosage/Flow rate
+^11 Med route
+^12 Last Action Date/Time
+^13 ""
+^14 ""
+^15 ""
+^16 Orderable item (IEN)
+^17 Injectable?
+^18 Variable dose?
+^19 Dosage form
+^20 Verifying nurse initials (*** if none)
+^21 Last action status (whole order)
+^22 Order start date/time (FM)
+^23 Order status
+^24 ""
+^25 ""
+^26 Transaction type
+^27 Order stop date/time (FM)
+^28 Last Given Date/Time
+^29 Virtual Due List (VDL) tab indicator = "UD":1 "IVPB":2 "IV":3
+^30 Override/Intervention reasons/comments exist (0=No;1=Yes) 
+^31 (IVPB tab usage)
+^32 Clinic Name (if a Clinic order, else null)
+^33 Clinic ien pointer (if a Clinic order, else null)
+ 
+ 
+ORC - Order Comment/Special instruction
+^1  "ORC"- header
+^2  Special instruction
+ 
+ 
+ORF - Order Flag
+^1  "ORF"- header
+^2  type of flag
+^3  flag origin
+^4  associated comment
+ 
+ 
+DD  - Dispense Drug
+^1  "DD" - header
+^2  Dispense drug IEN
+^3  Dispense drug name
+^4  Units per dose
+^5  Inactive date
+ 
+ADD - Additive
+^1  "ADD" - header
+^2  Additive IEN
+^3  Additive name
+^4  Strength
+^5  Bottle
+ 
+SOL - Solution
+^1  "SOL" - header
+^2  Solution IEN
+^3  Solution name
+^4  Volume
+ 
+ID  - Identification
+^1  "ID" - header
+^2  ID number
+^3  Additive IEN
+ 
+ADM - Administration
+^1  "ADM" - header
+^2  Scheduled admin date/time
+^3  Bag id
+^4  Med log ien
+^5  Action
+^6  Date/time
+^7  Action by initials
+^8  Action by ien
+^9  Prn reason
+^10 Next Action Date/Time
+ 
+CMT - Comment per administration
+^1  "CMT" - header
+^2  Comment
+^3  Prn effectiveness 
+ 
+SI - WP text for Special Instruction/Other Print Info
+^1    Literal "SI"
+^2    Special Instruction/Other Print Info text line
+ 
+END - End
+^1  "END" - header
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

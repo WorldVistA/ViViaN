@@ -1,0 +1,69 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>MAG KEY VALIDATE (2894)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>MAG KEY VALIDATE</td></tr><tr>
+<td>TAG</td><td>KVAL</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_MAGQBUT4.html">MAGQBUT4</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>INACTIVE</td><td>ACTIVE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This is a an interface to the Database Server (DBS) utility:
+Key Validator
+ 
+The Key Validator extrinsic function verifies that new values contained 
+in the FDA do not produce an invalid key. All keys in which any field in 
+the FDA participates are checked. If the value for a field in a key being 
+checked is not present in the FDA, the value used to verify the key is 
+obtained from the previously filed data.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>FLAGS</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>9</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+(Optional) Flags to control processing. The possible values are:
+ 
+Q  Quit when the first problem in the FDA is encountered.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>FDA</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>99</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+The root of the FDA that contains the data to be checked. The array can 
+be a local or global one. See the Database Server Introduction for 
+details of the structure of the FDA.
+The value of fields in the FDA must be the internal value. Do not pass 
+external (e.g., unresolved pointer values, non-FileMan dates) in the FDA.
+No action is taken on fields in the referenced FDA if those fields do not 
+participate in a Key defined in the KEY file.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+This Boolean function returns a 1 if key integrity is not violated by any 
+value in the FDA and a -1 followed by a carat delimiter and an error 
+message describing the nature of an invalid key that  was produced by any
+of the values. 
+ 
+740 A duplicate key is produced by a field's new value.
+742 A value for a field in a key is being deleted.
+744 Not all fields in a key have a value.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

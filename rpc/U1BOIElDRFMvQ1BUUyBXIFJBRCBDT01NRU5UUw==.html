@@ -1,0 +1,87 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>SPN ICDS/CPTS W RAD COMMENTS (2833)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>SPN ICDS/CPTS W RAD COMMENTS</td></tr><tr>
+<td>TAG</td><td>COL</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_SPNJRPIW.html">SPNJRPIW</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>INACTIVE</td><td>ACTIVE</td></tr><tr>
+<td>APP PROXY ALLOWED</td><td>Yes</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Returns ICD/CPT Codes with Radiology Comments for a given patient based 
+on the ICN and a cutoff date.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>ICN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>DESCRIPTION:</dt><dd><pre>
+Individual patient's ICN.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>SPNCUTDT</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>DESCRIPTION:</dt><dd><pre>
+Date to start search from.  
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+ 
+Return format:
+ 
+CPTBREAK^EOL999
+ 
+CPT detail level: CPT Description ^ CPT Code ^ Date CPT was entered ^ 
+Source file where Procedure code was found ^ Internal number of record in 
+source file ^ File and internal number of Radiology comments (if 
+applicable) ^ end of line marker
+ 
+Comments level: Type of comment (COM-R=Report, COM-I=Impression, 
+COM-H=additional clinical history) ^ Commments ^ end of line marker
+ 
+ICDBREAK^EOL999
+ 
+ICD detail level: ICD Description ^ ICD Code ^ Date/Timestamp ICD was 
+entered ^ Source file where Diagnosis code was found ^ Internal number of 
+record in source file ^ (null) ^ end of line marker
+ 
+ 
+Sample of return:
+ 
+CPTBREAK^EOL999
+GLYCATED HEMOGLOBIN TEST^83036^AUG 10, 
+2004@12:06^AUPNVCPT(^2360582^^EOL999
+CHEST X-RAY^71020^APR 23, 2004@09:26^AUPNVCPT(^2237884^^EOL999
+CHEST X-RAY^71020^APR 23, 2004@09:26^RADPT^6959576.9073^RARPT 
+162561^EOL999
+COM-R^CLINICAL HISTORY: Renal cancer. ^EOL999
+COM-R^Two views of the chest are submitted. Cardiac and mediastinal 
+silhouettes ^EOL999
+COM-I^1. Coarsened parenchymal markings, possibly due to emphysema or 
+chronic ^EOL999
+COM-I^lung disease. Recommend clinical correlation. ^EOL999
+ICDBREAK^EOL999
+EPIGLOTTIDECTOMY^30.21^FEB 24, 1999@10:09:12^DGPT^29429^^EOL999
+HEPATIC DX PROC NEC^50.19^FEB 24, 1999@10:09:12^DGPT^29429^^EOL999
+MALIG NEOPL KIDNEY^189.0^FEB 24, 1999@10:09:12^DGPT^29429^^EOL999
+HEMATURIA^599.7^SEP 09, 1998@13:20^SCE^828849^^EOL999
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

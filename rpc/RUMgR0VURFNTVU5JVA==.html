@@ -1,0 +1,57 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>EC GETDSSUNIT (926)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>EC GETDSSUNIT</td></tr><tr>
+<td>TAG</td><td>DSSUNT</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_ECUMRPC1.html">ECUMRPC1</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Returns array with active and/or inactive DSS units from file 724.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>ECARY</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>DESCRIPTION:</dt><dd><pre>
+Optional input variable ECARY containing a status of:
+   STAT   - Active or inactive DSS Units (optional)
+            A-ctive (default), I-nactive, B-oth
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+The results array contains data for DSS units as follows:-
+    1.  IEN of DSS Unit
+    2.  Name of DSS Unit
+    3.  Service
+    4.  Medical Speciality
+    5.  Cost Center
+    6.  Unit Number
+    7.  Inactive Flag
+    8.  Associated Stop Code
+    9.  Category flag
+    10. Default date entry
+    11. Send to PCE Flag
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

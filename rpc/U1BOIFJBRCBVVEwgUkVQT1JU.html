@@ -1,0 +1,54 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>SPN RAD UTL REPORT (2792)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>SPN RAD UTL REPORT</td></tr><tr>
+<td>TAG</td><td>RPC</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_SPNLRM7.html">SPNLRM7</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>APP PROXY ALLOWED</td><td>Yes</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>FDATE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>DESCRIPTION:</dt><dd><pre>
+DATE TO START COLLECTING DATA FROM
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>TDATE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>DESCRIPTION:</dt><dd><pre>
+DATE TO COLLECT DATA UP TO
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>MINPROC</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>DESCRIPTION:</dt><dd><pre>
+Minimum number of procedures to display:  (1-99999)
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>MINCOST</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>DESCRIPTION:</dt><dd><pre>
+Minimum dollar cost of procedures to display:  (0-999)
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>HIUSERS</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>DESCRIPTION:</dt><dd><pre>
+Number of highest users to identify:  (0-100)
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PTLIST</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>DESCRIPTION:</dt><dd><pre>
+DFN^DFN^DFN
+ 
+ 
+354^1368^1514^1862^2171^2254^2389^2401^2459^2726^2800^3504^3726^3793^4072
+</pre>
+</dd></li></ol></td></tbody>
+</table>
+</body></html>

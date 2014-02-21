@@ -1,0 +1,58 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>MAGV FIND PROC REF (3111)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>MAGV FIND PROC REF</td></tr><tr>
+<td>TAG</td><td>FINDPROC</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_MAGVRS07.html">MAGVRS07</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This remote procedure allows searching for a procedure reference based 
+upon a fixed scalar value for one or more of its attributes.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>PROCATTS</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>300</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+Input parameters are name-value pairs sent as successive integer
+subscripts in an array that should be passed in by reference as the second
+argument to entry point FINDPROC^MAGVRS07.  The first argument should be
+an array name (passed by reference) that will contain the returned value.
+ 
+The values passed in should be in the format &lt;fname&gt;`&lt;value&gt;, where
+&lt;fname&gt; is a field name in the IMAGING PROCEDURE REFERENCE File
+(#2005.61) and &lt;value&gt; is the value to which the record's attribute
+should be equal.  If multiple values are passed in, they will be ANDed.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+The first and only element of the return array will be structured as 
+follows, delimited by ` (backtick):
+ 
+P1  0 if no error, nonzero if error
+P2  Empty if no error, text if error
+P3  Internal entry number of procedure on the IMAGING PROCEDURE File 
+(#2005.61) if no error
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

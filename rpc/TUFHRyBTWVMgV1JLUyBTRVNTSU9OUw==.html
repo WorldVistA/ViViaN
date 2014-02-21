@@ -1,0 +1,58 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>MAGG SYS WRKS SESSIONS (975)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>MAGG SYS WRKS SESSIONS</td></tr><tr>
+<td>TAG</td><td>SESSION</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_MAGGTSY1.html">MAGGTSY1</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Returns session listing for a workstation.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>DATA</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>245</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+ DATA is '^' delimited string
+       IEN Workstatin File ^  From Date ^ To Date
+IEN is from the Workstation file ^MAG(2006.81
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Returns an array of user sessions on this workstation.
+each entry has session info in an '^' delimited piece
+in the format : 
+   $p(1) User Name
+   $p(2) Workstation Name
+   $p(3) Date of Last Logon, by a user.
+   $p(4) Date/Time of Last Logoff.
+   $p(5) patients viewed this session
+   $p(6) images viewed this session.
+   $p(7) Images captured this session
+   $p(8) action count
+   $p(9) error count
+   $p(10) session ien
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

@@ -1,0 +1,85 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>PSB USERSAVE (363)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>PSB USERSAVE</td></tr><tr>
+<td>TAG</td><td>USRSAVE</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_PSBRPC.html">PSBRPC</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>VERSION</td><td>2</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Save the users current window settings for the next session.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>PSBWIN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>30</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+Contains the current window settings so that the next time the user 
+activates the application the window will reappear in the same format.
+ 
+Data is in the following format:
+ 
+   Window Top;Window Left;Window Height;Window Width;Window State
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PSBVDL</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+VDL settings
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PSBUDCW</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+UD tab column settings
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PSBPBCW</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>4</dd><dt>DESCRIPTION:</dt><dd><pre>
+PB tab column settings 
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PSBIVCW</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>5</dd><dt>DESCRIPTION:</dt><dd><pre>
+IV tab column settings   
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PSBDEV</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>6</dd><dt>DESCRIPTION:</dt><dd><pre>
+Last print device used.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PSBCSRT</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>SEQUENCE NUMBER:</dt><dd>7</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PSBCV1</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>SEQUENCE NUMBER:</dt><dd>8</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PSBCV2</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>SEQUENCE NUMBER:</dt><dd>9</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PSBCV3</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>SEQUENCE NUMBER:</dt><dd>10</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PSBCV4</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>SEQUENCE NUMBER:</dt><dd>11</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PSBORMODE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>SEQUENCE NUMBER:</dt><dd>12</dd><dt>DESCRIPTION:</dt><dd><pre>
+Last Order mode per user upon exit of BCMA.
+ 
+This parameter is for the last Order Mode the user was using upon exiting 
+BCMA.  
+ 
+Value
+  0    Inpatient order mode
+  1    Clinic order mdoe
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PSBCLSRCH</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>SEQUENCE NUMBER:</dt><dd>13</dd><dt>DESCRIPTION:</dt><dd><pre>
+Last Clinic Search text criteria entered per user.  
+This parameter contains two pieces of data delimited by a "/".  First 
+piece of data is the Clinic name search Prefix text and the second is the 
+Clinic name contains search text.
+ 
+Example:
+ AL-BLUE TEAM/CARDIAC
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Returns
+ 
+  Results[0]='1^Saved'
+  Results[0]='-1^Unable to save settings' if an error occurs in filing.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

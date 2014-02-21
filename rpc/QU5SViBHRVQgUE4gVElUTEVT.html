@@ -1,0 +1,40 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>ANRV GET PN TITLES (2244)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>ANRV GET PN TITLES</td></tr><tr>
+<td>TAG</td><td>NOTES</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_TIUSRVD.html">TIUSRVD</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>SUBSCRIPTION</td></tr><tr>
+<td>APP PROXY ALLOWED</td><td>Yes</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This API returns a list of Progress Notes Titles, including a SHORT LIST 
+or preferred titles as defined by the user, and a LONG LIST of all titles 
+defined at the site.  This has been added to the Blind Rehab software to 
+allow the lookup of TIU Document Definitions to set as site parameters 
+for the current institution.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

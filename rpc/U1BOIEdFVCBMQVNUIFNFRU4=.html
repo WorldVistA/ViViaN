@@ -1,0 +1,60 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>SPN GET LAST SEEN (2793)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>SPN GET LAST SEEN</td></tr><tr>
+<td>TAG</td><td>COL</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_SPNJRPC1.html">SPNJRPC1</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>INACTIVE</td><td>ACTIVE</td></tr><tr>
+<td>APP PROXY ALLOWED</td><td>Yes</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This RPC returns list of patients with the date that they were last seen 
+at a clinic.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>ICNLST</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>DESCRIPTION:</dt><dd><pre>
+An array list of Integration Control Numbers of patients in the PATIENT 
+file (#2).  Format: ICNLST(1)=1001000001, ICNLST(2)=1001000002, etc.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>DAYS</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>DESCRIPTION:</dt><dd><pre>
+The number of days back from current date to begin search from.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+ 
+Return format:
+ 
+ Date last seen ^ Patient name ^ Last four digits of SSN ^ End of Line 
+ 
+Sample of Return:
+ 
+05/15/2003^SPINALCORD,ONE^0001^EOL999
+06/26/2003^SPINALCORD,TWO^0002^EOL999
+04/09/2003^SPINALCORD,THREE^0003^EOL999
+03/20/2003^SPINALCORD,FOUR^0004^EOL999
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

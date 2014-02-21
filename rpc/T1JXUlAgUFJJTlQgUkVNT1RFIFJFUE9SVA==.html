@@ -1,0 +1,71 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>ORWRP PRINT REMOTE REPORT (729)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>ORWRP PRINT REMOTE REPORT</td></tr><tr>
+<td>TAG</td><td>REMOTE</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_ORWRPP.html">ORWRPP</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>AVAILABILITY</td><td>SUBSCRIPTION</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+ This rpc is used to print a remote report on the Report tab
+ in CPRS.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>DEVICE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>100</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>DESCRIPTION:</dt><dd><pre>
+ Name of the device where the report should print.
+ Format: &lt;device name&gt; ; &lt;right margin&gt; ; &lt;page length&gt;
+ Right margin and page length are optional.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>DFN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>20</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>DESCRIPTION:</dt><dd><pre>
+ Internal entry number of entry in the Patient file.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>REPORT ID</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>20</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>DESCRIPTION:</dt><dd><pre>
+ Identification number of the desired report.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>HANDLE</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>DESCRIPTION:</dt><dd><pre>
+List of remote handles to print for.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+ If the print request was successfully queued then the
+ Task manager task number is return. Otherwise, and error
+ code and error description are returned.
+ Error Code Table:
+ 
+      Code            Text
+      ----            ----
+        0             &lt;Task Number&gt;
+        1             No device selected
+        2             No report specified
+        3             Report type specified is not valid
+        4             No date range specified
+        5             No health summary type specified
+        6             Patient specified is not valid
+        7             No exam identified
+        8             No procedure date identified
+        9             No assessment identified
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

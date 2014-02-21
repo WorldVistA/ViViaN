@@ -1,0 +1,104 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>RG VIEW VISTA EXCEPTIONS (2283)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>RG VIEW VISTA EXCEPTIONS</td></tr><tr>
+<td>TAG</td><td>EN</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_RGRPC.html">RGRPC</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>VERSION</td><td>1</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This RPC will allow the MPI IMDQ staff to view VistA exceptions for a 
+given patient logged during a specific date range.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>ICN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>10</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+Integration Control Number for patient exceptions are being requested 
+for.  If ICN is not passed, then SSN or DFN must be.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>SSN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>9</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+Social Security Number for patient exceptions are being requested 
+for.  If SSN is not passed, then ICN or DFN must be.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>DFN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>32000</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>4</dd><dt>DESCRIPTION:</dt><dd><pre>
+Internal Entry Number for patient, in the PATIENT (#2) file, exceptions
+are being requested for  If DFN is not passed, then ICN or SSN must be.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>BRANGE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>7</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>5</dd><dt>DESCRIPTION:</dt><dd><pre>
+Beginning Date Range for exceptions to be in.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>ERANGE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>7</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>6</dd><dt>DESCRIPTION:</dt><dd><pre>
+Ending Date Range for Exceptions to have been logged in.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Exceptions found for the patient in the given date range.  Fields 
+returned are from file 991.1:
+ 
+991.1,.01     NUMBER                 0;1 NUMBER (Required)
+              DESCRIPTION:      This is the internal entry number (IEN) 
+of this HL7 exception.  
+ 
+991.1,1       START                  0;2 DATE (Required)
+              DESCRIPTION:      This the date/time the message processing 
+started.  
+ 
+991.12,2        TYPE                 0;3 POINTER TO CIRN HL7 EXCEPTION 
+TYPE FILE (#991.11)
+                DESCRIPTION:    This is a pointer to the CIRN HL7 
+EXCEPTION TYPE file (#991.11).  
+ 
+991.12,3        PATIENT              0;4 POINTER TO PATIENT FILE (#2)
+                DESCRIPTION:    Pointer to PATIENT file (#2) for the 
+patient involved in this exception (DFN). This field is not required as
+every exception type does not have an associated DFN.
+ 
+991.12,6        EXCEPTION STATUS     0;5 SET
+                                '0' FOR NOT PROCESSED; 
+                                '1' FOR PROCESSED; 
+                DESCRIPTION:    This is the exception status for this 
+message.   A status of NOT PROCESSED indicates that user intervention is
+necessary.  The status should be changed to PROCESSED after confirming
+that the patient data is correct.
+ 
+991.12,10       TEXT                 10;E1,250 FREE TEXT
+                DESCRIPTION:    This is a free text field used for 
+supplemental text for the exception.  
+ 
+991.12,11       NOTES                11;0   WORD-PROCESSING #991.1211
+                DESCRIPTION:    This field allows users to enter notes 
+regarding an exception to aid in resolving the exception.  
+ 
+and new fields:
+ 
+991.12,7        DATE/TIME PROCESSED  0;6 DATE
+               DESCRIPTION:    This field will capture the date/time the
+exception was marked processed.  
+ 
+991.12,8        WHO MARKED PROCESSED 0;7 POINTER TO NEW PERSON FILE (#200)
+                DESCRIPTION:    This field will capture who has marked 
+the exception as processed.  
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

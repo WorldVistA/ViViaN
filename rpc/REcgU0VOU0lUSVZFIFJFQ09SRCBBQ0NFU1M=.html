@@ -1,0 +1,86 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DG SENSITIVE RECORD ACCESS (403)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DG SENSITIVE RECORD ACCESS</td></tr><tr>
+<td>TAG</td><td>PTSEC</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DGSEC4.html">DGSEC4</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>PUBLIC</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This Remote Procedure Call (RPC) will:
+ 
+        - Verify user is not accessing his/her own Patient file record if
+the Restrict Patient Record Access (#1201) field in the MAS parameters
+(#43) file is set to yes and the user does not hold the DG RECORD ACCESS
+security key.  If parameter set to yes and user is not a key holder , a
+social security number must be defined in the New Person file for the user
+to access any Patient file record.
+ 
+        - Determine if user accessing a sensitive record or an employee's
+record.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>DFN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+DFN = Patient (#2) file DFN.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>DGMSG</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>1</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+DGMSG = 1 - if message should be generated when a user's SSN is undefined
+        0 - message will not be generated
+        If not defined, defaults to 1.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>DGOPT</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+Contains Option name^Menu text for DG Security Log update.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+RESULT(1) = -1-RPC/API failed 
+               Required variable not defined
+             0-No display/action required
+               Not an employee, not sensitive or not accessing own Patient
+               record
+             1-Display warning message
+               Sensitive - inpatient or a DG SENSITIVITY key holder
+               or Employee and DG SECURITY OFFICER key holder
+             2-Display warning message, require OK to continue and call
+               DG SENSITIVE RECORD BULLETIN RPC to update DG Security Log
+               file and generate Sensitive Record Access mail message.
+               Sensitive - not an inpatient and not a key holder
+               or Employee/not a DG SECURITY OFFICER key holder
+             3-Access to record denied
+               Accessing own Patient file record
+             4-Access to Patient file (#2) records denied
+               SSN not defined
+RESULT(2-n) = error message or warning/Privacy Act message.  Error and
+warning messages will begin in RESULT(2) array.  The Privacy Act message
+is the longest message and will utilize RESULT(2)- RESULT(8).
+ 
+If RESULT(1)=1, the DG Security Log file is updated.
+If RESULT(1)=2, the user must acknowledge they want to access the
+restricted record and the application must call the DG SENSITIVE RECORD
+BULLETIN RPC to update the DG Security Log file and generate the Sensitive
+Record Access mail message.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

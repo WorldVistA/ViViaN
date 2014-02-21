@@ -1,0 +1,42 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIRRPTR KCHK REPORT KILL CHK (2998)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIRRPTR KCHK REPORT KILL CHK</td></tr><tr>
+<td>TAG</td><td>KCHK</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSIRRPTR.html">DSIRRPTR</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This procedure is used to check to see if the report cleanup task needs to
+be run. If yes, the DSIR REPORT KILL CHECK DATE parameter is updated and 
+the cleanup task is queued.
+</pre>
+</td></tr><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+OUTPUT IS EITHER 
+  0 (ZERO) WHICH INDICATES NO ACTION NEEDED
+  1 WHICH INDICATES THE REPORT CLEANUP TASK WAS SCHEDULED
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

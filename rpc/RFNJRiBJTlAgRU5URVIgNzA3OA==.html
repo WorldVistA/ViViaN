@@ -1,0 +1,126 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIF INP ENTER 7078 (2633)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIF INP ENTER 7078</td></tr><tr>
+<td>TAG</td><td>EN7078</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSIFNOT4.html">DSIFNOT4</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>VERSION</td><td>3.2</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This RPC enters a 7078, updates the FEE BASIS PATIENT FILE, and calls 
+IFCAP to post the 1358.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>REQ</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>99</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+Internal Number of Request (Required, Pointer to file 162.2)
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>OBNUM</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>99</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+Obligation Number (Required, complete with sequence number after the '.')
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>AUTODT</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>7</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+Authorized TO Date (Required, FM Date - Must be later than Authorized 
+FROM date in file 162.2)
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>DSCHDT</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>7</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>4</dd><dt>DESCRIPTION:</dt><dd><pre>
+Discharge Date (Optional, FM Date - Must not be earlier than AUTODT)
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>AUTH</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>99</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>5</dd><dt>DESCRIPTION:</dt><dd><pre>
+Admitting Authority (Required, Pointer to file 43.4 VA ADMITTING 
+REGULATION)
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>ESTAMT</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>9</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>6</dd><dt>DESCRIPTION:</dt><dd><pre>
+Estimated cost to the Veteran, will be passed to IFCAP (Required, Numeric 
+up to 2 decimals)
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PATYP</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>2</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>7</dd><dt>DESCRIPTION:</dt><dd><pre>
+Patient Type (Required, Set of Codes)
+ 00 = Surgical
+ 10 = Medical
+ 86 = Psychiatry
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PDISP</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>1</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>8</dd><dt>DESCRIPTION:</dt><dd><pre>
+Reason for Pending Disposition (Optional, Required if AUTODT is null)
+ 1 = FOLLOW-UP/NOT STABLE
+ 2 = AWAITING DISCHARGE/TRANSFER
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>DCHTYP</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>1</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>9</dd><dt>DESCRIPTION:</dt><dd><pre>
+Discharge Type (Required, Set of Codes)
+ 1 - Transfer to VA
+ 2 - Death With Autopsy
+ 3 - Death Without Autopsy
+ 4 - Discharge
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>POV</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>99</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>10</dd><dt>DESCRIPTION:</dt><dd><pre>
+Purpose of Visit (Optional - Pointer to file 161.82 FEE BASIS PURPOSE OF 
+VISIT)
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PSA</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>99</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>11</dd><dt>DESCRIPTION:</dt><dd><pre>
+Primary Service Area (Required - Pointer to file 4 INSITIUTION)
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>ACCR</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>1</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>12</dd><dt>DESCRIPTION:</dt><dd><pre>
+Accident Related (Optional Yes/No - Y : Yes, N : No)
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PCRC</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>1</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>13</dd><dt>DESCRIPTION:</dt><dd><pre>
+Potential Cost Recovery Case (Required Yes/No - Y : Yes, N : No [DEFAULT 
+= N])
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>AUTHSVC</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>80</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>16</dd><dt>DESCRIPTION:</dt><dd><pre>
+Authorized Services (Word Processing - Default text from Site Parameter 
+file 161.4 field #28)
+ 
+Array passed must be: AUTHSVC(1)= (text), 
+with additional lines if needed AUTHSVC(2)= (text line 2), etc.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>REFPROV</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>99</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>14</dd><dt>DESCRIPTION:</dt><dd><pre>
+Referring Provider (Optional - Pointer to file 200 NEW PERSON)
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>CNTIEN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>25</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>15</dd><dt>DESCRIPTION:</dt><dd><pre>
+Contract IEN
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Return Values
+        NNN = Internal Number for 7078, if no second piece all is well
+        NNN ^ Fee Basis Site Parameters are NOT set. Unable to authorize.
+        NNN ^ Unable to create PTF Record!
+        NNN ^ Unable to find/create Fee Basis Patient Record.
+      -1^1358^OBLIGATION NUMBER NOT FOUND
+              CPA NUMBER INVALID
+              Unauthorized control point user
+              OBLIGATION HAS NOT BEEN ESTABLISHED
+              TRANSACTION IS COMPLETE
+              NO SERVICE BALANCE ESTABLISHED
+              INSUFFICIENT REFERENCE BALANCE TO POST COMMITTED AMOUNT
+              INSUFFICIENT SERVICE BALANCE TO POST ACTUAL AMOUNT
+              INVALID DATE/TIME
+              NEED AT LEAST AN ESTIMATE OR AN ACTUAL AMOUNT
+              NEED THE REFERENCE FOR THIS OBLIGATION
+              COULD NOT CREATE RECORD
+              1358 not available for posting!
+ 
+        -1 ^ Invalid Input!
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

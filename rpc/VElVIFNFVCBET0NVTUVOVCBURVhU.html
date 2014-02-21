@@ -1,0 +1,71 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>TIU SET DOCUMENT TEXT (1109)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>TIU SET DOCUMENT TEXT</td></tr><tr>
+<td>TAG</td><td>SETTEXT</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_TIUSRVPT.html">TIUSRVPT</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>AVAILABILITY</td><td>SUBSCRIPTION</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This RPC buffers the transmittal of text (i.e., the body of TIU Documents)
+from the Client to the Server. It allows documents of indefinite size to
+be filed, without risk of an allocate error on the M Server.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>TIUDA</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the IEN of the TIU Document in the TIU DOCUMENT file (#8925).
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>TIUX</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the array in which the body of the TIU Document is being passed,
+as: 
+ 
+                TIUX("HDR")=&lt;# of Current Page&gt;^&lt;Total # of Pages&gt;
+                TIUX("TEXT",1,0)=&lt;Line 1 of document body&gt;
+                TIUX("TEXT",2,0)=&lt;Line 2 of document body&gt;
+                TIUX("TEXT",3,0)=&lt;Line 3 of document body&gt;
+                        .                       .
+                        .                       .
+                        .                       .
+                TIUX("TEXT",i,0)=&lt;Line i of document body&gt;
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>SUPPRESS</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>DESCRIPTION:</dt><dd><pre>
+Optional parameter.  Default is 0 (no).
+ 
+Boolean flag that indicates whether to commit the data (as in the Save w/o
+signature action in CPRS), or to simply save it in the EDIT BUFFER for the
+document (as in the auto-save function).
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Four '^'-piece scalar result formatted as follows:
+ 
+If successful:
+   &lt;IEN in TIU DOCUMENT FILE&gt;^&lt;LAST_PAGE_RECEIVED&gt;^&lt;TOTAL_PAGES_EXPECTED&gt;
+ 
+If unsuccessful:
+   0^0^0^Explanatory text
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

@@ -1,0 +1,55 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIRRPTR CRPT CHECK REPORTS (2982)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIRRPTR CRPT CHECK REPORTS</td></tr><tr>
+<td>TAG</td><td>CRPT</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSIRRPTR.html">DSIRRPTR</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Retrieve all report information from the DSIR SCHEDULED REPORTS file for 
+a given DUZ.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td>8994.02, , {}</td></tr><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+ 
+RETURNS in external format:
+ 
+   IEN^
+   CLERK^
+   REPORT NAME^
+   REPORT STATUS^
+   SCHEDULE TIME^
+   RUN TIME^
+   COMPLETION TIME^
+   KILL TIME^
+   TASK #
+    NOTE ALL TIMES ARE IN DATE TIME FORMAT
+  OR
+ -1^error message
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

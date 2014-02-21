@@ -1,0 +1,63 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIC FM DINUM (1582)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIC FM DINUM</td></tr><tr>
+<td>TAG</td><td>DINUM</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSICFM02.html">DSICFM02</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This will do a lookup on the inputted file for the requested value.  This 
+is only for files whose .01 field is defined to be a DINUM pointer to a
+file.  If the lookup value in not in the inputted file, then this will 
+add that pointer to that file.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>FILE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>20</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the file number of the DSS file which has a .01 DINUM'd field
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>IEN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>20</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the ien of the pointed to file.  If the .01 field is not a 
+pointer field then this parameter should not be passed when trying to add 
+a new entry to the file.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>VAL</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>80</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the external value of the .01 field.   If the .01 field is a 
+pointer field, then this would be some external lookup value for the 
+pointed to file.   If the .01 field is not a pointer, then this must 
+numeric.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>IENS</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>30</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>4</dd><dt>DESCRIPTION:</dt><dd><pre>
+This field is only valid if you are trying to add a DINUM'd value to a 
+multiple in the FILE.  The syntax of iens is ,S1,S2,S3,   See M 
+programmers for precise syntax to use if you need this.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Return the internal entry number (ien) of the item looked up or added.
+On error, return -1^error message
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

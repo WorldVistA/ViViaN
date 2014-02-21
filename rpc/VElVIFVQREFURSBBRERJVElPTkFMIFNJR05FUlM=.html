@@ -1,0 +1,54 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>TIU UPDATE ADDITIONAL SIGNERS (157)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>TIU UPDATE ADDITIONAL SIGNERS</td></tr><tr>
+<td>TAG</td><td>IDSIGNRS</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_TIULX.html">TIULX</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>AVAILABILITY</td><td>SUBSCRIPTION</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This RPC accepts a list of persons, and adds them as additional signers
+for the document identified by the first parameter.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>TIUDA</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the record # (ien) of the document in file 8925.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>TIULIST</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the list of users, passed by reference, as shown below:
+ 
+       TIULIST(1)=213[^CASEY,BEN]
+       TIULIST(2)=73425[^HOWSER,DOOGEY]
+       TIULIST(3)=172[^WELBY,MARCUS]
+ 
+NOTE that names passed as second '^'-pieces are optional.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+'^'-delimited String, which includes the DUZ's of the users who were
+successfully added as additional signers.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

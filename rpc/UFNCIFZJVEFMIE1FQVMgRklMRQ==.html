@@ -1,0 +1,76 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>PSB VITAL MEAS FILE (1696)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>PSB VITAL MEAS FILE</td></tr><tr>
+<td>TAG</td><td>RPC</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_PSBVITFL.html">PSBVITFL</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>PUBLIC</td></tr><tr>
+<td>INACTIVE</td><td>ACTIVE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This RPC has been built specifically to process the filing of BCMA 
+Pain Score data. The processing of other VITAL type may be incorporated 
+with some adjustments.
+ 
+ 
+  This routine is to service BCMA 3.0 functionality and store VITALs'
+  data into the VITAL MEASUREMENT FILE - ^GMR(120.5  using the API
+  GMRVPCE0
+  
+  Parameters:
+        Input  -        
+                        DFN   (r) Pointer to the PATIENT (#2) file
+                        RATE  (r)  BCMA trigger event/transaction
+                        VTYPE (o) Pointer to GMRV VITAL TYPE FILE (#120.51)
+                                  (default = Pain ["PN"])
+                        DTTKN (o) Date/time (FileMan) measurment was taken
+                                  (default = $$NOW^XLFDT())
+ 
+       Output -         RESULTS(0) = 1
+                        RESULTS(1) ="1^Pain Score successfully filed"
+                  or    RESULTS(1) ="-1^ERROR * Pain Score NOT filed 
+                                     successfully"
+ 
+     Process results in the storing of VITAL Measurement rate into the VITAL
+     MEASUREMENT FILE per the given patient and vital type.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>PSBDFN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+PSBDFN presents the Pointer to the PATIENT File (#2) of the patient for 
+whom this vital measurement data was entered.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PSBRATE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+PSBRATE presents the numeric value associated with this vital 
+measurement.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PSBVTYPE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+PSBVTYPE presents the type of measurement for this record and is a 
+pointer to the GMRV VITAL TYPE File (#120.51)
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PSBDTTKN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>4</dd><dt>DESCRIPTION:</dt><dd><pre>
+DTTKN   (o) Date/time (FileMan) measurment was taken.  The default is NOW.
+</pre>
+</dd></li></ol></td></tbody>
+</table>
+</body></html>

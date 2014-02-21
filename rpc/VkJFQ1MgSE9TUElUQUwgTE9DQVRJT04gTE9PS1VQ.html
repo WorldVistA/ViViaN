@@ -1,0 +1,69 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>VBECS HOSPITAL LOCATION LOOKUP (2475)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>VBECS HOSPITAL LOCATION LOOKUP</td></tr><tr>
+<td>TAG</td><td>LOC</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_VBECRPCD.html">VBECRPCD</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This RPC returns XML containing a list of Hospital Locations from the 
+HOSPITAL LOCATION file (#44) of either Ward or Clinic Type for use in 
+VBECS when issuing units to a location other than the Blood Bank.
+ 
+XML Mapping:
+LocationName element = HOSPITAL LOCATION file (#44) / NAME field (#.01)
+LocationIEN element =  HOSPITAL LOCATION file (#44) / NUMBER field (#.001)
+LocationType element = HOSPITAL LOCATION file (#44) / TYPE field (#2)
+ 
+XML Example:
+&lt;HospitalLocations&gt;
+    &lt;Location&gt;
+        &lt;LocationName&gt;6W REHAB-KC&lt;/LocationName&gt;
+        &lt;LocationIEN&gt;503&lt;/LocationIEN&gt;
+        &lt;LocationType&gt;W&lt;/LocationType&gt;
+    &lt;/Location&gt;
+    &lt;Location&gt;
+        &lt;LocationName&gt;7E PCUS-KC&lt;/LocationName&gt;
+        &lt;LocationIEN&gt;504&lt;/LocationIEN&gt;
+        &lt;LocationType&gt;W&lt;/LocationType&gt;
+    &lt;/Location&gt;
+    &lt;Location&gt;
+        &lt;LocationName&gt;KC-GI RESEARCH&lt;/LocationName&gt;
+        &lt;LocationIEN&gt;511&lt;/LocationIEN&gt;
+        &lt;LocationType&gt;C&lt;/LocationType&gt;
+    &lt;/Location&gt;
+&lt;/HospitalLocations&gt;
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>DIV</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>999</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+Input DIV = DIVISION Name
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+XML document with a list of Hospital Location found based on input value
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

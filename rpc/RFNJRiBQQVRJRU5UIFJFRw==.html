@@ -1,0 +1,83 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIF PATIENT REG (2657)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIF PATIENT REG</td></tr><tr>
+<td>TAG</td><td>REG</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSIFNOT3.html">DSIFNOT3</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This RPC will add entries to file 162.2 FEE NOTIFICATION/REQUEST FILE.  
+The logic was taken from routine: FBCHREQ* and edit template FBCH ENTER 
+REQUEST.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>DFN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>99</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+Patient File (#2) pointer (Required)
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>DATE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>14</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+Date and Time (Required - FM format)
+Date and Time that the vendor notifies the COJ of this episode of 
+hospitalization.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>VNDR</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>99</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+Vendor (Required - Pointer to file 161.2 FEE BASIS VENDOR)
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>DTOA</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>14</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>4</dd><dt>DESCRIPTION:</dt><dd><pre>
+Date &amp; Time of Admission (Required - FM format)
+This field contains the date and time that you begin accepting 
+responsibility for bills incurred if the veteran is found to be legally 
+and medically entitled.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PERS</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>30</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>5</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is a free text field that contains the name of the person who is 
+notifying you.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>IEN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>99</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>6</dd><dt>DESCRIPTION:</dt><dd><pre>
+Internal Entry Number to file 162.2 FEE NOTIFICATION/REQUEST (Optional - 
+Null = Add, Value = Edit). This field is only used for editting an 
+existing record.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>ADMDX</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>45</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>7</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the admitting diagnosis of the veteran which is usually obtained 
+from the person who called.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>ATPHY</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>30</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>8</dd><dt>DESCRIPTION:</dt><dd><pre>
+Attending Physician (Optional - Free Text)
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>ATPHPH</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>20</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>9</dd><dt>DESCRIPTION:</dt><dd><pre>
+This field contains the phone number of the attending physician while the 
+patient was residing in the non-VA facility.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Return Values
+        -1 ^ Invalid Input!
+        -1 ^ This notification has a status of complete.  Cannot edit.
+        -1 ^ This Authorization From Date exceeds the 72 hour notification
+period.
+        NNN = Internal number of newly created record
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

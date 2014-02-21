@@ -1,0 +1,53 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIR ADD DOCUMENT (1651)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIR ADD DOCUMENT</td></tr><tr>
+<td>TAG</td><td>NEWITEM</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSIROI0.html">DSIROI0</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>SUBSCRIPTION</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This RPC is used to create an entry in file 19620.1 DSIR RELEASED DOCUMENT
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>DATA ARRAY</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+Input: Array of
+    (1): Pointer to VEJD ROI INSTANCE (19620) file
+    (2): Internal Set of Codes value for document type
+    (3): Document IEN (If applicable)
+    (4): Internal Set of Codes value for document media
+    (5): Caption
+    (6): Document length
+    (7): Date/time of document
+    (8): Creator of Document: Needs to be a pointer to the NEW PERSON file
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Return array consists of one node
+        -1 ^ Error message
+         1 ^ IEN of new entry in File 19620.1
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

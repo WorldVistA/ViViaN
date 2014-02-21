@@ -1,0 +1,77 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>SPN READMISSIONS REPORT (2820)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>SPN READMISSIONS REPORT</td></tr><tr>
+<td>TAG</td><td>COL</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_SPNJRPRE.html">SPNJRPRE</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>INACTIVE</td><td>ACTIVE</td></tr><tr>
+<td>APP PROXY ALLOWED</td><td>Yes</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Returns detailed information for SCI/SCD ADMISSIONS and DISCHARGES for a 
+list of given patients (based on the ICN) based on a date range, so that 
+numbers of Readmissions can be determined.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>ICNLIST</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>DESCRIPTION:</dt><dd><pre>
+Patient's ICN in string format (ICN^ICN^ICN^ICN...)
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>FDATE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>DESCRIPTION:</dt><dd><pre>
+Date to start search from.  
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>TDATE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>DESCRIPTION:</dt><dd><pre>
+Date to end search at.  
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+ 
+Return format:
+ 
+Patient's ICN ^ Transaction type (Admission or Discharge) ^ Institution 
+Name ^ Institution Number ^ Ward Location ^ Mumps date/time stamp (for 
+calculations) ^ Date/time stamp ^ EOL999
+ 
+ 
+Sample of return:
+ 
+1002009998^ADMISSION^^^ICU-M^3011029.144215^OCT 29,2001@14:42:15^EOL999
+ 
+1002009998^DISCHARGE^EASTERN COLORADO HCS^554^ICU-M^3011029.172902^OCT 
+29,2001@17:29:02^EOL999
+ 
+1002009998^ADMISSION^^^ICU-M^3040912.203106^SEP 12,2004@20:31:06^EOL999
+ 
+1002009998^DISCHARGE^^^ICU-M^3040914.12475^SEP 14,2004@12:47:50^EOL999
+ 
+1002045970^ADMISSION^^^C SURGERY^2990224.100912^FEB 
+24,1999@10:09:12^EOL999
+ 
+1002045970^DISCHARGE^^^C SURGERY^2990303.110915^MAR 3,1999@11:09:15^EOL999
+ 
+1002045970^ADMISSION^^^ICU-S^3050101.08^JAN 1,2005@08:00^EOL999
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

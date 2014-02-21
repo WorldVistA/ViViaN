@@ -1,0 +1,91 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>VBECS MED PROFILE LOOKUP (2482)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>VBECS MED PROFILE LOOKUP</td></tr><tr>
+<td>TAG</td><td>RX</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_VBECRPCP.html">VBECRPCP</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This RPC returns XML containing a list of medications for a patient from 
+the Pharmacy package within a given date range.
+ 
+The patient demographic data is provided by the VistA API DEM^VADPT in 
+the VADM array.
+ 
+The medication related data is provided by the Pharmacy API OCL^PSOORRL in
+the ^TMP("PS",$J global array in the following format.
+ 
+^TMP("PS",$J,D0,0)=ORDER #_File;PKG^DRUG^INFUSION RATE^STOP DATE^REFILLS
+REMAINING^TOTAL DOSE^UNITS PER DOSE^PLACER #^STATUS^LAST FILLDATE^DAYS
+SUPPLY^QUANTITY^NOT TO BE GIVEN^PENDING RENEWAL (1 or 0)^ISSUE
+DATE(Outpatient) or START DATE(Inpatient)^LAST RELEASE DATE/TIME^LAST FILL
+DAY SUPPLY
+ 
+XML Mapping:
+PatientName element =          VADM(1)
+PatientSsn element =           VADM(2)
+PatientDob element =           VADM(3) in HL7 format
+BeginningSearchDate element =  SDATE input parameter in HL7 format
+EndingSearchDate element =     EDATE input parameter in HL7 format
+OrderNumber element =          ORDER #
+DrugName element =             DRUG
+IssueStartDate element =       ISSUE DATE(Outpatient) or START 
+                               DATE(Inpatient)
+Status element =               STATUS
+InpatientOutpatientIndicator = PKG
+ 
+XML Example:
+&lt;MedicationProfile&gt;
+    &lt;PatientName&gt;VBECSpatient,One&lt;/PatientName&gt;
+    &lt;PatientSsn&gt;666-66-6666&lt;/PatientSsn&gt;
+    &lt;PatientDob&gt;Jan 01, 1900&lt;/PatientDob&gt;
+    &lt;BeginningSearchDate&gt;Oct 01, 2002&lt;/BeginningSearchDate&gt;
+    &lt;EndingSearchDate&gt;Jul 31, 2003&lt;/EndingSearchDate&gt;
+    &lt;Order&gt;
+        &lt;OrderNumber&gt;4863015&lt;/OrderNumber&gt;
+        &lt;DrugName&gt;ACETAMINOPHEN 500MG TAB&lt;/DrugName&gt;
+        &lt;IssueStartDate&gt;Apr 08, 2002&lt;/IssueStartDate&gt;
+        &lt;Status&gt;EXPIRED&lt;/Status&gt;
+        &lt;InpatientOutpatientIndicator&gt;O&lt;/InpatientOutpatientIndicator&gt;
+    &lt;/Order&gt;
+&lt;/MedicationProfile&gt;
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>SDATE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>30</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+The SDATE input parameters represents the start date required by the Pharmacy API OCL^PSOORRL.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>EDATE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>30</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+The EDATE input parameter represents the end date required by the Pharmacy API OCL^PSOORRL.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>DFN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>15</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+The VistA Patient file (#2) Internal Entry Number.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+XML document with a list of medications prescribed for the patient during the specified dates in the input parameters.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

@@ -1,0 +1,57 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>PSB WARDLIST (1177)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>PSB WARDLIST</td></tr><tr>
+<td>TAG</td><td>WLIST</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_PSBPARIV.html">PSBPARIV</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>PUBLIC</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>VERSION</td><td>2</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Returns a list of active wards that are available
+for the definition of IV parameters in the BCMA IV PARAMETERS file 53.66.
+Wards already in file 53.66 are returned with the type of IV PARAMETERS
+defined.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>PSBEDIV</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>10</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+Division
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Results(0)      =       ^1 the number of wards returned
+Results(1,2...) =       ^1 the ward name
+                        ^2 "1" for BOLD (ward is defined in 53.66)
+                           "0" for NOBOLD (ward is not in 53.66)
+                        ^3 IEN number from file 53.66
+                        ^4 "A" if Admixture parameters in 53.66
+                        ^5 "C" if Chemo parameters in 53.66
+                        ^6 "H" if Hyperal parameters in 53.66
+                        ^7 "P" if Piggyback parameters in 53.66
+                        ^8 "S" if Syringe parameters in 53.66
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

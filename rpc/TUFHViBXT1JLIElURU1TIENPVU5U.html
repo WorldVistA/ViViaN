@@ -1,0 +1,66 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>MAGV WORK ITEMS COUNT (3170)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>MAGV WORK ITEMS COUNT</td></tr><tr>
+<td>TAG</td><td>CNTWI</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_MAGVIM08.html">MAGVIM08</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
++---------------------------------------------------------------+
+| Property of the US Government.                                |
+| No permission to copy or redistribute this software is given. |
+| Use of unreleased versions of this software requires the user |
+| to execute a written test agreement with the VistA Imaging    |
+| Development Office of the Department of Veterans Affairs,     |
+| telephone (301) 734-0100.                                     |
+| The Food and Drug Administration classifies this software as  |
+| a medical device.  As such, it may not be changed in any way. |
+| Modifications to this software may result in an adulterated   |
+| medical device under 21CFR820, the use of which is considered |
+| to be a violation of US Federal Statutes.                     |
++---------------------------------------------------------------+
+ 
+Returns number of records in MAG WORK ITEM file (#2006.941) by TYPE, SUBTYPE, and STATUS.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>TYPE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+External value of TYPE field (#2006.941,1)
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>SUBTYPE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+External value of SUBTYPE field (#2006.941,2)
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>STATUS</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+External value of STATUS field (#2006.941,3)
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+if error MAGRY(0) = Error number `` Error message
+if success MAGRY(0) = 0` Number of records
+           MAGRY(1) = "SUBTYPE`STATUS`COUNT"   
+           MAGRY(1..n) = SUBTYPE  ` STATUS ` COUNT
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

@@ -1,0 +1,201 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>GMV LOCATION SELECT (2117)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>GMV LOCATION SELECT</td></tr><tr>
+<td>TAG</td><td>RPC</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_GMVRPCHL.html">GMVRPCHL</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>SUBSCRIPTION</td></tr><tr>
+<td>INACTIVE</td><td>ACTIVE</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Select a hospital location by name, from a patient appointment or from a
+patient admission. Can also generate a list of active clinics.
+ 
+This remote procedure is documented in Integration Agreement 4461.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>OPTION</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>10</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+Routine tag line in GMVRPCHL to call.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>DATA</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>100</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+Other data as required for the call.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+This remote procedure call allows the user to select a hospital location. 
+The entry point is RPC^GMVRPCHL. It has input parameters of RESULTS, 
+OPTION and DATA (ex. RPC^GMVRPCHL(.RESULTS,OPTION,DATA).
+ 
+The RESULTS variable will contain the ^TMP("GMVHLOC",$J) global array 
+reference. The ^TMP("GMVHLOC",$J) global array contains the results.
+ 
+The OPTION variable identifies a line label in the GMVRPCHL routine that 
+will be invoked to process the call.
+ 
+The DATA variable contains any additional values needed by the OPTION 
+variable to process the call.
+ 
+ 1) When the OPTION value is NAME, this RPC will do a file lookup.
+ 
+ The DATA value is a three part value separated by carets(^). The first 
+ part is a file number. The second part is a value to look up. The third
+ part is the field or fields to do the look up on. If the third piece is
+ not defined, the lookup is done on the .01 field of the file.
+ 
+ The TMP global contains:
+  ^TMP("GMVHLOC",$J,0)=piece1
+  ^TMP("GMVHLOC",$J,n)=piece2^piece3
+ 
+   where piece1 = number of entries found
+         piece2 = file number, a semi-colon and record IEN
+         piece3 = field value
+ 
+ Example:
+ &gt;S OPTION="NAME",DATA="44^OUTPATIENT^.01"    
+ &gt;D RPC^GMVRPCHL(.RESULT,OPTION,DATA) ZW RESULT
+ &gt;RESULT="^TMP("GMVHLOC",539052767)"
+ &gt;D ^%G
+ &gt;Global ^TMP("GMVHLOC",$J
+ &gt;^TMP("GMVHLOC",539052767,0)=3
+                          1)=44;75^OUTPATIENT NUC MED
+                          2)=44;74^OUTPATIENT RADIOLOGY
+                          3)=44;80^OUTPATIENT ULTRASOUND
+ 
+ 
+ 2) When the OPTION value is APPT, this RPC will return a list of clinic 
+ appointments for the patient.
+ 
+ The DATA value is a four part value separated by carets(^). The first 
+ piece is DFN. The second piece is the start date of the search. If 
+ not defined, this value defaults to 365 days prior to today. The third 
+ piece is the end date of the search. If not defined, the value defaults 
+ to today. Both dates are in FileMan internal format. The fourth piece is
+ a string of numbers to indicate what types of appointments to return. If
+ not defined, the value defaults to "123456789" (i.e., all appointment
+ types) where:
+ 
+ 1 - Active/Kept
+ 2 - Inpatient appts. only
+ 3 - No-shows 
+ 4 - No-shows, auto-rebook
+ 5 - Cancelled by clinic
+ 6 - Cancelled by clinic, auto rebook
+ 7 - Cancelled by patient
+ 8 - Cancelled by patient, auto rebook
+ 9 - No action taken
+ 
+ The TMP global contains:
+  ^TMP("GMVHLOC",$J,0)=piece1
+  ^TMP("GMVHLOC",$J,n)=piece2^piece3^piece4^piece5^piece6^piece7
+                       ^piece8^piece9^
+ 
+   where piece1 = number of entries found
+         piece2 = date/time of appt (FM internal)
+         piece3 = date/time of appt (external)
+         piece4 = hospital location IEN (FILE 44)
+         piece5 = hospital location name (FILE 44, Field .01)
+         piece6 = appt status (internal)
+         piece7 = appt status (external)
+         piece8 = appt type (internal)
+         piece9 = appt type (external)
+ 
+ Example:
+ &gt; S OPTION="APPT",DATA="78^3051201^3051206^"   
+ &gt; D RPC^GMVRPCHL(.RESULT,OPTION,DATA) ZW RESULT
+ &gt; RESULT="^TMP("GMVHLOC",539052767)"
+ &gt; D ^%G
+ &gt; Global ^TMP("GMVHLOC",$J
+ &gt; ^TMP("GMVHLOC",539052767,0)=1
+                            1)=3051206.1^DEC 6,2005@10:00^88^WEIGHT 
+                               CLINIC^^^9^REGULAR
+ 
+ 3) When the OPTION value is ADMIT, this RPC will return a list of 
+ hospital admissions for the patient specified.
+ 
+ The DATA value is the patient's DFN.
+ 
+ The TMP global contains:
+  ^TMP("GMVHLOC",$J,0)=piece1
+  ^TMP("GMVHLOC",$J,n)=piece2^piece3^piece4^piece5^piece6
+ 
+   where piece1 = number of entries found
+         piece2 = date/time of admission (external) 
+         piece3 = hospital location IEN (FILE 44)
+         piece4 = hospital location name (FILE 44, Field .01)
+         piece5 = type of movement (FILE 405.1, Field .01)
+         piece6 = movement IEN (FILE 405)
+ 
+ Example:
+ &gt; S OPTION="ADMIT",DATA=134
+ &gt; D RPC^GMVRPCHL(.RESULT,OPTION,DATA) ZW RESULT
+ &gt; RESULT="^TMP("GMVHLOC",539052767)"
+ &gt; D ^%G
+ &gt; Global ^TMP("GMVHLOC",$J
+ &gt; ^TMP("GMVHLOC",539052767,0)=1 
+                            1)=Apr 09, 2001 1:48:43 pm^67^
+                               2-ASM^DIRECT^1712 
+ 
+ 
+ 4) When the OPTION value is CLINIC, this RPC will return a list of 
+ active clinics.
+ 
+ The DATA value is FROM^MAXIMUM^DIRECTION.
+    Where:
+          FROM = Value to begin the search (optional). Default is 
+                 null (i.e., start with the first entry in the B x-ref).
+       MAXIMUM = Maximum number of entries to return. (optional) 
+                 Default is 100.
+     DIRECTION = Direction of search (optional). 1 means forward and -1 
+                 means backwards. Default is 1.
+ 
+ The TMP global contains:
+  ^TMP("GMVHLOC",$J,0)=piece1
+  ^TMP("GMVHLOC",$J,n)=piece2^piece3
+            
+   where piece1 = number of entries found
+         piece2 = 44;ien (44, a semi-colon and the entry number)
+         piece3 = location name (FILE 44, Field .01)
+         n is a sequential number starting with zero
+                  
+ Example:
+ &gt; S OPTION="CLINIC",DATA="A^5^1"                           
+ &gt; K RESULTS D RPC^GMVRPCHL(.RESULTS,OPTION,DATA) ZW RESULTS
+ &gt; RESULTS="^TMP("GMVHLOC",540221719)"
+ &gt; D ^%G
+ &gt; Global ^TMP("GMVHLOC",$J
+ &gt; ^TMP("GMVHLOC",540221719,0)=5
+                            1)=44;140^ANDY'S AUDIO NON-COUNT CLINIC
+                            2)=44;139^ANDY'S AUDIOLOGY COUNT CLINIC
+                            3)=44;76^AUDIOLOGY AND SPEECH PATHOLOGY
+                            4)=44;87^BARB'S CLINIC
+                            5)=44;217^BOISE OUTPATIENT
+ 
+If an error is encountered for NAME, ADMIT, APPT or CLINIC, a "-1"
+followed by a caret and the error message text (i.e., -1^error message) is
+returned in RESULT(0).
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

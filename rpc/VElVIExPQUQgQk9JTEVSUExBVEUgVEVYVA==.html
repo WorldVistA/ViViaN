@@ -1,0 +1,54 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>TIU LOAD BOILERPLATE TEXT (89)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>TIU LOAD BOILERPLATE TEXT</td></tr><tr>
+<td>TAG</td><td>BLRSHELL</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_TIUSRVD.html">TIUSRVD</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>SUBSCRIPTION</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This RPC will load the boilerplate text associated with the selected
+title, and execute the methods for any objects embedded in the boilerplate
+text.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>TITLE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is a pointer to the TIU DOCUMENT DEFINITION FILE (#8925.1), which
+identifies the title of the document to be loaded.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>DFN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the pointer to the patient for whom the document is being entered.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>VSTRING</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>DESCRIPTION:</dt><dd><pre>
+This optional parameter is the visit string, formatted as:
+
+HLOC;VISIT_DATE;SVC_CAT
+
+It's necessary when objects included in the boilerplate are sensitive to the 
+attributes of the visit (e.g., the object VISIT DATE).
+</pre>
+</dd></li></ol></td></tbody>
+</table>
+</body></html>

@@ -1,0 +1,95 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>SPN LAB URINALYSIS (2776)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>SPN LAB URINALYSIS</td></tr><tr>
+<td>TAG</td><td>COL</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_SPNRPCD.html">SPNRPCD</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>INACTIVE</td><td>ACTIVE</td></tr><tr>
+<td>APP PROXY ALLOWED</td><td>Yes</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This RPC supports the following report(s):
+ 
+      Report Page Name              Subscreen
+      Urinary Tract Infections      Urinalysis
+ 
+ 
+Notes: 
+ 
+Calling the line tag COL will generate all Lab Urinalysis tests
+on file for the patient from the cut off date forward.
+ 
+DFN = Internal Entry Number of patient in the PATIENT file (#2)
+CUTDATE = Cut off date. Results are inclusive from cut off date to present
+ 
+ 
+Tested at the Bay Pines FO account using DFN = 27 and
+CUTDATE=1-1-1990.  Of course, at other sites, DFN would vary.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>ICN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+Internal entry number of the patient in the PATIENT file (#2).
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>CUTDATE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+Data from the CUTDATE forward to the present date will be returned.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Data is returned delimited by the up-arrow (^), with each piece defined 
+as follows:
+ 
+Piece
+  1 is Date &amp; time of test
+  2 is Test name
+  3 is Test value (result)
+  4 is High or Low indicator (H if &gt; normal range or L if below)
+  5 is Unit of measurement
+  6 is Lower limit of normal range
+  7 is Upper limit of normal range
+  8 is Field number of test (troubleshooting only)
+  9 is Reverse date (troubleshooting only)
+ 10 is End of Line indicator EOL999
+ 
+Notes:
+ 
+ 
+Sample data stream returned by this RPC:
+ 
+SPN LAB URINALYSIS Results:
+DEC 30, 2001@17:40:06^SPECIFIC 
+GRAVITY^1.027^^^1.003^1.035^685^6988769.825894^EOL999
+DEC 30, 2001@17:40:06^UR 
+KETONES^NEGATIVE^^MG/DL^"NEG"^^689^6988769.825894^EOL999
+DEC 30, 2001@17:40:06^UR 
+GLUCOSE^NEGATIVE^^MG/DL^"NEG"^^690^6988769.825894^EOL999
+DEC 30, 2001@17:40:06^UR 
+PROTEIN^NEG^^MG/DL^"NEG"^^691^6988769.825894^EOL999
+DEC 30, 2001@17:40:06^UR PH^6.5^^^5^9^692^6988769.825894^EOL999
+DEC 30, 2001@17:40:06^NITRITE, 
+URINE^NEGATIVE^^^"NEG"^^795^6988769.825894^EOL999
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

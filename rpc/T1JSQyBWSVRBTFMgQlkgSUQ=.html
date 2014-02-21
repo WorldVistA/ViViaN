@@ -1,0 +1,61 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>ORRC VITALS BY ID (1740)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>ORRC VITALS BY ID</td></tr><tr>
+<td>TAG</td><td>DETAIL</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_ORRCVIT.html">ORRCVIT</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>SUBSCRIPTION</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This call returns the details of the measurement sets requested in the
+list of ID's passed in.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>VITALS</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the list of measurement set identifiers, as VIT:ID where ID is
+Patient#_";"_Date.Time as returned by the patient list RPCs.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+This call returns the values of the requested vitals measurements for a
+patient, in the form:
+  "Item=" _ ID ^ ^ Measurement Date in the form YYYMMDDHHMMSS
+  "Data=" _ Vital ^ Value ^ Unit ^ Metric ^ Unit ^ BMI ^ SO2 ^ Abn ^ Qual
+where ID     = "VIT:" _ Patient pointer _";"_ measurement date
+      Vital  = name of vital measurement
+      Value  = value of measurement (alphanumeric)
+      Unit   = unit of measure
+      Metric = metric version of value, available for temp, weight, height,
+                circumference/girth
+      Unit   = metric unit of measure, when Metric is returned
+      BMI    = Body Mass Index, returned only for Weight
+      SO2    = Supplemental Oxygen (numeric), returned only for Pulse 
+                Oximetry (PO2)
+      Abn    = abnormal flag (* if value is considered critical else null)
+      Qual   = list of qualifiers, as Q1;Q2;...;Qn
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

@@ -1,0 +1,101 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>ROR LIST VA DRUG CLASSES (1780)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>ROR LIST VA DRUG CLASSES</td></tr><tr>
+<td>TAG</td><td>VACLSLST</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_RORRP017.html">RORRP017</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>VERSION</td><td>1</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+The ROR LIST VA DRUG CLASSES remote procedure returns a list of VA drug 
+classes (defined in the VA DRUG CLASS file), which conform to the search
+criteria.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>PARENT</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+Reserved
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PART</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>30</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+The partial match restriction.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>FLAGS</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+Flags that control the execution (can be combined):
+ 
+  N  Search the classes by their names
+     (by default, the search is performed by codes)
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>NUMBER</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>SEQUENCE NUMBER:</dt><dd>4</dd><dt>DESCRIPTION:</dt><dd><pre>
+Deprecated
+parameter designates all entries.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>FROM</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>SEQUENCE NUMBER:</dt><dd>5</dd><dt>DESCRIPTION:</dt><dd><pre>
+Deprecated
+   ^01: FromName
+   ^02: FromIEN
+   
+For example, a FROM value of "XA" would list entries following XA. You can
+use the 2-nd and 3-rd "^"- pieces of the Results[0] to continue the
+listing in the subsequent procedure calls.
+   
+NOTE: The FROM value itself is not included in the
+      resulting list.
+   
+See description of the LIST^DIC for more details about the PART, NUMBER 
+and FROM parameters.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+A negative value of the first "^"-piece of the Results[0] indicates that 
+an error occurred during the execution of the remote procedure. In this 
+case, the second piece of the Results[0] will contain number of the error
+descriptors returned in the subsequent nodes of the Results array:
+   
+  Results[0]            Result Descriptor
+                          ^01: The last error code
+                          ^02: Number of the error descriptors
+   
+  Results[i]            Error Descriptor
+                          ^01: Error code
+                          ^02: Message
+                          ^03: Place of the error
+  
+Otherwise, number of drug classes is returned in the Results[0] and the
+subsequent nodes of the global array contain the classes.
+   
+  Results[0]          Number of classes
+ 
+  Results[i]          VA Drug Class
+                        ^01: IEN
+                        ^02: Classification
+                        ^03: Code
+  Results[i]          VA Drug Class
+                        ^01: IEN
+                        ^02: Classification
+                        ^03: Code
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

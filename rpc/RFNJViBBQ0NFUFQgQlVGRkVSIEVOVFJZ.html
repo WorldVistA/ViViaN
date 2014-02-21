@@ -1,0 +1,157 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIV ACCEPT BUFFER ENTRY (2536)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIV ACCEPT BUFFER ENTRY</td></tr><tr>
+<td>TAG</td><td>ACCEPT</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSIVICA.html">DSIVICA</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Processes INSURANCE BUFFER file entry to insurance files
+and patient insurance type multiple.  Marks buffer entry
+STATUS=ACCEPTED.  This RPC should perform the same actions
+as the List Manager "Accept" action.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>IBBUFDA</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>16</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+INSURANCE BUFFER file IEN to be processed.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>DFN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>16</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+PATIENT file IEN.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>IBINSDA</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>16</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+INSURANCE COMPANY file IEN if not adding a new entry.
+This parameter is optional but must be present if the
+IBNEWINS parameter value is false (not adding a new
+INSURANCE COMPANY entry).
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>IBGRPDA</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>36</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>4</dd><dt>DESCRIPTION:</dt><dd><pre>
+GROUP INSURANCE PLAN file IEN if not adding a new entry.
+This parameter is optional but must be present if the
+IBNEWGRP parameter value is false (not adding a new
+GROUP INSURANCE PLAN entry).
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>IBPOLDA</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>16</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>5</dd><dt>DESCRIPTION:</dt><dd><pre>
+IEN of INSURANCE TYPE sub-file (#2.312) of PATIENT file
+if not adding a new entry.  This parameter must be present
+if the INSURANCE BUFFER data will update an existing entry
+in the INSURANCE TYPE multiple.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>IBMVINS</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>1</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>6</dd><dt>DESCRIPTION:</dt><dd><pre>
+Flag indicating whether buffer data will 1=Merge, 2=Overwrite, 3=Replace
+data in file #36.  Default is 2=Overwrite. In the List Manager interface
+flag value 4 means "individually accept."  This value is not valid in the
+Remote Procedure Call. The terms "merge," "overwrite," and "replace" are
+defined as follows:
+ 
+ TYPE    - 1 = Merge     (only buffer data moved to blank fields
+                          in ins file, no replace)
+           2 = Overwrite (all buffer data moved to ins file,
+                          replace existing data)
+           3 = Replace   (all buffer data including null move to
+                          ins file)
+                         ins file)
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>IBMVGRP</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>1</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>7</dd><dt>DESCRIPTION:</dt><dd><pre>
+Flag indicating whether buffer data will 1=Merge, 2=Overwrite, 3=Replace
+data in file #355.3.  Default is 2=Overwrite. In the List Manager
+interface flag value 4 means "individually accept."  This value is not
+valid in the Remote Procedure Call. The terms "merge," "overwrite," and
+"replace" are defined as follows:
+ 
+ TYPE    - 1 = Merge     (only buffer data moved to blank fields
+                          in ins file, no replace)
+           2 = Overwrite (all buffer data moved to ins file,
+                          replace existing data)
+           3 = Replace   (all buffer data including null move to
+                          ins file)
+                         ins file)
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>IBMVPOL</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>1</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>8</dd><dt>DESCRIPTION:</dt><dd><pre>
+Flag indicating whether buffer data will 1=Merge, 2=Overwrite, 3=Replace
+data in subfile #2.312.  Default is 2=Overwrite. In the List Manager
+interface flag value 4 means "individually accept."  This value is not
+valid in the Remote Procedure Call. The terms "merge," "overwrite," and
+"replace" are defined as follows:
+ 
+TYPE    - 1 = Merge     (only buffer data moved to blank fields
+                         in ins file, no replace)
+          2 = Overwrite (all buffer data moved to ins file,
+                         replace existing data)
+          3 = Replace   (all buffer data including null move to
+                         ins file)
+                         ins file)
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>IBNEWINS</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>1</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>9</dd><dt>DESCRIPTION:</dt><dd><pre>
+Flag indicating that a new entry should be created in the
+INSURANCE COMPANY file (#36).  1=TRUE (Create new entry)
+0=FALSE (Default - Do not create new entry).
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>IBNEWGRP</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>1</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>10</dd><dt>DESCRIPTION:</dt><dd><pre>
+Flag indicating that a new entry should be created in the
+GROUP INSURANCE PLAN file (#355.3).  1=TRUE (Create new entry)
+0=FALSE (Default - Do not create new entry).
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>IBNEWPOL</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>1</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>11</dd><dt>DESCRIPTION:</dt><dd><pre>
+Flag indicating that a new entry should be created in the
+INSURANCE TYPE subfile (#2.312).  1=TRUE (Create new entry)
+0=FALSE (Default - Do not create new entry).
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>IVMREPTR</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>4</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>12</dd><dt>DESCRIPTION:</dt><dd><pre>
+Internal entry number in IVM REASONS FOR NOT UPLOADING INSURANCE
+file (#301.91) if applicable.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>DSIVAUDT</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>10</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>13</dd><dt>DESCRIPTION:</dt><dd><pre>
+Internal entry number in File #19625.  Used when filing COMMENT fields.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>IBDATA</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>100</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+IBDATA array containts the following variables and data in an array
+ e.g. IBDATA(1)="IBINSDA^1002"
+      IBDATA(2)="INGRPDA^"
+      
+IBINSDA=File 36 IEN if not adding new entry
+IBGRPDA=File 355.3 IEN if not adding new entry
+IBPOLDA=File 2.312 IEN if not adding new entry
+IBMVINS=Type for INSURANCE 1=Merge, 2=Overwrite, 3=Replace, 4=(n/a)
+IBMVGRP=Type for GROUP     1=Merge, 2=Overwrite, 3=Replace, 4=(n/a)
+IBMVPOL=Type for POLICY    1=Merge, 2=Overwrite, 3=Replace, 4=(n/a)
+IBNEWINS=Add new INSURANCE COMPANY flag (non-zero means add)
+IBNEWGRP=Add new GROUP INSURANCE PLAN flag (non-zero means add)
+IBNEWPOL=Add new patient insurance policy (non-zero means add)
+IVMREPTR=File 301.91 IEN if applicable (IVM REASONS FOR NOT UPLOADING..)
+DSIVAUDT=File 19625 IEN if updating pt policy or group plan COMMENT
+IBELIG=to copy eIV report to pt elig/benefits 0=no,1=yes
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+RESULT(0)=0 (zero) means success or -1^&lt;error message&gt; means failure.
+Note that success may inclue one or more warnings in the
+format 0^&lt;warning message&gt;[^&lt;warning message&gt;].  Subsequent array values 
+may contain the following IF new iens were generated by the call:
+RESULT(1)="IBINSDA^"_IBINSDA
+RESULT(2)="IBGRPDA^"_IBGRPDA
+RESULT(3)="IBPOLDA^"_IBPOLDA
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

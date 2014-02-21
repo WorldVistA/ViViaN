@@ -1,0 +1,82 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>MAG ANNOT STORE IMAGE DETAIL (3035)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>MAG ANNOT STORE IMAGE DETAIL</td></tr><tr>
+<td>TAG</td><td>STORE</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_MAGSANNO.html">MAGSANNO</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+ Per VHA Directive 2004-038, this should not be modified.
++---------------------------------------------------------------+
+| Property of the US Government.                                |
+| No permission to copy or redistribute this software is given. |
+| Use of unreleased versions of this software requires the user |
+| to execute a written test agreement with the VistA Imaging    |
+| Development Office of the Department of Veterans Affairs,     |
+| telephone (301) 734-0100.                                     |
+| The Food and Drug Administration classifies this software as  |
+| a medical device.  As such, it may not be changed in any way. |
+| Modifications to this software may result in an adulterated   |
+| medical device under 21CFR820, the use of which is considered |
+| to be a violation of US Federal Statutes.                     |
++---------------------------------------------------------------+
+Store the annotation detail/XML into the IMAGING ANOTATION file (#2005.002)
+ .MAGOUT       Reference to a local variable where the results are returned to
+ .MAGIEN       Internal Entry Number(IEN) of IMAGE file been annotated
+ .SOURCE       Reference to the application XML been created by ('CLINIC' or 'VISTARAD'...etc)
+ .VER          Reference to the annotation tool version (e.g.: IG16.2)
+ .XML[]          Annotation raw data array
+Return Values 
+MAGOUT(0) is defined and its 1st '^'-piece is 0, then an error
+  occurred during execution of the procedure.
+MAGOUT(0) = 1 - success ^ total data lines ^ child IEN(optional)
+            0 - error
+MAGOUT(1) = Saved layer info:::LAYER ID ^ANNOTATOR ^ SAVED DATE/TIME ^ ANNOTATION VERSION ^ SOURCE ^ DELETION ^ TIU COMPLETION 
+            ^ SERVICE/SECTION  ^ SITE# ^ DUZ
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>IEN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>30</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+IEN is the IMAGE file (#2005) internal entry number, be used to save the annotation data.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>XML</dd><dt>PARAMETER TYPE:</dt><dd>WORD PROCESSING</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>256</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>4</dd><dt>DESCRIPTION:</dt><dd><pre>
+Annotation data in XML format
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>SOURCE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>30</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+Source of annotation, e.g.: Clinic display/capture or VistARad
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>DELETION</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>3</dd><dt>SEQUENCE NUMBER:</dt><dd>5</dd><dt>DESCRIPTION:</dt><dd><pre>
+Annotation was deleted by super user.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>VERSION</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>30</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+IMAGE GEAR VERSION (TOOLS), e.g.: 'IG16.3'
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+OUTPUT[0] := 1 Success  or 0 - Error (w/ ^ message)
+OUTPUT[1] := LAYER ID ^NAME ^DATE/TIME ^VERSION^ SOURCE ^DELETION^ TIU RESULTED ^ ANNOATOR SERVICE ^ SITE id# ^ DUZ
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

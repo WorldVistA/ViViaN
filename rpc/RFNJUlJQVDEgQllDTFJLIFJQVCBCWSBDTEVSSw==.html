@@ -1,0 +1,84 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIRRPT1 BYCLRK RPT BY CLERK (2980)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIRRPT1 BYCLRK RPT BY CLERK</td></tr><tr>
+<td>TAG</td><td>BYCLRK</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSIRRPT1.html">DSIRRPT1</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Schedules areport to retrieve ROI requests for a given date range for
+use in GUI reports.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>FRDT</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>7</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+The FileMan Date to start retrieval process.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>TODT</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>7</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+FileMan date to end retrieval process.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>STATUS</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>7</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+"A"  : Get only the appealed requests  (-RV,-PR)
+"O"  : Get only the open
+"C"  : "          " closed  (-D,-G,-P)
+"P"  : "          " pending
+"N"  : "          "other nondisclosured (-NR,-RF,-ND,-NV,-RC)
+"E"  : "          " entered in error
+"X"  : "          " cancelled
+"ALL": Gets all statuses
+ 
+This parameter may be any combination of the codes delimited by the '^'
+or the word 'ALL'.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>DIVL</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>99</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>4</dd><dt>DESCRIPTION:</dt><dd><pre>
+This parameter is used by the routine if the person requesting this
+report holds the DSIR MDIV key.  It is a list of internal Institution
+File entry numbers (File 4), delimited by '^'.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>REQS</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>99</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>5</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is an array of clerk IENs.
+        (1-n)=IEN to file 200
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>SCHED</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>1</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>6</dd><dt>DESCRIPTION:</dt><dd><pre>
+Boolean flag that determines whether a report is scheduled or run 
+immedieately. 0 - Immediate  1 - Schedule.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>ESTART</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>14</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>7</dd><dt>DESCRIPTION:</dt><dd><pre>
+Earliest time to start the scheduled task.  Mmust be inFileMan date/time 
+format. 
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Return Array ^ delimited
+        1. Division Name
+        2. ROI Clerk Name
+        3. Patient Name
+        4. Patient SSN
+        5. Type of Request
+        6. External Date Received
+        7. External Date Closed (If present)
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

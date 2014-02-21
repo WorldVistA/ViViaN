@@ -1,0 +1,43 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>MPIF SEEDING STATS (1433)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>MPIF SEEDING STATS</td></tr><tr>
+<td>TAG</td><td>STATS</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_MPIFSEED.html">MPIFSEED</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>VERSION</td><td>1</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This RPC will return the stats on the seeding process, including when the 
+next seeding job is scheduled to run
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td>8994.02, , {}</td></tr><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+RETURN(1)= file 984.8 zero node
+RETURN(2)= when MPIF SEEDING TASK is scheduled to run next
+RETURN(3)= count of how many ICNs are remaining to be seeded.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

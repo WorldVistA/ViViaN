@@ -1,0 +1,105 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIF PAY MED PAYMENT ADD/EDIT (2606)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIF PAY MED PAYMENT ADD/EDIT</td></tr><tr>
+<td>TAG</td><td>EDITPAY</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSIFPAY3.html">DSIFPAY3</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>WORD WRAP ON</td><td>FALSE</td></tr><tr>
+<td>VERSION</td><td>3.2</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Use to add/edit Medical Payment data
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>IDENTIFIER</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>255</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+IDENTIFIER=ID^Date of service^Fee program^Authorization pointer^C&amp;P 
+FLAG^Test payment validity Flag (do not store data)^Fee Basis 
+reimbursement flag
+ 
+ID=[Pt IEN;Fee Basis Vendor IEN;Initial date of service IEN (or blank for
+new)];Service Provided IEN (or blank for new)]
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>SERVICE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>255</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+SERVICE=[.01] Service provided:(1)^[1]Amt Claimed:(2)^[2]Amount 
+Paid:(3)^[5]Date Finalized:(4)^[7]Batch IEN:(5)^[8]Obligation
+#:(6)^ [13]Date
+correct invoice received:(7)^[14]Invoice #:(8)^[15]Patient
+type:(9)^[16]POV:(10)^[17]Treatment type:(11)^ [26]Primary Service
+facility:(12)^[27]Associated 7078/583:(13)^Anesthesia Time:(14)
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>DIAG</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>255</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+DIAG=[28]Primary Diagnosis:(1)^[30]Place of service:(2)^[31]HCFA type of
+service:(3)^[32]Service connected y/n:(4)^ [33]Vendor invoice
+date:(5)^[42]Site of service zip code:(6)^[47]Units paid:(7)^[48]Revenue
+code:(8)^ [49]Patient account number:(9)^[50]FPPS claim ID:(10)^[51]FPPS
+line item:(11)^[34]Prompt payment:(12)^Fee schedule Amt:(13)^Fee 
+Schedule:(14)
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>REMARKS</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>255</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>4</dd><dt>DESCRIPTION:</dt><dd><pre>
+REMARKS=IEN of remark:(1)^ [may repeat with however many remarks]
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>MODS</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>200</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>5</dd><dt>DESCRIPTION:</dt><dd><pre>
+MODS=external value of modifier:(1)^ [may repeat for any modifiers]
+*Must be sorted lowest to highest in value
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>ADJUSTMENTS</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>255</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>6</dd><dt>DESCRIPTION:</dt><dd><pre>
+ADJUSTMENTS=IEN of adjustment:(1)^IEN Adjustment Group:(2)^Adjustment 
+amount:(3)^ [may repeat]
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>FBSUSC</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>200</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>8</dd><dt>DESCRIPTION:</dt><dd><pre>
+Suspension comments
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>FBSUS</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>100</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>7</dd><dt>DESCRIPTION:</dt><dd><pre>
+FBSUS=Amount suspended:(1)^date suspended:(2)^Suspend code:(3)
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>DSIFDATA</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>255</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>9</dd><dt>DESCRIPTION:</dt><dd><pre>
+ ; DSIFDATA array (New fields added DSIF*3.2*2)
+ ;  54^CONTRACT IEN (#54), if allowed for deletion "@" can be passed
+ ;  58^ATTENDING PROV NAME (#58)
+ ;  59^ATTENDING PROV NPI (#59)
+ ;  60^ATTENDING PROV TAXONOMY CODE (#60)
+ ;  61^OPERATING PROV NAME (#61)
+ ;  62^OPERATING PROV NPI (#62)
+ ;  63^RENDERING PROV NAME (#63)
+ ;  64^RENDERING PROV NPI (#64)
+ ;  65^RENDERING PROV TAXONOMY CODE (#65)
+ ;  66^SERVICING PROV NAME (#66)
+ ;  67^SERVICING PROV NPI (#67)
+ ;  68^REFERRING PROV NAME (#68)
+ ;  69^REFERRING PROV NPI (#69)
+ ;  73^LI RENDERING PROV NAME (#73)    (these are payment line specific)
+ ;  74^LI RENDERING PROV NPI (#74)
+ ;  75^LI RENDERING PROV TAXONOMY (#75)
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+(Successful)
+1^Entry add/edited successfully
+(Failure)
+-1^(error message)
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

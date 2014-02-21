@@ -1,0 +1,317 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>RORICR CDC LOAD (1791)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>RORICR CDC LOAD</td></tr><tr>
+<td>TAG</td><td>LOADCDC</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_RORRP025.html">RORRP025</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>VERSION</td><td>1</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+The RORICR CDC LOAD remote procedure loads the data for the CDC form 
+that is edited/printed by the ICR registry.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>REGIEN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+The REGIEN parameter should contain a valid registry IEN (IEN of the
+registry parameters record in the ROR REGISTRY PARAMETERS file #798.1).
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PATIEN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+A valid patient IEN (DFN) should be assigned to the PATIEN parameter.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>LOCK</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+If this parameter is defined and not zero then the RPC will try to lock
+the registry record before loading the data and will leave it locked.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+A negative value of the first "^"-piece of the Results[0] indicates that
+an error occurred during the execution of the remote procedure. In this
+case, the second piece of the Results[0] will contain number of the error
+descriptors returned in the subsequent nodes of the Results array:
+   
+  Results[0]            Result Descriptor
+                          ^01: The last error code
+                          ^02: Number of the error descriptors
+                                                                      
+  Results[i]            Error Descriptor
+                          ^01: Error code
+                          ^02: Message
+                          ^03: Place of the error
+ 
+If locking was requested (see the LOCK parameter) and the record could not
+be locked then the first "^"-piece of the Results[0] would be greater than
+0. The Results[0] would contain the lock descriptor and subsequent nodes
+of the global array would contain the data (see below). The lock 
+descriptor contains information about the process, which owns the most 
+recent lock of the record.
+ 
+  Results[0]            Lock Descriptor
+                          ^01: Date/Time (FileMan)
+                          ^02: User/Process name
+                          ^03: User IEN (DUZ)
+                          ^04: $JOB
+                          ^05: Task number
+ 
+THE DATA ARE LOADED ONLY FOR VIEWING PURPOSES (READ-ONLY)!
+ 
+Otherwise, zero is returned in the Results[0] and the subsequent nodes of
+the array contain the data. Some data items are optional (for example, RCE
+and ETN). Some other items can be repeated (e.g. AID and CMT).
+ 
+  Results[0]            0
+ 
+  Results[i]            Demographic Information
+                          ^01: "DEM"
+                          ^02: ""
+                          ^03: Patient IEN (DFN)
+                          ^04: Patient Name
+                          ^05: Date of Birth (FileMan)
+                          ^06: SSN
+                          ^07: Date of Death (FileMan)
+                          ^08: Sex (F/M)
+ 
+  Results[i]            Patient's Address
+                          ^01: "ADR"
+                          ^02: ""
+                          ^03: Address (1)
+                          ^04: Address (2)
+                          ^05: Address (3)
+                          ^06: City
+                          ^07: State (IEN)
+                          ^08: State (Name)
+                          ^09: ZIP
+                          ^10: ZIP+4
+                          ^11: County (IEN)
+                          ^12: County (Name)
+                          ^13: Home Phone
+ 
+  Results[i]            Race Information
+                          ^01: "RCE"
+                          ^02: Race IEN
+                          ^03: Race HL7 Value
+                          ^04: Race
+                          ^05: Collection Method HL7 Value
+                          ^06: Collection Method
+ 
+                        Race HL7 Values
+                          1002-5  American Indian or Alaska Native
+                          2028-9  Asian
+                          2054-5  Black or African American
+                          0000-0  Declined to Answer
+                          2076-8  Native Hawaiian or Pacific Islander
+                          9999-4  Unknown by Patient
+                          2106-3  White
+ 
+                        Collection Method HL7 Values
+                          OBS     Observer
+                          PRX     Proxy
+                          SLF     Self Identification
+                          UNK     Unknown
+ 
+  Results[i]            Ethnicity Information
+                          ^01: "ETN"
+                          ^02: Ethnicity IEN
+                          ^03: Ethnicity HL7 Value
+                          ^04: Ethnicity
+                          ^05: Collection Method HL7 value
+                          ^06: Collection Method
+ 
+                        Ethnicity HL7 Values
+                          0000-0  Declined to Answer
+                          2135-2  Hispanic or Latino
+                          2186-5  Not Hispanic or Latino
+                          9999-4  Unknown by Patient
+ 
+  Results[i]            Form Headers
+                          ^01: "HDR"
+                          ^02: ""
+                          ^03: DATE CDC FORM COMPLETED (FileMan)
+                          ^04: CDC FORM COMPLETED BY (DUZ)
+                          ^05: CDC FORM COMPLETED BY (Name)
+                          ^06: Phone number of person completed form
+                          ^07: Medical Record Number
+ 
+  Results[i]            CDC Demographics (III)
+                          ^01: "CDM"
+                          ^02: ""
+                          ^03: STATUS AT REPORT {1|2}
+                          ^04: AGE AT DIAGNOSIS
+                          ^05: PATIENT STATUS {1|2|9}
+                          ^06: STATE/TERRITORY OF DEATH
+                          ^07: COUNTRY OF BIRTH {1|7|8|9}
+                          ^08: DEPENDENCY/OTHER COUNTRY DESCRIPTION
+                          ^09: ONSET OF ILLNESS/AIDS- CITY
+                          ^10: ONSET OF ILLNESS/AIDS- COUNTY
+                          ^11: ONSET OF ILLNESS/AIDS- STATE (IEN)
+                          ^12: ONSET OF ILLNESS/AIDS- STATE (Name)
+                          ^13: ONSET OF ILLNESS/AIDS- COUNTRY
+                          ^14: ONSET OF ILLNESS/AIDS- ZIP
+ 
+  Results[i]            Facility of Diagnosis (IV)
+                          ^01: "FD"
+                          ^02: ""
+                          ^03: AIDS DX - HOSPITAL
+                          ^04: AIDS DX - CITY
+                          ^05: AIDS DX - STATE (IEN)
+                          ^06: AIDS DX - STATE (Name)
+                          ^07: AIDS DX - COUNTRY
+                          ^08: AIDS DX - FACILITY SETTING {1|2|3|9}
+                          ^09: AIDS DX - FACILITY TYPE {01|31|88}
+                          ^10: AIDS DX - OTHER FACILITY TYPE
+ 
+  Results[i]            Patient History (V)
+                          ^01: "PH"
+                          ^02: ""
+                          ^03: SEX RELATIONS W/MALE PARTNER   {0|1|9}
+                          ^04: SEX RELATIONS W/FEMALE PARTNER {0|1|9}
+                          ^05: IV DRUGS AFTER 77 AND PRE HIV  {0|1|9}
+                          ^06: REC'D CLOTTING FACTORS         {0|1|9}
+                          ^07: TYPE OF HEMOPHILIA             {1|2|8}
+                          ^08: OTHER HEMOPHILIA DESCRIPTION
+                          ^09: SR WITH IV DRUG USER           {0|1|9}
+                          ^10: SR WITH BISEXUAL MAN           {0|1|9}
+                          ^11: SR W HEMOPHILIA/COAG DISORDER  {0|1|9}
+                          ^12: SR W TRANS RECIPIENT WITH AIDS {0|1|9}
+                          ^13: TRANSPLANT RECIP-DOCUMNTD HIV  {0|1|9}
+                          ^14: SR W AIDS/HIV INFECTION        {0|1|9}
+                          ^15: TRANS AFTER 77 AND BEFORE HIV  {0|1|9}
+                          ^16: DATE OF FIRST TRANSFUSION      (MM/YY)
+                          ^17: DATE OF LAST TRANSFUSION       (MM/YY)
+                          ^18: TRANSPLANT OR ARTIF INSEMIN    {0|1|9}
+                          ^19: WORK IN HEALTH CARE OR LAB     {0|1|9}
+                          ^20: OCCUPATION
+ 
+  Results[i]            Laboratory Data (VI)
+ 
+                          ^01: "LD1"
+                          ^02: ""
+                          ^03: HIV-1 EIA                      {0|1|9}
+                          ^04: HIV-1 EIA DATE                 (MM/YY)
+                          ^05: HIV-1/HIV-2 EIA                {0|1|9}
+                          ^06: HIV-1/HIV-2 EIA DATE           (MM/YY)
+                          ^07: HIV-1 WESTERN BLOT/IFA         {0|1|8|9}
+                          ^08: HIV-1 WESTERN BLOT/IFA DATE    (MM/YY)
+                          ^09: OTHER HIV ANTIBODY TEST        {0|1|8|9}
+                          ^10: OTHER HIV ANTIBODY TEST DATE   (MM/YY)
+                          ^11: OTHER HIV ANTIBODY TEST DESC
+                          ^12: Positive HIV Detection Test    {1|2|3}
+                          ^13: Date of the HIV Detection test (MM/YY)
+                          ^14: TYPE OF OTHER POSITIVE TEST
+                          ^15: DATE OTHER POS DETECTION TEST  (MM/YY)
+                          ^16: DETECTABLE VIRAL LOAD TEST {11|12|13|18}
+                          ^17: DETECTABLE VIRAL LOAD RESULT
+                          ^18: DETECTABLE VIRAL LOAD DATE     (MM/YY)
+ 
+                          ^01: "LD2"
+                          ^02: ""
+                          ^03: TYPE FOR LAST NEG TEST
+                          ^04: LAST DOCUMNTD NEG HIV TEST     (MM/YY)
+                          ^05: PHYS DOCUMNTD DIAGNOSIS?       {0|1|9}
+                          ^06: DATE PHYS DOCUMNTD DIAG        (MM/YY)
+                          ^07: CD4+ COUNT FOR CDC
+                          ^08: CD4+ COUNT FOR CDC DATE        (MM/YY)
+                          ^09: CD4+ PERCENT FOR CDC
+                          ^10: CD4+ PERCENT FOR CDC DATE      (MM/YY)
+                          ^11: CD4 COUNT FIRST &lt;200
+                          ^12: CD4 COUNT FIRST &lt;200 DATE      (MM/YY)
+                          ^13: CD4 PERCENT FIRST &lt;14%
+                          ^14: CD4 PERCENT FIRST &lt;14% DATE    (MM/YY)
+ 
+  Results[i]            Clinical Status (VIII)
+                          ^01: "CS"
+                          ^02: ""
+                          ^03: RECORD REVIEWED {0|1}
+                          ^04: DATE ASYMPTOMATIC              (MM/YY)
+                          ^05: DATE SYMPTOMATIC               (MM/YY)
+                          ^06: RVCT CASE NO.
+                          ^07: IMMUNODEF THAT DISQUALIFIES    {0|1|9}
+ 
+  Results[i]            AIDS Indicator Disease (VIII)
+                          ^01: "AID"
+                          ^02: Disease Code
+                          ^03: Initial Diagnosis              {1|2}
+                          ^04: Initial Date                   (MM/YY)
+ 
+                        Disease Codes:
+                            1  CANDIDIASIS, B, T, OR L
+                            2  CANDIDIASIS, ESOPHAGEAL
+                            3  CARCINOMA, INVASIVE CERVICAL
+                            4  COCCIDIOIDOMYCOSIS, DIS/EXTRAP
+                            5  CRYPTOCOCCOSIS, EXTRAPULMONARY
+                            6  CRYPTOSPORIDIOSIS, CHRONIC
+                            7  CYTOMEGALOVIRUS DISEASE
+                            8  CYTOMEGALOVIRUS RETINITIS
+                            9  HIV ENCEPHALOPATHY
+                           10  HERPES SIMPLEX
+                           11  HISTOPLASMOSIS, DIS/EXTRAP
+                           12  ISOSPORIASIS, CHRONIC INTEST
+                           13  KAPOSI'S SARCOMA
+                           14  LYMPHOMA, BURKITT'S
+                           15  LYMPHOMA, IMMUNOBLASTIC
+                           16  LYMPHOMA, PRIMARY IN BRAIN
+                           17  MYCOBACTERIUM AVIUM COMPLEX
+                           18  M. TUBERCULOSIS, PULMONARY
+                           19  M TUBERCULOSIS, DIS/EXTRAP
+                           20  MYCOBACTERIUM
+                           21  PNEUMOCYSTIS CARINII PNEUMONIA
+                           22  PNEUMONIA, RECURRENT IN 12 MO
+                           23  PROGRESSIVE MULTIFOCAL LEUKO
+                           24  SALMONELLA SEPTICEMIA, RECURR
+                           25  TOXOPLASMOSIS OF BRAIN
+                           26  WASTING SYNDROME DUE TO HIV
+ 
+  Results[i]            Treatment/Services (IX)
+ 
+                          ^01: "TS1"
+                          ^02: ""
+                          ^03: PATIENT BEEN INFORMED OF HIV   {0|1|9}
+                          ^04: PARTNERS NOTIFIED BY           {1|2|3|9}
+                          ^05: HIV RELATED MED SERVICES
+                          ^06: SUBSTANCE ABUSE TREATMENT      {0|1|8|9}
+                          ^07: RCVD ANTI-RETROVIRAL THERAPY   {0|1|9}
+                          ^08: RECEIVED PCP PROPHYLAXIS       {0|1|9}
+                          ^09: ENROLLED AT CLINCAL TRIAL      {1|2|3|9}
+                          ^10: ENROLLED AT CLINIC             {1|2|3|9}
+                          ^11: PRIMARY REIMBURSER FOR MED RX {1|2|3|4|7|9}
+ 
+                          ^01: "TS2"
+                          ^02: ""    
+                          ^03: GYNECOLOGY OR OBSTETRIC CARE   {0|1|9}
+                          ^04: CURRENTLY PREGNANT             {0|1|9}
+                          ^05: DELIVERED LIVE BORN INFANT     {0|1|9}
+                          ^06: CHILD'S DATE OF BIRTH
+                          ^07: CHILD'S HOSPITAL OF BIRTH
+                          ^08: CHILD'S HOSPITAL - CITY
+                          ^09: CHILD'S HOSPITAL - STATE
+ 
+  Results[i]            Comments (X)
+                          ^01: "CMT"
+                          ^02: [1-3]
+                          ^03: Comment
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

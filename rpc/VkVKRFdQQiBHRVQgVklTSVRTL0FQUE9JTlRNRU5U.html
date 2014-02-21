@@ -1,0 +1,116 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>VEJDWPB GET VISITS/APPOINTMENT (1089)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>VEJDWPB GET VISITS/APPOINTMENT</td></tr><tr>
+<td>TAG</td><td>VSIT</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_VEJDVST2.html">VEJDVST2</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This will call the VEJDWPB GET SCHED APPTS rpc to get the scheduled
+appointments for the user inputted date range.
+ 
+It then loops throughs the Visit file (#9000010) "AA" cross reference to
+find all visits.
+ 
+It then uses the uses the IN5^VADPT to get the current admission.
+It then uses the uses the IN5^VADPT to get the current admission.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>DATA</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+ DATA - required - DFN ^ BEG ^ END ^ ZLOC ^ FLG ^ MODS ^ CAT
+  DFN - required - pointer to file 2
+  BEG - optional - starting Fileman date/time
+  END - optional - ending fileman date/time - default = DT+.5
+ ALOC - optional - clinic, either name or file 44 ien retained for
+                   backwards compatibility
+  FLG - optional - type of appts to return
+        0 - active/kept appts (past) - default
+        1 - future appts only
+        2 - both past and future appts
+ MODS - optional - string of codes determine which encounters to return
+                   default value = ASV
+                   MODS["A" - return current admission regardless of date
+                   MODS["S" - return schedule appts
+                   MODS["V" - return visit file entries (#9000010)
+  CAT - optional - default value is 0 screen visits by service category
+        1 - return all visits
+        0 or &lt;null&gt; - do not return historical type visits
+        I $G(CAT) then do not screen visit entries by service category
+        I '$G(CAT) then screen out historical visits (E,D,X,N,C)
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>VECLIN</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+ VECLIN is a local array which contains a list of clinics to be used to
+ screen appointment list.  Only those appointments in these clinics will
+ be returned.
+    VECLIN - optional - passed by reference
+    VECLIN(#) = clinic name or ien
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>SCODE</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+ This is a list of 3-digit stop codes used to screen appointments
+ returned.  Only those clinic locations whose stop code is in this list
+ will be returned.
+ 
+    SCODE - optional - passed by reference
+    SCODE(#) = 3-digit stop code (lookup on C xref)
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>VEDIV</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>4</dd><dt>DESCRIPTION:</dt><dd><pre>
+ This is a list of divisions to be used to screen appointments.  Only
+ appointments in clinics for divisions in this list will be returned.
+ 
+     VEDIV - optional - passed by reference
+     VEDIV(#) = division name or ien
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+It returns to the broker, via the global array ^TMP("VEJD",$J,"VSIT",#)
+  1. All visits and current admission
+  2. Any scheduled visit for which there is no corresponding visit file
+     entry for the same date/time and clinic.
+  3. Format of data returned  p1^p2^p3^p4^p5^p6 where
+      p1 := A (if admission)  V (if visit)  S (if scheduled appt)
+      p2 := visit file ien
+      p3 := date/time in external format
+      p4 := location name (from file 44)
+      p5 := date/time in internal fileman format
+      p6 := location file (#44) ien
+  4. If no matching data was found then return
+      -1^Invalid patient DFN
+      -1^No visits or appointments found
+hospital location value (file 44) from the visit ien.  If it cannot, then
+the data returned by VSITAPI^VSITOE will be used.  In this case, p4 will
+be the location from file 9999999.06 and p6="".
+ 
+This rpc will
+ 1. Call the VEJDWPB GET SCHED APPTS rpc to get appointments
+ 2. Return only those kept appts which do not have a corresponding Visit
+    file entry (matching criteria: no visit with same date/time and file
+    44 pointer as appointment)
+ 3. The VSITAPI^VSITOE calls will exclude all those visits whose code is
+    contained in "EDXNC" (i.e., exclude non-count/historical visits)
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

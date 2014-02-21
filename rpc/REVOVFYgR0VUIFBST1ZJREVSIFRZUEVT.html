@@ -1,0 +1,45 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DENTV GET PROVIDER TYPES (1927)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DENTV GET PROVIDER TYPES</td></tr><tr>
+<td>TAG</td><td>TYPE</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DENTVRP5.html">DENTVRP5</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Gets a list of Provider Types from the DENTAL PROVIDER TYPE (220.51)
+file.
+</pre>
+</td></tr><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Returns an array containing the Provider Types and their 1-2 digit code.
+Returns List[1] := -1^error message if no active provider types found.
+The format of the return array is:
+  list[n] := p1^p2  where
+      p1  := Provider Type name
+      p2  := code (numeric)
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

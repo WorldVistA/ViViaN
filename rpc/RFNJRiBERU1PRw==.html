@@ -1,0 +1,68 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIF DEMOG (2574)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIF DEMOG</td></tr><tr>
+<td>TAG</td><td>DEMOG</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSIFENA1.html">DSIFENA1</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>WORD WRAP ON</td><td>FALSE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Pass in IEN of Patient file, return a list of Patient Demographics.
+ 
+Returns an array of demographic data or -1^error message (usually "Invalid
+ 
+Patient selection")
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>DFN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>50</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+Pass in Patient File IEN (file #2) 
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Return=
+"Demographics";1^Pt
+Name^SSN^Date of death^Date of Birth^telephone^Address
+line 1
+ 
+"Demographics";2^address line 2^Address line 3^City^State
+w/zip^County^Primary eligibility code^Verified?^Verified
+date^Disability %^Health insurance Yes or No
+ 
+"Other eligibilities";n^{list of additional eligibilities}
+ 
+"Rated disabilities";n^Service connected condition^Service connect %
+ 
+"Insurance data";n^Insurance^Subscriber ID^Group^Holder^Effective
+date^Expiration date of Insurance^Reimburse Insurance text
+ 
+"Insurance data";n.1^1^ *** Patient has Insurance Buffer entries *
+ 
+Error codes returned:
+Demographics;1^-1^Invalid Patient selection (DFN doesn not exist)
+Demographics;1^-1^Invalid input parameter (DFN not numeric)
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

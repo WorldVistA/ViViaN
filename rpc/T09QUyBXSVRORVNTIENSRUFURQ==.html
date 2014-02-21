@@ -1,0 +1,57 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>OOPS WITNESS CREATE (1409)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>OOPS WITNESS CREATE</td></tr><tr>
+<td>TAG</td><td>ADDWITN</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_OOPSGUI2.html">OOPSGUI2</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>PUBLIC</td></tr><tr>
+<td>WORD WRAP ON</td><td>FALSE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This broker call will add a new Witness record for a case in the ASISTS 
+Accident Reporting File (#2260).  It is called by the CA1 form in Delphi. 
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>IEN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the IEN for the case in file 2260 that is having the witness info 
+created.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>INFO</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the Name, Street, City, State, Zip, and Date of Witness Signature. It
+must be in format... 
+NAME^STREET^CITY^STATE^ZIP^DATESIGNED
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>CMNT</dd></li><li><dt>INPUT PARAMETER:</dt><dd>COMMENT</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>256</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>DESCRIPTION:</dt><dd><pre>
+The input will be a string containing the comment to be added/associated with
+the witness record created. 
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+This will be a string, either "WITNESS CREATION FAILED" indicating the witness
+record was not created, or "WITNESS CREATION SUCCESSFUL" indicating success.
+
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

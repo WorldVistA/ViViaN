@@ -1,0 +1,65 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>XWB REMOTE RPC (431)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>XWB REMOTE RPC</td></tr><tr>
+<td>TAG</td><td>EN1</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_XWB2HL7.html">XWB2HL7</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>SUBSCRIPTION</td></tr><tr>
+<td>INACTIVE</td><td>ACTIVE</td></tr><tr>
+<td>WORD WRAP ON</td><td>FALSE</td></tr><tr>
+<td>VERSION</td><td>1</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This is the RPC that is called to request that an application RPC
+be run on a remote system.  The data is passed by HL7 to the remote system
+as is the return value.  
+ 
+This RPC will return a HANDLE that can be used to check if the data has
+been sent back from the remote system.  The HANDLE can be used in another
+RPC to check the status of the RPC.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>LOC</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>30</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the Institution's station # to send the RPC to.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>RRPC</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>30</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the name of the remote RPC to be run.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>IP1</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the first input parameter to the remote RPC.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>IP2</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>SEQUENCE NUMBER:</dt><dd>4</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the second input parameter to the remote RPC.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+ The return value is always an array.  The first node of the array is
+equal to a string that serves as a HANDLE. This is used to check the
+status of a RPC request and to retrieve the results of the RPC.
+ In the case of an error condition, the first node of the array is
+equal to a string with the syntax "-1^error text".
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

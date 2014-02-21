@@ -1,0 +1,54 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>GMV DLL VERSION (2116)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>GMV DLL VERSION</td></tr><tr>
+<td>TAG</td><td>DLL</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_GMVUTL8.html">GMVUTL8</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>AVAILABILITY</td><td>SUBSCRIPTION</td></tr><tr>
+<td>INACTIVE</td><td>ACTIVE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Returns a YES or NO response to indicate if the Dynamic Link Library (DLL)
+file should be used.
+ 
+This remote procedure call is documented in Integration Agreement 4420.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>GMVX</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>50</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+This value is the name of the file and the date/time associated with it 
+(e.g., GMV_VITALSVIEWENTER.DLL:v. 07/21/05 10:34).
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Returns YES if the file can be used. Returns NO, if the file cannot be
+used. Returns null if the file was not found.
+ 
+Example:
+ &gt; S GMVX="GMV_VITALSVIEWENTER.DLL:v. 07/21/05 10:34"
+ &gt; D DLL^GMVUTL8(.RESULT,GMVX) ZW RESULT
+ &gt; RESULT="NO"
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

@@ -1,0 +1,68 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>TIU UPDATE RECORD (92)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>TIU UPDATE RECORD</td></tr><tr>
+<td>TAG</td><td>UPDATE</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_TIUSRVP.html">TIUSRVP</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>AVAILABILITY</td><td>SUBSCRIPTION</td></tr><tr>
+<td>WORD WRAP ON</td><td>FALSE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This API updates the record named in the TIUDA parameter, with the
+information contained in the TIUX(Field #) array.  The body of the
+modified TIU document should be passed in the TIUX("TEXT",i,0) subscript,
+where i is the line number (i.e., the "TEXT" node should be ready to MERGE
+with a word processing field).  Any filing errors which may occur will be
+returned in the single valued ERR parameter (which is passed by
+reference).
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>ERR</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the return parameter, which is passed by reference.  If an error
+occurs, it will be a pointer to the FM dialog file followed by the integer
+1 in the second "^"-piece (e.g., 8925001^1).
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>TIUDA</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the record # (IEN) of the TIU Document in file #8925.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>TIUX</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the input array which contains the data to be filed in the
+modified document.  It should look something like this:
+ 
+TIUX(.02)=45678
+TIUX(1301)=2960703.104556
+TIUX(1302)=293764
+TIUX("TEXT",1,0)="The patient is a 70 year old WHITE MALE, who presented
+to the ONCOLOGY CLINIC"
+TIUX("TEXT",2,0)="On JULY 3, 1996@10:00 AM, with the chief complaint of
+NECK PAIN..."
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>SUPPRESS</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+This BOOLEAN Flag is passed in to suppress the call to the COMMIT CODE for
+the TIU DOCUMENT in question (i.e., SUPPRESS=1 ==&gt; don't execute commit
+code; SUPPRESS=0 or UNDEFINED ==&gt; DO execute commit code).
+</pre>
+</dd></li></ol></td></tbody>
+</table>
+</body></html>

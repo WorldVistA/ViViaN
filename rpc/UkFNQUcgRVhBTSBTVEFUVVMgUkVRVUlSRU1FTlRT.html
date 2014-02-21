@@ -1,0 +1,251 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>RAMAG EXAM STATUS REQUIREMENTS (2742)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>RAMAG EXAM STATUS REQUIREMENTS</td></tr><tr>
+<td>TAG</td><td>EXMSTREQ</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_RAMAGRP2.html">RAMAGRP2</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+The RAMAG EXAM STATUS REQUIREMENTS remote procedure returns a descriptor
+that indicates conditions that should be met in order to successfully 
+perform an action on an exam/case record.
+ 
+These conditions are defined by the sites and stored in the EXAMINATION
+STATUS file (#72). See the .1 and .5 nodes of the data dictionary of the
+file #74 for more details.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>RACTION</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>1</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+The RACTION parameter defines the action that is going to be performed on 
+an exam/case record:
+ 
+  E  Examined (procedure has been performed,
+     images have been acquired)
+ 
+  C  Complete
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>RAIMGTYI</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+IEN of the imaging type in the IMAGING TYPE file (#79.2).
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>RAPROC</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+Radiology procedure IEN (file #71). This parameter is required to
+determine exact nuclear medicine requirements (pieces of the Results[0]
+from 17 to 25).
+ 
+By default (+$G(RAPROC)=0), this remote procedure cannot examine the
+SUPPRESS RADIOPHARM PROMPT field (2) of the RAD/NUC MED PROCEDURES file
+(#71) and might indicate that some nuclear medicine data is required even
+if it is not.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+A negative value of the first '^'-piece of the Results[0] indicates that
+an error occurred during the execution of the remote procedure. In this
+case, the second piece of the Results[0] will contain number of the error
+descriptors returned in the subsequent nodes of the Results array.
+ 
+  Results[0]            Result descriptor
+                          ^01: The last error code
+                          ^02: Number of error descriptors
+  
+  Results[i]            Error descriptor
+                          ^01: Error code
+                          ^02: Message
+                          ^03: Error location
+                          ^04: Error type
+  
+  Results[j]            Line of the additional info
+                          ^01: "" (empty)
+                          ^02: Text
+ 
+Error descriptors are returned in reverse chronological order (most recent
+first).
+ 
+Otherwise, exam status requirements are returned in the Results[0].
+Descriptor of the exam status is returned in the Results[1]. See comments 
+in the RAMAGU06 routine for details.
+ 
+  Results[0]            Exam status requirements
+                          ^01: TECHNOLOGIST REQUIRED?         {0|1}
+                          ^02: RESIDENT OR STAFF REQUIRED?    {0|1}
+                          ^03: DETAILED PROCEDURE REQUIRED?   {0|1}
+                          ^04: FILM ENTRY REQUIRED?           {0|1}
+                          ^05: DIAGNOSTIC CODE REQUIRED?      {0|1}
+                          ^06: CAMERA/EQUIP/RM REQUIRED?      {0|1}
+                          ^07: reserved
+                          ^08: reserved
+                          ^09: reserved
+                          ^10: reserved
+                          ^11: REPORT ENTERED REQUIRED?       {0|1}
+                          ^12: VERIFIED REPORT REQUIRED?      {0|1}
+                          ^13: PROCEDURE MODIFIERS REQUIRED?  {0|1}
+                          ^14: CPT MODIFIERS REQUIRED?        {0|1}
+                          ^15: reserved
+                          ^16: IMPRESSION REQUIRED?           {0|1}
+                          ^17: RADIOPHARMS/DOSAGES REQUIRED?  {0|1}                
+                          ^18: reserved                                            
+                          ^19: ACTIVITY DRAWN REQUIRED?       {0|1}                
+                          ^20: DRAWN DT/TIME/PERSON REQUIRED? {0|1}                
+                          ^21: ADM DT/TIME/PERSON REQUIRED?   {0|1}                
+                          ^22: reserved                                            
+                          ^23: ROUTE/SITE REQUIRED?           {0|1}                
+                          ^24: LOT NO. REQUIRED?              {0|1}                
+                          ^25: VOLUME/FORM REQUIRED?          {0|1}                
+ 
+  Results[1]            Exam status descriptor
+                          ^01: Status IEN
+                          ^02: Status name
+                          ^03: Status code (order)
+                          ^04: VistARAD category
+                          ^05: Generic exam status characteristics
+ 
+Explanations for the Requirements
+=================================
+ 
+01: TECHNOLOGIST REQUIRED?
+        
+    At least one value of the "TECH" parameter should be provided or
+    the TECHNOLOGIST multiple (175) of the RAD/NUC MED PATIENT file
+    (#70) should have at least one record already.
+ 
+02: RESIDENT OR STAFF REQUIRED?
+ 
+    The "PRIMINTRES" or "PRIMINTSTF" parameter should be defined or
+    at least one of the following fields of the RAD/NUC MED PATIENT
+    file (#70) should have a value already: PRIMARY INTERPRETING
+    RESIDENT (13) or PRIMARY INTERPRETING STAFF (15).
+ 
+03: DETAILED PROCEDURE REQUIRED?
+ 
+    If the ordered and/or registered procedure was a 'broad' one, 
+    then the "RAPROC" should reference a valid 'detailed' or
+    'series' procedure. Otherwise, the parameter is not required.
+ 
+    See the TYPE OF PROCEDURE field (6) of the RAD/NUC MED
+    PROCEDURES file (#71) for more details.
+ 
+04: FILM ENTRY REQUIRED?
+ 
+    At least one value of the "FILMSIZE" parameter should be
+    provided or the FILM SIZE multiple (50) of the RAD/NUC MED 
+    PATIENT file (#70) should have at least one record already.
+ 
+05: DIAGNOSTIC CODE REQUIRED?
+ 
+    A non-empty value of the "PRIMDXCODE" parameter should be
+    provided or the PRIMARY DIAGNOSTIC CODE field (13) of the
+    RAD/NUC MED PATIENT file (#70) should have a value already.
+ 
+06: CAMERA/EQUIP/RM REQUIRED?
+ 
+    A non-empty value of the "PRIMCAM" parameter should be provided
+    or the PRIMARY CAMERA/EQUIP/RM field (18) of the RAD/NUC MED
+    PATIENT file (#70) should have a value already.
+ 
+11: REPORT ENTERED REQUIRED?
+ 
+    A non-empty value of the "REPORT" parameter should be provided
+    or the REPORT TEXT field (200) of the RAD/NUC MED REPORTS file
+    (#74) should have a non-empty value already.
+ 
+12: VERIFIED REPORT REQUIRED?
+ 
+    The "V" value of the "RPTSTATUS" parameter should be provided
+    (default).
+ 
+13: PROCEDURE MODIFIERS REQUIRED?
+ 
+    At least one procedure modifier should be provided in the 
+    "RAPROC" parameter or the PROCEDURE MODIFIERS multiple (125) of
+    the RAD/NUC MED PATIENT file (#70) should have at least one
+    record already.
+ 
+14: CPT MODIFIERS REQUIRED?
+ 
+    At least one value of the "CPTMODS" parameter should be provided
+    or the CPT MODIFIERS multiple (135) of the RAD/NUC MED PATIENT
+    file (#70) should have at least one record already.
+ 
+16: IMPRESSION REQUIRED?
+ 
+    A non-empty value of the "IMPRESSION" parameter should be
+    provided or the IMPRESSION TEXT field (300) of the RAD/NUC MED
+    REPORTS file (#74) should have a non-empty value already.
+ 
+17: RADIOPHARMS/DOSAGES REQUIRED?
+ 
+    At least one record of the "RDPHARMS" parameter should be
+    provided (at least, the "RDPH-DRUG" and "RDPH-DOSE" record
+    parameters should be defined) or the RADIOPHARMACEUTICALS
+    multiple (100) of the NUC MED EXAM DATA file (#70.2) should
+    have at least one record already (at least, the 
+    RADIOPHARMACEUTICAL (.01) and DOSE ADMINISTERED (7) fields 
+    should be populated).
+ 
+19: ACTIVITY DRAWN REQUIRED?
+ 
+    A non-empty value of the "RDPH-ACDR" parameter should be
+    provided or the ACTIVITY DRAWN field (4) of the NUC MED EXAM
+    DATA file (#70.2) should have a non-empty value already.
+ 
+20: DRAWN DT/TIME/PERSON REQUIRED?
+ 
+    Non-empty values of the "RDPH-DTDRW" and "RDPH-PWMSD" parameters
+    should be provided or the DATE/TIME DRAWN (5) and PERSON WHO
+    MEASURED DOSE (6) fields of the NUC MED EXAM DATA file (#70.2)
+    should have non-empty values already.
+ 
+21: ADM DT/TIME/PERSON REQUIRED?
+ 
+    Non-empty values of the "RDPH-DTADM" and "RDPH-PWADM" parameters
+    should be provided or the DATE/TIME DOSE ADMINISTERED (8) and
+    PERSON WHO ADMINISTERED DOSE (9) fields of the NUC MED EXAM DATA
+    file (#70.2) should have non-empty values already.
+ 
+23: ROUTE/SITE REQUIRED?
+ 
+    Non-empty values of the "RDPH-ROUTE" and "RDPH-SITE" parameters
+    should be provided or the ROUTE OF ADMINISTRATION (11) and SITE
+    OF ADMINISTRATION (12) fields of the NUC MED EXAM DATA file
+    (#70.2) should have non-empty values already.
+ 
+24: LOT NO. REQUIRED?
+ 
+    A non-empty value of the "RDPH-LOTN" parameter should be
+    provided or the LOT NO field (13) of the NUC MED EXAM DATA file
+    (#70.2) should have a non-empty value already. 25: VOLUME/FORM
+    REQUIRED?
+    
+25: VOLUME/FORM REQUIRED?          
+    
+    Non-empty values of the "RDPH-FORM" and "RDPH-VOL" parameters
+    should be provided or the FORM (15) and VOLUME (14) fields of
+    the NUC MED EXAM DATA file (#70.2) should have non-empty values
+    already.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

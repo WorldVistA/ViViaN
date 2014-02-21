@@ -1,0 +1,61 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>GMV MARK ERROR (1271)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>GMV MARK ERROR</td></tr><tr>
+<td>TAG</td><td>ERROR</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_GMVUTL1.html">GMVUTL1</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>AVAILABILITY</td><td>SUBSCRIPTION</td></tr><tr>
+<td>INACTIVE</td><td>ACTIVE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This remote procedure call marks a selected vitals record in the GMRV
+Vital Measurement (#120.5) file as entered-in-error.
+ 
+This remote procedure call is documented in Integration Agreement 4414.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>GMVDATA</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>60</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+GMVDATA contains the following information:
+ 
+ piece1^piece2^piece3
+ 
+ where piece1 = FILE 120.5 IEN 
+       piece2 = FILE 200 IEN (i.e., DUZ)
+       piece3 = A single value to indicate the reason for the error.
+                1 = INCORRECT DATE/TIME, 2 = INCORRECT READING, 3 =
+                INCORRECT PATIENT and 4 = INVALID RECORD
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+If the record is marked as entered in error, RESULT is set to "OK".
+Otherwise, RESULT is set to "Record Not Found"
+ 
+ Example:
+ &gt; S GMVDATA="1560^547^1"
+ &gt; D ERROR^GMVUTL1(.RESULT,GMVDATA) ZW RESULT
+ &gt; RESULT="OK"
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

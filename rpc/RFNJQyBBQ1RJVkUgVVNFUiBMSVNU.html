@@ -1,0 +1,74 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIC ACTIVE USER LIST (1646)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIC ACTIVE USER LIST</td></tr><tr>
+<td>TAG</td><td>LIST</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSICDUZ.html">DSICDUZ</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This will return a list of active users matching the lookup value.  You 
+can pass in additional screening logic if so desired, such as security 
+keys.
+ 
+It is the programmers responsibility to ensure that the total length of 
+the date returned in each return value does not exceed 250 characters.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>VAL</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>50</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the lookup value to find matches in file 200
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>SCR</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>250</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+This RPC will return a list of active users.  You may wish additional 
+screening to occur.  For example, return all active users matching SMITH 
+who also own a particular security key.  Acceptable format of SCR():
+  SCR(n) = KEY^&lt;security key name&gt;
+  SCR(n) = PARM^&lt;parameter name&gt;^&lt;parameter instance&gt;
+  SCR(n) = M^&lt;return text&gt;^&lt;executable M code that sets $T&gt;
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Data will be returned in ^TMP("DSIC",$J,"DILIST",n,0).
+ 
+If a successful find for the lookup value, then return the following data:
+  ^TMP("DSIC",$J,"DILIST",n,0) = p1^p2^p3^...^p8  for n=1,2,3,4,...
+     for the GUI, you will have List[n] := p1^p2^...^p8 for n=0,1,2,3,...
+     where
+     p1 = ien                      p5 = first m last   p9 = division
+     p2 = name (.01 field)         p6 = initials
+     p3 = sig block printed name   p7 = title
+     p4 - sig block title          p8 = service
+ 
+If problems are encountered, then return
+  ^TMP("DSIC",$J,"DILIST",1,0) = -1^message
+  If additional messages are provided then they will be at
+    ^TMP("DSIC",$J,"DILIST",n,0) = message   for n=2,3,4,5,...
+ 
+If $Piece(List[0],"^",1) := -1 then there were problems, else the lookup 
+was successful.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

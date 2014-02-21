@@ -1,0 +1,54 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIC PX GET VISIT FLDS (2101)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIC PX GET VISIT FLDS</td></tr><tr>
+<td>TAG</td><td>ILOOK</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSICPX3.html">DSICPX3</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This will return the internal and external values for selected fields 
+from the VISIT file (#9000010).
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>DSICD</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>20</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+DSICD(n) = p1^p2  for n=0,1,2,3,...  where
+  p1 := "V" if this is the VISIT ifn, or VISIT field#
+  p2 := VISIT ifn (if p1="V"), or format code (if p1=field#)
+        Format codes:  I:internal  E:external  B:both
+ 
+ DSICD(n) = V^ifn is required
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Return List(n) = p1^p2^p3  for n=1,2,3,4,...  where
+  p1 := field number
+  p2 := internal value
+  p3 := external value
+ 
+If problems, return List(1) = -1^message
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

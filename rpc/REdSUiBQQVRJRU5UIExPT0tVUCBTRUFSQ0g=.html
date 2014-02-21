@@ -1,0 +1,60 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DGRR PATIENT LOOKUP SEARCH (2173)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DGRR PATIENT LOOKUP SEARCH</td></tr><tr>
+<td>TAG</td><td>SEARCH</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DGRRLU.html">DGRRLU</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>PUBLIC</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>VERSION</td><td>.001</td></tr><tr>
+<td>APP PROXY ALLOWED</td><td>No</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This rpc is set to return an xml document via VistaLink that contains
+the display data for a gui patient lookup.  
+ 
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>PARAM</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>999</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>DESCRIPTION:</dt><dd><pre>
+Input PARAM("SEARCH TYPE") = type of search requested
+Input PARAM("SEARCH VALUE") = value to search on
+Input PARAM("JOB") = a unique job # used to check for cancelled jobs
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+XML document with list of patients found based on search type and 
+search value.
+ 
+&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+ 
+&lt;record count='1'&gt;
+ 
+&lt;patient num='1' dfn='40' sensitive='true' name='RUCKER,JOHN W III' dob='2560306 ' ssn='123456799' type='SC VETERAN' primaryeligibility='SC LESS THAN 50%' servic econnected='true' scpercent='20' gender='M' icn='' veteran='true' ward='5 WEST P
+SYCH' roombed='501-1'&gt;&lt;/patient&gt;
+ 
+&lt;/record&gt;
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

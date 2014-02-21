@@ -1,0 +1,65 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>MAGQ FS CHNGE (2901)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>MAGQ FS CHNGE</td></tr><tr>
+<td>TAG</td><td>CHGSERV</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_MAGQBUT.html">MAGQBUT</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Finds the available network file server with the most space, 
+changes the current write space pointer and returns the IEN.
+The candidate list requires the following criteria:
+ONLINE
+type: MAG
+path does not contain: ":"
+NON-ROUTER
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>null</dd><dt>DESCRIPTION:</dt><dd><pre>
+No input parameter required.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>NOTIFY</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>2</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+A message will be sent to the G.MAG_SERVER mail group if this value is set 
+to '1' and if the share space does not meet the lower limit as established
+by the PERCENT SERVER RESERVE (#11) in the SITE PARAMETER FILE (#2006.1).
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>BP OS</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>99</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the Microsoft Windows operating system name and version.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>BPWS</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>99</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the Background Processor network computer name.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+In the first caret piece the following is returned:
+-1=NO RG MEMEBERS, 0=BELOW RESERVE,1=ABOVE RESERVE*PURGE FACTOR,2=BETWEEN RESERVE AND RESERVE*PURGE FACTOR
+The second caret piece is the network share path of the current write location
+The third piece is total disk space. The fourth is the purge boolean value.
+The fifth piece is the percent server reserve.  The sixth is the
+purge group and the 7th piece is the verifier Boolean value.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

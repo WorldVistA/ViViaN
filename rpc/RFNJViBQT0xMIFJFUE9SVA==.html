@@ -1,0 +1,59 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIV POLL REPORT (2550)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIV POLL REPORT</td></tr><tr>
+<td>TAG</td><td>POLL</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSIVICR1.html">DSIVICR1</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Used to check the status of the background job kicked off by the DSIV 
+EXCEPTION REPORT2 rpc, and to get the report data.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>DSIVHNDL</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>50</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+Contains the Handle returned by the kick-off rpc call DSIV EXCEPTION 
+REPORT2.  This is the ^XTMP global node where the report status and data 
+reside.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>CNT</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>10</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+Contains the count (#) of records to return for each call to the rpc.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>MORE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>1</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+Contains a flag (MORE=1) when there were more records than parameter 2 
+(CNT) to supress the header for the subsequent calls to get data.
+The first call to the rpc should NOT include the MORE=1 parameter.  Send 
+MORE=9 to kill the report data in ^XTMP global if the user no longer 
+wants to get it.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Returns -1^error, or 0^Results not ready, 
+or  Ret(1) = $START$report start date^report end date (reqst'd by user)
+    Ret(n) = Clinic^Appt Date/time^Patient
+    Ret(~) = $END$QUEUED dttm^rpt START RUN dttm^rpt END RUN dttm
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

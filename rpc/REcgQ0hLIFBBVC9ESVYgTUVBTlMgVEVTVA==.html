@@ -1,0 +1,45 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DG CHK PAT/DIV MEANS TEST (409)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DG CHK PAT/DIV MEANS TEST</td></tr><tr>
+<td>TAG</td><td>GUIMTD</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DPTLK6.html">DPTLK6</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>PUBLIC</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+CHECKS IF MEANS TEST REQUIRED FOR PATIENT AND
+CHECKS IF MEANS TEST DISPLAY REQUIRED FOR USER'S DIVISION
+RETURNS 1 IN 1ST STRING IF BOTH TRUE OTHERWISE 0
+IF BOTH TRUE RETURNS TEXT IN 2ND AND 3RD STRING (IF ANY)
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>DFN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+PATIENT IEN
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>DUZ2</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+Institution file pointer
+</pre>
+</dd></li></ol></td></tbody>
+</table>
+</body></html>

@@ -1,0 +1,76 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>MAGJ PTRADEXAMS (1126)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>MAGJ PTRADEXAMS</td></tr><tr>
+<td>TAG</td><td>PTLIST</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_MAGJLST1.html">MAGJLST1</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+ +---------------------------------------------------------------+
+ | Property of the US Government.                                |
+ | No permission to copy or redistribute this software is given. |
+ | Use of unreleased versions of this software requires the user |
+ | to execute a written test agreement with the VistA Imaging    |
+ | Development Office of the Department of Veterans Affairs,     |
+ | telephone (301) 734-0100.                                     |
+ |                                                               |
+ | The Food and Drug Administration classifies this software as  |
+ | a medical device.  As such, it may not be changed in any way. |
+ | Modifications to this software may result in an adulterated   |
+ | medical device under 21CFR820, the use of which is considered |
+ | to be a violation of US Federal Statutes.                     |
+ +---------------------------------------------------------------+
+This procedure is used by the Radiology Imaging Workstation to display a
+listing of all, or a subset of all, radiology exams for a selected
+patient.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>DATA</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>30</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>DESCRIPTION:</dt><dd><pre>
+Patient DFN ^ #_YRS_LIMIT ^ #_EXAMS_LIMIT
+ 
+#_YRS_LIMIT -- optional; an integer value, used to limit the returned list
+to include only exams within the most recent # of years specified
+ 
+#_EXAMS_LIMIT -- optiona; integer value to limit the number of list
+entries returned
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+ ARRAY(0)     = # Exams Found ^ Text for listing title, or error message
+ ARRAY(1)     = List Column Headings, delimited by "^"
+ ARRAY(2..N+1)= Exam data for display, delimited by "^", followed by exam
+                data as stored by Radiology package routine RAPTLU in ^TMP
+ 
+ Display data: 
+         LIST COUNTER ^ DAY-CASE # ^ PROCEDURE ^ EXAM DATE ^ EXAM STATUS ^
+         EXAM LOC. ^ ^TMP($J,"RAEX",
+ Data from ^TMP (expressed as Rad Pkg variable names):
+         RADFN ^ RADTI ^ RACNI ^ RANME ^ RASSN ^ RADATE ^ RADTE ^ RACN ^
+         RAPRC ^ RARPT ^ RAST 
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

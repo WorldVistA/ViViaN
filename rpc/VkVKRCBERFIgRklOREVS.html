@@ -1,0 +1,70 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>VEJD DDR FINDER (1094)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>VEJD DDR FINDER</td></tr><tr>
+<td>TAG</td><td>FIND</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_VEJDDDR0.html">VEJDDDR0</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>VEJDFILE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the number of the file in which you wish to search.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>VEJDIENS</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the IENS through which you wish to search for the value VEJDVAL.
+If you are searching the top level of a file, this should be null.  See
+the FileMan Programmers manual for instructions on constructing IENS
+strings.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>VEJDFELD</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is an ^ (or ";") delimited list of fields that you wish returned from
+each entry that matches the lookup conditions that you have specified.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>VEJDNUM</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>4</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the maximum number of entries to be returned.  Defaults to all
+entries matching the lookup value (VEJDVAL).
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Returns an array in the following format:
+ 
+Array[0]=Number of entries found^Number of entries requested^Any more
+entries to return?
+ 
+Array[1]-[n]=IEN^Values of fields requested in VEJDVAL (in order)
+ 
+For instance: if VEJDFILE=2 (the PATIENT file) and VEJDFELD=".01^.09"
+(name and SSAN respectively), then a sample return may look like:
+ 
+1^MOUSE,MICKEY^000000001
+2^MOUSE,MINNIE^000000002
+ 
+but if VEJDFELD=".09^.01", you would see:
+ 
+1^000000001^MOUSE,MICKEY
+2^000000002^MOUSE,MINNIE
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

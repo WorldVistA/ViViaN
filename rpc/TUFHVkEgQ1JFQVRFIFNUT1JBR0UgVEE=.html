@@ -1,0 +1,52 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>MAGVA CREATE STORAGE TA (3182)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>MAGVA CREATE STORAGE TA</td></tr><tr>
+<td>TAG</td><td>ADDSTTA</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_MAGVAC01.html">MAGVAC01</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>INACTIVE</td><td>ACTIVE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Add a new record to STORAGE TRANSACTION file (#2006.926)
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>MAGPARAM</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+ MAGPARAM("ARTIFACT") = Pointer to ARTIFACT file (#2006.916)
+ MAGPARAM("STORAGE PROVIDER") = Pointer to STORAGE PROVIDER file (#2006.917)
+ MAGPARAM("SUCCEEDED") = 0/1
+ MAGPARAM("TRANSACTION TYPE") = 
+ MAGPARAM("INITIATING APPLICATION") = 
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>MAGMSG</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+MAGMSG(1..n) = MESSAGE
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+ if error MAGRY = Failure status ^ Error message
+ if success MAGRY = Success status ^^IEN - IEN of the new record 
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

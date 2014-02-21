@@ -1,0 +1,56 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIF BATCH PAYMENTS DISPLAY (2613)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIF BATCH PAYMENTS DISPLAY</td></tr><tr>
+<td>TAG</td><td>BATPAY</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSIFPAY2.html">DSIFPAY2</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>VERSION</td><td>2</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Show all payments in a batch
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>BATCH</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>20</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+Batch IEN
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+ ;Output:  ^TMP($J,"DSIFPAY2",0) = "Batch"^Batch IEN;Batch number^Items 
+count  (or error message)
+         ,ID,0) = "ID"^ID^Obligation Number [ID is Patient IEN;Vendor
+IEN;Date of service IEN;Service provided IEN]
+            ,1) = "Demog"^Patient Name^SSN^Vendor name^Vendor ID^Invoice
+#^Voucher date
+            ,1,n) = "Data"^FLAGS^SVC DATE^CPT^Service provided^FPPS Claim
+ID^FPPS Line #^UNITS^PATIENT ACCOUNT NO.^INVOICE #^BATCH #^AMT CLAIMED^AMT
+CLAIMED^AMT PAID^ADJ CODE^ADJ AMOUNT^REMIT REMARK^FPPS Claim ID^FPPS Line 
+Item
+ (FLAGS = "*" Reimbursement to pt, "+" Cancellation activity, "#" Voided
+payment) 
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

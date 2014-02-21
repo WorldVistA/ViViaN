@@ -1,0 +1,58 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>ORRC TASK ADD (1727)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>ORRC TASK ADD</td></tr><tr>
+<td>TAG</td><td>NEW</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_ORRCTSK.html">ORRCTSK</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>AVAILABILITY</td><td>SUBSCRIPTION</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This call will accept data to create a new entry in the Patient Task
+file #102.3 and return the new identifier.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>DATA</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is a string of ^-delimited attributes of a new task, in the form
+  Subject^Created^ByWhom^Patient^Priority^Due^Completed^ByWhom^Items
+where Subject   = Text subject of task
+      Created   = date task was created, as YYYYMMDDHHMMSS
+      ByWhom    = user who created task, as pointer to #200
+      Patient   = patient that task is for, as pointer to #2
+      Priority  = H, M, or L
+      Due       = date task is due to be completed, as YYYMMDD[HHMM]
+      Completed = date task was completed as, YYYYMMDDHHMM
+      ByWhom    = user who completed task, as pointer to #200
+      Items     = linked items as ID,ID,...,ID where ID is XXX:### as
+                  DOC:### = documents in #8925
+                  ORR:### = order results in #100
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+This call returns either the identifier of the new task created in the
+form TSK:## (where ## is a pointer to the Patient Task file #102.3), or
+0^ErrorMessage to indicate that a new task could not be created.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

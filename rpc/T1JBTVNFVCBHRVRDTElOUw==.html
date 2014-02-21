@@ -1,0 +1,48 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>ORAMSET GETCLINS (2707)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>ORAMSET GETCLINS</td></tr><tr>
+<td>TAG</td><td>GETCLINS</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_ORAMSET.html">ORAMSET</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>SUBSCRIPTION</td></tr><tr>
+<td>WORD WRAP ON</td><td>FALSE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This RPC fetches the list of Clinic Names from the configuration of the 
+Anticoagulation Management Application.
+</pre>
+</td></tr><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Returns an array in the following format:
+ 
+RESULT(1)="SLC - Anticoagulation^384;SC("
+RESULT(2)="POC - Anticoagulation^386;SC("
+RESULT(3)="Ely - Anticoagulation^388;SC("
+ 
+where ^-piece 1 = Clinic Name, and
+      ^-piece 2 = Variable pointer to file 44 (Hospital Location)
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

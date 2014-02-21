@@ -1,0 +1,61 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>SCRP QUERY CHECK NAME (49)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>SCRP QUERY CHECK NAME</td></tr><tr>
+<td>TAG</td><td>NAME</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_SCRPBK2.html">SCRPBK2</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This RPC checks to see if the user already has a query
+with the name being passed in as part of the RPC.
+
+If there is already a query with the same name, the RPC
+passes back the internal entry number of the RPC, otherwise
+the RPC passes back a 0.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>QUERY NAME</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>30</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>DESCRIPTION:</dt><dd><pre>
+Name of the query that needs to be checked for existence.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>USER</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>30</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>DESCRIPTION:</dt><dd><pre>
+Internal entry number of user that the query name
+will be assoicated with, usually DUZ.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Using SCDATA to represent the return array, the following is
+the definition of the data being passed back via this RPC:
+
+  SCDATA(1) -&gt; 0 means no query with the passed in name was
+                 found for the user
+
+                              --- OR ---
+
+               &lt;n&gt; where n is the internal entry number of the RPC
+               found for the name passed in for the user.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

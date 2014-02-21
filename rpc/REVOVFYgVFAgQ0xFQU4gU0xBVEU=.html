@@ -1,0 +1,55 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DENTV TP CLEAN SLATE (3017)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DENTV TP CLEAN SLATE</td></tr><tr>
+<td>TAG</td><td>CLNSLT</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DENTVTP7.html">DENTVTP7</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>INACTIVE</td><td>ACTIVE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This will process a clean slate on DPAT passed in. The RPC processes both 
+clean slate, and undo clean slate. You must pass a flag to determine 
+which process you want completed. ACT=1 means you want to process a clean 
+slate, ACT=-1 means you want to undo a clean slate.
+ 
+The clean slate can only be processed if there is no unfiled data for the 
+patient. A clean slate undo can only be done if there no newer filed 
+transactions for the patient.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>DPAT</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd></li><li><dt>INPUT PARAMETER:</dt><dd>ACT</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+ACT is used to tell the RPC which process to run:
+ACT=1 means you want to process a clean slate.
+ACT=-1 means you want to undo a clean slate.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Returns 1^Message if successful clean slate.
+        0^Message if clean slate undo is successful.
+       -1^Message if clean slate has an error.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

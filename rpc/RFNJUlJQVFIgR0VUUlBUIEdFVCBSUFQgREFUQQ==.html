@@ -1,0 +1,84 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIRRPTR GETRPT GET RPT DATA (2984)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIRRPTR GETRPT GET RPT DATA</td></tr><tr>
+<td>TAG</td><td>GETRPT</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSIRRPTR.html">DSIRRPTR</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Retrieves stored results from a specified report.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>IEN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>20</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+Internal entry number of the report in 19620.35
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>STFM</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>99</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the Internal Number from the word processing multiple in file 
+19620.35 that was passed back as the last line sent in the small group 
+return.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>RECS</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>6</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the max number of records from the report text to return.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+RETURNS ^ delimited array containing report data in formats that vary 
+based on the report.  Report defined returns are as follows:
+  
+  Report/Piece/Field
+  ====================================================
+  REQUEST BY CLERK
+  1 Division Name
+  2 ROI Clerk Name
+  3 Patient Name
+  4 Patient SSN
+  5 Type of Request
+  6 External Date Received
+  7 External Date Closed (If present)
+ 
+  REQUESTS BY TYPE
+  1 DIVISION 
+  2 REQUESTOR TYPE
+  3 STATUS
+  4 CLOSED DATE
+  5 DATE RECEIVED
+  6 CORPORATE NAME
+  7 LAST NAME
+  8 FIRST NAME
+  9 ADDRESS1
+  10 ADDRESS2
+  11 CITY
+  12 STATE
+  13 ZIP
+  14 ADDRESS3
+  15 PHONE
+  16 FAX
+ 
+  or
+  -1^error message
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

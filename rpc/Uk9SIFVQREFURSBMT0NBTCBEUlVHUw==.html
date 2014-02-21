@@ -1,0 +1,90 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>ROR UPDATE LOCAL DRUGS (1801)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>ROR UPDATE LOCAL DRUGS</td></tr><tr>
+<td>TAG</td><td>LDLUPD</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_RORRP032.html">RORRP032</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>VERSION</td><td>1</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+The ROR UPDATE LOCAL DRUGS remote procedure updates the list of local drug
+names, which is stored in the LOCAL DRUG NAME (29) multiple of the ROR
+REGISTRY PARAMETERS file (#798.1).
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>REGIEN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+The REGIEN parameter should contain a valid registry IEN (IEN of the 
+registry parameters record in the ROR REGISTRY PARAMETERS file #798.1).
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>LDLST</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+The LDLST parameter should be an array containing a list of drug IEN's and
+Drug Group codes. An item of the list should have the following format:
+ 
+  ^01: Ignored
+  ^02: Ignored
+  ^03: IEN of the local drug (in file #50)
+  ^04: Code of the Drug Group
+       (see also the GROUP parameter)
+  
+Example:
+  with RPCBroker.Param[1] do
+    begin
+      PType :=list;
+      for i := 1 to Drugs.Count do
+        Mult[i] := '^^' + Drugs[i-1].DrugIEN + '^' + Drugs[i-1].GroupCode;
+    end;
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>GROUP</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+If the GROUP parameter is equal to 0 then every item of the LDLST must 
+contain a valid group code. If ane mpty list is passed into the RPC then 
+ALL records will be deleted from the LOCAL DRUG NAME multiple.
+ 
+If this parameter is not zero then it should contain a valid group code.
+All records of the LDLST will be associated with this group. If an empty
+list is passed into the RPC then only records associated with this group
+will be deleted from the multiple.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+A negative value of the first "^"-piece of the Results[0] indicates that
+an error occurred during the execution of the remote procedure. In this
+case, the second piece of the Results[0] will contain number of the error
+descriptors returned in the subsequent nodes of the Results array:
+  
+  Results[0]            Result Descriptor
+                          ^01: The last error code
+                          ^02: Number of the error descriptors
+                                                                      
+  Results[i]            Error Descriptor
+                          ^01: Error code
+                          ^02: Message
+                          ^03: Place of the error
+ 
+Otherwise, zero is returned in the Results[0].
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

@@ -1,0 +1,40 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIR CLEAR FOLLOWUP DATES (1909)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIR CLEAR FOLLOWUP DATES</td></tr><tr>
+<td>TAG</td><td>CLEARFU</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSIROI1.html">DSIROI1</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This RPC will go through the ROI Instance file (19620) and set the 
+current date as the Followup Letter Date for any entry that doesn't have 
+one.
+</pre>
+</td></tr><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+The value 1 is returned when the RPC completes.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

@@ -1,0 +1,76 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>NUPA LIST2 (2947)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>NUPA LIST2</td></tr><tr>
+<td>TAG</td><td>LIST2</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_NUPABCL.html">NUPABCL</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+List of all entries from a file including other fields.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>FILE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+File number to list data from.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>FILEDS</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+Other fields in format FILE^Field 1^Field 2 etc.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>SCREEN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+Fileman screen for the lookup.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+List of all data returned in ^TMP($J).  
+ 
+This example returns all entries from file 1927.2, along with field 4.
+D LIST2^NUPABCL(.R,"^NUPA(1927.2,","1927.2^4","")
+ 
+Pieces are:
+ 
+1. .01 field
+2. IEN
+3. Field 4, if there.
+ 
+^TMP(562303312,1)=ACTIVITY INTOLERANCE^1^
+               2)=ALTERED METABOLIC BALANCE SECONDARY TO ELECTROLYTE 
+IMBALANCE^71^
+               3)=ALTERED METABOLIC BALANCE SECONDARY TO GLYCEMIC 
+CHANGES^70^
+               4)=ALTERED PROTECTION R/T IMMUNE SUPRESSION^72^
+               5)=ANXIETY^6^
+               6)=ASPIRATION POTENTIAL^7^
+               7)=Abnormal Cardiac Rhythms  (Actual/Potential)^110^1
+               8)=Acute Coronary Syndrome (Acute MI) (Actual)^109^1
+               9)=Acute Pain (Actual)^148^13
+              10)=Anger Control (Potential)^154^10
+              11)=Anger Control (Potential)^168^15
+              12)=Anxiety (Actual)^155^10
+              13)=Anxiety (Actual)^167^15
+              14)=Aspiration risk (Potential)^125^2
+              15)=Assistance with ambulation^120^12
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

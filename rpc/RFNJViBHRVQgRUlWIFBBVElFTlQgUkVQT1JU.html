@@ -1,0 +1,57 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIV GET EIV PATIENT REPORT (2836)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIV GET EIV PATIENT REPORT</td></tr><tr>
+<td>TAG</td><td>PIIV</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSIVIC3.html">DSIVIC3</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Returns one to many patient eIV reports from the Insurance Type multiple 
+in the patient file.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>DFN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>30</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+Patient DFN (ien).
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>DSIVPATP</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>10</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+Contains the pointer to the patient policy IEN from the Insurance Type 
+multiple of the PATIENT file.  If sent, then the single eIV report for 
+that policy will be returned, if not sent then all policy entries will be 
+returned with any eIV report they might contain.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Returns the following patient policy eIV report data in a global array:
+ array(1)="$$PTPOL$$1"  (1=pt policy ien in this example)
+ array(2)="$$INS$$27^BLUE CROSS BLUE SHIELD" (policy ins co ien^name)
+ array(3)="$$GRP$$15^PENN WORKERS" (group ien^name)
+ array(4+)= 2.322^.02^Active Coverage^ELIGIBILITY/BENEFIT INFO 
+            (file#^field#^data^fieldname)
+ or       = 2.3226^1^.03^555-9090^COMMUNICATION NUMBER 
+            (file#^subfile entry#^field#^data^fieldname)
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

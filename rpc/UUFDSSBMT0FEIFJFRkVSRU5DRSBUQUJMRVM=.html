@@ -1,0 +1,105 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>QACI LOAD REFERENCE TABLES (2275)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>QACI LOAD REFERENCE TABLES</td></tr><tr>
+<td>TAG</td><td>EN</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_QACI3.html">QACI3</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>PUBLIC</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>VERSION</td><td>1</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This RPC assumes that the user has previously run the option QACI 
+MIGRATION DATA BUILD to build the lists of reference table data for all
+entries referenced by at least one CONSUMER CONTACT record.
+ 
+You must set up separate code to load each table, because the FLAG 
+parameter will be different for each table. The order in which the tables 
+are updated is not important. Each table update can call the RPC multiple
+times in a loop. When all of the data for a single table has been
+processed, the output array is returned empty. Exit the loop for that 
+table and go on to process the next table.
+ 
+The first time the RPC is called (based on an input parameter) two checks 
+are done. If there is no data to migrate in any of the tables, the RPC
+returns 0 in the 0th entry of the array. If the 'ready to migrate' flag
+has not been set, the RPC returns 1 in the 0th entry of the array 
+indicating that the user has not yet flagged the data ready for migration.
+ 
+So you would do the following in the Java calling code:
+1) Set the flag to indicate the table you wish to update, then call the
+RPC using VistALink. On the first call, the input array will be empty, 
+and the input parameter indicating whether this is the first call should 
+be set to 1.
+2) Check to make sure the 0 entry of the array is not set to 1 or 0. If
+it is, generate an appropriate message and quit.
+3) Check the output list from the RPC. If empty, return to step 1 to
+process the next table.
+4) Otherwise, pass the list returned by the RPC to the appropriate Oracle
+procedure to update the current table.
+5) Move the output from the Oracle procedure into the array that will be 
+used as input to the next RPC call, then return to step 1, still
+processing the same table.
+ 
+Each entry in the output list from this RPC contains up-arrow delimited
+strings of reference table data, each one containing all the data to
+update a single entry on the Oracle table indicated by the flag parameter.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>PATSNO</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>10</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+Number of entries to be returned in one call to the RPC. If set to 0 or 
+null, the RPC returns all entries for the current reference table.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PATSLIST</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+If defined, contains a list of VistA_IEN^Ids entries for the previous 
+group of entries that was migrated from VistA to the Oracle table. 
+Information indicating which table the data belongs to is included as 
+part of the list itself.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PATSFLAG</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>3</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+Must be set to the following, to indicate what type of data is to be 
+returned in the output list.
+H = hospital_location entries (HOSPITAL LOCATION #44)
+P = pats_patient entries (PATIENT file #2)
+U = pats_user entries (NEW PERSON file #200)
+C = congressional_contact (CONGRESSIONAL OFFICE file #745.4)
+E = employee_involved (NEW PERSON file #200)
+F = facility_service_or_section (QAC SERVICE/DISCIPLINE file 745.55)
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PATSFRST</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>1</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>4</dd><dt>DESCRIPTION:</dt><dd><pre>
+This boolean value indicates whether this RPC is being called the first 
+time, or subsequent times. On the first call, the parameter should be set 
+to 1. On subsequent calls, it should be set to 0.
+ 
+This controls additional checks in the routine that will tell the calling 
+routine if there is no data to migrate, or if the user flag that allows 
+the migration to be done has been set to allow migration at this time.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Returns an M global which is an array of up-arrow delimited strings.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

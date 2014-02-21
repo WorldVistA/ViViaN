@@ -1,0 +1,68 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>KMPD FILE SEARCH (1808)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>KMPD FILE SEARCH</td></tr><tr>
+<td>TAG</td><td>FILESRC</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_KMPDU5.html">KMPDU5</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Search for entries in file.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>PARAM1</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>60</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+File Number.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PARAM2</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>245</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+Fields to return.  This will be comma delimited.
+ 
+Example:  ".01,.04,1,12"  - would return fields .01, .01, 1 and 12
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PARAM3</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>245</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+Text to search for.
+ 
+Example:  "DG" - would retrieve all entries beginning with DG.
+ 
+               - if text equals "*" or "" (null) then all entries will be 
+                 retrieved
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PARAM4</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>245</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>4</dd><dt>DESCRIPTION:</dt><dd><pre>
+Name of array for temporary storage.  This should be a global array, and
+must be either ^TMP or ^UTILITY.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Array with data from file in format:
+ 
+       ARRAY(0)=IEN^FieldName^FieldName^FieldName^...
+       ARRAY(...)=IEN^FieldData^FieldData^FieldData^...
+ 
+Please Note:  - the first piece is always the IEN (internal entry number).
+              - the zero node is always the names of the fields, once
+                again with the IEN's being first.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

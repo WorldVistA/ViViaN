@@ -1,0 +1,66 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DVBAB 2507 PENDING REPORT (886)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DVBAB 2507 PENDING REPORT</td></tr><tr>
+<td>TAG</td><td>STRT</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DVBAB6.html">DVBAB6</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>SUBSCRIPTION</td></tr><tr>
+<td>WORD WRAP ON</td><td>FALSE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Generates a report based on the status of 2507 requests.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>DVBCSORT</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>1</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is  the status.  Valid choices are: A (age), S (status), V (veteran
+name), or R (routing location).
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>RSTAT</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>1</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the Request Status.  Valid choices are: A (all), P (pending), N
+(new), or T (transcribed).  If DVBCSORT=A,S, or V - RSTAT cannot be null.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>ERDAYS</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>3</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>DESCRIPTION:</dt><dd><pre>
+If DVBCSORT = A (age) this must be the earliest age to start with (ie. 30
+days old).  This goes with the next variable OLDAYS which is the oldest
+age (ie. 1 day old and cannot be 0).  ERDAYS must be &lt; OLDAYS
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>OLDAYS</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>3</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the Oldest age (ie 1 day) if DVBCSORT=A (age).  This goes with
+ERDAYS (earliest age - ie 30 days).  ERDAYS must be &lt; OLDAYS
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>ADIVNUM</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>3</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the regional office number - this is required only if DVBCSORT=R,
+otherwise send as null.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>ELTYP</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>1</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the elapsed time.  Values are C (calendar days - default) or W
+(workdays).  If DVBCSORT=A,S, or V - this must not be null.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+MSG is returned.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

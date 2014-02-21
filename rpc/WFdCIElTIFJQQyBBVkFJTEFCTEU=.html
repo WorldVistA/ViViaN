@@ -1,0 +1,66 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>XWB IS RPC AVAILABLE (429)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>XWB IS RPC AVAILABLE</td></tr><tr>
+<td>TAG</td><td>CKRPC</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_XWBLIB.html">XWBLIB</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>AVAILABILITY</td><td>PUBLIC</td></tr><tr>
+<td>INACTIVE</td><td>ACTIVE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+If RPC is installed, available in relevant context, and of proper version
+returns 1.  
+Otherwise, returns 0.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>RPC</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>30</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+Name of the RPC to be tested.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>RUN CONTEXT</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>1</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+Specific context in which RPC will run.  Possible values are:
+     L  =  run Locally (on the server the user is logged on to)
+     R  =  run Remotely (on a server the user is not logged on to)
+If this parameter is not sent, RPC is checked for both local and
+remote.
+ 
+The check is done against the value in the INACTIVE field in the 
+Remote Procedure file.  See that field's description for more details.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>VERSION NUMBER</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>11</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+Minimum version number of the RPC.
+ 
+This parameter is only used if the RUN CONTEXT parameter = "R".  If a
+numeric value is in this parameter, the value must be less than or equal
+to the value in the VERSION field of the Remote Procedure file for the
+RPC is be marked available.  Note: if the VERSION field is null, the
+check will fail for any numeric value in this parameter.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Boolean.  1 = RPC available.
+          0 = RPC not available.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

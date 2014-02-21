@@ -1,0 +1,77 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>RMPR PT DEM (1504)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>RMPR PT DEM</td></tr><tr>
+<td>TAG</td><td>EN</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_RMPR9DEM.html">RMPR9DEM</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>PUBLIC</td></tr><tr>
+<td>INACTIVE</td><td>ACTIVE</td></tr><tr>
+<td>WORD WRAP ON</td><td>FALSE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This procedure supplies the Patient Demographic data for 
+TAB 1 of the GUI 2319 
+Same routine for RMPR PT ADD REMOTE PROCEDURE. 
+Pass the IEN of file 668
+ 
+RESULTS COME FROM THE PIMS PACKAGE PATIENT FILE #2.
+ 
+RESULTS(1)=NAME
+RESULTS(2)=SSN  
+RESULTS(3)=DOB
+RESULTS(4)=AGE
+RESULTS(5)=SEX
+RESULTS(6)=DOD
+RESULTS(7)=RACE
+RESULTS(8)=RELIGION
+RESULTS(9)=MARRITAL STATUS
+RESULTS(11)=PRIMARY LONG ID
+RESULTS(12)=PRIMARY SHORT ID
+RESULTS(20)=FIRST LINE ST ADDRESS
+RESULTS(21)=CITY
+RESULTS(22)=STATE
+RESULTS(23)=ZIP
+RESULTS(24)=COUNTY
+RESULTS(25)=PHONE
+RESULTS(26)=ZIP+4
+RESULTS(27)=NOK
+RESULTS(28)=NOK FIRST LINE ADDRESS
+RESULTS(29)=NOK CITY
+RESULTS(30)=NOK STATE
+RESULTS(31)=NOK ZIP
+RESULTS(32)=NOK PHONE
+RESULTS(33)=NOK RELATION
+RESULTS(34)=PATIENT TYPE
+RESULTS(35)=PERIOD OF SERVICE
+RESULTS(36)=PRIMARY ELIGIBILITY CODE
+RESULTS(37)=ELIGIBILITY VERIFIED?
+RESULTS(38)=ONMETARY BENIFITS
+RESULTS(45)=PROSTHETICS DISABILITY
+RESULTS(46)=POW YES/NO
+RESULTS(999)=0
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td>8994.02, , {}</td></tr></tbody>
+</table>
+</body></html>

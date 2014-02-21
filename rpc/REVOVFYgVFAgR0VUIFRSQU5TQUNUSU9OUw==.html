@@ -1,0 +1,112 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DENTV TP GET TRANSACTIONS (1905)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DENTV TP GET TRANSACTIONS</td></tr><tr>
+<td>TAG</td><td>TXN</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DENTVTP5.html">DENTVTP5</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Returns all of the Transaction type records from the Treatment Plan 
+Transaction/Exam file (228.2) for a particular patient..
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>DFN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>20</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is a pointer to the PATIENT file.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>TYPE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>1</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+This flag (T, E, P, or S) indicates the type of records to retrieve.
+  T = transaction records
+  E = periodontal exams
+  P = periodontal screening &amp; recording
+  S = soft tissue lesion
+ 
+If not passed, default value is T
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>SDT</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>7</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is an optional date in Fileman format.   If passed only records 
+greater than or equal to this date will be retrieved.
+  If not passed, default value is Jan 1, 2002
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>EDT</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>7</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>4</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is an optional date in Fileman format.   If passed only records 
+less than or equal to this date will be retrieved.
+  If not passed, default value is TODAY
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PROV</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>12</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>5</dd><dt>DESCRIPTION:</dt><dd><pre>
+This optional parameter will be the provider's record number (ien) to the 
+NEW PERSON file (i.e., their DUZ value).   If passed, then only those 
+records with that provider will be returned.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Returns a global array List[n] := txn data.
+If there are problems, then the return will be List[1] := -1^message
+The format of the Transaction data in each node will be:
+ List[n] := p1^p2^p3^p4^p5^p6^p7^p8^p9^p10^p11^p12^p13^p14^p15^p16^
+            p17^p18^p19^p20^p21^p22^p23^p24^p25^p26^p27^p28^p29^p30
+            p31^p32^p33^p34^p35^p36^p37   where
+p1 := txn id                       p20 :=group
+p2 := provider name                p21 :=deleted flag (-1=true, 0=false)
+p3 := ADA code                     p22 :=cost ($ amount)
+p4 := ADA description              p23 :=category  (text)
+p5 := aspect(VALUE from 228.3)     p24 :=seq index  (numeric)
+p6 := chart type(VALUE from 228.3) p25 :=plaque index (numeric)
+p7 := condition (VALUE from 228.3) p26 :=read only flag (-1=true)
+p8 := material (VALUE from 228.3)  p27 :=Date created (external)
+p9 := region (VALUE from 228.3)    p28 :=icd1 (external)
+p10:= status (VALUE from 228.3)    p29 :=icd2 (external)
+p11:= date (external)              p30 :=icd3 (external)
+p12:= time counter (numeric)       p31 :=icd4 (external)
+p13:= tooth# (numeric)             p32 :=icd5 (external)
+p14:= surface (text)               p33 :=ctv (numeric)
+p15:= phase (numeric)              p34 :=rvu (numeric)
+p16:= isJuvenile (YES/NO/null)     p35 :=Dental Encounter ien
+p17:= chart# (numeric)             p36 :=product line (text)
+p18:= visible (YES/NO/null)        p37 :=canal# (text)
+p19:= next appt (YES/NO/null) 
+For Soft tissue leasions, each line format:
+   p1^p2^p3^p4^p5^p6^p7^p8^p9 where
+      p1 = transaction ID  p6 = marker color
+      p2 = provider duz    p7 = marker shape
+      p3 = fm date         p8 = marker size
+      p4 = x coordinate    p9 = description
+      p5 = y coordinate
+ 
+For PerioExams, the data returned is a multiline list:
+   1st line: $#   [starting record indicator]
+   2nd line: transaction ID ^ provider duz ^ pe exam#
+   3rd, 4th, 5th, ... lines: periodontal information
+   last line: $$  [ending record indicator]
+   The PC program needs to concantenate all the peridontal information
+    lines (lines 3,4,5,...,last-1) together to form one string (up to 604
+    bytes)
+ 
+In all record types, the transaction ID and the Fileman internal record
+number are the same.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

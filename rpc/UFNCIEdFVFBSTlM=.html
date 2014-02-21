@@ -1,0 +1,88 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>PSB GETPRNS (373)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>PSB GETPRNS</td></tr><tr>
+<td>TAG</td><td>GETPRNS</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_PSBPRN.html">PSBPRN</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>PUBLIC</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>VERSION</td><td>2</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Returns all administrations of a PRN order that have NOT had the PRN
+Effectiveness documented in the current admission or within the hours 
+defined in PRN documentation site parameter whichever is greater of the 
+two.  When the PRN medication is administered a flag is set based on the 
+given PRN Reason.  This flag will dictate whether BCMA will mandate a
+PAIN SCORE measurement with PRN documentation.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>DFN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+Patient IEN number.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PSBORD</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+Order number from Inpatient Medications. If order number is passed then 
+returns all PRN effectiveness not documented for that order.
+ 
+If order number is NOT passed, then returns all PRN effectiveness not 
+documented for that patient.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PSBSIOPI</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>1</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+This parameter is a true/false flag (1/0).  If true use the new SI/OP Wp
+fields and return data in the Results array to the GUI Client.
+ 
+The field is not required, so a null will convert into a 0, for false,
+making this backwards compatible.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Results[0] = Number of Nodes.
+ 
+Results[1]= ^1  Med Log IEN
+            ^2  Patient IEN
+            ^3  Patient Location
+            ^4  Administration Date/Time (Fileman format)
+            ^5  Action By
+            ^6  Administration Medication
+            ^7  PRN Reason
+            ^8  Orderable item IEN
+            ^9  Order Number
+            ^10 PRN Reason Flag
+ 
+Results[2]= ^1  Special Instructions
+                ("!"  &lt;- BCMA FLAG may precede Text)
+ 
+Results[3]= ^1  "DD/ADD/SOL"
+            ^2  Name of dispense drug/additive/solution
+            ^3  Dose given
+            ^4  Unit of administration (free text)
+ 
+Results[n]= ^1  LITERAL "SI"
+SI WP text  ^2  Special Instructions long Worprocessing text lines
+ 
+Results[n]= ^1  "END"
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

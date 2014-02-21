@@ -1,0 +1,68 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>GMV CLOSEST READING (2496)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>GMV CLOSEST READING</td></tr><tr>
+<td>TAG</td><td>CLOSEST</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_GMVGETD.html">GMVGETD</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>INACTIVE</td><td>ACTIVE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This remote procedure call returns the observation date/time and reading 
+of the record closest to the date/time specified for the patient and vital
+type.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>GMVDFN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>12</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+A pointer to the Patient (#2) file (i.e., DFN).
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>GMVDT</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>14</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+The date/time to search from. The default is NOW.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>GMVT</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>5</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+The vital type abbreviation as it appears in FILE 120.51, Field 1 (e.g., 
+WT).
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>GMVFLAG</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>1</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>4</dd><dt>DESCRIPTION:</dt><dd><pre>
+A flag to indicate if the search should look before or after the date/time
+specified in the GMVDT value where 1 indicates before, 2 indicates after
+and 0 indicates either direction.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Returns a string composed of two pieces. The first piece contains the 
+observation date/time (FILE 120.5, Field .01) of the record that was 
+found. The second piece contains the rate (FILE 120.5, Field 1.2) of the 
+record. If there is an error, the first piece will be -1 and the second 
+piece will be the error text.
+ 
+ Example:
+ 
+ &gt; S GMVDFN=134,GMVDT=3090225.08,GMVT="WT",GMVFLAG=0
+ &gt; D CLOSEST(.TEST,GMVDFN,GMVDT,GMVT,GMVFLAG) ZW TEST
+ &gt; TEST="3081106.142926^135"
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

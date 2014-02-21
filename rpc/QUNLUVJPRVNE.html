@@ -1,0 +1,64 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>ACKQROESD (2096)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>ACKQROESD</td></tr><tr>
+<td>TAG</td><td>STARTD</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_ACKQAG05.html">ACKQAG05</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>WORD WRAP ON</td><td>FALSE</td></tr><tr>
+<td>VERSION</td><td>3</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This is the RPC used to setup and send a deletion of an audiogram to the 
+DDc when a deletion is processed on the home system for an audiogram that 
+has been sent to the DDC.  It is triggered by the mDelete.OnClick action 
+from the Enter/Edit program ACKQROES3E.EXE.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>DFN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the internal number of the patient in the PATIENT file (#2).
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>IEN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the internal number of the record in the AUDIOMETRIC EXAM DATA 
+file (#509850.9).
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>STANUM</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the Station Number of the sending clinic
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>USRNAM</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>32</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>4</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the name of the submitting user
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>USRSER</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>5</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the name of the submitting user's service.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+This RPC returns a literal containing the local confirmation msg number,  
+The msg number sent to the DDC, the error number, and the error msg if 
+any.  It functions similarly to RPC ACKQROES, that transmits the 
+audiogram to the DDC.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

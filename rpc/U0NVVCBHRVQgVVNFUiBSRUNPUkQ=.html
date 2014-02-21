@@ -1,0 +1,53 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>SCUT GET USER RECORD (42)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>SCUT GET USER RECORD</td></tr><tr>
+<td>TAG</td><td>GETUSER</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_SCUTBK3.html">SCUTBK3</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This RPC returns user related data often needed by scheduling
+modules. The data returned is used to set instance variables
+for the TScUser object type on the client.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>DUZ NUMBER</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>20</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>DESCRIPTION:</dt><dd><pre>
+Internal entry number of the user.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Using SCDATA to represent the array, the following is returned:
+    SCDATA(0) -&gt; &lt;ien of user&gt; ^ &lt;name of user&gt; ^ &lt;default query id&gt;
+                        
+                --- OR ---
+
+    SCDATA(0) -&gt; 0 - meaning errors found ^ &lt;number of errors&gt;
+SCDATA(1...n) -&gt; error text
+
+
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

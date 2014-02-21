@@ -1,0 +1,89 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>MPI EVENT LIST (2852)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>MPI EVENT LIST</td></tr><tr>
+<td>TAG</td><td>LINKDATA</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_MPIRPC.html">MPIRPC</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>INACTIVE</td><td>ACTIVE</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>VERSION</td><td>1</td></tr><tr>
+<td>APP PROXY ALLOWED</td><td>Yes</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This RPC is used to return the list of all LINK and DO NOT LINK records 
+associated with the ICN list passed as input.  The DO NOT LINK list will 
+be derived from the records in the MPI DO NOT LINK file (#985.28) and 
+pulled using the GET^MPIDNL API. The LINK list will be built from PRIMARY
+ICN values associated with any of the ICNs in the input list.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>SOURCEID</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>200</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+This parameter is a list of ICN/VPID's that IMDQ Toolkit will provide to
+get a listing of all of the related LINK and DO NOT LINK events.  The
+format of this parameter is as follows:
+ 
+ICNLIST - LIST OF ICN'S
+ 
+ Format:
+A comma delimited list of Source IDs, each Source ID in the format: 
+ICN/VPID|SourceSytemID|SourceAssigningAuthority|IDType
+ 
+ Example: 
+1001170718V338193|200M|USVHA|NI,101178194V591076|200M|USVHA|NI,1008521877V
+768382|200M|USVHA|NI,1008522314V828468|200M|USVHA|NI
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+The return value is a list of records that the given record should not be
+linked too as well as a list of ICN's that the given ICN has in it's LINK 
+history.
+ 
+Format:
+ 
+  requested ICN/VPID|SourceSystemID|SourceAssigningAuthority|IDType|IDState
+    ^LINK^linked Record|SourceSystemID|SourceAssigningAuthority|IDType|IDState
+ 
+and/or
+ 
+  requested ICN/VPID|SourceSystemID|SourceAssigningAuthority|IDType
+    ^DO NOT LINK^record ID^SourceSystemID^SourceAssigningAuthority^IDType
+ 
+Example: 
+ 
+ RETURN(1)=123456789V123456|200M|USVHA|NI|T
+             ^LINK^1111111111V111111|200M|USVHA|NI|D
+ RETURN(2)=123456789V123456|200M|USVHA|NI|T
+             ^LINK^2222222222V222222|200M|USVHA|NI|D
+ RETURN(3)=123456789V123456|200M|USVHA|NI|T
+             ^LINK^3333333333V333333|200M|USVHA|NI|D
+ RETURN(4)=123456789V123456|200M|USVHA|NI
+             ^DO NOT LINK^5555555555V555555^200M^USVHA^NI
+ RETURN(5)=234567890V234567|200M|USVHA|NI
+             ^DO NOT LINK^1234546^500^USVHA^PI
+ RETURN(n)=456789012V456789^...
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

@@ -1,0 +1,54 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>TIU AUTHORIZATION (102)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>TIU AUTHORIZATION</td></tr><tr>
+<td>TAG</td><td>CANDO</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_TIUSRVA.html">TIUSRVA</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>AVAILABILITY</td><td>SUBSCRIPTION</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This RPC allows the calling application to evaluate privilege to perform
+any ASU-mediated action on a TIU document.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>TIUDA</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the record number (IEN) of the document in file 8925.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>TIUACT</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the ASU ACTION (.01 field from file 8930.8) which is to be
+performed by the calling application (e.g., EDIT RECORD, SIGNATURE, COPY,
+etc.).  To function appropriately, only valid actions may be passed.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Boolean Truth value, with explanatory message in second '^'-piece if
+FALSE.  That is:
+ 
+When privilege to perform action on document is granted, TIUY=1
+ 
+When privilege to perform action on document is denied, TIUY=0^Why not
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

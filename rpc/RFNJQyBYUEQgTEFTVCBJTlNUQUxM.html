@@ -1,0 +1,57 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIC XPD LAST INSTALL (1616)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIC XPD LAST INSTALL</td></tr><tr>
+<td>TAG</td><td>RLAST</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSICXPDU.html">DSICXPDU</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This returns the latest installed version of a KIDS build.  It gets the 
+data from the INSTALL file.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>PKG</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>50</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the name (.01 field value) from the INSTALL file.
+ 
+The VA naming convention for KIDS builds:
+  &lt;name&gt;&lt;space&gt;&lt;version&gt; for a whole package
+  name*version*patch for a patch
+ 
+PKG can be the full name KIDS BUILD file name, or it can just be the name 
+portion of the KIDS BUILD file name
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+This returns the latest version installed for a KIDS package.  It looks 
+at the date installed field to determine the latest version installed.
+ 
+Return values:
+                 successful lookup: version number ^ date.time installed
+  no matches found for input value: 0^message
+                          on error: -1^error message
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

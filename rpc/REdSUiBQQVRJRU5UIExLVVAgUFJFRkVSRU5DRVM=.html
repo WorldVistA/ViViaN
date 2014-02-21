@@ -1,0 +1,65 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DGRR PATIENT LKUP PREFERENCES (2177)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DGRR PATIENT LKUP PREFERENCES</td></tr><tr>
+<td>TAG</td><td>START</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DGRRLU4.html">DGRRLU4</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>PUBLIC</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>APP PROXY ALLOWED</td><td>No</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This remote procedure call returns an xml document containing the division
+or package preferences.  
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>PARAM</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+PARAM("stationNumber") = station number for institution.  If not 
+defined, RPC will return the package default values.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Returns xml document containing a list of preferences:
+ 
+&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;preferences&gt;
+&lt;error/&gt;
+&lt;institutionPreferences&gt;
+&lt;stationNumber&gt;500&lt;/stationNumber&gt;
+&lt;maxNumPatients&gt;50&lt;/maxNumPatients&gt;
+&lt;patientsPerPage&gt;10&lt;/patientsPerPage&gt;
+&lt;patientType&gt;Enabled&lt;/patientType&gt;
+&lt;gender&gt;Enabled&lt;/gender&gt;
+&lt;primaryEligibility&gt;Enabled&lt;/primaryEligibility&gt;
+&lt;roomBed&gt;Disabled&lt;/roomBed&gt;
+&lt;serviceConnected&gt;Disabled&lt;/serviceConnected&gt;
+&lt;veteranStatus&gt;Disabled&lt;/veteranStatus&gt;
+&lt;ward&gt;Disabled&lt;/ward&gt;
+&lt;veteranImage&gt;Enabled&lt;/veteranImage&gt;
+&lt;/institutionPreferences&gt;
+&lt;/preferences&gt;
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

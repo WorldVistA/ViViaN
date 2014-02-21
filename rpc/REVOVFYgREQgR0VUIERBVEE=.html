@@ -1,0 +1,67 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DENTV DD GET DATA (1072)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DENTV DD GET DATA</td></tr><tr>
+<td>TAG</td><td>GTD</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DENTVRP3.html">DENTVRP3</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Pass this RPC a cpt code and it will return the data stored in file 228
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>CODE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>6</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the CPT code name.  You can also send the ien to file 81 (CPT)
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>KEY</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>1</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+Check which security key this user has. The default value is 'L', or you
+may pass 'M'  If L, then see if user owns the local edit security key to
+edit entries in the local number space (&gt;100,000).  If you pass 'M' then
+this will check to see if the user owns the VACO security key and if so
+then the user can edit any entry in the file.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+This returns the data in file 228 associated with a cpt code.  It
+returns:
+ RET(#) = field#^field name^internal value^ext value^addtnl data
+ 
+The fields returned are: ".01;.07;.15;.18;.16;.17;1.01;1.14;1.15;3;5"
+Example: 
+ RET(1)=".01^ADA CODE^103743^D0415^Collection of microorganisms"
+ RET(2)=".07^SUBCATEGORY-2^MISC^MISC"
+ RET(3)=".15^TYPE^C^VACO"
+ RET(4)=".16^VA-DSS GROUP^8^DES008"
+ RET(5)=".17^FLAGS^^"
+ RET(6)=".18^RVU^15^15"
+ RET(7)="1.01^TOTAL MAPPED DIAGNOSES^6^6"
+ RET(8)="1.14^VA COST TO PERFORM^^"
+ RET(9)="1.15^EQUIVALENT PRIVATE COST^^"
+ RET(10)="3^ADMIN GUIDELINE^^"
+ RET(11)="5^DEFAULT DIAGNOSES^2875^528.3^CELLULITIS/ABSCESS MOUTH"
+ RET(12)="5^DEFAULT DIAGNOSES^2877^528.5^DISEASES OF LIPS"
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

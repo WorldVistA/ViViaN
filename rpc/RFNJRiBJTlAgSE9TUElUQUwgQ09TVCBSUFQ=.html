@@ -1,0 +1,61 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIF INP HOSPITAL COST RPT (2647)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIF INP HOSPITAL COST RPT</td></tr><tr>
+<td>TAG</td><td>COSTRPT</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSIFRPT0.html">DSIFRPT0</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This is an RPC version of the CIVIL HOSPITAL COST REPORT as found in 
+routines FBCHCR anc FBCHCR1.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>BEGDATE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>7</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+Begining Date (Required : FileMan format)
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>ENDDATE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>7</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+Ending Date (Required : FileMan format)
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>FBRT</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>1</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+Report Type (Optional : D = Detailed, S = Summary, Default = Summary)
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Return Array
+   -1 ^ Invalid Input!
+   -1 ^ No payments found within specified timeframe!
+   D ^ PATIENT NAME ^ SSN ^ ASSOCIATED 7078 ^ AMOUNT PAID ^ 1 = ANCILLARY
+      PAYMENT ^ FINAL DRG ^ LENGTH OF STAY
+   SL ^ TREATING SPECIALTY ^ LENGTH OF STAY ^ NUMBER OF CASES ^ AVG AMOUNT
+      PAID
+   ST ^ TOTAL CASES ^ AVG AMOUNT PAID ^ AVG LENGTH OF STAY
+   TA ^ TOTAL ANCILLARY PAYMENTS ^ AVG AMOUNT PAID
+      
+   (First Piece: D = Detail Line, SL = Summary Line, ST = Summary Totals,
+    TA = Total Ancillary)
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

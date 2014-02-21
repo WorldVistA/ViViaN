@@ -1,0 +1,70 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>VBECS WORKLOAD CODES LOOKUP (2480)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>VBECS WORKLOAD CODES LOOKUP</td></tr><tr>
+<td>TAG</td><td>WKLD</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_VBECRPCW.html">VBECRPCW</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This RPC returns XML containing a list of Workload Codes from the WKLD
+CODE file (#64) with a WORKLOAD CODE LAB SECTION of "Blood Bank" to VBECS.
+ 
+XML Mapping:
+LMIP element =             WKLD CODE file (#64) / WKLD CODE field (#1)
+Procedure element =        WKLD CODE file (#64) / PROCEDURE field (#.01)
+Cost element =             WKLD CODE file (#64) / COST field (#7)
+WeightMultiplier element = WKLD CODE file (#64) / WKLD UNIT WEIGHT field 
+                           (#2)
+CPTCode element =          WKLD CODE file (#64) / CODE sub-file (#64.018) 
+                           / CODE field (#.01)
+ 
+ 
+XML Example:
+&lt;Workload&gt;
+    &lt;Code&gt;
+        &lt;LMIP&gt;86272.0000&lt;/LMIP&gt;
+        &lt;Procedure&gt;Cryoprecipitate Thawing&lt;/Procedure&gt;
+        &lt;Cost&gt;2.50&lt;/Cost&gt;
+        &lt;WeightMultiplier&gt;3&lt;/WeightMultiplier&gt;
+        &lt;CPTCode&gt;88399&lt;/CPTCode&gt;
+    &lt;/Code&gt;
+    &lt;Code&gt;
+        &lt;LMIP&gt;86403.0000&lt;/LMIP&gt;
+        &lt;Procedure&gt;Decontamination of Lymphocyte&lt;/Procedure&gt;
+        &lt;Cost&gt;&lt;/Cost&gt;
+        &lt;WeightMultiplier&gt;2&lt;/WeightMultiplier&gt;
+        &lt;CPTCode&gt;88399&lt;/CPTCode&gt;
+    &lt;/Code&gt;
+&lt;/Workload&gt;
+</pre>
+</td></tr><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+XML document containing a list of Blood Bank WORKLOAD CODE LAB SECTION 
+entries from the WKLD CODE file.  The values returned are WKLD CODE, 
+PROCEDURE, COST, WKLD UNIT WEIGHT, and CPT codes. 
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

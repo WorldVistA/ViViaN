@@ -1,0 +1,51 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>YTAPI SHOWIT (400)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>YTAPI SHOWIT</td></tr><tr>
+<td>TAG</td><td>SHOWIT</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_YTAPI3.html">YTAPI3</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>INACTIVE</td><td>INACTIVE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This API returns the text, bottom, introduction and possible correct 
+responses for a specified test item in file 601. It will work only for 
+tests as opposed to interviews or batteries. The ASI is not supported.
+ 
+Input: 
+                CODE: Test code from file 601 e.g. "CAGE", "BDI"
+ITEM: a positive whole number between 1 and the highest item number for 
+the specified test.
+ 
+Output:
+Array(1)=[DATA] ;indicates successful  call
+Array(2)=MMPI2^1 ;SECOND LINE IS TEST Code^ item number
+Array(item number,"I",line number)=introductory text
+Array(item number,"T", line number)=text of question
+Array(item number,"R",0)=allowed responses
+Array(item number,"R",line number)= response cues
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

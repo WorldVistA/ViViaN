@@ -1,0 +1,59 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>EC GETPATCLASTAT (924)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>EC GETPATCLASTAT</td></tr><tr>
+<td>TAG</td><td>PATCLAST</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_ECUERPC1.html">ECUERPC1</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Returns a patient in/out status and classification. Classifications are:
+Agent Orange, Ionizing Radiation, SC Condition, Environmental Contaminants and
+Military Sexual Trauma.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>ECARY</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>DESCRIPTION:</dt><dd><pre>
+Input variable ECARY contains the following values separated by up-arrow.
+  1. ECDFN - Patient ien (#2)
+  2. ECD   - DSS Unit ien (#724)
+  3. ECDT  - Procedure date and time (fileman format)
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Returns a single line with values for a patient status and classifications.
+Data is delimited by (^) and '~'. Values after the '~' refers to those 
+classifications that must be asked by Delphi application when the answer to 
+SC=No. Pieces delimited by '^' are:-
+  1.   Patient Status: I for inpatient or O for outpatient
+  2-6. Classification: 2- Agent Orange, 3- Ionizing Radiation
+                       4- SC Condition, 5- Environmental Contaminants
+                       6- Military Sexual Trauma
+  Data delimited by '~' follows those of '^'. Pieces as follows:-
+  1.   Agent Orange    2. Ionizing Radiation
+  3.   Environmental Contaminants
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

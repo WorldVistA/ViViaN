@@ -1,0 +1,79 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>MAG4 INDEX GET EVENT (1936)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>MAG4 INDEX GET EVENT</td></tr><tr>
+<td>TAG</td><td>IGE</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_MAGSIXGT.html">MAGSIXGT</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>INACTIVE</td><td>ACTIVE</td></tr><tr>
+<td>WORD WRAP ON</td><td>FALSE</td></tr><tr>
+<td>VERSION</td><td>3</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This call will return an array of INDEX PROCEDURE/EVENT(s)
+based on the input parameters CLS (Class)
+and SPEC (Specialty/subspecialty)
+When images are displayed, it is desirable to limit the
+list of presented images to only those that are likely
+to be relevant in the current context.
+ 
+This procedure accepts an "image category" (either an IEN
+or the name of a category) and returns all "image events"
+that belong to that category.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>CLS</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>90</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+This parameter is a ',' (comma) delimited string of classes
+only those index types, that match a 'class' in the string
+will be returned in the array
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>FLGS</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>40</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+;  FLGS : An '^' delimited string
+;     1 IGN: Flag to IGNore the Status field
+;     2 INCL: Include Class in the Output string
+;     3 INST: Include Status in the Output String
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>SPEC</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>60</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is a comma delimited list of Specialty/SubSpecialties
+Only Procedure/Events that are associated with one of these will be
+returned in the list.
+If a Procedure/Event is not associated with any Specialty/Subspecialties
+it is considered valid for all, and will be returned.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+The result array includes all Procedure/Events that match the
+Class and Specialty/SubSpecialty that were passes as input parameters.
+The format of the result Array: 
+  
+Result(0)="0^&lt;error message&gt;"   &lt;- if error
+Result(0)="1^OK"                &lt;- if success
+the items in the array are in the format
+Result(1..n)="Procedure/Event^Abbreviation"  and Optionally
+  the 3rd and 4th '^' pieces could be CLASS^STATUS
+  OUT(i) = name of event ^ ien of event ^ abbreviation for event
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

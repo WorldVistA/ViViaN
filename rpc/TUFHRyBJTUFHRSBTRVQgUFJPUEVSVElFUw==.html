@@ -1,0 +1,167 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>MAGG IMAGE SET PROPERTIES (2566)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>MAGG IMAGE SET PROPERTIES</td></tr><tr>
+<td>TAG</td><td>SETPROPS</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_MAGGA02.html">MAGGA02</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This remote procedure updates one or more image properties (fields of the
+record of the IMAGE file (#2005)).
+ 
+If one of the following fields is updated in the parent or the child of a
+group that has only one image, then the changes are replicated to the
+child or parent respectively: SHORT DESCRIPTION (10), TYPE INDEX (42),
+PROC/EVENT INDEX (43), SPEC/SUBSPEC INDEX (44), ORIGIN INDEX (45),
+CREATION DATE (110), CONTROLLED IMAGE (112), STATUS (113), and STATUS
+REASON (113.3).
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>IMGIEN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+IEN of the image record in the IMAGE file (#2005).
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>FLAGS</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+Reserved for future use.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PROPVALS</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+Items of this list define new values of image properties. Each item has
+3 pieces separated by '^':
+ 
+  ^01: Parameter name
+  ^02: "" (empty)
+  ^03: Value
+ 
+The following parameters are supported by this remote procedure:
+ 
+  CRTNDT^^{Date/time}
+    Internal or external value for the CREATION DATE field (110)
+    of the IMAGE file #2005.
+ 
+  GDESC^^{Text}
+    Text for the SHORT DESCRIPTION field (10) of the file #2005.
+ 
+  ISTAT^^{Name or Code}
+    Internal or external value for the STATUS field (113)
+    of the file #2005.
+ 
+  ISTATRSN^^{Name or IEN}
+    Name or IEN of a reason for image status change
+    (see the STATUS REASON field (113.3) of the file #2005
+    for details).
+ 
+  IXORIGIN^^{Name or Code}
+    Internal or external value for the ORIGIN INDEX field (45)
+    of the file #2005.
+ 
+  IXPKG^^{Name or Code}
+    Internal or external value for the PACKAGE INDEX field (40)
+    of the file #2005.
+ 
+  IXPROC^^{Name or IEN}
+    Procedure/Event name or IEN (see the PROC/EVENT INDEX
+    field (43) of the file #2005 for details).
+ 
+  IXSPEC^^{Name or IEN}
+    Specialty/SubSpecialty name or IEN (see the SPEC/SUBSPEC
+    INDEX field (44) of the file #2005 for details).
+ 
+  IXTYPE^^{Name or IEN}
+    Image type name or IEN (see the TYPE INDEX field (42) of
+    the file #2005 for details).
+ 
+  PARDF^^{File Number}
+    Value for the PARENT DATA FILE# field (16) of
+    the file #2005.
+ 
+  PARGRD0^^{IEN}
+    Value for the PARENT GLOBAL ROOT D0 field (17) of
+    the file #2005.
+ 
+  PARGRD1^^{IEN}
+    Value for the PARENT GLOBAL ROOT D1 field (63) of
+    the file #2005.
+ 
+  PARIPTR^^{IEN}
+    Value for the PARENT DATA FILE IMAGE POINTER field (18)
+    of the file #2005.
+ 
+  PROC^^{Name}
+    Name of the procedure (see the PROCEDURE field (6) 
+    of the file #2005 for details).
+ 
+  PROCDT^^{Date/time}
+    Internal or external value for the PROCEDURE/EXAM 
+    DATE/TIME field (15) of the IMAGE file #2005.
+ 
+  SENSIMG^^{Name or Code}
+    Internal or external value for the CONTROLLED IMAGE field 
+    (112) of the file #2005.
+ 
+For pointer type parameters, pure numeric values are always treated as
+internal entry numbers (IEN).
+ 
+For sets of codes, the API checks for internal values first. So, if there
+is an ambiguity between internal and external values, the parameter value
+will be treated as the internal one.
+ 
+Parameters can be added to the list in any order. See comments preceding
+the SETPROPS^MAGGA02 for more details.
+ 
+Example:
+ 
+  with RPCBroker.Param[2] do
+    begin
+      PType := list;
+      Mult[1] := 'IXPKG^^RAD';
+      Mult[2] := 'IXSPEC^^1';
+      Mult[3] := 'IXORIGIN^^NON-VA';
+    end;
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Zero value of the first '^'-piece of the Results[0] indicates that an
+error occurred during the execution of the procedure. In this case, the
+errors are returned in the Results array as shown below:
+  
+  Results[0]            Result descriptor
+                          ^01: 0
+                          ^02: Message
+  
+  Results[i]            Error descriptor
+                          ^01: Error code
+                          ^02: Message
+                          ^03: Error location
+                          ^04: Message type
+ 
+  Results[j]            Line of the additional info (optional)
+                          ^01: ""
+                          ^02: Text
+  
+Otherwise, '1^Ok' is returned in the Results[0].
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

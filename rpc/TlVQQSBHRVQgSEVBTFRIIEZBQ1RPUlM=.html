@@ -1,0 +1,46 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>NUPA GET HEALTH FACTORS (2968)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>NUPA GET HEALTH FACTORS</td></tr><tr>
+<td>TAG</td><td>HF</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_NUPABCL2.html">NUPABCL2</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Returns a list of Office of Nursing Services (ONS) Health Factors.
+</pre>
+</td></tr><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+List of ONS health factors in format:
+ 
+NAME ^ IEN
+ 
+^TMP(562310320,1)=ONS AA ABUSE FINACIAL REPORTED^644666
+               2)=ONS AA ABUSE NEGLECT^644671
+               3)=ONS AA ABUSE NEGLECT REPORTED^644668
+               4)=ONS AA ABUSE PHYSICAL REPORTED^644665
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

@@ -1,0 +1,88 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIC DM GET STATUS (1594)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIC DM GET STATUS</td></tr><tr>
+<td>TAG</td><td>STATUS</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSICDM.html">DSICDM</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This will return the status(es) of import requests for an individual DSS 
+application. If you pass the transaction ID then the status of that
+transaction will be returned.  You can also retrieve the statuses of all
+requests or all requests of a certain status.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>TRANID</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>50</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the transaction ID that was passed to the VistA Imaging Import 
+Queue.  It must be in the format DSS;xxxxxx.
+unique identifier.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>WHICH</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>4</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is a string of codes to determine which transaction statuses to 
+return.  The parameter WHICH and TRANID are mutually excluded.  That is 
+if TRANID is passed, the parameter WHICH will not even be evaluated or 
+acted upon.
+ 
+If WHICH contains A, then retrieve all transactions for all statuses
+If WHICH contains E, then retrieve all ERROR transactions
+If WHICH contains S, then retrieve all SUCCESSFUL transactions
+If WHICH contains P, then retrieve all PENDING transactions
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>DEL</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>1</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+This flag (0 or 1) will control whether or not the transaction record 
+should be deleted from file 19621.   Default value is 0, do not delete
+ 
+If DEL=1 then delete all SUCCESSFUL transactions returned in the RPC
+call.  So this will not delete import requests in an error state or
+pending.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>APP</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>7</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>4</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the application code assigned to a DSS application.  
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+This will return a list:
+  on error, return error message(s) as array[n] = -1^error message
+  if no errors, then return data as follows: 
+    1. The return array will be sorted by status and then by tranID
+         Any transaction in an error state come first
+         Then come the successfully imported transactions
+         Then come the pending transactions
+    2. Each transaction returned will be multi-line
+         array[n] = tranID ^ status
+         array[n+j] = any messages passed back by Vista Imaging
+                      where j = 1,2,3,...
+         array[n+m] = $END  indicating the end of this transaction
+                      where m = the value of the last j plus 1
+         The status text is as follows:
+             Error
+             Successfully Imported
+             Successfully Imported, record deleted (only if DEL=1)
+             Pending
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

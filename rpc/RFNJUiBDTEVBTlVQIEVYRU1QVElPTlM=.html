@@ -1,0 +1,60 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIR CLEANUP EXEMPTIONS (1908)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIR CLEANUP EXEMPTIONS</td></tr><tr>
+<td>TAG</td><td>FIXMPT</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSIROI1.html">DSIROI1</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This RPC returna an array containing the internal numbers of any entry in 
+file 19620 that may have bogus data stored in the exemption fields. This 
+problem was corrected in the 5.2 version of the ROI package, this will 
+allow the ROI manager to review and correct the individual ROI requests.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>START DATE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>7</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+The date used to start the search for entries to check for bogus 
+exemption data.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>END DATE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>7</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+The date to stop the search.  Defaults to the current day.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Return Array '^' Delimited:
+        ROI Instance IEN
+        ROI Instance Patient/FOIA (external format)
+        Requestor (external format)
+        Clerk (external format)
+        Type of Request (external format)
+        Reason for Request (external format)
+        Authority for Request (external format)
+        Requestor Type (external format)
+        Current Status (external format)
+        Date Request Received (external format)
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

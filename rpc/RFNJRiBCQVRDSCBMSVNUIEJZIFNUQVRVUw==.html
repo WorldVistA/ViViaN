@@ -1,0 +1,67 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIF BATCH LIST BY STATUS (2611)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIF BATCH LIST BY STATUS</td></tr><tr>
+<td>TAG</td><td>LISTSTAT</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSIFBAT2.html">DSIFBAT2</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>VERSION</td><td>3</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Returns a list of batches sorted by entered status (O^C)  [open and 
+closed]  Screens to users who opened and supervisors
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>STATUS</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>20</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+Status to search: 
+'C' FOR CLERK CLOSED;'S' FOR SUPERVISOR CLOSED;'O' FOR OPEN;'T' FOR 
+TRANSMITTED;'V' FOR VOUCHERED;'P' FOR FORWARDED TO PRICER;'A' FOR
+ASSIGNED PRICE;'R' FOR REVIEWED AFTER PRICER;'F' FOR CENTRAL FEE ACCEPTED
+ 
+Delimited by "^", multiple status can be entered: "C^S^R"
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>FEE PROGRAM</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>3</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd></li><li><dt>INPUT PARAMETER:</dt><dd>STARTDT</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>7</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+Start date to display batches, defaults to all batches if not entered
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>ENDDATE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>7</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>4</dd><dt>DESCRIPTION:</dt><dd><pre>
+Enter the end of the date rand\ge to display default to all dates. 
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Output:  ^TMP($J,"DSIFBAT2",0)="-1^error message"  
+ 
+ ^TMP($J,"DSIFBAT2",Status,Batch)=Batch IEN;Batch number^Obligation 
+number^Fee program(Int;ext)^Status^User who opened^Lines allowed;Lines 
+currently in batch^FCP
+ 
+When dates from and to are entered, the following criteria is used:
+Transmitted/Verified Batches  - Date Transmitted
+Supervisor Closed             - Date Supervisor Closed 
+Closed Batches                - Date Clerk Closed
+Open Batches (and all other)  - Date opened
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

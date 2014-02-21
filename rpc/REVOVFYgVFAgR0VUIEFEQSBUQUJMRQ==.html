@@ -1,0 +1,56 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DENTV TP GET ADA TABLE (1896)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DENTV TP GET ADA TABLE</td></tr><tr>
+<td>TAG</td><td>ADA</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DENTVTP1.html">DENTVTP1</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This returns the ADA table (file 228) for the Discus Treatment Planning 
+system.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td>8994.02, , {}</td></tr><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+return ^TMP("DENT",$J,cpt_code) = p1^p2^...^p13
+       ^TMP("DENT",$J,cpt_code,1) = long description (250 chars)
+ 
+  p1 = cpt code          p8 = endo (boolean)
+  p2 = cpt description   p9 = local code (boolean)
+  p3 = condition         p10 = quick code (boolean)
+  p4 = area              p11 = apico (boolean)
+  p5 = material          p12 = retro (boolean)
+  p6 = diagnosis code    p13 = hemi (boolean)
+  p7 = ranged (boolean)  p14 = tooth related (boolean)
+                         P15 = diagnosis description
+  boolean in treatment planning is -1 for true, 0 for false
+ 
+  header records are also returned:
+  ^TMP("DENT",$J,cpt_header_code) = cpt code^cpt description
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

@@ -1,0 +1,70 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>SPN MAILMAN NOTIFICATION (2835)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>SPN MAILMAN NOTIFICATION</td></tr><tr>
+<td>TAG</td><td>MAIL</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_SPNJRPML.html">SPNJRPML</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>INACTIVE</td><td>ACTIVE</td></tr><tr>
+<td>APP PROXY ALLOWED</td><td>Yes</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Sends admit/discharge/transfer mailman notifications to individual or 
+group Mailman email addresses
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>FROM</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>DESCRIPTION:</dt><dd><pre>
+DUZ of the user initiating the notification 
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>SUBJECT</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>DESCRIPTION:</dt><dd><pre>
+Subject of mailman notification
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PAR</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>DESCRIPTION:</dt><dd><pre>
+Four options, set to 1 if chosen (1^1^1^1):
+                            PIECE 1 - Priority
+                            PIECE 2 - Information only
+                            PIECE 3 - Confirmation required
+                            PIECE 4 - Copy in 'IN' basket
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>TEXT</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>DESCRIPTION:</dt><dd><pre>
+An array format TEXT(1...n) containing the email message in 1 or more 
+lines (limit to 80 chars per line)
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>MLTO</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>DESCRIPTION:</dt><dd><pre>
+An array format MLTO(1...n) containing the recipients of the email in, 
+    and the recipient can be in the form of mail group names and/or 
+    employee names.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+ 
+Data is a single value that determines whether or not the transmission 
+was successful:
+ 
+0 - Unsuccessful
+1 - Successful
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

@@ -1,0 +1,92 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>SPN INPAT OUTPAT ACTIVITY (2799)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>SPN INPAT OUTPAT ACTIVITY</td></tr><tr>
+<td>TAG</td><td>COL</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_SPNJRPC3.html">SPNJRPC3</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>INACTIVE</td><td>ACTIVE</td></tr><tr>
+<td>APP PROXY ALLOWED</td><td>Yes</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Returns inpatient/outpatient activity statistics for a list of given 
+patients (based on the ICN) based on a date range, minimum number of 
+results, and number of highest patients to identify. 
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>ICNLST</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>DESCRIPTION:</dt><dd><pre>
+Patient's ICN in string format (ICN^ICN^ICN^ICN ) 
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>FDATE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>DESCRIPTION:</dt><dd><pre>
+Date to start search from.  
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>TDATE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>DESCRIPTION:</dt><dd><pre>
+Date to end search at.  
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>HIUSERS</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>DESCRIPTION:</dt><dd><pre>
+Number of patients with highest amount of orders to identify. 
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+ 
+Returns data that displays in the SPN Inpatient Outpatient Activity 
+report.
+ 
+Sample of return:
+ 
+PAT999^Outpatient Activity^EOL999
+BOS999^Totals: 1 patient for 5 visits (5 stops)^EOL999
+HDR999^Patients^Visits^EOL999
+1^5^EOL999
+HDR999^Clinic^Patients^Visits^Stops^EOL999
+180^DENTAL^1^5.00^5^EOL999
+ 
+BOS999^Highest Utilization of Visits^EOL999
+HDR999^Patient Name^SSN^Visit^Different Stop Codes^EOL999
+SPINALCORD,ONE^000-00-1001^5^1^EOL999
+ 
+PAT999^Inpatient Activity^EOL999
+BOS999^Totals: 2 patients for 3 stays and 225 days inpatient care^EOL999
+HDR999^Patients^Stays^EOL999
+1^1^EOL999
+1^2^EOL999
+ 
+BOS999^Median Length of Stay (MLOS): 108.0 days^EOL999
+HDR999^Specialty^Patients^Stays^Days^MLOS^EOL999
+GENERAL(ACUTE MEDICINE)^ 1^1^2^2.0^EOL999
+NHCU^2^2^223^111.5^EOL999
+ 
+BOS999^Highest Number of Stays^EOL999
+HDR999^Patient Name^SSN^Stays^Days^EOL999
+SPINALCORD,TWO^000-00-1002^2^117^EOL999
+SPINALCORD,THREE^000-00-1003^1^108^EOL999
+ 
+BOS999^Highest Number of Days^EOL999
+HDR999^Patient Name^SSN^Days^Stays^EOL999
+SPINALCORD,TWO^000-00-1002^117^2^EOL999
+SPINALCORD,THREE^000-00-1003^108^1^EOL999
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

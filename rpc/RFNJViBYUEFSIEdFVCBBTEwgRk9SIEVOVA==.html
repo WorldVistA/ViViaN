@@ -1,0 +1,54 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIV XPAR GET ALL FOR ENT (2892)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIV XPAR GET ALL FOR ENT</td></tr><tr>
+<td>TAG</td><td>GETALL</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSIVXPR.html">DSIVXPR</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Returns values for all instances and values for an entity/parameter.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>DATA</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>240</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+ DATA = "ARR(1)~ARR(2)~ARR(3)~ARR(4)~ARR(5)~ARR(6)"
+     e.g. "SYS~DSIV PAGE SETUP~~~~"
+  ARR(1) = entity     ARR(2) = param name    ARR(3) = instance
+  ARR(4) = value      ARR(5) = new instance value
+  ARR(6) = format for GETLST, Default = "Q"
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Returns array of parameter values based on the ARR(6) value:
+  default= "Q" - quick,    #)=internal instance^internal value
+           "E" - external, #)=external instance^external value
+           "B" - both,     #,"N")=internal instance^external instance
+                           #,"V")=internal value^external value
+           "N" - external instance)=internal value^external value
+        some of those pieces may be &lt;null&gt; depends upon ARR(6)
+On error, return RET(1)=-1^error message
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

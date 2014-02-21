@@ -1,0 +1,61 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>MD TMDLEX (2350)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>MD TMDLEX</td></tr><tr>
+<td>TAG</td><td>LEX</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_MDRPCW1.html">MDRPCW1</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>VERSION</td><td>1</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This RPC will return a list of CPT or ICD for a search typed in.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>MDSRCH</dd><dt>PARAMETER TYPE:</dt><dd>REFERENCE</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the text typed in for the look-up.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>MDAPP</dd><dt>PARAMETER TYPE:</dt><dd>REFERENCE</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the application indicator.  It is either "CPT" or "ICD".
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+^TMP("MDLEX",$J,#)=P1 - CPT/ICD Code
+                   P2 - Internal Entry Number
+                   P3 - Lexicon text
+ 
+&gt;D LEX^MDRPCW1(.RESULTS,"BORE","CPT")
+ 
+&gt;ZW RESULTS
+RESULTS="^TMP("MDLEX",539152953)"
+ 
+&gt;D ^%G
+ 
+Global ^TMP("MDLEX",$J -- NOTE: translation in effect
+^TMP("MDLEX",539152953,1)=86618^302213^Borella Burgdorferi (Lyme Disease) 
+Antibody (CP T-4 86618)
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

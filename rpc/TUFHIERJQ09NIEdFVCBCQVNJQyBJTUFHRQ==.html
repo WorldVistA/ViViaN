@@ -1,0 +1,110 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>MAG DICOM GET BASIC IMAGE (1844)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>MAG DICOM GET BASIC IMAGE</td></tr><tr>
+<td>TAG</td><td>IMAGE</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_MAGDRPC2.html">MAGDRPC2</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>INACTIVE</td><td>ACTIVE</td></tr><tr>
+<td>CLIENT MANAGER</td><td>0</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>VERSION</td><td>3</td></tr><tr>
+<td>SUPPRESS RDV USER SETUP</td><td>No</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+ +---------------------------------------------------------------+
+ | Property of the US Government.                                |
+ | No permission to copy or redistribute this software is given. |
+ | Use of unreleased versions of this software requires the user |
+ | to execute a written test agreement with the VistA Imaging    |
+ | Development Office of the Department of Veterans Affairs,     |
+ | telephone (301) 734-0100.                                     |
+ |                                                               |
+ | The Food and Drug Administration classifies this software as  |
+ | a medical device.  As such, it may not be changed in any way. |
+ | Modifications to this software may result in an adulterated   |
+ | medical device under 21CFR820, the use of which is considered |
+ | to be a violation of US Federal Statutes.                     |
+ +---------------------------------------------------------------+
+ 
+This RPC returns information about an image.
+The information that is returned consists of any of
+the fields listed below. Fields that do not have
+a value (or that have an "empty" value) are not
+returned.
+ 
+    OBJECT NAME
+    FILEREF
+    DISK &amp; VOLUME, MAGNETIC
+    DISK &amp; VOLUME, ABSTRACT
+    DISK &amp; VOLUME, WORM
+    OBJECT TYPE
+    PATIENT
+    PROCEDURE
+    LAST ACCESS DATE
+    IQ
+    GROUP PARENT
+    ACQUISITION SITE
+    DESCRIPTIVE CATEGORY
+    CLINIC
+    ACQUISITION DEVICE
+    TRACKING ID
+    DOCUMENT DATE
+    DATE/TIME IMAGE SAVED
+    IMAGE SAVE BY
+    SUMMARY OBJECT
+    SHORT DESCRIPTION
+    PROCEDURE/EXAM DATE/TIME
+    PARENT DATA FILE#
+    PARENT GLOBAL ROOT D0
+    PARENT DATA FILE IMAGE POINTER
+    EXPORT REQUEST STATUS
+    PARENT GLOBAL ROOT D1
+    Full FileName
+    Full Path+FileName
+    Big FileName
+    Big Path+FileName
+    Abstract FileName
+    Abstract Path+FileName
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>D0</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>30</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+The value of this parameter is a pointer to ^MAG(2005).
+This pointer identifies the image for which information
+is being requested.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+When an error occurs during the processing of this RPC,
+the output array consists only one element:
+    OUT(1) = -1,Invalid IEN (xxx)
+    OUT(1) = -3,Image #nnn has been deleted.
+    OUT(1) = -2,No data for "nnn".
+Otherwise, each element of the output array contains
+three or more caret-separated pieces of data:
+    OUT(i) = field-name ^ data (internal) [ ^ data (external) ]
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

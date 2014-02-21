@@ -1,0 +1,53 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>PSB MEDS ON PATIENT (3247)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>PSB MEDS ON PATIENT</td></tr><tr>
+<td>TAG</td><td>MEDSONPT</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_PSBRPC1.html">PSBRPC1</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>SUBSCRIPTION</td></tr><tr>
+<td>VERSION</td><td>3</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This RPC returns indicators if medications are still on a patient.  The 
+patient's DFN will be passed in and a RESULTS array returned with three 
+flags set.  Flags set to 1 for meds are on patient or 0 none per this
+category.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>DFN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+Patient DFN
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+A string with 3 pieces that indicate if Medications are on a patient per a
+specific category.  
+ 
+   Results[0] =  ^1      The number of lines returned(count)
+   Results[1] =  ^1      IV Meds are Infusing (1=exist, 0=do not exist)
+                 ^2      IV Meds are Stopped (1=exist, 0=do not exist)
+                 ^3      Patch on (1=exist, 0=do not exist)
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

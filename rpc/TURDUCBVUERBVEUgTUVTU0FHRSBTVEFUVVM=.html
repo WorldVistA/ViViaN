@@ -1,0 +1,64 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>MDCP UPDATE MESSAGE STATUS (2914)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>MDCP UPDATE MESSAGE STATUS</td></tr><tr>
+<td>TAG</td><td>UPDATERP</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_MDCPHL7B.html">MDCPHL7B</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>PUBLIC</td></tr><tr>
+<td>INACTIVE</td><td>ACTIVE</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>VERSION</td><td>1</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This call will update the status of an entry in file 704.002
+(the CLIO_HL7_LOG file).  Note that if the status passed through is 
+'PROCESSED', the CP INSTRUMENT file entry pointed to by field .03 will be 
+checked to see if it has a routine in its .11 field.  If it does, the HL7 
+message will be copied to a temp global and the PROCESSING ROUTINE will 
+be invoked.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>MDCPMSG</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+The IFN of the message in the CP RESULT REPORT file.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>MDCPSTAT</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>1</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+The status to which to change the file entry referenced by the first 
+parameter.  Check the data dictionary for field .09 to get a list of 
+valid codes.  This parameter must be in internal format.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>MDCPDFN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the IFN of the patient in file 2, if available.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>MDCPISCR</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>4</dd><dt>DESCRIPTION:</dt><dd><pre>
+If MDCPDFN is set, this tells the linetag that MDCPDFN is a correction, 
+not the original DFN.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Returns a local variable containing the results of the status update in 
+DIALOG format.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

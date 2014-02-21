@@ -1,0 +1,124 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIR FOIA VALIDATION (1906)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIR FOIA VALIDATION</td></tr><tr>
+<td>TAG</td><td>FOIA</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSIROIRV.html">DSIROIRV</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This RPC will return a global array of all records thkat were looked at 
+for the year end FOIA report.  It will contain the internal request 
+number and patient name/FOIA indicator, and a one for any block on the 
+report that the given request was included on.  It also contains all 
+record that, during the report period, were entered in error or of the 
+type of request/requestor type of an excluded state reporting agency.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>START DATE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>99</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd></li><li><dt>INPUT PARAMETER:</dt><dd>END DATE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>99</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd></li><li><dt>INPUT PARAMETER:</dt><dd>DIVISION(S)</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>99</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+RETURNS: GLOBAL ARRAY 
+ 
+The return array will have the following data with each piece 
+separated by a "^":
+ 
+ Piece Description
+     1 Request IEN
+     2 Patient/FOIA
+     3 Date Opened
+     4 Date Closed
+     5 Excluded
+     6 EX3 5705
+     7 EX3 7332
+     8 EX3 5701
+     9 EX3 253B
+    10 EX3 APP3
+    11 EX3 205
+    12 Processed
+    13 Pend at Start
+    14 Received
+    15 Pend at End
+    16 Granted
+    17 Partial
+    18 Denied
+    19 Exemption 1
+    20 Exemption 2
+    21 Exemption 3
+    22 Exemption 4
+    23 Exemption 5
+    24 Exemption 6
+    25 Exemption 7A
+    26 Exemption 7B
+    27 Exemption 7C
+    28 Exemption 7D
+    29 Exemption 7E
+    30 Exemption 7F
+    31 Exemption 8
+    32 Exemption 9
+    33 OTH REAS ND-No Records
+    34 OTH REAS ND-Referral
+    35 OTH REAS ND-Withdrawn
+    36 OTH REAS ND-Fee
+    37 OTH REAS ND-Not Described
+    38 OTH REAS ND-Not Proper FOIA
+    39 OTH REAS ND-Not Agency Record
+    40 OTH REAS ND-Duplicate
+    41 OTH REAS ND-Other
+    42 OTH REAS ND-Medically Sensitive
+    43 OTH REAS ND-Patient Died Before Completion
+    44 OTH REAS ND-Publicly Available
+    45 OTH REAS ND-Glomar
+    46 OTH REAS ND-Subsumed by Litigation
+    47 Perfected
+    48 Perf Workdays
+    49 Perf Granted
+    50 Response &lt;= 20
+    51 Response &lt;= 40
+    52 Response &lt;= 60
+    53 Response &lt;= 80
+    54 Response &lt;= 100
+    55 Response &lt;= 120
+    56 Response &lt;= 140
+    57 Response &lt;= 160
+    58 Response &lt;= 180
+    59 Response &lt;= 200
+    60 Response &lt;= 300
+    61 Response &lt;= 400
+    62 Response &gt; 400
+    63 Perf Pending
+    64 Perf Pend Days
+    65 Exp Requested
+    66 Exp Adjudicated
+    67 Exp Granted^
+    68 Exp Denied
+    69 Exp Cal Days
+    70 Fee Wav Requested
+    71 F W Adjudicated
+    72 F W Granted
+    73 F W Denied
+    74 F W Workdays 
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

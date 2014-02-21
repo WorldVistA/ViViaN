@@ -1,0 +1,49 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DGRR GET LOOKUP TYPE LIST (2176)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DGRR GET LOOKUP TYPE LIST</td></tr><tr>
+<td>TAG</td><td>GETLIST</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DGRRLU3.html">DGRRLU3</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>PUBLIC</td></tr><tr>
+<td>VERSION</td><td>.01</td></tr><tr>
+<td>APP PROXY ALLOWED</td><td>No</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Returns an XML document containing a list of wards or a list of
+clinics (depending on what was requested)
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>PARAM</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>99</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>DESCRIPTION:</dt><dd><pre>
+PARAM("TYPE")="ward" returns a list of wards
+PARAM("TYPE")="clinic" returns a list of clinics
+PARAM("TYPE")="provider" returns a list of providers
+PARAM("VALUE")=Beginning value or null to start at the beginning
+               or end of the file.
+PARAM("MAXNUM")=Number of entries to be returned.  Defaults to
+                traversing forward. If MAXNUM contains a negative
+                number, traverses through the file backwards.
+</pre>
+</dd></li></ol></td></tbody>
+</table>
+</body></html>

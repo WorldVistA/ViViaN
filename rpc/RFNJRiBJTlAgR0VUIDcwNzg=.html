@@ -1,0 +1,58 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIF INP GET 7078 (2630)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIF INP GET 7078</td></tr><tr>
+<td>TAG</td><td>GET7078</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSIFINP0.html">DSIFINP0</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>VERSION</td><td>3.2</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Pass in 7078 IEN. 
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>DPT</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>25</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd></li><li><dt>INPUT PARAMETER:</dt><dd>IEN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>10</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+ Pass in FB7078 IEN (FBIEN)
+ Output: 1^Reference # (#.01)^Fee program 
+(#.5)^Auth From Date (internal/external, ;-delimited) (#3)
+ ^Auth To Date (internal/external, ;-delimited) (#4)^Date of 
+Discharge (internal/external, ;-delimited) (#4.5)
+ ^Admitting Authority (internal/external, ;-delimited) 
+(#5)^Estimated Amount (#6)^User who entered it (internal/external, 
+;-delimited) (#8)
+ ^Status (Internal/external, ;-delimited) (#9)^Date of Issue 
+(internal/external, ;-delimited) (#10)
+ ^Reason for Pending Disposition (internal/external, ;-delimited) 
+(#12)^HERO contract IEN (#.01 in file 161.43) in Patient 
+IEN(DPT);Contract number
+ 
+ 
+ Failure output
+ -1^No record found with that IEN
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

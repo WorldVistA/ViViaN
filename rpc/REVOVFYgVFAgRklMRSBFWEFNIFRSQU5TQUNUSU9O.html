@@ -1,0 +1,83 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DENTV TP FILE EXAM TRANSACTION (3018)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DENTV TP FILE EXAM TRANSACTION</td></tr><tr>
+<td>TAG</td><td>FILEX</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DENTVTPA.html">DENTVTPA</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>INACTIVE</td><td>ACTIVE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Files the new exam template modal data (OHA,PAR,OCC,TMJ) into a record in 
+228.2 of type 5:EXAM
+ 
+Input variables:
+ 
+ SAVE DATA IN (FILED/UNFILED)
+ **************************************
+ DATA("FLAG")= ACTION FLAG, A OR BLANK FOR ADD, M FOR MODIFY
+ DATA("DPAT")= Patient IEN
+ DATA("PROV")= Provider IEN
+ DATA("DATE")= Date of transaction
+ DATA("OHA")=CI PLAQUE INDEX^CARIES RISK^ORAL HYGIENE^XEROSTOMIA
+ DATA("OCC")=MANDIBULAR^OPEN BITE^CROSS BITE^LEFT MOLAR RELAT^RIGHT MOLAR 
+RELAT^LEFT CUSPID RELAT^RIGHT CUSPID RELAT^OVERBITE^OVERJET
+ DATA("PAR")=BRUXING^CLENCHING^HISTORY^
+ DATA("PARWP",N)=PARAFUNCTIONAL HABIT NOTES (WORD PROCESSING)
+ DATA("PARC")=ATTRITION^ABRASION^EROSION^HYPERTROPHY^OBSERVED^FACETED^ABFR
+ACTION
+ DATA("PARCWP",N)=PARAFUNCTIONAL HABITS CLINICAL FINDINGS NOTES (WORD 
+PROCESSING)
+ DATA("TMJ")=TRAUMA^SPONT PAIN^POPPING^CLICKING^PAIN OPENING^PAIN 
+CHEWING^LIMITED OPENING^
+ DATA("TMJWP",N)=TMJ OTHER NOTES (WORD PROCESSING)
+ DATA("TMJC")=MAX INCISAL OPENING^LEFT LATERAL^RIGHT LATERAL^CF 
+POPPING^CF CLICKING^CF PAIN^DEVIATION^
+ DATA("TMJCWP",N)=TMJ CF NOTES (WORD PROCESSING)
+ DATA("SOCH")=PAT REP SOCH^SH CIGARETTES^CIGARETTE QUANTITY^CIGARETTE 
+FREQUENCY^CIGARETTE YEARS^SH PIPE/CIGAR^PIPE QUANTITY^PIPE FREQUENCY^PIPE 
+YEARS^SH SMOKELESS^SMOKELESS QUANTITY^SMOKELESS FREQUENCY^SMOKELESS 
+YEARS^SH
+ALCOHOL^ALCOHOL QUANTITY^ALOCHOL FREQUENCY^ALCOHOL YEARS^
+ DATA("SHDA")=SH DRUG ABUSE^SH DRUG ABUSE DESCRIPTION^
+ DATA("SHWP",N)=SH NOTES (WORD PROCESSING)
+ 
+ 
+Return variables:
+ 
+ 1^Successful message
+ -1^Error Message
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>DATA</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+See documentation in FILEX^DENTVTPA.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Returns a message 1^Message if the file is completed successfully. A 
+-1^message will be returned when an error occurs.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

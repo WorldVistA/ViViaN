@@ -1,0 +1,85 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>SPN LAB COMPLETE BLOOD COUNT (2775)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>SPN LAB COMPLETE BLOOD COUNT</td></tr><tr>
+<td>TAG</td><td>COL</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_SPNRPCC.html">SPNRPCC</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>INACTIVE</td><td>ACTIVE</td></tr><tr>
+<td>APP PROXY ALLOWED</td><td>Yes</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This RPC supports the following report(s):
+ 
+        Report Page Name                Subscreen
+        Urinary Tract Infection         Complete Blood Count
+ 
+ 
+Notes: 
+ 
+Calling the line tag COL will generate all Lab Complete Blood Count tests
+on file for the patient from the cut off date forward.
+ 
+DFN = Internal Entry Number of patient in the PATIENT file (#2)
+CUTDATE = Cut off date. Results are inclusive from cut off date to present
+ 
+ 
+Tested at the Bay Pines FO account using DFN = 100005251 and 
+CUTDATE=1-1-1900.  Of course, at other sites, DFN would vary.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>ICN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd></li><li><dt>INPUT PARAMETER:</dt><dd>CUTDATE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Data is returned delimited by the up-arrow (^), with each piece defined 
+as follows:
+ 
+Piece
+  1 is Date &amp; time of test
+  2 is Test name
+  3 is Test value (result)
+  4 is High or Low indicator (H if &gt; normal range or L if below)
+  5 is Unit of measurement
+  6 is Lower limit of normal range
+  7 is Upper limit of normal range
+  8 is Field number of the test (troubleshooting only)
+  9 is Reverse date (troubleshooting only)
+ 10 is End of Line indicator (EOL999)
+ 
+ 
+Notes: 
+ 
+Sample data stream returned by this RPC:
+ 
+SPN LAB COMPLETE BLOOD COUNT Results: 
+FEB 28, 2002@08:49:55^WESTERGREN ESR^3^^MM/HR^0^10^469^6979771.914945^EOL999
+FEB 02, 2002@08:99:27^WESTERGREN ESR^17^H^MM/HR^0^10^469^6979797.909973^EOL999
+JAN 19, 2002@09:30:05^WESTERGREN ESR^40^H^MM/HR^0^10^469^6979880.906895^EOL999
+JAN 04, 2002@18:99^WESTERGREN ESR^110^H^MM/HR^0^10^469^6979895.81^EOL999
+DEC 30, 2001@23:13:47^LYMPHS^comment^^^^^396^6988769.768553^EOL999
+DEC 30, 2001@23:13:47^MONOCYTES^comment^^^^^397^6988769.768553^EOL999
+DEC 30, 2001@17:40:01^WESTERGREN ESR^12^H^MM/HR^0^10^469^6988769.825899^EOL999
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

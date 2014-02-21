@@ -1,0 +1,149 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>SPN PUT LAB CYTOPATH (2783)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>SPN PUT LAB CYTOPATH</td></tr><tr>
+<td>TAG</td><td>COL</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_SPNRPCM.html">SPNRPCM</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>INACTIVE</td><td>ACTIVE</td></tr><tr>
+<td>APP PROXY ALLOWED</td><td>Yes</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>ICN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd></li><li><dt>INPUT PARAMETER:</dt><dd>CUTDATE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+SPN LAB CYTOPATHOLOGY Results: 
+ 
+BOR999 1^RIGHT URETER CYTOLOGY^MAY 20, 1998@00:00:20^CY 98 710^LR(7019478.99998^EOL999^
+BCD999 1^THIS IS THE CYTOPTTHOLOGY DIAGNOSIS LINE ONE^EOL999^
+BCD999 2^LINE TWO^EOL999^
+BCD999 3^LINE THREE^EOL999^
+BCD999 4^ ^EOL999^
+BCD999 5^ ^EOL999^
+BCD999 6^END OF THE CYTOPATHOLOGY DIAGNOSIS^EOL999^
+BME999 1^RIGHT URETER CYTOLOGY:|TAB|^EOL999^
+BME999 2^ - Abnormal transitional cells present, consistent with^EOL999^
+BME999 3^ transitional cell carcinoma.|TAB|^EOL999^
+BOF999 1^THIS IS THE OPERATIVE FINDING ON THIS ONE SPECIMEN^EOL999^
+BOF999 2^OF DAVE AND CHRIST THIS IS JUST TESTING^EOL999^
+BOF999 3^ ^EOL999^
+BOF999 4^ ^EOL999^
+BOF999 5^ ^EOL999^
+BOF999 6^AND NOTHING ELSE^EOL999^
+BOF999 7^ ^EOL999^
+BOF999 8^ ^EOL999^
+BOF999 9^THE END^EOL999^
+BCP999 1^RIGHT URETER CYTOLOGY^EOL999^
+BCP999 2^DAVES AND CHRIST'S TESTING^EOL999^
+ 
+ 
+BOR999 2^LEFT URETER CYTOLOGY^MAY 20, 1998@00:00:10^CY 98 709^LR(7019478.99999^EOL999^
+BME999 1^LEFT URETER CYTOLOGY:|TAB|^EOL999^
+BME999 2^ - Highly suspicious for papillary transitional cell carcinoma|TAB|^EOL999^
+BCP999 1^LEFT URETER CYTOLOGY^EOL999^
+ 
+ 
+BOR999 3^URINE CYTOLOGY, BLADDER^MAY 20, 1998^CY 98 708^LR(7019479^EOL999^
+BME999 1^URINE CYTOLOGY, BLADDER:|TAB|^EOL999^
+BME999 2^ - Malignant cells present, consistent with papillary transitional|TAB|^EOL999^
+BME999 3^ cell carcinoma.|TAB|^EOL999^
+BCP999 1^URINE CYTOLOGY, BLADDER^EOL999^
+ 
+ 
+BOR999 4^URINE^FEB 17, 1998^CY 98 217^LR(7019782^EOL999^
+BME999 1^URINE:|TAB|^EOL999^
+BME999 2^ - Malignant cells present, consistent with papillary transitional|TAB|^EOL999^
+BME999 3^ cell carcinoma, grade II OR III.^EOL999^
+BCP999 1^URINE^EOL999^
+ 
+ 
+BOR999 5^URINE^FEB 13, 1998^CY 98 205^LR(7019786^EOL999^
+BME999 1^URINE:|TAB|^EOL999^
+BME999 2^ - Malignant cells present, consistent with Transitional cell carcinoma|TAB|^EOL999^
+BCP999 1^URINE^EOL999^
+ 
+ 
+BOR999 6^URINE^OCT 14, 1997^CY 97 1167^LR(7028985^EOL999^
+BME999 1^URINE:|TAB|^EOL999^
+BME999 2^ - Abnormal transitional cells are present, suggestive of papillary|TAB|^EOL999^
+BME999 3^ transitional cell carcinoma.|TAB|^EOL999^
+BCP999 1^URINE^EOL999^
+ 
+ 
+BOR999 7^URINE^OCT 08, 1997^CY 97 1150^LR(7028991^EOL999^
+BME999 1^URINE:|TAB|^EOL999^
+BME999 2^ - Abnormal transitional cell clusters present, consistent with a|TAB|^EOL999^
+BME999 3^ papillary transitional cell carcinoma.|TAB|^EOL999^
+BCP999 1^URINE^EOL999^
+ 
+ 
+BOR999 8^URINE^FEB 06, 1997^CY 97 145^LR(7029793^EOL999^
+BME999 1^URINE: |TAB|^EOL999^
+BME999 2^ - Moderate to severely atypical transitional cells present;|TAB|^EOL999^
+BME999 3^ consistent with low-grade transitional cell carcinoma.|TAB|^EOL999^
+BCP999 1^URINE^EOL999^
+ 
+ 
+BOR999 9^URINE^SEP 24, 1996^CY 96 1154^LR(7039075^EOL999^
+BME999 1^URINE:|TAB|^EOL999^
+BME999 2^ - Acute inflammation and microhematuria with no apparent|TAB|^EOL999^
+BME999 3^ cellular atypia.|TAB|^EOL999^
+BCP999 1^URINE^EOL999^
+ 
+ 
+BOR999 10^URINE^SEP 23, 1996^CY 96 1152^LR(7039076^EOL999^
+BME999 1^URINE:|TAB|^EOL999^
+BME999 2^ - Acute inflammation and bacteria present|TAB|^EOL999^
+BME999 3^ - No apparent malignant cells seen|TAB|^EOL999^
+BME999 4^ (See comment)|TAB|^EOL999^
+BME999 5^|TAB|^EOL999^
+BME999 6^COMMENT: Inflammation obscures cell detail.^EOL999^
+BCP999 1^URINE^EOL999^
+ 
+ 
+BOR999 11^BRONCHIAL WASH^FEB 06, 1995@00:00:10^CY 95 129^LR(7049792.99999^EOL999^
+BME999 1^Bronchial Washing:^EOL999^
+BME999 2^ - Rare squamous metaplastic cells accompanied by an acute^EOL999^
+BME999 3^inflammatory exudate.^EOL999^
+BME999 4^ - Evaluation is limited by the poor epithelial cell yield.^EOL999^
+BME999 5^ ^EOL999^
+BME999 6^Comment: This material is correlated with surgical 95S-333. The findings^EOL999^
+BME999 7^are compatible.^EOL999^
+BOF999 1^Edema of right lower lobe mucosa.^EOL999^
+BPD999 1^Same.^EOL999^
+BCP999 1^BRONCHIAL WASH^EOL999^
+ 
+ 
+BOR999 12^BRONCHIAL BRUSH, RIGHT LOWER LOBE^FEB 06, 1995^CY 95 128^LR(7049793^EOL999^
+BME999 1^Bronchial Brush, Right Lower Lobe:^EOL999^
+BME999 2^ - Negative for malignant cells.^EOL999^
+BME999 3^ - Acute inflammation is present.^EOL999^
+BME999 4^ ^EOL999^
+BME999 5^Comment: This material is correlated with surgical 95S-333. The findings^EOL999^
+BME999 6^are compatible.^EOL999^
+BOF999 1^Edema of right lower lobe mucosa.^EOL999^
+BPD999 1^Same.^EOL999^
+BCP999 1^BRONCHIAL BRUSH, RIGHT LOWER LOBE^EOL999^
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

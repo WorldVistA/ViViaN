@@ -1,0 +1,68 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>IBD GET ONE INPUT OBJECT (74)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>IBD GET ONE INPUT OBJECT</td></tr><tr>
+<td>TAG</td><td>OBJLST</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_IBDFRPC1.html">IBDFRPC1</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>PUBLIC</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This call will return specific information about any one input object
+regardless of type.  Developers should first use the RPC to return the
+available input objects (either by form or by clinic).  
+ 
+There are 3 types of input objects, lists (both static and dynamic),
+hand print fields, and multiple choice fields.  Each input object
+may be associated with selection rules and data qualifiers.  There
+are 4 selection rules: 
+   0 := any number (including zero)
+   1 := exactly one
+   2 := at most one (0 or 1)
+   3 := at least one (1 or more)
+ 
+There are also a number of data qualifiers that are used to describe the
+data, for example, primary, secondary, add to problem list, etc.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>IBDF</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>DESCRIPTION:</dt><dd><pre>
+The following variables are required:
+   IBDF("PI")     := pointer to the package interface file
+   IBDF("IEN")    := pointer to the input object (file depends on type)
+   IBDF("CLINIC") := pointer to the hospital location file (required only
+                     to return provider lists)
+   IBDF("DFN")    := pointer to patient file (required only for patient
+                     specific dynamic lists such as patient active problems)
+All are returned by one of the available rpc's in aics.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Returns array describing input object.  See routine IBDFRPC1 for details.
+See routine IBDFDE* for examples of use.  (ibdfde2* for lists, ibdfde3 for
+hand print fields, ibdfde4 for multiple choice fields)
+ 
+The return array is different for the different types of objects.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

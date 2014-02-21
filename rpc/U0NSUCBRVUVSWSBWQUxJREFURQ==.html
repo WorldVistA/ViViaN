@@ -1,0 +1,64 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>SCRP QUERY VALIDATE (47)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>SCRP QUERY VALIDATE</td></tr><tr>
+<td>TAG</td><td>VALID</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_SCRPBK4.html">SCRPBK4</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This RPC will validate the criteria specified in the
+query template definiton passed in as part of the call.
+The validation checks the criteria against what data
+is required the report assoicated with the template.
+
+If the validation check fails, then the errors found
+are returned as part of the RPC, otherwise a success
+flag(1) is returned.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>QUERY DEFINITION</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>DESCRIPTION:</dt><dd><pre>
+This parameter contains the complete definition of the query
+template. The format of the definition data is defined by
+the TScQryDef.BuildQuery method on the client.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>VALIDATE MODE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>50</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>DESCRIPTION:</dt><dd><pre>
+This parameter indicates whether all validation checks
+need to be made(FULL) or only those checks related to
+entity entry selection(SELECTIONS) should be made.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Using SCDATA to represent the array, the following is returned:
+    SCDATA(0) -&gt; 1 - meaning validation checks found no errors
+                        
+                --- OR ---
+
+    SCDATA(0) -&gt; 0 - meaning errors found ^ &lt;number of errors&gt;
+SCDATA(1...n) -&gt; error text
+
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

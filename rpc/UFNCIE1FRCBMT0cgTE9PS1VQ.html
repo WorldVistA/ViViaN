@@ -1,0 +1,143 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>PSB MED LOG LOOKUP (1974)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>PSB MED LOG LOOKUP</td></tr><tr>
+<td>TAG</td><td>RPC</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_PSBMLLKU.html">PSBMLLKU</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>PUBLIC</td></tr><tr>
+<td>INACTIVE</td><td>ACTIVE</td></tr><tr>
+<td>VERSION</td><td>3</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+BCMA Medication Log Look Up Remote Procedures.
+ 
+This routine is a conglomerate of  Medication Log lookup functionality
+per the BCMA Graphical User Interface software.
+ 
+Input:  PSBREC (array)
+        PSBREC (0)     determine  "lookup" function 
+                      "PTLKUP" (patient file (#2) lookup)
+                      "ADMLKUP" (MedLog administration lookup)
+                      "SELECTAD" (selected admin.)
+               (1)     values to use per lookup. (DFN per ADMLKUP)
+                       value of selected item. (PSB IEN per SELECTAD)
+               (2)     search date per ADMLKUP
+    
+Output: RESULTS (array)
+        RESULTS(0)    number of lookup matches
+               (1)    error message or data per match/selection
+               (n)    data per subsequent match/selection.
+ 
+"PTLKUP" results data format:
+RPC Call: PSB MED LOG LOOKUP
+RESULTS(0) = 1
+RESULTS(1) = 
+piece 1         Patient's DFN               ("-1" if error/message)
+piece 2         Patient's Name
+piece 3         Sex
+piece 4         Date of Birth (FM format)
+piece 5         Social Security Number
+piece 6         ""
+piece 7         ""
+piece 8         ""
+piece 9         ""
+piece 10        Date Of Birth (displayable format)
+piece 11        Social Security Number (displayable format)
+ 
+ 
+ 
+"ADMLKUP" results data format:
+RESULTS(0)=Number of lines returned.
+ 
+RESULTS(1)=
+piece 1         DFN of Patient
+piece 2         DATE of Activity
+piece 3         Orderable Item_" "_Dosage Form
+piece 4         IV Unique ID
+piece 5         Action Status
+piece 6         Schedule Type
+piece 7         Action Date/Time (FileMan)
+piece 8         Action By Initials
+piece 9         PRN Reason
+piece 10        PRN Effectiveness
+ 
+ 
+ 
+"SELECTAD" results data format:
+ 
+RESULTS(0)=Number of lines returned.
+ 
+RESULTS(1)=
+piece 1         PSBIEN of the administration selected for edit. ("-1" if error/message)
+piece 2         DFN of Patient                                
+piece 3         Patient Name
+piece 4         SSN
+piece 5         Medication
+piece 6         BagID
+piece 7         AdminStat
+piece 8         "for possible later use"
+piece 9         AdminD/T
+piece 10        InjctSt
+piece 11        "IV"/"PB"/"UD"
+piece 12        "for possible later use"
+piece 13        Order Status
+piece 14        Schedul. Type
+piece 15        Order Number_U/V
+piece 16        Order has given patch or infusing IVbag - Flag
+ 
+RESULTS(2)=
+piece 1         PRN Reason
+piece 2         PRN Effectiveness
+ 
+RESULTS(3..n) [for each dd/add/sol] =
+piece 1         "DD"/"ADD"/"SOL"
+piece 2         drug IEN
+piece 3         drug Name
+piece 4         Units Ordered
+piece 5         Units Given
+piece 6         Units of Administration
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>PSBREC</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+PSBREC  (array)
+(0)     determines  "lookup" function 
+        "PTLKUP"  (patient file (#2) lookup)
+        "ADMLKUP"  (administration lookup)
+        "SELECTAD" (process selected administration. 
+(1)     values to use for the lookup.  (DFN for the ADMLKUP)
+        "SELECTAD" must present the PSBIEN value
+        of the user-chosen administration.
+(2)     search date for ADMLKUP
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+RESULTS (array)
+(0)     number of lookup matches
+(1)     error message or detail data per lookup match
+(n)     continued data per subsequent lookup match.
+        per SELECTAD - administration data ...
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

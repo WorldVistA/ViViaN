@@ -1,0 +1,61 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIR SET LAB LIST (2523)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIR SET LAB LIST</td></tr><tr>
+<td>TAG</td><td>STLABLST</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSIROI1.html">DSIROI1</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This routine sets the requested labs for a given request. 
+ 
+NOTE: the labs are deleted every time and then added
+  based on the contents of DTLS.  If at any time
+  an entry in DTLS contains an "@" the processing 
+  stops.  This will allow an "@" in the first 
+  entry in DTLS to cause all entries to be deleted.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>ROI</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>10</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+INPUT PARAMETER
+   ROI = REQUEST IEN
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>DTLS</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>61</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+ INPUT PARAMETER
+    DTLS = LAB LIST DETAILS - AN ARRAY OF LAB LIST TITLES
+       DTLS FORMAT:  #^LAB_TITLE
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+RETURNS 
+   Request IEN (same as ROI)
+ OR
+   -1^Invalid request number ROI
+ OR
+   -1^Unable to save the selected Lab List for request number ROI
+ OR
+   -1^Invalid lab type, Lab List cannot be saved for request number ROI
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

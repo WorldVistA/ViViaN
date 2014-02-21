@@ -1,0 +1,65 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIC SR DETAIL (1613)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIC SR DETAIL</td></tr><tr>
+<td>TAG</td><td>DETAILSR</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSICSRPT.html">DSICSRPT</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+For a surgical case, this returns the operation report, anesthesia 
+report, nurse's report, and procedure report.  Which reports are returned 
+depends upon the input paramter FLAG value.  It defaults to Op report and 
+Anesthesia report.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>DSISRTN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>20</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the internal file number from file 130, i.e., CASE#
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>FLAG</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>4</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+Optional parameter - string of characters indicating which reports to 
+return:
+  FLAG["O" - return Operation Report
+       "A" - return Anesthesia Report
+       "N" - return Nurse's Report
+       "P" - return Procedure Report (NON-OR)
+ 
+Default to FLAG="OA"
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+A local array with the report text.
+ If error or problems, return DSICX(1)=-1^message
+ Else, return DSICX(n)=text of requested report where n=1,2,3,4...
+ 
+All reports will start with a header such as:
+ ----------------------------------------------------------------------------
+                            &lt;name of surgical report&gt;
+ ----------------------------------------------------------------------------
+ 
+Note: the dash line consists of 77 '-'
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

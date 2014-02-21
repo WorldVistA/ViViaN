@@ -1,0 +1,92 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>SPN PUT PROSTHETIC DEVICES (2779)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>SPN PUT PROSTHETIC DEVICES</td></tr><tr>
+<td>TAG</td><td>COL</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_SPNRPCG.html">SPNRPCG</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>INACTIVE</td><td>ACTIVE</td></tr><tr>
+<td>APP PROXY ALLOWED</td><td>Yes</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+ This RPC is for the Prosthetic Device Codes subscreen on the Pressure 
+ Ulcer Treatment report.
+ 
+ Calling the line tag COL will generate all Prosthetic Device Codes on
+ file from the cut off date forward.
+ 
+ The results are first placed into ^UTILITY($J), and
+ then sorted into reverse date order and placed into ^TMP($J)
+ 
+ To call this RPC, simply DO
+ COL(,DFN,CUTDATE) , where
+ 
+ DFN = Internal Entry Number of patient in the PATIENT file (#2)
+ 
+ CUTDATE = Cut off date. Results are inclusive from cut off date to 
+present
+ 
+ Sample ^TMP Global data string, using first item:
+ 
+ Piece
+  1 is HCPCS CODE --&gt; L3001  (this is the prosthetic device code)
+  2 is Item Description --&gt; LINER-SPENCO
+  3 is Date Delivered --&gt; JUN 19, 2003
+  4 is file and note where information was obtained from (troubleshooting 
+only)
+ 
+ 
+Global ^TMP($J -- NOTE: translation in effect
+^TMP(545631591,1)=L3001^LINER-SPENCO^JUN 19, 2003^RMPR(664.1(9548
+               2)=L3221^SHOE-EXTRA DEPTH *PR^AUG 30, 1999^RMPR(664.1(5039
+               3)=L3002^INSERT,SHOE^AUG 30, 1999^RMPR(664.1(5039
+               4)=L2999^SOCKS,DIABETIC,LOOSE-FIT *PR^AUG 30, 
+1999^RMPR(664.1(5039
+               5)=L3002^INSOLE-MOLDABLE *PR^JAN 11, 1999^RMPR(664.1(1379
+               6)=L3002^INSERT,SHOE^JAN 11, 1999^RMPR(664.1(1415
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>ICN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd></li><li><dt>INPUT PARAMETER:</dt><dd>CUTDATE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+ Data is returned as a data stream, with each piece as follows:
+ 
+ Piece
+  1 is HCPCS CODE --&gt; L3001  (this is the prosthetic device code)
+  2 is Item Description --&gt; LINER-SPENCO
+  3 is Date Delivered --&gt; JUN 19, 2003
+  4 is file and note where data was obtained from (troubleshooting only)
+ 
+Sample data stream returned by this RPC:
+ 
+SPN PUT PROSTHETIC DEVICES Results:
+L5301^L5300 BK LIMB(200F)^SEP 09, 2002^RMPR(664.1(1115EOL999
+L5301^PROSTHESIS LEG PERMANENT BELOW KNEE^APR 26,
+2002^RMPR(664.1(1035EOL999
+L5301^PROSTHESIS LEG PERMANENT BELOW KNEE^APR 19,
+2002^RMPR(664.1(1036EOL999
+L5999^L5300 BK LIMB(200F)^MAR 28, 2002^RMPR(664.1(997EOL999
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

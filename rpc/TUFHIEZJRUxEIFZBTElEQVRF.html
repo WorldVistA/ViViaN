@@ -1,0 +1,82 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>MAG FIELD VALIDATE (2893)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>MAG FIELD VALIDATE</td></tr><tr>
+<td>TAG</td><td>DVAL</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_MAGQBUT4.html">MAGQBUT4</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>INACTIVE</td><td>ACTIVE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This provides an interface with the VA Fileman Database Server (DBS)
+API for the single field validator: VAL^DIE.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>FILE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>99</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the file number that contains the attribute to be validated.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>IENS</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>99</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the record number or place holder of the entry being validated.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>FIELD</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>99</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the number of the file attribute to be validated.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>FLAGS</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>99</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>4</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the option set of parameters defined for the VAL^DIE
+E External value is returned in RESULT(0).
+ 
+F FDA node is set for valid data in array identified by FDA_ROOT.
+ 
+H Help (single ?) is returned if VALUE is not valid.
+ 
+R Record identified by IENS is verified to exist and to be editable. Do
+not  include "R" if there are placeholders in the IENS.
+ 
+U Don't perform key validation. Without this flag, the data in VALUE is
+checked to ensure that no duplicate keys are created and that key field 
+values are not deleted.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>VALUE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>99</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>5</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the value to be validated.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+It returns the resolved external value or -1 followed by the carat 
+delimiter and one of the following error messages:
+ 
+120 Error occurred during execution of a FileMan hook.
+299 Ambiguous value. (Variable Pointer data type only.)
+405 The file is uneditable.
+520 The field's data type or INPUT transform is inappropriate.
+602 The entry cannot be edited.
+701 Value is invalid.
+710 The field is uneditable.
+712 An inappropriate deletion of a field's value is being attempted.
+740 A duplicate key is produced by a field's new value.
+742 A value for a field in a key is being deleted.
+1610 Help was improperly requested.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

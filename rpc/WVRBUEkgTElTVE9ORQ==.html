@@ -1,0 +1,61 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>YTAPI LISTONE (397)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>YTAPI LISTONE</td></tr><tr>
+<td>TAG</td><td>LISTONE</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_YTAPI.html">YTAPI</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>INACTIVE</td><td>INACTIVE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This API returns all psychological test administrations for a specified 
+patient during a specified time period  for a specified test or 
+instrument. If a scale is also specified, scoring for that scale is 
+returned. User must have adequate privileges to receive this information 
+(i.e. often the YSP KEY). 
+ 
+ 
+Input:
+       DFN : patient internal identifier
+       CODE: Test code from file 601 including "ASI" and "GAF" 
+e.g. "CAGE", "BDI"
+       BEGIN: inclusive date in %DT acceptable format (11/11/2011) to
+begin search [optional]
+       END: inclusive date in %DT acceptable format (11/11/2011) 
+to end search  [optional]
+       LIMIT: constrains to the last N administrations [optional]
+       Scale: scale number from file 601 or 1-7 on ASI [optional]
+Output:
+YSDATA(1)=[DATA]
+YSDATA(x)= internal administration date ^ external administration
+date^test code [^scale name^raw score^transformed score]
+ 
+Data is sorted in order of most recent administration to the oldest 
+administration. If no administrations are found Array(2) will not be 
+returned. If patient has no psych testing at all ,an error will be 
+returned.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

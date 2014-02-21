@@ -1,0 +1,77 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIC XPAR GET PARAM LIST (2102)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIC XPAR GET PARAM LIST</td></tr><tr>
+<td>TAG</td><td>LIST</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSICXPR.html">DSICXPR</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This will return a detailed list of one or more Kernel Parameter
+Definitions.  It does not return every Param Definition field.
+ 
+Either the NAME input parameter or the PREFIX input parameter is 
+required.  If you pass a NAME then PREFIX is ignored.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>NAME</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>30</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the name or the IFN for a Parameter Definition.  Pass this value 
+only if you wish to retrieve the data for one specific Parameter 
+Definition.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PREFIX</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>20</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the namespace or the leading characters for the Parameter 
+Definitions you wished to be returned.  For example, PREFIX="DSIC" will 
+return all DSIC Kernel Parameter Definitions.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Returns List[n] = value  for n=0,1,2,3,...
+ 
+If problems encounter, the first row returned will be
+  List[0] := -1^message
+  List[i] := message  for i=1,2,3,4,...
+ 
+Return list is a multi-lined return for each entry found.  For each 
+Parameter definition return:
+   List[j] := p1^p2^p3^p4  where
+              p1 = $START    p2 = Param Def ifn    p3 = Param Def name
+              p4 = Multivalued Param [Boolean 1/0/null)
+ List[j+1] := p1^p2^p3^p4  for Param Def Instance
+              p1 = term    p2 = data type code   p3 = data type
+              p4 = domain
+ List[j+2] := p1^p2^p3^p4  for Param Def Value
+              p1 = term    p2 = data type code   p3 = data type
+              p4 = domain
+ List[j+3] := s1;s2;s3^s1;s2;s3^s1;s2;s3^...  list of entities
+              s1 = precedence order number
+              s2 = entity name      s3 = entity abbreviation
+ List[j+k] := text  where k=4,5,6,...  Parameter description
+              these lines will not be returned if there is no 
+              description for the Parameter Definition
+ List[j+k+1] := $END
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

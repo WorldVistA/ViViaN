@@ -1,0 +1,64 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>ORRC SIGN (1734)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>ORRC SIGN</td></tr><tr>
+<td>TAG</td><td>SIGN</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_ORRCSIG.html">ORRCSIG</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>SUBSCRIPTION</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This call will apply the user's electronic signature to the orders and 
+documents in the ITEM array. It will return a boolean result for each 
+item (indicating success or failure), with explanatory text in the event 
+the call fails.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>USER</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the pointer to the user in the New Person file #200.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>LOC</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+The hospital location. Essential in the OE/RR 3 for printing of orders,
+if available. Not essential for notes.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>ESCODE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+The network encrypted signature code of the person identified in ORNP. 
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>ITEM</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>4</dd><dt>DESCRIPTION:</dt><dd><pre>
+The array of items to which the electronic signature is being applied. 
+Should have the format:
+  ITEM(#)=DOC:### for notes, or
+  ITEM(#)=ORU:###^DFN^Release Flag^Signature Status^Nature of Order
+  ITEM(#)=ORD:###^DFN^Release Flag^Signature Status^Nature of Order
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+in @ORY@(#) = ID^Success Indicator^Error Message (if 'Success).
+where ID is ORU:IEN for Orders, or
+            DOC:IEN for Documents.
+            DOC:IEN for Documents.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

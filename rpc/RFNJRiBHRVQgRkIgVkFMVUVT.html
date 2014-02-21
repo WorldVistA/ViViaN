@@ -1,0 +1,54 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIF GET FB VALUES (2576)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIF GET FB VALUES</td></tr><tr>
+<td>TAG</td><td>GETVAL</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSIFENA1.html">DSIFENA1</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>VERSION</td><td>2</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Used to return a list of possible entries for Autorizations in Fee Basis, 
+includes several files (Primary service area, Patient type,Type of Care, 
+Purpose of Visit and Evualation type)
+ 
+If array is not built it will return -1^error message
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>OUT</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Returns:
+^TMP($J,"DSIFENA1","A")="Patient type^.065^00^SURGICAL" 
+        (list of 161.01 field .065)
+^TMP($J,"DSIFENA1","B")="Purpose of Visit^.07^76^ADHC" 
+        (list of file 161.82)
+[REMOVED DSIF*3.2*2] ^TMP($J,"DSIFENA1","C")="Primary
+          Service Area^101^17007^ALB-PRRTP"
+^TMP($J,"DSIFENA1","D")="Treatment Type^.095^1^SHORT TERM FEE STATUS"
+^TMP($J,"DSIFENA1","E")="Type of Care^2^1^C&amp;P"
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

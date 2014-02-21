@@ -1,0 +1,61 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIF INP CANCEL 7078 (2634)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIF INP CANCEL 7078</td></tr><tr>
+<td>TAG</td><td>CAN7078</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSIFNOT2.html">DSIFNOT2</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This RPC will mark the 7078 cancelled and if possible remove the Non-VA 
+PTF record and make modifications to the 1358.  Logic cloned from 
+existing routine FBCHC78.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>IEN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>99</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+Pointer to file 162.4 VA FORM 10-7078 (Required)
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Return Values
+        -1 ^ Invalid Input!
+        -1 ^ FEE BASIS Site Parameters not set!
+(0 in first piece means that the 7078 was set to a cancel state but PTF or
+1358 problems occured)
+        0 ^ Unable to delete Non-VA PTF Record.
+        0 ^ Unable to locate reference number on 1358.
+        0 ^ 1358 Not available for posting.
+        0 ^ No data string passed
+        0 ^ Data element in string missing
+        0 ^ Invalid Transaction or Transaction previously closed
+        0 ^ Authorization amount can't be adjusted.
+        0 ^ Unauthorized control point user
+        0 ^ Insufficent obligation funds to adjust authorization to post
+            bill
+        0 ^ Credit bill amount will exceed total bill amount
+        0 ^ Unable to create Authorization Line Item
+        1 = Everything went fine
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

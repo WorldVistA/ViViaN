@@ -1,0 +1,105 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>PSB SCANPT (359)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>PSB SCANPT</td></tr><tr>
+<td>TAG</td><td>SCANPT</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_PSBRPC.html">PSBRPC</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>PUBLIC</td></tr><tr>
+<td>VERSION</td><td>3</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This RPC is used to validate the data scanned in at the scan patient 
+wristband prompt of the mnOpenPatient component.  The value passed in 
+is either the full SSN scanned in from the patient wristband -or- the 
+1U4N syntax of the patient lookup.  In either case the call must 
+return only one patient from the lookup.  If the 1U4N syntax is used 
+and multiple patients are found the call returns an error.  If only 
+one patient is found the RESULTS( ) array is loaded with the patient 
+data and passed back to the client for verification.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>PSBDATA</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the scanned valued passed by the client.
+wristband prompt of the mnOpenPatient component.  The value passed in
+is either the full SSN scanned in from the patient wristband -or- the
+1U4N syntax of the patient lookup.  In either case the call must
+return only one patient from the lookup.  If the 1U4N syntax is used
+and multiple patients are found the call returns an error.  If only
+one patient is found the RESULTS( ) array is loaded with the patient
+data and passed back to the client for verification.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+If no patient or multiple patients are found with the scan value an 
+error is returned in the following format:
+ 
+   Results[0] = 1
+   Results[1] = '-1^Unable to Determine Patient ID'
+ 
+If a unique patient is found the following data is returned to the 
+user:
+ 
+   Results[0]  = Count of returned records
+ 
+In the case of an error:
+    Results[1]  = '-1^  "the appropriate error message"  '
+ 
+    Results[1]  = DFN
+    Results[2]  = Name
+    Results[3]  = SSN^Dashed SSN
+    Results[4]  = Internal DOB^External DOB
+    Results[5]  = Age
+    Results[6]  = Internal Sex^External Sex
+    Results[7]  = Internal Last Mvmt^External Last Mvmt
+    Results[8]  = Internal Type Mvmt^External Type Mvmt
+    Results[9]  = Internal Ward Location^External Ward Location^
+                    Internal Hospital Location^External Hospital Location
+    Results[10] = Internal Bed Location^External Bed Location
+    Results[11] = Internal P-Care Physician^External P-Care Physician
+    Results[12] = Internal Treating Speciality^External Treating Speciality
+    Results[13] = Movement Diagnosis
+    Results[14] = 1 if in Bed Status 0 if not in Bed Status (i.e. Pass)
+    Results[15] = Expected return date from Pass
+    Results[16] = Reactions
+    Results[17] = Height
+    Results[18] = Weight
+    Results[19] = Means Tests
+    Results[20] = ICN umber
+    Results[21] = " Admission Status message "
+    Results[22] = This NODE begins 'other' patient information.
+                  This NODE may be null.  Records on this NODE will
+                  have a header.  A header will consist of one of the 
+                  following:
+                 
+ 
+                       "PATFLG"
+ 
+                              The PATFLG header will initiate a patient 
+                              flag record.  The patient flag record will 
+                              be constructed as follows: 
+                                        "PATFLG" ^ FLAG NAME ^ index#
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

@@ -1,0 +1,128 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>PRSN POC DAILY TIME EXTRACTION (2935)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>PRSN POC DAILY TIME EXTRACTION</td></tr><tr>
+<td>TAG</td><td>POCTIME</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_PRSN9B.html">PRSN9B</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>INACTIVE</td><td>ACTIVE</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+VANOD shall have the ability to extract data from the POC DAILY ACTIVITY
+EXTRACTION File (#451.7).
+ 
+Input Parameters: The PEV RPC Broker call shall be called with the
+following input parameters.
+ 
+Parameter 1:  Integer - records with a sequence number greater than
+this value shall be returned, in sequence.  If you want to return 
+records starting at the beginning of the file then a value of 0 should 
+be sent as this parameter.  The number of records returned shall not
+exceed the value passed in parameter 2.
+ 
+Parameter 2:  Integer - Maximum number of records to be returned.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>PRSNSEQ</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>15</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+Any records in POC DAILY ACTIVITY EXTRACTION File (#451.7) with a sequence
+number greater than this value shall be returned, in sequence.  The number
+of records returned shall not exceed the value passed in parameter
+PRSNREC.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PRSNREC</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>15</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the Maximum number of records to be returned.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+The PEV RPC Broker call shall provide a VistA temporary global array of 
+records with the name provided with the input parameter 1.
+ 
+Header Node
+This global array shall have a header node with index 0.  The header node 
+is a literal string with delimiter  ^ .  Data returned in the header node 
+is defined as follows:
+ 
+Delimiter       Piece # Data Description
+^       1       Site Name (STATION NUMBER) of VistA database
+^       2       Sequence # of first record in returned data
+^       3       Sequence # of last record returned
+^       4       Total number of records returned
+^       5       Sequence # of last record currently in Nurse POC 
+                Extraction file (#541.7)
+ 
+Data Nodes
+The output shall be an array of records indexed by sequence number as 
+defined by the input parameters.  Each record is a delimited literal 
+string defined as follows:
+ 
+Delimiter       Piece # Data Description
+^       1       Sequence Number
+^       2       Division IEN of Nurse Primary Location
+^       3       Division IEN of Nurse Location Worked
+^       4       Version Number (Sequence Number of Times of Reconciled) 
+^       5       Nurse ID (SS# without  - )
+^       6       IEN (Internal Entry Number) of File #450 Paid Employee
+^       7       Time Record Date (YYYYMMDD)
+^       8       Start Time (0000 - 2345)
+^       9       Stop Time (0015 - 2400) (stop time must be greater start
+                time)
+^       10      Type of Time
+^       11      Point of Care derived from  NURS LOCATION 211.4
+^       12      Mandatory Overtime (M or V)
+^       13      Reason for Overtime 
+^       14      Types of Work
+^       15      Release Date (CYYMMDD) 
+^       16      Nurse T&amp;L Unit at time of POC approval
+ 
+Version Number (Piece 4)   Full Day Substitution
+The records with highest version number are the most recently released 
+data records.  Records with version number one are original records.  
+Records with a version number greater than 1 are corrections to records 
+that have been released previously.
+The highest version number for a nurse and a date  is a replacement for 
+all data for the earlier version of the data for that nurse on that date. 
+(Full day substitution).
+It may be necessary to provide VANOD with a correction to a day off where 
+overtime was incorrectly reported and there was no activity on that day.  
+The RPC shall return a record with identifiers but no activity data for 
+that day (see sample record 28).
+ 
+Seq#    Div.    Sta #   Version #       Nurse ID        Nurse IEN 450
+FM Date   Start Time      Stop Time       Type of Time    Point of Care   
+Mand.  OT       Reason for overtime     Type of Work
+25      688     688     1               000-45-8452     13418
+20091016  0700            1000            Tour Time       2841
+26      7818    688     1               000-45-8452     13418
+20091016  1000            1900            Tour Time       2841
+                                        Sitter
+27      7819    688     1               000-45-8452     13418
+20091016  1900            2100            Overtime        1677
+Mandatory
+28      7736    688     2               000-22-9999     2088    
+20090912  0700            1530            Tour Time       2841
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

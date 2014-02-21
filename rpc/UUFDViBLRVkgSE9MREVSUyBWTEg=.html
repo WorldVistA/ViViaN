@@ -1,0 +1,74 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>QACV KEY HOLDERS VLH (2278)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>QACV KEY HOLDERS VLH</td></tr><tr>
+<td>TAG</td><td>EN</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_QACVEMPX.html">QACVEMPX</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Pass a list of SECURITY KEY names. The routine returns the next 'n' 
+persons who have been granted access to one or more of the keys in the 
+list.
+ 
+The routine returns the IEN, name components, title and mail code for the
+person(s) who match the lookup value, in XML format. In addition, the XML
+header contains a flag indicating whether there are more matching records
+to return. If it is set to 1, then the caller can make another call to get
+the next 'N' records. The XML header also contains a 'next name' and 'next
+IEN' value. These values are used like the FROM array in a FileMan Lister 
+call LIST^DIC. They are used to tell the routine where to start looking on
+subsequent calls, in order to return the next N records. These two 'from'
+values must be passed as input parameters to subsequent calls.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>KEYLIST</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>30</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+An array containing names of one or more SECURITY KEYS in the VistA 
+system. The array looks like LIST(N)=KEYNAME where N is a integer.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PATSROWS</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>12</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+Number of employees to return in each call. If not passed, the default
+value will be the next 10 matching employees.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PATSFRM0</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>35</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+On the first call to this RPC, this parameter should be set to the empty
+string "". On subsequent calls to find more matches to the same lookup 
+value, the parameter must be set to the "patsFrom0" attribute value from
+the XML document output by the previous call. The attribute will contain 
+the starting NAME value for the next search.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PATSFRM1</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>35</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>4</dd><dt>DESCRIPTION:</dt><dd><pre>
+On the first call to this RPC, this parameter should be set to the empty
+string "". On subsequent calls to find more matches to the same lookup 
+value, the parameter must be set to the "patsFrom1" attribute value from
+the XML document output by the previous call. The attribute will contain 
+the starting IEN value for the next search.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Returns an M global which contains employee data in XML format.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

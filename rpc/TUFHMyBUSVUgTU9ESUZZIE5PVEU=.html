@@ -1,0 +1,75 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>MAG3 TIU MODIFY NOTE (2422)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>MAG3 TIU MODIFY NOTE</td></tr><tr>
+<td>TAG</td><td>MOD</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_MAGGNTI1.html">MAGGNTI1</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Modify an Existing Note. 
+Change it's status from unsigned to administrative closure
+or to signed.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>MAGDFN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>60</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+DFN of the Patient.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>MAGTIUDA</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>60</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the IEN of the Note in file ^TIU(8925
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>MAGADCL</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>10</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+ 1 = Mark this Note as Administratively Closed
+ otherwise it will be Un-Signed
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>MAGMODE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>20</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>4</dd><dt>DESCRIPTION:</dt><dd><pre>
+Mode of Admin Closure:
+"S" = Scanned Document
+"M" = Manual closure
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>MAGES</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>90</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>5</dd><dt>DESCRIPTION:</dt><dd><pre>
+The encrypted Electronic Signature
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>MAGESBY</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>90</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>6</dd><dt>DESCRIPTION:</dt><dd><pre>
+ The DUZ of the Signer (Defaults to DUZ)
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>MAGTEXT</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>3200</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>7</dd><dt>DESCRIPTION:</dt><dd><pre>
+Array of Text to add to the Note.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+If success :
+   result = "&lt;TIU IEN&gt;^Addendum was created."
+If success and Administratively Closed.
+  result ="&lt;TIU IEN&gt;^Addendum was created...
+                             Administrative Closure."
+If success and signed.
+  result ="&lt;TIU IEN&gt;^Addendum was created.  Signed."
+   
+If error:
+  result ="0^&lt;error message&gt;"
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

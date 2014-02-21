@@ -1,0 +1,117 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>GMV VITALS/CAT/QUAL (1277)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>GMV VITALS/CAT/QUAL</td></tr><tr>
+<td>TAG</td><td>GETVITAL</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_GMVUTL7.html">GMVUTL7</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>SUBSCRIPTION</td></tr><tr>
+<td>INACTIVE</td><td>ACTIVE</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Returns all qualifier information for the vital types selected.
+ 
+This remote procedure call is documented in Integration Agreement 4359.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>GMVLIST</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>60</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+A list of vital type abbreviations (FILE 120.51, Field 1) separated by
+up-arrows (e.g., "HT^WT" for height and weight). When the value is null,
+all qualifier information will be returned for all vital types.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Returns the qualifier information for the selected vital types in the 
+array specified. Includes the abnormal high and low values for the vital 
+type, if any.
+ 
+The result array contains:
+ RESULT(n)=piece1^piece2^piece3^piece4^piece5^piece6^piece7^piece8^piece9
+ RESULT(n.nnn)=pieceA^pieceB^pieceC^pieceD
+ 
+  where n is a sequential number starting with 1
+        piece1 = V for vital type
+        piece2 = FILE 120.51 IEN for this vital type
+        piece3 = vital type name (FILE 120.51, Field .01)
+        piece4 = Abbreviation (FILE 120.51, Field 1)
+        piece5 = PCE Abbreviation (FILE 120.51, Field 7)
+        piece6 = If vital type is Blood Pressure this is the 
+                 abnormal systolic high value (File 120.57, Field 5.7).
+                 If vital type is Temperature, this is the abnormal high 
+                 value (File 120.57, Field 5.1)
+                 If vital type is Respiration, this is the abnormal high
+                 value (File 120.57, Field 5.5)
+                 If vital type is Pulse, this is the abnormal high value 
+                 (File 120.57, Field 5.3)
+                 If vital type is Central Venous Pressure, this is the 
+                 abnormal high value (File 120.57, Field 6.1)
+        piece7 = If vital type is Blood Pressure this is the 
+                 abnormal diastolic high value (File 120.57, Field 5.71).
+                 If vital type is Temperature, this is the abnormal low 
+                 value (File 120.57, Field 5.2)
+                 If vital type is Respiration, this is the abnormal low
+                 value (File 120.57, Field 5.6)
+                 If vital type is Pulse, this is the abnormal low value 
+                 (File 120.57, Field 5.4)
+                 If vital type is Central Venous Pressure, this is the 
+                 abnormal low value (File 120.57, Field 6.2)
+        piece8 = If vital type is Blood Pressure this is the 
+                 abnormal systolic low value (File 120.57, Field 5.8).
+                 If vital type is Central Pressure, this is the abnormal 
+                 O2 saturation (File 120.57, Field 6.3)
+        piece9 = If vital type is Blood Pressure this is the 
+                 abnormal diastolic low value (File 120.57, Field 5.81).
+ 
+ RESULT(n.nnn)=pieceA^pieceB^pieceC^pieceD
+  where pieceA = C for CATEGORY or Q for QUALIFIER
+ 
+  if pieceA is C, then  
+        pieceB = FILE 120.53 IEN for this category
+        pieceC = category name (FILE 120.53, Field .01)
+        pieceD = null
+ 
+  if pieceB is Q, then
+        pieceB = FILE 120.52 IEN for this qualifier
+        pieceC = qualifier name (FILE 120.52, Field .01)
+        pieceD = synonym (FILE 120.52, Field .02)
+ 
+Example:
+ &gt; S GMVLIST="HT^WT"                            
+ &gt; D GETVITAL^GMVUTL7(.RESULT,GMVLIST) ZW RESULT
+ &gt; RESULT(1)="V^8^HEIGHT^HT^HT^"
+ &gt; RESULT(1.001)="C^4^QUALITY"
+ &gt; RESULT(1.002)="Q^42^ACTUAL^A"
+ &gt; RESULT(1.003)="Q^43^ESTIMATED^E"
+ &gt; RESULT(1.004)="Q^107^Stated^St"
+ &gt; RESULT(2)="V^9^WEIGHT^WT^WT^"
+ &gt; RESULT(2.001)="C^2^METHOD"
+ &gt; RESULT(2.002)="Q^39^OTHER^Oth"
+ &gt; RESULT(2.003)="Q^50^SITTING^Si"
+ &gt; RESULT(2.004)="Q^51^STANDING^St"
+ &gt; RESULT(2.005)="C^4^QUALITY"
+ &gt; RESULT(2.006)="Q^42^ACTUAL^A"
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

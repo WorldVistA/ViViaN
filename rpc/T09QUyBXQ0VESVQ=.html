@@ -1,0 +1,56 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>OOPS WCEDIT (1420)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>OOPS WCEDIT</td></tr><tr>
+<td>TAG</td><td>OWCPCLR</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_OOPSGUI7.html">OOPSGUI7</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This call clears the Supervisor signature and related fields if the Workers
+Compensation specialist has edited fields INJURED PERFORMING DUTY (#146),
+NOT INJURED PERFORMING JOB (#147), INJURY CAUSED BY EMPLOYEE (#148),
+CAUSED BY EMPLOYEE EXPLAIN (#149), SUPERVISOR NOT AGREE EXPLAN (#164), or 
+REASON AGENCY CONTROVERTS COP (#165) after the Supervisor signed.  It also 
+sets the field WORKER'S COMP EDIT (#199) so the required bulletin will 
+be sent.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>IEN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>25</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the IEN for the ASISTS record that is being modified.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>CALLER</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>10</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the menu that originated the call.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>FORM</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>10</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the form type which can be 2162, CA1, or CA2.  However, the only form
+ever expected with this call is a CA1.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+The RESULTS parameter will contain the name of the person who signed as the 
+Supervisor.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

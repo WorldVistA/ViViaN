@@ -1,0 +1,63 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>OOPS VALIDATE TIME (1398)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>OOPS VALIDATE TIME</td></tr><tr>
+<td>TAG</td><td>DTVALID</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_OOPSGUI2.html">OOPSGUI2</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>PUBLIC</td></tr><tr>
+<td>WORD WRAP ON</td><td>FALSE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This broker call will compare two dates (which are part of the input) based 
+on the 3rd input paramater which is a flag indicating which type of compare 
+should be done.  The RESULTS output indicates whether the dates pass (VALID
+DATE) or fail (DATE ERROR) the compare.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>IDT</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the base date/time in external format. In the case of testing
+whether one date is before another, this would be the "base" date. 
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PDT</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the post date or benchmark date in external format.  In the example 
+of testing if one date is earlier/less than another, this would be the 
+latter date. 
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>FLAG</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>DESCRIPTION:</dt><dd><pre>
+This input parm indicates the type of comparison to be done. 
+
+-2 means PDT must be &lt;  IDT (The DAY only)
+-1 means PDT must be &lt;  IDT (The DAY&amp;TIME)
+0 means PDT must be =  IDT (The DAY&amp;TIME)
+1 means PDT must be &gt;  IDT (The DAY&amp;TIME)
+2 means PDT must be &gt; IDT (The DAY only)
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+The return parameter, RESULTS, indicates if the compare was good (VALID DATE)
+or bad (DATE ERROR).
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

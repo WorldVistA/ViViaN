@@ -1,0 +1,192 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>SPN LAB MICRO URINE (2777)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>SPN LAB MICRO URINE</td></tr><tr>
+<td>TAG</td><td>COL</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_SPNRPCE.html">SPNRPCE</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>INACTIVE</td><td>ACTIVE</td></tr><tr>
+<td>APP PROXY ALLOWED</td><td>Yes</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This RPC supports the Microbiology, Urine subscreen of the Laboratory
+Results section of the Urinary Tract Infections report.
+ 
+Calling the line tag COL will generate all Lab Microbiology Urine tests on
+file from the cut off date forward.
+ 
+The results are first placed into ^UTILITY($J), and
+then sorted into reverse date order and placed into ^TMP($J)
+ 
+To call this RPC, simply DO
+COL(,DFN,CUTDATE) , where
+ 
+DFN = Internal Entry Number of patient in the PATIENT file (#2)
+ 
+CUTDATE = Cut off date. Results are inclusive from cut off date to present
+ 
+ 
+Sample data stream, using first item:
+ 
+ Piece
+  1 is Accession --&gt; MI 98 6158  (Accession is the Lab's tracking number)
+  2 is Date/time Received --&gt; OCT 27, 1998@14:06:48
+  3 is Collection Sample --&gt; URINE;CLEAN CATCH MIDSTREAM
+  4 is Report Status --&gt; Final
+  5 is Report Date Approved --&gt; OCT 29, 1998
+  6 is Site/Specimen --&gt; URINE
+  7 &amp; 8 are for troubleshoting only.
+  
+      In addition, there is report text in the "TXT" string. Note that
+the "TXT" subscript may have multiple lines, and that some tests do not
+have remarks.  This subscript is from the BACT RPT REMARK multiple in
+Vista (subfield 13 of field 5 in LAB DATA file {#63}).
+ 
+This global was ran using the dfn of 42729 at the Bay Pines test acct. 
+ 
+^TMP(541078638,"MICRO URINE",1) = MI 00 3671^JUL 17, 2000@12:19:49^URINE; 
+CLEAN CATCH MIDSTREAM^Final^JUL 18, 2000^URINE^^LR(53,6999281.878085^|
+^TMP(541078638,"MICRO URINE",1,"TXT",1) = BACT RPT REMARK 1^NO GROWTH 
+(&lt;1000 CFU /ML) ^|
+^TMP(541078638,"MICRO URINE",1,"TXT",2) = BACT RPT REMARK 2^THIS IS THE 
+BACT RPT REMARD ^|
+^TMP(541078638,"MICRO URINE",1,"TXT",3) = BACT RPT REMARK 3^AND THIS IS 
+LINE 3 OF THE BACT REPT REMARKS ^|
+^TMP(541078638,"MICRO URINE",1,"TXT",4) = BACT RPT REMARK 4^AND ONE MORE 
+LINE FOR THE GIVE OF IT ^|
+^TMP(541078638,"MICRO URINE",1,"TXT",5) = BACT RPT REMARK 5^AND THE LAST 
+ONE ^|
+^TMP(541078638,"MICRO URINE",2) = MI 99 4202^JUL 15,
+1999@17:54:21^URINE^Final^JUL 17, 1999^URINE^^LR(53,7009283.824579^|
+^TMP(541078638,"MICRO URINE",2,"TXT",1) = BACT RPT REMARK 1^SPECIMEN 
+GROSSLY CONTAMINATED WITH 3 OR MORE ORGANISM: RESUBMIT ^|
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>ICN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd></li><li><dt>INPUT PARAMETER:</dt><dd>CUTDATE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Sample data stream, using first item:
+ 
+ Piece
+  1 is Accession --&gt; MI 98 6158  (Accession is the Lab's tracking number)
+  2 is Date/time Received --&gt; OCT 27, 1998@14:06:48
+  3 is Collection Sample --&gt; URINE;CLEAN CATCH MIDSTREAM
+  4 is Report Status --&gt; Final
+  5 is Report Date Approved --&gt; OCT 29, 1998
+  6 is Site/Specimen --&gt; URINE
+  7 &amp; 8 are for troubleshoting only.
+ 
+      In addition, there is report text in the "TXT" string. Note that
+the "TXT" subscript may have multiple lines, and that some tests do not
+have remarks.  This subscript is from the BACT RPT REMARK multiple in
+Vista (subfield 13 of field 5 in LAB DATA file {#63}).
+ 
+This global was ran using the dfn of 42729 at the Bay Pines test acct.
+ 
+SPN LAB MICRO URINE Results:
+ 
+BOR999 1^MI 98 1262^FEB 27, 1998@11:43:42^URINE; CLEAN CATCH MIDSTREAM^Final^MAR 01, 1998^URINE^^LR(4221,7019771.885665^EOL999^
+ 
+BOO999 1^ENTEROBACTER CLOACAE^&gt;100000 CFU/ML ^EOL999^
+BACT RPT REMARK 1^PATIENT EXPIRED: NO SENSITIVITY STUDIES DONE ^EOL999^
+ 
+ 
+BOR999 2^MI 98 1040^FEB 18, 1998@08:34:31^URINE^Final^FEB 19, 1998^URINE^^LR(4221,7019780.916573^EOL999^
+BOO999 1^GRAM NEG BACILLUS,NON-LACTOSE FERM^&gt;1000 &lt;10000 CFU/ML ^EOL999^
+ 
+ 
+BOR999 3^MI 98 988^FEB 15, 1998@08:59:31^URINE^Final^FEB 16, 1998^URINE^^LR(4221,7019783.914089^EOL999^
+BACT RPT REMARK 1^NO GROWTH (&lt;1000 CFU/ML) ^EOL999^
+ 
+ 
+BOR999 4^MI 98 676^JAN 29, 1998@20:28:01^URINE^Final^JAN 30, 1998^URINE^^LR(4221,7019869.797246^EOL999^
+BACT RPT REMARK 1^NO GROWTH (&lt;1000 CFU/ML) ^EOL999^
+ 
+ 
+BOR999 5^MI 98 318^JAN 14, 1998@09:22:16^URINE^Final^JAN 15, 1998^URINE^^LR(4221,7019885.7752^EOL999^
+BOO999 1^STAPHYLOCOCCUS HEMOLYTIC^&gt;1000 &lt;10000 CFU/ML ^EOL999^
+ 
+ 
+BOR999 6^MI 98 118^JAN 06, 1998@10:15:11^URINE; CLEAN CATCH MIDSTREAM^Final^JAN 08, 1998^URINE^^LR(4221,7019892.898494^EOL999^
+BOO999 1^STAPHYLOCOCCUS (COAG NEGATIVE)^&gt;50000 &lt;75000 CFU/ML ^EOL999^
+ 
+ 
+BOR999 7^MI 98 115^JAN 06, 1998@09:12:51^URINE^Final^JAN 07, 1998^URINE^^LR(4221,7019892.908756^EOL999^
+BACT RPT REMARK 1^THIS CULTURE SHOWS GROWTH OF SAME ORGANISMS AS OTHER RECENT CULTURES ^EOL999^
+BACT RPT REMARK 2^PLEASE REFER TO THE FOLLOWING CULTURE #'S FOR RESULTS: #118 ^EOL999^
+ 
+ 
+BOR999 8^MI 97 6121^OCT 26, 1997@10:52:21^URINE^Final^OCT 27, 1997^URINE^^LR(4221,7028973.7973^EOL999^
+BACT RPT REMARK 1^NO GROWTH (&lt;1000 CFU/ML) ^EOL999^
+ 
+ 
+BOR999 9^MI 97 5932^OCT 16, 1997@08:42:47^URINE^Final^OCT 17, 1997^URINE^^LR(4221,7028983.817^EOL999^
+BOO999 1^A SUIS^300 10 ^EOL999^
+BOO999 1 TXT 1^ORG A SUIS COMMENT ONE ^EOL999^
+BOO999 1 TXT 2^ORG A SUIS COMMENT TWO ^EOL999^
+BOO999 1 TXT 3^ORG A SUIS COMMENT THREE ^EOL999^
+BOO999 1 TXT 4^ORG A SISI COMMENT FOUR ^EOL999^
+BOO999 2^BIRD^200 21 ^EOL999^
+BOO999 2 TXT 1^ORG 2 COMMENT 1 ^EOL999^
+BOO999 2 TXT 2^ORG 2 COMMENT 2 ^EOL999^
+BOO999 2 TXT 3^ORG 3 BIRD COMMENT 3 ^EOL999^
+BACT RPT REMARK 1^NO GROWTH (&lt;1000 CFU/ML) ^EOL999^
+BACT RPT REMARK 2^THIS IS THE BACT RPT REMARKS ^EOL999^
+BACT RPT REMARK 3^AND ITS HAS FOUR ^EOL999^
+BACT RPT REMARK 4^AND HERE IS THE FOURTH ^EOL999^
+ 
+ 
+BOR999 10^MI 97 5420^SEP 15, 1997@15:04:28^URINE^Final^SEP 16, 1997^URINE^^LR(4221,7029083.849579^EOL999^
+BACT RPT REMARK 1^NO GROWTH (&lt;1000 CFU/ML) ^EOL999^
+ 
+ 
+BOR999 11^MI 96 3414^MAY 25, 1996@11:29:45^URINE^Final^MAY 26, 1996^URINE^^LR(4221,7039473.887064^EOL999^
+BOO999 1^STAPHYLOCOCCUS NON HEMOLYTIC^1 COLONY ^EOL999^
+ 
+ 
+BOR999 12^MI 96 3328^MAY 21, 1996@12:56:18^URINE^Final^MAY 22, 1996^URINE^^LR(4221,7039477.874393^EOL999^
+BACT RPT REMARK 1^NO GROWTH (&lt;1000 CFU/ML) ^EOL999^
+ 
+ 
+BOR999 13^MI 96 1616^MAR 06, 1996@07:41:15^URINE^Final^MAR 07, 1996^URINE^^LR(4221,7039692.9259^EOL999^
+BACT RPT REMARK 1^&gt;1000 &lt;10000 CFU/ML ^EOL999^
+ 
+ 
+BOR999 14^MI 95 1565^FEB 28, 1995@09:02^URINE^Final^MAR 01, 1995^URINE^^LR(4221,7049770.9098^EOL999^
+BACT RPT REMARK 1^NO GROWTH (&lt;1000 CFU/ML) ^EOL999^
+ 
+ 
+BOR999 15^MI 95 1510^FEB 24, 1995@17:14^URINE; CLEAN CATCH MIDSTREAM^Final^FEB 25, 1995^URINE^^LR(4221,7049774.8286^EOL999^
+BOO999 1^GRAM NEG BACILLUS,LACTOSE FERM^&gt;1000 &lt;10000 CFU/ML ^EOL999^
+ 
+ 
+BOR999 16^MI 95 600^JAN 25, 1995@07:30^URINE; CATHETER INDWELLING^Final^JAN 26, 1995^URINE^^LR(4221,7049873.927^EOL999^
+BACT RPT REMARK 1^NO GROWTH (&lt;1000 CFU/ML) ^EOL999^
+ 
+ 
+BOR999 17^MI 94 8818^DEC 17, 1994@13:15^URINE^Final^DEC 18, 1994^URINE^^LR(4221,7058781.8685^EOL999^
+BACT RPT REMARK 1^NO GROWTH (&lt;1000 CFU/ML) ^EOL999^
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

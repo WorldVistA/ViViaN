@@ -1,0 +1,58 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>MAGQ ABP (984)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>MAGQ ABP</td></tr><tr>
+<td>TAG</td><td>ENTRY</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_MAGQBTM.html">MAGQBTM</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Provides a list of Active Background Processes.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>WORKSTAT</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>30</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+This value is the actual workstation name as specified by
+the network operating system.  It is identical to the field
+in the VISTA workstation file (#2006.8) named WRKS COMPUTER
+NAME (#50).
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PROCESS</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>8</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+This value is by design either "B-PROC" or "Purge" and is used to rename
+the VISTA Job name on DSM systems.  This value has the last two IP octet
+concatenated to it for easy identification for system management purposes.
+It is also displayed in the title bar of the workstation process form.
+of the workstation process form.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+(0)="-1^No Background Processor parameters on system" OR
+(0)="-1^Not assigned as a Background Processor" OR
+(0)="0^BP List^IM-_(Purge or B-Proc)_Last two IP Octet^SYSNAME^WS id
+(1)=Process (either JUKEBOX,JBTOHD,DELETE,ABSTRACT,ROUTE)^#to be processed
+.
+.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

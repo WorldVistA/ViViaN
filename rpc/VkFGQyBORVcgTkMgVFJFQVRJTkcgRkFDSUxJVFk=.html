@@ -1,0 +1,71 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>VAFC NEW NC TREATING FACILITY (2730)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>VAFC NEW NC TREATING FACILITY</td></tr><tr>
+<td>TAG</td><td>NEWTF</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_VAFCTFU2.html">VAFCTFU2</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>PUBLIC</td></tr><tr>
+<td>INACTIVE</td><td>ACTIVE</td></tr><tr>
+<td>VERSION</td><td>1</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This Remote Procedure Call will be used by the North Chicago Common 
+Registration User Interface (UI).  Given a patient DFN and DOD EDIPI, the 
+RPC adds an active Department of Defense correlation to the VistA 
+TREATING FACILITY LIST (#391.91) file if it does not exist.  It returns a 
+list of Treating Facilities, including Source Identifier, Identifier 
+Type, Assigning Authority, Assigning Facility, Identifier Status, and an 
+indicator if the entry was entered into File 391.91.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>Vista Patient Identifier</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>255</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+Vista Patient Identifier will be the PATIENT (#2) file IEN (aka DFN).
+ 
+Example: DFN="7168937"
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>DOD Identifier</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>255</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+The DOD Identifier will be EDIPI data with the following format:
+ 
+ Id^IdType^AssigningAuthority^AssigningFacility
+ 
+ Example: EDIPI="852043888^NI^USDOD^200DOD"
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+This will return a list of treating facilities in the following format:
+  
+ Id^IdType^AssigningAuthority^AssigningFacility^IdStatus[^NEW]
+  
+ Examples:
+  
+ RESULT(1)="7168937^PI^USVHA^500^A"
+ RESULT(2)="1^NI^USDOD^200DOD^A^NEW"
+ 
+ Note: If there is data in the 6th piece of the RESULT(&lt;number&gt;), with
+       data value as "NEW", then it means that the entry was newly created
+       in the TREATING FACILITY LIST (#391.91) file by this RPC call.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

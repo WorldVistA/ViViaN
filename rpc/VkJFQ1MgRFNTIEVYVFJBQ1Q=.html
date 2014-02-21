@@ -1,0 +1,79 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>VBECS DSS EXTRACT (2487)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>VBECS DSS EXTRACT</td></tr><tr>
+<td>TAG</td><td>EN</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_VBECDSS.html">VBECDSS</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This RPC inserts or updates post transfusion related data in the VBECS DSS
+EXTRACT file (#6002.03). The data is passed into the VBECDSS routine 
+through the input parameters and a success indicator is returned to the 
+Blood Bank medical device.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>PARAMS</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>999</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+PARAMS("TRANSACTION ID") = Unique record identifier
+PARAMS("DFN") = Patient identifier
+PARAMS("ORDERING LOCATION") = Ordering Institution Identifier
+PARAMS("TRANSFUSION LOCATION") = Tranfusing Institution identifier
+PARAMS("PHYSICIAN") = Provider requesting blood product for transfusion
+PARAMS("ORDERING PROVIDER") = Provider who ordered Type and Crossmatch
+PARAMS("PRODUCT NAME") = Short blood product name
+PARAMS("COMPONENT ABBREVIATION") = Abbreviation of blood component
+PARAMS("NUMBER OF UNITS") = Number of pooled units transfused
+PARAMS("TRANSFUSION DATE") = Date/time of transfusion
+PARAMS("VOLUME") = Total volume of units transfused
+PARAMS("REACTION TYPE") = Type of reaction indicated
+PARAMS("UNIT MODIFICATION") = String of codes representing modifications 
+   done on units transfused. String cannot exceed 6 character. 
+   D = Deglycerolize
+   F = Freeze
+   I = Irradiate
+   L = Leukoreduce
+   P = Pool
+   R = Rejuvenate
+   S = Split/Divide
+   T = Thaw
+   U = Thaw/Pool Cryo
+   V = Volume Reduce
+   W = Wash
+PARAMS("REACTION") = Yes or No value if a reaction was indicated.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+This RPC returns and XML document containing a SuccessIndicator element 
+represented by either a 1 for a successful insert or update or a 0 for an 
+unsuccessful insert or update in the VBECS DSS EXTRACT file (#6002.03).
+ 
+Example of successful transaction:
+&lt;ReturnValue&gt;&lt;SuccessIndicator&gt;1&lt;/SuccessIndicator&gt;&lt;/ReturnValue&gt;
+ 
+Example of unsuccessful transaction:
+&lt;ReturnValue&gt;&lt;SuccessIndicator&gt;0&lt;/SuccessIndicator&gt;&lt;/ReturnValue&gt;
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

@@ -1,0 +1,44 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>ORWDBA2 ADDPDL (1991)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>ORWDBA2 ADDPDL</td></tr><tr>
+<td>TAG</td><td>ADDPDL</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_ORWDBA2.html">ORWDBA2</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Add a new Clinician's Personal DX List or add new ICD9 codes to an 
+existing Clinician's Personal DX List. The Personal DX list is stored in 
+the CPRS Diagnosis Provider file, file # 5000017
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>ORCIEN</dd><dt>PARAMETER TYPE:</dt><dd>REFERENCE</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>255</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+The clinician's internal ID number.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>ORDXA</dd><dt>PARAMETER TYPE:</dt><dd>REFERENCE</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>255</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+The array variable of diagnosis codes to be added to the clinician's 
+personal diagnoses list.
+</pre>
+</dd></li></ol></td></tbody>
+</table>
+</body></html>

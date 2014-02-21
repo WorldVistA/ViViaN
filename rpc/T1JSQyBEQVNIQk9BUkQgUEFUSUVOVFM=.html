@@ -1,0 +1,81 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>ORRC DASHBOARD PATIENTS (1747)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>ORRC DASHBOARD PATIENTS</td></tr><tr>
+<td>TAG</td><td>MAIN</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_ORRCDPT.html">ORRCDPT</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>SUBSCRIPTION</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This call returns a list of patients with recent activity or items that
+need attention for the specified user.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>USER</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the pointer to the user in the New Person file #200.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>LIST</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+These are the lists from which to return patients with data, in the form 
+"type:ien:clinic start:clinic stop" where
+  Provider list = "p:&lt;ien in New Person file #200&gt;"
+OE/RR Team list = "t:&lt;ien in OE/RR List file #100.21&gt;"
+ Specialty list = "s:&lt;ien in Facility Treating Specialty file #45.7&gt;"
+      Ward list = "w:&lt;ien in Ward Location file #42&gt;"
+    Clinic list = "c:&lt;ien in Hospital Location file #44&gt;:&lt;Start&gt;:&lt;Stop&gt;"
+                    where Start and Stop are FileMan-compatible dates
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>TYPE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the type of dashboard view desired, (C)linician or (N)urse.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+This call returns a list of patients for the Care Management Dashboards
+that are relevant for the specified user, including item ID's, as:
+  "Patient=DFN^NAME^SSN^DOB^AGE"
+  "Result=*ORR:##^ORR:##^...^ORR:##"
+  "Task=*TSK:##^TSK:##^...^TSK:##"
+  "Event=VST:ID^VST:ID^...^VST:ID"
+  "Error=^&lt;Error Description&gt;"
+ and also if TYPE="N":
+  "Unverified=ORV:##^...^ORV:##"
+  "Nursing=!ORN:##^...^ORN:##"
+  "Vital=*VIT:ID^...^VIT:ID"
+ where DFN  = Pointer to patient in Patient file #2
+       NAME = Patient name from file #2 (i.e. LAST,FIRST MI)
+       SSN  = SSN or Primary Long ID from file #2
+       DOB  = Date of Birth of patient in the form YYYYMMDD
+       AGE  = Current age of patient (or age at death, if deceased)
+ and ORR:## = Identifier for an order w/results (##=file #100 pointer)
+     TSK:## = Identifier for a task (##=file #102.3 pointer)
+     VST:ID = Identifier for an alert about an appointment
+     ORV:## = Identifier for an unverified order in (##=file #100 pointer)
+     ORN:## = Identifier for a nursing order (##=file #100 pointer)
+     VIT:ID = Identifier for a set of vitals measurements
+       [a leading * indicates abnormal results or high priority, and
+        a leading ! indicates a terminated or unreleased order]
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

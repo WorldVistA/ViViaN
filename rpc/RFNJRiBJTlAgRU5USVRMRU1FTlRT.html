@@ -1,0 +1,68 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIF INP ENTITLEMENTS (2631)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIF INP ENTITLEMENTS</td></tr><tr>
+<td>TAG</td><td>ENTS</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSIFNOT3.html">DSIFNOT3</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This RPC enters the Legal and Medical Entitlements in prep for the 
+creation of the 7078.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>DFN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>99</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+Patient File Pointer (File #2, Required)
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>IEN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>99</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+Internal Entry Number for File 162.2 FEE NOTIFICATION/REQUEST (Required)
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>LEME</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>3</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+Legal, Medical Indicators (Multi-Piece Legal Entitlement;Medical 
+Entitlement 1=Yes, 0=No)
+ 
+If Legal is 0 Medical is forced to be 0 and Suspense code should be 
+entered.
+ 
+If Legal is 1 Medical can be 0 or 1
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>SUSP</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>99</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>4</dd><dt>DESCRIPTION:</dt><dd><pre>
+Suspense Code (Pointer to file 161.27, Required if Legal or Medical is 0)
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>SDESC</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>80</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>5</dd><dt>DESCRIPTION:</dt><dd><pre>
+Suspense Description (WP Array MUST START WITH 1. Only used if Suspense 
+Code = 4 [Other])
+ 
+To delete the existing description, (only if the user wants it 
+deleted) pass SUSD(1)="@"
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Return Value
+        -1 ^ Invalid Input!
+        -1 ^ Selected Entry has a Status of COMPLETE.
+         1 = Entry updated
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

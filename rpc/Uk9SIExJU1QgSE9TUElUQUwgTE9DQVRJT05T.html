@@ -1,0 +1,128 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>ROR LIST HOSPITAL LOCATIONS (1778)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>ROR LIST HOSPITAL LOCATIONS</td></tr><tr>
+<td>TAG</td><td>HLOCLIST</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_RORRP015.html">RORRP015</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>VERSION</td><td>1</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+The ROR LIST HOSPITAL LOCATIONS remote procedure returns a list of 
+hospital locations (defined in the HOSPITAL LOCATION file), which conform
+the criteria.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>PART</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>30</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+The partial match restriction.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>FLAGS</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>SEQUENCE NUMBER:</dt><dd>4</dd><dt>DESCRIPTION:</dt><dd><pre>
+Flags that control the execution (can be combined):
+ 
+  A  Include active locations (default)
+ 
+  B  Backwards. Traverses the index in the opposite
+     direction of normal traversal.
+ 
+  I  Include inactive locations
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>NUMBER</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>SEQUENCE NUMBER:</dt><dd>5</dd><dt>DESCRIPTION:</dt><dd><pre>
+Maximum number of entries to return. A value of "*" or no value in this 
+parameter designates all entries.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>FROM</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>SEQUENCE NUMBER:</dt><dd>6</dd><dt>DESCRIPTION:</dt><dd><pre>
+The index entry(s) from which to begin the list
+  ^01: FromName
+  ^02: FromIEN
+ 
+For example, a FROM value of "VA" would list entries following VA. You can
+use the 2-nd and 3-rd "^"- pieces of the @RESULTS@(0) node to continue the
+listing in the subsequent procedure calls.
+ 
+NOTE: The FROM value itself is not included in the
+      resulting list.
+ 
+See description of the LIST^DIC for more details about the PART, NUMBER
+and FROM parameters.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>HLTYPES</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+List of location types separated by commas (internal values of the TYPE
+field of the HOSPITAL LOCATION file):
+ 
+  C   Clinic
+  F   File Area
+  I   Imaging
+  M   Module
+  N   Non-Clinic Stop
+  OR  Operating Room
+  W   Ward
+  Z   Other Location
+ 
+Only locations of the types defined by this parameter are selected by the 
+remote procedure. By default ($G(HLTYPES)=""), all locations are selected.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>DIVIEN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+Division IEN. If this parameter is defined and greater than zero then only
+the locations associated with this division are selected.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+A negative value of the first "^"-piece of the Results[0] indicates that 
+an error occurred during the execution of the remote procedure. In this 
+case, the second piece of the Results[0] will contain number of the error 
+descriptors returned in the subsequent nodes of the Results array:
+  
+  Results[0]            Result Descriptor
+                          ^01: The last error code
+                          ^02: Number of the error descriptors
+   
+  Results[i]            Error Descriptor
+                          ^01: Error code
+                          ^02: Message
+                          ^03: Place of the error
+ 
+Otherwise, number of hospital locations and the value of the FROM
+parameter for the next procedure call are returned in the Results[0] and
+the subsequent nodes of the global array contain the locations.
+ 
+  Results[0]          Result Descriptor
+                        ^01: Number of locations
+                        ^02: FromName
+                        ^03: FromIEN
+ 
+  Results[i]          Hospital Location
+                        ^01: IEN
+                        ^02: Name
+                        ^03: Location Type (internal)
+                        ^04: Institution IEN
+                        ^05: Division IEN
+                        ^06: Active (0/1)
+ 
+NOTE: The 6th "^"-piece of the location record (Active) is
+      populated only if both "A" and "I" flags are used.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

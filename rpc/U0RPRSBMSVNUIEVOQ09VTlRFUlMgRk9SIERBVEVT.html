@@ -1,0 +1,65 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>SDOE LIST ENCOUNTERS FOR DATES (131)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>SDOE LIST ENCOUNTERS FOR DATES</td></tr><tr>
+<td>TAG</td><td>LIST</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_SDOERPC.html">SDOERPC</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>PUBLIC</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This Remote Procedure Call (RPC) returns a list of Outpatient
+Encounters for a specified date range.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>BEGIN DATE/TIME</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+Beginning date and time in VA FileMan format.
+
+Time is optional.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>END DATE/TIME</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+End date and time in VA FileMan format.
+
+Time is optional.
+
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+The first piece of ';;' of each array item is the internal entry number.
+The second piece of ';;' of each array item is the value of the zeroth node.
+
+Example Array Item: 1232;;2970602.08^706^144^62^407^^2970805.1107^1^^9^1^2^10
+
+
+Note:
+Currently(7/97) only the zeroth node is returned. Also,
+only fields .01 thru .08 and .1 thru .13 of the zeroth are
+returned. Other nodes and fields are not supported.
+
+For detail information regarding the fields, see data dictionary
+for the Outpatient Encounter file (#409.68).
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

@@ -1,0 +1,59 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIV FILE INSURANCE TO AUDIT (3057)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIV FILE INSURANCE TO AUDIT</td></tr><tr>
+<td>TAG</td><td>IN</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSIVIM.html">DSIVIM</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Files new insurance data fields from ICB to the DSIV ICB AUDIT (#19625) 
+file that are not part of the INSURANCE BUFFER (#355.33) file so that they
+may be updated as part of buffer processing by insurance verifiers.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>DSIVAUD</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>30</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+Pointer to the DSIV ICB AUDIT (#19625) file.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>DATA</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>80</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+Contains data to file in the following format: 
+D DATA(n)=field^multi-id^value
+ e.g. DATA(1)="6.01^0^1"
+      DATA(2)="6.02^0^2"
+      DATA(3)="8^1^SYN1" SYNONYM is fld 8, subfile 19625.08 (multiple)
+      DATA(4)="8^2^SYN2"
+      DATA(5)="9^1^FIRST LINE OF REMARKS"  REMARKS is field 9, wp field
+      DATA(6)="9^2^SECOND LINE OF REMARKS"
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+RET(n) will exist based on what data is sent, if only 6.01-6.09 is sent 
+then only RET(1) is returned.
+ 
+ RET(1)=-1^error or 0^Record updated for fields 6.01-6.09 (NOT 6.08)
+ RET(2)=-1^error or 0^Synonym(s) updated
+ RET(3)=-1^error or 0^Remarks updated
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

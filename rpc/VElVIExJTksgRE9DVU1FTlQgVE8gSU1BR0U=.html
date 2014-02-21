@@ -1,0 +1,53 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>TIU LINK DOCUMENT TO IMAGE (392)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>TIU LINK DOCUMENT TO IMAGE</td></tr><tr>
+<td>TAG</td><td>PUTIMAGE</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_TIUSRVPL.html">TIUSRVPL</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>AVAILABILITY</td><td>SUBSCRIPTION</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This RPC links a document with an image. It will support a many-to-many
+association between documents and images.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>TIUDA</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the record number (IEN) of the document in the TIU DOCUMENT FILE
+(#8925).
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>IMGDA</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the record number (IEN) of the document in the IMAGE FILE (#2005).
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+The return variable is a scalar result. If a link is successfully created, 
+it will be the record number of the link in the TIU EXTERNAL LINKAGE FILE 
+(#8925.91). If a link cannot be made (e.g., the document and image are 
+already linked), the return variable will be a two '^'-piece result, with
+zero in the first '^'-piece, and an explanatory message in the second (e.g.,
+0^ Document already linked to this image).
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

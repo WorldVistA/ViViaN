@@ -1,0 +1,42 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>TIU FIELD LIST IMPORT (1108)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>TIU FIELD LIST IMPORT</td></tr><tr>
+<td>TAG</td><td>LIMPORT</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_TIUSRVF1.html">TIUSRVF1</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Calls the import process for a pre-loaded (into ^TMP) list of template
+fields.
+</pre>
+</td></tr><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Returns a list of field names imported in the format NAME^RCODE^RENAME, 
+where NAME is the desired field name, RCODE is 1 or 0 if the field
+was added/same or renamed (respectively), and RENAME is the actual
+saved name of the field if RCODE is 0.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

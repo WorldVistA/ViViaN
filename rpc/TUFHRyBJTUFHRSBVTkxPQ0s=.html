@@ -1,0 +1,76 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>MAGG IMAGE UNLOCK (2571)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>MAGG IMAGE UNLOCK</td></tr><tr>
+<td>TAG</td><td>UNLOCKIM</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_MAGGA04.html">MAGGA04</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This remote procedure unlocks one or more images.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>FLAGS</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+reserved
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>IMGLST</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+List of images that have to be unlocked. Images are referenced by their 
+internal entry numbers (IENs) in the IMAGE (#2005) and IMAGE AUDIT
+(#2005.1) files.
+ 
+Example:
+ 
+  with RPCBroker.Param[1] do
+    begin
+      PType := list;
+      Mult[1] := '234';
+      Mult[2] := '789';
+    end;
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Zero value of the first '^'-piece of the Results[0] indicates that an
+error occurred during the execution of the procedure. In this case, the
+errors are returned in the Results array as shown below:
+  
+  Results[0]            Result descriptor
+                          ^01: 0
+                          ^02: Message
+  
+  Results[i]            Error descriptor
+                          ^01: Error code
+                          ^02: Message
+                          ^03: Error location
+                          ^04: Message type
+ 
+  Results[j]            Line of the additional info (optional)
+                          ^01: ""
+                          ^02: Text  
+ 
+Otherwise, '1^Ok' is returned in the Results[0].
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

@@ -1,0 +1,110 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>VBECS PATIENT LOOKUP (2474)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>VBECS PATIENT LOOKUP</td></tr><tr>
+<td>TAG</td><td>SEARCH</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_VBECLU.html">VBECLU</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This RPC returns XML containing a list of patient demographic data for 
+the purpose of inserting a new patient in the VBECS database for 
+when receiving an autologous or directed unit on a patient that is not 
+already defined in the VBECS Patient table.
+ 
+XML Mapping:
+count attribute =       Number of records found
+Number element =        Sequence number of records found
+VistaPatientId =        PATIENT file (#2) / NUMBER field (#.001)
+PatientLastName =       PATIENT file (#2) / first comma delimited piece 
+                        of the NAME field (#.01)
+PatientFirstName =      PATIENT file (#2) / second comma delimited piece 
+                        and first "space" delimited piece of the NAME
+                        field (#.01)
+PatientMiddleName =     PATIENT file (#2) / second comma delimited piece
+                        and second "space" delimited piece of the NAME
+                        field (#.01)
+Sensitive =             DG SECURITY LOG file (#38.1) / SECURITY LEVEL 
+                        field (#2)
+PatientDOB =            PATIENT file (#2) / DATE OF BIRTH field (#.03) in 
+                        HL7 format
+PatientDOBCode =        Code derived from a missing day or month value in 
+                        PatientDOB.
+                        B = Both Day and Month is unknown.
+                        M = Month is unknown.
+                        D = Day is unknown
+                        V = valid Day/Month/Year
+PatientSSN =            PATIENT file (#2) / SOCIAL SECURITY NUMBER field 
+                        (#.09)
+PatientDeathDate =      PATIENT file (#2) / DATE OF DEATH field (#.351)
+Type =                  TYPE OF PATIENT file (#391) / NAME field (#.01)
+PrimaryEligibility =    MAS ELIGIBILITY CODE file (#8.1) / PRINT NAME 
+                        field (#5)
+ServiceConnected =      PATIENT file (#2) / SERVICE CONNECTED? field 
+                        (#.301)
+ScPercent =             PATIENT file (#2) / SERVICE CONNECTED PERCENTAGE 
+                        field (#.302)
+PatientSexCode =        PATIENT file (#2) / SEX field (#.02)
+PatientICN =            PATIENT file (#2) / INTEGRATION CONTROL NUMBER 
+                        field (#991.01)
+Veteran =               PATIENT file (#2) / VETERAN (Y/N)? field (#1901)
+PatientLocation =       PATIENT file (#2) / WARD LOCATION field (#.1)
+PatientRoomBed =        PATIENT file (#2) / ROOM-BED field (#.101)
+ 
+ 
+XML Example:
+&lt;record count='1'&gt;
+    &lt;Patient&gt;
+        &lt;Number&gt;1&lt;/Number&gt;
+        &lt;VistaPatientID&gt;1000&lt;/VistaPatientID&gt;
+        &lt;PatientLastName&gt;VBECSpatient&lt;/PatientLastName&gt;
+        &lt;PatientFirstName&gt;One&lt;/PatientFirstName&gt;
+        &lt;PatientMiddleName&gt;T&lt;/PatientMiddleName&gt;
+        &lt;Sensitive&gt;false&lt;/Sensitive&gt;
+        &lt;PatientDOB&gt;19291120&lt;/PatientDOB&gt;
+        &lt;PatientDOBCode&gt;V&lt;/PatientDOBCode&gt;
+        &lt;PatientSSN&gt;666000000&lt;/PatientSSN&gt;
+        &lt;Type&gt;SC VETERAN&lt;/Type&gt;
+        &lt;PrimaryEligibility&gt;SC, 50% TO 100%&lt;/PrimaryEligibility&gt;
+        &lt;ServiceConnected&gt;true&lt;/ServiceConnected&gt;
+        &lt;ScPercent&gt;50&lt;/ScPercent&gt;
+        &lt;PatientSexCode&gt;M&lt;/PatientSexCode&gt;
+        &lt;PatientICN&gt;1000000000V000000&lt;/PatientICN&gt;
+        &lt;Veteran&gt;true&lt;/Veteran&gt;
+        &lt;PatientLocation&gt;&lt;/PatientLocation&gt;
+        &lt;PatientRoomBed&gt;&lt;/PatientRoomBed&gt;
+    &lt;/Patient&gt;
+&lt;/record&gt;
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>PARAM</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>999</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+Input PARAM("SEARCH TYPE") = type of search requested
+Input PARAM("SEARCH VALUE") = value to search on
+RETURN PARAMETER DESCRIPTION:
+XML document with list of patients found based on search type and
+search value.
+</pre>
+</dd></li></ol></td></tbody>
+</table>
+</body></html>

@@ -1,0 +1,60 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>GMV LATEST VITALS BY LOCATION (1282)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>GMV LATEST VITALS BY LOCATION</td></tr><tr>
+<td>TAG</td><td>EN1</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_GMVDS1.html">GMVDS1</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>INACTIVE</td><td>ACTIVE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Prints the latest vitals/measurements for all patients on a given ward
+location.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>GMVDATA</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>150</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+A multi-piece variable that identifies the values needed to run the 
+report.
+  
+  Piece  1: n/a
+         2: n/a
+         3: n/a
+         4: n/a
+         5: Device name (File 3.5, Field .01)
+         6: Device internal entry number
+         7: date/time to print the report (FileMan format)
+         8: ward internal entry number (File 42)
+         9: hospital location internal entry number (File 44)
+        10: n/a
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Returns a message stating the outcome of the request to queue the report.
+If the report was successfully queued, RESULT will be "Report sent to 
+device. Task #: " ZTSK" where ZTSK is the task number of the job. If the 
+report could not be queued, RESULT will be "Unable to task the report."
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

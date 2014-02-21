@@ -1,0 +1,60 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DENTV PRIMARY PROVIDER (2044)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DENTV PRIMARY PROVIDER</td></tr><tr>
+<td>TAG</td><td>GS</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DENTVUTL.html">DENTVUTL</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This rpc gets or sets the primary and secondary providers for a
+dental patient. It also sends back the User duz if the user is a dental 
+provider for the Encounter Provider.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>DFN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>15</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+The first parameter is the patient ien (DFN) which is the ien to
+the DENTAL PATIENT (#220) file.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PSPROV</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>40</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+The second, optional, parameter is the primary and secondary provider
+iens, in the format p1^p2^p3.  P3 is the Encounter Provider.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>OMIT</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>1</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+A flag which determines whether omissions are allowed or required.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+If there is no second parameter, then we are "getting" the providers
+and the rpc will return p1^p2^p3 for primary^secondary^encounter provider.
+ 
+If there is a second parameter, then we are "setting" the providers
+into the DENTAL PATIENT file and we will return DFN^Successful if
+we were able to file the data.
+ 
+Errors will be returned as -1^error message.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

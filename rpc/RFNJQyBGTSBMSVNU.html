@@ -1,0 +1,65 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIC FM LIST (1645)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIC FM LIST</td></tr><tr>
+<td>TAG</td><td>LIST</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSICFM05.html">DSICFM05</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+The RPC provides a wrapper around the LIST^DIC API.  It exposes more of 
+the functionality of the API than the DSIC DDR LISTER RPC.
+ 
+For a lookup value, return all entries starting from that lookup value 
+and which collates after that lookup value.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>INPUT</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>250</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+The INPUT(n) = tag^value  where
+  tag = LIST^DIC input parameter name such as
+        FILE  IENS  FIELDS  FLAGS  NUMBER  INDEX  FROM  PART  SCREEN
+  value = value for that input parameter
+ 
+The INDEX variable consists only of a single index name.
+ 
+For those input parameters that allow an array, you can pass that array 
+in the tag such as FROM(2)^lookup value
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+If problems return List[0] = -1^error message.   There may be addtional 
+messages on subsequent lines where List[n] = message  or  -1^message  for
+n = 1,2,3,4,...
+ 
+Return values in list[n] = data  where n = 0,1,2,3,4,...
+  1st ^-piece of data is the ien for that record
+  2nd ^-piece is the value of the field in the 1st ;-piece of FIELDS
+  3rd ^-piece is the value of the field in the 2nd ;-piece of FIELDS
+  4th ^-piece is the value of the field in the 3rd ;-piece of FIELDS
+   etc., etc., ...
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

@@ -1,0 +1,93 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>MAG DOD GET STUDIES IEN (2724)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>MAG DOD GET STUDIES IEN</td></tr><tr>
+<td>TAG</td><td>STUDY2</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_MAGDQR21.html">MAGDQR21</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>INACTIVE</td><td>ACTIVE</td></tr><tr>
+<td>WORD WRAP ON</td><td>FALSE</td></tr><tr>
+<td>VERSION</td><td>3</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This Remote Procedure returns information about studies,
+based upon the IEN (File #2005 or #2005.1) of the image group, Patient Number,
+Study-Level Only Flag, and Include Deleted Images Flag that are provided as parameters.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>GROUPS</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>1000</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+This parameter can either be provided as a single value or as an array.
+Each value found (either GROUPS or GROUPS(i)) will be evaluated by the Remote Procedure.
+Each value found must be the IEN in file #2005 or #2005.1 of a group of images.
+For each group specified, the Remote Procedure will find the study to which
+that group belongs, and then return
+a hierarchical list of all series and images in that study.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>REQDFN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>50</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+This parameter is Patient Number who owns the images.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>IMGLESS</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>1</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+This parameter is an indicator whether to get only Study-Level or include all images.
+Pass "1" to get only Study-Level data.
+Pass null or empty string to include all images.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>FLAGS</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>1</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>4</dd><dt>DESCRIPTION:</dt><dd><pre>
+This parameter is an indicator whether to include or exclude "Deleted" Images.
+Pass "D" to include Deleted Images.
+Pass null or empty string to exclude Deleted Images
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+This Remote Procedure returns an array with information.
+If there is an error in the execution of the Remote Procedure,
+the first element of this array with start with a negative number,
+and the rest of the value in that array element will describe the error.
+ 
+Otherwise, the value of the first element is the number of valid further elements
+and each further element of the output array will follow the
+general format of a keyword, then a vertical bar, and then one or more
+values associated with that keyword.
+For example:
+    OUT(1)=17
+    OUT(2)="STUDY_UID|1.2.840.113754.1.4.660.1.108"
+    OUT(3)="STUDY_PAT|35|9865827312V582731|IMAGPATIENT35,35"
+    OUT(4)="SERIES_UID|"
+    OUT(5)="SERIES_IEN|6196"
+    OUT(6)="SERIES_NUMBER|1"
+    OUT(7)="IMAGE_UID|1.2.840.113754.1.4.660.1.108.59498.43402.0"
+    OUT(8)="IMAGE_IEN|6197"
+    OUT(9)="IMAGE_NUMBER|1"
+   OUT(10)="IMAGE_ABSTRACT|\\vhaiswclu4\User1$\EdD\Image_Gold\DM\00\61\DM006197.ABS"
+   OUT(11)="IMAGE_FULL|\\vhaiswclu4\User1$\EdD\Image_Gold\DM\00\61\DM006197.DCM"
+   OUT(12)="IMAGE_TEXT|\\vhaiswclu4\User1$\EdD\Image_Gold\DM\00\61\DM006197.TXT"
+   OUT(13)="IMAGE_UID|1.2.840.113754.1.4.660.1.108.59498.43402.1"
+   OUT(14)="IMAGE_IEN|6198"
+   OUT(15)="IMAGE_NUMBER|1"
+   OUT(16)="IMAGE_ABSTRACT|\\vhaiswclu4\User1$\EdD\Image_Gold\DM\00\61\DM006198.ABS"
+   OUT(17)="IMAGE_FULL|\\vhaiswclu4\User1$\EdD\Image_Gold\DM\00\61\DM006198.DCM"
+   OUT(18)="IMAGE_TEXT|\\vhaiswclu4\User1$\EdD\Image_Gold\DM\00\61\DM006198.TXT"
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

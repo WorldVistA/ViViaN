@@ -1,0 +1,97 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIR GET ROIS (1674)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIR GET ROIS</td></tr><tr>
+<td>TAG</td><td>GETLIST</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSIROI.html">DSIROI</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This RPC is used to return an array of ROI INSTANCE (File 19620) entries.
+ 
+GETLIST(AXY,TYPE,STAT,IEN)      ;RPC - DSIR GET ROIS
+Input: TYPE: Set of Codes:
+     "P"  : Get list by patient
+     "C"  : Get list by clerk
+     "O"  : Get all open or pending requests.
+            Defaults to all requests for a given status
+     "R"  : Get list by requestor
+   
+ STAT: Set of Codes: (Delimited by '^', defaults to *)
+     "*"  : Get all requests of a given type
+     "O"  : Get only the open requests of this type
+     "C"  : "          " closed "                " (-D,-G,-P)
+     "P"  : "          " pending "               "
+     "N"  : "          " other non-disclosure "  "
+                       (-NR,-RF,-ND,-NV,-RC,-NF,-NU)
+     "E"  : "          " entered in error "      "
+     "X"  : "          " cancelled "             "
+     "A"  : "          " appealed "              " (-RV,-PR)
+ 
+ ID: IFN of patient, requestor or clerk.
+     If not for requestor or clerk IEN should be one of the following 
+formats
+           nnnn;DPT( - VA Patient file entry
+           nnnn;DSIR(19620.96, - DSIR NON-COMPUTERIZED RECORDS PATIENT
+           1;DSIR(19620.95, - True FOIA requests
+        
+Return: Global Array
+ IEN^Patient Name^External Date Entered^Status^Requestor^SSN^Priority^FMDT
+    ^Exemptions^Expedite Reqstd^Expedite Granted^Clerk Name
+    ^Opened by Clerk Name^Internal Opened Date^External Open Date
+    ^Last Closed Clerk^Internal Last Closed Date^External Last Closed Date
+    ^Last Reopen Clerk^Internal Last Reopen Date^External Last Reopen Date
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>TYPE OF LIST</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>1</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+"P"  : Get list by patient
+"C"  : Get list by clerk
+"O"  : Get all open or pending requests.
+ 
+Defaults to all requests for a given status
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>STATUS</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>8</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+"A"  : Get only the appealed requests of this type
+"O"  : Get only the open requests of this type
+"C"  : "          " closed "                "
+"P"  : "          " pending "               "
+"N"  : "          " Other Nondisclosures    "
+"E"  : "          " entered in error "      "
+"X"  : "          " cancelled "             "
+"*"  : Get all types
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PATIENT/CLERK ID</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>99</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+DFN of patient or IEN of clerk.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+IEN^Patient Name^External Date Entered^Status^Requestor^SSN^Priority^FMDT
+    ^Exemptions^Expedite Reqstd^Expedite Granted^Clerk Name
+    ^Opened by Clerk Name^Internal Opened Date^External Open Date
+    ^Last Closed Clerk^Internal Last Closed Date^External Last Closed Date
+    ^Last Reopen Clerk^Internal Last Reopen Date^External Last Reopen Date
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

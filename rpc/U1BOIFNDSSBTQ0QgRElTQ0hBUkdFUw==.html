@@ -1,0 +1,92 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>SPN SCI SCD DISCHARGES (2819)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>SPN SCI SCD DISCHARGES</td></tr><tr>
+<td>TAG</td><td>COL</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_SPNJRPSD.html">SPNJRPSD</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>INACTIVE</td><td>ACTIVE</td></tr><tr>
+<td>APP PROXY ALLOWED</td><td>Yes</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Returns detailed information for SCI/SCD DISCHARGES for a list of given 
+patients (based on the ICN) based on a date range.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>ICNLIST</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>DESCRIPTION:</dt><dd><pre>
+Patient's ICN in string format (ICN^ICN^ICN^ICN...)
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>FDATE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>DESCRIPTION:</dt><dd><pre>
+Date to start search from.  
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>TDATE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>DESCRIPTION:</dt><dd><pre>
+Date to end search at.  
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+ 
+Return format:
+ 
+HDR1999^Patient^SSN^SCI^EOL999
+Patient Name ^ Social Security Number ^ VA SCI Status ^ EOL999
+ 
+(detail/repeating):
+HDR2999^Date D/C^LOS^D/C Location^Diagnosis Codes^EOL999
+DTL999^ Date of Discharge ^ Length of Stay ^ Discharge Location ^ EOL999
+ 
+(diagnosis/repeating):
+DIAG999 ^ Diagnosis Code ^ EOL999
+ 
+HDR3999^Facility^Station #^Total^EOL999
+Name of receiving facility ^ Station Number ID ^ Total # of patients 
+received ^ EOL999
+ 
+ 
+Sample of return:
+ 
+HDR1999^Patient^SSN^SCI^EOL999
+PAT999^AKDYFSXY,KUHYIL A^000-00-9001^NOT APPLICABLE^EOL999
+HDR2999^Date D/C^LOS^D/C Location^Diagnosis Codes^EOL999
+DTL999^7/28/02^1^ICU-M^EOL999
+DIAG999^HYPOVOLEMIA^EOL999
+DIAG999^CARDIAC DYSRHYTHMIAS NEC^EOL999
+DIAG999^ANEMIA NOS^EOL999
+DIAG999^ASTHMA NOS^EOL999
+HDR1999^Patient^SSN^SCI^EOL999
+PAT999^CALWWHU,KDAA A^000-00-9002^NOT APPLICABLE^EOL999
+HDR2999^Date D/C^LOS^D/C Location^Diagnosis Codes^EOL999
+DTL999^12/9/03^1^^EOL999
+HDR1999^Patient^SSN^SCI^EOL999
+PAT999^DHPHN,ELUXAI G^000-00-9003^PARAPLEGIA-NONTRAUMATIC^EOL999
+HDR2999^Date D/C^LOS^D/C Location^Diagnosis Codes^EOL999
+DTL999^1/31/03^29^HOSPICE^EOL999
+DIAG999^MAL NEO BRONCH/LUNG NOS^EOL999
+DIAG999^SECONDARY MALIG NEO BONE^EOL999
+DIAG999^MYELOPATHY IN OTH DIS^EOL999
+DIAG999^ENCOUNTER-PALLIATIVE CARE^EOL999
+DIAG999^COR ATHEROSCL UNSP TYP-VES^EOL999
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

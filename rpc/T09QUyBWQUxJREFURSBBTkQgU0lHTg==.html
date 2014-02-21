@@ -1,0 +1,60 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>OOPS VALIDATE AND SIGN (1414)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>OOPS VALIDATE AND SIGN</td></tr><tr>
+<td>TAG</td><td>SETSIGN</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_OOPSGUI1.html">OOPSGUI1</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This broker call handles the validation of data prior to a user entering their 
+electronic signature code.  It also validates the electronic signature code 
+and then assures that the users electronic signature code, the date/time of 
+signature, and the users DUZ is filed in the Vista database.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>INPUT</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>256</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+This parameter contains the IEN of the record being filed, the form (CA1 or
+CA2), and the Field number that will trigger the data validation to be 
+performed on the fields in the form.
+
+The format for this parameter is: IEN^FORM^FIELD^WCFLAG.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>SIGN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>256</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+This parameter passes in the text to be encrypted, validated, and used as the
+electronic signature.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+The RESULTS array will contain different message that indicate any problems
+or issues detected during the signing process.  The following messages are
+possible:
+  User not Authorized to sign form
+  Claim cannot be signed until the Bill of Rights Statement is understood 
+  No Signature Entered
+  No Electronic Signature on File
+  Invalid Signature Entered
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

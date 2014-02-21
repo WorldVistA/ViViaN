@@ -1,0 +1,143 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>SPN PHARMACY UTL REPORT (2789)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>SPN PHARMACY UTL REPORT</td></tr><tr>
+<td>TAG</td><td>RPC</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_SPNLRL7.html">SPNLRL7</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>INACTIVE</td><td>ACTIVE</td></tr><tr>
+<td>APP PROXY ALLOWED</td><td>Yes</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>FDATE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>DESCRIPTION:</dt><dd><pre>
+Date to start from.  mm/dd/yyyy.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>COST</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>DESCRIPTION:</dt><dd><pre>
+Value must be either ACTUAL OR CURRENT.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>MINCOST</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>DESCRIPTION:</dt><dd><pre>
+Minimum dollar cost of dispensed fills to display:  (0-9999999)
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>MINFILL</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>DESCRIPTION:</dt><dd><pre>
+Minimum number of fills to display:  (1-999999)
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PTLIST</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>DESCRIPTION:</dt><dd><pre>
+ICN^ICN^ICN
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>TDATE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>DESCRIPTION:</dt><dd><pre>
+Date to end collection.  mm/dd/yyyy.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>HIUSERS</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>DESCRIPTION:</dt><dd><pre>
+Number of highest users to identify:  (0-100)
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+RPC SPN PHARMACY UTL REPORT Results: 
+IP address of test 127.0.0.12
+ 
+Prameters 7
+1) JAN 1 2004
+2) JAN 15 2004
+3) ACTUAL
+4) 10
+5) 2
+6)1002651548^1002633845^1002632389^1002636280^1005409510^1002623561^
+1002654116^1002625018^1002624576^1005547840^1002624513
+7) 0
+Note that changing the seventh parameter will include the highest users 
+count.  
+ 
+ 
+ 
+BOS999^EOL999
+HDR999^Totals: 38 fills reported for 11 patients^EOL999
+HDR999^These include 31 different drugs^EOL999
+1^8^EOL999
+1^6^EOL999
+3^4^EOL999
+2^3^EOL999
+2^2^EOL999
+2^1^EOL999
+ 
+BOS999^EOL999
+HDR999^Drugs with 2 or more fills^EOL999
+OXYCODONE 5MG/ACETAMINOPHEN 325MG TAB^5^4^2(1)^EOL999
+INTERFERON BETA-1A 30MCG/SYR (AVONEX)^3^2^2(1)^EOL999
+COLON ELECTROLYTE LAVAGE PWD FOR SOLN^2^1^^EOL999
+ 
+BOS999^EOL999
+HDR999^Drugs with fills totaling $10.00 or more^EOL999
+CLINDAMYCIN HCL 150MG CAP^31.44^1^80^1^EOL999
+PERI-WASH 8 OZ^2451.84^1^960^1^EOL999
+NUTRITION SUPL ENSURE/VANILLA PWD^21.6^1^7200^1^EOL999
+CATHETER, FREEDOM MEDIUM^25.5^1^30^1^EOL999
+MORPHINE 60MG SR TAB^15.12^1^60^1^EOL999
+OXYCODONE 5MG/ACETAMINOPHEN 325MG TAB^11.1^5^300^4^EOL999
+SERTRALINE HCL 100MG TAB^36.36^1^30^1^EOL999
+FENTANYL 25MCG/H TRANSDERMAL PATCH^80.46^1^10^1^EOL999
+GABAPENTIN 300MG CAP^53.73^1^90^1^EOL999
+CALCIUM ALGINATE DRSNG 3 X 4 3/4 10'S^36.5^1^10^1^EOL999
+LANSOPRAZOLE 30MG SA CAP^16.122^1^30^1^EOL999
+INTERFERON BETA-1A 30MCG/SYR (AVONEX)^6268.56^3^12^2^EOL999
+UNDERPAD,BED LARGE^21.555^1^150^1^EOL999
+PRECISION Q-I-D GLUCOSE TEST STRIP^17.2^1^50^1^EOL999
+DRESSING,RESTORE PLUS 6IN X 8IN H#9954^99.207^1^9^1^EOL999
+QUETIAPINE FUMARATE 25MG TAB^93.3^1^150^1^EOL999
+EPOETIN ALFA,RECOMB 20,000UNT/ML INJ^525.8^1^4^1^EOL999
+ 
+BHDR999^TOTAL for listed drugs 9805.394^EOL999
+BHDR999^TOTAL (including unlisted drugs) 9863.5756^EOL999
+ 
+BOS999^EOL999
+HDR999^Dollor Cost^EOL999
+1^4,200-4,299^EOL999
+1^2,400-2,499^EOL999
+1^2,100-2,199^EOL999
+1^500-599^EOL999
+2^100-199^EOL999
+5^0-99^EOL999
+ 
+High user output if it's input:
+ 
+HDR999^Highest Utilization Patients Based on Fills^EOL999
+BHASXY,UXFHU U (O)^101-02-0265^8^6^4252.959^EOL999
+TNAHU,CLJVRHADYH CRTSDYH (C)^101-08-8130^6^6^147.327^EOL999
+OATHY,UDJELUI L (C)^101-09-2363^4^4^2139.775^EOL999
+TXZADYTXY,LYIUHP A (H)^101-10-5522^4^4^33.89^EOL999
+BXNBDY,PDAADLZ (O)^101-05-4234^4^3^43.5556^EOL999
+TLUWAHN,JLUASXY Z^101-02-4101^3^3^2474.8^EOL999
+BUXPY,AHUXN^101-01-5378^3^3^12.48^EOL999
+DXIFH,JAHLQHT J (C)^101-06-4996^2^2^135.707^EOL999
+AADF,YXUZLY P (C)^101-12-2314^2^2^81.16^EOL999
+ 
+BOS999^EOL999
+HDR999^Highest Utilization Patients Based on Cost^EOL999
+BHASXY,UXFHU U (O)^101-02-0265^8^6^4252.959^EOL999
+TLUWAHN,JLUASXY Z^101-02-4101^3^3^2474.8^EOL999
+OATHY,UDJELUI L (C)^101-09-2363^4^4^2139.775^EOL999
+FULYBADY,LAKHUS C (C)^101-06-3363^1^1^525.8^EOL999
+TNAHU,CLJVRHADYH CRTSDYH (C)^101-08-8130^6^6^147.327^EOL999
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

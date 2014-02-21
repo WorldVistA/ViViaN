@@ -1,0 +1,97 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIV ONE LOC APPTS (3054)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIV ONE LOC APPTS</td></tr><tr>
+<td>TAG</td><td>RQONELOC</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSIVIC5.html">DSIVIC5</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>PUBLIC</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Request all appointments for one hospital location with insurance flag, 
+check-in user, check-out user, and manual patient flag.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>MORE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>1</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>8</dd><dt>DESCRIPTION:</dt><dd><pre>
+Contains a 1 if this is a second call to the rpc to get more records.  
+Used with the NUMS field to get sets of data and not overwhelm the broker 
+or timeout.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>LOCIEN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>16</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+Hospital Location IEN
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>SDT</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>16</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+FileMan Start date.time (optional)
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>EDT</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>16</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+FileMan End date.time (optional)
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>DAYS</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>10</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>4</dd><dt>DESCRIPTION:</dt><dd><pre>
+Number of days prior to today for last verified check (default=182)
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>SCREEN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>1</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>5</dd><dt>DESCRIPTION:</dt><dd><pre>
+Contains the type of appointment to screen out:  1=checked in (which also 
+screens checked out appointments by default) or 2=checked out
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>NUMS</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>9</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>7</dd><dt>DESCRIPTION:</dt><dd><pre>
+Contains the number of records to return for each call.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>BUF</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>1</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>6</dd><dt>DESCRIPTION:</dt><dd><pre>
+This field can be set to 1 to screen out (not return) appointments if 
+there's an existing buffer entry for that patient.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Global array.  Each node has 10-12 pieces.
+On error, RESULT(1)=-1^Error message
+ 
+The first six pieces are the same as those described in the 
+VEJDSD GET SCHEDULED APPTS remote procedure return parameter
+description.
+ 
+The 7th piece is an insurance flag:
+Flag Value 1=Either of the following conditions are met:
+    a.  Field #.3192 COVERED BY INSURANCE=NO or UNKNOWN
+    b.  For ANY .312 field 3 entry
+        If Last Verified &gt; n DAYS before today 
+        AND expiration date &gt; today 
+        OR  expiration date is NULL
+Flag Value 0=Otherwise
+ 
+The 8th and 9th ^-pieces have additional information if
+insurance is verified as NO coverage.
+ 
+The 10th piece is check-in user from the 7th piece of the
+VEJDSD GET SCHEDULED APPTS return parameter description.
+ 
+The 11th piece is check-out user from the 8th piece of the
+VEJDSD GET SCHEDULED APPTS return parameter description.
+ 
+The 12th piece is the manual patient verification flag 
+(field .01 PATIENT) from file 19625.3 DSIV ICB MANUAL
+PATIENT FLAG.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

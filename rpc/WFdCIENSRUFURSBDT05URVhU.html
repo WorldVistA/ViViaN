@@ -1,0 +1,52 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>XWB CREATE CONTEXT (14)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>XWB CREATE CONTEXT</td></tr><tr>
+<td>TAG</td><td>CRCONTXT</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_XWBSEC.html">XWBSEC</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Establishes context on the server, which will be checked by the Broker before
+executing any other remote procedure.  Since context is nothing more than a
+client/server "B"-type option in the OPTION file (#19), standard MenuMan
+security is applied in establishing a context.  Therefore, a context option
+can be granted to user(s) exactly the same way as regular options are done
+using MenuMan.
+
+A context can not be established for the following reasons:
+
+       · The user has no access to that option
+
+       · The option is temporarily out of order
+
+An application can switch from one context to another as often as it needs to.
+Each time a context is created the previous context is overwritten.
+
+For more information on creating a context and the overall Broker security
+see Broker on-line help documentation.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

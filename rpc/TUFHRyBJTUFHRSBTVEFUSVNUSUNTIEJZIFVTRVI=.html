@@ -1,0 +1,59 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>MAGG IMAGE STATISTICS BY USER (2919)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>MAGG IMAGE STATISTICS BY USER</td></tr><tr>
+<td>TAG</td><td>GETUSRPT</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_MAGGA03Q.html">MAGGA03Q</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Return all statistics reports previously tasked for a user
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>MAGDUZ</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+Internal ID of a user that has previously queued an Image Statistics 
+Report.
+The default value is the current user DUZ.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+MAGRY(0) -  ^01: 1 Successful execution of the remote procedure
+                 0 An error occurred during the execution of the remote procedure
+ 
+            ^02: The number of reports identified for the user
+
+MAGRY(1..n) ^01: report FLAGS parameter
+            ^02: report FROMDATE parameter
+            ^03: report TODATE parameter
+            ^04: report REPORT START DATE/TIME parameter
+            ^05: report REPORT COMPLETE DATE/TIEM parameter
+  
+  e.g.
+    0)=1^5 Reports found for user IMAGING,USER
+    1)=CDE^2900613^3100503^3100505.09053^3100505.09053
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

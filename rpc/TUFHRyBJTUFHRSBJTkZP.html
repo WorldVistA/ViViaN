@@ -1,0 +1,66 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>MAGG IMAGE INFO (972)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>MAGG IMAGE INFO</td></tr><tr>
+<td>TAG</td><td>IMAGEINF</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_MAGGTU3.html">MAGGTU3</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Returns information on 1 Image
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>IEN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>30</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+internal entry number in IMAGE file  ^MAG(2005,IEN
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>NOQACHK</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>4</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+If this flag is sent with a value of 1, then the QA check will
+not be run.  Image information will be returned even if it is an
+image of Questionable Integrity.
+This is used when deleting an Image, but the user needs to see
+information that may have been blocked otherwise.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Returns '^' delimited string of image info
+$P(1^2^3)     IEN^Image FullPath and name^Abstract FullPath and Name
+$P(4)           SHORT DESCRIPTION field and desc of offline JukeBox
+$P(5)           PROCEDURE/ EXAM DATE/TIME field
+$P(6)           OBJECT TYPE
+$P(7)           PROCEDURE field
+$P(8)          display date
+$P(9)          to return the PARENT DATA FILE image pointer
+$p(10)        return the ABSTYPE  'M' magnetic 'W' worm  'O' offline
+$p(11)        is  'A' accessable   'O' offline
+$p(12^13)  Dicom Series Number  $p(12) and   Image Number  $p(13)
+$p(14        is count of images in group, 1 if single image.
+$p(15^16)   SiteParameter IEN ^ SiteParameter CODE
+$P(17)      is err description of Integrity Check
+$P(18)      Image BIGPath and name             //Patch 5
+$P(19^20)   Patient DFN  ^ Patient Name; // Patch 3.8
+$P(21)          Image Class: Clin,Admin,Clin/Admin,Admin/Clin
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

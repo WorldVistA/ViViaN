@@ -1,0 +1,127 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DENTV EXCEL EXTRACT (1079)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DENTV EXCEL EXTRACT</td></tr><tr>
+<td>TAG</td><td>EXCEL</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DENTVRP9.html">DENTVRP9</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This rpc will extract data from the history file (228.1) and format it
+so that the data can be imported into a spreadsheet.  The data will be in
+delimited format, with the '^' as the delimiter.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>SDT</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>14</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the start date/time for the extract.  The date/time must be in
+Fileman internal format.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>EDT</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>14</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the end date for the extract.  It must be in internal Fileman
+format.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PROV</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>20</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+Optional - if you want to extract only those records for a particular
+provider, then pass that provider's ien from file 200.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>DFN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>20</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>4</dd><dt>DESCRIPTION:</dt><dd><pre>
+Optional - if you wish to extract records for a particular patient, then
+pass the ien of that patient.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>FLG</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>4</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>5</dd><dt>DESCRIPTION:</dt><dd><pre>
+Contains the string CFPO or any combination of that.
+ C=complete txns (defaulted for old extract option)
+ P=planned txns
+ F=Findings
+ O=Observed
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>STN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>10</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>6</dd><dt>DESCRIPTION:</dt><dd><pre>
+Contains the external facility ID (500, 500BZ, etc) for which the user 
+wants extracted data.  If this field is null (not sent), then all 
+facilities will be returned.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+ RET is returned as the global reference ^TMP("DENT",$J)
+ SD = start date for extract (required)
+ ED = end date for extract (required)
+ PROV = provider ien (optional) - if present only return prov's recs
+ DFN = patient ien (optional) - if present only return pat's recs
+ FLG = E or R (optional) - default is "E" if not passed
+       E = use encounter date/time   R = use record created date
+ STN = facility to extract 
+ Format of global array returned.  Each record found in file 228.1
+ will consist of the following format:
+  # indicates start of individual record
+  $ indicates end of individual record
+  Line 1 of a record:   #   (starter block)
+  Line 2 of a record: p1^p2^p3^p4^p5^p6^p7^p8^p9^p10^p11^   where
+    p1 = ien to file 228.1
+    p2 = name of patient            p3 = SSN of patient
+    p4 = group flag (y)             p5 = date record created
+    p6 = name of person who entered record
+    p7 = name of provider           p8 = ien to visit file
+    p9 = date of encounter         p10 = time of encounter
+    p11 = date/time of DAS entry
+  Line 3 of record: p1^p2^p3^p4^p5^p6^p7^p8^p9^p10^p11   where
+    p1 = location                   p7 = primary pce diagnosis
+    p2 = agent orange related (y)   p8 = DAS patient category
+    p3 = environmental contaminant related (y)
+    p4 = ionizing rad related (y)   p9 = DAS bed section
+    p5 = service connected related (y)
+    p6 = military sexual trauma (y) p10 = DAS division
+                                    p11 = DAS disposition
+  Lines 4,5,6,etc of a record consist of the individual tooth data
+    p1^p2^p3^p4^p5^p6^p7^p8^p9^p10^p11^p12^p13^p14^p15    where
+      p1 = tooth # (0-32)
+      p2 = surfaces
+      p3 = cpt code
+      p4 = cpt short desc
+      p5 = quadrants
+      p6 = # canals
+      p7 = primary flag (y)
+      p8 = icd9 code (primary)
+      p9 = ctv value
+     p10 = flag indicating data filed to DAS (y)
+     p11 = flag indicating data filed to PCE (y)
+     p12,p13,p14,p15 = icd9 code (secondary codes)
+  Last line of a record = $
+  
+The program receiving this data needs a loop looking for start block #
+ 1. Gets line starting with '#'
+ 2. Save all characters after the # to be used to create an excel row
+ 3. Get next continuation line
+ 4. Then loop to retrieve all tooth related data
+    a. Then output as string the data from step 2 + 3 + 4 as one line
+       for one row in the spreadsheet.  If multiple teeth per record,
+       then you should have multiple rows in your spreadsheet.
+ 5. $ indicates termination of individual record, go back and look for
+    next start block #
+ 6. User should now have a .TXT file for importing into Excel to be
+    parsed using the ^ as a delimiter.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

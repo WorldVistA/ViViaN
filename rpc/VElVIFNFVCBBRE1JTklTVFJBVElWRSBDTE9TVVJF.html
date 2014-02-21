@@ -1,0 +1,61 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>TIU SET ADMINISTRATIVE CLOSURE (1110)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>TIU SET ADMINISTRATIVE CLOSURE</td></tr><tr>
+<td>TAG</td><td>ADMNCLOS</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_TIUSRVPT.html">TIUSRVPT</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>AVAILABILITY</td><td>SUBSCRIPTION</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This remote procedure sets the file attributes necessary to close a
+document by administrative action (either manually or by scanning a paper
+document that doesn't require the signature of an author as a typical TIU
+Document would).
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>TIUDA</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the IEN of the document in the TIU DOCUMENT FILE (#8925).
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>MODE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the alphabetic code for the manner in which the document was
+closed (i.e., "S" for Scanned Document, or "M" for Manual Closure).
+ 
+Optional: Defaults to "S".
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PERSON</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the IEN in the NEW PERSON file (#200) of the person who closed the
+document.
+ 
+Optional: Defaults to DUZ (i.e., the current user).
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+If successful, this RPC returns the IEN in the TIU DOCUMENT file (#8925)
+of the document that was closed.
+ 
+Otherwise, it will return:  0^&lt;Explanatory message&gt;
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

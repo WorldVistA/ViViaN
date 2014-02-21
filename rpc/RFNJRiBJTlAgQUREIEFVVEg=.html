@@ -1,0 +1,81 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIF INP ADD AUTH (2641)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIF INP ADD AUTH</td></tr><tr>
+<td>TAG</td><td>ADD</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSIFINP2.html">DSIFINP2</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>WORD WRAP ON</td><td>FALSE</td></tr><tr>
+<td>VERSION</td><td>3.2</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This RPC is used to pass in an array of values to add a new 
+Inpatient Authorization.  It does verification for required data.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>ARRAY</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>350</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+ Input array values (add/edit RPC's)
+ ; Input array values (add/edit RPC's)
+  (1)=Patient^DFN - REQ
+  (2)=AuthIEN^IEN of Authorization [supplied for an Edit, null to add new
+authorization] - REQ
+  (3)=FromDate^[Supplied in FM Date format] - REQ
+  (4)=ToDate^[Supplied in FM Date format]
+  (5)=Location^IEN [of file #4 (Primary Service area)] 
+  (6)=PurposeofVisit^POV IEN [file #161.82] - REQ
+  (7)=CostRecovery^(1 or 0)
+  (8)=Accident Related^(1 or 0)
+  (9)=Clerk^IEN [of file 200] - REQ
+  (10)=TreatmentType^IEN (set of codes)
+  (11)=TypeofCare^IEN (set of codes)
+  (12)=DX^1^[value]
+  (13)=DX^2^[value]
+  (14)=DX^3^[value]
+  (15)=PatientType^IEN (set of codes) 
+  (16)=Vendor^IEN (of file #161.2)
+  (17)=*DELETED - NOT USED
+  (18)=Consult #^IEN
+  (19)=Fee^(Fee program IEN file #161.8) - REQ
+  (20)=7078^Associated 7078 IEN - REQ
+  (21)=Discharge type^type (Optional, but if entered it MUST be 1-4 only)
+  (50)=Remarks^1^first 80 chars of text
+  (51...999999)=Remarks^n^next 80 chars of text
+ 
+Required fields are so noted
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Successful:  "1^Entry number #n added succesfully"
+  
+ Failure:  
+    "-1^Missing from date, quitting (nothing filed)"
+    "-1^Not a valid Patient"
+    "-1^No Authorization number, quitting (nothing filed)"
+    "-1^Invalid clerk, quitting (nothing filed)"
+    "-1^Invalid or missing 7078,quitting"
+    "-1^No Fee Program or Invalid Fee Program entered, quitting"
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

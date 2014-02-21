@@ -1,0 +1,74 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DVBAB AMIS REPORT (889)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DVBAB AMIS REPORT</td></tr><tr>
+<td>TAG</td><td>STRT</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DVBAB3.html">DVBAB3</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>INACTIVE</td><td>ACTIVE</td></tr><tr>
+<td>WORD WRAP ON</td><td>FALSE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Returns an AMIS report for specified search criteria.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>BDATE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+Beginning date in a date range to use for retrieving results for the 
+report.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>EDATE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+Ending date in a date range to use for retrieving results for the report.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>RONUM</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is an optional parameter that has 2 optional pieces: 
+     REGIONAL OFFICE^DIVISION
+If this parameter is defined, then the report logic will filter the 
+results by the Regional Office number passed and/or Division.
+ 
+Regional Office should always be included in the 1st '^' delimited piece 
+and the Division should always be included in the 2nd '^' delimited piece 
+if values are to be passed.
+ 
+If the 1st '^' delimited piece is undefined, null or 0 then results for 
+all Regional Offices (RO) will be returned. If Division is undefined, 
+null or 0, then results for all Divisions will be returned.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>SBULL</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>4</dd><dt>DESCRIPTION:</dt><dd><pre>
+A Y/N value which indicates whether a bulletin should be generated when 
+the processing has completed.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>DUZ</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>5</dd><dt>DESCRIPTION:</dt><dd><pre>
+Identifies the individual in the NEW PERSON File (#200) who should 
+recieve the bulletin generated.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>DVBAPRTY</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>4</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>6</dd><dt>DESCRIPTION:</dt><dd><pre>
+Priority of Exam code which inidicates which priorities to filter on.
+   AO   : Agent Orange
+   BDD  : Benefits Delivery at Discharge and Quick Start
+   IDES : Integrated Disability Evaluation System
+   ALL  : All Others (Original Report with all codes except those above)
+</pre>
+</dd></li></ol></td></tbody>
+</table>
+</body></html>

@@ -1,0 +1,71 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>MAGV GET REPORT (3130)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>MAGV GET REPORT</td></tr><tr>
+<td>TAG</td><td>GETRPT</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_MAGVRS08.html">MAGVRS08</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>INACTIVE</td><td>ACTIVE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This RPC, given the internal entry number of an entry on the IMAGING
+PROCEDURE REFERENCE File (#2005.61) that references a VA procedure,
+returns an array containing the report text for that procedure and 
+associated attributes.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>PATREFIEN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>10</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the internal entry number on the IMAGING PATIENT REFERENCE File
+(#2005.6) of the patient with whom this procedure reference is
+associated.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PROCREFIEN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>10</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the internal entry number of the entry on the IMAGING PROCEDURE
+REFERENCE File (#2005.61) for which report information is to be returned.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>OVERRIDE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>3</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+This parameter should be used with EXTREME CAUTION.  If valued TRUE
+(nonzero), it suppresses the check of the patient reference IEN against
+the value of the PARENT IEN Field (#.99) on the IMAGING PROCEDURE
+REFERENCE File (#2005.61).
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+This RPC returns an array containing report text and related information 
+associated with the VA procedure that is referenced by the requested entry
+on the IMAGING PROCEDURE REFERENCE File (#2005.61).  The entries of the
+array are formatted as &lt;fname&gt;`&lt;value&gt;.
+ 
+If the entry does not point to a VA procedure, an appropriate exception is
+returned.
+ 
+Otherwise, the following attributes are valued:
+DOCUMENT TYPE
+ENTRY DATE/TIME
+EPISODE END DATE/TIME
+REPORT TEXT
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

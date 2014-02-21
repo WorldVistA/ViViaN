@@ -1,0 +1,108 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>SPN PROS UTL REPORT (2816)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>SPN PROS UTL REPORT</td></tr><tr>
+<td>TAG</td><td>COL</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_SPNJRPP1.html">SPNJRPP1</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>INACTIVE</td><td>ACTIVE</td></tr><tr>
+<td>APP PROXY ALLOWED</td><td>Yes</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Returns detailed information for delivered prosthetics items for a list 
+of given patients (based on the ICN) based on a date range.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>ICNLIST</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>DESCRIPTION:</dt><dd><pre>
+Patient's ICN in string format (ICN^ICN^ICN^ICN...)
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>FDATE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>DESCRIPTION:</dt><dd><pre>
+Date to start collection from: (mm/dd/yyyy)
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>TDATE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>DESCRIPTION:</dt><dd><pre>
+Date to end collection: (mm/dd/yyyy)  
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+ 
+Return format:
+ 
+HDR999^PATIENTS^ITEMS^EOL999
+ (detail/repeating):
+Number of patients ^ Number of items ^ EOL999
+ 
+HDR999^PROSTHETIC ITEM^BRIEF DESCRIPTION^QUANTITY^TOTAL 
+COSTS^PATIENTS^EOL999
+(detail/repeating):
+Item number for prosthetic device ^ description of prosthetic device ^ 
+total number that were ordered ^ total cost for all orders ^ number of 
+patients ordering this device ^ EOL999
+ 
+HDR999^STATION^NAME^SSN^PROSTHETIC ITEM^BRIEF DESCRIPTION^PSAS HCPC^TOTAL 
+COST^TRANSACTION TYPE^DATE DELIVERED
+(detail/repeating):
+Institution/station ^ Patient's name ^ Patient's SSN ^ Item number for 
+prosthetic device ^ description of prosthetic device ^ PSAS HCPC for the 
+device ^ total cost for the item(s) ordered ^ transaction type for device 
+ordered ^ date the item(s) were delivered ^ EOL999
+ 
+ 
+Sample of return:
+ 
+HDR999^PATIENTS^ITEMS
+2^3^EOL999
+1^2^EOL999
+2^1^EOL999
+ 
+HDR999^PROSTHETIC ITEM^BRIEF DESCRIPTION^QUANTITY^TOTAL 
+COSTS^PATIENTS^EOL999
+2128^WHEELCHAIR,CUSTOM^1^298.89^1^EOL999
+2129^EYEGLASSES, PRESCRIPTION^1^102.45^1^EOL999
+2462^SPLINT-BRACE-WRIST/L-LG-1B39^2^24.00^1^EOL999
+3006^TIP-CANE-CRUTCH^2^^1^EOL999
+3022^BRACE-ANKLE^1^49.99^1^EOL999
+7682^HEEL LIFT ADJUSTABLE MEDIUM^1^18.76^1^EOL999
+9958^PROSTHETIC SOCK WOOL BK^2^53.95^1^EOL999
+ 
+HDR999^STATION^NAME^SSN^PROSTHETIC ITEM^BRIEF DESCRIPTION^PSAS 
+HCPC^TOTAL COST^TRANSACTION TYPE^DATE DELIVERED^EOL999
+CHEYENNE VAMC^SPINAL,CORD PTONE^000-00-1001^7682^HEEL LIFT ADJUSTABLE 
+MEDIUM^SHOE LIFT ELEV HEEL/SOLE COR^18.76^INITIAL^04/22/2001^EOL999
+CHEYENNE VAMC^SPINAL,CORD PTONE^000-00-1001^9958^PROSTHETIC SOCK WOOL 
+BK^AFO MOLDED ANKLE GAUNTLET ^53.95^INITIAL^04/22/2001^EOL999
+CHEYENNE VAMC^SPINALCORD,FIVE^000-00-
+0005^2128^WHEELCHAIR,CUSTOM^WHEELCHAIR LIGHTWEIGHT LEG 
+R^298.89^INITIAL^12/28/2001^EOL999
+CHEYENNE VAMC^SPINALCORD,SEVEN^000-00-0007^2462^SPLINT-BRACE-WRIST/L-
+LG-1B39^PRINTER, COMPUTER^24.00^SPARE^07/01/2002^EOL999
+CHEYENNE VAMC^SPINALCORD,SIX^000-00-0006^3006^TIP-CANE-CRUTCH^JOINT 
+DEVICE^^SPARE^03/05/2002^EOL999
+CHEYENNE VAMC^SPINALCORD,SIX^000-00-0006^3022^BRACE-ANKLE^SLINGS 
+^49.99^SPARE^03/05/2002^EOL999
+CHEYENNE VAMC^SPINALCORD,THREE^000-00-0003^2129^EYEGLASSES, 
+PRESCRIPTION^BIFOCAL VISION PRESCR^102.45^REPLACE^03/31/2001^EOL999
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

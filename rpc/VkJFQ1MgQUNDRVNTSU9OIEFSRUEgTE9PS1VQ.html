@@ -1,0 +1,72 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>VBECS ACCESSION AREA LOOKUP (2485)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>VBECS ACCESSION AREA LOOKUP</td></tr><tr>
+<td>TAG</td><td>ACNAREA</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_VBECRPCM.html">VBECRPCM</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This RPC returns XML containing a list of Lab Blood Bank Accession Areas
+from the ACCESSION file (#68) where the LR SUBSCRIPT field .02 is set to
+BLOOD BANK for use in the gov.va.med.vbecs rehosted Blood Bank
+application.
+ 
+XML Mapping:
+AccessionAreaName element = ACCESSION file (#68) / ACCESSION AREA field 
+(#.01)
+AccessionAreaId element =   ACCESSION file (#68) / IEN field (#.001)
+ 
+XML Example:
+&lt;AccessionAreas&gt;
+    &lt;AccessionArea&gt;
+        &lt;AccessionAreaName&gt;BLOOD BANK&lt;/AccessionAreaName&gt;
+        &lt;AccessionAreaId&gt;29&lt;/AccessionAreaId&gt;
+    &lt;/AccessionArea&gt;
+    &lt;AccessionArea&gt;
+        &lt;AccessionAreaName&gt;COBLOOD BANK&lt;/AccessionAreaName&gt;
+        &lt;AccessionAreaId&gt;60&lt;/AccessionAreaId&gt;
+    &lt;/AccessionArea&gt;
+    &lt;AccessionArea&gt;
+        &lt;AccessionAreaName&gt;LEBLOOD BANK&lt;/AccessionAreaName&gt;
+        &lt;AccessionAreaId&gt;87&lt;/AccessionAreaId&gt;
+    &lt;/AccessionArea&gt;
+    &lt;AccessionArea&gt;
+        &lt;AccessionAreaName&gt;TOBLOOD BANK&lt;/AccessionAreaName&gt;
+        &lt;AccessionAreaId&gt;91&lt;/AccessionAreaId&gt;
+    &lt;/AccessionArea&gt;
+    &lt;AccessionArea&gt;
+        &lt;AccessionAreaName&gt;WIBLOOD BANK&lt;/AccessionAreaName&gt;
+        &lt;AccessionAreaId&gt;146&lt;/AccessionAreaId&gt;
+    &lt;/AccessionArea&gt;
+&lt;/AccessionAreas&gt;
+</pre>
+</td></tr><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+XML document containing a list of Blood Bank Accession Areas from the 
+ACCESSION file.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

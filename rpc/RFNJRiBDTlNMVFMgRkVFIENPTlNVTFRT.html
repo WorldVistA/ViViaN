@@ -1,0 +1,85 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIF CNSLTS FEE CONSULTS (3030)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIF CNSLTS FEE CONSULTS</td></tr><tr>
+<td>TAG</td><td>FEECNSLT</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSIFCNS.html">DSIFCNS</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Returns a list of consults for the specified service in block of 50 
+consults at a time. Last item in the list is $$END$$ when last consult 
+for service returned.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>DSIFSVC</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+IEN for the REQUEST SERVICES (#123.5) file.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>DSIFLDT</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>15</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+Date for the last consult returned in a previous call to this RPC. If
+passed, must be in INTERNAL format, and the RPC will return the next 50
+consults prior to this date (reverse chronological order). If not passed,
+the RPC will return the next 50 consults before this date (reverse 
+chronological order).
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>DSIFLIEN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>15</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+The IEN to the last consult returned by a previous call to this RPC. If
+passed, must be passed with the LAST DATE parameter, and the RPC will
+return the next 50 consults beginning with the consult listed prior 
+to this one (returns in reverse chronological order). If not passed,
+the RPC will return the first 50 consults in the list in reverse 
+chronological order.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>DSIFSCR</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>1</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>4</dd><dt>DESCRIPTION:</dt><dd><pre>
+If passed, determines which form of screening should be used to determine
+whether the user can view the selected service. If not passed (or passed
+as ""), no screening will be performed.
+ 
+Allowed values are:
+   N - Consult Notification screen
+   U - Consult Parameter screening by user precedence
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>DSIFSTAT</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>5</dd><dt>DESCRIPTION:</dt><dd><pre>
+This input should be the status of the Consults you wish to be returned. 
+Currently, the only supported statuses are: Active and Pending.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+List of 50 consults in the format:
+   Consult IEN^Date/time of Request^Status^Consulting Service^Procedure^
+      Patient Name^Patient Last Initial &amp; Last 4 SSN^Patient DFN^
+         Consult Urgency
+ 
+Date/time of Request field contains both internal and external values
+separated by a semicolon, thus:
+ 
+   External;Internal
+ 
+If the RPC reaches the end of the list of consults for a service, the last
+line of the return will be:
+   $$END$$
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

@@ -1,0 +1,57 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>MAGG PAT INFO (1021)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>MAGG PAT INFO</td></tr><tr>
+<td>TAG</td><td>INFO</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_MAGGTPT1.html">MAGGTPT1</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Returns a string of '^' delimited pieces of patient information.
+
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>DATA</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>90</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+    DATA:  MAGDFN ^ NOLOG ^ ISICN
+       MAGDFN -- Patient DFN
+       NOLOG  -- 0/1; if 1, then do NOT update the Session log
+       ISICN  -- 0/1  if 1, then this is an ICN,
+       FLAGS  -- "D" Include Deleted images
+    if 0 (default) this is a DFN ; Patch 41
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+The result String returns the following.
+  1        2      3     4     5     6     7 
+ status ^   DFN ^ name ^ sex ^ DOB ^ SSN ^ S/C
+  
+ 8        9                     10
+TYPE ^ Veteran(y/n)  ^ Patient Image Count
+  
+   11            12              13
+ ICN       SITE Number   ^ Production Account 1/0
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

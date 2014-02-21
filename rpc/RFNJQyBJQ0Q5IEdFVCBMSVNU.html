@@ -1,0 +1,100 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIC ICD9 GET LIST (1632)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIC ICD9 GET LIST</td></tr><tr>
+<td>TAG</td><td>LIST</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSICDRG.html">DSICDRG</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This will return a list of active ICD9 codes for a lookup value.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>DSIX</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>50</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+ Old method of calling this procedure:
+    This is the Lexicon lookup value.
+ 
+ New method of calling this procedure:
+    Under the new method this parameter would be set to NULL.
+ 
+ Please see parameter DSIA details on new call procedure.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>SCR</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>1</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+ Old method of calling this procedure:
+    If SCR="P", then the matches to the lookup value will be screened
+    to only return diagnoses which are acceptable as principal diagnoses.
+ 
+ New method of calling this procedure:
+    Under the new method SCR would be set to NULL.
+ 
+ Please see parameter DSIA for details on new calling procedure.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>DSIA</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+ New method for calling this subroutine:
+     An input array "DSIA" will have to be set up in following format: 
+ 
+     DSIA(0) = "LOOKUP^Value"
+            user input lookup value
+     DSIA(1) = "CHKSCR^Value"
+            If value set to "P", only valid ICD9 codes that are eligible
+            to be principle diagnosis will be returned.
+     DSIA(2) = "ACTDATE^Value" (ACTDATE is in Fileman format, NULL dates
+            will be set to Today) The eligibility date of the ICD9 code.
+     DSIA(3) = "MAX^Value" (100 is the default)
+             The maximum number of diagnosis you want returned.
+ 
+          TOTALS = RR(0)= P1^P2 - Will only be returned for new call
+                                  method
+                    P1 = # of codes returned
+                    P2 = total number of codes considered
+ 
+              Example:
+                    DSIX - Leave NULL
+                    SCR  - Leave NULL
+                    SS(0)="LOOKUP^137"
+                    SS(1)="CHKSCR^P"
+                    SS(2)="ACTDATE^"
+                    SS(3)="MAX^N"
+              D LIST^DSICDRG(.RR,,,.SS)  Return: RR ="^TMP("DSIC",5876)"
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+ This returns a list of active diagnosis codes matching the lookup value.
+ 
+Enter RETURN to continue or '^' to exit:
+   List[0] := Returns the Diagnosis code counts
+                 P1^P2 - Will only be returned for new calling method
+                      P1 = # of codes returned
+                      P2 = total number of codes considered
+ 
+   List[n] : = ien to file 80 ^ ICD9 code ^ diagnosis (short description)
+               n = 0,1,2,3,4,....
+ 
+ 
+ On error or problems, List[0] = -1^message
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

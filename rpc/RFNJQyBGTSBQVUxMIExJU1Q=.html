@@ -1,0 +1,89 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIC FM PULL LIST (2432)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIC FM PULL LIST</td></tr><tr>
+<td>TAG</td><td>PULL</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSICFM.html">DSICFM</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Returns values to populate a list box of choices for a field that is
+SET OF CODES or POINTER or VARIABLE POINTER type.
+VARIABLE POINTER.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>FILE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>20</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+File or subfile number (canonic).
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>FIELD</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>20</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+Field number (canonic) of field for which choices are desired.
+Field must be set of codes or pointer or variable pointer.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>START</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>245</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+This parameter is optional and applies only to POINTER and VARIABLE
+POINTER field types.  It is not used with SET OF CODES type.
+ 
+Starting value for search. If specified this is usually the last
+value returned from the previous call.  If the field is a POINTER
+only the value should be argued.  If the field is a VARIABLE
+POINTER, both value and file should be argued, as VALUE^FILE.
+Both "^"-pieces can be copied from the last returned value.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>MAX</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>20</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>4</dd><dt>DESCRIPTION:</dt><dd><pre>
+The maximum number of values to return.  The default is 200.
+For VARIABLE POINTER fields the sum accumulates across pointed-to
+files.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>MASK</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>245</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>5</dd><dt>DESCRIPTION:</dt><dd><pre>
+An optional mask that constrains the values to be returned.
+For example, "SMI" returns all values that start with the "SMI"
+like SMITH, filtering out values that do not start with the
+specified mask like SAM.
+value, not the external value of a field.  PART is often a partial match 
+to FROM. For example, FROM(1)="ZTMMGR", and PART(1)="ZTM" would return 
+only entries that began with "ZTM" and came after "ZTMMGR". It would not 
+include "ZTZERO", even though it comes after "ZTMMGR". 
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Global array of values in the format IEN^NAME[^FILE], where the
+third "^"-piece applies only to the VARIABLE POINTER field type.
+  List[0] := &lt;number of entries&gt;^code  where code equals:
+             S:set of codes   P:pointer   V:variable pointer
+  List[i] := value   for i=1,2,3,4,5,...,n+1 for n entries
+             value equals:
+    for set of codes field type, value = code:code meaning
+    for pointer field type, value = p1^p2
+    for variable pointer field type, value = p1^p2^p3
+        where for pointer type fields,
+          p1 = ien of pointed to file
+          p2 = external representation of .01 field from pointer to file
+          p3 = file number of pointed file [only returned for var ptr]
+ 
+If problems or no records found, return List[0] = -1^message
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

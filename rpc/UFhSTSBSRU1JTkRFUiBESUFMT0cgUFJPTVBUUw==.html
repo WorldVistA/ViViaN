@@ -1,0 +1,64 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>PXRM REMINDER DIALOG PROMPTS (2019)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>PXRM REMINDER DIALOG PROMPTS</td></tr><tr>
+<td>TAG</td><td>PROMPT</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_PXRMRPCC.html">PXRMRPCC</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>SUBSCRIPTION</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Additional prompts for a given dialog element
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>DIALOG ELEMENT IEN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>16</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+Reminder dialog element identifier (ien) from REMINDER DIALOG file [#801.41]
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>CURRENT/HISTORICAL</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>16</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+Used only for taxonomy dialogs.
+  
+ 0 - Current Diagnosis/Procedure
+ 1 - Historical Diagnosis/Procedure
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>DIALOG LINE CPT/POV</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>3</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+For taxonomy dialog the type of finding (POV/CPT) for this dialog line
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+For a selected dialog element
+  
+ 3) Resolutions
+  
+ 3^dialog item ien[#801.41]^line id^resolution type code^ien[#various]
+  
+ 4) Additional prompts
+  
+ 4^dialog item ien[#801.41]^line id^prompt text
+  
+ 5) Listbox items (cpt/pov)
+  
+ 5^dialog item ien[#801.41]^line id^cpt/pov ien^code/desc
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

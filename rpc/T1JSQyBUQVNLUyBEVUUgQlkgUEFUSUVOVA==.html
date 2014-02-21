@@ -1,0 +1,56 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>ORRC TASKS DUE BY PATIENT (1749)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>ORRC TASKS DUE BY PATIENT</td></tr><tr>
+<td>TAG</td><td>DUE</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_ORRCTSK.html">ORRCTSK</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>SUBSCRIPTION</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This call returns a list of tasks for a patient that are now due.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>PATIENT</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the pointer to the patient in the Patient file #2.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+This call returns a list of tasks that are due, in the form:
+   ID^Subject^Created^ByWhom^Patient^Priority^Due^Completed^ByWhom^Items
+  where ID        = TSK:##, where ## is the pointer to #102.3
+        Subject   = Text subject of task
+        Created   = date task was created, as YYYYMMDDHHMMSS
+        ByWhom    = user who created task, as pointer to #200
+        Patient   = patient that task is for, as pointer to #2
+        Priority  = H, M, or L
+        Due       = date task is due to be completed, as YYYMMDD[HHMM]
+        Completed = date task was completed as, YYYYMMDDHHMM
+        ByWhom    = user who completed task, as pointer to #200
+        Items     = linked items as ID,ID,...,ID where ID is XXX:### as
+                    DOC:### = unsigned documents in #8925
+                    ORR:### = order results in #100
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

@@ -1,0 +1,51 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>XHD REMOVE PARAMETER CATEGORY (1714)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>XHD REMOVE PARAMETER CATEGORY</td></tr><tr>
+<td>TAG</td><td>REMOVE</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_XHDPCAT.html">XHDPCAT</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>AVAILABILITY</td><td>SUBSCRIPTION</td></tr><tr>
+<td>VERSION</td><td>.1</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This call removes parameter categories from their parents (i.e., "prunes" 
+the branch of which the the category is the root). It does NOT delete the 
+Category or its descendents. Use the ORR DELETE PARAMETER CATEGORY to 
+delete a given categor and all its descendents.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>PCAT</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the record number (i.e., IEN) of the parameter category.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PARENT</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the record number (i.e., IEN) of the parameter category's parent.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Error condition. Returns 0 if the category was successfully removed from 
+its parent, or 1^message if the call failed.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

@@ -1,0 +1,49 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>OOPS GET 2260 DATA (1388)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>OOPS GET 2260 DATA</td></tr><tr>
+<td>TAG</td><td>GET</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_OOPSGUI2.html">OOPSGUI2</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>PUBLIC</td></tr><tr>
+<td>WORD WRAP ON</td><td>FALSE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This broker call will return data from ASISTS file 2260. 
+The fields (in the array) returned will vary depending on the input parameter.
+One field of the input parameter is FORM. If the claim is for a 2162, all the 
+fields associated with "2162" nodes along with zero nodes will be returned.
+If the form is either CA1 or CA2 all associated nodes will be returned in
+addition to the zero and "CA" nodes.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>INPUT</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+The input parameter must include the ASISTS IEN and the form type of data
+to be retrieved. These parameters must be separated by the caret character. Ie.
+165^2162.
+
+Valid form values are CA1, CA2, or 2162.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PERS</dd></li></ol></td></tbody>
+</table>
+</body></html>

@@ -1,0 +1,47 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>TIU FIELD LIST ADD (1107)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>TIU FIELD LIST ADD</td></tr><tr>
+<td>TAG</td><td>XFLDLD</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_TIUSRVF1.html">TIUSRVF1</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>VERSION</td><td>1</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Takes in the XML string, in the format XMLSET(1)=" &lt;TEMPLATE_FIELDS&gt;" and 
+merges them with the global ^TMP("TIUFLDXML",$J).  If the subscript is 1,
+then it KILLs the global before it merges.  This routine is used so very
+large lists of fields can be processed without many calls to the database.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>XMLSET</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>DESCRIPTION:</dt><dd><pre>
+Input in the format of XMLSET(1)="&lt;FIELD NAME="12345"&gt;"
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>XMLIN</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Returns a "1" if successful; 0 otherwise.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

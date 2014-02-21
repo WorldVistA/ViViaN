@@ -1,0 +1,62 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DENTV TP GET HNC (1900)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DENTV TP GET HNC</td></tr><tr>
+<td>TAG</td><td>HNC</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DENTVTP3.html">DENTVTP3</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Returns all of the Head&amp;Neck records from the Treatment Plan 
+Transaction/Exam file (#228.2) for a particular patient.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>DFN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>20</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is a pointer to the PATIENT file.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Returns a global array List[n] = HNC data.
+If problems, returns List[1] = -1^error message
+The format of the HNC data will be as follows:
+  List[n] = p1^p2^p3^p4^p5^p6^p7^p8^p9^p10^p11^p12^p13^p14 
+      [n] = WP^word processing text
+      [n] = WP^word processing text ...etc
+where:
+    p1  = transaction id    p2  = provider name := provider name
+    p3  = X coord (numeric) p4  = Y coord (numeric)
+    p5  = Lesion dt (external fmt) p6  = color (numeric)
+    p7  = shape (numeric)   p8  = size  (constant VALUE field from 228.3)
+    p9  = description       p10 = deleted flag (-1 = true, 0=false)
+    p11 = master flag  (-1 = true, 0=false)
+    p12 = link to master (transaction id of master record)
+    p13 = result flag (-1 = true, 0=false)
+    p14 = read only flag (-1 = true, 0=false)
+      p13 := result flag (-1 = true, 0=false)
+      p14 := read only flag (-1 = true, 0=false)
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

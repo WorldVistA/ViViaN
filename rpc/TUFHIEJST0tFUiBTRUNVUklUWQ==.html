@@ -1,0 +1,44 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>MAG BROKER SECURITY (2714)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>MAG BROKER SECURITY</td></tr><tr>
+<td>TAG</td><td>BSE</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_MAGS2BSE.html">MAGS2BSE</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+CALL BSE(BROKER SECURITY ENHANCEMENT) - XUS SET VISITOR, RETURN A BSE TOKEN
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>RES</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>256</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>DESCRIPTION:</dt><dd><pre>
+CALL TO GET A BSE TOKEN FOR AUTHENTICATING REMOTE VISTA USER
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+RETURN A BSE TOKEN ACCORDING THE USER'S DUZ, E.G.: XUSBSE2032-487327_6
+THAT SAVES THE USER DEMOGRAPHIC INFO INTO XTMP(TOKEN, ) W/ EXPIRED DATE
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

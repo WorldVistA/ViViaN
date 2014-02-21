@@ -1,0 +1,62 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DDR FIND1 (145)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DDR FIND1</td></tr><tr>
+<td>TAG</td><td>FIND1C</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DDR2.html">DDR2</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This function returns the internal entry number of a record using
+$$FIND1^DIC.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>PARAMETERS</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>512</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>DESCRIPTION:</dt><dd><pre>
+This array contains the following parameters necessary to call
+$$FIND1^DIC.
+ 
+   "FILE" the file or subfile number to search
+   "IENS" the IENS that identifies the subfile if FILE is a subfile number
+   "FLAGS" possible values include:
+        A  allow pure numeric input to always be tried as an IEN
+        M  multiple index allowed
+        O  only find an exact match if possible
+        Q  quick lookup
+        X  exact match only
+        R  record the ien in ^DISV via RECALL^DILFD
+   "VALUE" the lookup value
+   "XREF" the indexes that would be searched for a match
+   "SCREEN" screen to apply to the record found
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+This parameter returns a valid internal record number if a match
+is found, a 0 if no match was found or a -1 if an error occurred.
+ 
+(For now, this is 'single value'.  It will return the error array
+later.)
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

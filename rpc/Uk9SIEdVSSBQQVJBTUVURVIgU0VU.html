@@ -1,0 +1,95 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>ROR GUI PARAMETER SET (1772)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>ROR GUI PARAMETER SET</td></tr><tr>
+<td>TAG</td><td>SETPARM</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_RORRP038.html">RORRP038</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>VERSION</td><td>1</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+The ROR GUI PARAMETER SET remote procedure stores the parameter value and
+associates it with the provided entity (see the DBIA #2263 for more 
+details).
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>INSTANCE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>91</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+The INSTANCE parameter defines the instance name of the GUI parameter. It 
+can also contain the parameter name as the second "^"-piece (by default, 
+the "ROR GUI PARAMETER" is used).
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>ENTITY</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>30</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+The ENTITY parameter defines the context that the parameter value is
+associated with. By default ($G(ENTITY)=""), the "USR" (user settings)
+value is used (see the DBIA #2263 for more details). The other value that
+is used most often is the "PKG" (package settings).
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>VALUE</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+The VALUE parameter defines the value of the GUI parameter. It should be
+either a literal (string value) or a list (text value). You can use the 
+"@" value to delete the parameter.
+ 
+ NOTE: The list (the Mult property) should not contain
+       the 0 subscript (it will not be stored).
+ 
+Example #1 (string value):
+ 
+  RPCBroker.Param[0].Value := 'MAIN FORM POS';
+  RPCBroker.Param[0].PType := literal;
+  RPCBroker.Param[1].Value := '';
+  RPCBroker.Param[1].PType := literal;
+  RPCBroker.Param[2].Value := '5,5,400,250';
+  RPCBroker.Param[2].PType := literal;
+ 
+Example #2 (text value):
+ 
+  RPCBroker.Param[0].Value := 'COM PORT SETTINGS';
+  RPCBroker.Param[0].PType := literal;
+  RPCBroker.Param[1].Value := 'PKG';
+  RPCBroker.Param[1].PType := literal;
+  RPCBroker.Param[2].Mult[1] := 'Port=COM1';
+  RPCBroker.Param[2].Mult[2] := 'Baud=19200';
+  RPCBroker.Param[2].PType := list;
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+A negative value of the first "^"-piece of the Results[0] indicates that
+an error occurred during the execution of the remote procedure. In this
+case, the second piece of the Results[0] will contain number of the error
+descriptors returned in the subsequent nodes of the Results array:
+   
+  Results[0]            Result Descriptor
+                          ^01: The last error code
+                          ^02: Number of the error descriptors
+                                                                       
+  Results[i]            Error Descriptor
+                          ^01: Error code
+                          ^02: Message
+                          ^03: Place of the error
+ 
+Otherwise, the Results[0] contains 0.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

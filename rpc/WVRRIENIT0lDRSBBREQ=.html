@@ -1,0 +1,47 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>YTQ CHOICE ADD (2305)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>YTQ CHOICE ADD</td></tr><tr>
+<td>TAG</td><td>ADDCH</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_YTQAPI4.html">YTQAPI4</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>SUBSCRIPTION</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This API is to be used to enter a new MH CHOICE 601.75. It searches for 
+already present choices and if available returns that 601.75 ien.
+ 
+Also checked are non-case sensitive matches.
+ 
+Input: TEXT as text of the choice
+        FORCE: set as Y to force an add when there is a non case 
+sensitive match
+ 
+Output: error and message or
+        601.75 ien added
+        Question Force returned when Force not equal Y and non case 
+sensitive match found.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

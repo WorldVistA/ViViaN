@@ -1,0 +1,58 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>MAGG PAT IMAGES (1000)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>MAGG PAT IMAGES</td></tr><tr>
+<td>TAG</td><td>IMAGES</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_MAGGTIG.html">MAGGTIG</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This returns the full list of images for a patient.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>MAGDFN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>20</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is DFN of patient.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Returns an array, (Global Array if list gets too big), of all images for
+the patient.
+Each list entry has image info in the format : 
+ - - - - - - 
+$P(1^2^3)     IEN^Image FullPath and name^Abstract FullPath and Name
+$P(4)           SHORT DESCRIPTION field and desc of offline JukeBox
+$P(5)           PROCEDURE/ EXAM DATE/TIME field
+$P(6)           OBJECT TYPE
+$P(7)           PROCEDURE field
+$P(8)          display date
+$P(9)          to return the PARENT DATA FILE image pointer
+$p(10)        return the ABSTYPE  'M' magnetic 'W' worm  'O' offline
+$p(11)        is  'A' accessable   'O' offline
+$p(12^13)  Dicom Series Number  $p(12) and   Image Number  $p(13)
+$p(14)        is count of images in group, 1 if single image.
+ - - - - - -
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

@@ -1,0 +1,52 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DDR LOCK/UNLOCK NODE (144)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DDR LOCK/UNLOCK NODE</td></tr><tr>
+<td>TAG</td><td>LOCKC</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DDR1.html">DDR1</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This function will lock or unlock an M global node.  Also,
+this function allows the calling application to specify the
+timeout (in seconds) for a 'lock' command.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>PARAMETERS</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>512</dd><dt>DESCRIPTION:</dt><dd><pre>
+This array contains the following parameter necessary for
+a Lock command:
+|TAB|- NODE - the global node that needs to be locked/unlocked
+|TAB|- LOCKMODE - the operation to be done, Lock or Unlock
+|TAB|- TIMEOUT - integer representing the number of seconds during which
+the system attempts to lock or unlock a node before returning control to
+the program .
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+This parameter returns 1 if the lock or unlock command is successful,
+otherwise a 0 is returned.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

@@ -1,0 +1,89 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIF PAY PAYMENT DISPLAY (2591)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIF PAY PAYMENT DISPLAY</td></tr><tr>
+<td>TAG</td><td>DISPAY</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSIFPAY1.html">DSIFPAY1</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>VERSION</td><td>3.2</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>DFN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>35</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+Patient IEN (File 161)
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>VENDOR</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>35</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+Vendor IEN (File 162)
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>DATE OF SERVICE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>7</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+Fileman date of service
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>CPT</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>10</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>4</dd><dt>DESCRIPTION:</dt><dd><pre>
+CPT code, (service provided)
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+ ; ^TMP($J,"DSIFPAY1",0)=1
+ ; ^TMP($J,"DSIFPAY1",1)="Fee_prog"^Date of service^Fee program^Auth IEN
+ ; ^TMP($J,"DSIFPAY1",ID,0)="ID"^ID^Invoice Number
+ ; ^TMP($J,"DSIFPAY1",ID,1)="LINE 1"^Service provided (i;e)^Amt 
+Claimed^Amt Paid^Date Finalized^Batch #^Obligation #
+ ; ^Date correct invoice received^Patient type^POV^Treatment type^Primary 
+Service facility^Money managed/Prompt pay^Contract number
+ ; ^TMP($J,"DSIFPAY1",ID,2)="Line 2"^Primary Diagnosis^Place of 
+service^HCFA type of service^Service connected condition
+ ; ^Vendor invoice date^Site of service zip code^Units paid^Revenue 
+code^Patient account number^FPPS claim ID^FPPS line item
+ ; ^Fee schedule^Fee Program^Associated 7078 or 583^Mill Bill (YES only 
+if true)^Anesthesia time (17th Piece Added in DSIF*3.2*1)
+ ; ^TMP($J,"DSIFPAY1",ID,3)="Line 3"^Attending Prov Name^Attending Prov 
+NPI^Attending Prov Taxonomy Code^Operating Prov Name
+ ; ^Operation Prov NPI^Rendering Prov Name^Rendering Prov NPI^Rendering 
+Prov Taxonomy Code^Servicing Prov Name^Servicing Prov NPI
+ ; ^Referring Prov Name^Referring Prov NPI
+ ; ^TMP($J,"DSIFPAY1",ID,4)="Line 4"^Servicing Facility Address^Servicing 
+Facility City^Servicing Facility State
+ ; ^Servicing Facility ZIP^LI Rendering Prov Name^LI Rendering Prov 
+NPI^LI Rendering Prov Taxonomy (added in DSIF*3.2*2)
+ ; ^TMP($J,"DSIFPAY1",ID,5)="Remit_remark"^IEN;Remittance remark^ [repeat 
+for each remark]
+ ; ^TMP($J,"DSIFPAY1",ID,6)="CPT_modifiers"^IEN;Cpt modifier 1^ [repeat 
+for each modifier]^TMP($J,"DSIFPAY1",ID,7)="Adjustments"
+ ; ^(#.01) Adjustment reason^(#1)Adjustment group^(#2)Adjustment amount^ 
+[repeat for each adjustment]
+ ; ^TMP($J,"DSIFPAY1",ID,8)="Rejections"^Reject Code:^Reason text^ [repeat
+for each rejection]
+ 
+ 
+(CIEN= Service provided IEN [CPT])
+ 
+[Error message]
+^TMP($J,"DSIFPAY1",0)="-1^"(error message)
+(CIEN= Service provided IEN [CPT])
+ 
+[Error message]
+^TMP($J,"DSIFPAY13",0)="-1^"(error message)
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

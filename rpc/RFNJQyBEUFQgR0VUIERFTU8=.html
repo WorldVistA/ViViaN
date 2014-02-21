@@ -1,0 +1,130 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIC DPT GET DEMO (1583)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIC DPT GET DEMO</td></tr><tr>
+<td>TAG</td><td>DEM</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSICDPT.html">DSICDPT</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This will return specific patient demographic elements for a patient
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>DFN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>20</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the patient's DFN or pointer to the PATIENT file
+ 
+You must pass either DFN or SSN
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>SSN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>10</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the patient's 9 (or 10) digit SSN.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PERM</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>1</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is a boolean flag (1 or 0).   The default value is zero.
+If one, then always return the patient's permanent address information.  
+Otherwise return was is configured in the MAS software.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>DSICONF</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>13</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>4</dd><dt>DESCRIPTION:</dt><dd><pre>
+This flag determines whether or not to return the confidential address 
+information.  It is optional.  If this is passed, then TODAY will be the
+default date to use to check to see if a confidential address is active
+for that date.
+ 
+  DSICONF - optional - p1^p2
+       p1 - required - confidential address category - this is a string of
+                       one or more numerics, e.g, 134, where category 
+                       numbers are
+                         1 for Eligibility/Enrollment
+                         2 for Appointment/Scheduling
+                         3 for Co-payments/Veterans Billing
+                         4 for Medical Records
+                         5 for All Others
+       p2 - optional - fileman date to determine if confidential date is
+                       effective.  Default value is TODAY
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>DSIFLG</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>1</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>5</dd><dt>DESCRIPTION:</dt><dd><pre>
+This boolean value (1 or 0) will determine the data returned for certain 
+data elements.  The default value is 0.  Any state, county or zip code
+data elements return value will be affected by this flag
+  If DSIFLG=0, return state abbreviation, a 5 or 9 zip-code, and county 
+name
+  If DSIFLG=1, return ien to file 5^state name^state abbreviation
+                      internal form of zip code^external zip code
+                      multiple ien value^county name
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+On error return -1^error message
+Else return:
+ DSICDAT()  Description
+ ---------  ------------------------------------------
+     1      patient name
+     2      ssn;dashed ssn
+     3      dob int;ext
+     4      age
+     5      sex
+     6      date of death int;ext
+     7      race
+     8      religion
+     9      marital status
+    10      employment status
+    11      1st st add
+    12      2nd st add
+    13      3rd st add
+    14      city
+    15      state abbr [or ien^state name^state abbr]
+    16      zip (9 or 5) [or internal zip^external zip]
+    17      county [or multiple ien^county name]
+    18      home phone
+    19      work phone
+    20      LastName^FirstName^Middle^Suffix/Title
+ ---- ret(21) - ret(28) all refer to confidential address  ----
+    21      confidential address category bitmap.  Default value of
+            "00000".  This is a 5 char string of 0s and 1s where each bit
+            refers to whether or not the particular category is active or
+            not as of the date in the DSICONF param.  Only those categories
+            requested in DSICONF param will have a bit value of 1
+    22      street address 1
+    23      street address 2
+    24      street address 3
+    25      city
+    26      state abbr [or ien^state name^state abbr]
+    27      zip (9 or 5) [or internal zip^external zip]
+    28      county [or multiple ien^county name]
+ -------------------------------------------------------------
+    29      primary elig ^ other elig ^ other elig ^ ...
+    30      1 if patient is a veteran, else 0
+    31      code^name of current means test status
+          := file 5 ien^state name^state abbr [dsiflg=1]
+  RET(26) := 5 char zip code or 9 digit zip code with dash [dsiflg=0]
+          := internal zip code^external zip code [dsiflg=1]
+  RET(27) := county name [dsiflg=0]
+          := multiple ien value^county name [dsiflg=1]
+  ***********************************************************************
+  RET(28) := primary eligibility ^ other elig ^ other elig ^ ...
+  RET(29) := 1 if patient is a veteran, else 0
+  RET(30) := code^ name for current means test status
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

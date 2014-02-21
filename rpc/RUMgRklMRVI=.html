@@ -1,0 +1,58 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>EC FILER (930)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>EC FILER</td></tr><tr>
+<td>TAG</td><td>FILE</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_ECFLRPC.html">ECFLRPC</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+A general purpose Event Capture filer used when filing data into ECS files.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>ECARY</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>DESCRIPTION:</dt><dd><pre>
+The input array ECARY defines all the fields and values needed for a particular 
+file.  The variable ECARY("ECFILE") must always be set to the file number where
+data will be saved.  The following are the options and file available
+       ECFILE       Option
+       ------       ------
+       721          Event Capture Patient File
+       724          DSS Unit
+       720.3        EC Event Code Screens
+       720.4        Event Code Reasons
+       725          EC Local Procedure
+       726          Event Capture Category
+       4            Event Capture Locations
+       200          Allocate/Deallocate users to Unit
+       200A         Allocate/Deallocate Units to user
+       8989.5       Update HFS directory
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+Returns a flag of sucess or failure or a list of error codes.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

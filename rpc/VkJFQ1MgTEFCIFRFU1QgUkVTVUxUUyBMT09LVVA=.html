@@ -1,0 +1,98 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>VBECS LAB TEST RESULTS LOOKUP (2484)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>VBECS LAB TEST RESULTS LOOKUP</td></tr><tr>
+<td>TAG</td><td>TSTRSLT</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_VBECRPCA.html">VBECRPCA</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This RPC returns XML containing a list of Laboratory test results for a 
+patient within a given date range.
+ 
+The data returned is provided by the Lab API RR^LR7OR1 in the 
+^TMP("LRRR" global array in the following format.
+ 
+^TMP("LRRR",$J,DFN,SUB,inverse d/t,sequence #)  = Test^result^L/N flag^
+units^reference range^result status^^^Nat'l Code^Name^System^Verified b 
+y^^Therapeutic flag^Print Name^Accession^Order#
+ 
+XML Mapping:
+VistaPatientId element =  DFN
+LabTestId element =       Test
+TestPrintName element =   Print Name
+TestResult element =      result
+TestDate element =        inverse d/t (Converted to HL7 format)
+ 
+ 
+XML Example:
+&lt;LabTests&gt;
+    &lt;LabTest&gt;
+        &lt;VistaPatientId&gt;378793&lt;/VistaPatientId&gt;
+        &lt;LabTestId&gt;3&lt;/LabTestId&gt;
+        &lt;TestPrintName&gt;HGB&lt;/TestPrintName&gt;
+        &lt;TestResult&gt;14.1&lt;/TestResult&gt;
+        &lt;TestDate&gt;20010910122446-0600&lt;/TestDate&gt;
+    &lt;/LabTest&gt;
+    &lt;LabTest&gt;
+         &lt;VistaPatientId&gt;378793&lt;/VistaPatientId&gt;
+         &lt;LabTestId&gt;3&lt;/LabTestId&gt;
+         &lt;TestPrintName&gt;HGB&lt;/TestPrintName&gt;
+         &lt;TestResult&gt;14.4&lt;/TestResult&gt;
+         &lt;TestDate&gt;20010430115535-0600&lt;/TestDate&gt;
+    &lt;/LabTest&gt;
+&lt;/LabTests&gt;
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>SDATE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+The SDATE input parameter represents the start date used to search for 
+Laboratory test results in the Lab API RR^LR7OR1.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>EDATE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>30</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+The EDATE input parameter represents the end date to search for 
+Laboratory test results in the Lab API RR^LR7OR1.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>DIV</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>12</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+The DIV input parameter representd the Division (Station Number) where 
+the results were obtained.
+NOTE:  This parameter is for future use.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>TESTS</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>999</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>4</dd><dt>DESCRIPTION:</dt><dd><pre>
+An array of Laboratory Test IENs used to search for results.
+  TESTS(1)="3536"
+  TESTS(2)="4090"
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PATS</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>999</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>5</dd><dt>DESCRIPTION:</dt><dd><pre>
+An array of Patient IENs used to search for Lab test results.
+  PATS(1)="495943"
+  PATS(2)="39282"
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+XML document with a list of patient related laboratory test results 
+returned from the Lab API RR^LR7OR1.
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

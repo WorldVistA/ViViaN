@@ -1,0 +1,77 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIC FM MULTIPLE FILER (2438)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIC FM MULTIPLE FILER</td></tr><tr>
+<td>TAG</td><td>MFILE</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSICFM.html">DSICFM</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Calls DSIC FM FILER remote procedure code as often as necessary
+to process multiple file or subfile x IENS combinations.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>INPUT</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>245</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+ ;         LIST[#] = p1^p2^p3^p4^p5^p6 where
+ ;
+ ;         p1 - required when file or subfile changes
+ ;              First record of each group relating to the same
+ ;              file or subfile must specify the file or subfile
+ ;              number in the first piece.  This value can be
+ ;              omitted for subsequent records that pertain to
+ ;              the same file or subfile.
+ ;         p2 - required when IENS or file/subfile changes
+ ;              First record of each group to be filed to the same
+ ;              entry or subentry must specify the IENS.
+ ;              This value can be omitted for subsequent
+ ;              records that pertain to other fields in the same
+ ;              entry.
+ ;         p3 - FLAG - optional - only acceptable value is "T" -
+ ;              transaction processing, that is, all the fields must
+ ;              be successfully updated or none are.  Applies to
+ ;              the entire group of records for one file or subfile
+ ;              number and IENS.  May be specified in any record of
+ ;              the same group.
+ ;         p4 - required - field # (Same as p1 in FILE^DSICFM)
+ ;         p5 - optional - default value I (Same as p2 in FILE^DSICFM)
+ ;              if p5="" then field value in internal format
+ ;                   ="E" then field value in external format
+ ;                   ="I" then field value in internal format
+ ;                   ="W" then field is a word processing
+ ;                                  see notes for FILE^DSICFM
+ ;         p6 - value for field# - if value is &lt;null&gt; or "@"
+ ;                        then field value will be deleted.
+ ;                        (Same as p3 in FILE^DSICFM)
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+RESULT -     return array where
+             RESULT(1) = 1^FILE^IENS  if everything was successfully filed
+                                      for this FILE x IENS combination.
+                           = -1^error message if any problems encountered
+             RESULT(2...n) = additional messages in above format
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

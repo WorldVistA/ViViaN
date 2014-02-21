@@ -1,0 +1,94 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>DSIC FM FILER (1614)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>DSIC FM FILER</td></tr><tr>
+<td>TAG</td><td>FILE</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_DSICFM04.html">DSICFM04</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This invokes the Fileman filer to update records for an existing entry.  
+This will allow you to update any field at the level of the FILE including
+word processing fields.  It does not allow for updating different levels
+of the file.  If you wish to update a subfile, then you will have to make
+multiple calls to this RPC for each file or subfile.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>FILE</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>20</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the file (or subfile) number for record which you wish to update
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>IENS</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>50</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the standard Fileman IENS for calling the Fileman DBS APIs.  The 
+format of iens is as follows (must have trailing commas):
+   record#, - to update a record at the top level of a file
+   sub1,ifn1, - to update multiple record sub1 in the file for record ifn1
+   sub2,sub1,ifn1 - update a multiple within a multiple within a file
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>FLAG</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>1</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+This parameter is optional.  If passed it must be equal to "T"
+FLAG="T" indicates that you wish transaction processing to occur.  That 
+is, all of the fields must successfully be updated or none of them are 
+updated.  Without this flag, Fileman will update those fields that he can.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>INPUT</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>250</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>4</dd><dt>DESCRIPTION:</dt><dd><pre>
+This list contains the fields to be updated in the file (or subfile).  
+The format of INPUT(x) = p1^p2^p3  where
+ 
+   x - the subscript of INPUT can be anything, numeric, string
+ 
+  p1 - required - this is the field number at the level in the file
+ 
+  p2 - optional - default value is "I" - this flag indicates the type
+       value being passed in, internal format, external format, word
+       processing
+         p2 = I - value is in Fileman internal format
+         p2 = E - value is on external format
+         p2 = W or WA - this field is a word processing field
+              see notes below for additional details for this
+ 
+  p3 - required - this is the value to be entered for this field#
+ 
+Notes on word process fields
+----------------------------
+  if INPUT(x) = field#^W^@ then delete any existing text for this record
+  if INPUT(x) = field#^W^text then this will first remove any existing
+                text that may exist.  It will then add the new text
+  if INPUT(x) = field#^WA^text then this will not delete the existing
+                text but will append the new text to the existing text if
+                there is any
+ 
+  For the same field# all lines of the array must have the same value for
+  the second piece.  That is, all must be W or WA.  You cannot have some
+  as W and some as WA.  Each field# can have its own type.  Field 1 could
+  be W and field 2 could be WA.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+If no problems are encountered filing data, then return LIST[1] := 1^
+Else return LIST[1] := -1^general error message
+            LIST[2...n] := additional specific error messages 
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

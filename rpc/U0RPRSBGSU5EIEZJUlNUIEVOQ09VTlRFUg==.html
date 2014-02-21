@@ -1,0 +1,68 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>SDOE FIND FIRST ENCOUNTER (126)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>SDOE FIND FIRST ENCOUNTER</td></tr><tr>
+<td>TAG</td><td>EXOE</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_SDOERPC.html">SDOERPC</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>AVAILABILITY</td><td>PUBLIC</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This Remote Procedure Call (RPC) returns the internal entry number
+of an OUTPATIENT ENCOUNTER file (#409.68) entry for the first encounter
+for a patient in a specified date range.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>PATIENT ID</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+This is the internal entry number of an entry in the PATIENT [#2 - ^DPT] file.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>BEGIN DATE/TIME</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+Beginning date and time in VA FileMan format.
+
+Time is optional.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>END DATE/TIME</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+End date and time in VA FileMan format.
+
+Time is optional.
+
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>SEARCH FLAGS</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>4</dd><dt>DESCRIPTION:</dt><dd><pre>
+This parameter allows developers to set specific flags that are
+used as an API searches encounter records. The flags indicate how
+the API should function.
+
+ Character  Description
+ ---------  -----------
+     C      Use only completed encounters
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+&lt;pointer&gt; - Outpatient Encounter ID for first encounter found in date range
+
+ &lt;null&gt;   - if no encounter exists
+
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

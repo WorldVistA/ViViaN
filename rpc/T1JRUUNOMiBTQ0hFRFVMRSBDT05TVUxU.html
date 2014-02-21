@@ -1,0 +1,45 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>ORQQCN2 SCHEDULE CONSULT (728)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>ORQQCN2 SCHEDULE CONSULT</td></tr><tr>
+<td>TAG</td><td>SCH</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_ORQQCN2.html">ORQQCN2</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>SINGLE VALUE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+Changes status of consult to "Scheduled", optionally adding a comment and
+sending alerts.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>Consult IEN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>16</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>DESCRIPTION:</dt><dd><pre>
+Consult IEN in file 123.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>Responsible provider</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>32</dd><dt>REQUIRED:</dt><dd>YES</dd></li><li><dt>INPUT PARAMETER:</dt><dd>Date of action</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>16</dd></li><li><dt>INPUT PARAMETER:</dt><dd>Send alerts?</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>2</dd><dt>REQUIRED:</dt><dd>YES</dd></li><li><dt>INPUT PARAMETER:</dt><dd>Send alerts to</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>100</dd><dt>REQUIRED:</dt><dd>NO</dd><dt>DESCRIPTION:</dt><dd><pre>
+";" separated list of alert recipients - pointers to file 200.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>Comments</dd><dt>PARAMETER TYPE:</dt><dd>LIST</dd><dt>DESCRIPTION:</dt><dd><pre>
+Array of comments to be added with this action.
+</pre>
+</dd></li></ol></td></tbody>
+</table>
+</body></html>

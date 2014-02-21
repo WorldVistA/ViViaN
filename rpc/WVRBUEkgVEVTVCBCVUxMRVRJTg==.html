@@ -1,0 +1,45 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>YTAPI TEST BULLETIN (1238)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>YTAPI TEST BULLETIN</td></tr><tr>
+<td>TAG</td><td>SNDBUL</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_YTAPI9.html">YTAPI9</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>SUBSCRIPTION</td></tr><tr>
+<td>INACTIVE</td><td>INACTIVE</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+When a clerk gives a psychological test by order of a clinician, a VISTA 
+email bulletin is sent to that clinician, informing him/her of the 
+administration of the test, the date, the clerk and the patient.
+ 
+Input: DFN ;ien of file 2 Patient
+       YSORD ;DUZ of ordering clinician
+ 
+Output:
+only success vs. error is reported.
+YSDATA(1)=[DATA]
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

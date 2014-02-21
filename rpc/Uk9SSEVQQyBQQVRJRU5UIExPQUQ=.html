@@ -1,0 +1,142 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>RORHEPC PATIENT LOAD (2106)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>RORHEPC PATIENT LOAD</td></tr><tr>
+<td>TAG</td><td>LOAD</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_RORRP036.html">RORRP036</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>GLOBAL ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>RESTRICTED</td></tr><tr>
+<td>WORD WRAP ON</td><td>TRUE</td></tr><tr>
+<td>VERSION</td><td>1</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+The RORHEPC PATIENT LOAD remote procedure loads the patient's data from
+the Hepatitis C registry and prepares the record for editing.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>REGIEN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+The REGIEN parameter should contain a valid registry IEN (IEN of the
+registry parameters record in the ROR REGISTRY PARAMETERS file #798.1).
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>PATIEN</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>2</dd><dt>DESCRIPTION:</dt><dd><pre>
+A valid patient IEN (DFN) should be assigned to the PATIEN parameter.
+</pre>
+</dd></li><li><dt>INPUT PARAMETER:</dt><dd>LOCK</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>SEQUENCE NUMBER:</dt><dd>3</dd><dt>DESCRIPTION:</dt><dd><pre>
+If this parameter is defined and not zero then the RPC will try to lock
+the registry record before loading the data and will leave it locked.
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+A negative value of the first "^"-piece of the Results[0] indicates that
+an error occurred during the execution of the remote procedure. In this
+case, the second piece of the Results[0] will contain number of the error
+descriptors returned in the subsequent nodes of the Results array:
+   
+  Results[0]            Result Descriptor
+                          ^01: The last error code
+                          ^02: Number of the error descriptors
+                                                                      
+  Results[i]            Error Descriptor
+                          ^01: Error code
+                          ^02: Message
+                          ^03: Place of the error
+ 
+If locking was requested (see the LOCK parameter) and the record could not
+be locked then the first "^"-piece of the Results[0] would be greater than
+0. The Results[0] would contain the lock descriptor and subsequent nodes
+of the global array would contain the data (see below). The lock 
+descriptor contains information about the process, which owns the most 
+recent lock of the record. The "O" flag (read-only) would also be added to
+the 15th field of the "PRD" segment.
+ 
+  Results[0]            Lock Descriptor
+                          ^01: Date/Time (FileMan)
+                          ^02: User/Process name
+                          ^03: User IEN (DUZ)
+                          ^04: $JOB
+                          ^05: Task number
+ 
+THE DATA ARE LOADED ONLY FOR VIEWING PURPOSES (READ-ONLY)!
+ 
+Otherwise, zero is returned in the Results[0] and the subsequent nodes of
+the array contain the data.
+ 
+  Results[0]            0
+ 
+  Results[i]            Demographic Information
+                          ^01: "DEM"
+                          ^02: ""
+                          ^03: Patient IEN (DFN)
+                          ^04: Patient Name
+                          ^05: Date of Birth (FileMan)
+                          ^06: SSN
+                          ^07: Date of Death (FileMan)
+                          ^08: Sex (F/M)
+ 
+  Results[i]            Basic Registry Data
+                          ^01: "PRD"
+                          ^02: ""
+                          ^03: Date Entered (FileMan)
+                          ^04: Status Code (Field 3, File #798)
+                          ^05: Active (0/1)
+                          ^06: Do not Send (0/1)
+                          ^07: Data Acknowledged Until (FileMan)
+                          ^08: Data Extracted Until (FileMan)
+                          ^09: Date Selected (FileMan)
+                          ^10: Date Confirmed (FileMan)
+                          ^11: Location Selected (Institution Name)
+                          ^12: Selection Rule Description
+                          ^13: reserved
+                          ^14: reserved
+                          ^15: Action Flags (see the description below)
+ 
+  Results[i]            Local field data
+                          ^O1: "LFV"
+                          ^02: IEN in the LOCAL FIELD multiple
+                               of the ROR REGISTRY RECORD file
+                          ^03: Field Definition IEN
+                               (in the ROR LOCAL FIELD file)
+                          ^04: Field Name
+                          ^05: Date (FileMan)
+                          ^06: Comment
+ 
+  Results[i]            Selection Rule
+                          ^01: "PSR"
+                          ^02: IEN in the SELECTION RULE multiple
+                               of the ROR REGISTRY RECORD file
+                          ^03: Rule Definition IEN
+                               (in the ROR SELECTION RULE file)
+                          ^04: Name of the Rule
+                          ^05: Date (FileMan)
+                          ^06: Location IEN  (Institution IEN)
+                          ^07: Location Name (Institution Name)
+                          ^08: Short Description
+ 
+  Results[i]            Registry Data
+                          ^01: "HEPC"
+                          ^02: ""
+                          ^03: reserved
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>

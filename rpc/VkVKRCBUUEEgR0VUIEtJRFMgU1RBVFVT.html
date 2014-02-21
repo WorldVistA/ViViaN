@@ -1,0 +1,68 @@
+<html>
+<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" id="js">
+  $(document).ready(function() {
+  // call the tablesorter plugin
+  $("#rpctable").tablesorter({
+    // sort on the first column and third column, order asc
+    sortList: [[0,0],[2,0]]
+  });
+}); </script>
+
+<body>
+<div>VEJD TPA GET KIDS STATUS (1065)</div>
+<table id="rpctable" class="tablesorter">
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td><td>VEJD TPA GET KIDS STATUS</td></tr><tr>
+<td>TAG</td><td>KID</td></tr><tr>
+<td>ROUTINE</td><td><a href="http://code.osehra.org/dox/Routine_VEJDTP01.html">VEJDTP01</a></td></tr><tr>
+<td>RETURN VALUE TYPE</td><td>ARRAY</td></tr><tr>
+<td>AVAILABILITY</td><td>AGREEMENT</td></tr><tr>
+<td>DESCRIPTION</td><td><pre>
+This does a Fileman lookup on the INSTALL file and returns the last entry
+for the value passed.
+</pre>
+</td></tr><tr>
+<td>INPUT PARAMETER</td><td><ol><li><dt>INPUT PARAMETER:</dt><dd>VAL</dd><dt>PARAMETER TYPE:</dt><dd>LITERAL</dd><dt>MAXIMUM DATA LENGTH:</dt><dd>50</dd><dt>REQUIRED:</dt><dd>YES</dd><dt>SEQUENCE NUMBER:</dt><dd>1</dd><dt>DESCRIPTION:</dt><dd><pre>
+Enter the name of the KIDS build for which you which to see its
+installation state.  Pass the name of the KIDS build as it appears in the
+INSTALL file.  You may pass a partial name, but this call will only return
+the data on the last entry installed
+</pre>
+</dd></li></ol></td><tr>
+<td>RETURN PARAMETER DESCRIPTION</td><td><pre>
+An array is returned in case an error is encountered or if multiple
+entries are found that match the input value.  This RPC will sort all
+values found by S1,S2,S3 where
+  S1 = KIDS NAME
+  S2 = install completed date (if present), otherwise install loaded date
+  S3 = internal entry number in the INSTALL FILE
+ 
+It starts looking at all entries found in reverse order (most recent
+first) for the first successfully installed KIDS build.
+ 
+The array returned is RET(x)= 1^message (if successfully installed)
+                            =-1^error message (could be multiple lines)
+ 
+Since one can load and install the same KIDS multiple times, this will try
+to retrieve the last successfully installed KIDS build.  Success is
+defined as STATUS = Install Completed AND there is an INSTALL DATE
+COMPLETED
+ 
+Example of possible scenario, install completed but they they reloaded the
+KIDS build but did not install it.  Then you will receive an array:
+  RET(1) = -1^error message
+  RET(2) =  1^message
+</pre>
+</td></tr></tbody>
+</table>
+</body></html>
