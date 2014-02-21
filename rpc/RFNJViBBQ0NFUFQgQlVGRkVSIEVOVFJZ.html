@@ -1,19 +1,22 @@
 <html>
-<link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id=""/>
+<link rel="stylesheet" href="../datatable/css/demo_page.css" type="text/css" id=""/>
+<link rel="stylesheet" href="../datatable/css/demo_table.css" type="text/css" id=""/>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-<script type="text/javascript" src="http://tablesorter.com/__jquery.tablesorter.js"></script>
+<script type="text/javascript" src="../datatable/js/jquery.dataTables.js"></script>
 <script type="text/javascript" id="js">
   $(document).ready(function() {
-  // call the tablesorter plugin
-  $("#rpctable").tablesorter({
-    // sort on the first column and third column, order asc
-    sortList: [[0,0],[2,0]]
-  });
+	// call the tablesorter plugin
+      $("#rpctable").dataTable({
+        "bPaginate": false,
+        "bLengthChange": false,
+        "bInfo": false,
+        "bSort": false
+      });
+
 }); </script>
 
-<body>
-<div>DSIV ACCEPT BUFFER ENTRY (2536)</div>
-<table id="rpctable" class="tablesorter">
+<body id="dt_example"><div id="container" style="width:80%"><h1>DSIV ACCEPT BUFFER ENTRY (2536)</h1>
+<div id="demo"><table id="rpctable" class="display">
 <thead>
 <tr>
 <th>Name</th>
@@ -154,4 +157,6 @@ RESULT(3)="IBPOLDA^"_IBPOLDA
 </pre>
 </td></tr></tbody>
 </table>
+</div>
+</div>
 </body></html>
