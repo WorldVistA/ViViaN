@@ -256,7 +256,7 @@ function update(source) {
               position: ["center","center-50"],
               title: "Package: " + d.name,
               open: function(){
-                  htmlLnk = getInterfaceHtml(d.name);
+                  htmlLnk = getInterfaceHtml(d);
                   $('#interface').html(htmlLnk);
                   $('#namespaces').html(getNamespaceHtml(d.prefixes))
                   $('#namespaces').show();
@@ -387,84 +387,37 @@ function getNamespaceHtml(namespace) {
 }
 
 var rpcpackage = [
- "Clinical Procedures",
- "VistALink",
- "National Health Information Network",
- "HealtheVet Desktop",
- "Dental",
- "Oncology",
- "Beneficiary Travel",
- "Wounded Injured and Ill Warriors",
- "VA FileMan",
- "IFCAP",
- "Quasar",
- "Registration",
- "Visual Impairment Service Team",
- "Functional Independence",
- "Radiology Nuclear Medicine",
- "PAID",
- "My HealtheVet",
- "Integrated Billing",
- "Event Capture",
- "Care Management",
- "Virtual Patient Record",
- "VBECS",
- "Imaging",
- "National Drug File",
- "Spinal Cord Dysfunction",
- "Asists",
- "RPC Broker",
- "Automated Medical Information Exchange",
- "Emergency Department Integration Software",
- "Remote Order Entry System",
- "Kernel",
- "Mental Health",
- "Clinical Case Registries",
- "Vendor - Document Storage Systems",
- "Patient Assessment Documentation",
- "VA Point of Service",
- "Shift Handoff Tool",
- "Clinical Reminders",
- "Automated Information Collection System",
- "Text Integration Utility",
- "Order Entry Results Reporting",
- "Integrated Patient Fund",
- "Capacity Management Tools",
- "Toolkit",
- "Electronic Signature",
- "Barcode Medication Administration",
- "National Online Information Sharing",
- "VA Certified Components - DSSI",
- "Patient Representative",
- "Clinical Information Resource Network",
- "Enrollment Application System",
- "Master Patient Index VistA",
- "Prosthetics",
- "Drug Accountability",
- "Release Of Information - DSSI",
- "Consult Request Tracking",
- "Scheduling",
- "General Medical Record - Vitals",
 ];
 
 function getRPCLinkByPackageName(pkgName) {
-  var index = rpcpackage.indexOf(pkgName);
-  if (index >=0) {
-    return "<a href=\"rpc/" + rpcpackage[index] + ".html\" target=\"_blank\">Remote Procedure Call</a>";
-  }
-  else {
-    return ""
-  }
+  return "<a href=\"rpc/" + pkgName + ".html\" target=\"_blank\">Remote Procedure Call</a>";
 }
 
-function getInterfaceHtml(pkgName) {
+function getHL7LinkByPackageName(pkgName) {
+  return "<a href=\"hl7/" + pkgName + ".html\" target=\"_blank\">HL7</a>";
+}
+
+function getInterfaceHtml(node) {
+  console.log(node)
+  pkgName = node.name
   var htmlLnk = "<ul>";
-  var rpcLink = getRPCLinkByPackageName(pkgName);
+  var rpcLink = "";
+  var hl7Link = "";
+  if (node.interfaces !== undefined){
+    var index = node.interfaces.indexOf("RPC");
+    if (index >= 0){
+      rpcLink = getRPCLinkByPackageName(pkgName);
+    }
+    index = node.interfaces.indexOf("HL7");
+    if (index >= 0){
+      hl7Link = getHL7LinkByPackageName(pkgName);
+    }
+  }
   if (pkgName === 'Order Entry Results Reporting'){
     htmlLnk += "<li><a href=\"http://www.osehra.org/content/vista-api?quicktabs_vista_api=0#quicktabs-vista_api\" target=\"_blank\">M API</a></li>";
     htmlLnk += "<li>" + rpcLink + "</li>";
     htmlLnk += "<li><a href=\"http://www.osehra.org/content/vista-api?quicktabs_vista_api=2#quicktabs-vista_api\" target=\"_blank\">Web Service API</a></li>";
-    htmlLnk += "<li>HL7</li>";
+    htmlLnk += "<li>" + hl7Link + "</li>";
     htmlLnk += "</ul>";
   }
   else{
@@ -473,7 +426,9 @@ function getInterfaceHtml(pkgName) {
       htmlLnk += "<li>" + rpcLink + "</li>";
     }
     htmlLnk += "<li>Web Service API</li>";
-    htmlLnk += "<li>HL7</li>";
+    if (hl7Link.length > 0){
+      htmlLnk += "<li>" + hl7Link + "</li>";
+    }
     htmlLnk += "</ul>";
   }
   return htmlLnk;

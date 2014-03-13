@@ -213,10 +213,10 @@ div.header4 {
     margin: 0 0;
 }
 
-.nytg-navigation li:first-of-type{
+.nytg-navigation li:first-of-type {
     border-radius: 4px 0 0 4px;
 }
-.nytg-navigation li:last-of-type{
+.nytg-navigation li:last-of-type {
 
     border-right: solid 1px #CCC;
     border-radius: 0 4px 4px 0;
@@ -243,3 +243,11 @@ div.selected {
     padding-bottom:10px;
 }
 
+td.ellipsis {
+  display: block;
+	text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+	width: 250px;
+	white-space: nowrap;
+	overflow: hidden;
+}

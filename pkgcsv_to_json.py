@@ -31,16 +31,15 @@ def convert_pkg_cat_csv_json():
       pkgCatDict[pkgName] = [fields[x] for x in DISTR_LIST]
 
   packageJson = generate_output_json_dict(catPkgDict, pkgCatDict)
-  output = json.dumps(packageJson)
-  outputFile = open("packages.json", 'w')
-  outputFile.write(output)
-  outputFile.write("\n")
+  with open("packages.json", 'w') as outputFile:
+    json.dump(packageJson, outputFile)
 
 def generate_output_json_dict(inputDict, pkgCatDict):
  # read package.csv file for more information
   packages_csv = csv.DictReader(open("Packages.csv",'r'))
   pkgNameSet = set()
   pkgNamePrex = dict()
+  pkgNameInterface = dict()
   pkg = None
   for fields in packages_csv:
     if fields['Directory Name']:
@@ -49,6 +48,16 @@ def generate_output_json_dict(inputDict, pkgCatDict):
       pkgNamePrex[pkg] = []
     if pkg and fields['Prefixes']:
       pkgNamePrex[pkg].append(fields['Prefixes'])
+  # read packageInterfaces.csv file for interface
+  interface_csv = csv.DictReader(open("PackageInterface.csv", 'r'))
+  pkgNameInterface = dict()
+  for row in interface_csv:
+    pkgName = row['Package']
+    if pkgName and pkgName in pkgNameSet:
+      if row['RPC']:
+        pkgNameInterface.setdefault(pkgName,[]).append('RPC')
+      if row['HL7']:
+        pkgNameInterface.setdefault(pkgName,[]).append('HL7')
 
   packageJson = dict() # the final json structure and convert to json file
   packageJson["name"] = "VistA"
@@ -70,6 +79,8 @@ def generate_output_json_dict(inputDict, pkgCatDict):
             if pkg in pkgNameSet:
               outPkg['hasLink'] = True
               outPkg['prefixes'] = pkgNamePrex[pkg]
+              if pkg in pkgNameInterface:
+                outPkg['interfaces'] = pkgNameInterface[pkg]
             else:
               outPkg['hasLink'] = False
             outPkg['category'] = []
@@ -88,4 +99,3 @@ def main():
 
 if __name__ == '__main__':
   main()
-
