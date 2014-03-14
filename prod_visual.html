@@ -386,19 +386,15 @@ function getNamespaceHtml(namespace) {
   return htmlLnk;
 }
 
-var rpcpackage = [
-];
-
 function getRPCLinkByPackageName(pkgName) {
-  return "<a href=\"rpc/" + pkgName + ".html\" target=\"_blank\">Remote Procedure Call</a>";
+  return "<a href=\"files/" + pkgName + "-RPC.html\" target=\"_blank\">Remote Procedure Call</a>";
 }
 
 function getHL7LinkByPackageName(pkgName) {
-  return "<a href=\"hl7/" + pkgName + ".html\" target=\"_blank\">HL7</a>";
+  return "<a href=\"files/" + pkgName + "-HL7.html\" target=\"_blank\">HL7</a>";
 }
 
 function getInterfaceHtml(node) {
-  console.log(node)
   pkgName = node.name
   var htmlLnk = "<ul>";
   var rpcLink = "";
