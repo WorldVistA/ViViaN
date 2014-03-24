@@ -1,0 +1,1 @@
+{"lock": "PRCNWHSE", "children": [{"name": "Display/Print Turn-In Request", "option": "PRCN TURN PRINT", "ien": "7194"}, {"lock": "PRCNWHSE", "name": "Process Equipment Turn-In Request (Warehouse)", "option": "PRCN TURN WHSE", "ien": "7180"}], "name": "Warehouse Turn-In Menu", "option": "PRCN TURN WHSE MENU", "ien": "7198"}
