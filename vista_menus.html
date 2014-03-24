@@ -46,7 +46,6 @@
     style="border-width:0" alt="OSEHRA" /></a>
     <!-- <select id="category"></select> -->
     <div style="font-size:10px; position:absolute; left:300px; top:30px;">
-      <button onclick="expandAllNode()">Expand All</button>
       <button onclick="collapseAllNode()">Collapse All</button>
       <button onclick="resetAllNode()">Reset</button>
     </div>
@@ -328,7 +327,7 @@ function change_circle_color(d){
 function node_onMouseOver(d) {
   var headText = "Option Name: " + d.option;
   if (d.lock !== undefined){
-    headText = headText + "<p>" + "Security Key: " + d.lock + "</p>";
+    headText = headText + "<br>" + "Security Key: " + d.lock + "</br>";
   }
   header.html(headText);
   toolTip.transition()
