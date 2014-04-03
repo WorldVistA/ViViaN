@@ -449,6 +449,9 @@ function toggle(d) {
 }
 
 function change_node_color(node) {
+  if (categories.length === 0) {
+    return "black";
+  }
   var category = categories[selectedIndex] + " Packages";
   if (category == "All Packages" || node.hasLink === undefined) {
     return "black";
@@ -493,8 +496,8 @@ function node_onMouseOver(d) {
 }
 
 
-var categories = ["All", "OSEHRA", "VA", "DSS", "Medsphere", "Oroville"];
-
+// var categories = ["All", "OSEHRA", "VA", "DSS", "Medsphere", "Oroville"];
+var categories = [];
 // Legend.
 var legend = vis.selectAll("g.legend")
     .data(categories)
