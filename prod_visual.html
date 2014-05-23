@@ -17,7 +17,7 @@
       }
 
       .node text {
-        font-size: 12px;
+        font-size: 11px;
         cursor: hand;
       }
 
@@ -80,25 +80,20 @@
     </script>
   </head>
 
-<body style="height:1050px; width:1280px; overflow:auto">
-  <div class="nytg-navBar">
+<body >
+  <div>
     <a href="http://www.osehra.org">
     <img src="http://www.osehra.org/profiles/drupal_commons/themes/commons_osehra_earth/logo.png"
     style="border-width:0" alt="OSEHRA" /></a>
     <!-- <select id="category"></select> -->
-    <div style="font-size:10px; position:absolute; left:300px; top:30px;">
+    <div style="font-size:10px; position:absolute; left:300px; top:20px;">
       <button onclick="expandAllNode()">Expand All</button>
       <button onclick="collapseAllNode()">Collapse All</button>
       <button onclick="resetAllNode()">Reset</button>
     </div>
   </div>
   <div id="footer" style="position:absolute; right:10px; top:0px;">
-    VIVIAN (<u>Vi</u>sualizing <u>Vi</u>stA <u>A</u>nd <u>N</u>amespace) Demonstration Site
-    <div class="disclaimer">
-      PLEASE NOTE:  Current data used on this page is sample data for demonstration purposes only.
-      <br>We acknowledge with thanks our corporate members whose names appear on this page.</br>
-    </div>
-    <div class="hint">click or option-click to expand or collapse</div>
+    VIVIAN (<u>Vi</u>sualizing <u>Vi</u>stA <u>A</u>nd <u>N</u>amespace)
   </div>
   <!-- Tooltip -->
 <div id="toolTip" class="tooltip" style="opacity:0;">
@@ -120,9 +115,9 @@
 </div>
 <script type="text/javascript">
 $("#accordion").accordion({heightStyle: 'content', collapsible: true}).hide();
-var m = [10, 120, 10, 120],
+var m = [0, 120, 0, 120],
     w = 1280 - m[1] - m[3],
-    h = 1050 - m[0] - m[2],
+    h = 1200 - m[0] - m[2],
     i = 0,
     root;
 
