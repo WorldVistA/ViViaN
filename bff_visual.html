@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <link type="text/css" rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    
+    <script src="d3/d3.v3.min.js" charset="utf-8"></script>
+    <style type="text/css">
+      .node circle {
+        cursor: pointer;
+        fill: #fff;
+        stroke: steelblue;
+        stroke-width: 1.5px;
+      }
+
+      .node text {
+        font-size: 11px;
+        cursor: hand;
+      }
+
+      path.link {
+        fill: none;
+        stroke: #ccc;
+        stroke-width: 1.5px;
+      }
+      A:hover { text-decoration: none; background-color: #f2f2ff }
+      A:link { text-decoration: underline;}
+    </style>
+    <!-- JQuery Buttons -->
+    <script>
+      $(function() {
+        $( "button" ).button().click(function(event){
+          event.preventDefault();
+        });
+      });
+    </script>
+    <!-- Google Analytics -->
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+     ga('create', 'UA-43872538-6', 'osehra.org');
+     ga('send', 'pageview');
+    </script>
+  </head>
+
+<body >
+  <div>
+    <a href="http://www.osehra.org">
+    <img src="http://www.osehra.org/profiles/drupal_commons/themes/commons_osehra_earth/logo.png"
+    style="border-width:0" alt="OSEHRA" /></a>
+    <!-- <select id="category"></select> -->
+  </div>
+  <div id="footer" style="position:absolute; right:10px; top:0px;">
+    VA BFF Visualization Demo
+  </div>
+  <!-- Tooltip -->
+<div id="toolTip" class="tooltip" style="opacity:0;">
+    <div id="head" class="header"></div>
+    <div  class="tooltipTail"></div>
+</div>
+
+<div id="body" style="position: absolute; left:80px; top:50px">
+</div>
+<div id="dialog-modal">
+  <div id='namespaces' style="display:none"></div>
+  <div id='dependencies' style="display:none"></div>
+  <div id="accordion">
+      <h3><a href="#">Description</a></h3>
+      <div id="description"></div>
+      <h3 id="commentary_head" style="display:none"><a href="#">Commentary</a></h3>
+      <div id="commentary"></div>
+  </div>
+</div>
+<script type="text/javascript">
+$("#accordion").accordion({heightStyle: 'content', collapsible: true}).hide();
+var m = [0, 140, 0, 140],
+    w = 1480 - m[1] - m[3],
+    h = 940 - m[0] - m[2],
+    i = 0,
+    root;
+
+var tree = d3.layout.tree()
+    .size([h, w]);
+
+var diagonal = d3.svg.diagonal()
+    .projection(function(d) { return [d.y, d.x]; });
+
+var vis = d3.select("#body").append("svg:svg")
+    .attr("width", w + m[1] + m[3])
+    .attr("height", h + m[0] + m[2])
+  .append("svg:g")
+    .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
+
+d3.json("bff.json", function(json) {
+  root = json;
+  root.x0 = h / 2;
+  root.y0 = 0;
+
+  resetAllNode();
+});
+
+function toggleAll(d) {
+  if (d.children) {
+    d.children.forEach(toggleAll);
+    toggle(d);
+  }
+}
+
+function expandAllNode() {
+  //root.children.forEach(toggleAll);
+  expand(root)
+  root.children.forEach(expandAll);
+  update(root);
+}
+
+function collapseAllNode() {
+  root.children.forEach(collapseAll);
+  collapse(root)
+  update(root);
+}
+
+function expandAll(d) {
+  expand(d);
+  if (d.children) {
+    d.children.forEach(expandAll);
+  }
+}
+
+function resetAllNode() {
+  expand(root);
+  root.children.forEach(collapseAll);
+  // Initialize the display to show a few nodes.
+  // expandAll(root.children[0]);
+  //root.children[0].forEach(toggleAll);
+  //toggle(root.children[0]);
+  //toggle(root.children[0].children[2]);
+  //toggle(root.children[0].children[3]);
+  //toggle(root.children[1]);
+  //toggle(root.children[1].children[0]);
+  //toggle(root.children[1].children[4]);
+  //toggle(root.children[4]);
+  //toggle(root.children[4].children[0]);
+  update(root);
+}
+
+function collapseAll(d) {
+  if (d.children) {
+    d.children.forEach(collapseAll);
+    collapse(d);
+  }
+}
+
+// Collapse Node.
+function collapse(d) {
+  if (d.children) {
+    d._children = d.children;
+    d.children = null;
+  }
+}
+
+// Expand children.
+function expand(d) {
+  if (d._children) {
+    d.children = d._children;
+    d._children = null;
+  }
+}
+
+
+function update(source) {
+  var duration = d3.event && d3.event.altKey ? 5000 : 500;
+
+  // Compute the new tree layout.
+  var nodes = tree.nodes(root).reverse();
+
+  // Normalize for fixed-depth.
+  nodes.forEach(function(d) { d.y = d.depth * 280; });
+
+  // Update the nodes
+  var node = vis.selectAll("g.node")
+      .data(nodes, function(d) { return d.id || (d.id = ++i); });
+
+  // Enter any new nodes at the parent's previous position.
+  var nodeEnter = node.enter().append("svg:g")
+      .attr("class", "node")
+      .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
+      .on("click", function(d) {
+          toggle(d);
+          update(d);
+      })
+      .on("mouseover", function(d) {
+          if (d.number !== undefined && d.number){
+            node_onMouseOver(d);
+          }
+      })
+      .on("mouseout", function(d) {
+          header.text("");
+          toolTip.transition()
+                 .duration(500)
+                 .style("opacity", "0");
+      });
+
+  nodeEnter.append("svg:circle")
+      .attr("r", 1e-6)
+      .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+
+  nodeEnter.append("svg:text")
+      .attr("x", function(d) { return d.children || d._children ? -10 : 10; })
+      .attr("dy", ".35em")
+      .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
+      .text(function(d) { return d.name; })
+      .attr("fill", function(node){
+        return change_node_color(node)
+      })
+      .attr("cursor", function(d){ return d.description !== undefined && d.description ? "pointer" : "hand";})
+      .on("click", function(d) {
+        if (d.description) {
+          var overlayDialogObj = {
+            autoOpen: true,
+            height: 'auto',
+            width: 700,
+            modal: true,
+            position: ["center","center-50"],
+            title: "" + d.number + ": " + d.name,
+            open: function(){
+                $('#description').html(d.description);
+                if (d.commentary){
+                  $('#commentary').html(d.commentary);
+                  $('#commentary').show();
+                  $('#commentary_head').show();
+                }
+                else{
+                  $('#commentary').html('');
+                  $('#commentary_head').hide();
+                  $('#commentary').hide();
+                }
+                $('#accordion').accordion("option", "active", 0);
+                $('#accordion').accordion("refresh");
+                $('#accordion').accordion({heightStyle: 'content'}).show();
+            },
+         };
+         $('#dialog-modal').dialog(overlayDialogObj).show();
+          // var pkgUrl = package_link_url + d.name.replace(/ /g, '_') + ".html";
+          // var win = window.open(pkgUrl, '_black');
+          // win.focus();
+        }
+        d3.event.preventDefault();
+        d3.event.stopPropagation();
+      })
+      .style("fill-opacity", 1e-6);
+  
+  // Transition nodes to their new position.
+  var nodeUpdate = node.transition()
+      .duration(duration)
+      .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
+
+  nodeUpdate.select("circle")
+    .attr("r", function(d) {return 7 - d.depth;})
+      .style("fill", function(d) { return change_circle_color(d); /* return d._children ? "lightsteelblue" : "#fff"; */ });
+  
+  nodeUpdate.select("text")
+      .attr("fill", function(node){ return change_node_color(node) })
+      .style("fill-opacity", 1);
+
+  // Transition exiting nodes to the parent's new position.
+  var nodeExit = node.exit().transition()
+      .duration(duration)
+      .attr("transform", function(d) { return "translate(" + source.y + "," + source.x + ")"; })
+      .remove();
+
+  nodeExit.select("circle")
+      .attr("r", 1e-6);
+
+  nodeExit.select("text")
+      .style("fill-opacity", 1e-6);
+
+  // Update the links
+  var link = vis.selectAll("path.link")
+      .data(tree.links(nodes), function(d) { return d.target.id; });
+
+  // Enter any new links at the parent's previous position.
+  link.enter().insert("svg:path", "g")
+      .attr("class", "link")
+      .attr("d", function(d) {
+        var o = {x: source.x0, y: source.y0};
+        return diagonal({source: o, target: o});
+      })
+    .transition()
+      .duration(duration)
+      .attr("d", diagonal);
+
+  // Transition links to their new position.
+  link.transition()
+      .duration(duration)
+      .attr("d", diagonal);
+
+  // Transition exiting nodes to the parent's new position.
+  link.exit().transition()
+      .duration(duration)
+      .attr("d", function(d) {
+        var o = {x: source.x, y: source.y};
+        return diagonal({source: o, target: o});
+      })
+      .remove();
+
+  // Stash the old positions for transition.
+  nodes.forEach(function(d) {
+    d.x0 = d.x;
+    d.y0 = d.y;
+  });
+}
+
+// Toggle children.
+function toggle(d) {
+  if (d.children) {
+    d._children = d.children;
+    d.children = null;
+  } else {
+    d.children = d._children;
+    d._children = null;
+  }
+}
+
+function change_node_color(node) {
+  if (categories.length === 0) {
+    return "black";
+  }
+  var category = categories[selectedIndex] + " Packages";
+  if (category == "All Packages" || node.hasLink === undefined) {
+    return "black";
+  }
+  if (node.category) {
+    var index = node.category.indexOf(category);
+    if (index >= 0) {
+      return catcolors[selectedIndex];
+    }
+  }
+  return "#E0E0E0";
+}
+
+function change_circle_color(d){
+  if (d._children){
+    return "lightsteelblue";
+  }
+  else {
+    if (d.hasLink !== undefined && selectedIndex > 0){
+      var category = categories[selectedIndex] + " Packages";
+      var index = d.category.indexOf(category);
+      if (index >= 0) {
+        return catcolors[selectedIndex];
+      }
+    }
+    return "#fff";
+  }
+}
+
+function node_onMouseOver(d) {
+    if (d.number !== undefined){
+      header.text("" + d.number);
+    }
+    else{
+      return;
+    }
+    toolTip.transition()
+            .duration(200)
+            .style("opacity", ".9");
+    toolTip.style("left", (d3.event.pageX + 20) + "px")
+            .style("top", (d3.event.pageY + 5) + "px");
+}
+
+
+// var categories = ["All", "OSEHRA", "VA", "DSS", "Medsphere", "Oroville"];
+var categories = [];
+
+    </script>
+  </body>
+</html>
+
