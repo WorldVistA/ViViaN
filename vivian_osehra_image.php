@@ -6,9 +6,9 @@ style="border-width:0" height="35" width="150" alt="OSEHRA Logo" /></a>
     VIVIAN (<u>Vi</u>sualizing <u>Vi</u>stA <u>A</u>nd <u>N</u>amespace)
   </div>
 <div id="demoexamples" style="position:absolute; left:550px; top:0px">
-  <ul class="nav nav-pills">
-    <li><a href="#">Home</a></li>
-    <li><a href="vista_menus.php" target="_blank">VistA Menus</a></li>
-    <li><a href="bff_visual.html" target="_blank">VA BFF Demo</a></li>
+  <ul class="nav nav-pills" role="navigation">
+    <li><a href="index.php">Home</a></li>
+    <li><a href="vista_menus.php">VistA Menus</a></li>
+    <li><a href="bff_demo.php">VA BFF Demo</a></li>
   </ul>
 </div>

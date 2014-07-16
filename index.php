@@ -22,10 +22,10 @@
   <div>
     <?php include_once "vivian_osehra_image.php" ?>
     <!-- <select id="category"></select> -->
-    <div style="font-size:10px; position:absolute; right:100px; top:30px;">
-      <button onclick="expandAllNode()">Expand All</button>
-      <button onclick="collapseAllNode()">Collapse All</button>
-      <button onclick="resetAllNode()">Reset</button>
+    <div style="font-size:10px; position:absolute; right:100px;">
+      <button onclick="_expandAllNode()">Expand All</button>
+      <button onclick="_collapseAllNode()">Collapse All</button>
+      <button onclick="_resetAllNode()">Reset</button>
     </div>
   </div>
   <!-- Tooltip -->
@@ -34,8 +34,6 @@
     <div  class="tooltipTail"></div>
 </div>
 
-<div id="body" style="position: absolute; left:80px; top:50px">
-</div>
 <div id="dialog-modal">
   <div id='namespaces' style="display:none"></div>
   <div id='dependencies' style="display:none"></div>
@@ -46,41 +44,48 @@
       <div id="description"></div>
   </div>
 </div>
+<div id="treeview_placeholder"/>
 <script type="text/javascript">
+var chart = d3.chart.treeview().height(1280).width(1200);
 $("#accordion").accordion({heightStyle: 'content', collapsible: true}).hide();
-var m = [0, 120, 0, 120],
-    w = 1280 - m[1] - m[3],
-    h = 1200 - m[0] - m[2],
-    i = 0,
-    root;
-
-var selectedIndex = 0;
-var catcolors = ["black", "#FF0000", "#3300CC", "#080", "#FF00FF", "#660000"];
-
-var tree = d3.layout.tree()
-    .size([h, w]);
-
-var diagonal = d3.svg.diagonal()
-    .projection(function(d) { return [d.y, d.x]; });
-
-var vis = d3.select("#body").append("svg:svg")
-    .attr("width", w + m[1] + m[3])
-    .attr("height", h + m[0] + m[2])
-  .append("svg:g")
-    .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
-
-d3.json("packages.json", function(json) {
-  root = json;
-  root.x0 = h / 2;
-  root.y0 = 0;
-
-  resetAllNode();
-});
-
 <?php include_once "vivian_tree_layout_common.js" ?>
+
 var package_link_url = "http://code.osehra.org/dox/Package_";
 var toolTip = d3.select(document.getElementById("toolTip"));
 var header = d3.select(document.getElementById("header1"));
+var selectedIndex = 0;
+var catcolors = ["black", "#FF0000", "#3300CC", "#080", "#FF00FF", "#660000"];
+
+d3.json("packages.json", function(json) {
+  resetAllNode(json);
+  chart.on("node", "event","click", pkgLinkClicked)
+     .on("node", "event", "mouseover", node_onMouseOver)
+     .on("node", "event","mouseout", node_onMouseOut)
+     .on("text", "attr", "cursor", function(d) {
+        return d.hasLink !== undefined && d.hasLink ? "pointer" : "hand";
+      })
+     .on("text", "attr", "fill", change_node_color)
+     .on("circle", "style", "fill", change_circle_color)
+     .on("circle", "attr", "r", function(d) { return 7 - d.depth; });
+  d3.select("#treeview_placeholder").datum(json).call(chart);
+  // createLegend();
+});
+
+function _expandAllNode() {
+  expandAllNode(chart.nodes());
+  chart.update(chart.nodes());
+}
+
+function _collapseAllNode() {
+  collapseAllNode(chart.nodes());
+  chart.update(chart.nodes());
+}
+
+function _resetAllNode() {
+  resetAllNode(chart.nodes());
+  chart.update(chart.nodes());
+}
+
 
 var sddesc = "<p>The VistA Scheduling package allows a user to Schedule appointments for" +
 " the following types of appointments:" +
@@ -100,148 +105,44 @@ var sddesc = "<p>The VistA Scheduling package allows a user to Schedule appointm
 " and visit date in the OCP File.  The AMIS 223 report and the OPC" +
 " file to be sent to the Austin DPC are generated using this file.</p>";
 
-
-function update(source) {
-  var duration = d3.event && d3.event.altKey ? 5000 : 500;
-
-  // Compute the new tree layout.
-  var nodes = tree.nodes(root).reverse();
-
-  // Normalize for fixed-depth.
-  nodes.forEach(function(d) { d.y = d.depth * 220; });
-
-  // Update the nodes
-  var node = vis.selectAll("g.node")
-      .data(nodes, function(d) { return d.id || (d.id = ++i); });
-
-  // Enter any new nodes at the parent's previous position.
-  var nodeEnter = node.enter().append("svg:g")
-      .attr("class", "node")
-      .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
-      .on("click", function(d) {
-          if (d.hasLink) {
-            var overlayDialogObj = {
-              autoOpen: true,
-              height: 'auto',
-              width: 700,
-              modal: true,
-              position: ["center","center-50"],
-              title: "Package: " + d.name,
-              open: function(){
-                  htmlLnk = getInterfaceHtml(d);
-                  $('#interface').html(htmlLnk);
-                  $('#namespaces').html(getNamespaceHtml(d.prefixes))
-                  $('#namespaces').show();
-                  if (d.name === 'Scheduling'){
-                    $('#description').html(sddesc);
-                  }
-                  else{
-                    $('#description').html(d.name);
-                  }
-                  depLink = getDependencyContentHtml(d.name)
-                  $('#dependencies').html(depLink);
-                  $('#dependencies').show();
-                  $('#accordion').accordion("option", "active", 0);
-                  $('#accordion').accordion("refresh");
-                  $('#accordion').accordion({heightStyle: 'content'}).show();
-              },
-           };
-           $('#dialog-modal').dialog(overlayDialogObj).show();
-            // var pkgUrl = package_link_url + d.name.replace(/ /g, '_') + ".html";
-            // var win = window.open(pkgUrl, '_black');
-            // win.focus();
-            return;
+function pkgLinkClicked(d) {
+  if (d.hasLink) {
+    var overlayDialogObj = {
+      autoOpen: true,
+      height: 'auto',
+      width: 700,
+      modal: true,
+      position: ["center","center-50"],
+      title: "Package: " + d.name,
+      open: function(){
+          htmlLnk = getInterfaceHtml(d);
+          $('#interface').html(htmlLnk);
+          $('#namespaces').html(getNamespaceHtml(d.prefixes))
+          $('#namespaces').show();
+          if (d.name === 'Scheduling'){
+            $('#description').html(sddesc);
           }
-          toggle(d);
-          update(d);
-      })
-      .on("mouseover", function(d) {
-          if (d.hasLink !== undefined && d.hasLink){
-            node_onMouseOver(d);
+          else{
+            $('#description').html(d.name);
           }
-      })
-      .on("mouseout", function(d) {
-          header.text("");
-          toolTip.transition()
-                 .duration(500)
-                 .style("opacity", "0");
-      });
-
-  nodeEnter.append("svg:circle")
-      .attr("r", 1e-6)
-      .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
-
-  nodeEnter.append("svg:text")
-      .attr("x", function(d) { return d.children || d._children ? -10 : 10; })
-      .attr("dy", ".35em")
-      .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
-      .text(function(d) { return d.name; })
-      .attr("fill", function(node){
-        return change_node_color(node)
-      })
-      .attr("cursor", function(d){ return d.hasLink !== undefined && d.hasLink ? "pointer" : "hand";})
-      .style("fill-opacity", 1e-6);
-  
-  // Transition nodes to their new position.
-  var nodeUpdate = node.transition()
-      .duration(duration)
-      .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
-
-  nodeUpdate.select("circle")
-    .attr("r", function(d) {return 7 - d.depth;})
-      .style("fill", function(d) { return change_circle_color(d); /* return d._children ? "lightsteelblue" : "#fff"; */ });
-  
-  nodeUpdate.select("text")
-      .attr("fill", function(node){ return change_node_color(node) })
-      .style("fill-opacity", 1);
-
-  // Transition exiting nodes to the parent's new position.
-  var nodeExit = node.exit().transition()
-      .duration(duration)
-      .attr("transform", function(d) { return "translate(" + source.y + "," + source.x + ")"; })
-      .remove();
-
-  nodeExit.select("circle")
-      .attr("r", 1e-6);
-
-  nodeExit.select("text")
-      .style("fill-opacity", 1e-6);
-
-  // Update the links
-  var link = vis.selectAll("path.link")
-      .data(tree.links(nodes), function(d) { return d.target.id; });
-
-  // Enter any new links at the parent's previous position.
-  link.enter().insert("svg:path", "g")
-      .attr("class", "link")
-      .attr("d", function(d) {
-        var o = {x: source.x0, y: source.y0};
-        return diagonal({source: o, target: o});
-      })
-    .transition()
-      .duration(duration)
-      .attr("d", diagonal);
-
-  // Transition links to their new position.
-  link.transition()
-      .duration(duration)
-      .attr("d", diagonal);
-
-  // Transition exiting nodes to the parent's new position.
-  link.exit().transition()
-      .duration(duration)
-      .attr("d", function(d) {
-        var o = {x: source.x, y: source.y};
-        return diagonal({source: o, target: o});
-      })
-      .remove();
-
-  // Stash the old positions for transition.
-  nodes.forEach(function(d) {
-    d.x0 = d.x;
-    d.y0 = d.y;
-  });
+          depLink = getDependencyContentHtml(d.name)
+          $('#dependencies').html(depLink);
+          $('#dependencies').show();
+          $('#accordion').accordion("option", "active", 0);
+          $('#accordion').accordion("refresh");
+          $('#accordion').accordion({heightStyle: 'content'}).show();
+      },
+   };
+   $('#dialog-modal').dialog(overlayDialogObj).show();
+    // var pkgUrl = package_link_url + d.name.replace(/ /g, '_') + ".html";
+    // var win = window.open(pkgUrl, '_black');
+    // win.focus();
+  }
+  else{
+    chart.onNodeClick(d);
+  }
 }
+
 
 function getPackageDoxLink(pkgName) {
   var doxLinkName = pkgName.replace(/ /g, '_').replace(/-/g, '_')
@@ -309,17 +210,6 @@ function getDependencyContentHtml(pkgName) {
   return depLink;
 }
 
-// Toggle children.
-function toggle(d) {
-  if (d.children) {
-    d._children = d.children;
-    d.children = null;
-  } else {
-    d.children = d._children;
-    d._children = null;
-  }
-}
-
 function change_node_color(node) {
   if (categories.length === 0) {
     return "black";
@@ -354,54 +244,64 @@ function change_circle_color(d){
 }
 
 function node_onMouseOver(d) {
-    if (d.prefixes !== undefined){
-      header.text("Namespace: " + d.prefixes);
-    }
-    else{
-      return;
-    }
-    toolTip.transition()
-            .duration(200)
-            .style("opacity", ".9");
-    toolTip.style("left", (d3.event.pageX + 20) + "px")
-            .style("top", (d3.event.pageY + 5) + "px");
+  if (d.hasLink === undefined || !d.hasLink) {
+    return;
+  }
+  if (d.prefixes !== undefined){
+    header.text("Namespace: " + d.prefixes);
+  }
+  else{
+    return;
+  }
+  toolTip.transition()
+          .duration(200)
+          .style("opacity", ".9");
+  toolTip.style("left", (d3.event.pageX + 20) + "px")
+          .style("top", (d3.event.pageY + 5) + "px");
+}
+
+function node_onMouseOut(d) {
+  header.text("");
+  toolTip.transition()
+         .duration(200)
+         .style("opacity", "0");
 }
 
 
 // var categories = ["All", "OSEHRA", "VA", "DSS", "Medsphere", "Oroville"];
 var categories = [];
 // Legend.
-var legend = vis.selectAll("g.legend")
-    .data(categories)
-  .enter().append("svg:g")
-    .attr("class", "legend")
-    .attr("transform", function(d, i) { return "translate(-100," + (i * 30 + 80) + ")"; })
-    .on("click", function(d) {
-      selectedIndex = categories.indexOf(d);
-      d3.selectAll("text")
-        .filter(function (d) { return d.hasLink != undefined;})
-        .attr("fill", function (node) {
-          return change_node_color(node);
-        });
-      d3.selectAll("circle")
-        .filter(function (d) { return d.hasLink != undefined;})
-        .style("fill", function (d) {
-          return change_circle_color(d);
-        });
+function createLegend() {
+  var legend = chart.svg().selectAll("g.legend")
+      .data(categories)
+    .enter().append("svg:g")
+      .attr("class", "legend")
+      .attr("transform", function(d, i) { return "translate(-100," + (i * 30 + 80) + ")"; })
+      .on("click", function(d) {
+        selectedIndex = categories.indexOf(d);
+        d3.selectAll("text")
+          .filter(function (d) { return d.hasLink != undefined;})
+          .attr("fill", function (node) {
+            return change_node_color(node);
+          });
+        d3.selectAll("circle")
+          .filter(function (d) { return d.hasLink != undefined;})
+          .style("fill", function (d) {
+            return change_circle_color(d);
+          });
 
-    });
+      });
 
-legend.append("svg:circle")
-    .attr("class", String)
-    .attr("r", 3);
+  legend.append("svg:circle")
+      .attr("class", String)
+      .attr("r", 3);
 
-legend.append("svg:text")
-    .attr("class", String)
-    .attr("x", 13)
-    .attr("dy", ".31em")
-    .text(function(d) { return  d + " Packages"; });
-
+  legend.append("svg:text")
+      .attr("class", String)
+      .attr("x", 13)
+      .attr("dy", ".31em")
+      .text(function(d) { return  d + " Packages"; });
+}
     </script>
   </body>
 </html>
-

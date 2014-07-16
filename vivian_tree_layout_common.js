@@ -5,17 +5,15 @@ function toggleAll(d) {
   }
 }
 
-function expandAllNode() {
+function expandAllNode(root) {
   //root.children.forEach(toggleAll);
   expand(root)
   root.children.forEach(expandAll);
-  update(root);
 }
 
-function collapseAllNode() {
+function collapseAllNode(root) {
   root.children.forEach(collapseAll);
   collapse(root)
-  update(root);
 }
 
 function expandAll(d) {
@@ -25,7 +23,7 @@ function expandAll(d) {
   }
 }
 
-function resetAllNode() {
+function resetAllNode(root) {
   expand(root);
   root.children.forEach(collapseAll);
   // Initialize the display to show a few nodes.
@@ -39,7 +37,7 @@ function resetAllNode() {
   //toggle(root.children[1].children[4]);
   //toggle(root.children[4]);
   //toggle(root.children[4].children[0]);
-  update(root);
+  //update(root);
 }
 
 function collapseAll(d) {
