@@ -50,7 +50,7 @@
 var chart = d3.chart.treeview()
               .height(1050)
               .width(1280*2)
-              .margins({top: 20, left: 210, bottom: 20, right: 0})
+              .margins({top: 20, left: 260, bottom: 20, right: 0})
               .textwidth(300);
 
 function autoCompleteChanged(eve, ui) {

@@ -25,9 +25,12 @@ function expandAll(d) {
 
 function resetAllNode(root) {
   expand(root);
-  root.children.forEach(collapseAll);
-  // Initialize the display to show a few nodes.
-  expandAll(root.children[0]);
+  if (root.children !== undefined && root.children)
+  {
+    root.children.forEach(collapseAll);
+    // Initialize the display to show a few nodes.
+    expandAll(root.children[0]);
+  }
   //root.children[0].forEach(toggleAll);
   //toggle(root.children[0]);
   //toggle(root.children[0].children[2]);
