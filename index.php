@@ -57,7 +57,7 @@
 var chart = d3.chart.treeview()
               .height(1280)
               .width(1200)
-              .margins({top:42, left:180, right:0, bottom:10})
+              .margins({top:42, left:180, right:0, bottom:0})
               .textwidth(220);
 $("#accordion").accordion({heightStyle: 'content', collapsible: true}).hide();
 <?php include_once "vivian_tree_layout_common.js" ?>
