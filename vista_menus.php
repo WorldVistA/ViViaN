@@ -21,8 +21,9 @@
           }
         });
         d3.json('menu_autocomplete.json', function(json) {
+          var sortedjson = json.sort(function(a,b) { return a.label.localeCompare(b.label); });
           $("#autocomplete").autocomplete({
-            source: json,
+            source: sortedjson,
             select: autoCompleteChanged,
             change: autoCompleteChanged
           }).val('EVE: System Manager Menu').data('autocomplete')._trigger('select');
@@ -33,13 +34,22 @@
 
     </script>
     <?php include_once "vivian_google_analytics.php" ?>
+    <style>
+      .ui-autocomplete {
+          max-height: 400px;
+          font-size: 0.9em;
+          overflow-y: auto;   /* prevent horizontal scrollbar */
+          overflow-x: hidden; /* add padding to account for vertical scrollbar */
+          z-index:1000 !important;
+      }  
+    </style>
   </head>
 
 <body >
   <div>
     <?php include_once "vivian_osehra_image.php" ?>
     <!-- <select id="category"></select> -->
-    <div style="font-size:0.9em; position:absolute; right:20px; top:5px;">
+    <div style="position:absolute; right:20px; top:5px;">
       <label for="autocomplete">Select a top level menu: </label>
       <input id="autocomplete" size="50">
     </div>
@@ -103,7 +113,7 @@ function node_onMouseClick(d) {
   var optionLink = getOptionDetailLink(d);
   var win = window.open(optionLink, '_black');
   win.focus();
-  d3.event.preventDefault();
+  //d3.event.preventDefault();
   d3.event.stopPropagation();
 }
 
