@@ -46,7 +46,7 @@
 </div>
 <div id="treeview_placeholder"/>
 <script type="text/javascript">
-var chart = d3.chart.treeview().height(1280).width(1200);
+var chart = d3.chart.treeview().height(1280).width(1200).textwidth(220);
 $("#accordion").accordion({heightStyle: 'content', collapsible: true}).hide();
 <?php include_once "vivian_tree_layout_common.js" ?>
 
@@ -263,7 +263,7 @@ function node_onMouseOver(d) {
 function node_onMouseOut(d) {
   header.text("");
   toolTip.transition()
-         .duration(200)
+         .duration(100)
          .style("opacity", "0");
 }
 

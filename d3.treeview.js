@@ -13,7 +13,7 @@ d3.chart = d3.chart || {};
 d3.chart.treeview = function(option) {
 
   var _width = 1600, _height = 800,
-          _margins = {top: 0, left: 0, right: 120, bottom: 0},
+          _margins = {top: 0, left: 180, right: 0, bottom: 0},
           _textwidth = 220,
           _svg,
           _nodes,
@@ -59,7 +59,7 @@ d3.chart.treeview = function(option) {
                   .attr("width", _width)
                   .append("svg:g")
                   .attr("transform", function(d){
-                    return "translate(" + _margins.right + "," + _margins.top + ")";
+                    return "translate(" + _margins.left + "," + _margins.top + ")";
                   });
       }
 
@@ -116,19 +116,19 @@ d3.chart.treeview = function(option) {
           switch (tp) {
             case 'event':
               for (pt in custs[tp]) {
-                console.log("on " + pt + " " + target);
+                //console.log("on " + pt + " " + target);
                 src.on(pt, custs[tp][pt]);
               }
               break;
             case 'attr':
               for (pt in custs[tp]) {
-                console.log("attr " + pt + " " + target);
+                //console.log("attr " + pt + " " + target);
                 src.attr(pt, custs[tp][pt]);
               }
               break;
             case 'style':
               for (pt in custs[tp]) {
-                console.log("style " + pt + " " + target);
+                //console.log("style " + pt + " " + target);
                 src.style(pt, custs[tp][pt]);
               }
               break;

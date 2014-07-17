@@ -54,7 +54,7 @@
 var chart = d3.chart.treeview()
               .height(1050)
               .width(1280*2)
-              .margins({top: 10, left: 150, bottom: 10, right: 150})
+              .margins({top: 10, left: 210, bottom: 10, right: 0})
               .textwidth(300);
 
 function autoCompleteChanged(eve, ui) {
@@ -111,7 +111,7 @@ function node_onMouseOver(d) {
   }
   header.html(headText);
   toolTip.transition()
-          .duration(200)
+          .duration(100)
           .style("opacity", ".9");
   toolTip.style("left", (d3.event.pageX + 20) + "px")
           .style("top", (d3.event.pageY + 5) + "px");
@@ -120,7 +120,7 @@ function node_onMouseOver(d) {
 function node_onMouseOut(d) {
   header.text("");
   toolTip.transition()
-         .duration(500)
+         .duration(200)
          .style("opacity", "0");
 }
 
