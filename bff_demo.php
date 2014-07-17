@@ -7,9 +7,18 @@
     ?>
     <!-- JQuery Buttons -->
     <script>
+      $(function(){
+        $('#demoexamples li').each(function (i) {
+          if (i === 2) {
+            $(this).removeClass().addClass("active");
+          }
+          else {
+            $(this).removeClass();
+          }
+        });
+      });
       var btn = $.fn.button.noConflict() // reverts $.fn.button to jqueryui btn
       $.fn.btn = btn // assigns bootstrap button functionality to $.fn.btn
-
     </script>
     <?php include_once "vivian_google_analytics.php" ?>
   </head>

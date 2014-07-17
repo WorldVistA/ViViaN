@@ -11,3 +11,4 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script src="d3/d3.v3.min.js" charset="utf-8"></script>
 <script src="d3.treeview.js" charset="utf-8"></script>
+<script src="d3.dependencyedgebundling.js" charset="utf-8"></script>

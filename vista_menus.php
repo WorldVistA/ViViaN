@@ -11,6 +11,15 @@
         $( "button" ).button().click(function(event){
           event.preventDefault();
         });
+
+        $('#demoexamples li').each(function (i) {
+          if (i === 1) {
+            $(this).removeClass().addClass("active");
+          }
+          else {
+            $(this).removeClass();
+          }
+        });
         d3.json('menu_autocomplete.json', function(json) {
           $("#autocomplete").autocomplete({
             source: json,

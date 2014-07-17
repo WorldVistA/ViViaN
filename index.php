@@ -11,6 +11,14 @@
         $( "button" ).button().click(function(event){
           event.preventDefault();
         });
+        $('#demoexamples li').each(function (i) {
+          if (i === 0) {
+            $(this).removeClass().addClass("active");
+          }
+          else {
+            $(this).removeClass();
+          }
+        });
       });
     var btn = $.fn.button.noConflict() // reverts $.fn.button to jqueryui btn
     $.fn.btn = btn // assigns bootstrap button functionality to $.fn.btn
@@ -22,7 +30,7 @@
   <div>
     <?php include_once "vivian_osehra_image.php" ?>
     <!-- <select id="category"></select> -->
-    <div style="font-size:10px; position:absolute; right:100px;">
+    <div style="font-size:10px; position:absolute; right:100px; top:30px">
       <button onclick="_expandAllNode()">Expand All</button>
       <button onclick="_collapseAllNode()">Collapse All</button>
       <button onclick="_resetAllNode()">Reset</button>
@@ -46,7 +54,11 @@
 </div>
 <div id="treeview_placeholder"/>
 <script type="text/javascript">
-var chart = d3.chart.treeview().height(1280).width(1200).textwidth(220);
+var chart = d3.chart.treeview()
+              .height(1280)
+              .width(1200)
+              .margins({top:42, left:180, right:0, bottom:10})
+              .textwidth(220);
 $("#accordion").accordion({heightStyle: 'content', collapsible: true}).hide();
 <?php include_once "vivian_tree_layout_common.js" ?>
 
