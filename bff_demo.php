@@ -111,7 +111,7 @@ function text_onMouseClick(d) {
 function node_onMouseOut(d) {
   header.text("");
   toolTip.transition()
-         .duration(200)
+         .duration(20)
          .style("opacity", "0");
 }
 

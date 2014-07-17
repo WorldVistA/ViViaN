@@ -11,17 +11,13 @@
         $( "button" ).button().click(function(event){
           event.preventDefault();
         });
-        var test = [
-                    {label:"eve: System Manager Menu", id:9},
-                    {label:"test", id:1933},
-                    {label:"test1", id:5038},
-                    {label:"Combined A&MM Menus", id:2575}
-                   ];
-        $("#autocomplete").autocomplete({
-          source: test,
-          select: autoCompleteChanged,
-          change: autoCompleteChanged
-        }).val('eve').data('autocomplete')._trigger('select');
+        d3.json('menu_autocomplete.json', function(json) {
+          $("#autocomplete").autocomplete({
+            source: json,
+            select: autoCompleteChanged,
+            change: autoCompleteChanged
+          }).val('EVE: System Manager Menu').data('autocomplete')._trigger('select');
+        });
       });
       var btn = $.fn.button.noConflict() // reverts $.fn.button to jqueryui btn
       $.fn.btn = btn // assigns bootstrap button functionality to $.fn.btn
@@ -34,13 +30,13 @@
   <div>
     <?php include_once "vivian_osehra_image.php" ?>
     <!-- <select id="category"></select> -->
-    <div style="font-size:10px; position:absolute; right:20px; top:40;">
+    <div style="font-size:0.9em; position:absolute; right:20px; top:5px;">
+      <label for="autocomplete">Select a top level menu: </label>
+      <input id="autocomplete" size="50">
+    </div>
+    <div style="font-size:12px; position:absolute; right:20px; top:40px;">
       <button onclick="_collapseAllNode()">Collapse All</button>
       <button onclick="_resetAllNode()">Reset</button>
-    </div>
-    <div style="font-size:12px; position:absolute; right:20px; top:10px;">
-      <label for="autocomplete">Select a top level menu: </label>
-      <input id="autocomplete" size="30">
     </div>
   </div>
     <!-- Tooltip -->
@@ -54,7 +50,7 @@
 var chart = d3.chart.treeview()
               .height(1050)
               .width(1280*2)
-              .margins({top: 10, left: 210, bottom: 10, right: 0})
+              .margins({top: 20, left: 210, bottom: 20, right: 0})
               .textwidth(300);
 
 function autoCompleteChanged(eve, ui) {
@@ -80,10 +76,10 @@ function resetMenuFile(menuFile) {
   var clickFunc = chart.onNodeClick;
   d3.json(menuFile, function(json) {
     resetAllNode(json);
-    chart.on("node", "event","click", node_onMouseClick)
-       .on("node", "event", "mouseover", node_onMouseOver)
+    chart.on("node", "event", "mouseover", node_onMouseOver)
        .on("node", "event","mouseout", node_onMouseOut)
        .on("text", "attr", "cursor", function(d) { return "pointer"; })
+       .on("text", "event","click", node_onMouseClick)
        .on("circle", "event", "click", clickFunc)
        .on("circle", "attr", "r", function(d) { return 7 - d.depth/2; });
     d3.select("#treeview_placeholder").datum(json).call(chart);
@@ -95,13 +91,15 @@ var header = d3.select(document.getElementById("head"));
 
 function node_onMouseClick(d) {
   console.log("Node: " + d.name + " ien: " + d.ien + " clicked!");
-  var optionLink = getOptionDetailLink(d)
+  var optionLink = getOptionDetailLink(d);
   var win = window.open(optionLink, '_black');
   win.focus();
+  d3.event.preventDefault();
+  d3.event.stopPropagation();
 }
 
 function getOptionDetailLink(node) {
-  return "files/19-" + node.ien + ".html"
+  return "files/19-" + node.ien + ".html";
 }
 
 function node_onMouseOver(d) {
@@ -120,7 +118,7 @@ function node_onMouseOver(d) {
 function node_onMouseOut(d) {
   header.text("");
   toolTip.transition()
-         .duration(200)
+         .duration(20)
          .style("opacity", "0");
 }
 

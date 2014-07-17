@@ -263,7 +263,7 @@ function node_onMouseOver(d) {
 function node_onMouseOut(d) {
   header.text("");
   toolTip.transition()
-         .duration(100)
+         .duration(20)
          .style("opacity", "0");
 }
 
