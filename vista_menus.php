@@ -51,7 +51,7 @@
     <!-- <select id="category"></select> -->
     <div style="position:absolute; right:20px; top:5px;">
       <label for="autocomplete">Select a top level menu: </label>
-      <input id="autocomplete" size="50">
+      <input id="autocomplete" size="40">
     </div>
     <div style="font-size:12px; position:absolute; right:20px; top:40px;">
       <button onclick="_collapseAllNode()">Collapse All</button>
@@ -70,7 +70,8 @@ var chart = d3.chart.treeview()
               .height(1050)
               .width(1280*2)
               .margins({top: 42, left: 260, bottom: 0, right: 0})
-              .textwidth(300);
+              .textwidth(300)
+              .nodeTextHyperLink(getOptionDetailLink);
 
 function autoCompleteChanged(eve, ui) {
   console.log("label selected is " + ui.item.id);
@@ -92,14 +93,13 @@ function _resetAllNode() {
 
 resetMenuFile("menus/VistAMenu-9.json");
 function resetMenuFile(menuFile) {
-  var clickFunc = chart.onNodeClick;
   d3.json(menuFile, function(json) {
     resetAllNode(json);
     chart.on("node", "event", "mouseover", node_onMouseOver)
        .on("node", "event","mouseout", node_onMouseOut)
        .on("text", "attr", "cursor", function(d) { return "pointer"; })
-       .on("text", "event","click", node_onMouseClick)
-       .on("circle", "event", "click", clickFunc)
+       //.on("text", "event","click", node_onMouseClick)
+       .on("circle", "event", "click", chart.onNodeClick)
        .on("circle", "attr", "r", function(d) { return 7 - d.depth/2; });
     d3.select("#treeview_placeholder").datum(json).call(chart);
   });
@@ -113,7 +113,7 @@ function node_onMouseClick(d) {
   var optionLink = getOptionDetailLink(d);
   var win = window.open(optionLink, '_black');
   win.focus();
-  //d3.event.preventDefault();
+  d3.event.preventDefault();
   d3.event.stopPropagation();
 }
 

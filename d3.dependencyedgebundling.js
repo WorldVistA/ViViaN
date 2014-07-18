@@ -16,6 +16,7 @@ d3.chart.dependencyedgebundling = function(options) {
   var textRadius ;
   var innerRadius = radius - textRadius;
   var txtLinkGap = 5;
+  var _nodeTextHyperLink;
 
   function resetDimension(){
     radius = diameter / 2;
@@ -68,7 +69,7 @@ d3.chart.dependencyedgebundling = function(options) {
 
     return depends;
   }
-
+  
   function chart(selection) {
     selection.each(function(data) {
       // logic to set the size of the svg graph based on input
@@ -130,14 +131,25 @@ d3.chart.dependencyedgebundling = function(options) {
 
       node = node
           .data(nodes.filter(function(n) { return !n.children; }))
-        .enter().append("text")
-          .attr("class", "node")
+        .enter();
+      if (_nodeTextHyperLink) {
+        node = node.append("a")
+          .attr("xlink:href", _nodeTextHyperLink)
+          .attr("target", "_blank")
+          .style("text-decoration", "none")
+          .insert("text");
+      }
+      else {
+        node = node.append("text");
+      }
+      node = node.attr("class", "node")
           .attr("dy", ".31em")
           .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + (d.y + txtLinkGap) + ",0)" + (d.x < 180 ? "" : "rotate(180)"); })
           .style("text-anchor", function(d) { return d.x < 180 ? "start" : "end"; })
           .text(function(d) { return d.key; })
           .on("mouseover", mouseovered)
           .on("mouseout", mouseouted);
+          //.on("click", _onNodeClick);
 
       function mouseovered(d) {
 
@@ -166,9 +178,14 @@ d3.chart.dependencyedgebundling = function(options) {
             .classed("node--source", false);
 
       }
-
     });
   }
+
+  chart.nodeTextHyperLink = function(n) {
+    if (!arguments.length) return n;
+    _nodeTextHyperLink = n;
+    return chart;
+  };
 
   return chart;
 };

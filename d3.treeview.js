@@ -20,6 +20,7 @@ d3.chart.treeview = function(option) {
           _i = 0,
           _tree,
           _diagonal,
+          _nodeTextHyperLink,
           _cust = {
             node: {
               event:{
@@ -191,8 +192,18 @@ d3.chart.treeview = function(option) {
   }
 
   function renderLabels(nodeEnter, nodeUpdate, nodeExit) {
-      var textEnter = nodeEnter.append("svg:text")
-              .attr("x", function (d) {
+      var textEnter;
+      if (_nodeTextHyperLink) {
+        textEnter = nodeEnter.append("a")
+          .attr("xlink:href", _nodeTextHyperLink)
+          .attr("target", "_blank")
+          .style("text-decoration", "none")
+          .insert("svg:text");
+      }
+      else {
+        textEnter = nodeEnter.append("svg:text");
+      }
+      textEnter = textEnter.attr("x", function (d) {
                   return d.children || d._children ? -10 : 10;
               })
               .attr("dy", ".35em")
@@ -313,6 +324,12 @@ d3.chart.treeview = function(option) {
 
   chart.resetAllNode = function() {
 
+  };
+
+  chart.nodeTextHyperLink = function(n) {
+    if (!arguments.length) return n;
+    _nodeTextHyperLink = n;
+    return chart;
   };
   return chart;
 }

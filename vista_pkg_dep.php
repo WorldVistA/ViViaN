@@ -27,7 +27,16 @@
     <!-- <select id="category"></select> -->
   <div id="chart_placeholder"/>
 <script type="text/javascript">
-  var chart = d3.chart.dependencyedgebundling();
+
+  var package_link_url = "http://code.osehra.org/dox/Package_";
+
+  function getPackageDoxLink(node) {
+    var doxLinkName = node.key.replace(/ /g, '_').replace(/-/g, '_')
+    return package_link_url + doxLinkName + ".html";
+  }
+
+  var chart = d3.chart.dependencyedgebundling()
+           .nodeTextHyperLink(getPackageDoxLink);
   var localpath = "pkgdep.json";
   d3.json(localpath, function(error, classes) {
   if (error){
