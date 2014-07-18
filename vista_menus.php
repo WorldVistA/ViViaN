@@ -24,8 +24,8 @@
           var sortedjson = json.sort(function(a,b) { return a.label.localeCompare(b.label); });
           $("#autocomplete").autocomplete({
             source: sortedjson,
-            select: autoCompleteChanged,
-            change: autoCompleteChanged
+            select: autoCompleteChanged
+            //change: autoCompleteChanged
           }).val('EVE: System Manager Menu').data('autocomplete')._trigger('select');
         });
       });
