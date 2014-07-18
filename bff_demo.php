@@ -43,7 +43,7 @@
   </div>
 
   <div id='title' style="position:absolute; top:65px; left:60px;">
-  <p>VA Business Function Framework Demo</p>
+  <p>VHA Business Function Framework Demo</p>
   </div>
   <div id="treeview_placeholder"/>
 <script type="text/javascript">
