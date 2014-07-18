@@ -41,6 +41,10 @@
         <div id="commentary"></div>
     </div>
   </div>
+
+  <div id='title' style="position:absolute; top:65px; left:60px;">
+  <p>VA Business Function Framework Demo</p>
+  </div>
   <div id="treeview_placeholder"/>
 <script type="text/javascript">
 $("#accordion").accordion({heightStyle: 'content', collapsible: true}).hide();

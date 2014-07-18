@@ -24,7 +24,14 @@
 <body >
   <div>
     <?php include_once "vivian_osehra_image.php" ?>
+  </div>
     <!-- <select id="category"></select> -->
+  <div class='hint' style="position:absolute; top:80px; left:30px; font-size:0.9em; width:400px">
+  <p>
+Mouseover any of the packages in this graph to see the incoming links (dependants) in green and the outgoing links (dependencies) in red.
+Click any of the packages to see package dependencies details.
+  </p>
+  </div>
   <div id="chart_placeholder"/>
 <script type="text/javascript">
 

@@ -49,14 +49,6 @@
   <div>
     <?php include_once "vivian_osehra_image.php" ?>
     <!-- <select id="category"></select> -->
-    <div style="position:absolute; right:20px; top:5px;">
-      <label for="autocomplete">Select a top level menu: </label>
-      <input id="autocomplete" size="40">
-    </div>
-    <div style="font-size:12px; position:absolute; right:20px; top:40px;">
-      <button onclick="_collapseAllNode()">Collapse All</button>
-      <button onclick="_resetAllNode()">Reset</button>
-    </div>
   </div>
     <!-- Tooltip -->
   <div id="toolTip" class="tooltip" style="opacity:0;">
@@ -64,6 +56,22 @@
       <div  class="tooltipTail"></div>
   </div>
 
+  <div style="position:absolute; left:20px; top:60px;">
+    <label for="autocomplete">Select a top level menu: </label>
+  </div>
+  <div style="position:absolute; left:20px; top:80px;">
+    <input id="autocomplete" size="40">
+  </div>
+  <div style="font-size:10px; position:absolute; right:20px; top:42px;">
+    <button onclick="_collapseAllNode()">Collapse All</button>
+    <button onclick="_resetAllNode()">Reset</button>
+  </div>
+  <div class='hint' style="position:absolute; top:120px; left:20px; font-size:0.9em; width:350px;">
+  <p>
+Mouseover any of the menu in this menu tree to see the option name and security key associated if any.
+Click any of the menu to see the menu option details.
+  </p>
+  </div>
   <div id="treeview_placeholder"/>
 <script type="text/javascript">
 var chart = d3.chart.treeview()
@@ -74,7 +82,6 @@ var chart = d3.chart.treeview()
               .nodeTextHyperLink(getOptionDetailLink);
 
 function autoCompleteChanged(eve, ui) {
-  console.log("label selected is " + ui.item.id);
   var menuFile = "menus/VistAMenu-" + ui.item.id + ".json";
   console.log("Menu file is " + menuFile);
   resetMenuFile(menuFile);
