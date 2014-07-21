@@ -69,7 +69,7 @@ d3.chart.dependencyedgebundling = function(options) {
 
     return depends;
   }
-  
+
   function chart(selection) {
     selection.each(function(data) {
       // logic to set the size of the svg graph based on input
