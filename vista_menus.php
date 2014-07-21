@@ -62,7 +62,7 @@
   <div style="position:absolute; left:20px; top:80px;">
     <input id="autocomplete" size="40">
   </div>
-  <div style="font-size:10px; position:absolute; right:20px; top:42px;">
+  <div style="font-size:10px; position:absolute; left:220px; top:200px;">
     <button onclick="_collapseAllNode()">Collapse All</button>
     <button onclick="_resetAllNode()">Reset</button>
   </div>
