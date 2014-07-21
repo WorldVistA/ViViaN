@@ -41,7 +41,7 @@
           overflow-y: auto;   /* prevent horizontal scrollbar */
           overflow-x: hidden; /* add padding to account for vertical scrollbar */
           z-index:1000 !important;
-      }  
+      }
     </style>
   </head>
 
@@ -68,8 +68,7 @@
   </div>
   <div class='hint' style="position:absolute; top:120px; left:20px; font-size:0.9em; width:350px;">
   <p>
-Mouseover any of the menu in this menu tree to see the option name and security key associated if any.
-Click any of the menu to see the menu option details.
+This tree visualization represents the menu hierarchy of VistA. Mouse over any of the entries in the tree to see the menu option name and the security key (if any). Click on an item to see the menu option details.
   </p>
   </div>
   <div id="treeview_placeholder"/>
