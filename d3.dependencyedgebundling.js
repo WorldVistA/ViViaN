@@ -158,9 +158,9 @@ d3.chart.dependencyedgebundling = function(options) {
 
         link
             .classed("link--target", function(l) { if (l.target === d) return l.source.source = true; })
-            .classed("link--source", function(l) { if (l.source === d) return l.target.target = true; })
-          .filter(function(l) { return l.target === d || l.source === d; })
-            .each(function() { this.parentNode.appendChild(this); });
+            .classed("link--source", function(l) { if (l.source === d) return l.target.target = true; });
+          //  .filter(function(l) { return l.target === d || l.source === d; })
+          //  .each(function() { this.parentNode.appendChild(this); });
 
         node
             .classed("node--target", function(n) { return n.target; })

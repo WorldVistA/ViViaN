@@ -10,8 +10,6 @@
 
 .node:hover {
   fill: #000;
-  cursor: hand;
-  cursor: pointer;
 }
 
 .link {
