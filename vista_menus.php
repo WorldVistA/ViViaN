@@ -56,17 +56,17 @@
       <div  class="tooltipTail"></div>
   </div>
 
-  <div style="position:absolute; left:20px; top:60px;">
+  <div style="position:absolute; left:20px; top:100px;">
     <label for="autocomplete">Select a top level menu: </label>
   </div>
-  <div style="position:absolute; left:20px; top:80px;">
+  <div style="position:absolute; left:20px; top:120px;">
     <input id="autocomplete" size="40">
   </div>
-  <div style="font-size:10px; position:absolute; left:220px; top:200px;">
+  <div style="font-size:10px; position:absolute; left:220px; top:240px;">
     <button onclick="_collapseAllNode()">Collapse All</button>
     <button onclick="_resetAllNode()">Reset</button>
   </div>
-  <div class='hint' style="position:absolute; top:120px; left:20px; font-size:0.9em; width:350px;">
+  <div class='hint' style="position:absolute; top:160px; left:20px; font-size:0.9em; width:350px;">
   <p>
 This tree visualization represents the menu hierarchy of VistA. Mouse over any of the entries in the tree to see the menu option name and the security key (if any). Click on an item to see the menu option details.
   </p>

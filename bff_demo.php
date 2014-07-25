@@ -45,10 +45,10 @@
     </div>
   </div>
 
-  <div id='title' style="position:absolute; top:65px; left:40px; font-size:.97em;">
+  <div id='title' style="position:absolute; top:100px; left:40px; font-size:.97em;">
   <p>VHA Business Function Framework Demo</p>
   </div>
-  <div class='hint' style="position:absolute; top:100px; left:20px; font-size:0.9em; width:350px;">
+  <div class='hint' style="position:absolute; top:140px; left:20px; font-size:0.9em; width:350px;">
   <p>
 This tree graph represents the VHA Business Function Framework (BFF). The BFF is a hierarchical construct that describes VHA business functions or  major service areas within each core mission Line of Business (LoB) and serve as logical groupings of activities. Subfunctions represent the logical groupings of sub-activities needed to fulfill each VHA business function. Click on an item to bring a modal window with detailed description and commentary.
   </p>
