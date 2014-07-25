@@ -18,6 +18,8 @@
         }
       });
     });
+    var btn = $.fn.button.noConflict() // reverts $.fn.button to jqueryui btn
+    $.fn.btn = btn // assigns bootstrap button functionality to $.fn.btn
     </script>
   </head>
 
@@ -26,7 +28,7 @@
     <?php include_once "vivian_osehra_image.php" ?>
   </div>
     <!-- <select id="category"></select> -->
-  <div class='hint' style="position:absolute; top:100px; left:30px; font-size:0.9em; width:400px">
+  <div class='hint' style="position:absolute; top:120px; left:30px; font-size:0.9em; width:400px">
   <p>
 This circle plot captures the interrelationships among VistA packages. Mouse over any of the packages in this graph to see incoming links (dependents) in green and the outgoing links (dependencies) in red. Click on any of the packages to view package dependency details.
   </p>
