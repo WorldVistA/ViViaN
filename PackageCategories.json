@@ -1,0 +1,522 @@
+{
+    "name": "VistA", 
+    "children": [
+        {
+            "name": "Provider Services", 
+            "children": [
+                {
+                    "name": "Laboratory", 
+                    "children": [
+                        {
+                            "name": "Automated Lab Instruments"
+                        }, 
+                        {
+                            "name": "Anatomic Pathology"
+                        }, 
+                        {
+                            "name": "National Laboratory Test"
+                        }, 
+                        {
+                            "name": "Lab Service"
+                        }
+                    ]
+                }, 
+                {
+                    "name": "Patient Care Data", 
+                    "children": [
+                        {
+                            "name": "Oncology"
+                        }, 
+                        {
+                            "name": "Functional Independence"
+                        }, 
+                        {
+                            "name": "Patient Assessment Documentation"
+                        }, 
+                        {
+                            "name": "Health Summary"
+                        }, 
+                        {
+                            "name": "Quasar"
+                        }, 
+                        {
+                            "name": "PCE Patient Care Encounter"
+                        }, 
+                        {
+                            "name": "General Medical Record - IO"
+                        }, 
+                        {
+                            "name": "Imaging"
+                        }, 
+                        {
+                            "name": "Problem List"
+                        }, 
+                        {
+                            "name": "General Medical Record - Generator"
+                        }, 
+                        {
+                            "name": "General Medical Record - Vitals"
+                        }, 
+                        {
+                            "name": "Spinal Cord Dysfunction"
+                        }, 
+                        {
+                            "name": "Text Integration Utility"
+                        }
+                    ]
+                }, 
+                {
+                    "name": "Pharmacy", 
+                    "children": [
+                        {
+                            "name": "Barcode Medication Administration"
+                        }, 
+                        {
+                            "name": "Inpatient Medications"
+                        }, 
+                        {
+                            "name": "Auto Replenishment Ward Stock"
+                        }, 
+                        {
+                            "name": "Pharmacy Enterprise Customization System"
+                        }, 
+                        {
+                            "name": "Outpatient Pharmacy"
+                        }, 
+                        {
+                            "name": "Controlled Substances"
+                        }, 
+                        {
+                            "name": "Pharmacy Prescription Practice"
+                        }, 
+                        {
+                            "name": "Drug Accountability"
+                        }, 
+                        {
+                            "name": "Pharmacy Product System - National"
+                        }, 
+                        {
+                            "name": "Pharmacy Data Management"
+                        }, 
+                        {
+                            "name": "National Drug File"
+                        }, 
+                        {
+                            "name": "CMOP"
+                        }, 
+                        {
+                            "name": "Pharmacy Benefits Management"
+                        }
+                    ]
+                }, 
+                {
+                    "name": "Patient Service Delivery", 
+                    "children": [
+                        {
+                            "name": "Clinical Reminders"
+                        }, 
+                        {
+                            "name": "Visual Impairment Service Team"
+                        }, 
+                        {
+                            "name": "Mental Health"
+                        }, 
+                        {
+                            "name": "Womens Health"
+                        }, 
+                        {
+                            "name": "Integrated Home Telehealth"
+                        }, 
+                        {
+                            "name": "Emergency Department Integration Software"
+                        }, 
+                        {
+                            "name": "Radiology Nuclear Medicine"
+                        }, 
+                        {
+                            "name": "Dietetics"
+                        }, 
+                        {
+                            "name": "Dental"
+                        }, 
+                        {
+                            "name": "Nursing Service"
+                        }, 
+                        {
+                            "name": "VBECS"
+                        }, 
+                        {
+                            "name": "Prosthetics"
+                        }, 
+                        {
+                            "name": "Scheduling"
+                        }, 
+                        {
+                            "name": "Immunization"
+                        }, 
+                        {
+                            "name": "Social Work"
+                        }, 
+                        {
+                            "name": "Medicine"
+                        }, 
+                        {
+                            "name": "Surgery"
+                        }
+                    ]
+                }, 
+                {
+                    "name": "Order & Results Management", 
+                    "children": [
+                        {
+                            "name": "Clinical Procedures"
+                        }, 
+                        {
+                            "name": "Order Entry Results Reporting"
+                        }, 
+                        {
+                            "name": "Consult Request Tracking"
+                        }, 
+                        {
+                            "name": "CPRS Plugins"
+                        }
+                    ]
+                }
+            ]
+        }, 
+        {
+            "name": "Infrastructure", 
+            "children": [
+                {
+                    "name": "Support", 
+                    "children": [
+                        {
+                            "name": "National Online Information Sharing"
+                        }, 
+                        {
+                            "name": "National VistA Support"
+                        }
+                    ]
+                }, 
+                {
+                    "name": "Application Infrastructure", 
+                    "children": [
+                        {
+                            "name": "Electronic Signature "
+                        }, 
+                        {
+                            "name": "Kernel"
+                        }, 
+                        {
+                            "name": "Toolkit"
+                        }, 
+                        {
+                            "name": "Patch Module"
+                        }, 
+                        {
+                            "name": "Run Time Library"
+                        }
+                    ]
+                }, 
+                {
+                    "name": "Capacity Management", 
+                    "children": [
+                        {
+                            "name": "SAGG Project"
+                        }, 
+                        {
+                            "name": "Capacity Management - RUM"
+                        }, 
+                        {
+                            "name": "Capacity Management Tools"
+                        }
+                    ]
+                }, 
+                {
+                    "name": "Interoperability", 
+                    "children": [
+                        {
+                            "name": "National Health Information Network"
+                        }, 
+                        {
+                            "name": "Health Level Seven"
+                        }, 
+                        {
+                            "name": "VDEF"
+                        }, 
+                        {
+                            "name": "Patient Data Exchange"
+                        }, 
+                        {
+                            "name": "Virtual Patient Record"
+                        }, 
+                        {
+                            "name": "Master Patient Index VistA"
+                        }, 
+                        {
+                            "name": "Network Health Exchange"
+                        }, 
+                        {
+                            "name": "Foundations"
+                        }, 
+                        {
+                            "name": "VistALink"
+                        }, 
+                        {
+                            "name": "VistALink Security"
+                        }
+                    ]
+                }, 
+                {
+                    "name": "Architecture", 
+                    "children": [
+                        {
+                            "name": "Web Services Client"
+                        }, 
+                        {
+                            "name": "RPC Broker"
+                        }, 
+                        {
+                            "name": "CORBA Services"
+                        }
+                    ]
+                }, 
+                {
+                    "name": "Tools", 
+                    "children": [
+                        {
+                            "name": "List Manager"
+                        }, 
+                        {
+                            "name": "M XML Parser"
+                        }, 
+                        {
+                            "name": "FileMan Delphi Components"
+                        }, 
+                        {
+                            "name": "MailMan"
+                        }, 
+                        {
+                            "name": "VA FileMan"
+                        }
+                    ]
+                }, 
+                {
+                    "name": "Data Standardization", 
+                    "children": [
+                        {
+                            "name": "Lexicon Utility"
+                        }, 
+                        {
+                            "name": "Health Data and Informatics"
+                        }
+                    ]
+                }
+            ]
+        }, 
+        {
+            "name": "Management Functions", 
+            "children": [
+                {
+                    "name": "Medical Records", 
+                    "children": [
+                        {
+                            "name": "Authorization Subscription"
+                        }, 
+                        {
+                            "name": "Record Tracking"
+                        }, 
+                        {
+                            "name": "Release Of Information - DSSI"
+                        }, 
+                        {
+                            "name": "CPT HCPCS Codes"
+                        }, 
+                        {
+                            "name": "Generic Code Sheet"
+                        }
+                    ]
+                }, 
+                {
+                    "name": "Education", 
+                    "children": [
+                        {
+                            "name": "Library"
+                        }
+                    ]
+                }, 
+                {
+                    "name": "Financial", 
+                    "children": [
+                        {
+                            "name": "Remote Order Entry System"
+                        }, 
+                        {
+                            "name": "Event Driven Reporting"
+                        }, 
+                        {
+                            "name": "Fee Basis"
+                        }, 
+                        {
+                            "name": "E Claims Management Engine"
+                        }, 
+                        {
+                            "name": "Integrated Billing"
+                        }, 
+                        {
+                            "name": "Event Capture"
+                        }
+                    ]
+                }, 
+                {
+                    "name": "Care Planning & Management", 
+                    "children": [
+                        {
+                            "name": "Shift Handoff Tool"
+                        }, 
+                        {
+                            "name": "Hospital Based Home Care"
+                        }, 
+                        {
+                            "name": "DSS Extracts"
+                        }, 
+                        {
+                            "name": "Care Management"
+                        }
+                    ]
+                }, 
+                {
+                    "name": "Patient Administration", 
+                    "children": [
+                        {
+                            "name": "Automated Information Collection System"
+                        }, 
+                        {
+                            "name": "Clinical Information Resource Network"
+                        }, 
+                        {
+                            "name": "DRG Grouper"
+                        }, 
+                        {
+                            "name": "Integrated Patient Fund"
+                        }
+                    ]
+                }, 
+                {
+                    "name": "Medical Center Administration", 
+                    "children": [
+                        {
+                            "name": "HINQ"
+                        }, 
+                        {
+                            "name": "Police and Security"
+                        }, 
+                        {
+                            "name": "Interim Management Support"
+                        }, 
+                        {
+                            "name": "IFCAP"
+                        }, 
+                        {
+                            "name": "PAID"
+                        }, 
+                        {
+                            "name": "Voluntary Timekeeping"
+                        }, 
+                        {
+                            "name": "Occupational Health Record-Keeping System"
+                        }, 
+                        {
+                            "name": "Engineering"
+                        }, 
+                        {
+                            "name": "Accounts Receivable"
+                        }, 
+                        {
+                            "name": "Wounded Injured and Ill Warriors"
+                        }, 
+                        {
+                            "name": "Automated Medical Information Exchange"
+                        }, 
+                        {
+                            "name": "Equipment Turn-In Request"
+                        }
+                    ]
+                }, 
+                {
+                    "name": "Infectious Diseases", 
+                    "children": [
+                        {
+                            "name": "Clinical Case Registries"
+                        }, 
+                        {
+                            "name": "Methicillin Resistant Staph Aurerus Initiative Reports "
+                        }
+                    ]
+                }
+            ]
+        }, 
+        {
+            "name": "Safety & Quality", 
+            "children": [
+                {
+                    "name": "ASISTS"
+                }, 
+                {
+                    "name": "Occurrence Screen"
+                }, 
+                {
+                    "name": "Adverse Reaction Tracking"
+                }, 
+                {
+                    "name": "Incomplete Records Tracking"
+                }, 
+                {
+                    "name": "Beneficiary Travel"
+                }, 
+                {
+                    "name": "Clinical Monitoring System"
+                }, 
+                {
+                    "name": "Survey Generator"
+                }, 
+                {
+                    "name": "Patient Representive"
+                }, 
+                {
+                    "name": "Incident Reporting"
+                }, 
+                {
+                    "name": "Utilization Management Rollup"
+                }, 
+                {
+                    "name": "Quality Assurance Integration"
+                }
+            ]
+        }, 
+        {
+            "name": "Registration/Enrollment/Eligibility", 
+            "children": [
+                {
+                    "name": "Eligibility", 
+                    "children": [
+                        {
+                            "name": "Income Verification Match"
+                        }
+                    ]
+                }, 
+                {
+                    "name": "Encounter & Visit Management", 
+                    "children": [
+                        {
+                            "name": "Enrollment Application System"
+                        }, 
+                        {
+                            "name": "Registration"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
