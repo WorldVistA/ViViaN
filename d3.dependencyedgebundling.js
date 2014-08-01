@@ -11,23 +11,47 @@ d3.chart = d3.chart || {};
  */
 d3.chart.dependencyedgebundling = function(options) {
 
-  var diameter ;
-  var radius ;
-  var textRadius ;
-  var innerRadius = radius - textRadius;
-  var txtLinkGap = 5;
+  var _radius;
+  var _diameter = 600;
+  var _textRadius = 160;
+  var _innerRadius;
   var _nodeTextHyperLink;
+  var _txtLinkGap = 5;
+  var _minTextWidth = 7.4;
+  var _radialTextHeight = 13;
 
-  function resetDimension(){
-    radius = diameter / 2;
-    innerRadius = radius - textRadius;
+  function resetDimension() {
+    _radius = _diameter / 2;
+    _innerRadius = _radius - _textRadius;
   }
 
-  function autoDimension(){
+  function autoDimension(data) {
     // automatically resize the dimension based on total number of nodes
+    var item=0, maxLength=0, length=0, maxItem;
+    for (item in data){
+      length = data[item].name.length;
+      if (maxLength < length)
+        {
+          maxLength = length;
+          maxItem = data[item].name;
+        }
+    }
+    var minTextRadius = Math.ceil(maxLength * _minTextWidth);
+    if (_textRadius < minTextRadius) {
+      _textRadius = minTextRadius;
+    }
+    var minInnerRadius = Math.ceil((_radialTextHeight * data.length)/2/Math.PI);
+    if (minInnerRadius < 140)
+      {
+        minInnerRadius = 140;
+      }
+    var minDiameter = 2 * (_textRadius + minInnerRadius + _txtLinkGap + 2);
+    if (_diameter < minDiameter) {
+      _diameter = minDiameter;
+    }
   }
   // Lazily construct the package hierarchy
-  var packageHierarchy = function (classes) {
+  var _packageHierarchy = function (classes) {
     var map = {};
 
     function setparent(name, data) {
@@ -69,35 +93,16 @@ d3.chart.dependencyedgebundling = function(options) {
 
     return depends;
   }
-
+  
   function chart(selection) {
     selection.each(function(data) {
       // logic to set the size of the svg graph based on input
-      var item=0, maxLength=0, length=0, maxItem;
-      for (item in data){
-        length = data[item].name.length;
-        if (maxLength < length)
-          {
-            maxLength = length;
-            maxItem = data[item].name;
-          }
-      }
-      var minTextWidth = 7.4;
-      var radialTextHeight = 12;
-      var minTextRadius = Math.ceil(maxLength * minTextWidth);
-      var minInnerRadius = Math.ceil((radialTextHeight * data.length)/2/Math.PI);
-      if (minInnerRadius < 140)
-        {
-          minInnerRadius = 140;
-        }
-      var minDiameter = 2 * (minTextRadius + minInnerRadius + txtLinkGap + 2);
-      diameter = minDiameter;
-      textRadius = minTextRadius;
+      autoDimension(data);
       resetDimension();
       var root = data;
       // create the layout
       var cluster =  d3.layout.cluster()
-        .size([360, innerRadius])
+        .size([360, _innerRadius])
         .sort(null)
         .value(function(d) {return d.size; });
 
@@ -105,23 +110,24 @@ d3.chart.dependencyedgebundling = function(options) {
 
       var line = d3.svg.line.radial()
           .interpolate("bundle")
-          .tension(.9)
+          .tension(.95)
           .radius(function(d) { return d.y; })
           .angle(function(d) { return d.x / 180 * Math.PI; });
 
       var svg = selection.insert("svg")
-          .attr("width", diameter)
-          .attr("height", diameter)
+          .attr("width", _diameter)
+          .attr("height", _diameter)
         .append("g")
-          .attr("transform", "translate(" + radius + "," + radius + ")");
+          .attr("transform", "translate(" + _radius + "," + _radius + ")");
 
       // get all the link and node
       var link = svg.append("g").selectAll(".link"),
           node = svg.append("g").selectAll(".node");
-
-      var nodes = cluster.nodes(packageHierarchy(root)),
+      
+      var pkgNodes  = _packageHierarchy(root);
+      var nodes = cluster.nodes(pkgNodes),
           links = packageDepends(nodes);
-
+      
       link = link
           .data(bundle(links))
         .enter().append("path")
@@ -144,9 +150,9 @@ d3.chart.dependencyedgebundling = function(options) {
       }
       node = node.attr("class", "node")
           .attr("dy", ".31em")
-          .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + (d.y + txtLinkGap) + ",0)" + (d.x < 180 ? "" : "rotate(180)"); })
+          .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + (d.y + _txtLinkGap) + ",0)" + (d.x < 180 ? "" : "rotate(180)"); })
           .style("text-anchor", function(d) { return d.x < 180 ? "start" : "end"; })
-          .text(function(d) { return d.key; })
+          .text(function(d) { return d.name; })
           .on("mouseover", mouseovered)
           .on("mouseout", mouseouted);
           //.on("click", _onNodeClick);
@@ -158,9 +164,9 @@ d3.chart.dependencyedgebundling = function(options) {
 
         link
             .classed("link--target", function(l) { if (l.target === d) return l.source.source = true; })
-            .classed("link--source", function(l) { if (l.source === d) return l.target.target = true; });
-          //  .filter(function(l) { return l.target === d || l.source === d; })
-          //  .each(function() { this.parentNode.appendChild(this); });
+            .classed("link--source", function(l) { if (l.source === d) return l.target.target = true; })
+            .filter(function(l) { return l.target === d || l.source === d; })
+            .each(function() { this.parentNode.appendChild(this); });
 
         node
             .classed("node--target", function(n) { return n.target; })
@@ -186,6 +192,43 @@ d3.chart.dependencyedgebundling = function(options) {
     _nodeTextHyperLink = n;
     return chart;
   };
+  
+  chart.packageHierarchy = function (p) {
+    if (!arguments.length) return p;
+    _packageHierarchy = p;
+    return chart;
+  };
 
+  chart.diameter = function (d) {
+    if (!arguments.length) return d;
+    _diameter = d;
+    return chart;
+  };
+
+  chart.textRadius = function (t) {
+    if (!arguments.length) return t;
+    _textRadius = t;
+    return chart;
+  };
+
+  chart.txtLinkGap = function (t) {
+    if (!arguments.length) return t;
+    _txtLinkGap = t;
+    return chart;
+  };
+
+  chart.txtWidth = function (t) {
+    if (!arguments.length) return t;
+    _minTextWidth = t;
+    return chart;
+  };
+
+  chart.nodeWidth = function (n) {
+    if (!arguments.length) return n;
+    _radialTextHeight = n;
+    return chart;
+  };
+  
   return chart;
+
 };
