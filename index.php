@@ -263,18 +263,14 @@ function node_onMouseOver(d) {
   else{
     return;
   }
-  toolTip.transition()
-          .duration(200)
-          .style("opacity", ".9");
   toolTip.style("left", (d3.event.pageX + 20) + "px")
-          .style("top", (d3.event.pageY + 5) + "px");
+         .style("top", (d3.event.pageY + 5) + "px")
+         .style("opacity", ".9");
 }
 
 function node_onMouseOut(d) {
   header.text("");
-  toolTip.transition()
-         .duration(20)
-         .style("opacity", "0");
+  toolTip.style("opacity", "0");
 }
 
 

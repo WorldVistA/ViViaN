@@ -57,7 +57,7 @@ This tree graph represents the VHA Business Function Framework (BFF). The BFF is
 $("#accordion").accordion({heightStyle: 'content', collapsible: true}).hide();
 var chart = d3.chart.treeview()
               .height(940)
-              .width(1480)
+              .width(1880)
               .margins({top: 45, left: 280, bottom: 0, right: 0})
               .textwidth(280);
 
@@ -86,11 +86,9 @@ function node_onMouseOver(d) {
     else{
       return;
     }
-    toolTip.transition()
-            .duration(100)
-            .style("opacity", ".9");
     toolTip.style("left", (d3.event.pageX + 20) + "px")
-            .style("top", (d3.event.pageY + 5) + "px");
+           .style("top", (d3.event.pageY + 5) + "px")
+           .style("opacity", ".9");
 }
 
 function text_onMouseClick(d) {
@@ -130,9 +128,7 @@ function text_onMouseClick(d) {
 
 function node_onMouseOut(d) {
   header.text("");
-  toolTip.transition()
-         .duration(20)
-         .style("opacity", "0");
+  toolTip.style("opacity", "0");
 }
 
     </script>
