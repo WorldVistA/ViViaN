@@ -26,7 +26,6 @@ def generate_output_json_dict(pkgCatJson):
       pkgNamePrefixes[pkg].append(fields['Prefixes'])
   # read packageInterfaces.csv file for interface
   interface_csv = csv.DictReader(open("PackageInterface.csv", 'r'))
-  pkgNameInterface = dict()
   for row in interface_csv:
     pkgName = row['Package']
     if pkgName and pkgName in pkgNameSet:
