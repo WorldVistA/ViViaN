@@ -1,1 +1,0 @@
-{"children": [{"name": "Stop SAGG Collection", "option": "KMPS SAGG STOP", "ien": "8289"}, {"name": "Check SAGG Environment", "option": "KMPS SAGG STATUS", "ien": "8288"}, {"name": "Edit SAGG Project File", "option": "KMPS SAGG FILE", "ien": "8291"}], "name": "SAGG Project Manager Menu", "option": "KMPS SAGG MANAGER", "ien": "8290"}

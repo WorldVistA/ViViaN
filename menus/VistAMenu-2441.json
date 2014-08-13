@@ -1,1 +1,1 @@
-{"children": [{"name": "View Insurance Company", "option": "IBCN VIEW INSURANCE CO", "ien": "2440"}, {"name": "View Patient Insurance", "option": "IBCN VIEW PATIENT INSURANCE", "ien": "2439"}], "name": "View Insurance Management Menu", "option": "IBCN VIEW INSURANCE DATA", "ien": "2441"}
+{"children": [{"name": "View Patient Insurance", "option": "IBCN VIEW PATIENT INSURANCE", "ien": "2439"}, {"name": "View Insurance Company", "option": "IBCN VIEW INSURANCE CO", "ien": "2440"}], "name": "View Insurance Management Menu", "option": "IBCN VIEW INSURANCE DATA", "ien": "2441"}

@@ -28,12 +28,14 @@ def generate_output_json_dict(pkgCatJson):
   interface_csv = csv.DictReader(open("PackageInterface.csv", 'r'))
   for row in interface_csv:
     pkgName = row['Package']
+    print pkgName
     if pkgName and pkgName in pkgNameSet:
       if row['RPC']:
+        print "RPC interface " + pkgName
         pkgNameInterface.setdefault(pkgName,[]).append('RPC')
       if row['HL7']:
         pkgNameInterface.setdefault(pkgName,[]).append('HL7')
-  
+        print "Hl7 interface " + pkgName
   traverseChildren(pkgCatJson)
 
 def traverseChildren(package):
@@ -47,6 +49,7 @@ def traverseChildren(package):
       package['prefixes'] = pkgNamePrefixes[pkgName]
     if pkgName in pkgNameInterface:
       package['interfaces'] = pkgNameInterface[pkgName]
+      print "set up package interface " + pkgName
 
 def main():
   generate_packages_json()

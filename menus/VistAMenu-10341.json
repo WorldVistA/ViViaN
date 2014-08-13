@@ -1,1 +1,0 @@
-{"children": [{"name": "Manual Pharmacy Statistics", "option": "PSU PBM MANUAL", "ien": "4388"}, {"name": "Retransmit Patient Demographic Data", "option": "PSU RETRANSMIT PATIENT DATA", "ien": "10342"}, {"name": "Map Pharmacy Locations", "option": "PSU MAP PHARMACY LOCATIONS", "ien": "10340"}], "name": "Manager Menu Options", "option": "PSU PBM MANAGER MENU", "ien": "10341"}

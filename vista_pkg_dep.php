@@ -37,11 +37,11 @@ This circle plot captures the interrelationships among VistA packages. Mouse ove
   d3.json("PackageCategories.json", function(error, data) {
     var categories = data;
     function getPackageDoxLink(node) {
-      var package_link_url = "http://code.osehra.org/dox/Package_";
+      var package_link_url = "http://code.osehra.org/dox_alpha/vxvista/Package_";
       var doxLinkName = node.name.replace(/ /g, '_').replace(/-/g, '_')
       return package_link_url + doxLinkName + ".html";
     }
-    
+
     function packageHierarchyByGroups(classes) {
       var map = {};
       map[categories.name] = {name: name, children: []}; 
