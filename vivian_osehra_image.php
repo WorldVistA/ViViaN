@@ -4,8 +4,8 @@
 style="border-width:0" height="35" width="150" alt="OSEHRA Logo" /></a>
 <a href="http://www.vxvista.org">
 <img src="images/vxVistA13.png"
-style="border-width:0" height="35" width="150" alt="vxVistA Logo" /></a>
-  <div id="title" style="position:absolute; left:310px; top:10px; font-size:1.0em;">
+style="border-width:0" height="44" width="100" alt="vxVistA Logo" /></a>
+  <div id="title" style="position:absolute; left:260px; top:10px; font-size:1.0em;">
     VIVIAN<sup style="font-size:0.59em;">TM</sup>(<u>Vi</u>sualizing <u>Vi</u>stA <u>A</u>nd <u>N</u>amespace)
   </div>
 </div>
