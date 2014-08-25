@@ -13,10 +13,10 @@
         });
         $('#demoexamples li').each(function (i) {
           if (i === 0) {
-            $(this).removeClass().addClass("active");
+            $(this).removeClass("active").addClass("active");
           }
           else {
-            $(this).removeClass();
+            $(this).removeClass("active");
           }
         });
       });
