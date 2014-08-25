@@ -12,6 +12,8 @@ style="border-width:0" height="35" width="150" alt="OSEHRA Logo" /></a>
     <li><a href="vista_menus.php">VistA Menus</a></li>
     <li><a href="bff_demo.php">VHA BFF Demo</a></li>
     <li><a href="vista_pkg_dep.php">VistA Package Dependency</a></li>
+    <li><a href="javascript:aboutClicked();">About</a></li>
+    <li><a href="http://www.osehra.org/content/visualization-open-source-project-group">Join the Visualization Working Group</a></li>
     <li class="dropdown">
       <a class="dropdown-toggle" data-toggle="dropdown" href="#">
         FOIA VistA <span class="caret"></span>
@@ -20,8 +22,6 @@ style="border-width:0" height="35" width="150" alt="OSEHRA Logo" /></a>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="vxvista">DSS vxVistA</a></li>
       </ul>
     </li>
-    <li><a href="javascript:aboutClicked();">About</a></li>
-    <li><a href="http://www.osehra.org/content/visualization-open-source-project-group">Join the Visualization Working Group</a></li>
   </ul>
 </div>
 <script>

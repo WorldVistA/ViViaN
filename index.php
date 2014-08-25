@@ -78,7 +78,7 @@ d3.json("packages.json", function(json) {
      .on("circle", "style", "fill", change_circle_color)
      .on("circle", "attr", "r", function(d) { return 7 - d.depth; });
   d3.select("#treeview_placeholder").datum(json).call(chart);
-  // createLegend();
+  createLegend();
 });
 
 function _expandAllNode() {
@@ -156,7 +156,11 @@ function pkgLinkClicked(d) {
 
 function getPackageDoxLink(pkgName) {
   var doxLinkName = pkgName.replace(/ /g, '_').replace(/-/g, '_')
-  return package_link_url + doxLinkName + ".html";
+  var doxUrl = package_link_url;
+  if (selectedIndex === 3){
+    doxUrl = "http://code.osehra.org/dox_alpha/vxvista/Package_";
+  }
+  return doxUrl + doxLinkName + ".html";
 }
 
 function getNamespaceHtml(namespace) {
@@ -224,15 +228,18 @@ function change_node_color(node) {
   if (categories.length === 0) {
     return "black";
   }
-  var category = categories[selectedIndex] + " Packages";
-  if (category == "All Packages" || node.hasLink === undefined) {
+  var category = categories[selectedIndex];
+  if (category == "All" || node.hasLink === undefined) {
     return "black";
   }
-  if (node.category) {
-    var index = node.category.indexOf(category);
+  if (node.distribution) {
+    var index = node.distribution.indexOf(category);
     if (index >= 0) {
       return catcolors[selectedIndex];
     }
+  }
+  else if (selectedIndex == 1 || selectedIndex == 2){
+    return catcolors[selectedIndex];
   }
   return "#E0E0E0";
 }
@@ -243,9 +250,14 @@ function change_circle_color(d){
   }
   else {
     if (d.hasLink !== undefined && selectedIndex > 0){
-      var category = categories[selectedIndex] + " Packages";
-      var index = d.category.indexOf(category);
-      if (index >= 0) {
+      var category = categories[selectedIndex];
+      if (d.distribution !== undefined){
+        var index = d.distribution.indexOf(category);
+        if (index >= 0) {
+          return catcolors[selectedIndex];
+        }
+      }
+      else if (selectedIndex <= 2){
         return catcolors[selectedIndex];
       }
     }
@@ -274,7 +286,8 @@ function node_onMouseOut(d) {
 }
 
 
-var categories = ["All", "OSEHRA", "VA", "DSS", "Medsphere", "Oroville"];
+// var categories = ["All", "OSEHRA", "VA", "DSS", "Medsphere", "Oroville"];
+var categories = ["All", "OSEHRA", "VA", "DSS"];
 // Legend.
 function createLegend() {
   var legend = chart.svg().selectAll("g.legend")

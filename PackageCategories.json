@@ -137,7 +137,12 @@
                             "name": "Dietetics"
                         }, 
                         {
-                            "name": "Dental"
+                            "name": "Dental",
+                            "distribution": [
+                              "DSS",
+                              "VA",
+                              "OSEHRA"
+                            ]
                         }, 
                         {
                             "name": "Nursing Service"
@@ -211,6 +216,12 @@
                             "name": "Toolkit"
                         }, 
                         {
+                            "name": "VPE Shell",
+                            "distribution": [
+                              "DSS"
+                            ]
+                        },
+                        {
                             "name": "Patch Module"
                         }, 
                         {
@@ -222,7 +233,7 @@
                     "name": "Capacity Management", 
                     "children": [
                         {
-                            "name": "SAGG Project"
+                            "name": "SAGG Proj,ect"
                         }, 
                         {
                             "name": "Capacity Management - RUM"
@@ -495,6 +506,17 @@
             ]
         }, 
         {
+            "name": "Other", 
+            "children": [
+                {
+                    "name": "DSS vxVistA Enhancement",
+                    "distribution": [
+                      "DSS"
+                    ]
+                }
+            ]
+        },
+        {
             "name": "Registration/Enrollment/Eligibility", 
             "children": [
                 {
@@ -513,6 +535,12 @@
                         }, 
                         {
                             "name": "Registration"
+                        },
+                        {
+                            "name": "Sea Island Systems Registration",
+                            "distribution": [
+                              "DSS"
+                            ]
                         }
                     ]
                 }
