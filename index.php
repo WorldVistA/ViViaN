@@ -13,10 +13,10 @@
         });
         $('#demoexamples li').each(function (i) {
           if (i === 0) {
-            $(this).removeClass().addClass("active");
+            $(this).removeClass("active").addClass("active");
           }
           else {
-            $(this).removeClass();
+            $(this).removeClass("active");
           }
         });
       });
@@ -274,8 +274,7 @@ function node_onMouseOut(d) {
 }
 
 
-// var categories = ["All", "OSEHRA", "VA", "DSS", "Medsphere", "Oroville"];
-var categories = [];
+var categories = ["All", "OSEHRA", "VA", "DSS", "Medsphere", "Oroville"];
 // Legend.
 function createLegend() {
   var legend = chart.svg().selectAll("g.legend")
