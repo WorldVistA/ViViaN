@@ -8,15 +8,35 @@
                     "name": "Laboratory", 
                     "children": [
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Automated Lab Instruments"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Anatomic Pathology"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "National Laboratory Test"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Lab Service"
                         }
                     ]
@@ -25,42 +45,107 @@
                     "name": "Patient Care Data", 
                     "children": [
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Oncology"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Functional Independence"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Patient Assessment Documentation"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Health Summary"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Quasar"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "PCE Patient Care Encounter"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "General Medical Record - IO"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Imaging"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Problem List"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "General Medical Record - Generator"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "General Medical Record - Vitals"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Spinal Cord Dysfunction"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Text Integration Utility"
                         }
                     ]
@@ -69,42 +154,107 @@
                     "name": "Pharmacy", 
                     "children": [
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Barcode Medication Administration"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Inpatient Medications"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Auto Replenishment Ward Stock"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Pharmacy Enterprise Customization System"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Outpatient Pharmacy"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Controlled Substances"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Pharmacy Prescription Practice"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Drug Accountability"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Pharmacy Product System - National"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Pharmacy Data Management"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "National Drug File"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "CMOP"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Pharmacy Benefits Management"
                         }
                     ]
@@ -113,54 +263,139 @@
                     "name": "Patient Service Delivery", 
                     "children": [
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Clinical Reminders"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Visual Impairment Service Team"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Mental Health"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Womens Health"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Integrated Home Telehealth"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Emergency Department Integration Software"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Radiology Nuclear Medicine"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Dietetics"
                         }, 
                         {
+                            "distribution": [
+                                "DSS", 
+                                "VA", 
+                                "OSEHRA"
+                            ], 
                             "name": "Dental"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Nursing Service"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "VBECS"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Prosthetics"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Scheduling"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Immunization"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Social Work"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Medicine"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Surgery"
                         }
                     ]
@@ -169,15 +404,35 @@
                     "name": "Order & Results Management", 
                     "children": [
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Clinical Procedures"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Order Entry Results Reporting"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Consult Request Tracking"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "CPRS Plugins"
                         }
                     ]
@@ -191,9 +446,19 @@
                     "name": "Support", 
                     "children": [
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "National Online Information Sharing"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "National VistA Support"
                         }
                     ]
@@ -202,18 +467,49 @@
                     "name": "Application Infrastructure", 
                     "children": [
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Electronic Signature "
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Kernel"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Toolkit"
                         }, 
                         {
+                            "distribution": [
+                                "DSS"
+                            ], 
+                            "name": "VPE Shell"
+                        }, 
+                        {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Patch Module"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Run Time Library"
                         }
                     ]
@@ -222,12 +518,27 @@
                     "name": "Capacity Management", 
                     "children": [
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "SAGG Project"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Capacity Management - RUM"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Capacity Management Tools"
                         }
                     ]
@@ -236,33 +547,83 @@
                     "name": "Interoperability", 
                     "children": [
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "National Health Information Network"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Health Level Seven"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "VDEF"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Patient Data Exchange"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Virtual Patient Record"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Master Patient Index VistA"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Network Health Exchange"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Foundations"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "VistALink"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "VistALink Security"
                         }
                     ]
@@ -271,12 +632,27 @@
                     "name": "Architecture", 
                     "children": [
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Web Services Client"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "RPC Broker"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "CORBA Services"
                         }
                     ]
@@ -285,18 +661,43 @@
                     "name": "Tools", 
                     "children": [
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "List Manager"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "M XML Parser"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "FileMan Delphi Components"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "MailMan"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "VA FileMan"
                         }
                     ]
@@ -305,9 +706,19 @@
                     "name": "Data Standardization", 
                     "children": [
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Lexicon Utility"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Health Data and Informatics"
                         }
                     ]
@@ -321,18 +732,43 @@
                     "name": "Medical Records", 
                     "children": [
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Authorization Subscription"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Record Tracking"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Release Of Information - DSSI"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "CPT HCPCS Codes"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Generic Code Sheet"
                         }
                     ]
@@ -341,6 +777,11 @@
                     "name": "Education", 
                     "children": [
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Library"
                         }
                     ]
@@ -349,21 +790,51 @@
                     "name": "Financial", 
                     "children": [
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Remote Order Entry System"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Event Driven Reporting"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Fee Basis"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "E Claims Management Engine"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Integrated Billing"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Event Capture"
                         }
                     ]
@@ -372,15 +843,35 @@
                     "name": "Care Planning & Management", 
                     "children": [
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Shift Handoff Tool"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Hospital Based Home Care"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "DSS Extracts"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Care Management"
                         }
                     ]
@@ -389,15 +880,35 @@
                     "name": "Patient Administration", 
                     "children": [
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Automated Information Collection System"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Clinical Information Resource Network"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "DRG Grouper"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Integrated Patient Fund"
                         }
                     ]
@@ -406,39 +917,99 @@
                     "name": "Medical Center Administration", 
                     "children": [
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "HINQ"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Police and Security"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Interim Management Support"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "IFCAP"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "PAID"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Voluntary Timekeeping"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Occupational Health Record-Keeping System"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Engineering"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Accounts Receivable"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Wounded Injured and Ill Warriors"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Automated Medical Information Exchange"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Equipment Turn-In Request"
                         }
                     ]
@@ -447,9 +1018,19 @@
                     "name": "Infectious Diseases", 
                     "children": [
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Clinical Case Registries"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Methicillin Resistant Staph Aurerus Initiative Reports "
                         }
                     ]
@@ -460,37 +1041,103 @@
             "name": "Safety & Quality", 
             "children": [
                 {
+                    "distribution": [
+                        "OSEHRA", 
+                        "VA", 
+                        "DSS"
+                    ], 
                     "name": "Asists"
                 }, 
                 {
+                    "distribution": [
+                        "OSEHRA", 
+                        "VA", 
+                        "DSS"
+                    ], 
                     "name": "Occurrence Screen"
                 }, 
                 {
+                    "distribution": [
+                        "OSEHRA", 
+                        "VA", 
+                        "DSS"
+                    ], 
                     "name": "Adverse Reaction Tracking"
                 }, 
                 {
+                    "distribution": [
+                        "OSEHRA", 
+                        "VA", 
+                        "DSS"
+                    ], 
                     "name": "Incomplete Records Tracking"
                 }, 
                 {
+                    "distribution": [
+                        "OSEHRA", 
+                        "VA", 
+                        "DSS"
+                    ], 
                     "name": "Beneficiary Travel"
                 }, 
                 {
+                    "distribution": [
+                        "OSEHRA", 
+                        "VA", 
+                        "DSS"
+                    ], 
                     "name": "Clinical Monitoring System"
                 }, 
                 {
+                    "distribution": [
+                        "OSEHRA", 
+                        "VA", 
+                        "DSS"
+                    ], 
                     "name": "Survey Generator"
                 }, 
                 {
+                    "distribution": [
+                        "OSEHRA", 
+                        "VA", 
+                        "DSS"
+                    ], 
                     "name": "Patient Representive"
                 }, 
                 {
+                    "distribution": [
+                        "OSEHRA", 
+                        "VA", 
+                        "DSS"
+                    ], 
                     "name": "Incident Reporting"
                 }, 
                 {
+                    "distribution": [
+                        "OSEHRA", 
+                        "VA", 
+                        "DSS"
+                    ], 
                     "name": "Utilization Management Rollup"
                 }, 
                 {
+                    "distribution": [
+                        "OSEHRA", 
+                        "VA", 
+                        "DSS"
+                    ], 
                     "name": "Quality Assurance Integration"
+                }
+            ]
+        }, 
+        {
+            "name": "Other", 
+            "children": [
+                {
+                    "distribution": [
+                        "DSS"
+                    ], 
+                    "name": "DSS vxVistA Enhancement"
                 }
             ]
         }, 
@@ -501,6 +1148,11 @@
                     "name": "Eligibility", 
                     "children": [
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Income Verification Match"
                         }
                     ]
@@ -509,10 +1161,26 @@
                     "name": "Encounter & Visit Management", 
                     "children": [
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Enrollment Application System"
                         }, 
                         {
+                            "distribution": [
+                                "OSEHRA", 
+                                "VA", 
+                                "DSS"
+                            ], 
                             "name": "Registration"
+                        }, 
+                        {
+                            "distribution": [
+                                "DSS"
+                            ], 
+                            "name": "Sea Island Systems Registration"
                         }
                     ]
                 }
