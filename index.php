@@ -274,8 +274,7 @@ function node_onMouseOut(d) {
 }
 
 
-// var categories = ["All", "OSEHRA", "VA", "DSS", "Medsphere", "Oroville"];
-var categories = [];
+var categories = ["All", "OSEHRA", "VA", "DSS", "Medsphere", "Oroville"];
 // Legend.
 function createLegend() {
   var legend = chart.svg().selectAll("g.legend")
