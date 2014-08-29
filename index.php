@@ -60,11 +60,26 @@ var chart = d3.chart.treeview()
 $("#accordion").accordion({heightStyle: 'content', collapsible: true}).hide();
 <?php include_once "vivian_tree_layout_common.js" ?>
 
-var package_link_url = "http://code.osehra.org/dox/Package_";
+var package_link_url = "http://code.osehra.org/dox/";
 var toolTip = d3.select(document.getElementById("toolTip"));
 var header = d3.select(document.getElementById("header1"));
 var selectedIndex = 0;
-var catcolors = ["black", "#FF0000", "#3300CC", "#080", "#FF00FF", "#660000"];
+var distProp = [ // constants to store property of each distribution
+  { name: "All", color: "black", distribution: 'All', doxlink: package_link_url},
+  { name: "OSEHRA", color: "#FF0000", distribution: 'OSEHRA VistA', doxlink: package_link_url},
+  { name: "VA", color: "#3300CC", distribution: 'VA FOIA VistA' ,doxlink: package_link_url},
+  { name: "DSS", color: "#080", distribution: 'DSS vxVistA' , doxlink: "http://code.osehra.org/dox_alpha/vxvista/"}
+  /**
+  ,{
+    name: "Medsphere",
+    color: "#FF00FF"
+  },
+  {
+    name: "Oroville",
+    color: "#660000"
+  } **/
+];
+
 
 d3.json("packages.json", function(json) {
   resetAllNode(json);
@@ -135,7 +150,7 @@ function pkgLinkClicked(d) {
           else{
             $('#description').html(d.name);
           }
-          depLink = getDependencyContentHtml(d.name)
+          depLink = getDependencyContentHtml(d.name, d)
           $('#dependencies').html(depLink);
           $('#dependencies').show();
           $('#accordion').accordion("option", "active", 0);
@@ -153,14 +168,28 @@ function pkgLinkClicked(d) {
   }
 }
 
-
-function getPackageDoxLink(pkgName) {
+function getPackageDoxLink(pkgName, node) {
+  var doxUrl = "";
   var doxLinkName = pkgName.replace(/ /g, '_').replace(/-/g, '_')
-  var doxUrl = package_link_url;
-  if (selectedIndex === 3){
-    doxUrl = "http://code.osehra.org/dox_alpha/vxvista/Package_";
+  var category = distProp[selectedIndex];
+  var index = node.distribution.indexOf(category.name);
+  if (index >= 0) {
+    doxUrl = category.doxlink;
   }
-  return doxUrl + doxLinkName + ".html";
+  else {
+    doxUrl = getDistributionPropByName(node.distribution[0]).doxlink;
+  }
+  return doxUrl + "Package_" + doxLinkName + ".html";
+}
+
+function getDistributionPropByName(distName){
+  var index = 0;
+  for (index = 0; index < distProp.length; index++) {
+    if (distProp[index].name === distName) {
+      return distProp[index];
+    }
+  }
+  return null;
 }
 
 function getNamespaceHtml(namespace) {
@@ -173,12 +202,20 @@ function getNamespaceHtml(namespace) {
   return htmlLnk;
 }
 
-function getRPCLinkByPackageName(pkgName) {
-  return "<a href=\"files/" + pkgName + "-RPC.html\" target=\"_blank\">Remote Procedure Call</a>";
+function getRPCLinkByPackageName(pkgName, linkUrl) {
+  var defLnk = "files";
+  if (linkUrl){
+    defLnk = linkUrl + '/' + defLnk;
+  }
+  return "<a href=\"" + defLnk + "/" + pkgName + "-RPC.html\" target=\"_blank\">Remote Procedure Call</a>";
 }
 
-function getHL7LinkByPackageName(pkgName) {
-  return "<a href=\"files/" + pkgName + "-HL7.html\" target=\"_blank\">HL7</a>";
+function getHL7LinkByPackageName(pkgName, linkUrl) {
+  var defLnk = "files";
+  if (linkUrl){
+    defLnk = linkUrl + '/' + defLnk;
+  }
+  return "<a href=\"" + defLnk + "/" + pkgName + "-HL7.html\" target=\"_blank\">HL7</a>";
 }
 
 function getInterfaceHtml(node) {
@@ -186,14 +223,21 @@ function getInterfaceHtml(node) {
   var htmlLnk = "<ul>";
   var rpcLink = "";
   var hl7Link = "";
+  var extraLink = "";
   if (node.interfaces !== undefined){
+    if (selectedIndex === 3) {
+      category = distProp[selectedIndex].name;
+      if (node.distribution && node.distribution.indexOf(category) >=0) {
+        extraLink = "vxvista";
+      }
+    }
     var index = node.interfaces.indexOf("RPC");
     if (index >= 0){
-      rpcLink = getRPCLinkByPackageName(pkgName);
+      rpcLink = getRPCLinkByPackageName(pkgName, extraLink);
     }
     index = node.interfaces.indexOf("HL7");
     if (index >= 0){
-      hl7Link = getHL7LinkByPackageName(pkgName);
+      hl7Link = getHL7LinkByPackageName(pkgName, extraLink);
     }
   }
   if (pkgName === 'Order Entry Results Reporting'){
@@ -217,29 +261,26 @@ function getInterfaceHtml(node) {
   return htmlLnk;
 }
 
-function getDependencyContentHtml(pkgName) {
-  var pkgUrl = getPackageDoxLink(pkgName)
+function getDependencyContentHtml(pkgName, node) {
+  var pkgUrl = getPackageDoxLink(pkgName, node)
   depLink = "<h4><a href=\"" + pkgUrl + "\" target=\"_blank\">";
   depLink += "Dependencies & Code View" + "</a></h4>";
   return depLink;
 }
 
 function change_node_color(node) {
-  if (categories.length === 0) {
+  if (distProp.length === 0) {
     return "black";
   }
-  var category = categories[selectedIndex];
-  if (category == "All" || node.hasLink === undefined) {
+  var category = distProp[selectedIndex];
+  if (category.name === "All" || node.hasLink === undefined) {
     return "black";
   }
   if (node.distribution) {
-    var index = node.distribution.indexOf(category);
+    var index = node.distribution.indexOf(category.name);
     if (index >= 0) {
-      return catcolors[selectedIndex];
+      return category.color;
     }
-  }
-  else if (selectedIndex == 1 || selectedIndex == 2){
-    return catcolors[selectedIndex];
   }
   return "#E0E0E0";
 }
@@ -250,15 +291,15 @@ function change_circle_color(d){
   }
   else {
     if (d.hasLink !== undefined && selectedIndex > 0){
-      var category = categories[selectedIndex];
+      var category = distProp[selectedIndex];
       if (d.distribution !== undefined){
-        var index = d.distribution.indexOf(category);
+        var index = d.distribution.indexOf(category.name);
         if (index >= 0) {
-          return catcolors[selectedIndex];
+          return category.color;
         }
       }
-      else if (selectedIndex <= 2){
-        return catcolors[selectedIndex];
+      else { 
+        return category.color;
       }
     }
     return "#fff";
@@ -287,16 +328,15 @@ function node_onMouseOut(d) {
 
 
 // var categories = ["All", "OSEHRA", "VA", "DSS", "Medsphere", "Oroville"];
-var categories = ["All", "OSEHRA", "VA", "DSS"];
 // Legend.
 function createLegend() {
   var legend = chart.svg().selectAll("g.legend")
-      .data(categories)
+      .data(distProp)
     .enter().append("svg:g")
       .attr("class", "legend")
       .attr("transform", function(d, i) { return "translate(-100," + (i * 30 + 80) + ")"; })
       .on("click", function(d) {
-        selectedIndex = categories.indexOf(d);
+        selectedIndex = distProp.indexOf(d);
         d3.selectAll("text")
           .filter(function (d) { return d.hasLink != undefined;})
           .attr("fill", function (node) {
@@ -311,14 +351,16 @@ function createLegend() {
       });
 
   legend.append("svg:circle")
-      .attr("class", String)
+      .attr("class", function(d) {return d.name;})
       .attr("r", 3);
 
   legend.append("svg:text")
-      .attr("class", String)
+      .attr("class", function(d) {return d.name;})
       .attr("x", 13)
       .attr("dy", ".31em")
-      .text(function(d) { return  d + " Packages"; });
+      .text(function(d) {
+        return  d.distribution; 
+      });
 }
     </script>
   </body>
