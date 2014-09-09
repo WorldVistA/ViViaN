@@ -50,7 +50,7 @@
   <p>
 This tree graph represents the VHA Business Function Framework (BFF). The BFF is a hierarchical construct that describes VHA business functions or  major service areas within each core mission Line of Business (LoB) and serve as logical groupings of activities. Subfunctions represent the logical groupings of sub-activities needed to fulfill each VHA business function. Click on an item to bring a modal window with detailed description and commentary.
   </p>
-  <p>This demo is based on BFF version 2.6.</p>
+  <p>This demo is based on BFF version 2.7.</p>
   </div>
   <div id="treeview_placeholder"/>
 <script type="text/javascript">
