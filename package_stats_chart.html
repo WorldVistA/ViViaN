@@ -1,0 +1,192 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>VistA Package Dependencies Chart</title>
+
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		<style type="text/css">
+${demo.css}
+		</style>
+		<script type="text/javascript">
+$(function () {
+    var options = {
+        chart: {
+            type: 'bar'
+        },
+        title: {
+            text: 'VistA Packages Dependencies Chart'
+        },
+        xAxis: {
+          categories: [],
+          labels: {
+            formatter: function (){
+              var package_link_url = "http://code.osehra.org/dox/";
+              var doxLinkName = this.value.replace(/ /g, '_').replace(/-/g, '_')
+              var lnkUrl = package_link_url + "Package_" + doxLinkName + ".html";
+              return "<a href=\"" + lnkUrl + "\">" + this.value + "</a>";
+            },
+            useHTML: true,
+            enabled: true
+          },
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                //text: 'Total Number Of Dependencies'
+                text: null
+            },
+        },
+        legend: {
+            align: 'right',
+            x: -70,
+            verticalAlign: 'top',
+            y: 20,
+            floating: true,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+            borderColor: '#CCC',
+            borderWidth: 1,
+            shadow: false
+        },
+        tooltip: {
+            formatter: function () {
+                return '<b>' + this.x + '</b><br/>' +
+                    this.series.name + ': ' + this.y + '<br/>' + '';
+                    //'Total: ' + this.point.stackTotal;
+            }
+        },
+        plotOptions: {
+            bar: {
+                //stacking: 'normal',
+                dataLabels: {
+                    enabled: true
+                }
+            }
+        },
+        credits: {
+          enabled: false
+        },
+        series: []
+    };
+
+    function sortByNoRoutines(one, two) {
+      return sortByProp(one, two, "routines");
+    }
+
+    function sortByNoFiles(one, two) {
+      return sortByProp(one, two, "files");
+    }
+
+    function sortByNoDepends(one, two) {
+      return sortByProp(one, two, "depends");
+    }
+
+    function sortByNoDependents(one, two) {
+      return sortByProp(one, two, "dependents");
+    }
+
+    function sortByName(one, two) {
+      if (one.name > two.name) {
+        return 1;
+      }
+      if (one.name < two.name) {
+        return -1;
+      }
+      return 0;
+    }
+
+    function sortByProp(one, two, property) {
+      if (property in one && property in two) {
+        return two[property].length - one[property].length;
+      }
+      if (property in one) {
+        return -1;
+      }
+      return 1;
+    }
+
+    function getSeriesByJson(data, property) {
+      var totLen = data.length;
+      var outSeries = {"data":[], "name": property};
+      for (var idx = 0; idx < totLen; idx++) {
+        if (property in data[idx]) {
+          outSeries.data.push(data[idx][property].length);
+        }
+        else {
+          outSeries.data.push(0);
+        }
+      }
+      return outSeries;
+    }
+
+    function getJsonCategoriesArray(data) {
+      var totLen = data.length;
+      var categories = [];
+      for (var idx = 0; idx < totLen; idx++) {
+        if (data[idx].name && data[idx].name !== undefined) {
+          categories.push(data[idx].name);
+        }
+      }
+      return categories;
+    }
+
+    function setCategoriesByJson(data) {
+      options.xAxis.categories = getJsonCategoriesArray(data);
+    }
+    // read the chart data from json file
+    var jsonData = [];
+    $.getJSON('pkgdep.json', function(data){
+      jsonData = data;
+      jsonData.sort(sortByName);
+      setCategoriesByJson(jsonData);
+      //setSeriesByJson(jsonData, "routines");
+      //setSeriesByJson(jsonData, "files");
+      var depData = getSeriesByJson(jsonData,"routines");
+      depData.color = "#d62728";
+      options.series.push(depData);
+      depData = getSeriesByJson(jsonData,"files");
+      depData.color = "#2ca02c";
+      options.series.push(depData);
+      $('#container').highcharts(options);
+    });
+    $(' #list').change(function(e) {
+      var chart = $("#container").highcharts();
+      while( chart.series.length > 0 ) {
+       chart.series[0].remove( false );
+      }
+      if ($(this).val() == 0) {
+        jsonData.sort(sortByName);
+      }
+      else if ($(this).val() == 1) {
+        jsonData.sort(sortByNoRoutines);
+      }
+      else {
+        jsonData.sort(sortByNoFiles);
+      }
+      chart.xAxis[0].setCategories(getJsonCategoriesArray(jsonData), false);
+      var depData = getSeriesByJson(jsonData,"routines");
+      depData.color = "#d62728";
+      chart.addSeries(depData);
+      depData = getSeriesByJson(jsonData,"files");
+      depData.color = "#2ca02c";
+      chart.addSeries(depData);
+      chart.redraw();
+    });
+
+});
+		</script>
+	</head>
+	<body>
+<script src="highcharts/highcharts.js"></script>
+<form>
+<label for="list">Sorted By:</label>
+<SELECT id="list">
+    <OPTION VALUE="0" selected="selected">Name</OPTION>
+    <OPTION VALUE="1">Routines</OPTION>
+    <OPTION VALUE="2">Files</OPTION>
+</SELECT>
+</form>
+<div id="container" style="min-width: 500px; height: 3800px; margin: 0 auto"></div>
+
+	</body>
+</html>

@@ -17,8 +17,8 @@ d3.chart.dependencyedgebundling = function(options) {
   var _innerRadius;
   var _nodeTextHyperLink;
   var _txtLinkGap = 5;
-  var _minTextWidth = 7.4;
-  var _radialTextHeight = 13;
+  var _minTextWidth = 7.0;
+  var _radialTextHeight = 12;
 
   function resetDimension() {
     _radius = _diameter / 2;
