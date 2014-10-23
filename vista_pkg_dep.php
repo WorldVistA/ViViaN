@@ -192,10 +192,13 @@ $(function () {
         },
         tooltip: {
             formatter: function () {
-                return '<b>' + this.x + '</b><br/>' +
-                    this.series.name + ': ' + this.y + '<br/>' + '';
-                    //'Total: ' + this.point.stackTotal;
-            }
+                var ttp = '<b>' + this.x + '</b><br/>';
+                $.each(this.points, function(){
+                  ttp += this.series.name + ': ' + this.y + '<br/>' + '';
+                });
+                return ttp;
+            },
+            shared: true
         },
         plotOptions: {
             bar: {
@@ -291,7 +294,7 @@ $(function () {
       options.series.push(depData);
       $('#container').highcharts(options);
     });
-      
+
     // utility function for resetting chart data
     function resetChartData(val) {
       var chart = $("#container").highcharts();
@@ -341,36 +344,36 @@ $(function () {
       resetChartData($(this).val());
     });
 
-      $("input:radio[name='chart-option']").change(function() {
-          var chart = $("#container").highcharts();
-          var value = $(this).val();
-          console.log(value);
-          if (value == 1) {
-            $('#frm-dep').hide();
-            $('#frm-stats').show();
-            chart.setTitle({text: "VistA Package Statistics"});
-            resetChartData($("#list-stats").val());
-          }
-          else {
-            chart.setTitle({text: "VistA Package Dependencies"});
-            $('#frm-stats').hide();
-            $('#frm-dep').show();
-            resetChartData($("#list-dep").val());
-          }
-      });
+    $("input:radio[name='chart-option']").change(function() {
+        var chart = $("#container").highcharts();
+        var value = $(this).val();
+        console.log(value);
+        if (value == 1) {
+          $('#frm-dep').hide();
+          $('#frm-stats').show();
+          chart.setTitle({text: "VistA Package Statistics"});
+          resetChartData($("#list-stats").val());
+        }
+        else {
+          chart.setTitle({text: "VistA Package Dependencies"});
+          $('#frm-stats').hide();
+          $('#frm-dep').show();
+          resetChartData($("#list-dep").val());
+        }
+    });
 
-      $("input:radio[name='options']").change(function() {
-          var value = $(this).val();
-          console.log(value);
-          if (value == 1) {
-            $('#circular-chart').hide();
-            $('#bar-chart').show();
-          }
-          else if (value == 0) {
-            $('#bar-chart').hide();
-            $('#circular-chart').show();
-          }
-      });
+    $("input:radio[name='options']").change(function() {
+        var value = $(this).val();
+        console.log(value);
+        if (value == 1) {
+          $('#circular-chart').hide();
+          $('#bar-chart').show();
+        }
+        else if (value == 0) {
+          $('#bar-chart').hide();
+          $('#circular-chart').show();
+        }
+    });
 
 });
 		</script>
