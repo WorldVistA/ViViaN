@@ -80,17 +80,17 @@ This circle plot captures the interrelationships among VistA packages. Mouse ove
       var doxLinkName = node.name.replace(/ /g, '_').replace(/-/g, '_')
       return package_link_url + doxLinkName + ".html";
     }
-    
+
     function packageHierarchyByGroups(classes) {
       var map = {};
-      map[categories.name] = {name: name, children: []}; 
+      map[categories.name] = {name: name, children: []};
       function setdata(name, data) {
         var node = map[name];
         if (!node) {
           node = map[name] = data || {name: name, children: []};
         }
       }
-      
+
       classes.forEach(function(d) {
         setdata(d.name, d);
       });
@@ -166,7 +166,7 @@ $(function () {
               var package_link_url = "http://code.osehra.org/dox/";
               var doxLinkName = this.value.replace(/ /g, '_').replace(/-/g, '_')
               var lnkUrl = package_link_url + "Package_" + doxLinkName + ".html";
-              return "<a href=\"" + lnkUrl + "\">" + this.value + "</a>";
+              return "<a href=\"" + lnkUrl + "\"" + " target=\"_blank\"" + ">" + this.value + "</a>";
             },
             useHTML: true,
             enabled: true
