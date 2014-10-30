@@ -10,6 +10,7 @@
             "Uncategorized",
             "VA FileMan"
         ],
+        "fields": 23,
         "files": 4,
         "name": "Methicillin Resistant Staph Aurerus Initiative Reports",
         "routines": 8
@@ -40,6 +41,7 @@
             "Text Integration Utility",
             "VA FileMan"
         ],
+        "fields": 43,
         "files": 7,
         "name": "Authorization Subscription",
         "routines": 33
@@ -82,6 +84,7 @@
             "Scheduling",
             "General Medical Record - Vitals"
         ],
+        "fields": 390,
         "files": 43,
         "name": "Clinical Procedures",
         "routines": 120
@@ -103,6 +106,7 @@
             "VistALink Security",
             "VA FileMan"
         ],
+        "fields": 15,
         "files": 3,
         "name": "VistALink",
         "routines": 16
@@ -132,6 +136,7 @@
             "Uncategorized",
             "VA FileMan"
         ],
+        "fields": 124,
         "files": 13,
         "name": "CMOP",
         "routines": 149
@@ -173,6 +178,7 @@
             "VA FileMan",
             "Uncategorized"
         ],
+        "fields": 56,
         "files": 8,
         "name": "HINQ",
         "routines": 99
@@ -202,6 +208,7 @@
             "General Medical Record - Vitals",
             "Pharmacy Data Management"
         ],
+        "fields": 0,
         "files": 0,
         "name": "National Health Information Network",
         "routines": 19
@@ -215,6 +222,7 @@
             "Uncategorized",
             "Text Integration Utility"
         ],
+        "fields": 0,
         "files": 0,
         "name": "HealtheVet Desktop",
         "routines": 13
@@ -231,6 +239,7 @@
             "MailMan",
             "Registration"
         ],
+        "fields": 198,
         "files": 15,
         "name": "Dental",
         "routines": 76
@@ -252,6 +261,7 @@
             "Uncategorized",
             "VA FileMan"
         ],
+        "fields": 182,
         "files": 11,
         "name": "Social Work",
         "routines": 82
@@ -272,6 +282,7 @@
             "Uncategorized",
             "VA FileMan"
         ],
+        "fields": 41,
         "files": 5,
         "name": "Incomplete Records Tracking",
         "routines": 49
@@ -293,6 +304,7 @@
             "VA FileMan",
             "Uncategorized"
         ],
+        "fields": 75,
         "files": 3,
         "name": "Quality Assurance Integration",
         "routines": 20
@@ -305,6 +317,7 @@
             "Toolkit",
             "VA FileMan"
         ],
+        "fields": 347,
         "files": 28,
         "name": "Voluntary Timekeeping",
         "routines": 95
@@ -321,11 +334,13 @@
             "VA FileMan",
             "Uncategorized"
         ],
+        "fields": 24,
         "files": 4,
         "name": "Survey Generator",
         "routines": 38
     },
     {
+        "fields": 0,
         "files": 0,
         "name": "Wireless Medication Administration",
         "routines": 0
@@ -351,6 +366,7 @@
             "Uncategorized",
             "VA FileMan"
         ],
+        "fields": 2084,
         "files": 51,
         "name": "Oncology",
         "routines": 446
@@ -381,6 +397,7 @@
             "Uncategorized",
             "VA FileMan"
         ],
+        "fields": 157,
         "files": 15,
         "name": "Beneficiary Travel",
         "routines": 59
@@ -394,6 +411,7 @@
             "VA FileMan",
             "Uncategorized"
         ],
+        "fields": 21,
         "files": 2,
         "name": "Wounded Injured and Ill Warriors",
         "routines": 10
@@ -432,6 +450,7 @@
             "Uncategorized",
             "VA FileMan"
         ],
+        "fields": 142,
         "files": 23,
         "name": "Lexicon Utility",
         "routines": 264
@@ -571,11 +590,13 @@
             "Imaging",
             "Uncategorized"
         ],
+        "fields": 347,
         "files": 36,
         "name": "VA FileMan",
         "routines": 803
     },
     {
+        "fields": 0,
         "files": 0,
         "name": "MCCR National Database - Field",
         "routines": 0
@@ -622,11 +643,13 @@
             "Generic Code Sheet",
             "VA FileMan"
         ],
+        "fields": 2081,
         "files": 134,
         "name": "IFCAP",
         "routines": 1318
     },
     {
+        "fields": 0,
         "files": 0,
         "name": "Pharmacy Product System - National",
         "routines": 0
@@ -646,6 +669,7 @@
             "Quality Assurance Integration",
             "VA FileMan"
         ],
+        "fields": 85,
         "files": 14,
         "name": "Occurrence Screen",
         "routines": 86
@@ -672,6 +696,7 @@
             "Uncategorized",
             "VA FileMan"
         ],
+        "fields": 598,
         "files": 10,
         "name": "Quasar",
         "routines": 94
@@ -719,6 +744,7 @@
             "Uncategorized",
             "VA FileMan"
         ],
+        "fields": 36,
         "files": 4,
         "name": "CPT HCPCS Codes",
         "routines": 43
@@ -728,6 +754,7 @@
             "Kernel",
             "Uncategorized"
         ],
+        "fields": 0,
         "files": 0,
         "name": "National Laboratory Test",
         "routines": 1
@@ -744,6 +771,7 @@
             "VA FileMan",
             "Uncategorized"
         ],
+        "fields": 25,
         "files": 4,
         "name": "Network Health Exchange",
         "routines": 18
@@ -768,6 +796,7 @@
             "Uncategorized",
             "VA FileMan"
         ],
+        "fields": 35,
         "files": 8,
         "name": "Auto Replenishment Ward Stock",
         "routines": 106
@@ -788,6 +817,7 @@
             "Uncategorized",
             "VA FileMan"
         ],
+        "fields": 28,
         "files": 11,
         "name": "General Medical Record - IO",
         "routines": 50
@@ -936,6 +966,7 @@
             "Pharmacy Data Management",
             "Generic Code Sheet"
         ],
+        "fields": 1767,
         "files": 126,
         "name": "Registration",
         "routines": 1490
@@ -945,6 +976,7 @@
             "Kernel",
             "VA FileMan"
         ],
+        "fields": 0,
         "files": 0,
         "name": "VistA Web",
         "routines": 1
@@ -963,6 +995,7 @@
             "MailMan",
             "VA FileMan"
         ],
+        "fields": 2649,
         "files": 9,
         "name": "Generic Code Sheet",
         "routines": 50
@@ -978,6 +1011,7 @@
             "Uncategorized",
             "VA FileMan"
         ],
+        "fields": 94,
         "files": 12,
         "name": "Visual Impairment Service Team",
         "routines": 28
@@ -997,6 +1031,7 @@
             "Uncategorized",
             "VA FileMan"
         ],
+        "fields": 150,
         "files": 2,
         "name": "Functional Independence",
         "routines": 7
@@ -1050,6 +1085,7 @@
             "Scheduling",
             "Pharmacy Data Management"
         ],
+        "fields": 400,
         "files": 34,
         "name": "Radiology Nuclear Medicine",
         "routines": 429
@@ -1076,6 +1112,7 @@
             "National Drug File",
             "VA FileMan"
         ],
+        "fields": 138,
         "files": 18,
         "name": "Patient Data Exchange",
         "routines": 178
@@ -1091,6 +1128,7 @@
             "Uncategorized",
             "VA FileMan"
         ],
+        "fields": 0,
         "files": 0,
         "name": "Vendor - Audiofax Inc",
         "routines": 1
@@ -1120,6 +1158,7 @@
             "Quality Assurance Integration",
             "VA FileMan"
         ],
+        "fields": 1352,
         "files": 42,
         "name": "PAID",
         "routines": 398
@@ -1138,6 +1177,7 @@
             "Uncategorized",
             "VA FileMan"
         ],
+        "fields": 12,
         "files": 2,
         "name": "My HealtheVet",
         "routines": 38
@@ -1206,6 +1246,7 @@
             "Scheduling",
             "Surgery"
         ],
+        "fields": 2277,
         "files": 164,
         "name": "Integrated Billing",
         "routines": 1660
@@ -1235,6 +1276,7 @@
             "Uncategorized",
             "VA FileMan"
         ],
+        "fields": 92,
         "files": 11,
         "name": "Event Capture",
         "routines": 183
@@ -1244,6 +1286,7 @@
             "Surgery",
             "Beneficiary Travel"
         ],
+        "fields": 0,
         "files": 0,
         "name": "Communications Service Library",
         "routines": 2
@@ -1271,6 +1314,7 @@
             "VA FileMan",
             "Text Integration Utility"
         ],
+        "fields": 23,
         "files": 3,
         "name": "Care Management",
         "routines": 16
@@ -1293,6 +1337,7 @@
             "Uncategorized",
             "VA FileMan"
         ],
+        "fields": 211,
         "files": 14,
         "name": "Record Tracking",
         "routines": 139
@@ -1435,6 +1480,7 @@
             "Text Integration Utility",
             "VA FileMan"
         ],
+        "fields": 0,
         "files": 0,
         "name": "Uncategorized",
         "routines": 94
@@ -1457,6 +1503,7 @@
             "VA FileMan",
             "Quality Assurance Integration"
         ],
+        "fields": 74,
         "files": 9,
         "name": "Clinical Monitoring System",
         "routines": 77
@@ -1495,6 +1542,7 @@
             "General Medical Record - Vitals",
             "Surgery"
         ],
+        "fields": 0,
         "files": 0,
         "name": "Virtual Patient Record",
         "routines": 31
@@ -1527,6 +1575,7 @@
             "Uncategorized",
             "VA FileMan"
         ],
+        "fields": 276,
         "files": 32,
         "name": "Nursing Service",
         "routines": 281
@@ -1557,6 +1606,7 @@
             "Registration",
             "VA FileMan"
         ],
+        "fields": 57,
         "files": 7,
         "name": "VBECS",
         "routines": 60
@@ -1638,6 +1688,7 @@
             "General Medical Record - Vitals",
             "Pharmacy Data Management"
         ],
+        "fields": 482,
         "files": 29,
         "name": "Outpatient Pharmacy",
         "routines": 618
@@ -1682,6 +1733,7 @@
             "General Medical Record - Vitals",
             "Surgery"
         ],
+        "fields": 1287,
         "files": 111,
         "name": "Imaging",
         "routines": 331
@@ -1725,6 +1777,7 @@
             "CMOP",
             "VA FileMan"
         ],
+        "fields": 152,
         "files": 19,
         "name": "National Drug File",
         "routines": 90
@@ -1762,6 +1815,7 @@
             "General Medical Record - Vitals",
             "Pharmacy Data Management"
         ],
+        "fields": 198,
         "files": 13,
         "name": "Spinal Cord Dysfunction",
         "routines": 357
@@ -1775,6 +1829,7 @@
             "VA FileMan",
             "Uncategorized"
         ],
+        "fields": 471,
         "files": 32,
         "name": "Asists",
         "routines": 87
@@ -1830,11 +1885,13 @@
             "National Drug File",
             "List Manager"
         ],
+        "fields": 135,
         "files": 7,
         "name": "Adverse Reaction Tracking",
         "routines": 140
     },
     {
+        "fields": 0,
         "files": 0,
         "name": "Occupational Health Record-Keeping System",
         "routines": 0
@@ -1875,6 +1932,7 @@
             "Uncategorized",
             "VA FileMan"
         ],
+        "fields": 17,
         "files": 2,
         "name": "RPC Broker",
         "routines": 37
@@ -1912,6 +1970,7 @@
             "Scheduling",
             "Surgery"
         ],
+        "fields": 263,
         "files": 15,
         "name": "Automated Medical Information Exchange",
         "routines": 870
@@ -1948,6 +2007,7 @@
             "General Medical Record - Vitals",
             "Pharmacy Data Management"
         ],
+        "fields": 171,
         "files": 16,
         "name": "Emergency Department Integration Software",
         "routines": 76
@@ -1963,6 +2023,7 @@
             "Uncategorized",
             "VA FileMan"
         ],
+        "fields": 167,
         "files": 15,
         "name": "Remote Order Entry System",
         "routines": 90
@@ -2124,6 +2185,7 @@
             "Registration",
             "Scheduling"
         ],
+        "fields": 1290,
         "files": 66,
         "name": "Kernel",
         "routines": 734
@@ -2166,6 +2228,7 @@
             "DSS Extracts",
             "Text Integration Utility"
         ],
+        "fields": 795,
         "files": 66,
         "name": "Mental Health",
         "routines": 351
@@ -2197,6 +2260,7 @@
             "National Drug File",
             "Text Integration Utility"
         ],
+        "fields": 658,
         "files": 44,
         "name": "Dietetics",
         "routines": 610
@@ -2212,6 +2276,7 @@
             "RPC Broker",
             "VA FileMan"
         ],
+        "fields": 0,
         "files": 0,
         "name": "VistALink Security",
         "routines": 7
@@ -2250,6 +2315,7 @@
             "General Medical Record - Vitals",
             "Pharmacy Data Management"
         ],
+        "fields": 270,
         "files": 20,
         "name": "Clinical Case Registries",
         "routines": 218
@@ -2268,6 +2334,7 @@
             "Uncategorized",
             "VA FileMan"
         ],
+        "fields": 200,
         "files": 22,
         "name": "Hospital Based Home Care",
         "routines": 68
@@ -2308,6 +2375,7 @@
             "Uncategorized",
             "VA FileMan"
         ],
+        "fields": 60,
         "files": 7,
         "name": "Problem List",
         "routines": 46
@@ -2317,6 +2385,7 @@
             "Integrated Billing",
             "Prosthetics"
         ],
+        "fields": 0,
         "files": 0,
         "name": "Vendor - Document Storage Systems",
         "routines": 2
@@ -2339,6 +2408,7 @@
             "Text Integration Utility",
             "VA FileMan"
         ],
+        "fields": 382,
         "files": 14,
         "name": "Patient Assessment Documentation",
         "routines": 8
@@ -2366,6 +2436,7 @@
             "Uncategorized",
             "VA FileMan"
         ],
+        "fields": 642,
         "files": 30,
         "name": "E Claims Management Engine",
         "routines": 168
@@ -2381,6 +2452,7 @@
             "Uncategorized",
             "VA FileMan"
         ],
+        "fields": 0,
         "files": 0,
         "name": "VA Point of Service",
         "routines": 1
@@ -2395,6 +2467,7 @@
             "Uncategorized",
             "VA FileMan"
         ],
+        "fields": 11,
         "files": 4,
         "name": "Shift Handoff Tool",
         "routines": 19
@@ -2434,6 +2507,7 @@
             "Scheduling",
             "Pharmacy Data Management"
         ],
+        "fields": 1523,
         "files": 71,
         "name": "Medicine",
         "routines": 330
@@ -2492,6 +2566,7 @@
             "General Medical Record - Vitals",
             "Pharmacy Data Management"
         ],
+        "fields": 337,
         "files": 26,
         "name": "Clinical Reminders",
         "routines": 361
@@ -2500,6 +2575,7 @@
         "depends": [
             "Registration"
         ],
+        "fields": 6,
         "files": 1,
         "name": "Event Driven Reporting",
         "routines": 0
@@ -2518,6 +2594,7 @@
             "Capacity Management Tools",
             "VA FileMan"
         ],
+        "fields": 129,
         "files": 1,
         "name": "Capacity Management - RUM",
         "routines": 17
@@ -2544,6 +2621,7 @@
             "Uncategorized",
             "VA FileMan"
         ],
+        "fields": 28,
         "files": 4,
         "name": "Interim Management Support",
         "routines": 49
@@ -2567,6 +2645,7 @@
             "Toolkit",
             "VA FileMan"
         ],
+        "fields": 0,
         "files": 0,
         "name": "M XML Parser",
         "routines": 6
@@ -2620,6 +2699,7 @@
             "Uncategorized",
             "Registration"
         ],
+        "fields": 138,
         "files": 7,
         "name": "DRG Grouper",
         "routines": 174
@@ -2690,6 +2770,7 @@
             "General Medical Record - Vitals",
             "Surgery"
         ],
+        "fields": 61,
         "files": 5,
         "name": "Health Summary",
         "routines": 240
@@ -2731,6 +2812,7 @@
             "Scheduling",
             "General Medical Record - Vitals"
         ],
+        "fields": 539,
         "files": 42,
         "name": "Automated Information Collection System",
         "routines": 993
@@ -2748,6 +2830,7 @@
             "Uncategorized",
             "VA FileMan"
         ],
+        "fields": 7,
         "files": 1,
         "name": "Foundations",
         "routines": 8
@@ -2817,6 +2900,7 @@
             "General Medical Record - Vitals",
             "Surgery"
         ],
+        "fields": 391,
         "files": 31,
         "name": "Text Integration Utility",
         "routines": 440
@@ -2833,6 +2917,7 @@
             "List Manager",
             "Uncategorized"
         ],
+        "fields": 24,
         "files": 3,
         "name": "Web Services Client",
         "routines": 14
@@ -2888,6 +2973,7 @@
             "General Medical Record - Vitals",
             "Pharmacy Data Management"
         ],
+        "fields": 266,
         "files": 24,
         "name": "Inpatient Medications",
         "routines": 513
@@ -2959,6 +3045,7 @@
             "General Medical Record - Vitals",
             "Pharmacy Data Management"
         ],
+        "fields": 336,
         "files": 29,
         "name": "PCE Patient Care Encounter",
         "routines": 337
@@ -3064,6 +3151,7 @@
             "General Medical Record - Vitals",
             "Surgery"
         ],
+        "fields": 570,
         "files": 52,
         "name": "Order Entry Results Reporting",
         "routines": 1042
@@ -3081,6 +3169,7 @@
             "Uncategorized",
             "VA FileMan"
         ],
+        "fields": 127,
         "files": 8,
         "name": "Integrated Patient Fund",
         "routines": 43
@@ -3116,6 +3205,7 @@
             "Uncategorized",
             "VA FileMan"
         ],
+        "fields": 122,
         "files": 12,
         "name": "Income Verification Match",
         "routines": 167
@@ -3153,6 +3243,7 @@
             "VA FileMan",
             "Inpatient Medications"
         ],
+        "fields": 68,
         "files": 7,
         "name": "Controlled Substances",
         "routines": 295
@@ -3186,11 +3277,13 @@
             "Generic Code Sheet",
             "VA FileMan"
         ],
+        "fields": 699,
         "files": 39,
         "name": "Accounts Receivable",
         "routines": 503
     },
     {
+        "fields": 0,
         "files": 0,
         "name": "FileMan Delphi Components",
         "routines": 0
@@ -3222,6 +3315,7 @@
             "Uncategorized",
             "VA FileMan"
         ],
+        "fields": 97,
         "files": 11,
         "name": "Automated Lab Instruments",
         "routines": 352
@@ -3237,6 +3331,7 @@
             "Quality Assurance Integration",
             "VA FileMan"
         ],
+        "fields": 74,
         "files": 7,
         "name": "Incident Reporting",
         "routines": 54
@@ -3257,6 +3352,7 @@
             "VA FileMan",
             "Capacity Management - RUM"
         ],
+        "fields": 487,
         "files": 6,
         "name": "Capacity Management Tools",
         "routines": 57
@@ -3267,6 +3363,7 @@
             "Automated Medical Information Exchange",
             "Master Patient Index VistA"
         ],
+        "fields": 0,
         "files": 0,
         "name": "CORBA Services",
         "routines": 2
@@ -3281,6 +3378,7 @@
             "Quality Assurance Integration",
             "VA FileMan"
         ],
+        "fields": 135,
         "files": 7,
         "name": "EEO Complaint Tracking",
         "routines": 33
@@ -3388,6 +3486,7 @@
             "Uncategorized",
             "VA FileMan"
         ],
+        "fields": 220,
         "files": 25,
         "name": "Toolkit",
         "routines": 237
@@ -3404,6 +3503,7 @@
             "Uncategorized",
             "VA FileMan"
         ],
+        "fields": 177,
         "files": 14,
         "name": "Library",
         "routines": 108
@@ -3468,6 +3568,7 @@
             "MailMan",
             "Order Entry Results Reporting"
         ],
+        "fields": 23,
         "files": 1,
         "name": "List Manager",
         "routines": 41
@@ -3487,6 +3588,7 @@
             "Generic Code Sheet",
             "VA FileMan"
         ],
+        "fields": 1218,
         "files": 54,
         "name": "Engineering",
         "routines": 383
@@ -3503,6 +3605,7 @@
             "Uncategorized",
             "VA FileMan"
         ],
+        "fields": 37,
         "files": 4,
         "name": "General Medical Record - Generator",
         "routines": 44
@@ -3554,6 +3657,7 @@
             "General Medical Record - Vitals",
             "Pharmacy Data Management"
         ],
+        "fields": 1011,
         "files": 33,
         "name": "Surgery",
         "routines": 650
@@ -3563,6 +3667,7 @@
             "Kernel",
             "VA FileMan"
         ],
+        "fields": 0,
         "files": 0,
         "name": "Electronic Signature",
         "routines": 1
@@ -3595,6 +3700,7 @@
             "Controlled Substances",
             "Inpatient Medications"
         ],
+        "fields": 141,
         "files": 8,
         "name": "Barcode Medication Administration",
         "routines": 119
@@ -3622,6 +3728,7 @@
             "Uncategorized",
             "VA FileMan"
         ],
+        "fields": 45,
         "files": 9,
         "name": "Health Data and Informatics",
         "routines": 50
@@ -3635,6 +3742,7 @@
             "VA FileMan",
             "Uncategorized"
         ],
+        "fields": 418,
         "files": 45,
         "name": "National Online Information Sharing",
         "routines": 217
@@ -3654,6 +3762,7 @@
             "Uncategorized",
             "Registration"
         ],
+        "fields": 0,
         "files": 0,
         "name": "NDBI",
         "routines": 11
@@ -3671,6 +3780,7 @@
             "MailMan",
             "VA FileMan"
         ],
+        "fields": 0,
         "files": 0,
         "name": "Pharmacy Prescription Practice",
         "routines": 3
@@ -3746,6 +3856,7 @@
             "General Medical Record - Vitals",
             "Surgery"
         ],
+        "fields": 1149,
         "files": 75,
         "name": "Lab Service",
         "routines": 1195
@@ -3754,6 +3865,7 @@
         "dependents": [
             "Fee Basis"
         ],
+        "fields": 0,
         "files": 0,
         "name": "VA Certified Components - DSSI",
         "routines": 2
@@ -3815,6 +3927,7 @@
             "VA FileMan",
             "Uncategorized"
         ],
+        "fields": 496,
         "files": 39,
         "name": "Health Level Seven",
         "routines": 258
@@ -3841,6 +3954,7 @@
             "Uncategorized",
             "VA FileMan"
         ],
+        "fields": 300,
         "files": 22,
         "name": "Womens Health",
         "routines": 100
@@ -3860,6 +3974,7 @@
             "Quality Assurance Integration",
             "VA FileMan"
         ],
+        "fields": 70,
         "files": 7,
         "name": "Patient Representative",
         "routines": 62
@@ -3892,11 +4007,13 @@
             "Run Time Library",
             "VA FileMan"
         ],
+        "fields": 98,
         "files": 7,
         "name": "Clinical Information Resource Network",
         "routines": 113
     },
     {
+        "fields": 0,
         "files": 0,
         "name": "Integrated Home Telehealth",
         "routines": 0
@@ -3917,6 +4034,7 @@
             "Toolkit",
             "VA FileMan"
         ],
+        "fields": 33,
         "files": 7,
         "name": "VDEF",
         "routines": 12
@@ -3954,6 +4072,7 @@
             "Uncategorized",
             "VA FileMan"
         ],
+        "fields": 233,
         "files": 15,
         "name": "Enrollment Application System",
         "routines": 171
@@ -4010,6 +4129,7 @@
             "VA FileMan",
             "CORBA Services"
         ],
+        "fields": 47,
         "files": 4,
         "name": "Master Patient Index VistA",
         "routines": 57
@@ -4047,11 +4167,13 @@
             "Scheduling",
             "VA FileMan"
         ],
+        "fields": 705,
         "files": 39,
         "name": "Prosthetics",
         "routines": 449
     },
     {
+        "fields": 0,
         "files": 0,
         "name": "CPRS Plugins",
         "routines": 0
@@ -4082,6 +4204,7 @@
             "Uncategorized",
             "VA FileMan"
         ],
+        "fields": 144,
         "files": 7,
         "name": "Drug Accountability",
         "routines": 197
@@ -4118,6 +4241,7 @@
             "General Medical Record - Vitals",
             "Pharmacy Data Management"
         ],
+        "fields": 2,
         "files": 1,
         "name": "Pharmacy Benefits Management",
         "routines": 109
@@ -4238,6 +4362,7 @@
             "Uncategorized",
             "VA FileMan"
         ],
+        "fields": 347,
         "files": 18,
         "name": "MailMan",
         "routines": 244
@@ -4278,6 +4403,7 @@
             "Generic Code Sheet",
             "VA FileMan"
         ],
+        "fields": 554,
         "files": 48,
         "name": "Fee Basis",
         "routines": 395
@@ -4328,6 +4454,7 @@
             "Pharmacy Data Management",
             "Interim Management Support"
         ],
+        "fields": 1859,
         "files": 45,
         "name": "DSS Extracts",
         "routines": 235
@@ -4341,6 +4468,7 @@
             "VA FileMan",
             "Uncategorized"
         ],
+        "fields": 0,
         "files": 0,
         "name": "National VistA Support",
         "routines": 18
@@ -4357,11 +4485,13 @@
             "VA FileMan",
             "Uncategorized"
         ],
+        "fields": 216,
         "files": 18,
         "name": "Police and Security",
         "routines": 104
     },
     {
+        "fields": 0,
         "files": 0,
         "name": "Release Of Information - DSSI",
         "routines": 0
@@ -4409,6 +4539,7 @@
             "Scheduling",
             "General Medical Record - Vitals"
         ],
+        "fields": 125,
         "files": 6,
         "name": "Consult Request Tracking",
         "routines": 169
@@ -4424,6 +4555,7 @@
             "Toolkit",
             "VA FileMan"
         ],
+        "fields": 4,
         "files": 1,
         "name": "SAGG Project",
         "routines": 4
@@ -4535,6 +4667,7 @@
             "Consult Request Tracking",
             "Social Work"
         ],
+        "fields": 738,
         "files": 73,
         "name": "Scheduling",
         "routines": 961
@@ -4588,6 +4721,7 @@
             "Uncategorized",
             "VA FileMan"
         ],
+        "fields": 59,
         "files": 6,
         "name": "General Medical Record - Vitals",
         "routines": 265
@@ -4662,6 +4796,7 @@
             "Scheduling",
             "General Medical Record - Vitals"
         ],
+        "fields": 421,
         "files": 20,
         "name": "Pharmacy Data Management",
         "routines": 292
@@ -4677,6 +4812,7 @@
             "Uncategorized",
             "VA FileMan"
         ],
+        "fields": 23,
         "files": 1,
         "name": "Utilization Management Rollup",
         "routines": 38
@@ -4690,6 +4826,7 @@
             "VA FileMan",
             "Uncategorized"
         ],
+        "fields": 122,
         "files": 7,
         "name": "Equipment Turn-In Request",
         "routines": 53
@@ -4707,6 +4844,7 @@
             "VA FileMan",
             "Uncategorized"
         ],
+        "fields": 0,
         "files": 0,
         "name": "Run Time Library",
         "routines": 30
