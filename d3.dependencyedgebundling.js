@@ -19,6 +19,7 @@ d3.chart.dependencyedgebundling = function(options) {
   var _txtLinkGap = 5;
   var _minTextWidth = 7.0;
   var _radialTextHeight = 12;
+  var _mouseOvered, _mouseOuted;
 
   function resetDimension() {
     _radius = _diameter / 2;
@@ -171,7 +172,10 @@ d3.chart.dependencyedgebundling = function(options) {
         node
             .classed("node--target", function(n) { return n.target; })
             .classed("node--source", function(n) { return n.source; });
-
+        
+        if (_mouseOvered) {
+          _mouseOvered(d);
+        }
       }
 
       function mouseouted(d) {
@@ -183,6 +187,9 @@ d3.chart.dependencyedgebundling = function(options) {
             .classed("node--target", false)
             .classed("node--source", false);
 
+        if (_mouseOuted) {
+          _mouseOuted(d);
+        }
       }
     });
   }
@@ -229,6 +236,18 @@ d3.chart.dependencyedgebundling = function(options) {
     return chart;
   };
   
+  chart.mouseOvered = function (d) {
+    if (!arguments.length) return d;
+    _mouseOvered = d;
+    return chart;
+  };
+
+  chart.mouseOuted = function (d) {
+    if (!arguments.length) return d;
+    _mouseOuted = d;
+    return chart;
+  };
+
   return chart;
 
 };

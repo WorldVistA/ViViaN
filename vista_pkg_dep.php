@@ -71,8 +71,21 @@ This circle plot captures the interrelationships among VistA packages. Mouse ove
   </p>
   </div>
   <div id="chart_placeholder" style="position:relative;"/>
-</div>
-<script type="text/javascript">
+  </div>
+  <div id="toolTip" class="tooltip" style="opacity:0;">
+      <div id="header1" class="header"></div>
+      <div id="dependency" style="color:#d62728;"></div>
+      <div id="dependents" style="color:#2ca02c;"></div>
+      <div  class="tooltipTail"></div>
+  </div>
+
+		<style type="text/css">
+${demo.css}
+		</style>
+<script src="highcharts/highcharts.js"></script>
+		<script type="text/javascript">
+
+  var jsonData = [];
   d3.json("PackageCategories.json", function(error, data) {
     var categories = data;
     function getPackageDoxLink(node) {
@@ -129,11 +142,38 @@ This circle plot captures the interrelationships among VistA packages. Mouse ove
       return map[categories.name];
     }
 
+
+    function mouseOvered(d) {
+      var header1Text = "Name: " + d.name + "</br> Group: " + d.parent.name + "</br>";
+      $('#header1').html(header1Text);
+      if (d.depends) {
+        var depends = "Depends: " + d.depends.length;
+        $('#dependency').html(depends);
+      }
+      if (d.dependents) {
+        var dependents = "Dependents: " + d.dependents.length;
+        $('#dependents').html(dependents);
+      }
+      d3.select("#toolTip").style("left", (d3.event.pageX + 40) + "px")
+              .style("top", (d3.event.pageY + 5) + "px")
+              .style("opacity", ".9");
+    }
+
+    function mouseOuted(d) {
+      $('#header1').text("");
+      $('#dependents').text("");
+      $('#dependency').text("");
+      d3.select("#toolTip").style("opacity", "0");
+    }
+
     var chart = d3.chart.dependencyedgebundling()
              .packageHierarchy(packageHierarchyByGroups)
+             .mouseOvered(mouseOvered)
+             .mouseOuted(mouseOuted)
              .nodeTextHyperLink(getPackageDoxLink);
     var localpath = "pkgdep.json";
     d3.json(localpath, function(error, classes) {
+      jsonData = classes;
       if (error){
         errormsg = "json error " + error + " data: " + classes;
         document.write(errormsg);
@@ -143,15 +183,10 @@ This circle plot captures the interrelationships among VistA packages. Mouse ove
       d3.select('#chart_placeholder')
         .datum(classes)
         .call(chart);
+      setupBarChart();
     });
   });
-    </script>
 
-		<style type="text/css">
-${demo.css}
-		</style>
-		<script type="text/javascript">
-$(function () {
     var options = {
         chart: {
             type: 'bar'
@@ -242,7 +277,12 @@ $(function () {
 
     function sortByProp(one, two, property) {
       if (property in one && property in two) {
-        return two[property].length - one[property].length;
+        if (two[property] instanceof Array) {
+          return two[property].length - one[property].length;
+        }
+        else {
+          return two[property] - one[property];
+        }
       }
       if (property in one) {
         return -1;
@@ -255,7 +295,12 @@ $(function () {
       var outSeries = {"data":[], "name": property};
       for (var idx = 0; idx < totLen; idx++) {
         if (property in data[idx]) {
-          outSeries.data.push(data[idx][property].length);
+          if (data[idx][property] instanceof Array) {
+            outSeries.data.push(data[idx][property].length);
+          }
+          else {
+            outSeries.data.push(data[idx][property]);
+          }
         }
         else {
           outSeries.data.push(0);
@@ -278,10 +323,9 @@ $(function () {
     function setCategoriesByJson(data) {
       options.xAxis.categories = getJsonCategoriesArray(data);
     }
+
+    function setupBarChart() {
     // read the chart data from json file
-    var jsonData = [];
-    $.getJSON('pkgdep.json', function(data){
-      jsonData = data;
       jsonData.sort(sortByNoDepends);
       setCategoriesByJson(jsonData);
       //setSeriesByJson(jsonData, "routines");
@@ -293,7 +337,7 @@ $(function () {
       depData.color = "#2ca02c";
       options.series.push(depData);
       $('#container').highcharts(options);
-    });
+    }
 
     // utility function for resetting chart data
     function resetChartData(val) {
@@ -336,6 +380,7 @@ $(function () {
       }
       chart.redraw();
     }
+$(function () {
 
     $(' #list-dep').change(function(e) {
       resetChartData($(this).val());
@@ -378,7 +423,6 @@ $(function () {
 });
 		</script>
 
-<script src="highcharts/highcharts.js"></script>
   </body>
 </html>
 
