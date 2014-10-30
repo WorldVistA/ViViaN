@@ -58,10 +58,11 @@
           <OPTION VALUE="3">Name</OPTION>
           <OPTION VALUE="4"  selected="selected">Routines</OPTION>
           <OPTION VALUE="5">Files</OPTION>
+          <OPTION VALUE="6">File Fields</OPTION>
       </SELECT>
     </form>
   </div>
-  <div id="container" style="position:relative; top:20px; width: 90%; height: 3800px; margin: 0 auto"></div>
+  <div id="container" style="position:relative; top:20px; width: 90%; height: 4200px; margin: 0 auto"></div>
 </div>
 <div id="circular-chart">
     <!-- <select id="category"></select> -->
@@ -257,6 +258,10 @@ ${demo.css}
       return sortByProp(one, two, "files");
     }
 
+    function sortByNoFileFields(one, two) {
+      return sortByProp(one, two, "fields");
+    }
+
     function sortByNoDepends(one, two) {
       return sortByProp(one, two, "depends");
     }
@@ -360,6 +365,9 @@ ${demo.css}
       else if (val == 5){
         jsonData.sort(sortByNoFiles);
       }
+      else if (val == 6){
+        jsonData.sort(sortByNoFileFields);
+      }
       chart.xAxis[0].setCategories(getJsonCategoriesArray(jsonData), false);
       var depData;
       if (val < 3) {
@@ -376,6 +384,9 @@ ${demo.css}
         chart.addSeries(depData);
         depData = getSeriesByJson(jsonData,"files");
         depData.color = "#2ca02c";
+        chart.addSeries(depData);
+        depData = getSeriesByJson(jsonData,"fields");
+        depData.color = "#3399FF";
         chart.addSeries(depData);
       }
       chart.redraw();
