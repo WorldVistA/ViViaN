@@ -66,7 +66,7 @@ var header = d3.select(document.getElementById("header1"));
 var selectedIndex = 0;
 var distProp = [ // constants to store property of each distribution
   { name: "All", color: "black", distribution: 'All', doxlink: package_link_url},
-  { name: "OSEHRA", color: "#FF0000", distribution: 'OSEHRA VistA', doxlink: package_link_url},
+  { name: "OSEHRA", color: "#FF0000", distribution: 'OSEHRA VistA', doxlink: "http://code.osehra.org/OSEHRA_dox/"},
   { name: "VA", color: "#3300CC", distribution: 'VA FOIA VistA' ,doxlink: package_link_url},
   { name: "DSS", color: "#080", distribution: 'DSS vxVistA' , doxlink: "http://code.osehra.org/dox_alpha/vxvista/"}
   /**
@@ -151,7 +151,11 @@ function pkgLinkClicked(d) {
             $('#description').html(d.name);
           }
           depLink = getDependencyContentHtml(d.name, d)
-          $('#dependencies').html(depLink);
+          var depLink_html = "";
+          for(var i = 0; i < depLink.length;i++) {
+            depLink_html += depLink[i] + " ";
+          }
+          $('#dependencies').html(depLink_html);
           $('#dependencies').show();
           $('#accordion').accordion("option", "active", 0);
           $('#accordion').accordion("refresh");
@@ -169,17 +173,22 @@ function pkgLinkClicked(d) {
 }
 
 function getPackageDoxLink(pkgName, node) {
-  var doxUrl = "";
+  var doxUrl = [];
   var doxLinkName = pkgName.replace(/ /g, '_').replace(/-/g, '_')
   var category = distProp[selectedIndex];
   var index = node.distribution.indexOf(category.name);
   if (index >= 0) {
-    doxUrl = category.doxlink;
+    doxUrl.push(category.doxlink + "Package_" + doxLinkName + ".html");
+  }
+  else if (index == -1) {
+    for(var i = 1; i < distProp.length;i++) {
+      doxUrl.push(distProp[i].doxlink + "Package_" + doxLinkName + ".html");
+    }
   }
   else {
-    doxUrl = getDistributionPropByName(node.distribution[0]).doxlink;
+    doxUrl.push(getDistributionPropByName(node.distribution[0]).doxlink);
   }
-  return doxUrl + "Package_" + doxLinkName + ".html";
+  return doxUrl;  // + "Package_" + doxLinkName + ".html";
 }
 
 function getDistributionPropByName(distName){
@@ -263,8 +272,13 @@ function getInterfaceHtml(node) {
 
 function getDependencyContentHtml(pkgName, node) {
   var pkgUrl = getPackageDoxLink(pkgName, node)
-  depLink = "<h4><a href=\"" + pkgUrl + "\" target=\"_blank\">";
-  depLink += "Dependencies & Code View" + "</a></h4>";
+  var depLink = []
+  for(var i = 0; i < pkgUrl.length;i++) {
+    depLink_str = "<h4><a href=\"" + pkgUrl[i] + "\" target=\"_blank\">";
+    if( selectedIndex==0 ) {depLink_str += distProp[i+1].name +" Dependencies & Code View" + "</a></h4>";}
+    else {depLink_str += distProp[selectedIndex].name +" Dependencies & Code View" + "</a></h4>";}
+    depLink.push(depLink_str);
+  }
   return depLink;
 }
 
