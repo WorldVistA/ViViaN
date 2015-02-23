@@ -11,7 +11,8 @@ def generate_packages_json():
     json.dump(pkgCatJson, outputFile)
 
 pkgNameSet = set()
-pkgNamePrefixes = dict()
+pkgPosNamePrefixes = dict()
+pkgNegNamePrefixes = dict()
 pkgNameInterface = dict()
 def generate_output_json_dict(pkgCatJson):
  # read package.csv file for more information
@@ -21,9 +22,14 @@ def generate_output_json_dict(pkgCatJson):
     if fields['Directory Name']:
       pkg = fields['Directory Name']
       pkgNameSet.add(pkg)
-      pkgNamePrefixes[pkg] = []
+      pkgPosNamePrefixes[pkg] = []
+      pkgNegNamePrefixes[pkg] = []
     if pkg and fields['Prefixes']:
-      pkgNamePrefixes[pkg].append(fields['Prefixes'])
+      if fields['Prefixes'][0] == '!':
+        pkgNegNamePrefixes[pkg].append(fields['Prefixes'][1:])
+      else:
+        pkgPosNamePrefixes[pkg].append(fields['Prefixes'])
+      
   # read packageInterfaces.csv file for interface
   interface_csv = csv.DictReader(open("PackageInterface.csv", 'r'))
   for row in interface_csv:
@@ -44,7 +50,8 @@ def traverseChildren(package):
     pkgName = package['name']
     package['hasLink'] = pkgName in pkgNameSet
     if pkgName in pkgNameSet:
-      package['prefixes'] = pkgNamePrefixes[pkgName]
+      package['Posprefixes'] = pkgPosNamePrefixes[pkgName]
+      package['Negprefixes'] = pkgNegNamePrefixes[pkgName]
     if pkgName in pkgNameInterface:
       package['interfaces'] = pkgNameInterface[pkgName]
 
