@@ -41,9 +41,11 @@
 </div>
 
 <div id="dialog-modal">
-  <div id='namespaces' style="display:none"></div>
-  <div id='dependencies' style="display:none"></div>
   <div id="accordion">
+      <h3><a href="#">Namespaces</a></h3>
+      <div id='namespaces' style="display:none"></div>
+      <h3><a href="#">Dependencies</a></h3>
+      <div id='dependencies' style="display:none"></div>
       <h3><a href="#">Interfaces</a></h3>
       <div id="interface"></div>
       <h3><a href="#">Description</a></h3>
@@ -194,7 +196,7 @@ function getDistributionPropByName(distName){
 
 function getNamespaceHtml(namespace) {
   var i=0, len=namespace.length;
-  var htmlLnk = "<h4>Namespaces: </h4>";
+  var htmlLnk = "";
   for (; i<len-1; i++) {
     htmlLnk += "&nbsp;" + namespace[i] + ",&nbsp;";
   }
