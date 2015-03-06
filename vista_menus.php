@@ -77,11 +77,11 @@ var chart = d3.chart.treeview()
               .textwidth(300)
               .nodeTextHyperLink(getOptionDetailLink);
 chart.on("text","attr","fill",color_by_type);
-var selectedIndex;
+var selectedIndex=0;
 
 var menuType = [
-  {iName: "legend",color :"black",dName: "Option Type:"},
-  {iName: "menu",color :"black",dName: "Menu"},
+  {iName: "legend",color: "black",dName: "All Types"},
+  {iName: "menu",color :"gray",dName: "Menu"},
   {iName: "run routine",color :"#ff7f0e",dName: "Run Routine"},
   {iName: "Broker (Client/Server)" , color : "#17becf", dName: "Broker (Client/Server)"},
   {iName: "edit",color :"#2ca02c",dName: "Edit"},
@@ -142,7 +142,7 @@ function resetMenuFile(menuFile) {
        .on("node", "event","mouseout", node_onMouseOut)
        .on("text", "attr", "cursor", function(d) { return "pointer"; })
        //.on("text", "event","click", node_onMouseClick)
-       .on("circle", "event", "click", chart.onNodeClick)
+       .on("circle", "event", "click", node_onMouseClick)
        .on("circle", "attr", "r", function(d) { return 7 - d.depth/2; });
     d3.select("#treeview_placeholder").datum(json).call(chart);
     generate_legend();
@@ -153,13 +153,16 @@ var toolTip = d3.select(document.getElementById("toolTip"));
 var header = d3.select(document.getElementById("head"));
 
 function node_onMouseClick(d) {
-  console.log("Node: " + d.name + " ien: " + d.ien + " clicked!");
-  var optionLink = getOptionDetailLink(d);
-  var win = window.open(optionLink, '_black');
-  win.focus();
-  d3.event.preventDefault();
-  d3.event.stopPropagation();
+  chart.onNodeClick(d);
+  console.log()
+  if(selectedIndex !== 0){
+    d3.selectAll("text")
+      .attr("fill", function (d) {
+        return color_filter(d);
+      });
+  }
 }
+
 
 function getOptionDetailLink(node) {
   return "files/19-" + node.ien + ".html";
