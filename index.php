@@ -41,9 +41,11 @@
 </div>
 
 <div id="dialog-modal">
-  <div id='namespaces' style="display:none"></div>
-  <div id='dependencies' style="display:none"></div>
   <div id="accordion">
+      <h3><a href="#">Namespaces</a></h3>
+      <div id='namespaces' style="display:none"></div>
+      <h3><a href="#">Dependencies</a></h3>
+      <div id='dependencies' style="display:none"></div>
       <h3><a href="#">Interfaces</a></h3>
       <div id="interface"></div>
       <h3><a href="#">Description</a></h3>
@@ -180,16 +182,6 @@ function getPackageDoxLink(pkgName, node) {
     doxUrl = getDistributionPropByName(node.distribution[0]).doxlink;
   }
   return doxUrl + "Package_" + doxLinkName + ".html";
-}
-
-function getDistributionPropByName(distName){
-  var index = 0;
-  for (index = 0; index < distProp.length; index++) {
-    if (distProp[index].name === distName) {
-      return distProp[index];
-    }
-  }
-  return null;
 }
 
 function getDistributionPropByName(distName){
