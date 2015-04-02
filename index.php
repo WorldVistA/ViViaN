@@ -142,7 +142,7 @@ function pkgLinkClicked(d) {
       open: function(){
           htmlLnk = getInterfaceHtml(d);
           $('#interface').html(htmlLnk);
-          $('#namespaces').html(getNamespaceHtml(d.prefixes))
+          $('#namespaces').html(getNamespaceHtml(d))
           $('#namespaces').show();
           if (d.name === 'Scheduling'){
             $('#description').html(sddesc);
@@ -192,13 +192,32 @@ function getDistributionPropByName(distName){
   return null;
 }
 
-function getNamespaceHtml(namespace) {
-  var i=0, len=namespace.length;
-  var htmlLnk = "<h4>Namespaces: </h4>";
-  for (; i<len-1; i++) {
-    htmlLnk += "&nbsp;" + namespace[i] + ",&nbsp;";
+function getDistributionPropByName(distName){
+  var index = 0;
+  for (index = 0; index < distProp.length; index++) {
+    if (distProp[index].name === distName) {
+      return distProp[index];
+    }
   }
-  htmlLnk += "&nbsp;" + namespace[i];
+  return null;
+}
+
+function getNamespaceHtml(pkg) {
+  var i=0, len=pkg.Posprefixes.length;
+  var htmlLnk = "<h4>Namespaces: </h4>Includes:";
+  for (; i<len-1; i++) {
+    htmlLnk += "&nbsp;" + pkg.Posprefixes[i] + ",&nbsp;";
+  }
+  htmlLnk += "&nbsp;" + pkg.Posprefixes[i];
+
+  var i=0, len=pkg.Negprefixes.length;
+  htmlLnk += "</br>Excludes:"
+  if(len > 0) {
+    for (; i<len-1; i++) {
+      htmlLnk += "&nbsp;" + pkg.Negprefixes[i] + ",&nbsp;";
+    }
+    htmlLnk += "&nbsp;" + pkg.Negprefixes[i];
+  }
   return htmlLnk;
 }
 
@@ -310,12 +329,16 @@ function node_onMouseOver(d) {
   if (d.hasLink === undefined || !d.hasLink) {
     return;
   }
-  if (d.prefixes !== undefined){
-    header.text("Namespace: " + d.prefixes);
+  if (d.Posprefixes !== undefined){
+    tooltipString = "Namespace: Includes: " + d.Posprefixes + ".\r\n";
+  }
+  if (d.Negprefixes !== undefined){
+    tooltipString += "Excludes: " + d.Negprefixes;
   }
   else{
     return;
   }
+  header.text(tooltipString)
   toolTip.style("left", (d3.event.pageX + 20) + "px")
          .style("top", (d3.event.pageY + 5) + "px")
          .style("opacity", ".9");
