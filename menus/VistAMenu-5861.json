@@ -1,1 +1,1 @@
-{"children": [{"name": "Print Reports that are Marked for Deletion", "option": "MCGENERICMFD", "ien": "5862"}], "name": "Generic Medicine Manager Menu", "option": "MCGENERICMANAGER", "ien": "5861"}
+{"children": [{"type": "run routine", "name": "Print Reports that are Marked for Deletion", "option": "MCGENERICMFD", "ien": "5862"}], "type": "menu", "name": "Generic Medicine Manager Menu", "option": "MCGENERICMANAGER", "ien": "5861"}

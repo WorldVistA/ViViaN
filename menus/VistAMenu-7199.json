@@ -1,1 +1,1 @@
-{"children": [{"name": "Review Equipment Requests (Concurring Official)", "option": "PRCN NX CONCUR", "ien": "7184"}], "name": "Equipment Concurring Official Menu", "option": "PRCN NX CONC MENU", "ien": "7199"}
+{"children": [{"type": "run routine", "name": "Review Equipment Requests (Concurring Official)", "option": "PRCN NX CONCUR", "ien": "7184"}], "type": "menu", "name": "Equipment Concurring Official Menu", "option": "PRCN NX CONC MENU", "ien": "7199"}

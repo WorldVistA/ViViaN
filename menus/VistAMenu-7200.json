@@ -1,1 +1,1 @@
-{"lock": "PRCNEN", "children": [{"lock": "PRCNEN", "name": "Approve Equipment Request (Engineering)", "option": "PRCN NX ENG", "ien": "7178"}], "name": "Engineering Equipment Request Menu", "option": "PRCN NX ENG MENU", "ien": "7200"}
+{"name": "Engineering Equipment Request Menu", "lock": "PRCNEN", "ien": "7200", "type": "menu", "children": [{"lock": "PRCNEN", "type": "run routine", "name": "Approve Equipment Request (Engineering)", "option": "PRCN NX ENG", "ien": "7178"}], "option": "PRCN NX ENG MENU"}
