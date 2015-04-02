@@ -67,7 +67,18 @@
   <p>
 This tree visualization represents the menu hierarchy of VistA. Mouse over any of the entries in the tree to see the menu option name and the security key (if any). Click on an item to see the menu option details.
   </p>
+  <div style="position:absolute; left:0px; top:100px;">
+    <label> Search for an Option</label>
+    <div class='hint' style="position:absolute; font-size:0.9em; width:350px;">
+      <p>Search for an option by entering the Menu Text of the option that you wish to find.  The search is capitalization independent, but the path to the targeted option may not be highlighted if the case doesn't match.</p>
+      <div id="search_result"> </div>
+      <input id="search" size="40">
+      <br></br>
+      <button onclick="_searchForOptions()">Search</button>
+      <button onclick="_clearSearch()">Clear</button>
+    </div>
   </div>
+  </div>  
   <div id="treeview_placeholder"/>
 <script type="text/javascript">
 var chart = d3.chart.treeview()
@@ -78,12 +89,13 @@ var chart = d3.chart.treeview()
               .nodeTextHyperLink(getOptionDetailLink);
 chart.on("text","attr","fill",color_by_type);
 var selectedIndex=0;
+var target_option='';
 
 var menuType = [
   {iName: "legend",color: "black",dName: "All Types"},
   {iName: "menu",color :"gray",dName: "Menu"},
   {iName: "run routine",color :"#ff7f0e",dName: "Run Routine"},
-  {iName: "Broker (Client/Server)" , color : "#17becf", dName: "Broker (Client/Server)"},
+  {iName: "Broker (Client/Server)" , color : "#17becf", dName: "Broker"},
   {iName: "edit",color :"#2ca02c",dName: "Edit"},
   {iName: "server",color :"#d62728",dName: "Server"},
   {iName: "print",color :"#9467bd",dName: "Print"},
@@ -133,11 +145,52 @@ function _resetAllNode() {
   chart.update(chart.nodes());
 }
 
+function _searchForOptions() {
+
+  //capture text from id box
+  $("#search_result").html("");
+  target_option = $("#search")[0].value
+  if(target_option != '') {
+  //search through menus for text
+    $.ajax({dataType: "script",
+      type:"GET",
+      url:'filegrep.php',
+      complete: function(response) {
+        resetMenuFile(response.responseText);
+        var menuID = response.responseText.match("[0-9]+");
+        d3.json('menu_autocomplete.json', function(json) {
+          for ( var i = 0; i < json.length; i++) {
+            if( json[i].id == menuID) {
+              $("#autocomplete")[0].value = json[i].label;
+              break;
+            }
+          }
+        });
+      },
+      data : {
+        'path': 'menus/',
+        'option_name': target_option,
+        'ajax': true
+     }
+    })
+  }
+}
+
+function _clearSearch() {
+  $("#search")[0].value = '';
+}
+
 resetMenuFile("menus/VistAMenu-9.json");
 
 function resetMenuFile(menuFile) {
   d3.json(menuFile, function(json) {
-    resetAllNode(json);
+    try{resetAllNode(json);}
+    catch(err) {
+      console.log(err);
+      $("#search")[0].style.border="solid 4px red";
+      target_option='';
+      $("#search_result").html("<h4>Option not found</h4>");
+    }
     chart.on("node", "event", "mouseover", node_onMouseOver)
        .on("node", "event","mouseout", node_onMouseOut)
        .on("text", "attr", "cursor", function(d) { return "pointer"; })
@@ -146,15 +199,52 @@ function resetMenuFile(menuFile) {
        .on("circle", "attr", "r", function(d) { return 7 - d.depth/2; });
     d3.select("#treeview_placeholder").datum(json).call(chart);
     generate_legend();
+    if(target_option != '') {
+      openSpecificOption(chart.nodes());
+      setTimeout(highlight_path,300,chart,json);
+      //highlight_path(chart,json);
+    }
+
   });
 }
 
 var toolTip = d3.select(document.getElementById("toolTip"));
 var header = d3.select(document.getElementById("head"));
 
+function highlight_path(chart, json) {
+      var tree = d3.layout.tree()
+      var nodes = tree.nodes(chart.nodes());
+      var links = tree.links(nodes);
+      var target = target_option;
+      var target_path = [];
+      while (target != nodes[0].name) {
+        var link = chart.svg().selectAll("path.link").data(links, function(d) {
+          if(d.target.name.toUpperCase() == target.toUpperCase()) {
+            target = d.source.name;
+            target_path.push(d)
+            }
+        });
+        if(target.toUpperCase() == target_option.toUpperCase()){
+          $("#search")[0].style.border="solid 4px orange";
+          $("#search_result").html("<h5>Target option found in menu, but couldn't be matched.</h5>");
+          resetAllNode(json)
+          break;}
+      }
+      chart.svg().selectAll("path.link").data(target_path).forEach(highlight);
+      d3.select("#treeview_placeholder").datum(json).call(chart);
+      target_path = [];
+      target = '';
+      target_option='';
+}
+
+function highlight(d) {
+  for(var i =0; i< d.length; i++) {
+    d[i].classList.add("target");
+  }
+}
+
 function node_onMouseClick(d) {
   chart.onNodeClick(d);
-  console.log()
   if(selectedIndex !== 0){
     d3.selectAll("text")
       .attr("fill", function (d) {
@@ -189,7 +279,7 @@ function generate_legend() {
     .data(menuType)
     .enter().append("svg:g")
     .attr("class", "legend")
-    .attr("transform", function(d, i) { return "translate(-250," + (i * 30 + 180) + ")"; })
+    .attr("transform", function(d, i) { return "translate(" + (i * 110 + 100) +",-10)"; })
     .on("click", function(d) {
       selectedIndex = menuType.indexOf(d);
       if(selectedIndex !== 0){
@@ -213,7 +303,30 @@ function generate_legend() {
     .text(function(d) {return  d.dName; });
 
 }
+
+//Enter Cost Information for Procedures
+function searchForOption(d) {
+  if (d._children) {
+    for(var i=0; i<d._children.length;i++) {
+      var ret = searchForOption(d._children[i])
+      if(ret) {
+         expand(d);
+         return true;
+      }
+    }
+  }
+  if( d.name.toUpperCase() == target_option.toUpperCase()) {
+    expand(d);
+    return true;
+  }
+  return false;
+}
+  
+function openSpecificOption(root) {
+  $("#search")[0].style.border="";
+  collapseAllNode(root);
+  searchForOption(root);
+}
     </script>
   </body>
 </html>
-
