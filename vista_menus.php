@@ -26,7 +26,15 @@
             source: sortedjson,
             select: autoCompleteChanged
             //change: autoCompleteChanged
-          }).val('EVE: System Manager Menu').data('autocomplete')._trigger('select');
+          }).val('EVE: Systems Manager Menu').data('autocomplete')/*._trigger('select')*/;
+        });
+
+        d3.json('option_autocomplete.json', function(json) {
+          var sortedjson = json.sort(function(a,b) { return a.label.localeCompare(b.label); });
+          $("#option_autocomplete").autocomplete({
+            source: sortedjson,
+            select: optionAutoCompleteChanged
+          }).data('autocomplete')/*._trigger('select')*/;
         });
       });
     </script>
@@ -72,14 +80,13 @@ This tree visualization represents the menu hierarchy of VistA. Mouse over any o
     <div class='hint' style="position:absolute; font-size:0.9em; width:350px;">
       <p>Search for an option by entering the Menu Text of the option that you wish to find.  The search is capitalization independent, but the path to the targeted option may not be highlighted if the case doesn't match.</p>
       <div id="search_result"> </div>
-      <input id="search" size="40">
+      <input id="option_autocomplete" size="40">
       <br></br>
-      <button onclick="_searchForOptions()">Search</button>
-      <button onclick="_clearSearch()">Clear</button>
     </div>
   </div>
   </div>  
-  <div id="treeview_placeholder"/>
+
+  <div id="treeview_placeholder">
 <script type="text/javascript">
 var chart = d3.chart.treeview()
               .height(1050)
@@ -90,6 +97,7 @@ var chart = d3.chart.treeview()
 chart.on("text","attr","fill",color_by_type);
 var selectedIndex=0;
 var target_option='';
+var target_node;
 
 var menuType = [
   {iName: "legend",color: "black",dName: "All Types"},
@@ -134,6 +142,20 @@ function autoCompleteChanged(eve, ui) {
   resetMenuFile(menuFile);
 }
 
+function optionAutoCompleteChanged(eve, ui) {
+  var menuFile = "menus/VistAMenu-" + ui.item.parent_id + ".json";
+  d3.json('menu_autocomplete.json', function(json) {
+    for ( var i = 0; i < json.length; i++) {
+      if( json[i].id == ui.item.parent_id) {
+      $("#autocomplete")[0].value = json[i].label;
+      break;
+      }
+    }
+  });
+  target_option = $.trim(ui.item.value.split(":")[1]);
+  resetMenuFile(menuFile);
+}
+
 <?php include_once "vivian_tree_layout_common.js" ?>
 function _collapseAllNode() {
   collapseAllNode(chart.nodes());
@@ -145,52 +167,11 @@ function _resetAllNode() {
   chart.update(chart.nodes());
 }
 
-function _searchForOptions() {
-
-  //capture text from id box
-  $("#search_result").html("");
-  target_option = $("#search")[0].value
-  if(target_option != '') {
-  //search through menus for text
-    $.ajax({dataType: "script",
-      type:"GET",
-      url:'filegrep.php',
-      complete: function(response) {
-        resetMenuFile(response.responseText);
-        var menuID = response.responseText.match("[0-9]+");
-        d3.json('menu_autocomplete.json', function(json) {
-          for ( var i = 0; i < json.length; i++) {
-            if( json[i].id == menuID) {
-              $("#autocomplete")[0].value = json[i].label;
-              break;
-            }
-          }
-        });
-      },
-      data : {
-        'path': 'menus/',
-        'option_name': target_option,
-        'ajax': true
-     }
-    })
-  }
-}
-
-function _clearSearch() {
-  $("#search")[0].value = '';
-}
-
 resetMenuFile("menus/VistAMenu-9.json");
 
 function resetMenuFile(menuFile) {
   d3.json(menuFile, function(json) {
-    try{resetAllNode(json);}
-    catch(err) {
-      console.log(err);
-      $("#search")[0].style.border="solid 4px red";
-      target_option='';
-      $("#search_result").html("<h4>Option not found</h4>");
-    }
+    resetAllNode(json);
     chart.on("node", "event", "mouseover", node_onMouseOver)
        .on("node", "event","mouseout", node_onMouseOut)
        .on("text", "attr", "cursor", function(d) { return "pointer"; })
@@ -202,40 +183,12 @@ function resetMenuFile(menuFile) {
     if(target_option != '') {
       openSpecificOption(chart.nodes());
       setTimeout(highlight_path,300,chart,json);
-      //highlight_path(chart,json);
     }
 
   });
 }
-
 var toolTip = d3.select(document.getElementById("toolTip"));
 var header = d3.select(document.getElementById("head"));
-
-function highlight_path(chart, json) {
-      var tree = d3.layout.tree()
-      var nodes = tree.nodes(chart.nodes());
-      var links = tree.links(nodes);
-      var target = target_option;
-      var target_path = [];
-      while (target != nodes[0].name) {
-        var link = chart.svg().selectAll("path.link").data(links, function(d) {
-          if(d.target.name.toUpperCase() == target.toUpperCase()) {
-            target = d.source.name;
-            target_path.push(d)
-            }
-        });
-        if(target.toUpperCase() == target_option.toUpperCase()){
-          $("#search")[0].style.border="solid 4px orange";
-          $("#search_result").html("<h5>Target option found in menu, but couldn't be matched.</h5>");
-          resetAllNode(json)
-          break;}
-      }
-      chart.svg().selectAll("path.link").data(target_path).forEach(highlight);
-      d3.select("#treeview_placeholder").datum(json).call(chart);
-      target_path = [];
-      target = '';
-      target_option='';
-}
 
 function highlight(d) {
   for(var i =0; i< d.length; i++) {
@@ -317,16 +270,48 @@ function searchForOption(d) {
   }
   if( d.name.toUpperCase() == target_option.toUpperCase()) {
     expand(d);
+    target_node = d;
     return true;
   }
   return false;
 }
-  
+
 function openSpecificOption(root) {
-  $("#search")[0].style.border="";
   collapseAllNode(root);
   searchForOption(root);
 }
+
+
+function highlight_path(chart, json) {
+      var tree = d3.layout.tree()
+      var nodes = tree.nodes(chart.nodes());
+      var links = tree.links(nodes);
+      var target = target_node;
+      var target_path = [];
+
+      while (target.name != nodes[0].name) {
+        var link = chart.svg().selectAll("path.link").data(links, function(d) {
+          if(d.target == target) {
+            target = d.source;
+            target_path.push(d)
+            }
+        });
+        if(target == target_node){
+          $("#option_autocomplete")[0].style.border="solid 4px orange";
+          $("#search_result").html("<h5>Target option found in menu, but couldn't be matched.</h5>");
+          resetAllNode(json)
+          break;}
+      }
+
+      chart.svg().selectAll("path.link").data(target_path).forEach(highlight);
+      d3.select("#treeview_placeholder").datum(json).call(chart);
+      target_path = [];
+      target = '';
+      target_option='';
+
+}
+
     </script>
+    </div>
   </body>
 </html>
