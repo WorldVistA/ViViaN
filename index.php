@@ -205,7 +205,7 @@ function getDistributionPropByName(distName){
 
 function getNamespaceHtml(pkg) {
   var i=0, len=pkg.Posprefixes.length;
-  var htmlLnk = "<h4>Namespaces: </h4>Includes:";
+  var htmlLnk = "Includes:";
   for (; i<len-1; i++) {
     htmlLnk += "&nbsp;" + pkg.Posprefixes[i] + ",&nbsp;";
   }
