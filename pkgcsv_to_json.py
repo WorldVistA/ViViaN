@@ -5,7 +5,7 @@ DISTR_LIST = ("VA","OSEHRA","DSS","Medsphere","Oroville")
 import logging
 
 def generate_packages_json():
-  pkgCatJson = json.load(open("PackageCategories.json", 'r'))
+  pkgCatJson = json.load(open("PackageCategories-0.json", 'r'))
   generate_output_json_dict(pkgCatJson)
   with open("packages.json", 'w') as outputFile:
     json.dump(pkgCatJson, outputFile)
