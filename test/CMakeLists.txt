@@ -13,11 +13,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #---------------------------------------------------------------------------
-file(GLOB VIVIAN_TEST_FILES ${CMAKE_CURRENT_SOURCE_DIR}/*.py)
+file(GLOB VIVIAN_TEST_FILES ${CMAKE_CURRENT_SOURCE_DIR}/test_*.py)
 
 set(VIVIAN_WEB_ROOT "http://code.osehra.org/vivian" CACHE STRING "Set web root of vivian page to test")
+option(VIVIAN_COVERAGE "Attempt to capture Coverage via JSCover" OFF )
+set(VIVIAN_ARGS "-r" "${VIVIAN_WEB_ROOT}")
+
+if(VIVIAN_COVERAGE)
+  set(VIVIAN_ARGS "${VIVIAN_ARGS}" "-cov")
+endif()
+
 foreach(test_file ${VIVIAN_TEST_FILES})
   get_filename_component(test_name ${test_file} NAME_WE)
-  add_test("VIVIAN_${test_name}" "${PYTHON_EXECUTABLE}" "${test_file}" "-r" "${VIVIAN_WEB_ROOT}")
+  add_test("VIVIAN_${test_name}" "${PYTHON_EXECUTABLE}" "${test_file}" ${VIVIAN_ARGS})
   set_tests_properties("VIVIAN_${test_name}" PROPERTIES FAIL_REGULAR_EXPRESSION "FAIL:")
 endforeach()

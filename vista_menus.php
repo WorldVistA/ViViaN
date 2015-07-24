@@ -86,7 +86,7 @@ This tree visualization represents the menu hierarchy of VistA. Mouse over any o
   </div>
   <div id="treeview_placeholder"/>
   <script src="vivian_tree_layout_common.js"></script>
-  <script type="text/javascript" src="menus_content.js"></script>
+  <script type="text/javascript" src="vista_menus_content.js"></script>
     <script>
       menus_main()
     </script>

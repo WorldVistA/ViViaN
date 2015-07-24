@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #---------------------------------------------------------------------------
+from selenium_utils import set_up,shut_down
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
@@ -26,7 +27,7 @@ class test_bff(unittest.TestCase):
   @classmethod
   def tearDownClass(cls):
     global driver
-    driver.close()
+    shut_down(driver,config)
 
   def test_02_node(self):
     global driver
@@ -38,10 +39,8 @@ class test_bff(unittest.TestCase):
     self.assertTrue(newSize != oldSize)
 
 if __name__ == '__main__':
-  parser =argparse.ArgumentParser(description="")
-  parser.add_argument("-r",dest = 'webroot', required=True, help="Web root of the ViViAN instance to test.  eg. http://code.osehra.org/vivian/")
-  result = vars(parser.parse_args())
-  driver = webdriver.Firefox()
-  driver.get(result['webroot'] + "/bff_demo.php")
+  global driver
+  global config
+  driver,config = set_up("bff_demo.php")
   suite = unittest.TestLoader().loadTestsFromTestCase(test_bff)
   unittest.TextTestRunner(verbosity=2).run(suite)

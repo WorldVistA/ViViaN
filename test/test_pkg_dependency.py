@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #---------------------------------------------------------------------------
+from selenium_utils import set_up,shut_down
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
@@ -27,7 +28,7 @@ class test_pkgdep(unittest.TestCase):
   @classmethod
   def tearDownClass(cls):
     global driver
-    driver.close()
+    shut_down(driver,config)
 
   def test_01_chart_tooltip(self):
     global driver
@@ -173,11 +174,8 @@ class test_pkgdep(unittest.TestCase):
       time.sleep(5)
 
 if __name__ == '__main__':
-  parser =argparse.ArgumentParser(description="")
-  parser.add_argument("-r",dest = 'webroot', required=True, help="Web root of the ViViAN instance to test.  eg. http://code.osehra.org/vivian")
-  result = vars(parser.parse_args())
-  driver = webdriver.Firefox()
-  driver.maximize_window()
-  driver.get(result['webroot'] + "/vista_pkg_dep.php")
+  global driver
+  global config
+  driver,config = set_up("vista_pkg_dep.php")
   suite = unittest.TestLoader().loadTestsFromTestCase(test_pkgdep)
   unittest.TextTestRunner(verbosity=2).run(suite)

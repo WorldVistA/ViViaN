@@ -54,7 +54,7 @@ This tree graph represents the VHA Business Function Framework (BFF). The BFF is
   </div>
   <div id="treeview_placeholder"/>
   <script src="vivian_tree_layout_common.js"></script>
-  <script type="text/javascript" src="bff_content.js"></script>
+  <script type="text/javascript" src="bff_demo_content.js"></script>
     <script>
       bff_main()
     </script>

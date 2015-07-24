@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #---------------------------------------------------------------------------
+from selenium_utils import set_up,shut_down
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
@@ -26,10 +27,11 @@ class test_about(unittest.TestCase):
   @classmethod
   def tearDownClass(cls):
     global driver
-    driver.close()
-
+    global config
+    shut_down(driver,config)
   def test_about_option(self):
     global driver
+    print driver
     about_option = driver.find_element_by_xpath('//*[@id="demoexamples"]/ul/li[5]/a')
     about_option.click()
     time.sleep(1)
@@ -42,10 +44,8 @@ class test_about(unittest.TestCase):
 
 
 if __name__ == '__main__':
-  parser =argparse.ArgumentParser(description="Access the 'About' Text of the ViViAN webpage")
-  parser.add_argument("-r",dest = 'webroot', required=True, help="Web root of the ViViAN instance to test.  eg. http://code.osehra.org/vivian/")
-  result = vars(parser.parse_args())
-  driver = webdriver.Firefox()
-  driver.get(result['webroot'] + "/index.php")
+  global driver
+  global config
+  driver,config = set_up("index.php")
   suite = unittest.TestLoader().loadTestsFromTestCase(test_about)
   unittest.TextTestRunner(verbosity=2).run(suite)

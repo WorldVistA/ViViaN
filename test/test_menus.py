@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #---------------------------------------------------------------------------
+from selenium_utils import set_up,shut_down
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
@@ -26,7 +27,7 @@ class test_menus(unittest.TestCase):
   @classmethod
   def tearDownClass(cls):
     global driver
-    driver.close()
+    shut_down(driver,config)
 
   # def test_09_node(self):
   # #  # ********************************************
@@ -105,10 +106,8 @@ class test_menus(unittest.TestCase):
       time.sleep(1)
 
 if __name__ == '__main__':
-  parser =argparse.ArgumentParser(description="")
-  parser.add_argument("-r",dest = 'webroot', required=True, help="Web root of the ViViAN instance to test.  eg. http://code.osehra.org/vivian/")
-  result = vars(parser.parse_args())
-  driver = webdriver.Firefox()
-  driver.get(result['webroot'] + "/vista_menus.php")
+  global driver
+  global config
+  driver,config = set_up("vista_menus.php")
   suite = unittest.TestLoader().loadTestsFromTestCase(test_menus)
   unittest.TextTestRunner(verbosity=2).run(suite)
