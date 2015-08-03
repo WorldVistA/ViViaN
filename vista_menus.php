@@ -26,7 +26,15 @@
             source: sortedjson,
             select: autoCompleteChanged
             //change: autoCompleteChanged
-          }).val('EVE: System Manager Menu').data('autocomplete')._trigger('select');
+          }).val('EVE: Systems Manager Menu').data('autocomplete')/*._trigger('select')*/;
+        });
+
+        d3.json('option_autocomplete.json', function(json) {
+          var sortedjson = json.sort(function(a,b) { return a.label.localeCompare(b.label); });
+          $("#option_autocomplete").autocomplete({
+            source: sortedjson,
+            select: optionAutoCompleteChanged
+          }).data('autocomplete')/*._trigger('select')*/;
         });
       });
     </script>
@@ -67,8 +75,18 @@
   <p>
 This tree visualization represents the menu hierarchy of VistA. Mouse over any of the entries in the tree to see the menu option name and the security key (if any). Click on an item to see the menu option details.
   </p>
+  <div style="position:absolute; left:0px; top:100px;">
+    <label> Search for an Option</label>
+    <div class='hint' style="position:absolute; font-size:0.9em; width:350px;">
+      <p>Search for an option by entering the Menu Text of the option that you wish to find.  The search is capitalization independent, but the path to the targeted option may not be highlighted if the case doesn't match.</p>
+      <div id="search_result"> </div>
+      <input id="option_autocomplete" size="40">
+      <br></br>
+    </div>
   </div>
-  <div id="treeview_placeholder"/>
+  </div>  
+
+  <div id="treeview_placeholder">
 <script type="text/javascript">
 var chart = d3.chart.treeview()
               .height(1050)
@@ -78,12 +96,14 @@ var chart = d3.chart.treeview()
               .nodeTextHyperLink(getOptionDetailLink);
 chart.on("text","attr","fill",color_by_type);
 var selectedIndex=0;
+var target_option='';
+var target_node;
 
 var menuType = [
   {iName: "legend",color: "black",dName: "All Types"},
   {iName: "menu",color :"gray",dName: "Menu"},
   {iName: "run routine",color :"#ff7f0e",dName: "Run Routine"},
-  {iName: "Broker (Client/Server)" , color : "#17becf", dName: "Broker (Client/Server)"},
+  {iName: "Broker (Client/Server)" , color : "#17becf", dName: "Broker"},
   {iName: "edit",color :"#2ca02c",dName: "Edit"},
   {iName: "server",color :"#d62728",dName: "Server"},
   {iName: "print",color :"#9467bd",dName: "Print"},
@@ -122,6 +142,20 @@ function autoCompleteChanged(eve, ui) {
   resetMenuFile(menuFile);
 }
 
+function optionAutoCompleteChanged(eve, ui) {
+  var menuFile = "menus/VistAMenu-" + ui.item.parent_id + ".json";
+  d3.json('menu_autocomplete.json', function(json) {
+    for ( var i = 0; i < json.length; i++) {
+      if( json[i].id == ui.item.parent_id) {
+      $("#autocomplete")[0].value = json[i].label;
+      break;
+      }
+    }
+  });
+  target_option = $.trim(ui.item.value.split(":")[1]);
+  resetMenuFile(menuFile);
+}
+
 <?php include_once "vivian_tree_layout_common.js" ?>
 function _collapseAllNode() {
   collapseAllNode(chart.nodes());
@@ -146,15 +180,24 @@ function resetMenuFile(menuFile) {
        .on("circle", "attr", "r", function(d) { return 7 - d.depth/2; });
     d3.select("#treeview_placeholder").datum(json).call(chart);
     generate_legend();
+    if(target_option != '') {
+      openSpecificOption(chart.nodes());
+      setTimeout(highlight_path,300,chart,json);
+    }
+
   });
 }
-
 var toolTip = d3.select(document.getElementById("toolTip"));
 var header = d3.select(document.getElementById("head"));
 
+function highlight(d) {
+  for(var i =0; i< d.length; i++) {
+    d[i].classList.add("target");
+  }
+}
+
 function node_onMouseClick(d) {
   chart.onNodeClick(d);
-  console.log()
   if(selectedIndex !== 0){
     d3.selectAll("text")
       .attr("fill", function (d) {
@@ -189,7 +232,7 @@ function generate_legend() {
     .data(menuType)
     .enter().append("svg:g")
     .attr("class", "legend")
-    .attr("transform", function(d, i) { return "translate(-250," + (i * 30 + 180) + ")"; })
+    .attr("transform", function(d, i) { return "translate(" + (i * 110 + 100) +",-10)"; })
     .on("click", function(d) {
       selectedIndex = menuType.indexOf(d);
       if(selectedIndex !== 0){
@@ -213,7 +256,62 @@ function generate_legend() {
     .text(function(d) {return  d.dName; });
 
 }
+
+//Enter Cost Information for Procedures
+function searchForOption(d) {
+  if (d._children) {
+    for(var i=0; i<d._children.length;i++) {
+      var ret = searchForOption(d._children[i])
+      if(ret) {
+         expand(d);
+         return true;
+      }
+    }
+  }
+  if( d.name.toUpperCase() == target_option.toUpperCase()) {
+    expand(d);
+    target_node = d;
+    return true;
+  }
+  return false;
+}
+
+function openSpecificOption(root) {
+  collapseAllNode(root);
+  searchForOption(root);
+}
+
+
+function highlight_path(chart, json) {
+      var tree = d3.layout.tree()
+      var nodes = tree.nodes(chart.nodes());
+      var links = tree.links(nodes);
+      var target = target_node;
+      var target_path = [];
+
+      while (target.name != nodes[0].name) {
+        var link = chart.svg().selectAll("path.link").data(links, function(d) {
+          if(d.target == target) {
+            target = d.source;
+            target_path.push(d)
+            }
+        });
+        if(target == target_node){
+          $("#option_autocomplete")[0].style.border="solid 4px orange";
+          $("#search_result").html("<h5>Target option found in menu, but couldn't be matched.</h5>");
+          resetAllNode(json)
+          break;}
+      }
+
+      chart.svg().selectAll("path.link").data(target_path).forEach(highlight);
+      d3.select("#treeview_placeholder").datum(json).call(chart);
+      target_path = [];
+      target = '';
+      target_option='';
+
+}
+
     </script>
+    </div>
   </body>
 </html>
-

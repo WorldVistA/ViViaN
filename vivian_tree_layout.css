@@ -47,6 +47,11 @@
         stroke: #ccc;
         stroke-width: 1.5px;
       }
+
+      path.link.target {
+        stroke-width : 2px;
+        stroke : #ff99aa;
+      }
       #dependencies, #interface A:hover { text-decoration: none; background-color: #f2f2ff }
       #dependencies, #interface A:link { text-decoration: underline;}
     </style>
