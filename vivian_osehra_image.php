@@ -20,6 +20,13 @@ style="border-width:0" height="35" width="150" alt="OSEHRA Logo" /></a>
       </a>
       <ul class="dropdown-menu" role="menu">
         <li role="presentation"><a role="menuitem" tabindex="-1" href="vxvista">DSS vxVistA</a></li>
+      </ul>    <li class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+        VA Visualizations <span class="caret"></span>
+      </a>
+      <ul class="dropdown-menu" role="menu">
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="http://bim.osehra.org">Business Information Model</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="http://him.osehra.org">Hybrid Information Model</a></li>
       </ul>
     </li>
   </ul>
