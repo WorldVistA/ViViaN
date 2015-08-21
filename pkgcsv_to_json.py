@@ -2,7 +2,6 @@ import csv
 import json
 
 DISTR_LIST = ("VA","OSEHRA","DSS","Medsphere","Oroville")
-import logging
 
 def generate_packages_json():
   pkgCatJson = json.load(open("PackageCategories.json", 'r'))
