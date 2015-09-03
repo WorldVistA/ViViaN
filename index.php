@@ -48,6 +48,8 @@
       <div id='dependencies' style="display:none"></div>
       <h3><a href="#">Interfaces</a></h3>
       <div id="interface"></div>
+      <h3><a href="#">HIM Info</a></h3>
+      <div id="himInfo"></div>
       <h3><a href="#">Description</a></h3>
       <div id="description"></div>
   </div>
@@ -71,6 +73,7 @@ var distProp = [ // constants to store property of each distribution
   { name: "OSEHRA", color: "#FF0000", distribution: 'OSEHRA VistA', doxlink: "http://code.osehra.org/OSEHRA_dox/"},
   { name: "VA", color: "#3300CC", distribution: 'VA FOIA VistA' ,doxlink: package_link_url},
   { name: "DSS", color: "#080", distribution: 'DSS vxVistA' , doxlink: "http://code.osehra.org/dox_alpha/vxvista/"}
+
   /**
   ,{
     name: "Medsphere",
@@ -81,7 +84,7 @@ var distProp = [ // constants to store property of each distribution
     color: "#660000"
   } **/
 ];
-
+var himInfoJSON;
 
 d3.json("packages.json", function(json) {
   resetAllNode(json);
@@ -159,6 +162,7 @@ function pkgLinkClicked(d) {
           }
           $('#dependencies').html(depLink_html);
           $('#dependencies').show();
+          getHIMLink(d);
           $('#accordion').accordion("option", "active", 0);
           $('#accordion').accordion("refresh");
           $('#accordion').accordion({heightStyle: 'content'}).show();
@@ -221,6 +225,21 @@ function getNamespaceHtml(pkg) {
   }
   return htmlLnk;
 }
+
+function getHIMLink(pkg) {
+  d3.json("himData.json", function(json) {
+
+    var himPath = json[pkg.name];
+    if (himPath == null) {
+      $("#himInfo").hide()
+    }
+    else {
+      var htmlLnk = "<a href='http://him.osehra.org/content/" + himPath +"'>HIM Visualization for "+ pkg.name +"</a>";
+      $("#himInfo").html(htmlLnk);
+    }
+  });
+}
+
 
 function getRPCLinkByPackageName(pkgName, linkUrl) {
   var defLnk = "files";
