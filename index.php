@@ -231,7 +231,7 @@ function getHIMLink(pkg) {
 
     var himPath = json[pkg.name];
     if (himPath == null) {
-      $("#himInfo").hide()
+      $("#himInfo").html("")
     }
     else {
       var htmlLnk = "<a href='http://him.osehra.org/content/" + himPath +"'>HIM Visualization for "+ pkg.name +"</a>";
