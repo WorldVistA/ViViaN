@@ -24,15 +24,10 @@
     <?php include_once "vivian_google_analytics.php" ?>
   </head>
 
-<body>
-  <?php include_once "vivian_osehra_image.php" ?>
-
-  <div style="position:relative; left 20px; top:30px;">
-    <div style="font-size:10px; position:absolute; left:20px; top:10px">
-      <button onclick="_expandAllNode()">Expand All</button>
-      <button onclick="_collapseAllNode()">Collapse All</button>
-      <button onclick="_resetAllNode()">Reset</button>
-    </div>
+<body >
+  <div>
+    <?php include_once "vivian_osehra_image.php" ?>
+    <!-- <select id="category"></select> -->
   </div>
   <!-- Tooltip -->
 <div id="toolTip" class="tooltip" style="opacity:0;">
@@ -54,6 +49,18 @@
       <div id="description"></div>
   </div>
 </div>
+</br>
+</br>
+</br>
+  <div id="menuButtons">
+      <button onclick="_expandAllNode()">Expand All</button>
+      <button onclick="_collapseAllNode()">Collapse All</button>
+      <button onclick="_resetAllNode()">Reset</button>
+  </div>
+<div id="legend_placeholder">
+
+</div>
+
 <div id="treeview_placeholder"/>
 <script type="text/javascript">
 var chart = d3.chart.treeview()
@@ -61,6 +68,16 @@ var chart = d3.chart.treeview()
               .width(1200)
               .margins({top:42, left:180, right:0, bottom:0})
               .textwidth(220);
+var legendShapeChart = d3.chart.treeview()
+              .height(50)
+              .width(350)
+              .margins({top:42, left:10, right:0, bottom:0})
+              .textwidth(110);
+var legendDistChart = d3.chart.treeview()
+              .height(50)
+              .width(800)
+              .margins({top:42, left:10, right:0, bottom:0})
+              .textwidth(110);
 $("#accordion").accordion({heightStyle: 'content', collapsible: true}).hide();
 <?php include_once "vivian_tree_layout_common.js" ?>
 
@@ -84,6 +101,9 @@ var distProp = [ // constants to store property of each distribution
     color: "#660000"
   } **/
 ];
+
+var shapeLegend = [{name: "Package Category", shape: "triangle-up"},
+                   {name: "Package", shape:"circle"}]
 var himInfoJSON;
 
 d3.json("packages.json", function(json) {
@@ -95,10 +115,13 @@ d3.json("packages.json", function(json) {
         return d.hasLink !== undefined && d.hasLink ? "pointer" : "hand";
       })
      .on("text", "attr", "fill", change_node_color)
-     .on("circle", "style", "fill", change_circle_color)
-     .on("circle", "attr", "r", function(d) { return 7 - d.depth; });
+     .on("path", "style", "fill", change_circle_color)
+     .on("path", "attr", "r", function(d) { return 7 - d.depth; });
   d3.select("#treeview_placeholder").datum(json).call(chart);
+  d3.select("#legend_placeholder").datum(null).call(legendShapeChart);
+  d3.select("#legend_placeholder").datum(null).call(legendDistChart);
   createLegend();
+  createShapeLegend();
 });
 
 function _expandAllNode() {
@@ -373,19 +396,20 @@ function node_onMouseOut(d) {
 // var categories = ["All", "OSEHRA", "VA", "DSS", "Medsphere", "Oroville"];
 // Legend.
 function createLegend() {
-  var legend = chart.svg().selectAll("g.legend")
+
+  var legend = legendDistChart.svg().selectAll("g.legend")
       .data(distProp)
     .enter().append("svg:g")
       .attr("class", "legend")
-      .attr("transform", function(d, i) { return "translate(-100," + (i * 30 + 80) + ")"; })
+      .attr("transform", function(d, i) { return "translate("+ (i * 200) + ",-10)"; })
       .on("click", function(d) {
         selectedIndex = distProp.indexOf(d);
         d3.selectAll("text")
-          .filter(function (d) { return d.hasLink != undefined;})
+          .filter(function (d) {if(d) { return d.hasLink != undefined;}})
           .attr("fill", function (node) {
             return change_node_color(node);
           });
-        d3.selectAll("circle")
+        d3.selectAll("path")
           .filter(function (d) { return d.hasLink != undefined;})
           .style("fill", function (d) {
             return change_circle_color(d);
@@ -404,6 +428,43 @@ function createLegend() {
       .text(function(d) {
         return  d.distribution; 
       });
+
+  var legend = legendDistChart.svg()
+  legend.append("text")
+          .attr("x", 0)
+          .attr("y", -28 )
+          .attr("text-anchor", "left")
+          .style("font-size", "16px")
+          .text("Distribution Filter Menu");
+}
+
+function createShapeLegend() {
+  var shapeLegendDisplay = legendShapeChart.svg().selectAll("g.shapeLegend")
+      .data(shapeLegend)
+    .enter().append("svg:g")
+      .attr("class", "shapeLegend")
+      .attr("transform", function(d, i) { return "translate("+(i * 200) +", -10)"; })
+
+  shapeLegendDisplay.append("path")
+      .attr("class", function(d) {return d.name;})
+      .attr("d", d3.svg.symbol().type(function(d) { return d.shape;}))
+      .attr("r", 3);
+
+  shapeLegendDisplay.append("svg:text")
+      .attr("class", function(d) {return d.name;})
+      .attr("x", 13)
+      .attr("dy", ".31em")
+      .text(function(d) {
+        return  d.name;
+      });
+
+  var shapeLegendDisplay = legendShapeChart.svg();
+  shapeLegendDisplay.append("text")
+          .attr("x", 0)
+          .attr("y", -28 )
+          .attr("text-anchor", "left")
+          .style("font-size", "16px")
+          .text("Shape Legend");
 }
     </script>
   </body>

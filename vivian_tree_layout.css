@@ -22,6 +22,33 @@
         cursor: pointer;
       }
 
+      #title {
+        position:relative;
+        top:10px;
+        left:30px;
+        font-size:.97em;
+      }
+
+      #title div {
+        position:relative;
+        font-size:.90em;
+      }
+
+      #title button {
+          font-size : 10px;
+        position : relative;
+      }
+
+      #legend_placeholder svg {
+        border-style: solid;
+        border-width: 1px;
+      }
+      #menuButtons button {
+        font-size : 10px;
+        position : relative;
+        left:30px;
+        top:-5px;
+      }
       .OSEHRA {
         fill: #FF0000;
       }

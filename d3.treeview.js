@@ -35,7 +35,7 @@ d3.chart.treeview = function(option) {
               style:{
               }
             },
-            circle: {
+            path: {
               attr: {
                 r: function(d) {return 4.5;}
               },
@@ -78,11 +78,12 @@ d3.chart.treeview = function(option) {
               .projection(function (d) {
                   return [d.y, d.x];
               });
+      if (_nodes != null) {
+        _nodes.x0 = (_height - _margins.top - _margins.bottom) / 2;
+        _nodes.y0 = 0;
 
-      _nodes.x0 = (_height - _margins.top - _margins.bottom) / 2;
-      _nodes.y0 = 0;
-
-      render(_nodes);
+        render(_nodes);
+      }
   }
 
   function render(source) {
@@ -158,20 +159,21 @@ d3.chart.treeview = function(option) {
               });
       _customization(nodeEnter, 'node', 'event');
 
-      var circleEnter = nodeEnter.append("svg:circle")
+      var circleEnter = nodeEnter.append("path")
+              .style("stroke","steelblue")
+              .attr("d",d3.svg.symbol().type(find_node_shape))
               .attr("r", 1e-6);
 
-      _customization(circleEnter, 'circle', 'event');
-      _customization(circleEnter, 'circle', 'style');
+      _customization(circleEnter, 'path', 'event');
+      _customization(circleEnter, 'path', 'style');
 
       var nodeUpdate = node.transition()
               .attr("transform", function (d) {
                   return "translate(" + d.y + "," + d.x + ")";
               });
-
-      var circleUpdate = nodeUpdate.select("circle");
-      _customization(circleUpdate, 'circle', 'attr');
-      _customization(circleUpdate, 'circle', 'style');
+      var circleUpdate = nodeUpdate.select("path");
+      _customization(circleUpdate, 'path', 'attr');
+      _customization(circleUpdate, 'path', 'style');
 
       var nodeExit = node.exit().transition()
               .attr("transform", function (d) {
@@ -180,7 +182,7 @@ d3.chart.treeview = function(option) {
               })
               .remove();
 
-      nodeExit.select("circle")
+      nodeExit.select("g")
               .attr("r", 1e-6);
 
       renderLabels(nodeEnter, nodeUpdate, nodeExit);
@@ -191,6 +193,19 @@ d3.chart.treeview = function(option) {
       });
   }
 
+  function find_node_shape(d){
+  var shape = "circle"
+  if (d.children || d._children) {
+    shape = "triangle-up";
+  }
+  else if (d.hasSubpackage) {
+    shape = "diamond";
+  }
+  else if (d.isSubpackage) {
+    shape = "square";
+  }
+  return shape;
+  }
   function renderLabels(nodeEnter, nodeUpdate, nodeExit) {
       var textEnter;
       if (_nodeTextHyperLink) {
@@ -265,7 +280,7 @@ d3.chart.treeview = function(option) {
   }
 
   function fillNodeCircle(d) {
-    return d._children ? "lightsteelblue" : "#fff";
+    return d._children ? "lightsteelblue" : "#FFF";
   }
 
   chart.width = function (w) {
