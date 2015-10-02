@@ -12,7 +12,7 @@
           event.preventDefault();
         });
 
-        $('#demoexamples li').each(function (i) {
+        $('#navigation_buttons li').each(function (i) {
           if (i === 1) {
             $(this).removeClass().addClass("active");
           }
@@ -50,48 +50,54 @@
     </style>
   </head>
 
-<body >
-  <div>
+  <body>
     <?php include_once "vivian_osehra_image.php" ?>
-    <!-- <select id="category"></select> -->
-  </div>
+
     <!-- Tooltip -->
-  <div id="toolTip" class="tooltip" style="opacity:0;">
-      <div id="head" class="header"></div>
-      <div  class="tooltipTail"></div>
-  </div>
-
-  <div style="position:absolute; left:20px; top:100px;">
-    <label for="autocomplete">Select a top level menu: </label>
-  </div>
-  <div style="position:absolute; left:20px; top:120px;">
-    <input id="autocomplete" size="40">
-  </div>
-  <div style="font-size:10px; position:absolute; left:220px; top:240px;">
-    <button onclick="_collapseAllNode()">Collapse All</button>
-    <button onclick="_resetAllNode()">Reset</button>
-  </div>
-  <div class='hint' style="position:absolute; top:160px; left:20px; font-size:0.9em; width:350px;">
-  <p>
-This tree visualization represents the menu hierarchy of VistA. Mouse over any of the entries in the tree to see the menu option name and the security key (if any). Click on an item to see the menu option details.
-  </p>
-  <div style="position:absolute; left:0px; top:100px;">
-    <label> Search for an Option</label>
-    <div class='hint' style="position:absolute; font-size:0.9em; width:350px;">
-      <p>Search for an option by entering the Menu Text of the option that you wish to find.  The search is capitalization independent, but the path to the targeted option may not be highlighted if the case doesn't match.</p>
-      <div id="search_result"> </div>
-      <input id="option_autocomplete" size="40">
-      <br></br>
+    <div id="toolTip" class="tooltip" style="opacity:0;">
+        <div id="head" class="header"></div>
+        <div  class="tooltipTail"></div>
     </div>
-  </div>
-  </div>  
 
-  <div id="treeview_placeholder">
+    <div style="position:relative; left 40px; top:30px;">
+      <div class='hint' style="position:absolute; left:20px; top:10px; font-size:0.9em; width:350px;">
+        <p>This tree visualization represents the menu hierarchy of VistA.
+        Mouse over any of the entries in the tree to see the menu option name
+        and the security key (if any). Click on an item to see the menu option details.
+        </p>
+      </div>
+
+      <div style="font-size:10px; position:absolute; left:20px; top:100px;">
+        <button onclick="_collapseAllNode()">Collapse All</button>
+        <button onclick="_resetAllNode()">Reset</button>
+      </div>
+
+      <div style="position:absolute; left:20px; top:140px;">
+        <div><label for="autocomplete">Select a top level menu: </label></div>
+        <div><input id="autocomplete" size="40"></div>
+      </div>
+
+      <div style="position:absolute; left:20px; top:250px;">
+        <div class='hint' style="position:relative; font-size:0.9em; width:350px;">
+          <p>Search for an option by entering the Menu Text of the option
+          that you wish to find.  The search is capitalization independent,
+          but the path to the targeted option may not be highlighted if
+          the case doesn't match.
+          </p>
+        </div>
+        <div><label for="option_autocomplete"> Search for an option:</label></div>
+        <div><input id="option_autocomplete" size="40"></div>
+        <div id="search_result"> </div>
+      </div>
+    </div>
+
+    <div id="treeview_placeholder">
+
 <script type="text/javascript">
 var chart = d3.chart.treeview()
               .height(1050)
               .width(1280*2)
-              .margins({top: 42, left: 260, bottom: 0, right: 0})
+              .margins({top: 60, left: 260, bottom: 0, right: 0})
               .textwidth(300)
               .nodeTextHyperLink(getOptionDetailLink);
 chart.on("text","attr","fill",color_by_type);
@@ -232,7 +238,7 @@ function generate_legend() {
     .data(menuType)
     .enter().append("svg:g")
     .attr("class", "legend")
-    .attr("transform", function(d, i) { return "translate(" + (i * 110 + 100) +",-10)"; })
+    .attr("transform", function(d, i) { return "translate(" + (i * 110 + 120) +",-10)"; })
     .on("click", function(d) {
       selectedIndex = menuType.indexOf(d);
       if(selectedIndex !== 0){

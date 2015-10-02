@@ -30,7 +30,7 @@ class test_about(unittest.TestCase):
 
   def test_about_option(self):
     global driver
-    about_option = driver.find_element_by_xpath('//*[@id="demoexamples"]/ul/li[5]/a')
+    about_option = driver.find_element_by_xpath('//*[@id="navigation_buttons"]/ul/li[5]/a')
     about_option.click()
     time.sleep(1)
     about_header = driver.find_element_by_class_name('ui-state-focus')

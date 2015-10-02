@@ -11,7 +11,7 @@
         $( "button" ).button().click(function(event){
           event.preventDefault();
         });
-        $('#demoexamples li').each(function (i) {
+        $('#navigation_buttons li').each(function (i) {
           if (i === 0) {
             $(this).removeClass("active").addClass("active");
           }
@@ -24,11 +24,11 @@
     <?php include_once "vivian_google_analytics.php" ?>
   </head>
 
-<body >
-  <div>
-    <?php include_once "vivian_osehra_image.php" ?>
-    <!-- <select id="category"></select> -->
-    <div style="font-size:10px; position:absolute; left:60px; top:100px">
+<body>
+  <?php include_once "vivian_osehra_image.php" ?>
+
+  <div style="position:relative; left 20px; top:30px;">
+    <div style="font-size:10px; position:absolute; left:20px; top:10px">
       <button onclick="_expandAllNode()">Expand All</button>
       <button onclick="_collapseAllNode()">Collapse All</button>
       <button onclick="_resetAllNode()">Reset</button>

@@ -165,3 +165,7 @@ td.ellipsis {
   font-weight: bold;
   font-size: 18px;
 }
+
+.navbar {
+   padding: 10px 100px 10px 10px;
+}
