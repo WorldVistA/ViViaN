@@ -50,7 +50,7 @@
       height: 'auto',
       width: 500,
       modal: true,
-      position: ["center","center-50"],
+      position: ["center",150],
       title: "About ViViaN(TM)"
     };
     $('#dialog-modal-about').dialog(overlayDialogObj).show();
