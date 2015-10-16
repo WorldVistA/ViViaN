@@ -13,7 +13,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #---------------------------------------------------------------------------
-file(GLOB VIVIAN_TEST_FILES ${CMAKE_CURRENT_SOURCE_DIR}/*.py)
+file(GLOB VIVIAN_TEST_FILES ${CMAKE_CURRENT_SOURCE_DIR}/test*.py)
+message(STATUS "The Image comparison part of the Menus test utilizes the PILLOW Python Library.
+Installation instructions for PILLOW are found here:
+    http://pillow.readthedocs.org/en/3.0.x/installation.html
+")
 
 set(VIVIAN_WEB_ROOT "http://code.osehra.org/vivian" CACHE STRING "Set web root of vivian page to test")
 foreach(test_file ${VIVIAN_TEST_FILES})

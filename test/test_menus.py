@@ -20,6 +20,7 @@ import argparse
 import unittest
 import re
 import time
+import selenium_utils as Utils
 
 class test_menus(unittest.TestCase):
 
@@ -90,6 +91,58 @@ class test_menus(unittest.TestCase):
     time.sleep(1)
     node_list = driver.find_elements_by_class_name('node')
     self.assertTrue(node_list[-1].text == target_menu_text)
+
+  def test_05_menuAutoComplete(self):
+    target_menu_text = "Monitor Taskman"
+    global driver
+    ac_form = driver.find_element_by_id("option_autocomplete")
+    ac_form.clear()
+    ac_form.send_keys(target_menu_text)
+    time.sleep(1)
+    ac_list = driver.find_elements_by_class_name('ui-menu-item')
+    for option in ac_list:
+      ac_option = option.find_element_by_tag_name('a')
+      if(re.search(target_menu_text,ac_option.text)):
+        ac_option.click()
+    time.sleep(1)
+    # Now being to compare images to match paths
+    driver.save_screenshot("path_image_pass_new.png")
+    self.assertTrue(Utils.compareImg("path_image_pass"))
+
+  def test_06_menuAutoCompleteFail(self):
+    target_menu_text = "Problem Device report"
+    global driver
+    ac_form = driver.find_element_by_id("option_autocomplete")
+    ac_form.clear()
+    ac_form.send_keys(target_menu_text)
+    time.sleep(1)
+    ac_list = driver.find_elements_by_class_name('ui-menu-item')
+    for option in ac_list:
+      ac_option = option.find_element_by_tag_name('a')
+      if(re.search(target_menu_text,ac_option.text)):
+        ac_option.click()
+    time.sleep(1)
+    # Now being to compare images to match paths
+    driver.save_screenshot("path_image_fail_new.png")
+    self.assertFalse(Utils.compareImg("path_image_fail"))
+
+  def test_07_menuAutoCompleteFail2(self):
+    target_menu_text = "Process Insurance Buffer"
+    global driver
+    ac_form = driver.find_element_by_id("option_autocomplete")
+    ac_form.clear()
+    ac_form.send_keys(target_menu_text)
+    time.sleep(1)
+    ac_list = driver.find_elements_by_class_name('ui-menu-item')
+    for option in ac_list:
+      ac_option = option.find_element_by_tag_name('a')
+      if(re.search(target_menu_text,ac_option.text)):
+        ac_option.click()
+    time.sleep(1)
+    # Now being to compare images to match paths
+    driver.save_screenshot("path_image_fail2_new.png")
+    self.assertFalse(Utils.compareImg("path_image_fail2"))
+
 
   def test_03_legend(self):
     color_options = ["#E0E0E0",'']
