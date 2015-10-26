@@ -11,7 +11,7 @@
     ViViaN<sup style="font-size:0.59em;">TM</sup>(<u>Vi</u>sualizing <u>Vi</u>stA <u>a</u>nd <u>N</u>amespace)
   </div>
 
-  <div id="navigation_buttons" style="font-size:.9em; position:relative; top:45px">
+  <div id="navigation_buttons" style="font-size:1.0em; position:relative; top:45px">
     <nav class="navbar navbar-default navbar-static-top">
       <div class="container-fluid">
         <ul class="nav navbar-nav">
