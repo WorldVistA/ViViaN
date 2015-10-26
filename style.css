@@ -166,6 +166,7 @@ td.ellipsis {
   font-size: 18px;
 }
 
-.navbar {
-   padding: 10px 100px 10px 10px;
+.navbar .brand {
+    max-height: 63px;
+    padding: 0px 0px 0px 0px;
 }
