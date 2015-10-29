@@ -76,6 +76,7 @@
 </br>
 <div id="legend_placeholder"></div>
 <div id="treeview_placeholder"></div>
+
 <script type="text/javascript">
 var chart = d3.chart.treeview()
               .height(1050)
@@ -99,8 +100,10 @@ var shapeLegend = [{name: "Menu", shape: "triangle-up"},
 
 chart.on("text","attr","fill",color_by_type);
 var selectedIndex=0;
+
 var target_option='';
 var target_node;
+var target_path = [];
 
 var menuType = [
   {iName: "legend",color: "black",dName: "All Types"},
@@ -145,7 +148,6 @@ function color_filter(d) {
 
 function autoCompleteChanged(eve, ui) {
   var menuFile = "menus/VistAMenu-" + ui.item.id + ".json";
-  console.log("Menu file is " + menuFile);
   resetMenuFile(menuFile);
 }
 
@@ -164,17 +166,21 @@ function optionAutoCompleteChanged(eve, ui) {
 }
 
 <?php include_once "vivian_tree_layout_common.js" ?>
+
 function _collapseAllNode() {
+  clearAutocomplete();
   collapseAllNode(chart.nodes());
   chart.update(chart.nodes());
 }
 
 function _resetAllNode() {
+  clearAutocomplete();
   resetAllNode(chart.nodes());
   chart.update(chart.nodes());
 }
 
 resetMenuFile("menus/VistAMenu-9.json");
+
 
 function resetMenuFile(menuFile) {
   d3.json(menuFile, function(json) {
@@ -189,23 +195,20 @@ function resetMenuFile(menuFile) {
     d3.select("#legend_placeholder").datum(null).call(legendShapeChart);
     d3.select("#legend_placeholder").datum(null).call(legendTypeChart);
     createShapeLegend();
-    generate_legend();
+    createLegend();
+
     if(target_option != '') {
       openSpecificOption(chart.nodes());
       setTimeout(highlight_path,300,chart,json);
     }
-
+    else {
+      clearAutocomplete();
+    }
   });
 }
 
 var toolTip = d3.select(document.getElementById("toolTip"));
 var header = d3.select(document.getElementById("head"));
-
-function highlight(d) {
-  for(var i =0; i< d.length; i++) {
-    d[i].classList.add("target");
-  }
-}
 
 function node_onMouseClick(d) {
   chart.onNodeClick(d);
@@ -216,7 +219,6 @@ function node_onMouseClick(d) {
       });
   }
 }
-
 
 function getOptionDetailLink(node) {
   return "files/19-" + node.ien + ".html";
@@ -238,7 +240,7 @@ function node_onMouseOut(d) {
   toolTip.style("opacity", "0");
 }
 
-function generate_legend() {
+function createLegend() {
   var legend = legendTypeChart.svg().selectAll("g.legend")
     .data(menuType)
     .enter().append("svg:g")
@@ -299,34 +301,36 @@ function openSpecificOption(root) {
   searchForOption(root);
 }
 
-
 function highlight_path(chart, json) {
-      var tree = d3.layout.tree()
-      var nodes = tree.nodes(chart.nodes());
-      var links = tree.links(nodes);
-      var target = target_node;
-      var target_path = [];
+  var tree = d3.layout.tree()
+  var nodes = tree.nodes(chart.nodes());
+  var links = tree.links(nodes);
+  var target = target_node;
 
-      while (target.name != nodes[0].name) {
-        var link = chart.svg().selectAll("path.link").data(links, function(d) {
-          if(d.target == target) {
-            target = d.source;
-            target_path.push(d)
-            }
-        });
-        if(target == target_node){
-          $("#option_autocomplete")[0].style.border="solid 4px orange";
-          $("#search_result").html("<h5>Target option found in menu, but couldn't be matched.</h5>");
-          resetAllNode(json)
-          break;}
+  while (target.name != nodes[0].name) {
+    var link = chart.svg().selectAll("path.link").data(links, function(d) {
+      if(d.target == target) {
+        target = d.source;
+        target_path.push(d)
       }
+    });
 
-      chart.svg().selectAll("path.link").data(target_path).forEach(highlight);
-      d3.select("#treeview_placeholder").datum(json).call(chart);
-      target_path = [];
-      target = '';
-      target_option='';
+    if(target == target_node){
+      $("#option_autocomplete")[0].style.border="solid 4px orange";
+      $("#search_result").html("<h5>Target option found in menu, but couldn't be matched.</h5>");
+      resetAllNode(json)
+      break;
+    }
+  }
 
+  chart.svg().selectAll("path.link").data(target_path).forEach(highlight);
+  d3.select("#treeview_placeholder").datum(json).call(chart);
+}
+
+function highlight(d) {
+  for(var i =0; i< d.length; i++) {
+    d[i].classList.add("target");
+  }
 }
 
 function createShapeLegend() {
@@ -355,6 +359,19 @@ function createShapeLegend() {
           .attr("text-anchor", "left")
           .style("font-size", "16px")
           .text("Shape Legend");
+}
+function clearAutocomplete() {
+  console.log("clearAutocomplete");
+  document.getElementById("option_autocomplete").value= '';
+  chart.svg().selectAll("path.link").data(target_path).forEach(function(d) {
+      for(var i =0; i< d.length; i++) {
+        d[i].classList.remove("target");
+      }
+  });
+
+  target_path = [];
+  target_option='';
+
 }
     </script>
     </div>

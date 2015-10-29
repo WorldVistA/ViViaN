@@ -19,7 +19,15 @@
             $(this).removeClass("active");
           }
         });
+
+        d3.json('packages_autocomplete.json', function(json) {
+          $("#option_autocomplete").autocomplete({
+            source: json,
+            select: optionAutoCompleteChanged
+          }).data('autocomplete');
+        });
       });
+
     </script>
     <?php include_once "vivian_google_analytics.php" ?>
   </head>
@@ -30,23 +38,30 @@
     <!-- <select id="category"></select> -->
   </div>
   <!-- Tooltip -->
-<div id="toolTip" class="tooltip" style="opacity:0;">
-    <div id="header1" class="header"></div>
-    <div  class="tooltipTail"></div>
-</div>
+  <div id="toolTip" class="tooltip" style="opacity:0;">
+      <div id="header1" class="header"></div>
+      <div  class="tooltipTail"></div>
+  </div>
 
-<div id="dialog-modal">
-  <div id="accordion">
-      <h3><a href="#">Namespaces</a></h3>
-      <div id='namespaces' style="display:none"></div>
-      <h3><a href="#">Dependencies</a></h3>
-      <div id='dependencies' style="display:none"></div>
-      <h3><a href="#">Interfaces</a></h3>
-      <div id="interface"></div>
-      <h3><a href="#">HIM Info</a></h3>
-      <div id="himInfo"></div>
-      <h3><a href="#">Description</a></h3>
-      <div id="description"></div>
+  <div id="dialog-modal">
+    <div id="accordion">
+        <h3><a href="#">Namespaces</a></h3>
+        <div id='namespaces' style="display:none"></div>
+        <h3><a href="#">Dependencies</a></h3>
+        <div id='dependencies' style="display:none"></div>
+        <h3><a href="#">Interfaces</a></h3>
+        <div id="interface"></div>
+        <h3><a href="#">HIM Info</a></h3>
+        <div id="himInfo"></div>
+        <h3><a href="#">Description</a></h3>
+        <div id="description"></div>
+    </div>
+  </div>
+
+  <div style="position:absolute; left:20px; top:350px;">
+    <div><label for="option_autocomplete"> Search for a package:</label></div>
+    <div><input id="option_autocomplete" size="40" onfocus="clearAutocomplete()"></div>
+    <div id="search_result"> </div>
   </div>
 </div>
 </br>
@@ -58,10 +73,10 @@
       <button onclick="_resetAllNode()">Reset</button>
   </div>
 <div id="legend_placeholder">
-
 </div>
 
 <div id="treeview_placeholder"/>
+
 <script type="text/javascript">
 var chart = d3.chart.treeview()
               .height(1280)
@@ -106,8 +121,13 @@ var shapeLegend = [{name: "Package Category", shape: "triangle-up"},
                    {name: "Package", shape:"circle"}]
 var himInfoJSON;
 
+var target_option = "";
+var target_node;
+var target_path = [];
+
 d3.json("packages.json", function(json) {
   resetAllNode(json);
+
   chart.on("node", "event","click", pkgLinkClicked)
      .on("node", "event", "mouseover", node_onMouseOver)
      .on("node", "event","mouseout", node_onMouseOut)
@@ -120,23 +140,101 @@ d3.json("packages.json", function(json) {
   d3.select("#treeview_placeholder").datum(json).call(chart);
   d3.select("#legend_placeholder").datum(null).call(legendShapeChart);
   d3.select("#legend_placeholder").datum(null).call(legendDistChart);
+  clearAutocomplete();
   createLegend();
   createShapeLegend();
 });
 
 function _expandAllNode() {
+  clearAutocomplete();
   expandAllNode(chart.nodes());
   chart.update(chart.nodes());
 }
 
 function _collapseAllNode() {
+  clearAutocomplete();
   collapseAllNode(chart.nodes());
   chart.update(chart.nodes());
 }
 
 function _resetAllNode() {
+  clearAutocomplete();
   resetAllNode(chart.nodes());
   chart.update(chart.nodes());
+}
+
+function optionAutoCompleteChanged(event, ui) {
+  target_option = ui.item.value;
+  openSpecificOption();
+  setTimeout(highlight_path,300,chart);
+}
+
+function searchForOption(d) {
+  if (d._children) {
+    for(var i=0; i<d._children.length;i++) {
+      var ret = searchForOption(d._children[i])
+      if(ret) {
+         expand(d);
+         return true;
+      }
+    }
+  }
+
+  if( d.name.toUpperCase() == target_option.toUpperCase()) {
+    expand(d);
+    target_node = d;
+    return true;
+  }
+    return false;
+}
+
+function openSpecificOption() {
+  collapseAllNode(chart.nodes());
+  searchForOption(chart.nodes());
+}
+
+function highlight_path(chart) {
+  var tree = d3.layout.tree()
+  var nodes = tree.nodes(chart.nodes());
+  var links = tree.links(nodes);
+  var target = target_node;
+
+  while (target.name != nodes[0].name) {
+    var link = chart.svg().selectAll("path.link").data(links, function(d) {
+      if(d.target == target) {
+        target = d.source;
+        target_path.push(d)
+        }
+    });
+
+    if(target == target_node) {
+      $("#option_autocomplete")[0].style.border="solid 4px blue";
+      $("#search_result").html("<h5>Target option found in menu, but couldn't be matched.</h5>");
+      resetAllNode(chart.nodes())
+      break;
+      }
+  }
+
+  chart.svg().selectAll("path.link").data(target_path).forEach(highlight);
+  d3.select("#treeview_placeholder").datum(chart.nodes()).call(chart);
+}
+
+function highlight(d) {
+  for(var i =0; i< d.length; i++) {
+    d[i].classList.add("target");
+  }
+}
+
+function clearAutocomplete() {
+  document.getElementById("option_autocomplete").value= '';
+  chart.svg().selectAll("path.link").data(target_path).forEach(function(d) {
+      for(var i =0; i< d.length; i++) {
+        d[i].classList.remove("target");
+      }
+  });
+
+  target_path = [];
+  target_option='';
 }
 
 
@@ -257,7 +355,6 @@ function getHIMLink(pkg) {
     }
   });
 }
-
 
 function getRPCLinkByPackageName(pkgName, linkUrl) {
   var defLnk = "files";
@@ -392,14 +489,13 @@ function node_onMouseOut(d) {
   toolTip.style("opacity", "0");
 }
 
-
 // var categories = ["All", "OSEHRA", "VA", "DSS", "Medsphere", "Oroville"];
 // Legend.
 function createLegend() {
 
   var legend = legendDistChart.svg().selectAll("g.legend")
       .data(distProp)
-    .enter().append("svg:g")
+      .enter().append("svg:g")
       .attr("class", "legend")
       .attr("transform", function(d, i) { return "translate("+ (i * 200) + ",-10)"; })
       .on("click", function(d) {

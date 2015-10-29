@@ -18,7 +18,7 @@ def run():
   # input: menus/VistAMenu-*.json
   # output: option_autocomplete.json
   option_autocomplete_gen.run()
-  print "*** Updated menu_autocomplete.json"
+  print "*** Updated option_autocomplete.json"
 
   # input: files/*-RPC.html and files/*-HL7.html
   # output: PackageInterface.csv
@@ -26,9 +26,10 @@ def run():
   print "*** Updated PackageInterface.csv"
 
   # input: PackageCategories.json, Packages.csv and PackageInterface.csv
-  # output: packages.json
+  # output: packages.json, packages_autocomplete.json
   pkgcsv_to_json.generate_packages_json()
   print "*** Updated packages.json"
+  print "*** Updated packages_autocomplete.json"
 
 
 if __name__ == '__main__':
