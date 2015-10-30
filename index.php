@@ -299,16 +299,14 @@ function getPackageDoxLink(pkgName, node) {
   var doxLinkName = pkgName.replace(/ /g, '_').replace(/-/g, '_')
   var category = distProp[selectedIndex];
   var index = node.distribution.indexOf(category.name);
-  if (index >= 0) {
-    doxUrl.push(category.doxlink + "Package_" + doxLinkName + ".html");
-  }
-  else if (index == -1) {
+
+  if (category.name == "All") {
     for(var i = 1; i < distProp.length;i++) {
       doxUrl.push(distProp[i].doxlink + "Package_" + doxLinkName + ".html");
     }
   }
-  else {
-    doxUrl.push(getDistributionPropByName(node.distribution[0]).doxlink);
+  else if (index >= 0) {
+    doxUrl.push(category.doxlink + "Package_" + doxLinkName + ".html");
   }
   return doxUrl;  // + "Package_" + doxLinkName + ".html";
 }
