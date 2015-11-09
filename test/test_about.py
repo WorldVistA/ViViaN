@@ -42,8 +42,8 @@ class test_about(unittest.TestCase):
 
 
 if __name__ == '__main__':
-  parser =argparse.ArgumentParser(description="Access the 'About' Text of the ViViAN webpage")
-  parser.add_argument("-r",dest = 'webroot', required=True, help="Web root of the ViViAN instance to test.  eg. http://code.osehra.org/vivian/")
+  parser =argparse.ArgumentParser(description="Access the 'About' Text of the ViViaN(TM) webpage")
+  parser.add_argument("-r",dest = 'webroot', required=True, help="Web root of the ViViaN(TM) instance to test.  eg. http://code.osehra.org/vivian/")
   result = vars(parser.parse_args())
   driver = webdriver.Firefox()
   driver.get(result['webroot'] + "/index.php")

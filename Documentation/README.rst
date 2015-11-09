@@ -1,5 +1,5 @@
-OSEHRA ViViaN
---------------
+OSEHRA ViViaN(TM)
+-----------------
 
 **Vi** sualizing **Vi** stA **a** nd **N** amespace
 This document contains the information about the OSEHRA ViViaN tool.

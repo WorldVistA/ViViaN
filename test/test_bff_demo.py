@@ -39,7 +39,7 @@ class test_bff(unittest.TestCase):
 
 if __name__ == '__main__':
   parser =argparse.ArgumentParser(description="")
-  parser.add_argument("-r",dest = 'webroot', required=True, help="Web root of the ViViAN instance to test.  eg. http://code.osehra.org/vivian/")
+  parser.add_argument("-r",dest = 'webroot', required=True, help="Web root of the ViViaN(TM) instance to test.  eg. http://code.osehra.org/vivian/")
   result = vars(parser.parse_args())
   driver = webdriver.Firefox()
   driver.get(result['webroot'] + "/bff_demo.php")

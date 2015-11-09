@@ -1,9 +1,9 @@
-Generating ViViAN Information
------------------------------
+Generating ViViaN(TM) Information
+-----------------------------------
 
 Install
 ^^^^^^^^
-The methods for installing the ViViAN tool are quite simple.  The code for the
+The methods for installing the ViViaN tool are quite simple.  The code for the
 visualization can be cloned from the OSEHRA-Sandbox/Product_Management
 repository: https://github.com/OSEHRA-Sandbox/Product-Management. 
 
@@ -12,7 +12,7 @@ service to host the web pages. Any web server that can handle PHP will allow
 the pages to be hosted. On Windows, the developers have used WampServer_ as the
 host.
 
-The second component is the information that will be used by the ViViAN tool.
+The second component is the information that will be used by the ViViaN tool.
 It consists of a series of HTML and JSON files.  The HTML files contain the
 information about the VistA instance upon which it run.  It captures
 information on each package in addition to info about the Remote Procedures,
@@ -66,12 +66,12 @@ and Options respectively.  An example command to be run would look like this:
 
   $ python FileManGlobalDataParser.py -mr ~/Work/OSEHRA/VistA-M -pr ~/work/osehra/VistA -outdir ~/Work/OSEHRA/vivian-out -all 101 8994 19
 
-Link Backend Data with ViViAN
+Link Backend Data with ViViaN
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 After the FileManGlobalDataParser script has been run successfully, a series of
 file manipulation steps are necessary to get all of the data into the correct
 places. All of these changes are made in the Visual directory of the
-Product_Management (ViViAN) repository.
+Product_Management (ViViaN) repository.
 
 * Generate a symbolic link  “files” pointing to the output directory specified above.
 * Move all files with the VistAMenu* prefix from Visual/files to the Visual/menus directory.
@@ -85,7 +85,7 @@ Product_Management (ViViAN) repository.
 
 The script creates or updates: ``menu_autocomplete.json``, ``option_autocomplete.json``, ``PackageInterface.csv``, and ``packages.json``.
 
-Note: ``bff.json`` and ``pkgdep.json`` are also required by the ViViAN pages.
+Note: ``bff.json`` and ``pkgdep.json`` are also required by the ViViaN pages.
 These files are included in the ProductManagement repository and are updated
 manually.
 

@@ -14,7 +14,7 @@
 # limitations under the License.
 #---------------------------------------------------------------------------
 cmake_minimum_required(VERSION 2.8.0)
-project(ViViAN NONE)
+project(ViViaN NONE)
 
 include(CTest)
 
