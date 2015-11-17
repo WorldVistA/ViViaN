@@ -5,7 +5,8 @@ DISTR_LIST = ("VA","OSEHRA","DSS","Medsphere","Oroville")
 
 def generate_packages_json():
   pkgCatJson = json.load(open("PackageCategories.json", 'r'))
-  generate_output_json_dict(pkgCatJson)
+  pkgDesJson = json.load(open("PackageDes.json", 'r'))
+  generate_output_json_dict(pkgCatJson, pkgDesJson)
   with open("packages.json", 'w') as outputFile:
     json.dump(pkgCatJson, outputFile)
 
@@ -13,7 +14,9 @@ pkgNameSet = set()
 pkgPosNamePrefixes = dict()
 pkgNegNamePrefixes = dict()
 pkgNameInterface = dict()
-def generate_output_json_dict(pkgCatJson):
+pkgPrefixDic = dict()
+
+def generate_output_json_dict(pkgCatJson, pkgDesJson):
  # read package.csv file for more information
   packages_csv = csv.DictReader(open("Packages.csv",'r'))
   pkg = None
@@ -28,6 +31,7 @@ def generate_output_json_dict(pkgCatJson):
         pkgNegNamePrefixes[pkg].append(fields['Prefixes'][1:])
       else:
         pkgPosNamePrefixes[pkg].append(fields['Prefixes'])
+        pkgPrefixDic[fields['Prefixes']] = pkg
       
   # read packageInterfaces.csv file for interface
   interface_csv = csv.DictReader(open("PackageInterface.csv", 'r'))
@@ -39,18 +43,25 @@ def generate_output_json_dict(pkgCatJson):
       if row['HL7']:
         pkgNameInterface.setdefault(pkgName,[]).append('HL7')
   
-  traverseChildren(pkgCatJson)
+  traverseChildren(pkgCatJson, pkgDesJson)
 
-def traverseChildren(package):
+def traverseChildren(package, pkgDesJson):
   if "children" in package:
     for child in package['children']:
-      traverseChildren(child)
+      traverseChildren(child, pkgDesJson)
   else:
     pkgName = package['name']
     package['hasLink'] = pkgName in pkgNameSet
     if pkgName in pkgNameSet:
       package['Posprefixes'] = pkgPosNamePrefixes[pkgName]
       package['Negprefixes'] = pkgNegNamePrefixes[pkgName]
+      for prefix in package['Posprefixes']:
+        if prefix in pkgDesJson:
+          if 'des' in pkgDesJson[prefix]:
+            package['des'] = pkgDesJson[prefix]['des']
+          else:
+            package['des'] = pkgDesJson[prefix]['shortdes']
+          break
     if pkgName in pkgNameInterface:
       package['interfaces'] = pkgNameInterface[pkgName]
 

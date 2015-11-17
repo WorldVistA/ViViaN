@@ -117,24 +117,6 @@ function _resetAllNode() {
 }
 
 
-var sddesc = "<p>The VistA Scheduling package allows a user to Schedule appointments for" +
-" the following types of appointments:" +
-"<ul><li>Scheduled</li>" +
-"<li>C and P</li>" +
-"<li>Collateral</li></ul>" +
-" It also allows entry of an unscheduled appointment at any time during a day" +
-" on which the clinic being scheduled into meets.  From these appointments," +
-" various output reports are produced such as, but not limited to, file room" +
-" list, appointment list, routing slips, letters for cancellations, no-shows," +
-" and pre-appointment.  There is an additional capability where additional" +
-" clinic stop credits can be directly entered and associated with a particular" +
-" patient and date.  AMIS reporting is handled via a set of extract routines" +
-" that summarize the data found by reading through the appointments and" +
-" additional clinic stops and the 10/10 and unscheduled visits (outpatient" +
-" credit given to Admitting/Screening) and storing the information by patient" +
-" and visit date in the OCP File.  The AMIS 223 report and the OPC" +
-" file to be sent to the Austin DPC are generated using this file.</p>";
-
 function pkgLinkClicked(d) {
   if (d.hasLink) {
     var overlayDialogObj = {
@@ -149,12 +131,7 @@ function pkgLinkClicked(d) {
           $('#interface').html(htmlLnk);
           $('#namespaces').html(getNamespaceHtml(d))
           $('#namespaces').show();
-          if (d.name === 'Scheduling'){
-            $('#description').html(sddesc);
-          }
-          else{
-            $('#description').html(d.name);
-          }
+          $('#description').html(getDescriptionHtml(d))
           depLink = getDependencyContentHtml(d.name, d)
           var depLink_html = "";
           for(var i = 0; i < depLink.length;i++) {
@@ -175,6 +152,24 @@ function pkgLinkClicked(d) {
   }
   else{
     chart.onNodeClick(d);
+  }
+}
+
+function getDescriptionHtml(d) {
+  if (d.des) {
+    if (d.des instanceof Array) {
+      var outtext = '';
+      for (var idx=0, len=d.des.length; idx < len; idx++){
+        outtext += d.des[idx] + "<br />";
+      }
+      return outtext;
+    }
+    else {
+      return d.des;
+    }
+  }
+  else {
+    return d.name;
   }
 }
 
