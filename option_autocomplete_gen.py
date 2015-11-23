@@ -20,6 +20,7 @@ def recurse_info(inJSON):
         recurse_info(child)
 
 def run():
+  global parent_id
   output = "option_autocomplete.json"
   menuJsonFiles = glob.glob("menus/VistAMenu-*.json")
 
