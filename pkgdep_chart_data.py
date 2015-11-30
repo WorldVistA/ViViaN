@@ -54,14 +54,14 @@ def main():
       outJson['series'][1]['data'].append(0)
 
     if 'routines' in pkgs[key]:
-      print len(pkgs[key]['routines'])
-      outJson['series'][2]['data'].append(len(pkgs[key]['routines']))
+      print pkgs[key]['routines']
+      outJson['series'][2]['data'].append(pkgs[key]['routines'])
     else:
       outJson['series'][2]['data'].append(0)
 
     if 'files' in pkgs[key]:
-      print len(pkgs[key]['files'])
-      outJson['series'][3]['data'].append(len(pkgs[key]['files']))
+      print pkgs[key]['files']
+      outJson['series'][3]['data'].append(pkgs[key]['files'])
     else:
       outJson['series'][3]['data'].append(0)
     
