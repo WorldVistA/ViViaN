@@ -128,7 +128,7 @@ d3.chart.dependencyedgebundling = function(options) {
       var pkgNodes  = _packageHierarchy(root);
       var nodes = cluster.nodes(pkgNodes),
           links = packageDepends(nodes);
-      
+
       link = link
           .data(bundle(links))
         .enter().append("path")
@@ -158,15 +158,47 @@ d3.chart.dependencyedgebundling = function(options) {
           .on("mouseout", mouseouted);
           //.on("click", _onNodeClick);
 
+      link.forEach(function(link) {
+          link.source = node[link.source] ||
+              (node[link.source] = {name: link.source});
+          link.target = node[link.target] ||
+              (node[link.target] = {name: link.target});
+      });
+
       function mouseovered(d) {
+        // the following two variables are used to find and class paths that are dependant
+        // and depend upon the mouseovered package.
+        //
+        // targetNames keeps the opposite end of the paths value and index
+        // duplicateIndexes holds the index again when the opposite path is found
+        var targetNames = {};
+        var duplicateIndexes=[]
+
         node
             .each(function(n) { n.target = n.source = false; });
 
-        link
-            .classed(palette+"-link--target link--target", function(l) { if (l.target === d) return l.source.source = true; })
-            .classed(palette+"-link--source link--source", function(l) { if (l.source === d) return l.target.target = true; })
-            .filter(function(l) { return l.target === d || l.source === d; })
-            .each(function() { this.parentNode.appendChild(this); });
+        var links = link.filter(function(l) { return l.target === d || l.source === d; })
+             .classed(palette+"-link--target link--target", function(l,i) {
+              if (l.target === d)  {
+                targetNames[l.source.name] = i;
+                return l.source.source = true;
+              }
+            })
+            .classed(palette+"-link--source link--source", function(l,i) {
+              if(l.target.name in targetNames) {
+                  duplicateIndexes.push(targetNames[l.target.name])
+                  d3.select(this).classed('link--target', true);
+               }
+              if (l.source === d) {
+                return l.target.target = true;
+              }
+            });
+
+        duplicateIndexes.forEach(function(d) {
+           d3.select(links[0][d]).classed('link--source', true);
+           links[0][d]= links[0][d];
+        });
+        links.each(function() {this.parentNode.appendChild(this); });
 
         node
             .classed(palette+"-node--target node--target", function(n) { return n.target; })

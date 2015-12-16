@@ -84,7 +84,9 @@
     <div id="toolTip" class="tooltip" style="opacity:0;">
       <div id="header1" class="header"></div>
       <div id="dependency" ></div>
-      <div id="dependents" ></div>
+      <div id="bothDeps"></div>
+      <div id="dependents"></div>
+
       <div class="tooltipTail"></div>
     </div>
   </div>
@@ -100,11 +102,12 @@
   var jsonData = [];
   var palette = "rg";
   var colorLegend = [{name: "Depends", colorClass: palette + "-link--source"},
-  {name: "Dependents", colorClass: palette + "-link--target"}];
+  {name: "Dependents", colorClass: palette + "-link--target"},
+  {name: "Both", colorClass: "link--target link--source"}];
 
   var legendColorChart = d3.chart.treeview()
               .height(50)
-              .width(350)
+              .width(500)
               .margins({top:42, left:10, right:0, bottom:0})
               .textwidth(110);
   function swapColorScheme() {
@@ -183,12 +186,22 @@
     function mouseOvered(d) {
       var header1Text = "Name: " + d.name + "</br> Group: " + d.parent.name + "</br>";
       $('#header1').html(header1Text);
+      var localDepends = [];
+      if (d.depends && d.dependents) {
+        localDepends = d.depends.filter(function(n) {
+          return d.dependents.indexOf(n) != -1
+        });
+      }
       if (d.depends) {
-        var depends = "Depends: " + d.depends.length;
+        var depends = "Depends: " + ( d.depends.length - localDepends.length);
         $('#dependency').html(depends).addClass(palette+"-link--source");
       }
+      if (localDepends.length > 0 ) {
+       var both = "Both: " + localDepends.length;
+       $('#bothDeps').html(both).addClass("link--source link--target");;
+      }
       if (d.dependents) {
-        var dependents = "Dependents: " + d.dependents.length;
+        var dependents = "Dependents: " + (d.dependents.length - localDepends.length);
         $('#dependents').html(dependents).addClass(palette+"-link--target");
       }
       d3.select("#toolTip").style("left", (d3.event.pageX + 40) + "px")
@@ -200,6 +213,7 @@
       $('#header1').text("");
       $('#dependents').text("").removeClass(palette+"-link--target");
       $('#dependency').text("").removeClass(palette+"-link--source");
+      $('#bothDeps').text("").removeClass(palette+"-link--both");
       d3.select("#toolTip").style("opacity", "0");
     }
 
@@ -477,7 +491,7 @@ function createColorLegend(legendColorChart) {
       .data(colorLegend)
     .enter().append("svg:g")
       .attr("class", "shapeLegend")
-      .attr("transform", function(d, i) { return "translate("+(i * 200) +", -10)"; })
+      .attr("transform", function(d, i) { return "translate("+(i * 200) +", -10)"; });
 
   shapeLegendDisplay.append("path")
       .attr("class", function(d) {return d.colorClass;})
@@ -491,7 +505,6 @@ function createColorLegend(legendColorChart) {
       .text(function(d) {
         return  d.name;
       });
-
   var shapeLegendDisplay = legendColorChart.svg();
   shapeLegendDisplay.append("text")
           .attr("x", 0)

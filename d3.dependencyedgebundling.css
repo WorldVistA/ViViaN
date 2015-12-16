@@ -27,6 +27,7 @@
   font-weight: 700;
   opacity: 1;
 }
+
 .link--source,
 .link--target {
   stroke-opacity: 1;
@@ -65,5 +66,14 @@
 .cb-link--target {
   stroke: #5233FF;
   color: #5233FF;
+}
+/* Represents the "Both" entries in the either color scheme  */
+.node--target.node--source {
+  fill: #A02CA0;
+}
+
+.link--target.link--source {
+  stroke: #A02CA0;
+  color: #A02CA0;
 }
 </style>
