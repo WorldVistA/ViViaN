@@ -159,19 +159,18 @@ d3.chart.dependencyedgebundling = function(options) {
           //.on("click", _onNodeClick);
 
       function mouseovered(d) {
-
         node
             .each(function(n) { n.target = n.source = false; });
 
         link
-            .classed("link--target", function(l) { if (l.target === d) return l.source.source = true; })
-            .classed("link--source", function(l) { if (l.source === d) return l.target.target = true; })
+            .classed(palette+"-link--target link--target", function(l) { if (l.target === d) return l.source.source = true; })
+            .classed(palette+"-link--source link--source", function(l) { if (l.source === d) return l.target.target = true; })
             .filter(function(l) { return l.target === d || l.source === d; })
             .each(function() { this.parentNode.appendChild(this); });
 
         node
-            .classed("node--target", function(n) { return n.target; })
-            .classed("node--source", function(n) { return n.source; });
+            .classed(palette+"-node--target node--target", function(n) { return n.target; })
+            .classed(palette+"-node--source node--source", function(n) { return n.source; });
         
         if (_mouseOvered) {
           _mouseOvered(d);
@@ -179,13 +178,14 @@ d3.chart.dependencyedgebundling = function(options) {
       }
 
       function mouseouted(d) {
+
         link
-            .classed("link--target", false)
-            .classed("link--source", false);
+            .classed(palette+"-link--target link--target", false)
+            .classed(palette+"-link--source link--source", false);
 
         node
-            .classed("node--target", false)
-            .classed("node--source", false);
+            .classed(palette+"-node--target node--target", false)
+            .classed(palette+"-node--source node--source", false);
 
         if (_mouseOuted) {
           _mouseOuted(d);

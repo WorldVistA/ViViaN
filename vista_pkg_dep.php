@@ -23,22 +23,30 @@
 
 <body>
   <?php include_once "vivian_osehra_image.php" ?>
-
+    </br>
+    </br>
   <div id="circular-chart">
-    <div class='hint' style="position:relative; top:50px; left:60px; width:400px">
+
+
+    <div class='hint' style="position:relative; width:800px; left:50px">
       <p>
       This circle plot captures the interrelationships among VistA packages.
       Mouse over any of the packages in this graph to see incoming links (dependents)
-      in green and the outgoing links (dependencies) in red. Click on any of the
-      packages to view package dependency details.
+      in one color and the outgoing links (dependencies) in a second. Click on any of the packages to view package dependency
+      details.
       </p>
+
+    <label class="btn-primary btn-sm">
+        <input type="checkbox" id="colorMode" onclick="javascript:swapColorScheme()"> Colorblind Mode </input>
+    </label>
+    <div id="legend_placeholder" style="position:relative;"></div>
     </div>
     <div id="chart_placeholder" style="position:relative;"></div>
 
     <div id="toolTip" class="tooltip" style="opacity:0;">
       <div id="header1" class="header"></div>
-      <div id="dependency" style="color:#d62728;"></div>
-      <div id="dependents" style="color:#2ca02c;"></div>
+      <div id="dependency" ></div>
+      <div id="dependents" ></div>
       <div class="tooltipTail"></div>
     </div>
   </div>
@@ -48,7 +56,34 @@
 </style>
 
 <script type="text/javascript">
+
   var jsonData = [];
+  var palette = "rg";
+  var colorLegend = [{name: "Depends", colorClass: palette + "-link--source"},
+  {name: "Dependents", colorClass: palette + "-link--target"}];
+
+  var legendColorChart = d3.chart.treeview()
+              .height(50)
+              .width(350)
+              .margins({top:42, left:10, right:0, bottom:0})
+              .textwidth(110);
+  function swapColorScheme() {
+    var shapeLegendText = legendColorChart.svg().selectAll("text")
+    $("#colorMode").toggleClass("active");
+    if(palette == "rg") {
+       palette = "cb";
+    }
+    else {
+      palette = "rg";
+    }
+    shapeLegendText
+      .filter( function(l) { console.log(l); if(l) return l.name === "Dependents"})
+      .attr("class", function(d) {return palette + "-link--target";});
+    shapeLegendText
+      .filter( function(l) { console.log(l); if(l) return l.name === "Depends"})
+      .attr("class", function(d) {return palette + "-link--source";});
+    shapeLegendText.transition();
+  }
   d3.json("PackageCategories.json", function(error, data) {
     var categories = data;
     function getPackageDoxLink(node) {
@@ -110,11 +145,11 @@
       $('#header1').html(header1Text);
       if (d.depends) {
         var depends = "Depends: " + d.depends.length;
-        $('#dependency').html(depends);
+        $('#dependency').html(depends).addClass(palette+"-link--source");
       }
       if (d.dependents) {
         var dependents = "Dependents: " + d.dependents.length;
-        $('#dependents').html(dependents);
+        $('#dependents').html(dependents).addClass(palette+"-link--target");
       }
       d3.select("#toolTip").style("left", (d3.event.pageX + 40) + "px")
               .style("top", (d3.event.pageY + 5) + "px")
@@ -123,8 +158,8 @@
 
     function mouseOuted(d) {
       $('#header1').text("");
-      $('#dependents').text("");
-      $('#dependency').text("");
+      $('#dependents').text("").removeClass(palette+"-link--target");
+      $('#dependency').text("").removeClass(palette+"-link--source");
       d3.select("#toolTip").style("opacity", "0");
     }
 
@@ -134,6 +169,7 @@
              .mouseOuted(mouseOuted)
              .nodeTextHyperLink(getPackageDoxLink);
     var localpath = "pkgdep.json";
+    d3.select("#legend_placeholder").datum(null).call(legendColorChart);
     d3.json(localpath, function(error, classes) {
       jsonData = classes;
       if (error){
@@ -145,9 +181,38 @@
       d3.select('#chart_placeholder')
         .datum(classes)
         .call(chart);
+      createColorLegend(legendColorChart);
     });
   });
 
+function createColorLegend(legendColorChart) {
+  var shapeLegendDisplay = legendColorChart.svg().selectAll("g.shapeLegend")
+      .data(colorLegend)
+    .enter().append("svg:g")
+      .attr("class", "shapeLegend")
+      .attr("transform", function(d, i) { return "translate("+(i * 200) +", -10)"; })
+
+  shapeLegendDisplay.append("path")
+      .attr("class", function(d) {return d.colorClass;})
+      .attr("r", 3);
+
+  shapeLegendDisplay.append("svg:text")
+      .attr("class", function(d) {return d.colorClass;})
+      .attr("id", function(d) {return d.name;})
+      .attr("x", 13)
+      .attr("dy", ".31em")
+      .text(function(d) {
+        return  d.name;
+      });
+
+  var shapeLegendDisplay = legendColorChart.svg();
+  shapeLegendDisplay.append("text")
+          .attr("x", 0)
+          .attr("y", -28 )
+          .attr("text-anchor", "left")
+          .style("font-size", "16px")
+          .text("Color Legend");
+}
 		</script>
 
   </body>

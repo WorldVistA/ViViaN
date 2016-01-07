@@ -39,10 +39,6 @@
         position : relative;
       }
 
-      #legend_placeholder svg {
-        border-style: solid;
-        border-width: 1px;
-      }
       #menuButtons button {
         font-size : 10px;
         position : relative;
