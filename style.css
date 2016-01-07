@@ -170,3 +170,7 @@ td.ellipsis {
     max-height: 63px;
     padding: 0px 0px 0px 0px;
 }
+#legend_placeholder svg {
+  border-style: solid;
+  border-width: 1px;
+}

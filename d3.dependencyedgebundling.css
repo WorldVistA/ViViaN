@@ -27,15 +27,6 @@
   font-weight: 700;
   opacity: 1;
 }
-
-.node--source {
-  fill: #2ca02c;
-}
-
-.node--target {
-  fill: #d62728;
-}
-
 .link--source,
 .link--target {
   stroke-opacity: 1;
@@ -43,11 +34,36 @@
   opacity: 1;
 }
 
-.link--source {
-  stroke: #d62728;
+/* Represents the "Depends" in the Red/Green Color Scheme  */
+.rg-node--target {
+  fill: #d62728;
 }
-
-.link--target {
+.rg-link--source {
+  stroke: #d62728;
+  color: #d62728;
+}
+/* Represents the "Dependents" in the Red/Green Color Scheme  */
+.rg-node--source {
+  fill: #2ca02c;
+}
+.rg-link--target {
   stroke: #2ca02c;
+  color: #2ca02c;
+}
+/* Represents the "Depends" in the Orange/Blue (Colorblind) Color Scheme  */
+.cb-node--target {
+  fill: #ff9933;
+}
+.cb-link--source {
+  stroke: #ff9933;
+  color: #ff9933;
+}
+/* Represents the "Dependents" in the Orange/Blue (Colorblind) Color Scheme  */
+.cb-node--source {
+  fill: #5233FF;
+}
+.cb-link--target {
+  stroke: #5233FF;
+  color: #5233FF;
 }
 </style>
