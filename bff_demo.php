@@ -49,7 +49,7 @@
   <p>VHA Business Function Framework Demo</p>
   </div>
   <div class='hint' style="position:relative; top:10px; left:30px; font-size:0.9em; width:350px;">
-  <p>This demo is based on BFF version 2.7.</p>
+  <p>This demo is based on BFF version 2.10.</p>
   <div id="legend_placeholder"></div>
   </div>
   <div id="treeview_placeholder"></div>
