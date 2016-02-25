@@ -378,13 +378,23 @@ function getProtocolLinkByPackageName(pkgName, linkUrl) {
   return "<a href=\"" + defLnk + "/" + pkgName + "-Protocols.html\" target=\"_blank\">Protocols</a>";
 }
 
+function getHLOLinkByPackageName(pkgName, linkUrl) {
+  var defLnk = "files";
+  if (linkUrl){
+    defLnk = linkUrl + '/' + defLnk;
+  }
+  return "<a href=\"" + defLnk + "/" + pkgName + "-HLO.html\" target=\"_blank\">HLO</a>";
+}
+
 function getInterfaceHtml(node) {
   pkgName = node.name
   var htmlLnk = "<ul>";
   var rpcLink = "";
   var hl7Link = "";
   var protocolLink = "";
+  var hloLink = "";
   var extraLink = "";
+  console.log(node.interfaces);
   if (node.interfaces !== undefined){
     if (selectedIndex === 3) {
       category = distProp[selectedIndex].name;
@@ -403,6 +413,10 @@ function getInterfaceHtml(node) {
     index = node.interfaces.indexOf("Protocols");
     if (index >= 0){
       protocolLink = getProtocolLinkByPackageName(pkgName, extraLink);
+    }
+    index = node.interfaces.indexOf("HLO");
+    if (index >= 0){
+      hloLink = getHLOLinkByPackageName(pkgName, extraLink);
     }
   }
   if (pkgName === 'Order Entry Results Reporting'){
@@ -423,6 +437,9 @@ function getInterfaceHtml(node) {
     }
     if (protocolLink.length > 0){
       htmlLnk += "<li>" + protocolLink + "</li>";
+    }
+    if (hloLink.length > 0){
+      htmlLnk += "<li>" + hloLink + "</li>";
     }
     htmlLnk += "</ul>";
   }

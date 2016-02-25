@@ -49,6 +49,8 @@ def generate_output_json_dict(pkgCatJson, pkgDesJson):
         pkgNameInterface.setdefault(pkgName,[]).append('HL7')
       if row['Protocols']:
         pkgNameInterface.setdefault(pkgName,[]).append('Protocols')
+      if row['HLO']:
+        pkgNameInterface.setdefault(pkgName,[]).append('HLO')
   
   traverseChildren(pkgCatJson, pkgDesJson)
 
