@@ -10,6 +10,7 @@ def generate_packages_json():
   with open("packages.json", 'w') as outputFile:
     json.dump(pkgCatJson, outputFile)
   with open("packages_autocomplete.json", 'w') as autocompleteOutputFile:
+    pkgNameSet.add("Unknown")
     packageNames = list(pkgNameSet)
     packageNames.sort()
     json.dump(packageNames, autocompleteOutputFile)
