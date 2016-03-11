@@ -1,0 +1,21 @@
+    <style type="text/css">
+ .chart {
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+  }
+
+  .axis path, .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+  }
+
+  .backgroundBar {
+    opacity: 0.4;
+  }
+  .bar {
+     stroke: black;
+     stroke-width: .5px;
+  }
+
+  </style>

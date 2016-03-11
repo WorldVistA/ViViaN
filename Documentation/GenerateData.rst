@@ -69,13 +69,14 @@ numbers:
           8994              Remote Procedure
            19                    Option
           779.2              HLO Application
+          9.779                  Install
  ======================= =======================
 
 An example command to be run would look like this:
 
 .. parsed-literal::
 
-  $ python FileManGlobalDataParser.py -mr ~/Work/OSEHRA/VistA-M -pr ~/work/osehra/VistA -outdir ~/Work/OSEHRA/vivian-out -all 101 8994 19 779.2
+  $ python FileManGlobalDataParser.py -mr ~/Work/OSEHRA/VistA-M -pr ~/work/osehra/VistA -outdir ~/Work/OSEHRA/vivian-out -all 101 8994 19 779.2 9.7
 
 Link Backend Data with ViViaN
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -87,6 +88,8 @@ Product_Management (ViViaN) repository.
 
 * Generate a symbolic link  “files” pointing to the output directory specified above.
 * Move all files with the VistAMenu* prefix from Visual/files to the Visual/menus directory.
+* Move the ``install_information.json`` and ``pkgKey_autocomplete.json`` from the Visual/files
+  to the Visual directory
 * Update Packages.csv or PackageCategories.json, if needed.
 * Execute the setup script from the Visual directory:  ``python setup.py``
   to generate other JSON and csv files. The script does not take any input parameters but requires:
