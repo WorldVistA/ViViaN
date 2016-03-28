@@ -62,17 +62,16 @@
   </br>
 </div>
 
-<div id="legend_placeholder"></div>
-
-<div style="position:relative; left:20px; top:150px;">
-
+<div style="position:relative; left:20px; top:0px;">
+  <div id="legend_placeholder"></div>
+  </br>
   <div id="packageSearch">
     <div><label for="option_autocomplete"> Search for a package:</label></div>
     <div><input id="option_autocomplete" size="40" onfocus="clearAutocomplete()"></div>
     <div id="search_result"> </div>
   </div>
   </br>
-  <div id="menuButtons">
+  <div id="buttons">
       <button onclick="_expandAllNode()">Expand All</button>
       <button onclick="_collapseAllNode()">Collapse All</button>
       <button onclick="_resetAllNode()">Reset</button>
