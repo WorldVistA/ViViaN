@@ -54,46 +54,61 @@
   <body>
     <?php include_once "vivian_osehra_image.php" ?>
 
-    <!-- Tooltip -->
+  <!-- Tooltip -->
   <div id="toolTip" class="tooltip" style="opacity:0;">
       <div id="head" class="header"></div>
       <div  class="tooltipTail"></div>
   </div>
-<div id='title' style="position:relative; top:10px; left:30px; font-size:.97em;">
- <p title="This tree visualization represents the menu hierarchy of VistA. Mouse over any of the entries in the tree to see the menu option name and the security key (if any). Click on an item to see the menu option details."> VistA Menus </p>
-  <div style="position:relative;" >
-    <label title="Show the structure of a top level menu by entering the name of the option." style="width:200;" for="autocomplete">Select a top level menu: </label>
-    <input id="autocomplete" size="40">
+
+  <div class='hint' style="position:relative; width:800px; left:20px; top:50px">
+    <p>
+    This tree visualization represents the menu hierarchy of VistA. Mouse over
+    any of the entries in the tree to see the menu option name and the security
+    key (if any). Click on an item to see the menu option details.
+    </p>
   </div>
-  <div>
-    <label title="Search for an option by entering the name of the option that you wish to find."> Search for an Option:</label>
-    <input id="option_autocomplete" size="40">
+
+<div style="position:relative; left:20px; top:30px;">
+  </br>
+  <div id="legend_placeholder"></div>
+  </br>
+  <div id="packageSearch">
+    <div><label title="Show the structure of a top level menu by entering the name of the option."
+                for="autocomplete">Select a top level menu:</label></div>
+    <div><input id="autocomplete" size="40"></div>
+    <div id="search_result"> </div>
   </div>
+  </br>
   <div>
+    <div><label title="Search for an option by entering the name of the option that you wish to find."
+                for="option_autocomplete">Search for an Option:</label></div>
+    <div><input id="option_autocomplete" size="40"></div>
+  </div>
+  </br>
+  <div id="buttons">
     <button onclick="_collapseAllNode()">Collapse All</button>
     <button onclick="_resetAllNode()">Reset</button>
   </div>
 </div>
-</br>
-<div id="legend_placeholder"></div>
+
 <div id="treeview_placeholder"></div>
 
 <script type="text/javascript">
 var chart = d3.chart.treeview()
               .height(1050)
               .width(1280*2)
-              .margins({top: 60, left: 260, bottom: 0, right: 0})
+              .margins({top: 0, left: 260, bottom: 0, right: 0})
               .textwidth(300)
               .nodeTextHyperLink(getOptionDetailLink);
 var legendShapeChart = d3.chart.treeview()
               .height(50)
-              .width(350)
-              .margins({top:42, left:10, right:0, bottom:0})
+              .width(250)
+              .margins({top:10, left:10, right:0, bottom:0})
               .textwidth(110);
 var legendTypeChart = d3.chart.treeview()
               .height(50)
               .width(1100)
-              .margins({top:42, left:0, right:0, bottom:0})
+              .margins({top:10, left:10, right:0, bottom:0})
               .textwidth(110);
 
 var shapeLegend = [{name: "Menu", shape: "triangle-up"},
@@ -246,7 +261,7 @@ function createLegend() {
     .data(menuType)
     .enter().append("svg:g")
     .attr("class", "legend")
-    .attr("transform", function(d, i) { return "translate(" + (i * 110) +",-10)"; })
+    .attr("transform", function(d, i) { return "translate(" + (i * 110) +",30)"; })
     .on("click", function(d) {
       selectedIndex = menuType.indexOf(d);
       if(selectedIndex !== 0){
@@ -337,9 +352,9 @@ function highlight(d) {
 function createShapeLegend() {
   var shapeLegendDisplay = legendShapeChart.svg().selectAll("g.shapeLegend")
       .data(shapeLegend)
-    .enter().append("svg:g")
+      .enter().append("svg:g")
       .attr("class", "shapeLegend")
-      .attr("transform", function(d, i) { return "translate("+(i * 200) +", -10)"; });
+      .attr("transform", function(d, i) { return "translate("+(i * 150) +", 25)"; });
   shapeLegendDisplay.append("path")
       .attr("class", function(d) {return d.name;})
       .attr("d", d3.svg.symbol().type(function(d) { return d.shape;}))
@@ -356,7 +371,7 @@ function createShapeLegend() {
   var shapeLegendDisplay = legendShapeChart.svg();
   shapeLegendDisplay.append("text")
           .attr("x", 0)
-          .attr("y", -28 )
+          .attr("y", 10 )
           .attr("text-anchor", "left")
           .style("font-size", "16px")
           .text("Shape Legend");

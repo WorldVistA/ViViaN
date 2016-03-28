@@ -65,9 +65,8 @@
     </div>
     <div id="container" style="position:relative; top:55px; width: 90%; height: 4200px; margin: 0 auto"></div>
   </div>
-
   <div id="circular-chart">
-    <div class='hint' style="position:absolute; top:10px; left:220px; font-size:0.9em; width:400px">
+    <div class='hint' style="position:relative; width:800px; top:50px; left:20px">
       <p>
       This circle plot captures the interrelationships among VistA packages.
       Mouse over any of the packages in this graph to see incoming links (dependents)
