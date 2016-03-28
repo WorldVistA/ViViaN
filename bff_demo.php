@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+  <title>VHA Business Function Framework Demo</title>
   <head>
     <?php
       include_once "vivian_common_header.php";

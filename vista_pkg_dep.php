@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+  <title>VistA Package Dependency</title>
   <head>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700|Roboto:400,700' rel='stylesheet' type='text/css'>
     <?php
