@@ -23,10 +23,9 @@
 
 <body>
   <?php include_once "vivian_osehra_image.php" ?>
-    </br>
-    </br>
+
   <div id="circular-chart">
-    <div class='hint' style="position:relative; width:800px; left:50px">
+    <div class='hint' style="position:relative; width:800px; top:50px; left:20px">
       <p>
       This circle plot captures the interrelationships among VistA packages.
       Mouse over any of the packages in this graph to see incoming links (dependents)

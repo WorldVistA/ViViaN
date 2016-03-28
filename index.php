@@ -57,22 +57,25 @@
         <div id="description"></div>
     </div>
   </div>
+  </br>
+  </br>
+  </br>
+</div>
 
-  <div style="position:absolute; left:20px; top:350px;">
+<div style="position:relative; left:20px; top:0px;">
+  <div id="legend_placeholder"></div>
+  </br>
+  <div id="packageSearch">
     <div><label for="option_autocomplete"> Search for a package:</label></div>
     <div><input id="option_autocomplete" size="40" onfocus="clearAutocomplete()"></div>
     <div id="search_result"> </div>
   </div>
-</div>
-</br>
-</br>
-</br>
-  <div id="menuButtons">
+  </br>
+  <div id="buttons">
       <button onclick="_expandAllNode()">Expand All</button>
       <button onclick="_collapseAllNode()">Collapse All</button>
       <button onclick="_resetAllNode()">Reset</button>
   </div>
-<div id="legend_placeholder">
 </div>
 
 <div id="treeview_placeholder"/>
