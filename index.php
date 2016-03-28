@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+  <title>ViViaN</title>
   <head>
     <?php
       include_once "vivian_common_header.php";
