@@ -12,12 +12,12 @@ d3.chart = d3.chart || {};
 d3.chart.dependencyedgebundling = function(options) {
 
   var _radius;
-  var _diameter = 600;
-  var _textRadius = 160;
+  var _diameter = 900;
+  var _textRadius = 100;
   var _innerRadius;
   var _nodeTextHyperLink;
   var _txtLinkGap = 5;
-  var _minTextWidth = 7.0;
+  var _minTextWidth = 5.5;
   var _radialTextHeight = 12;
   var _mouseOvered, _mouseOuted;
 
@@ -37,6 +37,7 @@ d3.chart.dependencyedgebundling = function(options) {
           maxItem = data[item].name;
         }
     }
+
     var minTextRadius = Math.ceil(maxLength * _minTextWidth);
     if (_textRadius < minTextRadius) {
       _textRadius = minTextRadius;
@@ -94,7 +95,7 @@ d3.chart.dependencyedgebundling = function(options) {
 
     return depends;
   }
-  
+
   function chart(selection) {
     selection.each(function(data) {
       // logic to set the size of the svg graph based on input
@@ -118,13 +119,12 @@ d3.chart.dependencyedgebundling = function(options) {
       var svg = selection.insert("svg")
           .attr("width", _diameter)
           .attr("height", _diameter)
-        .append("g")
+          .append("svg:g")
           .attr("transform", "translate(" + _radius + "," + _radius + ")");
 
       // get all the link and node
       var link = svg.append("g").selectAll(".link"),
           node = svg.append("g").selectAll(".node");
-      
       var pkgNodes  = _packageHierarchy(root);
       var nodes = cluster.nodes(pkgNodes),
           links = packageDepends(nodes);

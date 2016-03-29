@@ -46,13 +46,19 @@
     </div>
   </br>
   </br>
-  <div id='title' style="position:relative; top:10px; left:30px;font-size:.97em;" title="This tree graph represents the VHA Business Function Framework (BFF). The BFF is a hierarchical construct that describes VHA business functions or  major service areas within each core mission Line of Business (LoB) and serve as logical groupings of activities. Subfunctions represent the logical groupings of sub-activities needed to fulfill each VHA business function. Click on an item to bring a modal window with detailed description and commentary.">
-  <p>VHA Business Function Framework Demo</p>
+  <div id='description' class='hint'  style="position:relative; top:10px; left:20px; margin-right:200px;">
+    <p>
+    This tree graph represents the VHA Business Function Framework (BFF).
+    The BFF is a hierarchical construct that describes VHA business functions
+    or major service areas within each core mission Line of Business (LoB) and
+    serve as logical groupings of activities. Subfunctions represent the
+    logical groupings of sub-activities needed to fulfill each VHA business
+    function. Click on an item to bring a modal window with detailed
+    description and commentary.
+    </p>
+    <p>This demo is based on BFF version 2.10.</p>
   </div>
-  <div class='hint' style="position:relative; top:10px; left:30px; font-size:0.9em; width:350px;">
-  <p>This demo is based on BFF version 2.7.</p>
-  <div id="legend_placeholder"></div>
-  </div>
+  <div id="legend_placeholder" style="position:relative; left:20px; top:20px;"></div>
   <div id="treeview_placeholder"></div>
 
 <script type="text/javascript">
@@ -60,7 +66,6 @@ $("#accordion").accordion({heightStyle: 'content', collapsible: true}).hide();
 var chart = d3.chart.treeview()
               .height(940)
               .width(1880)
-              .margins({top: 45, left: 280, bottom: 0, right: 0})
               .textwidth(280);
 var legendShapeChart = d3.chart.treeview()
               .height(50)

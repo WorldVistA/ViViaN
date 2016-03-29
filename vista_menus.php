@@ -60,7 +60,7 @@
       <div  class="tooltipTail"></div>
   </div>
 
-  <div class='hint' style="position:relative; width:800px; left:20px; top:50px">
+  <div class='hint' style="position:relative; left:20px; top:50px">
     <p>
     This tree visualization represents the menu hierarchy of VistA. Mouse over
     any of the entries in the tree to see the menu option name and the security
@@ -68,10 +68,8 @@
     </p>
   </div>
 
-<div style="position:relative; left:20px; top:30px;">
-  </br>
-  <div id="legend_placeholder"></div>
-  </br>
+<div id="legend_placeholder" style="position:relative; left:20px; top:50px;"></div>
+<div style="position:relative; left:20px; top:60px; width:400px;">
   <div id="packageSearch">
     <div><label title="Show the structure of a top level menu by entering the name of the option."
                 for="autocomplete">Select a top level menu:</label></div>
@@ -84,8 +82,7 @@
                 for="option_autocomplete">Search for an Option:</label></div>
     <div><input id="option_autocomplete" size="40"></div>
   </div>
-  </br>
-  <div id="buttons">
+  <div id="buttons" style="position:relative; top:10px;">
     <button onclick="_collapseAllNode()">Collapse All</button>
     <button onclick="_resetAllNode()">Reset</button>
   </div>
@@ -97,7 +94,7 @@
 var chart = d3.chart.treeview()
               .height(1050)
               .width(1280*2)
-              .margins({top: 0, left: 260, bottom: 0, right: 0})
+              .margins({top: 0, left: 200, bottom: 0, right: 0})
               .textwidth(300)
               .nodeTextHyperLink(getOptionDetailLink);
 var legendShapeChart = d3.chart.treeview()
