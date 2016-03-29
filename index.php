@@ -162,9 +162,10 @@ function _resetAllNode() {
 }
 
 function optionAutoCompleteChanged(event, ui) {
+  clearHighlightedPath();
   target_option = ui.item.value;
   openSpecificOption();
-  setTimeout(highlight_path,300,chart);
+  setTimeout(highlightPath,300,chart);
 }
 
 function searchForOption(d) {
@@ -191,7 +192,7 @@ function openSpecificOption() {
   searchForOption(chart.nodes());
 }
 
-function highlight_path(chart) {
+function highlightPath(chart) {
   var tree = d3.layout.tree()
   var nodes = tree.nodes(chart.nodes());
   var links = tree.links(nodes);
@@ -225,6 +226,10 @@ function highlight(d) {
 
 function clearAutocomplete() {
   document.getElementById("option_autocomplete").value= '';
+  clearHighlightedPath();
+}
+
+function clearHighlightedPath() {
   chart.svg().selectAll("path.link").data(target_path).forEach(function(d) {
       for(var i =0; i< d.length; i++) {
         d[i].classList.remove("target");
@@ -392,7 +397,6 @@ function getInterfaceHtml(node) {
   var protocolLink = "";
   var hloLink = "";
   var extraLink = "";
-  console.log(node.interfaces);
   if (node.interfaces !== undefined){
     if (selectedIndex === 3) {
       category = distProp[selectedIndex].name;
