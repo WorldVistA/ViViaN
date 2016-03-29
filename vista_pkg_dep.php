@@ -24,30 +24,30 @@
 
 <body>
   <?php include_once "vivian_osehra_image.php" ?>
-
-  <div id="circular-chart">
-    <div class='hint' style="position:relative; width:800px; top:50px; left:20px">
-      <p>
+  <div style="position:relative; top:50px; left:20px">
+    <div id="legend_placeholder" style="float: left;"></div>
+    <div style="float: left; margin-left:15px; margin-right:35px;">
+      <label class="btn-primary btn-sm">
+        <input type="checkbox" id="colorMode" onclick="javascript:swapColorScheme()"> Colorblind Mode </input>
+      </label>
+    </div>
+    <div class="hint" style="float: left; margin-left:15px; width:500px;">
       This circle plot captures the interrelationships among VistA packages.
       Mouse over any of the packages in this graph to see incoming links (dependents)
-      in one color and the outgoing links (dependencies) in a second. Click on any of the packages to view package dependency
+      in one color and the outgoing links (dependencies) in a second. Click on
+      any of the packages to view package dependency.
       details.
-      </p>
-    <label class="btn-primary btn-sm">
-        <input type="checkbox" id="colorMode" onclick="javascript:swapColorScheme()"> Colorblind Mode </input>
-    </label>
-    <div id="legend_placeholder" style="position:relative;"></div>
     </div>
-    <div id="chart_placeholder" style="position:relative;"></div>
+  </div>
 
-    <div id="toolTip" class="tooltip" style="opacity:0;">
-      <div id="header1" class="header"></div>
-      <div id="dependency" ></div>
-      <div id="bothDeps"></div>
-      <div id="dependents"></div>
+  <div id="chart_placeholder"></div>
 
-      <div class="tooltipTail"></div>
-    </div>
+  <div id="toolTip" class="tooltip" style="opacity:0;">
+    <div id="header1" class="header"></div>
+    <div id="dependency" ></div>
+    <div id="bothDeps"></div>
+    <div id="dependents"></div>
+    <div class="tooltipTail"></div>
   </div>
 
  <style type="text/css">
@@ -64,7 +64,7 @@
 
   var legendColorChart = d3.chart.treeview()
               .height(50)
-              .width(500)
+              .width(300)
               .margins({top:42, left:10, right:0, bottom:0})
               .textwidth(110);
   function swapColorScheme() {
@@ -197,17 +197,17 @@
   });
 
 function createColorLegend(legendColorChart) {
-  var shapeLegendDisplay = legendColorChart.svg().selectAll("g.shapeLegend")
+  var colorLegendDisplay = legendColorChart.svg().selectAll("g.shapeLegend")
       .data(colorLegend)
-    .enter().append("svg:g")
+      .enter().append("svg:g")
       .attr("class", "shapeLegend")
-      .attr("transform", function(d, i) { return "translate("+(i * 200) +", -10)"; });
+      .attr("transform", function(d, i) { return "translate("+(i * 115) +", -10)"; });
 
-  shapeLegendDisplay.append("path")
+  colorLegendDisplay.append("path")
       .attr("class", function(d) {return d.colorClass;})
       .attr("r", 3);
 
-  shapeLegendDisplay.append("svg:text")
+  colorLegendDisplay.append("svg:text")
       .attr("class", function(d) {return d.colorClass;})
       .attr("id", function(d) {return d.name;})
       .attr("x", 13)
@@ -215,15 +215,15 @@ function createColorLegend(legendColorChart) {
       .text(function(d) {
         return  d.name;
       });
-  var shapeLegendDisplay = legendColorChart.svg();
-  shapeLegendDisplay.append("text")
+  var colorLegendDisplay = legendColorChart.svg();
+  colorLegendDisplay.append("text")
           .attr("x", 0)
           .attr("y", -28 )
           .attr("text-anchor", "left")
           .style("font-size", "16px")
           .text("Color Legend");
 }
-		</script>
+  </script>
 
   </body>
 </html>

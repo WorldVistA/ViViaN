@@ -58,21 +58,15 @@
         <div id="description"></div>
     </div>
   </div>
-  </br>
-  </br>
-  </br>
 </div>
-
-<div style="position:relative; left:20px; top:0px;">
-  <div id="legend_placeholder"></div>
-  </br>
+<div id="legend_placeholder" style="position:relative; left:20px; top:50px;"></div>
+<div style="position:relative; width:400px; left:20px; top:65px;">
   <div id="packageSearch">
     <div><label for="option_autocomplete"> Search for a package:</label></div>
     <div><input id="option_autocomplete" size="40" onfocus="clearAutocomplete()"></div>
     <div id="search_result"> </div>
   </div>
-  </br>
-  <div id="buttons">
+  <div id="buttons" style="position:relative; top:10px;">
       <button onclick="_expandAllNode()">Expand All</button>
       <button onclick="_collapseAllNode()">Collapse All</button>
       <button onclick="_resetAllNode()">Reset</button>
@@ -85,7 +79,7 @@
 var chart = d3.chart.treeview()
               .height(1280)
               .width(1200)
-              .margins({top:42, left:180, right:0, bottom:0})
+              .margins({top:0, left:100, right:0, bottom:0})
               .textwidth(220);
 var legendShapeChart = d3.chart.treeview()
               .height(50)

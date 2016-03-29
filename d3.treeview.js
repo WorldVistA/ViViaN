@@ -13,7 +13,7 @@ d3.chart = d3.chart || {};
 d3.chart.treeview = function(option) {
 
   var _width = 1600, _height = 800,
-          _margins = {top: 0, left: 180, right: 0, bottom: 0},
+          _margins = {top: 0, left: 150, right: 0, bottom: 0},
           _textwidth = 220,
           _svg,
           _nodes,
