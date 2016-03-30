@@ -72,6 +72,7 @@ var legendShapeChart = d3.chart.treeview()
               .width(350)
               .margins({top:42, left:10, right:0, bottom:0})
               .textwidth(110);
+
 <?php include_once "vivian_tree_layout_common.js" ?>
 
 var shapeLegend = [{name: "Framework Grouping", shape: "triangle-up"},

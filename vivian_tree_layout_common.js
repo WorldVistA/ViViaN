@@ -1,21 +1,27 @@
-function toggleAll(d) {
-  if (d.children) {
-    d.children.forEach(toggleAll);
-    toggle(d);
-  }
-}
+
 
 function expandAllNode(root) {
-  //root.children.forEach(toggleAll);
   expand(root)
   root.children.forEach(expandAll);
 }
 
 function collapseAllNode(root) {
-  root.children.forEach(collapseAll);
-  collapse(root)
+  if (root.children) {
+    root.children.forEach(collapseAll);
+  }
+  collapse(root);
 }
 
+function resetAllNode(root) {
+  expand(root);
+  if (root.children !== undefined && root.children) {
+    root.children.forEach(collapseAll);
+    // Initialize the display to show a few nodes.
+    expandAll(root.children[0]);
+  }
+}
+
+// Helper functions
 function expandAll(d) {
   expand(d);
   if (d.children) {
@@ -23,24 +29,11 @@ function expandAll(d) {
   }
 }
 
-function resetAllNode(root) {
-  expand(root);
-  if (root.children !== undefined && root.children)
-  {
-    root.children.forEach(collapseAll);
-    // Initialize the display to show a few nodes.
-    expandAll(root.children[0]);
+function expand(d) {
+  if (d._children) {
+    d.children = d._children;
+    d._children = null;
   }
-  //root.children[0].forEach(toggleAll);
-  //toggle(root.children[0]);
-  //toggle(root.children[0].children[2]);
-  //toggle(root.children[0].children[3]);
-  //toggle(root.children[1]);
-  //toggle(root.children[1].children[0]);
-  //toggle(root.children[1].children[4]);
-  //toggle(root.children[4]);
-  //toggle(root.children[4].children[0]);
-  //update(root);
 }
 
 function collapseAll(d) {
@@ -50,19 +43,10 @@ function collapseAll(d) {
   }
 }
 
-// Collapse Node.
 function collapse(d) {
   if (d.children) {
     d._children = d.children;
     d.children = null;
-  }
-}
-
-// Expand children.
-function expand(d) {
-  if (d._children) {
-    d.children = d._children;
-    d._children = null;
   }
 }
 

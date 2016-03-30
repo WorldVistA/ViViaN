@@ -162,7 +162,11 @@ function _resetAllNode() {
 }
 
 function optionAutoCompleteChanged(event, ui) {
-  clearHighlightedPath();
+  if (chart.nodes()._children) { // collapsed
+    _expandAllNode();
+  } else {
+    clearHighlightedPath();
+  }
   target_option = ui.item.value;
   openSpecificOption();
   setTimeout(highlightPath,300,chart);
@@ -170,7 +174,7 @@ function optionAutoCompleteChanged(event, ui) {
 
 function searchForOption(d) {
   if (d._children) {
-    for(var i=0; i<d._children.length;i++) {
+    for(var i=0; i < d._children.length; i++) {
       var ret = searchForOption(d._children[i])
       if(ret) {
          expand(d);
@@ -213,7 +217,6 @@ function highlightPath(chart) {
       break;
       }
   }
-
   chart.svg().selectAll("path.link").data(target_path).forEach(highlight);
   d3.select("#treeview_placeholder").datum(chart.nodes()).call(chart);
 }
@@ -274,7 +277,10 @@ function pkgLinkClicked(d) {
     // var win = window.open(pkgUrl, '_black');
     // win.focus();
   }
-  else{
+  else {
+    if (d.depth == 0) {
+      clearAutocomplete();
+    }
     chart.onNodeClick(d);
   }
 }

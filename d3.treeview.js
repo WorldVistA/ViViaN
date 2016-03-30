@@ -272,13 +272,6 @@ d3.chart.treeview = function(option) {
       }
   }
 
-  function toggleAll(d) {
-      if (d.children) {
-          d.children.forEach(toggleAll);
-          toggle(d);
-      }
-  }
-
   function fillNodeCircle(d) {
     return d._children ? "lightsteelblue" : "#FFF";
   }
@@ -337,9 +330,6 @@ d3.chart.treeview = function(option) {
     render(d);
   };
 
-  chart.resetAllNode = function() {
-
-  };
 
   chart.nodeTextHyperLink = function(n) {
     if (!arguments.length) return n;
