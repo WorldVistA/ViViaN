@@ -224,6 +224,9 @@ var toolTip = d3.select(document.getElementById("toolTip"));
 var header = d3.select(document.getElementById("head"));
 
 function node_onMouseClick(d) {
+  if (d.depth == 0) {
+    clearAutocomplete();
+  }
   chart.onNodeClick(d);
   if(selectedIndex !== 0){
     d3.selectAll("text")
@@ -373,8 +376,8 @@ function createShapeLegend() {
           .style("font-size", "16px")
           .text("Shape Legend");
 }
+
 function clearAutocomplete() {
-  console.log("clearAutocomplete");
   document.getElementById("option_autocomplete").value= '';
   chart.svg().selectAll("path.link").data(target_path).forEach(function(d) {
       for(var i =0; i< d.length; i++) {
