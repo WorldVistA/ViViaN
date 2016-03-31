@@ -114,9 +114,16 @@ function highlightPath(chart) {
       $("#option_autocomplete")[0].style.border="solid 4px blue";
       $("#search_result").html("<h5>Target option found in menu, but couldn't be matched.</h5>");
       resetAllNode(chart.nodes())
+      target_path = [];
       break;
       }
   }
+
+  if (target_path.length) {
+    $("#option_autocomplete")[0].style.border="";
+    $("#search_result").html("");
+  }
+
   chart.svg().selectAll("path.link").data(target_path).forEach(highlight);
   d3.select("#treeview_placeholder").datum(chart.nodes()).call(chart);
 }
@@ -129,6 +136,8 @@ function highlight(d) {
 
 function clearAutocomplete() {
   document.getElementById("option_autocomplete").value= '';
+  $("#option_autocomplete")[0].style.border="";
+  $("#search_result").html("");
   clearHighlightedPath();
 }
 
