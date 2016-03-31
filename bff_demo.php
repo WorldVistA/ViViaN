@@ -151,7 +151,7 @@ function node_onMouseOut(d) {
 function createShapeLegend() {
   var shapeLegendDisplay = legendShapeChart.svg().selectAll("g.shapeLegend")
       .data(shapeLegend)
-    .enter().append("svg:g")
+      .enter().append("svg:g")
       .attr("class", "shapeLegend")
       .attr("transform", function(d, i) { return "translate("+(i * 200) +", -10)"; })
   shapeLegendDisplay.append("path")
@@ -164,7 +164,7 @@ function createShapeLegend() {
       .attr("x", 13)
       .attr("dy", ".31em")
       .text(function(d) {
-        return  d.name;
+        return d.name;
       });
 
   var shapeLegendDisplay = legendShapeChart.svg();
