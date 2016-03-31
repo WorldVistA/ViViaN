@@ -76,13 +76,13 @@
     <div><label title="Show the structure of a top level menu by entering the name of the option."
                 for="autocomplete">Select a top level menu:</label></div>
     <div><input id="autocomplete" size="40"></div>
-    <div id="search_result"> </div>
   </div>
   </br>
   <div>
     <div><label title="Search for an option by entering the name of the option that you wish to find."
-                for="option_autocomplete">Search for an Option:</label></div>
+                for="option_autocomplete">Search for an option:</label></div>
     <div><input id="option_autocomplete" size="40"></div>
+    <div id="search_result"> </div>
   </div>
   <div id="buttons" style="position:relative; top:10px;">
     <button onclick="_collapseAllNode()">Collapse All</button>
