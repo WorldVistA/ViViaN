@@ -20,7 +20,12 @@
           <li><a href="vista_menus.php">VistA Menus</a></li>
           <li><a href="bff_demo.php">VHA BFF Demo</a></li>
           <li><a href="vista_pkg_dep.php">VistA Package Dependency</a></li>
-          <li><a href="installScale.php">VistA Install Timeline</a></li>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">VistA Install<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="installScale.php">Install Timeline</a></li>
+              <li><a href="patchDependency.php">Install Dependency Tree</a></li>
+            </ul>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li><a href="javascript:aboutClicked();">About</a></li>
