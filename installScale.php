@@ -21,7 +21,7 @@
           }
         });
 
-        d3.json('packages_autocomplete.json', function(json) {
+        d3.json('install_autocomplete.json', function(json) {
           var sortedjson = json.sort(function(a,b) { return a.localeCompare(b); });
           $("#package_autocomplete").autocomplete({
             source: sortedjson,
@@ -219,7 +219,6 @@ function resetMenuFile(packageName,start,stop) {
         .tickSize(10)
         .tickPadding(8);
 
-        
       /* Sorts the pkgInfo to put the tallest bars first, this should prevent the smaller bars from being
       *  hidden by a taller bar.
       */
@@ -309,9 +308,7 @@ function resetMenuFile(packageName,start,stop) {
         .attr("transform", "rotate(90)")
         .style("text-anchor", "start");
         shownPackage=packageName;
-    }
-    else
-    {
+    } else {
       alert("No information for that package")
       $("#package_autocomplete").val(shownPackage)
     }

@@ -96,9 +96,10 @@ Product_Management (ViViaN) repository.
 
   * Visual/files directory created in 1.
   * Visual/menus directory populated in 2.
-  * ``Packages.csv``, ``PackageCategories.json``
+  * ``Packages.csv``, ``PackageCategories.json``, and ``install_information.json``
 
-The script creates or updates: ``menu_autocomplete.json``, ``option_autocomplete.json``, ``PackageInterface.csv``, and ``packages.json``.
+The script creates or updates: ``menu_autocomplete.json``, ``option_autocomplete.json``, ``PackageInterface.csv``,
+``packages.json``, ``packages_autocomplete.json`` and ``install_autocomplete.json``.
 
 Note: ``bff.json`` and ``pkgdep.json`` are also required by the ViViaN pages.
 These files are included in the ProductManagement repository and are updated
