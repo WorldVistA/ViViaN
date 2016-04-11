@@ -68,10 +68,13 @@ function collapse(d) {
 }
 
 // Highlight path
-var target_node;
+var target_node = null;
 var target_path = [];
 
 function openSpecificNode(target, root) {
+  target_node = null;
+  target_path = [];
+
   collapseAllNode(root);
   searchForNode(target, root);
 }
@@ -102,7 +105,7 @@ function highlightPath(chart) {
   var links = tree.links(nodes);
   var target = target_node;
 
-  while (target.name != nodes[0].name) {
+  while (target != null && target.name != nodes[0].name) {
     var link = chart.svg().selectAll("path.link").data(links, function(d) {
       if(d.target == target) {
         target = d.source;
@@ -148,6 +151,7 @@ function clearHighlightedPath() {
     }
   });
 
+  target_node = null;
   target_path = [];
 }
 
