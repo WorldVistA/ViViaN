@@ -26,11 +26,15 @@ def run():
   print "*** Updated PackageInterface.csv"
 
   # input: PackageCategories.json, Packages.csv and PackageInterface.csv
-  # output: packages.json, packages_autocomplete.json
+  # output: packages.json and packages_autocomplete.json
   pkgcsv_to_json.generate_packages_json()
   print "*** Updated packages.json"
   print "*** Updated packages_autocomplete.json"
 
+  # input: install_information.json
+  # output: install_autocomplete.json
+  install_autocomplete_gen.run()
+  print "*** Updated install_autocomplete.json"
 
 if __name__ == '__main__':
   run()
