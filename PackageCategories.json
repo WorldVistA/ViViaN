@@ -472,7 +472,7 @@
                                 "VA", 
                                 "DSS"
                             ], 
-                            "name": "Electronic Signature "
+                            "name": "Electronic Signature"
                         }, 
                         {
                             "distribution": [
@@ -1031,7 +1031,7 @@
                                 "VA", 
                                 "DSS"
                             ], 
-                            "name": "Methicillin Resistant Staph Aurerus Initiative Reports "
+                            "name": "Methicillin Resistant Staph Aurerus Initiative Reports"
                         }
                     ]
                 }
@@ -1102,7 +1102,7 @@
                         "VA", 
                         "DSS"
                     ], 
-                    "name": "Patient Representive"
+                    "name": "Patient Representative"
                 }, 
                 {
                     "distribution": [
