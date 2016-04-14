@@ -121,21 +121,6 @@ function installAutocompleteChanged(eve, ui) {
   showDependency(ui.item.value);
 }
 
-/*function findChildNode(nodes, target) {
-    function(d) {
-      if (d.name == target.name ){
-        d.children= target.children;
-        return nodes
-      }
-      if(d.children) {
-        findChildNode(d,target);
-      }
-    })
-    return nodes;
-}
-
-*/
-
 function appendPackageInformation (d,json){
   var id = ''
   d.forEach(function (child) {
@@ -162,11 +147,19 @@ function node_onMouseOver(d) {
   toolTip.style("left", (d3.event.pageX + 20) + "px")
          .style("top", (d3.event.pageY + 5) + "px")
          .style("opacity", ".9");
+
+  var nodes = d3.selectAll("g.node")
+                .filter( function (node) {return (node.name == d.name)})
+                .classed('active',true);
+
 }
 
 function node_onMouseOut(d) {
   header.text("");
   toolTip.style("opacity", "0");
+  var nodes = d3.selectAll("g.node")
+                .filter( function (node) {return (node.name == d.name)})
+                .classed('active',false);
 }
 
 
