@@ -11,6 +11,10 @@
         cursor: hand;
       }
 
+      .node.active {
+        stroke: red;
+      }
+
       .legend circle {
         fill-opacity: 1;
       }
