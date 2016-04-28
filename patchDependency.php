@@ -88,7 +88,7 @@ var chart = d3.chart.treeview()
               .textwidth(220)
               .nodeTextHyperLink(getInstallDetailLink);
 var initPackage = "Barcode Medication Administration";
-var initInstall = 105;
+var initInstall = "PSB*3.0*68" ;
 var targetPackage = initPackage;
 var toolTip = d3.select(document.getElementById("toolTip"));
 var header = d3.select(document.getElementById("header1"));
@@ -104,7 +104,7 @@ function packageAutocompleteChanged(eve, ui) {
           targetPackage = ui.item.label
           $("#install_autocomplete").val("");
           d3.json('install_information.json', function(json) {
-          var sortedjson = json[ui.item.label].sort(function(a,b) { return a.name.localeCompare(b.name); });
+          var sortedjson = Object.keys(json[ui.item.label]).sort(function(a,b) { return a.localeCompare(b); });
           $("#install_autocomplete").autocomplete({
             source: sortedjson,
             select: function(event, ui) {
@@ -125,11 +125,8 @@ function appendPackageInformation (d,json){
   var id = ''
   d.forEach(function (child) {
       var target = '';
-      var blah = json[child.package];
-      blah.forEach(function(search) {
-        if( search.name == child.name) {target = $.extend(true, {},search);}
-      });
-
+      var packageInformation = json[child.package];
+      var target = $.extend(true, {},packageInformation[child.name]);
       if(target) {
         child.installDate= target.installDate;
         child.ien  = target.ien;
@@ -156,6 +153,7 @@ function node_onMouseOver(d) {
 
 function node_onMouseOut(d) {
   header.text("");
+  installDateTip.text("");
   toolTip.style("opacity", "0");
   var nodes = d3.selectAll("g.node")
                 .filter( function (node) {return (node.name == d.name)})
@@ -196,7 +194,7 @@ function showDependency(entryNo) {
       .on("path", "style", "fill", change_circle_color)*/
       .on("path", "attr", "r", function(d) { return 7 - d.depth; });
     var root = json[targetPackage][entryNo];
-    if(root.children) {
+    if(root.hasOwnProperty("children")) {
       root.children = appendPackageInformation(root.children,json)
     }
 
@@ -207,10 +205,6 @@ function showDependency(entryNo) {
 }
 $("#package_autocomplete").val(targetPackage);
 showDependency(initInstall)
-var temp = { "item": {"label": targetPackage}};
-packageAutocompleteChanged("",temp )
-var temp = { "item": {"label": "PSB*3.0*68"}};
-installAutocompleteChanged("",temp )
     </script>
   </body>
 </html>
