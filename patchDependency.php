@@ -22,6 +22,7 @@
         });
 
         d3.json('packages_autocomplete.json', function(json) {
+          json.push("MultiBuild");
           var sortedjson = json.sort(function(a,b) { return a.localeCompare(b); });
           $("#package_autocomplete").autocomplete({
             source: sortedjson,
@@ -42,6 +43,7 @@
     <?php include_once "vivian_osehra_image.php" ?>
     <!-- <select id="category"></select> -->
   </div>
+  <!-- Tooltip -->
   <!-- Tooltip -->
      <div id="toolTip" class="tooltip" style="opacity:0;">
       <div id="header1" class="header"></div>
@@ -68,8 +70,14 @@
    <div>
     <label title="Search for an option by entering the name of the option that you wish to find."> Install information for package:</label>
     <input id="package_autocomplete" size="40"></br>
-    <label title="Select Patch"> Patch Dependency:</label>
+    <div id="installEntryAuto">
+    <label for ="install_autocomplete" title="Select Patch"> Patch Dependency:</label>
     <input id="install_autocomplete" size="40"></br>
+    </div>
+    <div id="installEntryDrop" style="display: none">
+      <label for ='install_dropdown' title="Select Patch"> Patch Dependency:</label>
+      <select id="install_dropdown"></select>
+    </div>
     <div id="buttons">
         <button onclick="_expandAllNode()">Expand All</button>
         <button onclick="_collapseAllNode()">Collapse All</button>
@@ -90,12 +98,12 @@ var chart = d3.chart.treeview()
               .nodeTextHyperLink(getInstallDetailLink)
               .pannableTree(true);
 var initPackage = "Barcode Medication Administration";
-var initInstall = "PSB*3.0*68" ;
+var initInstall = "PSB*3.0*68";
 var targetPackage = initPackage;
 var toolTip = d3.select(document.getElementById("toolTip"));
 var header = d3.select(document.getElementById("header1"));
 var installDateTip = d3.select(document.getElementById("installDate"));
-var originalTransform = [180,300];
+var originalTransform = [300,300];
 <?php include_once "vivian_tree_layout_common.js" ?>
 /*
 *  Function to handle the graph when selecting a new package
@@ -103,19 +111,36 @@ var originalTransform = [180,300];
 *  from the date selectors and the value of the new package
 */
 function packageAutocompleteChanged(eve, ui) {
-          targetPackage = ui.item.label
-          $("#install_autocomplete").val("");
-          d3.json('install_information.json', function(json) {
-          var sortedjson = Object.keys(json[ui.item.label]).sort(function(a,b) { return a.localeCompare(b); });
-          $("#install_autocomplete").autocomplete({
-            source: sortedjson,
-            select: function(event, ui) {
-              event.preventDefault();
-              $("#install_autocomplete").val(ui.item.label);
-              installAutocompleteChanged(event,ui);
-            }
-          }).data('autocomplete')/*._trigger('select')*/;
-        });
+  d3.json('install_information.json', function(json) {
+    targetPackage = ui.item.label
+    if(ui.item.label == "MultiBuild") {
+      console.log($("#installEntryAuto"));
+      $("#installEntryAuto").hide();
+      $("#installEntryDrop").show();
+
+      $('#install_dropdown').selectmenu({
+        change: function(event,ui) { showDependency(ui.item.value);},
+        appendTo: "#installEntryDrop",
+        width: 400
+      });
+      var jqueryDropdown = $('#install_dropdown')
+      Object.keys(json[ui.item.label]).forEach(function(key, value) {
+           jqueryDropdown.append($("<option/>").val(key).text(key));
+      })
+    }
+    else {
+      $("#installEntryAuto").show();
+      $("#installEntryDrop").hide();
+      $("#install_autocomplete").val("");
+
+      var sortedjson = Object.keys(json[ui.item.label]).sort(function(a,b) { return a.localeCompare(b); });
+      $("#install_autocomplete").autocomplete({
+        source: sortedjson,
+        select: installAutocompleteChanged
+        })
+        .data('autocomplete')/*._trigger('select')*/;
+    }
+  })
 }
 
 function installAutocompleteChanged(eve, ui) {
