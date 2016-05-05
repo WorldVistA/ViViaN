@@ -8,6 +8,18 @@ d3.chart = d3.chart || {};
  * d3.select('#treelayout_placeholder')
  *   .datum(data)
  *   .call(chart);
+ *
+ *  To utilize the panning functionality of the treeview
+ *  some extra information is required
+ *
+ *  In addition to adding a ".pannableTree(true)" command
+ *  to the initialization, a global array called "originalTransform"
+ *  must be generated.  This array contains the X and Y coordinates of
+ *  the initial position of the root node of the tree.  The value for the
+ *  patchDependency visualization is as follows:
+ *
+ *  var originalTransform = [180,300];
+ *
  */
 
 d3.chart.treeview = function(option) {
@@ -21,6 +33,7 @@ d3.chart.treeview = function(option) {
       _tree,
       _diagonal,
       _nodeTextHyperLink,
+      _pannableTree = false,
       _cust = {
         node: {
           event:{
@@ -62,8 +75,11 @@ d3.chart.treeview = function(option) {
                 .attr("transform", function(d){
                   return "translate(" + _margins.left + "," + _margins.top + ")";
                 });
+        if(_pannableTree) {
+          selection.call(zoomListener);
+          zoomListener.translate(originalTransform).scale(1);
+        }
     }
-
     renderBody(_svg);
   };
 
@@ -320,6 +336,10 @@ d3.chart.treeview = function(option) {
     return _svg;
   };
 
+  chart.tree = function (n) {
+    return _tree;
+  };
+
   chart.on = function(target, type, prop, value) {
     if (arguments.length == 3) {
       return _cust[target][type][prop];
@@ -347,5 +367,28 @@ d3.chart.treeview = function(option) {
       return chart;
     }
   };
+
+  chart.pannableTree = function(n) {
+    if (!arguments.length) {
+      return n;
+    } else {
+      _pannableTree = n;
+      return chart;
+    }
+  };
+
+  chart.centerDisplay = function(n) {
+    _svg.transition().attr("transform","translate("+originalTransform[0]+","+originalTransform[1]+")");
+    zoomListener.translate(originalTransform).scale(1);
+  }
+
+  //Taken from http://bl.ocks.org/robschmuecker/6afc2ecb05b191359862
+  // =================================================================
+  var panSpeed = 200;
+  var zoomListener = d3.behavior.zoom().scaleExtent([.5,2]).on("zoom", zoomFunc);
+  function zoomFunc() {
+      _svg.attr("transform", "translate(" + d3.event.translate + ")scale("+d3.event.scale+")");
+  }
+  //===================================================================
   return chart;
 }

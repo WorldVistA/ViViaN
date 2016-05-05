@@ -13,7 +13,7 @@
           event.preventDefault();
         });
         $('#navigation_buttons li').each(function (i) {
-          if (i === 5) {
+          if (i === 4) {
             $(this).removeClass("active").addClass("active");
           }
           else {
@@ -74,6 +74,7 @@
         <button onclick="_expandAllNode()">Expand All</button>
         <button onclick="_collapseAllNode()">Collapse All</button>
         <button onclick="_resetAllNode()">Reset</button>
+        <button onclick="_centerDisplay()">Center</button>
     </div>
   </div>
 
@@ -86,14 +87,15 @@ var chart = d3.chart.treeview()
               .width(2000)
               .margins({top:0, left:180, right:0, bottom:0})
               .textwidth(220)
-              .nodeTextHyperLink(getInstallDetailLink);
+              .nodeTextHyperLink(getInstallDetailLink)
+              .pannableTree(true);
 var initPackage = "Barcode Medication Administration";
 var initInstall = "PSB*3.0*68" ;
 var targetPackage = initPackage;
 var toolTip = d3.select(document.getElementById("toolTip"));
 var header = d3.select(document.getElementById("header1"));
 var installDateTip = d3.select(document.getElementById("installDate"));
-var idVal= 0;
+var originalTransform = [180,300];
 <?php include_once "vivian_tree_layout_common.js" ?>
 /*
 *  Function to handle the graph when selecting a new package
@@ -178,7 +180,12 @@ function _collapseAllNode() {
 
 function _resetAllNode() {
   resetAllNode(chart.nodes());
+  _centerDisplay();
   chart.update(chart.nodes());
+}
+
+function _centerDisplay() {
+  chart.centerDisplay();
 }
 
 function showDependency(entryNo) {
@@ -197,14 +204,17 @@ function showDependency(entryNo) {
     if(root.hasOwnProperty("children")) {
       root.children = appendPackageInformation(root.children,json)
     }
-
     resetAllNode(root);
     d3.select("#treeview_placeholder").datum(root).call(chart);
+    chart.tree().nodeSize([15,0]);
 
+    chart.svg().attr("transform","translate("+originalTransform+")")
+    chart.update(chart.nodes())
   });
 }
 $("#package_autocomplete").val(targetPackage);
 showDependency(initInstall)
+
     </script>
   </body>
 </html>
