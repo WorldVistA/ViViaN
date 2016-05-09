@@ -197,13 +197,24 @@ function resetMenuFile(packageName,start,stop) {
     */
     if (packageName in json) {
       var pkgInfo = json[packageName]
-      if (start === "") { start = json[packageName][0].installDate}
+      
+      /*
+      *  Pushes the JSON information into an array so that it can be sorted.
+      *  First sort by install date to acquire the earliest install date
+      *  and use that as the start of the default display time frame
+      */
+      var pkgInfoArray = [];
+      for (elem in pkgInfo) {
+        pkgInfoArray.push(pkgInfo[elem])
+      }
+      pkgInfoArray.sort(function(a,b) { return a.installDate.localeCompare(b.installDate); });
+      if (start === "") { start = pkgInfoArray[0].installDate}
       if (stop === "") { stop = endDate}
       var svg = d3.select('body').select('svg')
       svg.selectAll("*").remove();
 
-    $("#timeline_date_start").datepicker("setDate",new Date(start))
-    $("#timeline_date_stop").datepicker("setDate",new Date(stop))
+      $("#timeline_date_start").datepicker("setDate",new Date(start))
+      $("#timeline_date_stop").datepicker("setDate",new Date(stop))
 
       // Generate a time scale to position the dates along the axis
       // domain uses the dates above, rangeRound is set to keep it within
@@ -218,21 +229,20 @@ function resetMenuFile(packageName,start,stop) {
         .orient('bottom')
         .tickSize(10)
         .tickPadding(8);
-
-      /* Sorts the pkgInfo to put the tallest bars first, this should prevent the smaller bars from being
-      *  hidden by a taller bar.
-      */
-      var sortedpkgInfo = pkgInfo.slice();
-      sortedpkgInfo.sort(function(a,b) {
-          return (((b.numFiles||1) + (b.numRoutines||1)) - ((a.numFiles||1) + (a.numRoutines||1)));
-      });
       /*
       *  This function generates the background bars which represent
       *  different versions of each package.
       *
       *  ie Change from Dietetics 5.0 to Dietetics 5.5
       */
-      var pkgVersions= pkgVersionData_gen(pkgInfo)
+      var pkgVersions= pkgVersionData_gen(pkgInfoArray)
+
+      /* Sorts the pkgInfo to put the tallest bars first, this should prevent the smaller bars from being
+      *  hidden by a taller bar.
+      */
+      pkgInfoArray.sort(function(a,b) {
+          return (((b.numFiles||1) + (b.numRoutines||1)) - ((a.numFiles||1) + (a.numRoutines||1)));
+      });
 
       // Add the chart to the SVG object
       svg.attr('class', 'chart')
@@ -271,7 +281,7 @@ function resetMenuFile(packageName,start,stop) {
       *
       */
       svg.selectAll('.chart')
-        .data(sortedpkgInfo)
+        .data(pkgInfoArray)
         .enter().append('rect')
         .attr('class', 'bar')
         .attr('x', function(d) {return x(new Date(d.installDate)); })
