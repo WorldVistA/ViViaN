@@ -4,6 +4,7 @@
     script individually.
 """
 
+import install_autocomplete_gen
 import menu_autocomplete_gen
 import option_autocomplete_gen
 import pkg_interface_gen
