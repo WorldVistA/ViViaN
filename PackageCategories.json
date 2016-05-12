@@ -1131,17 +1131,6 @@
             ]
         }, 
         {
-            "name": "Other", 
-            "children": [
-                {
-                    "distribution": [
-                        "DSS"
-                    ], 
-                    "name": "DSS vxVistA Enhancement"
-                }
-            ]
-        }, 
-        {
             "name": "Registration/Enrollment/Eligibility", 
             "children": [
                 {
