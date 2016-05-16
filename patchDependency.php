@@ -65,9 +65,9 @@
   </div>
   <br>
    <div>
-    <label title="Search for an option by entering the name of the option that you wish to find."> Install information for package:</label>
+    <label for="package_autocomplete" title="Search for an option by entering the name of the option that you wish to find."> Install information for package:</label>
     <input id="package_autocomplete" size="40"></br>
-    <label title="Select Patch"> Patch Dependency:</label>
+    <label for ="install_autocomplete" title="Select Patch"> Patch Dependency:</label>
     <input id="install_autocomplete" size="40"></br>
     <div id="buttons">
         <button onclick="_expandAllNode()">Expand All</button>

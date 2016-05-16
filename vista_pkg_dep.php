@@ -27,7 +27,7 @@
   <div style="position:relative; top:50px; left:20px">
     <div id="legend_placeholder" style="float: left;"></div>
     <div style="float: left; margin-left:15px; margin-right:35px;">
-      <label class="btn-primary btn-sm">
+      <label for="colorMode" class="btn-primary btn-sm">
         <input type="checkbox" id="colorMode" onclick="javascript:swapColorScheme()"> Colorblind Mode </input>
       </label>
     </div>
