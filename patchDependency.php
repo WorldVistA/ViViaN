@@ -43,14 +43,13 @@
     <!-- <select id="category"></select> -->
   </div>
   <!-- Tooltip -->
-     <div id="toolTip" class="tooltip" style="opacity:0;">
-      <div id="header1" class="header"></div>
-      <div id="installDate" ></div>
-      <div class="tooltipTail"></div>
-    </div>
+  <div id="toolTip" class="tooltip" style="opacity:0;">
+    <div id="header1" class="header"></div>
+    <div id="installDate" ></div>
+    <div class="tooltipTail"></div>
   </div>
-  </br>
-  </br>
+  <br>
+  <br>
   <div id="descrHeader" >
     <p>The information in this visualization is not complete.  The majority of the installs may
        not have dependency information.  For the best examples of the dependency display, select
@@ -64,7 +63,7 @@
       <li> Integrated Billing: IB*2.0*497 </li>
     </ul>
   </div>
-  </br>
+  <br>
    <div>
     <label title="Search for an option by entering the name of the option that you wish to find."> Install information for package:</label>
     <input id="package_autocomplete" size="40"></br>
@@ -77,7 +76,7 @@
     </div>
   </div>
 
-<div id="treeview_placeholder"/>
+<div id="treeview_placeholder"></div>
 
 <script type="text/javascript">
 

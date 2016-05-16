@@ -3,7 +3,7 @@
   <div style="position:absolute; left: 20px;">
     <a href="http://www.osehra.org">
       <img src="http://www.osehra.org/profiles/drupal_commons/themes/commons_osehra_earth/logo.png"
-      style="border-width:10" height="48" width="200" alt="OSEHRA Logo"/>
+          style="border-width:10" height="48" width="200" alt="OSEHRA Logo"/>
     </a>
   </div>
 
