@@ -16,7 +16,10 @@
       <div class="container-fluid">
         <ul class="nav navbar-nav">
           <li>
-          <a class="brand" href="index.php"> <img width="137" height="50" src="http://osehra.org/sites/default/files/vivian.png"></img></a></li>
+            <a class="brand" href="index.php">
+              <img src="http://osehra.org/sites/default/files/vivian.png" width="137" height="50" alt="ViViaN Logo"/>
+            </a>
+          </li>
           <li><a href="vista_menus.php">VistA Menus</a></li>
           <li><a href="bff_demo.php">VHA BFF Demo</a></li>
           <li><a href="vista_pkg_dep.php">VistA Package Dependency</a></li>
