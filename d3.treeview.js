@@ -218,6 +218,12 @@ d3.chart.treeview = function(option) {
     return shape;
   }
 
+  //Necessary to open the xlinked information on pannable views.
+  //Shows no difference on non-panning view
+  function openLink(d) {
+    window.open($(this).parent().attr("href"));
+  }
+
   function renderLabels(nodeEnter, nodeUpdate, nodeExit) {
     var textEnter;
     if (_nodeTextHyperLink) {
@@ -225,7 +231,8 @@ d3.chart.treeview = function(option) {
         .attr("xlink:href", _nodeTextHyperLink)
         .attr("target", "_blank")
         .style("text-decoration", "none")
-        .insert("svg:text");
+        .insert("svg:text")
+        .on('click', openLink, true);
     } else {
       textEnter = nodeEnter.append("svg:text");
     }
@@ -385,7 +392,8 @@ d3.chart.treeview = function(option) {
   //Taken from http://bl.ocks.org/robschmuecker/6afc2ecb05b191359862
   // =================================================================
   var panSpeed = 200;
-  var zoomListener = d3.behavior.zoom().scaleExtent([.5,2]).on("zoom", zoomFunc);
+  var zoomListener = d3.behavior.zoom().scaleExtent([.5,2])
+                                       .on("zoom", zoomFunc);
   function zoomFunc() {
       _svg.attr("transform", "translate(" + d3.event.translate + ")scale("+d3.event.scale+")");
   }
