@@ -77,7 +77,7 @@
                 for="autocomplete">Select a top level menu:</label></div>
     <div><input id="autocomplete" size="40"></div>
   </div>
-  </br>
+  <br>
   <div>
     <div><label title="Search for an option by entering the name of the option that you wish to find."
                 for="option_autocomplete">Search for an option:</label></div>
@@ -313,6 +313,5 @@ function createShapeLegend() {
 }
 
     </script>
-    </div>
   </body>
 </html>

@@ -60,7 +60,7 @@
         <div id="description"></div>
     </div>
   </div>
-</div>
+
 <div id="legend_placeholder" style="position:relative; left:20px; top:50px;"></div>
 <div style="position:relative; width:400px; left:20px; top:65px;">
   <div id="packageSearch">
@@ -75,7 +75,7 @@
   </div>
 </div>
 
-<div id="treeview_placeholder"/>
+<div id="treeview_placeholder"></div>
 
 <script type="text/javascript">
 

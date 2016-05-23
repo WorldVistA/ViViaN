@@ -56,11 +56,11 @@
   <div id="descrHeader" ></div>
   </br>
    <div>
-    <label title="Search for an option by entering the name of the option that you wish to find."> Install information for package:</label>
+    <label for="package_autocomplete" title="Search for an option by entering the name of the option that you wish to find."> Install information for package:</label>
     <input id="package_autocomplete" size="40"></br>
     <label title="Set the data parameters for the timeline.">Select date range to view:</label>
-    <input type="text" id="timeline_date_start" >
-    <input type="text" id="timeline_date_stop">
+    <input type="text" id="timeline_date_start" title="Start Date" >
+    <input type="text" id="timeline_date_stop" title="Stop Date" >
     <button id="timeline_date_update">Update</button>
     <button id="timeline_date_reset">Reset</button>
   </div>
