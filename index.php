@@ -307,11 +307,20 @@ function getHLOLinkByPackageName(pkgName, linkUrl) {
   return "<a href=\"" + defLnk + "/" + pkgName + "-HLO.html\" target=\"_blank\">HLO</a>";
 }
 
+function getICRLinkByPackageName(pkgName, linkUrl) {
+  var defLnk = "files";
+  if (linkUrl){
+    defLnk = linkUrl + '/' + defLnk;
+  }
+  return "<a href=\"" + defLnk + "/" + pkgName + "-ICR.html\" target=\"_blank\">ICR</a>";
+}
+
 function getInterfaceHtml(node) {
   pkgName = node.name
   var htmlLnk = "<ul>";
   var rpcLink = "";
   var hl7Link = "";
+  var icrLink = "";
   var protocolLink = "";
   var hloLink = "";
   var extraLink = "";
@@ -338,12 +347,17 @@ function getInterfaceHtml(node) {
     if (index >= 0){
       hloLink = getHLOLinkByPackageName(pkgName, extraLink);
     }
+    index = node.interfaces.indexOf("ICR");
+    if (index >= 0){
+      icrLink = getICRLinkByPackageName(pkgName);
+    }
   }
   if (pkgName === 'Order Entry Results Reporting'){
     htmlLnk += "<li><a href=\"http://www.osehra.org/content/vista-api?quicktabs_vista_api=0#quicktabs-vista_api\" target=\"_blank\">M API</a></li>";
     htmlLnk += "<li>" + rpcLink + "</li>";
     htmlLnk += "<li><a href=\"http://www.osehra.org/content/vista-api?quicktabs_vista_api=2#quicktabs-vista_api\" target=\"_blank\">Web Service API</a></li>";
     htmlLnk += "<li>" + hl7Link + "</li>";
+    htmlLnk += "<li>" + icrLink + "</li>";
     htmlLnk += "</ul>";
   }
   else{
@@ -360,6 +374,9 @@ function getInterfaceHtml(node) {
     }
     if (hloLink.length > 0){
       htmlLnk += "<li>" + hloLink + "</li>";
+    }
+    if (icrLink.length > 0){
+      htmlLnk += "<li>" + icrLink + "</li>";
     }
     htmlLnk += "</ul>";
   }
