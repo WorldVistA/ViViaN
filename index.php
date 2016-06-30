@@ -100,7 +100,7 @@ $("#accordion").accordion({heightStyle: 'content', collapsible: true}).hide();
 
 <?php include_once "vivian_tree_layout_common.js" ?>
 
-var package_link_url = "http://code.osehra.org/dox/";
+var package_link_url = "http://code.osehra.org/dox_alpha/vxvista/Package_";
 var toolTip = d3.select(document.getElementById("toolTip"));
 var header = d3.select(document.getElementById("header1"));
 var selectedIndex = 0;

@@ -1,0 +1,1 @@
+{"children": [{"type": "run routine", "name": "IMPORT wholesale price", "option": "VFDVXPSI WHOLESALE PRICE I", "ien": "11710"}, {"type": "edit", "name": "EDIT wholesale price", "option": "VFDVXPSI WHOLESALE PRICE E", "ien": "11711"}], "type": "menu", "name": "PHARMACY IMPORT MAIN", "option": "VFDVXPSI MAIN", "ien": "11712"}

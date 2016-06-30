@@ -1,6 +1,17 @@
 {
-    "name": "VistA", 
+    "name": "vxVistA",
     "children": [
+        {
+            "name": "Open Source vxVistA",
+            "children": [
+                {
+                    "distribution": [
+                        "DSS"
+                    ],
+                    "name": "DSS vxVistA Enhancement"
+                }
+            ]
+        },
         {
             "name": "Provider Services", 
             "children": [

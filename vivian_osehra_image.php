@@ -1,13 +1,14 @@
 <div style="position:relative; left:0px; top:10px;">
 
-  <div style="position:absolute; left: 20px;">
-    <a href="http://www.osehra.org">
-      <img src="http://www.osehra.org/profiles/drupal_commons/themes/commons_osehra_earth/logo.png"
-          style="border-width:10" height="48" width="200" alt="OSEHRA Logo"/>
-    </a>
-  </div>
+<div style="position:relative; left:20px; top:2px;">
+<a href="http://www.osehra.org">
+<img src="http://www.osehra.org/profiles/drupal_commons/themes/commons_osehra_earth/logo.png"
+style="border-width:0" height="35" width="150" alt="OSEHRA Logo" /></a>
+<a href="http://www.vxvista.org">
+<img src="images/vxVistA15.png"
+style="border-width:0" height="35" width="150" alt="vxVistA Logo" /></a>
 
-  <div id="title" style="position:absolute; left:235px; top:10px; font-size:1.0em;">
+  <div id="title" style="position:absolute; left:350px; top:10px; font-size:1.0em;">
     ViViaN<sup style="font-size:0.59em;">TM</sup>(<u>Vi</u>sualizing <u>Vi</u>stA <u>a</u>nd <u>N</u>amespace)
   </div>
 
@@ -21,13 +22,11 @@
             </a>
           </li>
           <li><a href="vista_menus.php">VistA Menus</a></li>
-          <li><a href="bff_demo.php">VHA BFF Demo</a></li>
           <li><a href="vista_pkg_dep.php">VistA Package Dependency</a></li>
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">VistA Install<span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><a href="installScale.php">Install Timeline</a></li>
-              <li><a href="patchDependency.php">Install Dependency Tree</a></li>
             </ul>
         </ul>
         <ul class="nav navbar-nav navbar-right">
@@ -49,9 +48,9 @@
         </ul>
       </div>
     </nav>
+
   </div>
 </div>
-
 <script>
   function aboutClicked(){
     var overlayDialogObj = {

@@ -1,0 +1,1 @@
+{"name": "Fix Uncoded ICD OPERATION/PROCEDURE Codes", "lock": "APCDSUPER", "ien": "10999", "type": "menu", "children": [{"lock": "APCDZSUPER", "type": "run routine", "name": "Fix Uncoded V PROCEDURE Operation Codes", "option": "APCDFIXOPS", "ien": "10998"}], "option": "APCDFIXPROCEDURE"}
