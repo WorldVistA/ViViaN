@@ -10,6 +10,14 @@
         font-size: 11px;
         cursor: hand;
       }
+      
+      .node.active {
+        stroke: red;
+      }
+
+      .node.active {
+        stroke: red;
+      }
 
       .legend circle {
         fill-opacity: 1;
@@ -22,6 +30,29 @@
         cursor: pointer;
       }
 
+      #title {
+        position:relative;
+        top:10px;
+        left:30px;
+        font-size:.97em;
+      }
+
+      #title div {
+        position:relative;
+        font-size:.90em;
+      }
+
+      #title button {
+          font-size : 10px;
+        position : relative;
+      }
+
+      #menuButtons button {
+        font-size : 10px;
+        position : relative;
+        left:30px;
+        top:-5px;
+      }
       .OSEHRA {
         fill: #FF0000;
       }
@@ -46,6 +77,11 @@
         fill: none;
         stroke: #ccc;
         stroke-width: 1.5px;
+      }
+
+      path.link.target {
+        stroke-width : 2px;
+        stroke : #ff99aa;
       }
       #dependencies, #interface A:hover { text-decoration: none; background-color: #f2f2ff }
       #dependencies, #interface A:link { text-decoration: underline;}

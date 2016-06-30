@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+  <title>VistA Package Dependency</title>
   <head>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700|Roboto:400,700' rel='stylesheet' type='text/css'>
     <?php
@@ -9,8 +10,8 @@
     <?php include_once "vivian_google_analytics.php" ?>
     <script>
     $(function() {
-      $('#demoexamples li').each(function (i) {
-        if (i === 3) {
+      $('#navigation_buttons li').each(function (i) {
+        if (i === 2) {
           $(this).removeClass().addClass("active");
         }
         else {
@@ -21,19 +22,68 @@
     </script>
   </head>
 
-<body >
-  <div>
-    <?php include_once "vivian_osehra_image.php" ?>
+<body>
+  <?php include_once "vivian_osehra_image.php" ?>
+  <div style="position:relative; top:50px; left:20px">
+    <div id="legend_placeholder" style="float: left;"></div>
+    <div style="float: left; margin-left:15px; margin-right:35px;">
+      <label for="colorMode" class="btn-primary btn-sm">
+        <input type="checkbox" id="colorMode" onclick="javascript:swapColorScheme()"> Colorblind Mode </input>
+      </label>
+    </div>
+    <div class="hint" style="float: left; margin-left:15px; width:500px;">
+      This circle plot captures the interrelationships among VistA packages.
+      Mouse over any of the packages in this graph to see incoming links (dependents)
+      in one color and the outgoing links (dependencies) in a second. Click on
+      any of the packages to view package dependency.
+      details.
+    </div>
   </div>
-    <!-- <select id="category"></select> -->
-  <div class='hint' style="position:absolute; top:120px; left:30px; font-size:0.9em; width:400px">
-  <p>
-This circle plot captures the interrelationships among VistA packages. Mouse over any of the packages in this graph to see incoming links (dependents) in green and the outgoing links (dependencies) in red. Click on any of the packages to view package dependency details.
-  </p>
+
+  <div id="chart_placeholder"></div>
+
+  <div id="toolTip" class="tooltip" style="opacity:0;">
+    <div id="header1" class="header"></div>
+    <div id="dependency" ></div>
+    <div id="bothDeps"></div>
+    <div id="dependents"></div>
+    <div class="tooltipTail"></div>
   </div>
-  <div id="chart_placeholder"/>
+
+ <style type="text/css">
+  ${demo.css}
+</style>
+
 <script type="text/javascript">
 
+  var jsonData = [];
+  var palette = "rg";
+  var colorLegend = [{name: "Depends", colorClass: palette + "-link--source"},
+  {name: "Dependents", colorClass: palette + "-link--target"},
+  {name: "Both", colorClass: "link--target link--source"}];
+
+  var legendColorChart = d3.chart.treeview()
+              .height(50)
+              .width(300)
+              .margins({top:42, left:10, right:0, bottom:0})
+              .textwidth(110);
+  function swapColorScheme() {
+    var shapeLegendText = legendColorChart.svg().selectAll("text")
+    $("#colorMode").toggleClass("active");
+    if(palette == "rg") {
+       palette = "cb";
+    }
+    else {
+      palette = "rg";
+    }
+    shapeLegendText
+      .filter( function(l) { console.log(l); if(l) return l.name === "Dependents"})
+      .attr("class", function(d) {return palette + "-link--target";});
+    shapeLegendText
+      .filter( function(l) { console.log(l); if(l) return l.name === "Depends"})
+      .attr("class", function(d) {return palette + "-link--source";});
+    shapeLegendText.transition();
+  }
   d3.json("PackageCategories.json", function(error, data) {
     var categories = data;
     function getPackageDoxLink(node) {
@@ -44,14 +94,14 @@ This circle plot captures the interrelationships among VistA packages. Mouse ove
 
     function packageHierarchyByGroups(classes) {
       var map = {};
-      map[categories.name] = {name: name, children: []}; 
+      map[categories.name] = {name: name, children: []};
       function setdata(name, data) {
         var node = map[name];
         if (!node) {
           node = map[name] = data || {name: name, children: []};
         }
       }
-      
+
       classes.forEach(function(d) {
         setdata(d.name, d);
       });
@@ -90,11 +140,49 @@ This circle plot captures the interrelationships among VistA packages. Mouse ove
       return map[categories.name];
     }
 
+    function mouseOvered(d) {
+      var header1Text = "Name: " + d.name + "</br> Group: " + d.parent.name + "</br>";
+      $('#header1').html(header1Text);
+      var localDepends = [];
+      if (d.depends && d.dependents) {
+        localDepends = d.depends.filter(function(n) {
+          return d.dependents.indexOf(n) != -1
+        });
+      }
+      if (d.depends) {
+        var depends = "Depends: " + ( d.depends.length - localDepends.length);
+        $('#dependency').html(depends).addClass(palette+"-link--source");
+      }
+      if (localDepends.length > 0 ) {
+       var both = "Both: " + localDepends.length;
+       $('#bothDeps').html(both).addClass("link--source link--target");;
+      }
+      if (d.dependents) {
+        var dependents = "Dependents: " + (d.dependents.length - localDepends.length);
+        $('#dependents').html(dependents).addClass(palette+"-link--target");
+      }
+      d3.select("#toolTip").style("left", (d3.event.pageX + 40) + "px")
+              .style("top", (d3.event.pageY + 5) + "px")
+              .style("opacity", ".9");
+    }
+
+    function mouseOuted(d) {
+      $('#header1').text("");
+      $('#dependents').text("").removeClass(palette+"-link--target");
+      $('#dependency').text("").removeClass(palette+"-link--source");
+      $('#bothDeps').text("").removeClass(palette+"-link--both");
+      d3.select("#toolTip").style("opacity", "0");
+    }
+
     var chart = d3.chart.dependencyedgebundling()
              .packageHierarchy(packageHierarchyByGroups)
+             .mouseOvered(mouseOvered)
+             .mouseOuted(mouseOuted)
              .nodeTextHyperLink(getPackageDoxLink);
     var localpath = "pkgdep.json";
+    d3.select("#legend_placeholder").datum(null).call(legendColorChart);
     d3.json(localpath, function(error, classes) {
+      jsonData = classes;
       if (error){
         errormsg = "json error " + error + " data: " + classes;
         document.write(errormsg);
@@ -104,9 +192,39 @@ This circle plot captures the interrelationships among VistA packages. Mouse ove
       d3.select('#chart_placeholder')
         .datum(classes)
         .call(chart);
+      createColorLegend(legendColorChart);
     });
   });
-    </script>
+
+function createColorLegend(legendColorChart) {
+  var colorLegendDisplay = legendColorChart.svg().selectAll("g.shapeLegend")
+      .data(colorLegend)
+      .enter().append("svg:g")
+      .attr("class", "shapeLegend")
+      .attr("transform", function(d, i) { return "translate("+(i * 115) +", -10)"; });
+
+  colorLegendDisplay.append("path")
+      .attr("class", function(d) {return d.colorClass;})
+      .attr("r", 3);
+
+  colorLegendDisplay.append("svg:text")
+      .attr("class", function(d) {return d.colorClass;})
+      .attr("id", function(d) {return d.name;})
+      .attr("x", 13)
+      .attr("dy", ".31em")
+      .text(function(d) {
+        return  d.name;
+      });
+  var colorLegendDisplay = legendColorChart.svg();
+  colorLegendDisplay.append("text")
+          .attr("x", 0)
+          .attr("y", -28 )
+          .attr("text-anchor", "left")
+          .style("font-size", "16px")
+          .text("Color Legend");
+}
+  </script>
+
   </body>
 </html>
 

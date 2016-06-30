@@ -1,0 +1,1 @@
+{"name": "Police Records Information", "lock": "ESP CHIEF", "ien": "6443", "type": "menu", "children": [{"type": "run routine", "name": "Inquire to Police Files", "option": "ESP FILEMAN INQUIRY", "ien": "6444"}, {"type": "run routine", "name": "Print from Police Files", "option": "ESP FILEMAN PRINT", "ien": "6445"}], "option": "ESP FILEMAN OPTIONS"}

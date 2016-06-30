@@ -8,43 +8,56 @@ d3.chart = d3.chart || {};
  * d3.select('#treelayout_placeholder')
  *   .datum(data)
  *   .call(chart);
+ *
+ *  To utilize the panning functionality of the treeview
+ *  some extra information is required
+ *
+ *  In addition to adding a ".pannableTree(true)" command
+ *  to the initialization, a global array called "originalTransform"
+ *  must be generated.  This array contains the X and Y coordinates of
+ *  the initial position of the root node of the tree.  The value for the
+ *  patchDependency visualization is as follows:
+ *
+ *  var originalTransform = [180,300];
+ *
  */
 
 d3.chart.treeview = function(option) {
 
   var _width = 1600, _height = 800,
-          _margins = {top: 0, left: 180, right: 0, bottom: 0},
-          _textwidth = 220,
-          _svg,
-          _nodes,
-          _i = 0,
-          _tree,
-          _diagonal,
-          _nodeTextHyperLink,
-          _cust = {
-            node: {
-              event:{
-                click: chart.onNodeClick
-              },
-              attr: {},
-              style: {}
-            },
-            text: {
-              event:{},
-              attr:{},
-              style:{
-              }
-            },
-            circle: {
-              attr: {
-                r: function(d) {return 4.5;}
-              },
-              style:{
-                fill: fillNodeCircle
-              },
-              event:{}
-            }
-          };
+      _margins = {top: 0, left: 150, right: 0, bottom: 0},
+      _textwidth = 220,
+      _svg,
+      _nodes,
+      _i = 0,
+      _tree,
+      _diagonal,
+      _nodeTextHyperLink,
+      _pannableTree = false,
+      _cust = {
+        node: {
+          event:{
+            click: chart.onNodeClick
+          },
+          attr: {},
+          style: {}
+        },
+        text: {
+          event:{},
+          attr:{},
+          style:{
+          }
+        },
+        path: {
+          attr: {
+            r: function(d) {return 4.5;}
+          },
+          style:{
+            fill: fillNodeCircle
+          },
+          event:{}
+        }
+      };
 
   function chart(selection) {
     selection.each(function(data) {
@@ -54,42 +67,44 @@ d3.chart.treeview = function(option) {
   }
 
   function renderTree(selection) {
-      if (!_svg) {
-          _svg = selection.insert("svg")
-                  .attr("height", _height)
-                  .attr("width", _width)
-                  .append("svg:g")
-                  .attr("transform", function(d){
-                    return "translate(" + _margins.left + "," + _margins.top + ")";
-                  });
-      }
-
-      renderBody(_svg);
+    if (!_svg) {
+        _svg = selection.insert("svg")
+                .attr("height", _height)
+                .attr("width", _width)
+                .append("svg:g")
+                .attr("transform", function(d){
+                  return "translate(" + _margins.left + "," + _margins.top + ")";
+                });
+        if(_pannableTree) {
+          selection.call(zoomListener);
+          zoomListener.translate(originalTransform).scale(1);
+        }
+    }
+    renderBody(_svg);
   };
 
   function renderBody(svg) {
-      _tree = d3.layout.tree()
-              .size([
-        (_height - _margins.top - _margins.bottom),
-        (_width - _margins.left - _margins.right)
-      ]);
+    _tree = d3.layout.tree()
+            .size([
+      (_height - _margins.top - _margins.bottom),
+      (_width - _margins.left - _margins.right)
+    ]);
 
-      _diagonal = d3.svg.diagonal()
-              .projection(function (d) {
-                  return [d.y, d.x];
-              });
-
+    _diagonal = d3.svg.diagonal()
+            .projection(function (d) {
+                return [d.y, d.x];
+            });
+    if (_nodes != null) {
       _nodes.x0 = (_height - _margins.top - _margins.bottom) / 2;
       _nodes.y0 = 0;
 
       render(_nodes);
+    }
   }
 
   function render(source) {
       var nodes = _tree.nodes(_nodes).reverse();
-
       renderNodes(nodes, source);
-
       renderLinks(nodes, source);
   }
 
@@ -98,14 +113,13 @@ d3.chart.treeview = function(option) {
     var custs = {};
     if (custinfos !== undefined && custinfos) {
       if (type !== undefined) {
-        if (custinfos[type] !== undefined){
+        if (custinfos[type] !== undefined) {
           if (prop !== undefined &&
               custinfos[type][prop] !== undefined &&
-              custinfos[type][prop] ) {
+              custinfos[type][prop]) {
             custs[type] = {};
             custs[type][prop] = custinfos[type][prop];
-          }
-          else {
+          } else {
             custs = {};
             custs[type] = custinfos[type];
           }
@@ -141,176 +155,206 @@ d3.chart.treeview = function(option) {
   }
 
   function renderNodes(nodes, source) {
-      nodes.forEach(function (d) {
-          d.y = d.depth * _textwidth;
-      });
+    nodes.forEach(function (d) {
+        d.y = d.depth * _textwidth;
+    });
 
-      var node = _svg.selectAll("g.node")
-              .data(nodes, function (d) {
-                  return d.id || (d.id = ++_i);
-              });
+    var node = _svg.selectAll("g.node")
+            .data(nodes, function (d) {
+                return d.id || (d.id = ++_i);
+            });
 
-      var nodeEnter = node.enter().append("svg:g")
-              .attr("class", "node")
-              .attr("transform", function (d) {
-                  return "translate(" + source.y0
-          + "," + source.x0 + ")";
-              });
-      _customization(nodeEnter, 'node', 'event');
+    var nodeEnter = node.enter().append("svg:g")
+            .attr("class", "node")
+            .attr("transform", function (d) {
+                return "translate(" + source.y0
+        + "," + source.x0 + ")";
+            });
+    _customization(nodeEnter, 'node', 'event');
 
-      var circleEnter = nodeEnter.append("svg:circle")
-              .attr("r", 1e-6);
+    var circleEnter = nodeEnter.append("path")
+            .style("stroke","steelblue")
+            .attr("d",d3.svg.symbol().type(find_node_shape))
+            .attr("r", 1e-6);
 
-      _customization(circleEnter, 'circle', 'event');
-      _customization(circleEnter, 'circle', 'style');
+    _customization(circleEnter, 'path', 'event');
+    _customization(circleEnter, 'path', 'style');
 
-      var nodeUpdate = node.transition()
-              .attr("transform", function (d) {
-                  return "translate(" + d.y + "," + d.x + ")";
-              });
+    var nodeUpdate = node.transition()
+            .attr("transform", function (d) {
+                return "translate(" + d.y + "," + d.x + ")";
+            });
+    var circleUpdate = nodeUpdate.select("path");
+    _customization(circleUpdate, 'path', 'attr');
+    _customization(circleUpdate, 'path', 'style');
 
-      var circleUpdate = nodeUpdate.select("circle");
-      _customization(circleUpdate, 'circle', 'attr');
-      _customization(circleUpdate, 'circle', 'style');
+    var nodeExit = node.exit().transition()
+            .attr("transform", function (d) {
+                return "translate(" + source.y
+        + "," + source.x + ")";
+            })
+            .remove();
 
-      var nodeExit = node.exit().transition()
-              .attr("transform", function (d) {
-                  return "translate(" + source.y
-          + "," + source.x + ")";
-              })
-              .remove();
+    nodeExit.select("g")
+            .attr("r", 1e-6);
 
-      nodeExit.select("circle")
-              .attr("r", 1e-6);
+    renderLabels(nodeEnter, nodeUpdate, nodeExit);
 
-      renderLabels(nodeEnter, nodeUpdate, nodeExit);
+    nodes.forEach(function (d) {
+        d.x0 = d.x;
+        d.y0 = d.y;
+    });
+  }
 
-      nodes.forEach(function (d) {
-          d.x0 = d.x;
-          d.y0 = d.y;
-      });
+  function find_node_shape(d) {
+    var shape = "circle";
+    if (d.children || d._children) {
+      shape = "triangle-up";
+    } else if (d.hasSubpackage) {
+      shape = "diamond";
+    } else if (d.isSubpackage) {
+      shape = "square";
+    }
+    return shape;
+  }
+
+  //Necessary to open the xlinked information on pannable views.
+  //Shows no difference on non-panning view
+  function openLink(d) {
+    window.open($(this).parent().attr("href"));
   }
 
   function renderLabels(nodeEnter, nodeUpdate, nodeExit) {
-      var textEnter;
-      if (_nodeTextHyperLink) {
-        textEnter = nodeEnter.append("a")
-          .attr("xlink:href", _nodeTextHyperLink)
-          .attr("target", "_blank")
-          .style("text-decoration", "none")
-          .insert("svg:text");
-      }
-      else {
-        textEnter = nodeEnter.append("svg:text");
-      }
-      textEnter = textEnter.attr("x", function (d) {
-                  return d.children || d._children ? -10 : 10;
-              })
-              .attr("dy", ".35em")
-              .attr("text-anchor", function (d) {
-                  return d.children || d._children ? "end" : "start";
-              })
-              .text(function (d) {
-                  return d.name;
-              })
-              .style("fill-opacity", 1e-6);
-      _customization(textEnter, "text", "attr");
-      _customization(textEnter, "text", "event");
-      nodeUpdate.select("text")
-              .style("fill-opacity", 1);
+    var textEnter;
+    if (_nodeTextHyperLink) {
+      textEnter = nodeEnter.append("a")
+        .attr("xlink:href", _nodeTextHyperLink)
+        .attr("target", "_blank")
+        .style("text-decoration", "none")
+        .insert("svg:text")
+        .on('click', openLink, true);
+    } else {
+      textEnter = nodeEnter.append("svg:text");
+    }
+    textEnter = textEnter.attr("x", function (d) {
+                return d.children || d._children ? -10 : 10;
+            })
+            .attr("dy", ".35em")
+            .attr("text-anchor", function (d) {
+                return d.children || d._children ? "end" : "start";
+            })
+            .text(function (d) {
+                return d.name;
+            })
+            .style("fill-opacity", 1e-6);
+    _customization(textEnter, "text", "attr");
+    _customization(textEnter, "text", "event");
+    nodeUpdate.select("text")
+            .style("fill-opacity", 1);
 
-      nodeExit.select("text")
-              .style("fill-opacity", 1e-6);
+    nodeExit.select("text")
+            .style("fill-opacity", 1e-6);
   }
 
   function renderLinks(nodes, source) {
-      var link = _svg.selectAll("path.link")
-              .data(_tree.links(nodes), function (d) {
-                  return d.target.id;
-              });
+    var link = _svg.selectAll("path.link")
+            .data(_tree.links(nodes), function (d) {
+                return d.target.id;
+            });
 
-      link.enter().insert("svg:path", "g")
-              .attr("class", "link")
-              .attr("d", function (d) {
-                  var o = {x: source.x0, y: source.y0};
-                  return _diagonal({source: o, target: o});
-              });
+    link.enter().insert("svg:path", "g")
+            .attr("class", "link")
+            .attr("d", function (d) {
+                var o = {x: source.x0, y: source.y0};
+                return _diagonal({source: o, target: o});
+            });
 
-      link.transition()
-              .attr("d", _diagonal);
+    link.transition()
+            .attr("d", _diagonal);
 
-      link.exit().transition()
-              .attr("d", function (d) {
-                  var o = {x: source.x, y: source.y};
-                  return _diagonal({source: o, target: o});
-              })
-              .remove();
+    link.exit().transition()
+            .attr("d", function (d) {
+                var o = {x: source.x, y: source.y};
+                return _diagonal({source: o, target: o});
+            })
+            .remove();
   }
 
   function toggle(d) {
-      if (d.children) {
-          d._children = d.children;
-          d.children = null;
-      } else {
-          d.children = d._children;
-          d._children = null;
-      }
-  }
-
-  function toggleAll(d) {
-      if (d.children) {
-          d.children.forEach(toggleAll);
-          toggle(d);
-      }
+    if (d.children) {
+        d._children = d.children;
+        d.children = null;
+    } else {
+        d.children = d._children;
+        d._children = null;
+    }
   }
 
   function fillNodeCircle(d) {
-    return d._children ? "lightsteelblue" : "#fff";
+    return d._children ? "lightsteelblue" : "#FFF";
   }
 
   chart.width = function (w) {
-      if (!arguments.length) return _width;
+    if (!arguments.length) {
+      return _width;
+    } else {
       _width = w;
       return chart;
+    }
   };
 
   chart.height = function (h) {
-      if (!arguments.length) return _height;
+    if (!arguments.length) {
+      return _height;
+    } else {
       _height = h;
       return chart;
+    }
   };
 
   chart.margins = function (m) {
-      if (!arguments.length) return _margins;
+    if (!arguments.length) {
+      return _margins;
+    } else {
       _margins = m;
       return chart;
+    }
   };
 
   chart.textwidth = function (m) {
-      if (!arguments.length) return _textwidth;
+    if (!arguments.length) {
+      return _textwidth;
+    } else {
       _textwidth = m;
       return chart;
+    }
   };
 
-
   chart.nodes = function (n) {
-      if (!arguments.length) return _nodes;
+    if (!arguments.length) {
+      return _nodes;
+    } else {
       _nodes = n;
       return chart;
+    }
   };
 
   chart.svg = function (n) {
     return _svg;
   };
 
+  chart.tree = function (n) {
+    return _tree;
+  };
+
   chart.on = function(target, type, prop, value) {
-      if (arguments.length == 3) {
-        return _cust[target][type][prop];
-      }
-      if (arguments.length > 3) {
-        _cust[target][type][prop] = value;
-      }
-      return chart;
+    if (arguments.length == 3) {
+      return _cust[target][type][prop];
+    }
+    if (arguments.length > 3) {
+      _cust[target][type][prop] = value;
+    }
+    return chart;
   };
 
   chart.onNodeClick = function (d) {
@@ -322,14 +366,37 @@ d3.chart.treeview = function(option) {
     render(d);
   };
 
-  chart.resetAllNode = function() {
-
-  };
-
   chart.nodeTextHyperLink = function(n) {
-    if (!arguments.length) return n;
-    _nodeTextHyperLink = n;
-    return chart;
+    if (!arguments.length) {
+      return n;
+    } else {
+      _nodeTextHyperLink = n;
+      return chart;
+    }
   };
+
+  chart.pannableTree = function(n) {
+    if (!arguments.length) {
+      return n;
+    } else {
+      _pannableTree = n;
+      return chart;
+    }
+  };
+
+  chart.centerDisplay = function(n) {
+    _svg.transition().attr("transform","translate("+originalTransform[0]+","+originalTransform[1]+")");
+    zoomListener.translate(originalTransform).scale(1);
+  }
+
+  //Taken from http://bl.ocks.org/robschmuecker/6afc2ecb05b191359862
+  // =================================================================
+  var panSpeed = 200;
+  var zoomListener = d3.behavior.zoom().scaleExtent([.5,2])
+                                       .on("zoom", zoomFunc);
+  function zoomFunc() {
+      _svg.attr("transform", "translate(" + d3.event.translate + ")scale("+d3.event.scale+")");
+  }
+  //===================================================================
   return chart;
 }

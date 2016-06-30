@@ -1,21 +1,44 @@
-function toggleAll(d) {
-  if (d.children) {
-    d.children.forEach(toggleAll);
-    toggle(d);
-  }
+
+function _expandAllNode() {
+  clearAutocomplete();
+  expandAllNode(chart.nodes());
+  chart.update(chart.nodes());
+}
+
+function _collapseAllNode() {
+  clearAutocomplete();
+  collapseAllNode(chart.nodes());
+  chart.update(chart.nodes());
+}
+
+function _resetAllNode() {
+  clearAutocomplete();
+  resetAllNode(chart.nodes());
+  chart.update(chart.nodes());
 }
 
 function expandAllNode(root) {
-  //root.children.forEach(toggleAll);
   expand(root)
   root.children.forEach(expandAll);
 }
 
 function collapseAllNode(root) {
-  root.children.forEach(collapseAll);
-  collapse(root)
+  if (root.children) {
+    root.children.forEach(collapseAll);
+  }
+  collapse(root);
 }
 
+function resetAllNode(root) {
+  expand(root);
+  if (root.children !== undefined && root.children) {
+    root.children.forEach(collapseAll);
+    // Initialize the display to show a few nodes.
+    expandAll(root.children[0]);
+  }
+}
+
+// Helper functions
 function expandAll(d) {
   expand(d);
   if (d.children) {
@@ -23,24 +46,11 @@ function expandAll(d) {
   }
 }
 
-function resetAllNode(root) {
-  expand(root);
-  if (root.children !== undefined && root.children)
-  {
-    root.children.forEach(collapseAll);
-    // Initialize the display to show a few nodes.
-    expandAll(root.children[0]);
+function expand(d) {
+  if (d._children) {
+    d.children = d._children;
+    d._children = null;
   }
-  //root.children[0].forEach(toggleAll);
-  //toggle(root.children[0]);
-  //toggle(root.children[0].children[2]);
-  //toggle(root.children[0].children[3]);
-  //toggle(root.children[1]);
-  //toggle(root.children[1].children[0]);
-  //toggle(root.children[1].children[4]);
-  //toggle(root.children[4]);
-  //toggle(root.children[4].children[0]);
-  //update(root);
 }
 
 function collapseAll(d) {
@@ -50,7 +60,6 @@ function collapseAll(d) {
   }
 }
 
-// Collapse Node.
 function collapse(d) {
   if (d.children) {
     d._children = d.children;
@@ -58,11 +67,91 @@ function collapse(d) {
   }
 }
 
-// Expand children.
-function expand(d) {
+// Highlight path
+var target_node = null;
+var target_path = [];
+
+function openSpecificNode(target, root) {
+  target_node = null;
+  target_path = [];
+
+  collapseAllNode(root);
+  searchForNode(target, root);
+}
+
+function searchForNode(target, d) {
   if (d._children) {
-    d.children = d._children;
-    d._children = null;
+    for(var i=0; i<d._children.length;i++) {
+      var ret = searchForNode(target, d._children[i])
+      if (ret) {
+         expand(d);
+         return true;
+      }
+    }
   }
+
+  if (d.name.toUpperCase() == target.toUpperCase()) {
+    expand(d);
+    target_node = d;
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function highlightPath(chart) {
+  var tree = d3.layout.tree()
+  var nodes = tree.nodes(chart.nodes());
+  var links = tree.links(nodes);
+  var target = target_node;
+
+  while (target != null && target.name != nodes[0].name) {
+    var link = chart.svg().selectAll("path.link").data(links, function(d) {
+      if(d.target == target) {
+        target = d.source;
+        target_path.push(d)
+        }
+    });
+
+    if(target == target_node) {
+      $("#option_autocomplete")[0].style.border="solid 4px blue";
+      $("#search_result").html("<h5>Target option found in menu, but couldn't be matched.</h5>");
+      resetAllNode(chart.nodes())
+      target_path = [];
+      break;
+      }
+  }
+
+  if (target_path.length) {
+    $("#option_autocomplete")[0].style.border="";
+    $("#search_result").html("");
+  }
+
+  chart.svg().selectAll("path.link").data(target_path).forEach(highlight);
+  d3.select("#treeview_placeholder").datum(chart.nodes()).call(chart);
+}
+
+function highlight(d) {
+  for(var i = 0; i < d.length; i++) {
+    d[i].classList.add("target");
+  }
+}
+
+function clearAutocomplete() {
+  document.getElementById("option_autocomplete").value= '';
+  $("#option_autocomplete")[0].style.border="";
+  $("#search_result").html("");
+  clearHighlightedPath();
+}
+
+function clearHighlightedPath() {
+  chart.svg().selectAll("path.link").data(target_path).forEach(function(d) {
+    for(var i =0; i< d.length; i++) {
+      d[i].classList.remove("target");
+    }
+  });
+
+  target_node = null;
+  target_path = [];
 }
 

@@ -2,18 +2,27 @@ import csv
 import json
 
 DISTR_LIST = ("VA","OSEHRA","DSS","Medsphere","Oroville")
-import logging
+
+pkgNameSet = set()
+pkgPosNamePrefixes = dict()
+pkgNegNamePrefixes = dict()
+pkgNameInterface = dict()
+pkgPrefixDic = dict()
+pkgAutocomple = set();
 
 def generate_packages_json():
   pkgCatJson = json.load(open("PackageCategories.json", 'r'))
-  generate_output_json_dict(pkgCatJson)
+  pkgDesJson = json.load(open("PackageDes.json", 'r'))
+  generate_output_json_dict(pkgCatJson, pkgDesJson)
   with open("packages.json", 'w') as outputFile:
     json.dump(pkgCatJson, outputFile)
+  with open("packages_autocomplete.json", 'w') as autocompleteOutputFile:
+    pkgAutocomple.add("Unknown")
+    packageNames = list(pkgAutocomple)
+    packageNames.sort()
+    json.dump(packageNames, autocompleteOutputFile)
 
-pkgNameSet = set()
-pkgNamePrefixes = dict()
-pkgNameInterface = dict()
-def generate_output_json_dict(pkgCatJson):
+def generate_output_json_dict(pkgCatJson, pkgDesJson):
  # read package.csv file for more information
   packages_csv = csv.DictReader(open("Packages.csv",'r'))
   pkg = None
@@ -21,32 +30,49 @@ def generate_output_json_dict(pkgCatJson):
     if fields['Directory Name']:
       pkg = fields['Directory Name']
       pkgNameSet.add(pkg)
-      pkgNamePrefixes[pkg] = []
+      pkgPosNamePrefixes[pkg] = []
+      pkgNegNamePrefixes[pkg] = []
     if pkg and fields['Prefixes']:
-      pkgNamePrefixes[pkg].append(fields['Prefixes'])
+      if fields['Prefixes'][0] == '!':
+        pkgNegNamePrefixes[pkg].append(fields['Prefixes'][1:])
+      else:
+        pkgPosNamePrefixes[pkg].append(fields['Prefixes'])
+        pkgPrefixDic[fields['Prefixes']] = pkg
+
   # read packageInterfaces.csv file for interface
   interface_csv = csv.DictReader(open("PackageInterface.csv", 'r'))
   for row in interface_csv:
     pkgName = row['Package']
     print pkgName
     if pkgName and pkgName in pkgNameSet:
-      if row['RPC']:
-        print "RPC interface " + pkgName
+      if 'RPC' in row and row['RPC']:
         pkgNameInterface.setdefault(pkgName,[]).append('RPC')
-      if row['HL7']:
+      if 'HL7' in row and row['HL7']:
         pkgNameInterface.setdefault(pkgName,[]).append('HL7')
-        print "Hl7 interface " + pkgName
-  traverseChildren(pkgCatJson)
+      if 'Protocols' in row and row['Protocols']:
+        pkgNameInterface.setdefault(pkgName,[]).append('Protocols')
+      if 'HLO' in row and row['HLO']:
+        pkgNameInterface.setdefault(pkgName,[]).append('HLO')
+  traverseChildren(pkgCatJson, pkgDesJson)
 
-def traverseChildren(package):
+def traverseChildren(package, pkgDesJson):
   if "children" in package:
     for child in package['children']:
-      traverseChildren(child)
+      traverseChildren(child, pkgDesJson)
   else:
     pkgName = package['name']
+    pkgAutocomple.add(pkgName);
     package['hasLink'] = pkgName in pkgNameSet
     if pkgName in pkgNameSet:
-      package['prefixes'] = pkgNamePrefixes[pkgName]
+      package['Posprefixes'] = pkgPosNamePrefixes[pkgName]
+      package['Negprefixes'] = pkgNegNamePrefixes[pkgName]
+      for prefix in package['Posprefixes']:
+        if prefix in pkgDesJson:
+          if 'des' in pkgDesJson[prefix]:
+            package['des'] = pkgDesJson[prefix]['des']
+          else:
+            package['des'] = pkgDesJson[prefix]['shortdes']
+          break
     if pkgName in pkgNameInterface:
       package['interfaces'] = pkgNameInterface[pkgName]
       print "set up package interface " + pkgName

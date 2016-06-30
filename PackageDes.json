@@ -1,0 +1,1031 @@
+{
+    "A7R": {
+        "des": [
+            " The National Database Integration System (NDBI) is an application",
+            "developed for the VA medical center integrations. This package contains",
+            "the files used at the legacy and primary sites. The entire application",
+            "consists of files, options, routines located in the A7R namespace, which",
+            "comprises the utilities used to consolidate the data extracted from the",
+            "VISTA applications.",
+            "  ",
+            " The actual distribution of the application is sectioned into two builds.",
+            "One is the NDBI PRIMARY SYSTEM, consisting of all NDBI files, A7R*",
+            "routines, A7RP* options and A7RC* options. The other build is NDBI LEGACY",
+            "SYSTEM, consisting of all NDBI files, A7R* routines, A7RL* options and",
+            "A7RC* options.  ",
+            "   ",
+            " The options are in the namespace of A7RC, A7RL and A7RP. The A7RC*",
+            "options are Common options used at the legacy and primary sites. They",
+            "consist of utilities that are used for the New Person and Patient files,",
+            "and our NDBI Event Log utilities. The A7RL* options are Legacy options",
+            "used to collect and process data from the legacy site only. The A7RP*",
+            "options are Primary options used to preview, merge and process the data",
+            "collected from legacy system. These A7RP* options are used on the primary",
+            "site only.  "
+        ],
+        "shortdes": "Software to support integrated sites."
+    },
+    "ABSV": {
+        "des": [
+            "This package is designed to automate the volunteer time keeping activities",
+            "at a VA medical center.",
+            " "
+        ],
+        "shortdes": "VOLUNTARY TIMEKEEPING"
+    },
+    "ACKQ": {
+        "des": [
+            "Quality: Audiology and Speech Pathology Audit and Review (QUASAR)",
+            "is designed to capture patient treatment and workload information",
+            "for Audiology and Speech Pathology clinic visits."
+        ],
+        "shortdes": "Quality: Audiology and Speech Pathology Audit and Review"
+    },
+    "AFJX": {
+        "des": [
+            "The Network Health Exchange Software Package allows individual",
+            "sites in a network area to request total and/or pharmacy",
+            "health summarys (complete or last 12 months of data) via a",
+            "server that will return the data from the facility, and set an",
+            "alert that allows the user to print the information received",
+            "from the sending site."
+        ],
+        "shortdes": "Requests Total and Pharmacy Health Summary Data"
+    },
+    "ANRV": {
+        "des": [
+            "A database file of Visual Impairment Services Team (VIST) patients",
+            "at this VA facility."
+        ],
+        "shortdes": "VIST Roster with patient data and AMIS report."
+    },
+    "BPS": {
+        "shortdes": "ELECTRONIC CLAIMS MGT"
+    },
+    "CRHD": {
+        "shortdes": "CAIRO PRODUCT CONVERSION TO CLASS I PRODUCT"
+    },
+    "DENT": {
+        "des": [
+            "The Dental package captures data on all sittings (Dental treatments)",
+            "performed in the Dental Service.  It also captures data on Dental fee",
+            "basis patients, applications for care and on days worked by Dental",
+            "Service personnel and the amount of time spent in clinical and non",
+            "clinical activities.",
+            " ",
+            "The package generates all required Dental AMIS reports and is capable of",
+            "transmitting the data to Austin, Texas through the VADATS electronic",
+            "network using Network Mailman or by magnetic tape.",
+            " ",
+            "The package also provides support for developing a treatment plan for",
+            "individual patients by determining the number of appointments needed",
+            "for each type of care to be provided and which appointments can be",
+            "scheduled concurrently or must be scheduled consecutively.",
+            " ",
+            "In addition to the AMIS reports, there is also a report to determine",
+            "which inpatients need a dental exam and one to print out sittings/visits",
+            "for one or all providers.",
+            " ",
+            "There is a separate menu for the managers of the Dental package which",
+            "allows them to set up basic files, delete erroneous entries and re-release",
+            "data to Austin that was rejected due to an error."
+        ],
+        "shortdes": "NATIONAL DENTAL PACKAGE"
+    },
+    "DG": {
+        "shortdes": "PATIENT REGISTRATION, ADMISSION, DISCHARGE, EMBOSSER"
+    },
+    "DGBT": {
+        "shortdes": "Beneficiary Travel"
+    },
+    "DGJ": {
+        "shortdes": "IRT"
+    },
+    "DI": {
+        "shortdes": "FM INIT"
+    },
+    "DVB": {
+        "des": [
+            "This is the HINQ package."
+        ],
+        "shortdes": "HINQ(Hospital Inquiry)"
+    },
+    "DVBA": {
+        "des": [
+            "This is the entire AMIE package.  Both the 7131 and the 2507 portions",
+            "are carried under a single namespace.  AMIE was designed to help",
+            "automate the requesting process for both of these programs.",
+            "(Note: Routines for the 2507 portion are still namespaced DVBC.)"
+        ],
+        "shortdes": "The entire AMIE package 7131/2507."
+    },
+    "EAS": {
+        "shortdes": "ENROLLMENT"
+    },
+    "EC": {
+        "des": [
+            "Event Capture is that portion of the Decision Support System (DSS) which",
+            "has been designed to capture the workload for those areas which do not",
+            "currently have a software system which may be extracted.  Such areas as",
+            "Chaplain, Canteen, and non-associated clinics can use Event Capture to",
+            "track their workload."
+        ],
+        "shortdes": "Event Capture Workload Capture System"
+    },
+    "ECT": {
+        "des": [
+            "The purpose of DHCP Interim Management Support is to provide",
+            "accessible, reliable, and useful information to management within",
+            "the VAMC.  Information pertains to the center, its workload, and its",
+            "resources.  The primary source of data for the module is the hospital's",
+            "DHCP applications/packages and associated files."
+        ],
+        "shortdes": "Information for VAMC's management."
+    },
+    "ECX": {
+        "des": [
+            "The DSS software provides a way to load data from DHCP to a commercial",
+            "decision support system.  The software extracts data from several DHCP",
+            "files.  Extracted data elements are stored in summary files which may",
+            "be reviewed before being transmitted to the commercial software."
+        ],
+        "shortdes": "Decision Support System. (DSS)"
+    },
+    "EDP": {
+        "des": [
+            "This is the Emergency Department Information System (EDIS)."
+        ],
+        "shortdes": "Emergency Department Information System"
+    },
+    "EEO": {
+        "des": [
+            "The EEO Compliant Tracking Package allows automated access for entry,",
+            "review and printing of specialized EEO reports.  The software establishes",
+            "a nationally consistent medium for collection of EEO information."
+        ],
+        "shortdes": "EEO Complaint Tracking system"
+    },
+    "EN": {
+        "des": [
+            "First proposed in the mid to late 1970's, MUMPS coding of this package",
+            "began about 1980. National distribution of hardware and software took",
+            "place in 1984.",
+            " Principal modules include Work Control, Equipment Managment, and",
+            "Construction Tracking."
+        ],
+        "shortdes": "AUTOMATED ENGINEERING MANAGEMENT SYSTEM"
+    },
+    "ES": {
+        "des": [
+            "This package supports the role of the VA police officer.",
+            "Functions include Offense Reports, Violations, Quick Name Check,",
+            "Wants & Warrants, and Vehicle Registration."
+        ],
+        "shortdes": "POLICE & SECURITY PACKAGE"
+    },
+    "FB": {
+        "des": [
+            "System used by Medical Administration service to process and pay ",
+            "invoices from private vendors for authorized procedures provided",
+            "to veterans. Initial version will include the the processing of",
+            "Hometown Pharmacy, Patient Travel, and Outpatient Medical claims.",
+            "Version 2 includes Contract Hospital and Community Nursing Home.",
+            "Unauthorized claims has been added in version 3.  Also in this",
+            "version is an update to the vendor file for the conversion of",
+            "CALM to FMS in Austin.  The Community Nursing Home has been",
+            "modified to handle multiple rates."
+        ],
+        "shortdes": "Used to pay private vendors"
+    },
+    "FH": {
+        "shortdes": "Dietetics System"
+    },
+    "FSC": {
+        "shortdes": "Problem Tracking"
+    },
+    "GEC": {
+        "des": [
+            "This package allows for the creation and entry of code sheets;",
+            "the management of the code sheet from creation to batching to",
+            "transmission."
+        ],
+        "shortdes": "GENERIC CODE SHEET"
+    },
+    "GMPL": {
+        "des": [
+            "This package allows for entry and tracking of a patient's problems",
+            "within DHCP.  Other components of the clinical record may be linked",
+            "to a problem, such as orders, procedures, and progress notes."
+        ],
+        "shortdes": "Automated Patient Problem List"
+    },
+    "GMRA": {
+        "des": [
+            "This package permits clinical users to track and report patient allergies",
+            "and adverse reactions. The intended users are physicians, nurses, other",
+            "clinicians and clerks."
+        ],
+        "shortdes": "Adverse Reaction Tracking package"
+    },
+    "GMRC": {
+        "des": [
+            "This package provides the tools needed for Consults and Requests to be",
+            "ordered via OE/RR and then tracked by the service receiving the order."
+        ],
+        "shortdes": "CONSULTS/REQUESTS"
+    },
+    "GMRG": {
+        "des": [
+            "The Text Generator allows for the codifying/boilerplating of clinical",
+            "forms.  Patient data for these forms are then collected via a menu driven",
+            "data entry system.  Output is generated from this collection in an",
+            "outline or paragraph format.  There are two major components to the Text",
+            "Generator:  1) Content Building, and  2) Patient Data Enter/Edit.  The",
+            "data reporting mechanism is currently a part of the Patient Data",
+            "Enter/Edit, but will become its own component in the future.  The Text",
+            "Generator is currently used by the Nursing Package to generate Nursing",
+            "Care Plans.  Future plans include the use by Mental Health for the",
+            "development of treatment plans, and as a front end to generate progress",
+            "notes for patients."
+        ],
+        "shortdes": "TEXT GENERATOR"
+    },
+    "GMRV": {
+        "des": [
+            "This is only a part of the General Medical Record Package.  This part ",
+            "contains the vitals/measurements module which tracks patient vital signs",
+            "and physical measurements."
+        ],
+        "shortdes": "Vitals/Measurements Module of General Medical Record."
+    },
+    "GMRY": {
+        "des": [
+            "This package contains Intake/Output module which tracks patient",
+            "Intake/Output measurements."
+        ],
+        "shortdes": "Intake/Output Module of General Medical Record."
+    },
+    "GMTS": {
+        "des": [
+            "Tools to build and display health summaries.  The health summary pulls",
+            "information from ancillary packages and presents it in an integrated",
+            "fashion."
+        ],
+        "shortdes": "Integrated Health Summary Tools"
+    },
+    "HBH": {
+        "des": [
+            "This package contains HBH v1.0 Patch 4 routines, which include inits."
+        ],
+        "shortdes": "HBH v1.0 Patch 4 w/Inits"
+    },
+    "HDI": {
+        "shortdes": "Data Standardization"
+    },
+    "HL": {
+        "des": [
+            "This package is a generic implementation the Health Level Seven (HL7)",
+            "protocol for use by all DHCP applications.  The HL7 protocol provides a",
+            "single, standard interface between computer systems for the exchange of",
+            "clinical information."
+        ],
+        "shortdes": "DHCP IMPLEMENTATION OF HEALTH LEVEL SEVEN"
+    },
+    "IB": {
+        "shortdes": "INTEGRATED BILLING"
+    },
+    "IBD": {
+        "des": [
+            "The Automated Info Collection Sys consists of a set of utilities for",
+            "designing, printing, tracking, maintaining, and scanning encounter forms."
+        ],
+        "shortdes": "The utilities for generating a paper encounter form."
+    },
+    "IBDE": {
+        "shortdes": "The import/export utilities for encounter forms."
+    },
+    "IBQ": {
+        "des": [
+            "This package is used at the local facility for rollup of Utilization ",
+            "Management Rollup data to the National Database."
+        ],
+        "shortdes": "Rollup from Hospital Review and Claims Tracking files."
+    },
+    "ICD": {
+        "des": [
+            "DHCP DRG Grouper"
+        ],
+        "shortdes": "DRG GROUPER"
+    },
+    "ICPT": {
+        "shortdes": "ICPT/HCPCS CODES"
+    },
+    "IVM": {
+        "des": [
+            " ",
+            "The IVM package will transmit information to the IVM Center for patients",
+            "whose means tests meet the following criteria:",
+            " ",
+            "       Means test is Category A, but neither hardship or adjudicated",
+            "                                   OR",
+            "       Means test is Category C, but patient has no active insurance",
+            " ",
+            "Information transmitted includes demographics, income and next-of-kin",
+            "information as well as demographic and income data for the patient's",
+            "spouse.",
+            " ",
+            "Changes to the patient's name, SSN, DOB, sex, address, phone number, or",
+            "means test are transmitted for patients being reviewed by the IVM Center."
+        ],
+        "shortdes": "IVM Software for interface with the IVM Center"
+    },
+    "KMPD": {
+        "shortdes": "Capacity Management Tools"
+    },
+    "KMPR": {
+        "des": [
+            "The Resource Usage Monitor (RUM) is a component of Capacity Management's",
+            "suite of monitoring tools."
+        ],
+        "shortdes": "Capacity Management - Resource Usage Monitor"
+    },
+    "KMPS": {
+        "des": [
+            "The SAGG (Statistical Analysis of Global Growth) Project will produce data",
+            "enabling all VAMCs and IRMFOs to make various statistical analysis studies",
+            "of global growth patterns within the DHCP environment."
+        ],
+        "shortdes": "SAGG (Statistical Analysis of Global Growth) Project"
+    },
+    "LA": {
+        "des": [
+            "This a is list of routines and files needed for",
+            "LAB auto instruments.  This release has routines for",
+            "microbiology instruments along with attendant verify routines.",
+            "The release also carries with it routines for some instruments to be",
+            "run in a bidirectional mode.",
+            " ",
+            "In some cases we have added some routines which will run an instrument",
+            "directly connected to the CPU instead of going through the LSI.  This",
+            "has been done because of problems with timing, and/or problems",
+            "with the method of data transmission protocols.  You can usually",
+            "tell a direct connect instrument by the routine name being LAnnnnXX",
+            "where the XX will need to be changed before running and the nnnn will",
+            "identify the instrument.",
+            " ",
+            "With this release there is also a new error trap for auto instruments.",
+            "This trap does not use the system error trap and therefore does not",
+            "create any special system problems."
+        ],
+        "shortdes": "Lab Auto-Instrument Package"
+    },
+    "LBR": {
+        "des": [
+            "The first module to be developed in an intergrated library system is the",
+            "Serials Management Module. It automates the tedious manual serial title",
+            "check-in and distribution. It integrates previously scattered data (check-in",
+            "history, local holdings, subscription data, and bibliographic data) into",
+            "a single title record.  It provides many outputs previously unavailable",
+            "without hours of manual assembly and repetitive typing.  It extends online",
+            "hospital staff access to library holdings and services.",
+            " ",
+            "Basic functions to be included in the first version of the package are:",
+            "Check-in by number of copies ordered or copy by copy, automatic routing,",
+            "title entry/edit, claims list, inquire to holdings, automatic prediction",
+            "of next issue for check-in, issue history and various other reports."
+        ],
+        "shortdes": "LIBRARY SERIALS PACKAGE"
+    },
+    "LEX": {
+        "des": [
+            "The Lexicon contains medical and biomedical major concepts.  Each major ",
+            "concept can be expressed in numerous forms (major concepts, and synonyms ",
+            "or lexical variants to the major concepts).  These expressions are updated",
+            "using VA terminology sources.  These sources include the various disciplines",
+            "not well represented to date (i.e., Social Work, Nursing, etc.) and the",
+            "Lexicon itself through the capturing of terms not found within the file.",
+            " ",
+            "Updates to the Lexicon will be simultaneously sent to all sites, providing",
+            "them with the ability to communicate medical concepts across disciplines ",
+            "and computer systems."
+        ],
+        "shortdes": "Medical and Biomedical Terminology System."
+    },
+    "LR": {
+        "des": [
+            "This is the entire Laboratory file, containing 41 Files.",
+            "The WKLD Code file and AUTO INSTRUMENT file have their own init and",
+            "are not included in the LRINIT.",
+            "  If this is the first install of the laboratory package",
+            "consult the installation guide for more information."
+        ],
+        "shortdes": "CORE LAB SYSTEM"
+    },
+    "MC": {
+        "des": [
+            "Current Version includes Cardiology,GI,Pulmonary Endoscopy, Hematology",
+            "Bone Marrow Aspirates and Biopsies, Pacemaker, and Rheumatology",
+            " ",
+            "INITS FOR THIS PACKAGE ARE CONTINUED IN 'MC2' MEDICINE-2 PACKAGE"
+        ],
+        "shortdes": "MEDICINE PACKAGE INCLUDES ALL AREAS OF MEDICINE"
+    },
+    "MD": {
+        "des": [
+            "Clinical Procedures (CP) primarily functions as a conduit for passing final",
+            "patient results, using HL7 messaging, between vendor clinical information",
+            "systems (CIS), and the VISTA hospital information system.  Clinical",
+            "Procedures was developed in conjunction with Consults, CPRS, TIU and",
+            "VISTA Imaging and is fully integrated with these packages."
+        ],
+        "shortdes": "Clinical Procedures"
+    },
+    "MHV": {
+        "des": [
+            "This package supports the My HealtheVet website.  It exposes interfaces ",
+            "for extracting patient data, supporting prescription refill, and more."
+        ],
+        "shortdes": "Support for My HealtheVet web site."
+    },
+    "MMRS": {
+        "des": [
+            "VHA Directive 2007-002, MRSA Prevention Initiative, requires facilities to",
+            "screen patients on Admission, subsequent Transfer(s), and Discharge.",
+            "Facilities are required to report compliance rates with Nares Screening on",
+            "Admission to the Facility and Unit(s) and on Discharge.  This information",
+            "also determines the Prevalence and Transmission rates of MRSA.  Data is",
+            "reported monthly to the Inpatient Evaluation Center (IPEC). The purpose",
+            "ofthe software will allow facilities to extract MRSA data for reporting",
+            "purposes."
+        ],
+        "shortdes": "MRSA PREVENTION INITIATIVE"
+    },
+    "MPIF": {
+        "shortdes": "Master Patient Index VistA side"
+    },
+    "NHIN": {
+        "des": [
+            "VA's NHIN product supports the VA's business initiatives for",
+            "the increased exchange of health information between VA and",
+            "non-VA providers (other government and private sector health",
+            "organizations) that are providing care to veterans because",
+            "it is estimated  that 3 out of 4 veterans receive care from",
+            "non-VA providers.",
+            "",
+            "The VA NHIN system provides VistaWeb with access to the",
+            "available patient medical information provided by the NHIN.",
+            "The VA NHIN system will access the VA MPI to retrieve",
+            "patient demographics and the VA Vista(s) to retrieve patient",
+            "medical information. Version 1.0 of the NHIN supports these",
+            "medical domains: Patient Problem List Patient Allergies ",
+            "Patient Medications (Pharmacy All Out-Patient Pharmacy).",
+            "",
+            "The VA NHIN system accesses this information in the form of",
+            "a HITSP CCD or (C32) Continuity of Care Document.",
+            "",
+            "The VA NHIN also provides the VA ROI office with support for",
+            "the patient authorizations process with a web page for the",
+            "Consumer Preferences and Policy Management System. ",
+            ""
+        ],
+        "shortdes": "NATIONAL HEALTH INFORMATION NETWORK ADAPTER"
+    },
+    "NLT": {
+        "des": [
+            " This package is used to update NLT files consisting of nationally",
+            "standardized terms and procedure names. Any new procedure of term",
+            "created by the site must use terms already defined by the NLT package.",
+            " Responsibility of the contents of these files has been granted to",
+            "Pathology & Laboratory Medicine Service."
+        ],
+        "shortdes": "National Laboratory Test file of terms."
+    },
+    "NUPA": {
+        "des": [
+            "Nursing Admission Assessment, Reassessment, and Interdisciplinary Plan ",
+            "of Care."
+        ],
+        "shortdes": "Nursing Admission Assessment"
+    },
+    "NUR": {
+        "des": [
+            "This entry exists to allow all NURSING patches (e.g., NURA, NURC, NURQ and NURS) to be linked to this one PACKAGE file entry which has a namespace of NUR."
+        ],
+        "shortdes": "Nursing software"
+    },
+    "ONC": {
+        "des": [
+            "The Oncology package, which is known as the Tumor Registry Automation",
+            "Program (TRAP), is a comprehensive program for automating the hospital",
+            "tumor registry.  It is unique among tumor registry programs in supporting",
+            "all requirements of the American College of Surgeons and the National",
+            "Cancer Institute's Surveillance, Epidemiology, and End Results (SEER) ",
+            "Program and providing interactive edits for all data elements.  It features ",
+            "flexibility in accommodating expanded data sets for medical oncology,",
+            "radiation therapy, and surgery, and for satisfying local needs and special",
+            "research studies.  It also features a transparent approach for encoding",
+            "and decoding ICD-O and SNOMED nomenclatures.  "
+        ],
+        "shortdes": "Oncology treatment tracking & tumor registry package."
+    },
+    "OOPS": {
+        "shortdes": "Automated Safety Incident Surveillance Tracking System"
+    },
+    "OR": {
+        "shortdes": "Order Entry/Results Reporting"
+    },
+    "ORRC": {
+        "shortdes": "Care Mgt Modules"
+    },
+    "OSI": {
+        "shortdes": "This is a place-holder for OpenM information patches"
+    },
+    "PPP": {
+        "des": [
+            "The Pharmacy Prescription Practices Package is a set of routines for",
+            "determining whether a patient has visited other VAMC's and the making",
+            "the prescription data from those facilities aviable to the local",
+            "pharmacist"
+        ],
+        "shortdes": "3P"
+    },
+    "PRC": {
+        "des": [
+            "This package distributes the IFCAP Data Dictionaries for: CONTROL POINT",
+            "ACTIVITY, FISCAL and SUPPLY."
+        ],
+        "shortdes": "IFCAP System Files"
+    },
+    "PRCA": {
+        "des": [
+            "Enhancements to the A/R package to support FMS."
+        ],
+        "shortdes": "FMS"
+    },
+    "PRCN": {
+        "des": [
+            "This module allows for the request and approval of non-",
+            "expendable equipment and for the turn-in on non-expendable",
+            "equipment."
+        ],
+        "shortdes": "EQUIPMENT/TURN-IN REQUEST"
+    },
+    "PREN": {
+        "shortdes": "WEB BASED"
+    },
+    "PRPF": {
+        "des": [
+            "This package is the class I version of the Patient funds accounting system."
+        ],
+        "shortdes": "PATIENT FUNDS.  INTEGRATED WITH PATIENT FILE"
+    },
+    "PRS": {
+        "shortdes": "PAID"
+    },
+    "PS": {
+        "shortdes": "OUTPATIENT LABELS, PROFILE, INVENTORY, PRESCRIPTIONS"
+    },
+    "PSA": {
+        "shortdes": "Drug Accountability Inventory and Tracking module."
+    },
+    "PSB": {
+        "shortdes": "BAR CODE MEDICATION ADMINISTRATION"
+    },
+    "PSD": {
+        "des": [
+            "The Controlled Substances module provides functionality to monitor",
+            "and track the receipt, inventory, and dispensing of all controlled",
+            "substances."
+        ],
+        "shortdes": "Controlled Substances Inventory and Tracking module."
+    },
+    "PSGW": {
+        "des": [
+            "AUTOMATIC REPLENISHMENT/WARD STOCK IS A MEANS OF DRUG DISTRIBUTION",
+            "AND INVENTORY USED BY INPATIENT PHARMACY.  VERSION 2.0 INCLUDES",
+            "MULTI-DIVISION AMIS REPORTING."
+        ],
+        "shortdes": "A method of drug distribution and inventory management."
+    },
+    "PSH": {
+        "shortdes": "Non-VA Medications"
+    },
+    "PSJ": {
+        "des": [
+            "  Combination of Unit Dose Medications and IV Medications and their",
+            "associated utilities."
+        ],
+        "shortdes": "UNIT DOSE AND IVS"
+    },
+    "PSN": {
+        "shortdes": "This is the National Drug File Package V 3.15"
+    },
+    "PSO": {
+        "shortdes": "OUTPATIENT LABELS, PROFILE, INVENTORY, PRESCRIPTIONS"
+    },
+    "PSS": {
+        "des": [
+            "For maintenance of Pharmacy files and fields."
+        ],
+        "shortdes": "Maintenance of Pharmacy files."
+    },
+    "PSU": {
+        "des": [
+            " ;;Pharmacy Benefits Management (PBM) software extracts statistics from",
+            " ;;the following files on a monthly basis:",
+            " ;;",
+            " ;;File Name                                     File Number",
+            " ;;---------------------------------------------------------",
+            " ;;Pharmacy Patient IV Subfile......................55.01",
+            " ;;Pharmacy Patient UD Subfile......................55.06",
+            " ;;AR/WS STOCK Stats................................58.5",
+            " ;;Prescription.....................................52",
+            " ;;Procurement......................................442, 58.811, 58.81",
+            " ;;Controlled Substances............................58.81",
+            " ;;Laboratory.......................................60, 63",
+            " ;;",
+            " ;;This data is electronically exported via MailMan to the National",
+            " ;;PBM Section. These messages are then passed through a translation",
+            " ;;process to convert all local drug names to a common drug name and all",
+            " ;;local dispensing units to a common dispensing unit. After translation",
+            " ;;the information will be added to a national database. The PBM",
+            " ;;Section will be able to provide information on facility, regional, and",
+            " ;;national product use on a monthly, quarterly, and annual intervals."
+        ],
+        "shortdes": "PHARMACY BENEFITS MANAGEMENT"
+    },
+    "PSX": {
+        "shortdes": "Consolidated Mail Outpatient Pharmacy"
+    },
+    "PX": {
+        "shortdes": "Patient Care Encounter"
+    },
+    "PXRM": {
+        "shortdes": "Clinical Reminders"
+    },
+    "QAC": {
+        "des": [
+            "This package supports the work of the Patient Representative by",
+            "collecting data on patient and non-patient contacts."
+        ],
+        "shortdes": "PATIENT REPRESENTATIVE PACKAGE"
+    },
+    "QAM": {
+        "des": [
+            "The Clinical Monitoring System allows the users to create their own",
+            "monitors from a list of pre-defined conditions.  The monitors then run",
+            "nightly, scanning DHCP data for patients who meet the conditions of the",
+            "monitor.  The user may select data elements from a pre-defined list to be",
+            "captured when a patient falls out for a given monitor.  Programmers may",
+            "add new data elements and conditions to the system.  Users can design and",
+            "print ad hoc reports from the fall out data."
+        ],
+        "shortdes": "Allows users to build their own monitors."
+    },
+    "QAN": {
+        "shortdes": "This package is designed to track a hospital incident."
+    },
+    "QAO": {
+        "des": [
+            "The package addresses the Occurrence Screen circular by automating the",
+            "collection of selected occurrence screens.  The remaining screens that",
+            "are not auto enrolled may be entered manually.  Provision has been made",
+            "for identifying practitioner, system, and equipment related problems",
+            "with patient risk events."
+        ],
+        "shortdes": "OCCURRENCE SCREENING VERSION 3.0"
+    },
+    "QAP": {
+        "des": [
+            "This package will completely generate a survey with information provided",
+            "by the survey author, then allow participation of designated audiences.",
+            "Once the participation is finished, the author may generate statistics."
+        ],
+        "shortdes": "Generates surveys and allows participation in them."
+    },
+    "QAQ": {
+        "shortdes": "UTILITIES USED IN ALL QUALITY ASSURANCE MODULES"
+    },
+    "RA": {
+        "des": [
+            " ",
+            " "
+        ],
+        "shortdes": "REGISTERS PATIENTS,RECORDS EXAMS,PROFILES,AMIS REPORTS"
+    },
+    "RG": {
+        "des": [
+            "Clinical Information Resource Network (CIRN)"
+        ],
+        "shortdes": "CIRN"
+    },
+    "RGUT": {
+        "shortdes": "RUN TIME LIBRARY"
+    },
+    "RMIM": {
+        "shortdes": "RMIM"
+    },
+    "RMPF": {
+        "des": [
+            "This system allows users of VA Medical Facilities to electronically",
+            "order products and services from the Denver Distribution Center",
+            "in Denver, Colorado."
+        ],
+        "shortdes": "Remote Order/Entry System"
+    },
+    "RMPR": {
+        "des": [
+            "The DHCP Prosthetic package automates many functions for Prosthetics.  The",
+            "record of Prosthetics Service (VA Form 10-2319) and the appropriate",
+            "VAF 1358 obligation, are updated at the time of purchase (entry into the",
+            "computer) of the item or service provided to the veteran.  This update is",
+            "accomplished through direct links to IFCAP and the electronic patient VAF",
+            "10-2319. Purchasing is simplified by entering the information only once",
+            "into the computer and letting it update your 1358 account balances and the",
+            "patient VAF 10-2319.",
+            " ",
+            "   Purchasing Module",
+            " ",
+            "Purchasing interfaces with IFCAP into the IFCAP 1358 module.  Forms ",
+            "printed include the Authorization Invoice (VAF 10-2421), and Authority to",
+            "Exceed Amount on the Service Card (FL 10-55).  For tracking transactions",
+            "associated with purchasing, Prosthetics will accommodate the Prosthetic",
+            "Service Card Invoice (VAF 10-2520), the Prescription and Authorization for",
+            "Eyeglasses (VAF 10-2914), No-Form, Pickup/Delivery Charges, Request for",
+            "Estimate (FL10-90), and Patient Notification Letter.",
+            " ",
+            " ",
+            "   Electronic 10-2319 Module",
+            "  ",
+            "Record of Prosthetics Services is fully incorporated into DHCP displayed in",
+            "multiple terminal screens.  Appliances and services issued are",
+            "automatically recorded to the electronic VAF 10-2319 when purchases are",
+            "obligated or issued from stock.  In addition, PSC Card, Clothing",
+            "Allowance, Auto Adaptive Equipment, Patient Correspondence, and other",
+            "patient data is recorded and displayed within the Electronic VAF 10-2319",
+            "Module.  This is the module that provides the basis for all AMIS reports.",
+            " ",
+            "   Entitlement Records Module",
+            "  ",
+            "Information collected by Medical Administration Service (MAS) to determine",
+            "eligibility of benefits to the veteran is displayed in this module.",
+            "Patient data includes name, social security number, date of birth,",
+            "address, remarks, temporary address, phone, sex, next of kin, military",
+            "service, eligibility status, verification of eligibility, disability",
+            "ratings, diagnostic codes, admission date, discharge date, type of",
+            "discharge, clinic enrollment, and pending appointments.",
+            "  ",
+            "   AMIS Module",
+            "  ",
+            "This module calculates the new and repair work sheets based on the infor-",
+            "mation collected in the electronic 10-2319 file.",
+            "This module also automatically generates Genric Code sheets that will be",
+            "saved for editing and transmission to Austin.",
+            " ",
+            "   Inventory Module",
+            "  ",
+            "Inventory is linked to the Generic Inventory Package.  Each station has the",
+            "option to activate GIP.",
+            " ",
+            " ",
+            "   Correspondence Module",
+            "  ",
+            "Letters sent to patients are generated from this module.  Denial letters",
+            "are counted on AMIS automatically when end-of-quarter AMIS reports are",
+            "run.",
+            "  ",
+            " ",
+            "   Scheduled Meetings and Home/Liaison Visits Module",
+            "  ",
+            "Appointment information for Prosthetics Clinics can be pulled over onto",
+            "the Prosthetics VAF 10-2527 to be printed as Appointment Roster and Clinic",
+            "Action Sheets.",
+            " ",
+            "Home/Liaison visits can also be entered and printed in this module.  All",
+            "Appointment Visits and Home/Liaison Visits will be calculated on AMIS at",
+            "the end of the quarter.",
+            " ",
+            "    Prosthetic Lab Module",
+            " ",
+            "The Prosthetic Lab module automates VA Form 10-2529-3, Request and Receipt",
+            "for Prosthetic Appliances or Services, which is used to maintain a",
+            "consolidated record of prosthetic services furnished to eligible veterans.",
+            "This includes activities at Orthotic Laboratories, Restoration",
+            "Laboratories, Shoe Last Clinics, Wheelchair Repair Shops, National Foot",
+            "Centers, and the Denver Distribution Center."
+        ],
+        "shortdes": "PROSTHETICS VERSION 3.0 ALPHA"
+    },
+    "ROR": {
+        "shortdes": "CLINICAL REGISTRIES"
+    },
+    "RT": {
+        "des": [
+            "This package is mainly used for medical records tracking and film",
+            "jacket tracking. However, it is design to be used to track most",
+            "any kind of record, such as dental."
+        ],
+        "shortdes": "Medical Records and Film Jacket Tracking"
+    },
+    "SD": {
+        "des": [
+            "The DHCP Scheduling package allows a user to Schedule appointments for",
+            "the following types of appointments:",
+            "                Scheduled",
+            "                C&P",
+            "                Collateral",
+            "It also allows entry of an unscheduled appointment at any time during a day",
+            "on which the clinic being scheduled into meets.  From these appointments,",
+            "various output reports are produced such as, but not limited to, file room",
+            "list, appointment list, routing slips, letters for cancellations, no-shows,",
+            "and pre-appointment.  There is an additional capability where additional",
+            "clinic stop credits can be directly entered and associated with a particular",
+            "patient and date.  AMIS reporting is handled via a set of extract routines",
+            "that summarize the data found by reading through the appointments and",
+            "additional clinic stops and the 10/10 and unscheduled visits (outpatient",
+            "credit given to Admitting/Screening) and storing the information by patient",
+            "and visit date in the OCP File.  The AMIS 223 report and the OPC",
+            "file to be sent to the Austin DPC are generated using this file."
+        ],
+        "shortdes": "APPOINTMENTS,PROFILES,LETTERS,AMIS REPORTS"
+    },
+    "SOW": {
+        "des": [
+            "THE FILE AND OPTIONS ASSOCIATED WITH THIS PACKAGE WAS DEVELOPED",
+            "AT THE ISC REGION-3, BY STANLEY A. BROWN."
+        ],
+        "shortdes": "Files and fields for the Social Work Package"
+    },
+    "SPN": {
+        "des": [
+            "The Spinal Cord Dysfunction package is intended to provide a registry of",
+            "SCD patients and to track their functional statuses."
+        ],
+        "shortdes": "SPINAL CORD DYSFUNCTION, FIELD COMPONENT"
+    },
+    "SR": {
+        "des": [
+            "The DHCP Surgery package is used to enter/edit and display information",
+            "related to the Surgical Service.  It will track surgical cases, provide",
+            "useful management reports, and produce the necessary documentation for",
+            "all surgical cases.",
+            " "
+        ],
+        "shortdes": "SURGICAL DATA COLLECTION AND OPERATIONS SCHEDULING"
+    },
+    "TIU": {
+        "des": [
+            "This package is designed to manage the capture, retention, retrieval and ",
+            "processing of any patient-visit-oriented document.  Its first version will ",
+            "support Discharge Summaries, Progress Notes, and Consult Results."
+        ],
+        "shortdes": "Text Integration Utilities"
+    },
+    "USR": {
+        "shortdes": "User Authorization"
+    },
+    "VALM": {
+        "shortdes": "List Manager Developer Tool"
+    },
+    "VAQ": {
+        "des": [
+            "This module allows medical centers to exchange patient clinical and",
+            "administrative information through the use of MailMan.  Requests can",
+            "be sent to a remote site.  The remote site can process the request and",
+            "a message containing patient information will be returned."
+        ],
+        "shortdes": "Module used to manage patient information exchange"
+    },
+    "VBEC": {
+        "des": [
+            "This package, VBECS, exists in the M environment to",
+            "perform integrity checks on existing VistA Blood Bank",
+            "data, convert relevant data for migration to parallel",
+            "applications, and to migrate VistA data to parallel",
+            "applications when specific application events are",
+            "triggered."
+        ],
+        "shortdes": "VistA Blood Establishment Computer System"
+    },
+    "VDEF": {
+        "des": [
+            "VDEF stands for VistA Data Extraction Framework, a data-driven scripting",
+            "tool for automated HL7 message generation."
+        ],
+        "shortdes": "VISTA Data Extraction Framework"
+    },
+    "VIAB": {
+        "shortdes": "VIAB APP"
+    },
+    "VPR": {
+        "des": [
+            "This application contains utilities to build and manage a copy of the",
+            "patient's record, including local and remote data.  The authoritative",
+            "copy of the data will continue to be each local VistA service."
+        ],
+        "shortdes": "Utilities to manage a virtual copy of the patient record"
+    },
+    "VPS": {
+        "shortdes": "RPC components that support VPS Kiosk."
+    },
+    "WEBB": {
+        "shortdes": "BED MANAGEMENT SOLUTION"
+    },
+    "WEBV": {
+        "shortdes": "VISTA WEB"
+    },
+    "WII": {
+        "shortdes": "Active duty patients admissions and discharges."
+    },
+    "WV": {
+        "shortdes": "Tracks health issues specific to female patients."
+    },
+    "XHD": {
+        "shortdes": "HealtheVet Desktop"
+    },
+    "XM": {
+        "des": [
+            "MailMan is a communications package that can be used by software",
+            "and hardware.  In its' user mode it operates in a kind of mode that",
+            "is very nice for asynchronous teleconferencing.  It has many functions",
+            "that can be used by software, including the ability to address messages",
+            "to software (servers) and extract data from message fields."
+        ],
+        "shortdes": "Electronic Mail, both local and networked"
+    },
+    "XOBE": {
+        "des": [
+            "Contains the M-side portion of the electronic signature methods for ",
+            "rehosted applications that validate, store, and retrieve electronic ",
+            "signature data."
+        ],
+        "shortdes": "Foundations electronic signature code utilities."
+    },
+    "XOBS": {
+        "des": [
+            "CONTAINS ROUTINES COMPRISING THE SECURITY SUBSYSTEM FOR VISTALINK."
+        ],
+        "shortdes": "SECURITY SUBSYSTEM FOR VISTALINK"
+    },
+    "XOBU": {
+        "des": [
+            "Contains common files, libraries, etc. used by all the XOB*",
+            "packages.  ",
+            " ",
+            "Also, contains options, protocols and list templates used to",
+            "manage Foundations site parameters and operations."
+        ]
+    },
+    "XOBV": {
+        "shortdes": "VistaLink"
+    },
+    "XOBW": {
+        "shortdes": "Allows VistA applications access to remote web services"
+    },
+    "XPD": {
+        "des": [
+            "Kernel Installation and Distribution System first time install. This",
+            "package is used to install Kernel for the first time. It will install",
+            "a part of KIDS that will then allow you to use KIDS to install Kernel."
+        ],
+        "shortdes": "Kernel Installation & Distribution System"
+    },
+    "XT": {
+        "des": [
+            "The KERNEL TOOLKIT can only be installed on a system already running",
+            "VA KERNEL V7.1."
+        ],
+        "shortdes": "PROGRAMMERS OPTIONS, MULTI. TERM LOOKUP"
+    },
+    "XU": {
+        "des": [
+            "This is the basic package containing the KERNEL."
+        ],
+        "shortdes": "SIGN-ON, SECURITY, MENU DRIVER, DEVICES, TASKMAN"
+    },
+    "XWB": {
+        "des": [
+            "Remote Procedure Call (RPC) Broker is the software that provides Decentralized",
+            "Hospital Computer Program (DHCP) its client/server architecture.  The RPC",
+            "Broker allows workstations running client applications to access DHCP data and",
+            "methods.  ",
+            "",
+            "RPC Broker has a client module which runs on the workstation and a server",
+            "module which runs on the host computer where the data and business rules ",
+            "reside.  On the client side the Broker works between the applications and the",
+            "transport protocol.  "
+        ],
+        "shortdes": "Remote Procedure Call Broker"
+    },
+    "YS": {
+        "des": [
+            "Mental Health belongs to the CORE+8 group of DHCP packages.  This package",
+            "includes modules to assist Psychologists, Psychiatrists, Nurses, Social",
+            "Workers, and other health-care professionals in the care of Mental",
+            "Health patients.  Major clinical entities include various clinical",
+            "modules and options, an inpatient module, a psychologic testing",
+            "module, and various supervisory options."
+        ],
+        "shortdes": "Version 5.01 of Mental Health"
+    }
+}

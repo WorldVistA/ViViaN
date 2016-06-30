@@ -12,13 +12,14 @@ d3.chart = d3.chart || {};
 d3.chart.dependencyedgebundling = function(options) {
 
   var _radius;
-  var _diameter = 600;
-  var _textRadius = 160;
+  var _diameter = 900;
+  var _textRadius = 100;
   var _innerRadius;
   var _nodeTextHyperLink;
   var _txtLinkGap = 5;
-  var _minTextWidth = 7.4;
-  var _radialTextHeight = 13;
+  var _minTextWidth = 5.5;
+  var _radialTextHeight = 12;
+  var _mouseOvered, _mouseOuted;
 
   function resetDimension() {
     _radius = _diameter / 2;
@@ -36,6 +37,7 @@ d3.chart.dependencyedgebundling = function(options) {
           maxItem = data[item].name;
         }
     }
+
     var minTextRadius = Math.ceil(maxLength * _minTextWidth);
     if (_textRadius < minTextRadius) {
       _textRadius = minTextRadius;
@@ -93,7 +95,7 @@ d3.chart.dependencyedgebundling = function(options) {
 
     return depends;
   }
-  
+
   function chart(selection) {
     selection.each(function(data) {
       // logic to set the size of the svg graph based on input
@@ -117,17 +119,16 @@ d3.chart.dependencyedgebundling = function(options) {
       var svg = selection.insert("svg")
           .attr("width", _diameter)
           .attr("height", _diameter)
-        .append("g")
+          .append("svg:g")
           .attr("transform", "translate(" + _radius + "," + _radius + ")");
 
       // get all the link and node
       var link = svg.append("g").selectAll(".link"),
           node = svg.append("g").selectAll(".node");
-      
       var pkgNodes  = _packageHierarchy(root);
       var nodes = cluster.nodes(pkgNodes),
           links = packageDepends(nodes);
-      
+
       link = link
           .data(bundle(links))
         .enter().append("path")
@@ -157,32 +158,70 @@ d3.chart.dependencyedgebundling = function(options) {
           .on("mouseout", mouseouted);
           //.on("click", _onNodeClick);
 
+      link.forEach(function(link) {
+          link.source = node[link.source] ||
+              (node[link.source] = {name: link.source});
+          link.target = node[link.target] ||
+              (node[link.target] = {name: link.target});
+      });
+
       function mouseovered(d) {
+        // the following two variables are used to find and class paths that are dependant
+        // and depend upon the mouseovered package.
+        //
+        // targetNames keeps the opposite end of the paths value and index
+        // duplicateIndexes holds the index again when the opposite path is found
+        var targetNames = {};
+        var duplicateIndexes=[]
 
         node
             .each(function(n) { n.target = n.source = false; });
 
-        link
-            .classed("link--target", function(l) { if (l.target === d) return l.source.source = true; })
-            .classed("link--source", function(l) { if (l.source === d) return l.target.target = true; })
-            .filter(function(l) { return l.target === d || l.source === d; })
-            .each(function() { this.parentNode.appendChild(this); });
+        var links = link.filter(function(l) { return l.target === d || l.source === d; })
+             .classed(palette+"-link--target link--target", function(l,i) {
+              if (l.target === d)  {
+                targetNames[l.source.name] = i;
+                return l.source.source = true;
+              }
+            })
+            .classed(palette+"-link--source link--source", function(l,i) {
+              if(l.target.name in targetNames) {
+                  duplicateIndexes.push(targetNames[l.target.name])
+                  d3.select(this).classed('link--target', true);
+               }
+              if (l.source === d) {
+                return l.target.target = true;
+              }
+            });
+
+        duplicateIndexes.forEach(function(d) {
+           d3.select(links[0][d]).classed('link--source', true);
+           links[0][d]= links[0][d];
+        });
+        links.each(function() {this.parentNode.appendChild(this); });
 
         node
-            .classed("node--target", function(n) { return n.target; })
-            .classed("node--source", function(n) { return n.source; });
-
+            .classed(palette+"-node--target node--target", function(n) { return n.target; })
+            .classed(palette+"-node--source node--source", function(n) { return n.source; });
+        
+        if (_mouseOvered) {
+          _mouseOvered(d);
+        }
       }
 
       function mouseouted(d) {
+
         link
-            .classed("link--target", false)
-            .classed("link--source", false);
+            .classed(palette+"-link--target link--target", false)
+            .classed(palette+"-link--source link--source", false);
 
         node
-            .classed("node--target", false)
-            .classed("node--source", false);
+            .classed(palette+"-node--target node--target", false)
+            .classed(palette+"-node--source node--source", false);
 
+        if (_mouseOuted) {
+          _mouseOuted(d);
+        }
       }
     });
   }
@@ -229,6 +268,18 @@ d3.chart.dependencyedgebundling = function(options) {
     return chart;
   };
   
+  chart.mouseOvered = function (d) {
+    if (!arguments.length) return d;
+    _mouseOvered = d;
+    return chart;
+  };
+
+  chart.mouseOuted = function (d) {
+    if (!arguments.length) return d;
+    _mouseOuted = d;
+    return chart;
+  };
+
   return chart;
 
 };
