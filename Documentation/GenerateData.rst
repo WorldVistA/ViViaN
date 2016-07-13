@@ -69,7 +69,7 @@ numbers:
           8994              Remote Procedure
            19                    Option
           779.2              HLO Application
-          9.779                  Install
+          9.7                  Install
  ======================= =======================
 
 An example command to be run would look like this:
