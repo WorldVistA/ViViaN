@@ -56,23 +56,23 @@ class test_pkgdep(unittest.TestCase):
     ActionChains(driver).move_to_element(driver.find_element_by_link_text("PCE Patient Care Encounter")).perform()
     source_size = len(driver.find_elements_by_class_name("node--source"))
     target_size = len(driver.find_elements_by_class_name("node--target"))
-    self.assertTrue(source_size == PCE_values[0])
-    self.assertTrue(target_size == PCE_values[1])
+    self.assertEqual(source_size, PCE_values[0])
+    self.assertEqual(target_size, PCE_values[1])
     time.sleep(3)
 
     ActionChains(driver).move_to_element(driver.find_element_by_link_text("Equipment Turn-In Request")).perform()
     time.sleep(3)
     source_size = len(driver.find_elements_by_class_name("node--source"))
     target_size = len(driver.find_elements_by_class_name("node--target"))
-    self.assertTrue(source_size == ETiR_values[0])
-    self.assertTrue(target_size == ETiR_values[1])
+    self.assertEqual(source_size, ETiR_values[0])
+    self.assertEqual(target_size, ETiR_values[1])
 
     ActionChains(driver).move_to_element(driver.find_element_by_link_text("CORBA Services")).perform()
     time.sleep(3)
     source_size = len(driver.find_elements_by_class_name("node--source"))
     target_size = len(driver.find_elements_by_class_name("node--target"))
-    self.assertTrue(source_size == CS_values[0])
-    self.assertTrue(target_size == CS_values[1])
+    self.assertEqual(source_size, CS_values[0])
+    self.assertEqual(target_size, CS_values[1])
 
   def test_03_chart_switch(self):
     global driver
@@ -122,14 +122,24 @@ class test_pkgdep(unittest.TestCase):
     pulldown_options = Select(dep_pulldown)
     for option in pulldown_options.options:
       pulldown_options.select_by_visible_text(option.text)
-      self.assertTrue( driver.find_element_by_xpath("//*[@id='highcharts-0']/div/span[1]").text in dep_chart_top_entries)
+      self.assertTrue(driver.find_element_by_xpath("//*[@id='highcharts-0']/div/span[1]").text in dep_chart_top_entries)
+      time.sleep(5)
+
+  def test_05_bar_switch(self):
+    global driver
+    bar_chart = driver.find_element_by_id("bar-chart")
+    btn_group = bar_chart.find_element_by_class_name("btn-group")
+    for btn in btn_group.find_elements_by_tag_name("label"):
+      type = btn.text.split(' ')[0]
+      btn.click()
+      self.assertTrue("active" in btn.get_attribute("class"))
       time.sleep(5)
 
   def test_06_stat_bar_content(self):
-    chart_titles = ['VistA Packages Dependencies Chart','VistA Package Statistics']
+    global driver
+    chart_titles = ['VistA Packages Dependencies Chart','VistA Package Statistics', 'VistAPackageStatistics']
     stat_chart_legend = ['routines','files','fields']
     stat_chart_top_entries = ['Generic Code Sheet','Integrated Billing','Accounts Receivable']
-    global driver
 
     #Ensure that the list of data and labels isn't empty
     chart_container = driver.find_elements_by_class_name("highcharts-series")
@@ -145,7 +155,6 @@ class test_pkgdep(unittest.TestCase):
     # Read title of graph
     bar_chart = driver.find_element_by_id("bar-chart")
     title_element = bar_chart.find_element_by_class_name("highcharts-title")
-    print title_element.text
     self.assertTrue(title_element.text in chart_titles)
 
     # Ensure that legends have proper information
@@ -159,21 +168,12 @@ class test_pkgdep(unittest.TestCase):
     pulldown_options = Select(dep_pulldown)
     for option in pulldown_options.options:
       pulldown_options.select_by_visible_text(option.text)
-      self.assertTrue( driver.find_element_by_xpath("//*[@id='highcharts-0']/div/span[1]").text in stat_chart_top_entries)
+      self.assertTrue(driver.find_element_by_xpath("//*[@id='highcharts-0']/div/span[1]").text in stat_chart_top_entries)
       time.sleep(5)
 
-  def test_05_bar_switch(self):
-    global driver
-    bar_chart = driver.find_element_by_id("bar-chart")
-    btn_group = bar_chart.find_element_by_class_name("btn-group")
-    for btn in btn_group.find_elements_by_tag_name("label"):
-      type = btn.text.split(' ')[0]
-      btn.click()
-      self.assertTrue("active" in btn.get_attribute("class"))
-      time.sleep(5)
 
 if __name__ == '__main__':
-  parser =argparse.ArgumentParser(description="")
+  parser = argparse.ArgumentParser(description="")
   parser.add_argument("-r",dest = 'webroot', required=True, help="Web root of the ViViaN(TM) instance to test.  eg. http://code.osehra.org/vivian")
   result = vars(parser.parse_args())
   driver = webdriver.Firefox()

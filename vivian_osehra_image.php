@@ -36,11 +36,11 @@
               <li><a href="vxvista">DSS vxVistA</a></li>
             </ul>
           </li>
-          <li class="dropdown">
+          <li class="dropdown" id="va-visualizations">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">VA Visualizations <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="http://bim.osehra.org">Business Information Model</a></li>
-              <li><a href="http://him.osehra.org">Hybrid Information Model</a></li>
+              <li><a href="http://bim.osehra.org" id="business-information-model">Business Information Model</a></li>
+              <li><a href="http://him.osehra.org" id="hybrid-information-model">Hybrid Information Model</a></li>
             </ul>
           </li>
         </ul>

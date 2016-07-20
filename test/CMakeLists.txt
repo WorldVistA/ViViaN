@@ -13,15 +13,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #---------------------------------------------------------------------------
+cmake_minimum_required(VERSION 2.8.0)
+
+enable_testing()
+
 file(GLOB VIVIAN_TEST_FILES ${CMAKE_CURRENT_SOURCE_DIR}/test*.py)
 message(STATUS "The Image comparison part of the Menus test utilizes the PILLOW Python Library.
 Installation instructions for PILLOW are found here:
     http://pillow.readthedocs.org/en/3.0.x/installation.html
 ")
 
+if(NOT DEFINED PYTHON_EXECUTABLE)
+  include(FindPythonInterp)
+endif(NOT DEFINED PYTHON_EXECUTABLE)
+
 set(VIVIAN_WEB_ROOT "http://code.osehra.org/vivian" CACHE STRING "Set web root of vivian page to test")
 foreach(test_file ${VIVIAN_TEST_FILES})
   get_filename_component(test_name ${test_file} NAME_WE)
   add_test("VIVIAN_${test_name}" "${PYTHON_EXECUTABLE}" "${test_file}" "-r" "${VIVIAN_WEB_ROOT}")
-  set_tests_properties("VIVIAN_${test_name}" PROPERTIES FAIL_REGULAR_EXPRESSION "FAIL:")
+  set_tests_properties("VIVIAN_${test_name}" PROPERTIES FAIL_REGULAR_EXPRESSION "FAIL")
 endforeach()

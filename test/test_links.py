@@ -14,28 +14,45 @@
 # limitations under the License.
 #---------------------------------------------------------------------------
 from selenium import webdriver
+from selenium.webdriver.support.ui import Select
 import argparse
 import unittest
 import re
 import time
 
-class test_about(unittest.TestCase):
+class test_links(unittest.TestCase):
 
   @classmethod
   def tearDownClass(cls):
     global driver
     driver.close()
 
-  def test_01_about_option(self):
+  def test_01_visualization_working_group(self):
     global driver
-    about_option = driver.find_element_by_xpath('//*[@id="navigation_buttons"]/nav/div/ul[2]/li[1]/a')
-    about_option.click()
+    nav_button = driver.find_element_by_xpath('//*[@id="navigation_buttons"]/nav/div/ul[2]/li[2]/a')
+    nav_button.click()
+    time.sleep(1)
+    self.assertEqual(driver.current_url, 'https://www.osehra.org/content/visualization-open-source-project-group')
+    driver.back()
     time.sleep(1)
 
-    about_para = driver.find_element_by_id("dialog-modal-about")
-    self.assertTrue(re.search("Visualizing VistA and Namespace",about_para.text))
-    self.assertTrue(re.search("tree-based visualizations",about_para.text))
-    self.assertTrue(re.search("VHA Business Function Framework",about_para.text))
+  def test_02_business_information_model(self):
+    global driver
+    driver.find_element_by_id('va-visualizations').click()
+    driver.find_element_by_id('business-information-model').click()
+    time.sleep(1)
+    self.assertEqual(driver.current_url, 'http://bim.osehra.org/')
+    driver.back()
+    time.sleep(1)
+
+  def test_03_hybrid_information_model(self):
+    global driver
+    driver.find_element_by_id('va-visualizations').click()
+    driver.find_element_by_id('hybrid-information-model').click()
+    time.sleep(1)
+    self.assertEqual(driver.current_url, 'http://him.osehra.org/')
+    driver.back()
+    time.sleep(1)
 
 if __name__ == '__main__':
   parser = argparse.ArgumentParser(description="Access the 'About' Text of the ViViaN(TM) webpage")
@@ -43,5 +60,5 @@ if __name__ == '__main__':
   result = vars(parser.parse_args())
   driver = webdriver.Firefox()
   driver.get(result['webroot'] + "/index.php")
-  suite = unittest.TestLoader().loadTestsFromTestCase(test_about)
+  suite = unittest.TestLoader().loadTestsFromTestCase(test_links)
   unittest.TextTestRunner(verbosity=2).run(suite)

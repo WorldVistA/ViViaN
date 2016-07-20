@@ -14,7 +14,6 @@
 # limitations under the License.
 #---------------------------------------------------------------------------
 from selenium import webdriver
-from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 import argparse
 import unittest
@@ -36,10 +35,11 @@ class test_index(unittest.TestCase):
     time.sleep(1)
     button = driver.find_element_by_xpath("//button[contains(@onclick,'_resetAllNode')]")
     button.click()
+    time.sleep(1)
     newSize = len(driver.find_elements_by_class_name('node'))
-    self.assertTrue(oldSize == newSize)
+    self.assertEqual(oldSize, newSize)
 
-  def test_02_expand(self):
+  def test_02_expand_all(self):
     global driver
     oldSize = len(driver.find_elements_by_class_name('node'))
     button = driver.find_element_by_xpath("//button[contains(@onclick,'_expandAllNode')]")
@@ -51,7 +51,7 @@ class test_index(unittest.TestCase):
   def test_03_title(self):
     global driver
     title = driver.find_element_by_id("title")
-    self.assertTrue(re.search("Visualizing VistA And Namespace", title.text))
+    self.assertTrue(re.search("Visualizing VistA and Namespace", title.text))
 
   def test_04_legend(self):
     global driver
@@ -61,7 +61,7 @@ class test_index(unittest.TestCase):
       entry.click()
       nodes = driver.find_elements_by_class_name('node')
       node_text = nodes[40].find_element_by_tag_name('text')
-      self.assertTrue(not(node_text.get_attribute("fill") == prev))
+      self.assertNotEqual(node_text.get_attribute("fill"), prev)
       prev = node_text.get_attribute("fill")
 
   def test_05_modal_title(self):
@@ -69,40 +69,52 @@ class test_index(unittest.TestCase):
     nodes = driver.find_elements_by_class_name('node')
     node_text = nodes[40].find_element_by_tag_name('text')
     node_text.click()
-    modal_title = driver.find_element_by_id('ui-id-1')
+    modal_title = driver.find_element_by_class_name('ui-dialog-title')
     self.assertTrue(re.search(node_text.text, modal_title.text))
+    # Close the dialog
+    modal_titlebar = driver.find_element_by_class_name('ui-dialog-titlebar')
+    modal_titlebar.find_element_by_tag_name("button").click()
 
   def test_06_modal_accordion(self):
-    modalCategories = ['namespaces','dependencies','interface','description']
-    modalRegex = ['Includes.+Excludes','Dependencies \& Code View','M API.+Remote Procedure Call','[A-Za-z &/]+']
     global driver
+    # Open accordian dialog
     nodes = driver.find_elements_by_class_name('node')
     node_text = nodes[40].find_element_by_tag_name('text')
     accordion = driver.find_element_by_id("accordion")
     node_text.click()
-    for i in range(4):
+
+    modalCategories = ['namespaces','dependencies','interface','himInfo', 'description']
+    modalRegex = ['Includes.+Excludes','Dependencies \&amp; Code View','M API.+Web Service API',
+                  'HIM Visualization for','[A-Za-z &/]+']
+    for i in range(1,6): # 1, 2, 3, 4, 5
       # Test accordion selection of each header
-      modal_accordion = accordion.find_element_by_id('ui-accordion-accordion-header-'+str(i))
+      modal_accordion = accordion.find_element_by_id('ui-id-'+str(i))
       modal_accordion.click()
       self.assertTrue(modal_accordion.get_attribute('aria-selected'))
-
-    # Test accordion content
-      content = accordion.find_element_by_id(modalCategories[1]).get_attribute('innerHTML');
-      self.assertTrue(modalRegex[i],content)
+      # Test accordion content
+      content = accordion.find_element_by_id(modalCategories[i-1]).get_attribute('innerHTML');
+      self.assertTrue(re.search(modalRegex[i-1], content))
     # Close modal window
     modal_title = driver.find_element_by_class_name('ui-dialog-titlebar')
     modal_title.find_element_by_tag_name("button").click()
 
-  def test_07_node(self):
+  def test_07_expand_collapse_nodes(self):
     global driver
     nodes = driver.find_elements_by_class_name('node')
     oldSize = len(nodes)
-    ActionChains(driver).move_to_element(nodes[0].find_element_by_tag_name("circle")).click(nodes[0]).perform()
-    time.sleep(2)
-    newSize = len(driver.find_elements_by_class_name('node'))
-    self.assertTrue(newSize <> oldSize)
+    # Click on node to collapse or expand some nodes
+    nodes[-1].find_element_by_tag_name("path").click()
+    time.sleep(1)
+    nodes = driver.find_elements_by_class_name('node')
+    self.assertNotEqual(len(nodes), oldSize)
+    # Click on the node again
+    nodes[-1].find_element_by_tag_name("path").click()
+    time.sleep(1)
+    # Should be back where we started
+    nodes = driver.find_elements_by_class_name('node')
+    self.assertEqual(len(nodes), oldSize)
 
-  def test_collapse(self):
+  def test_08_collapse_all(self):
     global driver
     oldSize = len(driver.find_elements_by_class_name('node'))
     button = driver.find_element_by_xpath("//button[contains(@onclick,'_collapseAllNode')]")
@@ -110,11 +122,12 @@ class test_index(unittest.TestCase):
     time.sleep(1)
     newSize = len(driver.find_elements_by_class_name('node'))
     self.assertTrue(oldSize > newSize)
+    self.assertEqual(newSize, 1)
 
 
 
 if __name__ == '__main__':
-  parser =argparse.ArgumentParser(description="Test the index page of the ViViaN(TM) tool, the VistA Package visualization")
+  parser = argparse.ArgumentParser(description="Test the index page of the ViViaN(TM) tool, the VistA Package visualization")
   parser.add_argument("-r",dest = 'webroot', required=True, help="Web root of the ViViaN(TM) instance to test.  eg. http://code.osehra.org/vivian/")
   result = vars(parser.parse_args())
   driver = webdriver.Firefox()

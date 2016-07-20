@@ -14,11 +14,8 @@
 # limitations under the License.
 #---------------------------------------------------------------------------
 from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.action_chains import ActionChains
 import argparse
 import unittest
-import re
 import time
 
 class test_bff(unittest.TestCase):
@@ -28,17 +25,27 @@ class test_bff(unittest.TestCase):
     global driver
     driver.close()
 
-  def test_02_node(self):
+  def test_01_expand_collapse_nodes(self):
     global driver
     nodes = driver.find_elements_by_class_name('node')
+    # Page opens with some nodes expanded
     oldSize = len(nodes)
-    ActionChains(driver).move_to_element(nodes[-1].find_element_by_tag_name("circle")).click(nodes[-1]).perform()
+    # Click on root node to collapse all nodes
+    nodes[-1].find_element_by_tag_name("path").click()
     time.sleep(1)
-    newSize = len(driver.find_elements_by_class_name('node'))
-    self.assertTrue(newSize != oldSize)
+    # Now, only the root node should be visible
+    nodes = driver.find_elements_by_class_name('node')
+    self.assertNotEqual(len(nodes), oldSize)
+    self.assertEqual(len(nodes), 1)
+    # Click on root node again
+    nodes[-1].find_element_by_tag_name("path").click()
+    time.sleep(1)
+    # Should be back where we started
+    nodes = driver.find_elements_by_class_name('node')
+    self.assertEqual(len(nodes), oldSize)
 
 if __name__ == '__main__':
-  parser =argparse.ArgumentParser(description="")
+  parser = argparse.ArgumentParser(description="")
   parser.add_argument("-r",dest = 'webroot', required=True, help="Web root of the ViViaN(TM) instance to test.  eg. http://code.osehra.org/vivian/")
   result = vars(parser.parse_args())
   driver = webdriver.Firefox()
