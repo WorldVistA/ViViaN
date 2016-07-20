@@ -16,6 +16,12 @@ How to Contribute
 To see the instructions on obtaining and submitting a change to the ViViaN tool,
 see `How To Contribute`_
 
+Testing
++++++++
+
+For instructions on how to run and generate new tests, see Testing_
+
 .. _GenerateData: GenerateData.rst
 .. _`How To Contribute`: howToSubmit.rst
+.. _Testing: testing.rst
 

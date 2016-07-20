@@ -61,7 +61,7 @@ the Product-Management repository.
 
 
 Adding Remote
-+++++++++++++++++++
++++++++++++++
 
 Now that there is a copy of the Product-Management repository, the newly forked
 repository can be added as a new Git remote via a ``git remote add`` command.
@@ -84,13 +84,24 @@ new repository. An example of the git remote command is shown below:
   softhat@softhatvm /d/wamp/www/Product-Management/Visual (master)
   $ git remote add personal git://github.com/softhat/Product-Management.git
 
+Make changes on development branch
+----------------------------------
+
+After performing the development work, commit the change to a development
+branch. The commit message should describe the reason behind the change and any
+necessary information to setup and use the change.
+
+Run tests
+---------
+
+Run existing tests and add new tests, if needed. See Testing_ for detailed
+instructions. Commit any changes to the development branch.
+
+
 Push the change
 ---------------
 
-After performing the development work, commit the change to a branch.  The
-commit message should describe the reason behind the change and any necessary
-information to setup and use the change.  This development branch then has to
-be pushed to the personal fork and OSEHRA repository.
+The development branch needs be pushed to the personal fork and OSEHRA repository.
 
 To Personal Fork
 +++++++++++++++++
@@ -225,3 +236,4 @@ Minor or cosmetic changes simply be made to to the same branch and pushed to
 the remote as before.
 
 
+.. _Testing: testing.rst
