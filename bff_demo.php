@@ -115,7 +115,7 @@ function text_onMouseClick(d) {
       height: 'auto',
       width: 700,
       modal: true,
-      position: ["center","center-50"],
+      position: {my: "center center-50", of: window},
       title: "" + d.number + ": " + d.name,
       open: function(){
           $('#description').html(d.description);

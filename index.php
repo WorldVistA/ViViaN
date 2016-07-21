@@ -163,7 +163,7 @@ function pkgLinkClicked(d) {
       height: 'auto',
       width: 700,
       modal: true,
-      position: ["center","center"],
+      position: {my: "center center", of: window},
       title: "Package: " + d.name,
       open: function(){
           htmlLnk = getInterfaceHtml(d);
