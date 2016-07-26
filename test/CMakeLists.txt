@@ -15,6 +15,7 @@
 #---------------------------------------------------------------------------
 cmake_minimum_required(VERSION 2.8.0)
 
+project(ViViaN-Test, NONE)
 enable_testing()
 
 file(GLOB VIVIAN_TEST_FILES ${CMAKE_CURRENT_SOURCE_DIR}/test*.py)

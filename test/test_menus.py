@@ -74,11 +74,13 @@ class test_menus(unittest.TestCase):
       if(re.search(target_menu_text, option.text)):
         option.click()
         break
+    else:
+      self.fail("Failed to find " + target_menu_text)
     time.sleep(1)
     node_list = driver.find_elements_by_class_name('node')
     self.assertEqual(node_list[-1].text, target_menu_text)
 
-  def test_05_option_autocomplete(self):
+  def _test_05_option_autocomplete(self):
     global driver
     target_menu_text = "Monitor Taskman"
     ac_form = driver.find_element_by_id("option_autocomplete")

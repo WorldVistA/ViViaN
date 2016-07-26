@@ -21,9 +21,9 @@ test_index.py
   ‘ViViaN’
 
 test_links.py
-* ‘Join the Visualization Working Group’
-* ‘VA Visualizations/Business Information Model’
-* ‘VA Visualizations/Hybrid Information Model’
+  * ‘Join the Visualization Working Group’
+  * ‘VA Visualizations/Business Information Model’
+  * ‘VA Visualizations/Hybrid Information Model’
 
 test_menus.py
   ‘VistA Menus’
@@ -32,8 +32,19 @@ test_pkgdep.py
   ‘VistA Package Dependency’
 
 
+Set-up
++++++++
+
+Prerequistes
+------------
+* Firefox
+* Python
+* Latest version of Selenium (http://selenium-python.readthedocs.io/installation.html)
+
+Note: Tests can be run on Linux or Windows
+
 Set-up Tests
-++++++++++++
+------------
 
 Run the following commands to set-up the testing suite:
 
@@ -46,7 +57,8 @@ Run the following commands to set-up the testing suite:
 Note: The <vivian_test> directory can be created anywhere that is convenient
 (best practice is not in the ViViaN source directory).
 
-Note: Use ccmake or cmake gui to change *VIVIAN_WEB_ROOT*.
+Note: Use ccmake or cmake gui to change *VIVIAN_WEB_ROOT*:
+
 * The default value is: http://code.osehra.org/vivian
 * To test the vivian-demo site, use: http://code.osehra.org/vivian-demo
 * To test local changes, point at a test instance (e.g http://localhost/vivian/Visual)

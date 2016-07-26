@@ -175,6 +175,7 @@ d3.chart.treeview = function(option) {
     var circleEnter = nodeEnter.append("path")
             .style("stroke","steelblue")
             .attr("d",d3.svg.symbol().type(find_node_shape))
+            .attr("name", find_node_shape)
             .attr("r", 1e-6);
 
     _customization(circleEnter, 'path', 'event');
