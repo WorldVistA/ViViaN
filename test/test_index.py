@@ -57,32 +57,53 @@ class test_index(unittest.TestCase):
     global driver
     legend = driver.find_elements_by_class_name('legend')
     prev = ''
-    for entry in legend:
+    titles = ['All', 'OSEHRA VistA', 'VA FOIA VistA', 'DSS vxVistA']
+    for idx, entry in enumerate(legend):
+      self.assertEqual(entry.find_element_by_tag_name('text').text, titles[idx])
       entry.click()
       nodes = driver.find_elements_by_class_name('node')
-      node_text = nodes[40].find_element_by_tag_name('text')
-      self.assertNotEqual(node_text.get_attribute("fill"), prev)
+      # find a leaf node
+      for node in nodes:
+        node_path = node.find_element_by_tag_name('path')
+        if node_path.get_attribute('name') == 'circle':
+          node_text = node.find_element_by_tag_name('text')
+          break;
+      self.assertNotEqual(node_text.get_attribute("fill"), prev, 'Expected color to change for node "' + node_text.text + '"')
       prev = node_text.get_attribute("fill")
 
   def test_05_modal_title(self):
     global driver
+
+    self.addCleanup(self.close_modal_dialog)
+
     nodes = driver.find_elements_by_class_name('node')
-    node_text = nodes[40].find_element_by_tag_name('text')
+    # find a leaf node
+    for node in nodes:
+      node_path = node.find_element_by_tag_name('path')
+      if node_path.get_attribute('name') == 'circle':
+        node_text = node.find_element_by_tag_name('text')
+        break;
+    # open dialog
     node_text.click()
     modal_title = driver.find_element_by_class_name('ui-dialog-title')
     self.assertTrue(re.search(node_text.text, modal_title.text))
-    # Close the dialog
-    modal_titlebar = driver.find_element_by_class_name('ui-dialog-titlebar')
-    modal_titlebar.find_element_by_tag_name("button").click()
 
-  def test_06_modal_accordion(self):
+  def _test_06_modal_accordion(self):
     global driver
-    # Open accordian dialog
+
+    self.addCleanup(self.close_modal_dialog)
+
+    # find 'Barcode Medication Administration' node
     nodes = driver.find_elements_by_class_name('node')
-    node_text = nodes[40].find_element_by_tag_name('text')
-    accordion = driver.find_element_by_id("accordion")
+    for node in nodes:
+      node_text = node.find_element_by_tag_name('text')
+      if node_text.text == 'Barcode Medication Administration':
+        break;
+
+    # Open modal dialog
     node_text.click()
 
+    accordion = driver.find_element_by_id("accordion")
     modalCategories = ['namespaces','dependencies','interface','himInfo', 'description']
     modalRegex = ['Includes.+Excludes','Dependencies \&amp; Code View','M API.+Web Service API',
                   'HIM Visualization for','[A-Za-z &/]+']
@@ -93,10 +114,14 @@ class test_index(unittest.TestCase):
       self.assertTrue(modal_accordion.get_attribute('aria-selected'))
       # Test accordion content
       content = accordion.find_element_by_id(modalCategories[i-1]).get_attribute('innerHTML');
-      self.assertTrue(re.search(modalRegex[i-1], content))
-    # Close modal window
+      self.assertTrue(re.search(modalRegex[i-1], content),
+                      'Looking for "' + modalRegex[i-1] + '" Found "' + content + '" for node "' + node_text.text + '"')
+
+  def close_modal_dialog(self):
+    global driver
     modal_title = driver.find_element_by_class_name('ui-dialog-titlebar')
     modal_title.find_element_by_tag_name("button").click()
+
 
   def test_07_expand_collapse_nodes(self):
     global driver
