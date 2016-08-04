@@ -1,5 +1,84 @@
 [
     {
+        "dependents": [
+            "Authorization Subscription",
+            "Text Integration Utility"
+        ],
+        "depends": [
+            "Kernel",
+            "VA FileMan",
+            "Uncategorized",
+            "Toolkit",
+            "Registration",
+            "Scheduling",
+            "Order Entry Results Reporting",
+            "PCE Patient Care Encounter",
+            "Lab Service",
+            "Master Patient Index VistA",
+            "Text Integration Utility",
+            "Radiology Nuclear Medicine",
+            "Clinical Reminders",
+            "CPT HCPCS Codes",
+            "Pharmacy Data Management",
+            "Adverse Reaction Tracking",
+            "List Manager",
+            "Consult Request Tracking",
+            "Problem List",
+            "General Medical Record - Vitals",
+            "Barcode Medication Administration",
+            "Authorization Subscription",
+            "Medicine",
+            "DRG Grouper",
+            "National Drug File",
+            "Lexicon Utility",
+            "Clinical Procedures",
+            "Surgery",
+            "Care Management",
+            "Emergency Department Integration Software",
+            "Mental Health",
+            "MailMan",
+            "Outpatient Pharmacy",
+            "Womens Health",
+            "RPC Broker",
+            "Integrated Billing"
+        ],
+        "fields": 0,
+        "files": 9,
+        "name": "Enterprise Health Management Platform",
+        "routines": 94
+    },
+    {
+        "depends": [
+            "Uncategorized",
+            "Kernel",
+            "VA FileMan"
+        ],
+        "dependents": [
+            "M XML Parser"
+        ],
+        "fields": 0,
+        "files": 0,
+        "name": "MASH Utilities",
+        "routines": 22
+    },
+    {
+        "depends": [
+            "Kernel"
+        ],
+        "fields": 0,
+        "files": 0,
+        "name": "VistA Integration Adapter",
+        "routines": 1
+    },
+    {
+        "depends": [
+        ],
+        "fields": 0,
+        "files": 0,
+        "name": "Medication Order Check Healthcare Application",
+        "routines": 0
+    },
+    {
         "depends": [
             "Clinical Reminders",
             "Kernel",
@@ -39,7 +118,8 @@
             "List Manager",
             "RPC Broker",
             "Text Integration Utility",
-            "VA FileMan"
+            "VA FileMan",
+            "Enterprise Health Management Platform"
         ],
         "fields": 43,
         "files": 7,
@@ -2640,6 +2720,7 @@
             "VistALink"
         ],
         "depends": [
+            "MASH Utilities",
             "Kernel",
             "Uncategorized",
             "Toolkit",
@@ -2898,7 +2979,8 @@
             "Problem List",
             "Scheduling",
             "General Medical Record - Vitals",
-            "Surgery"
+            "Surgery",
+            "Enterprise Health Management Platform"
         ],
         "fields": 391,
         "files": 31,
