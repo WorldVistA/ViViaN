@@ -64,7 +64,7 @@
 
   <div class='hint' style="position:relative; left:20px; top:50px">
     <p>
-    This tree visualization represents the menu hierarchy of VistA. Mouse over
+    This tree visualization represents the menu hierarchy of VistA. Hover over
     any of the entries in the tree to see the menu option name and the security
     key (if any). Click on an item to see the menu option details.
     </p>
