@@ -48,7 +48,7 @@ class test_pkgdep(unittest.TestCase):
     global driver
 
     # Values taken from local instance, not the most sustainable but works for now
-    PCE_values = [39,23]
+    PCE_values = [40,23]
     ETiR_values = [0,6]
     CS_values = [3,0]
 
@@ -74,26 +74,16 @@ class test_pkgdep(unittest.TestCase):
     self.assertEqual(source_size, CS_values[0])
     self.assertEqual(target_size, CS_values[1])
 
-  def test_03_chart_switch(self):
-    global driver
-    btn_group = driver.find_element_by_class_name("btn-group")
-    for btn in btn_group.find_elements_by_tag_name("label"):
-      type = btn.text.split(' ')[0]
-      btn.click()
-      self.assertTrue("active" in btn.get_attribute("class"))
-      time.sleep(2)
-      if type == "Circular":
-        non_active_chart_id = "bar-chart"
-      else:
-        non_active_chart_id = "circular-chart"
-      chart = driver.find_element_by_id(non_active_chart_id)
-      self.assertTrue(re.search("display: none", chart.get_attribute("style")))
-
   def test_04_dep_bar_content(self):
+    global driver
+
+    driver.find_element_by_id('package-dependency').click()
+    driver.find_element_by_id('bar-chart').click()
+    time.sleep(1)
+
     chart_titles = ['VistA Packages Dependencies Chart','VistAPackageStatistics']
     dep_chart_legend = ['depends','dependents']
     dep_chart_top_entries = ['Kernel','Order Entry Results Reporting','Accounts Receivable']
-    global driver
 
     # Ensure that the data and labels of chart are not empty
     chart_container = driver.find_elements_by_class_name("highcharts-series")
@@ -106,19 +96,17 @@ class test_pkgdep(unittest.TestCase):
       bar_array = type.find_elements_by_tag_name("text")
       self.assertTrue(len(bar_array) > 0)
 
-
     # Read title of graph
-    bar_chart = driver.find_element_by_id("bar-chart")
-    title_element = bar_chart.find_element_by_class_name("highcharts-title")
+    title_element = driver.find_element_by_class_name("highcharts-title")
     self.assertTrue(title_element.text in chart_titles)
     # Ensure that legends have proper information
-    chart_legend = bar_chart.find_element_by_class_name("highcharts-legend")
+    chart_legend = driver.find_element_by_class_name("highcharts-legend")
     legend_array = chart_legend.find_elements_by_tag_name("text")
     for item in legend_array:
        self.assertTrue(item.get_attribute("innerHTML") in dep_chart_legend)
 
     # Check each of the "Sort By" selections to ensure that the first element is found in top_entries array
-    dep_pulldown = bar_chart.find_element_by_id("list-dep")
+    dep_pulldown = driver.find_element_by_id("list-dep")
     pulldown_options = Select(dep_pulldown)
     for option in pulldown_options.options:
       pulldown_options.select_by_visible_text(option.text)
@@ -127,8 +115,7 @@ class test_pkgdep(unittest.TestCase):
 
   def test_05_bar_switch(self):
     global driver
-    bar_chart = driver.find_element_by_id("bar-chart")
-    btn_group = bar_chart.find_element_by_class_name("btn-group")
+    btn_group = driver.find_element_by_class_name("btn-group")
     for btn in btn_group.find_elements_by_tag_name("label"):
       type = btn.text.split(' ')[0]
       btn.click()
@@ -153,18 +140,17 @@ class test_pkgdep(unittest.TestCase):
       self.assertTrue(len(bar_array) > 0)
 
     # Read title of graph
-    bar_chart = driver.find_element_by_id("bar-chart")
-    title_element = bar_chart.find_element_by_class_name("highcharts-title")
+    title_element = driver.find_element_by_class_name("highcharts-title")
     self.assertTrue(title_element.text in chart_titles)
 
     # Ensure that legends have proper information
-    chart_legend = bar_chart.find_element_by_class_name("highcharts-legend")
+    chart_legend = driver.find_element_by_class_name("highcharts-legend")
     legend_array = chart_legend.find_elements_by_tag_name("text")
     for item in legend_array:
        self.assertTrue(item.get_attribute("innerHTML") in stat_chart_legend)
 
     # Check each of the "Sort By" selections to ensure that the first element is found in top_entries array
-    dep_pulldown = bar_chart.find_element_by_id("list-stats")
+    dep_pulldown = driver.find_element_by_id("list-stats")
     pulldown_options = Select(dep_pulldown)
     for option in pulldown_options.options:
       pulldown_options.select_by_visible_text(option.text)
