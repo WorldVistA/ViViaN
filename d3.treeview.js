@@ -219,12 +219,6 @@ d3.chart.treeview = function(option) {
     return shape;
   }
 
-  //Necessary to open the xlinked information on pannable views.
-  //Shows no difference on non-panning view
-  function openLink(d) {
-    window.open($(this).parent().attr("href"));
-  }
-
   function renderLabels(nodeEnter, nodeUpdate, nodeExit) {
     var textEnter;
     if (_nodeTextHyperLink) {
@@ -232,8 +226,7 @@ d3.chart.treeview = function(option) {
         .attr("xlink:href", _nodeTextHyperLink)
         .attr("target", "_blank")
         .style("text-decoration", "none")
-        .insert("svg:text")
-        .on('click', openLink, true);
+        .insert("svg:text");
     } else {
       textEnter = nodeEnter.append("svg:text");
     }
