@@ -83,7 +83,7 @@ var index = 0
 colors = d3.scale.category20b()
 backgroundColors = d3.scale.category20()
 var currentDate = new Date();
-var endDate = currentDate.getFullYear()+"-12-31"
+var endDate = "12/31/"+ currentDate.getFullYear()
 $("#timeline_date_start").datepicker()
 $("#timeline_date_stop").datepicker()
 
