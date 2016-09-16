@@ -229,12 +229,14 @@ function showDependency(entryNo) {
     if(root.hasOwnProperty("children")) {
       root.children = appendPackageInformation(root.children,json)
     }
-    resetAllNode(root);
+
     d3.select("#treeview_placeholder").datum(root).call(chart);
     chart.tree().nodeSize([15,0]);
 
     chart.svg().attr("transform","translate("+originalTransform+")")
+    resetAllNode(chart.nodes());
     chart.update(chart.nodes())
+    
   });
 }
 $("#package_autocomplete").val(targetPackage);

@@ -126,8 +126,6 @@ var shapeLegend = [{name: "Package Category", shape: "triangle-up"},
 var himInfoJSON;
 
 d3.json("packages.json", function(json) {
-  resetAllNode(json);
-
   chart.on("node", "event","click", pkgLinkClicked)
      .on("node", "event", "mouseover", node_onMouseOver)
      .on("node", "event","mouseout", node_onMouseOut)
@@ -137,9 +135,12 @@ d3.json("packages.json", function(json) {
      .on("text", "attr", "fill", change_node_color)
      .on("path", "style", "fill", change_circle_color)
      .on("path", "attr", "r", function(d) { return 7 - d.depth; });
+
   d3.select("#treeview_placeholder").datum(json).call(chart);
   d3.select("#legend_placeholder").datum(null).call(legendShapeChart);
   d3.select("#legend_placeholder").datum(null).call(legendDistChart);
+  resetAllNode(chart.nodes());
+  chart.update(chart.nodes())
   clearAutocomplete();
   createLegend();
   createShapeLegend();

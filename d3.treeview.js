@@ -88,7 +88,10 @@ d3.chart.treeview = function(option) {
             .size([
       (_height - _margins.top - _margins.bottom),
       (_width - _margins.left - _margins.right)
-    ]);
+    ]).sort(function(a,b) {
+      // Adapted from d3.ascending: https://github.com/d3/d3-3.x-api-reference/blob/master/Arrays.md#d3_ascending
+      return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
+    });
 
     _diagonal = d3.svg.diagonal()
             .projection(function (d) {
