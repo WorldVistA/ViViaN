@@ -39,7 +39,7 @@ The FileManGlobalDataParser.py file’s execution signature is as follows:
 .. parsed-literal::
 
   usage: FileManGlobalDataParser.py [-h] -mr MREPOSITDIR -pr PATCHREPOSITDIR
-                                    [-outdir OUTDIR] [-all]
+                                    [-outdir OUTDIR] -gp GITPATH [-all]
                                     fileNos [fileNos ...]
 
   FileMan Global Data Parser
@@ -50,6 +50,8 @@ The FileManGlobalDataParser.py file’s execution signature is as follows:
   optional arguments:
     -h, --help            show this help message and exit
     -outdir OUTDIR        top directory to generate output in html
+    -gp GITPATH, --gitPath GITPATH
+                          Path to the folder containing git excecutable
     -all                  generate all dependency files as well
 
   Initial CrossReference Generator Arguments:
@@ -78,7 +80,7 @@ An example command to be run would look like this:
 
 .. parsed-literal::
 
-  $ python FileManGlobalDataParser.py -mr ~/Work/OSEHRA/VistA-M -pr ~/work/osehra/VistA -outdir ~/Work/OSEHRA/vivian-out -all 101 8994 19 779.2 9.7
+  $ python FileManGlobalDataParser.py -mr ~/Work/OSEHRA/VistA-M -pr ~/work/osehra/VistA -gp /usr/local/bin -outdir ~/Work/OSEHRA/vivian-out -all 101 8994 19 779.2 9.7
 
 ICRParser
 ~~~~~~~~~

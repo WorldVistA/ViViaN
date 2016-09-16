@@ -57,15 +57,20 @@
 
 <script>
   function aboutClicked(){
-    var overlayDialogObj = {
-      autoOpen: true,
-      height: 'auto',
-      width: 500,
-      modal: true,
-      position: {my: "center 150", of: window},
-      title: "About ViViaN(TM)"
-    };
-    $('#dialog-modal-about').dialog(overlayDialogObj).show();
+    d3.json("files/filesInfo.json", function(json) {
+      console.log($('#dialog-modal-dataVersion'))
+      $('#dialog-modal-dataVersion').text("The information in this instance of ViViaN was generated on:  "+json["date"] +
+                                          " from the OSEHRA VistA-M repository with a Git hash of:  "+ json["sha1"]);
+    });
+      var overlayDialogObj = {
+        autoOpen: true,
+        height: 'auto',
+        width: 500,
+        modal: true,
+        position: {my: "center 150", of: window},
+        title: "About ViViaN(TM)"
+      };
+      $('#dialog-modal-about').dialog(overlayDialogObj).show();
   }
 </script>
 
@@ -81,5 +86,6 @@
     tree-based visualizations of VistA menus and the VHA Business Function Framework
     categorization; as well as circle plots of the interaction network among VistA packages.
     </p>
+    <p id="dialog-modal-dataVersion"></p>
   </div>
 </div>
