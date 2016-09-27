@@ -187,7 +187,6 @@ resetMenuFile("menus/VistAMenu-9.json");
 
 function resetMenuFile(menuFile) {
   d3.json(menuFile, function(json) {
-    resetAllNode(json);
     chart.on("node", "event", "mouseover", node_onMouseOver)
        .on("node", "event","mouseout", node_onMouseOut)
        .on("text", "attr", "cursor", function(d) { return "pointer"; })
@@ -199,6 +198,8 @@ function resetMenuFile(menuFile) {
     d3.select("#legend_placeholder").datum(null).call(legendTypeChart);
     createShapeLegend();
     createLegend();
+    resetAllNode(chart.nodes());
+    chart.update(chart.nodes())
 
     if(target_option != '') {
       openSpecificNode(target_option, chart.nodes());

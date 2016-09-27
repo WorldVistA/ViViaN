@@ -80,8 +80,9 @@ class test_menus(unittest.TestCase):
     node_list = driver.find_elements_by_class_name('node')
     self.assertEqual(node_list[-1].text, target_menu_text)
 
-  def _test_05_option_autocomplete(self):
+  def test_05_option_autocomplete(self):
     global driver
+    driver.set_window_size(1024, 768)
     target_menu_text = "Monitor Taskman"
     ac_form = driver.find_element_by_id("option_autocomplete")
     ac_form.clear()
@@ -94,7 +95,8 @@ class test_menus(unittest.TestCase):
         break
     time.sleep(1)
     # Compare images to match paths
-    driver.save_screenshot("path_image_pass_new.png")
+    display = driver.find_element_by_id("treeview_placeholder").find_element_by_tag_name('svg')
+    Utils.take_screenshot(driver,"path_image_pass_new.png", display)
     self.assertTrue(Utils.compareImg("path_image_pass"))
 
 if __name__ == '__main__':

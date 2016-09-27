@@ -46,11 +46,17 @@ def count_nonblack_pil(img):
                .point(bool)
                .getdata())
 
+def take_screenshot(driver, imageName, targetObj):
+    loc = targetObj.location
+    size = targetObj.size
+    driver.save_screenshot("path_image_pass_new1.png")
+    boundBox = (int(loc['x']),int(loc['y']),int(loc['x']+size['width']),int(loc['y']+size['height']))
+    tmpImage = Image.open("path_image_pass_new1.png")
+    tmpImage.crop(boundBox).save("path_image_pass_new.png")
 
 def compareImg(imageRoot):
-
-  newFileName = os.path.normpath(os.getcwd() + "/" + imageRoot +'_new.png');
-  compFileName = os.path.normpath(os.getcwd() + "/" + imageRoot +'_comp.gif');
+  newFileName = os.path.normpath(os.getcwd() + "/" + imageRoot +'_new.png')
+  compFileName = os.path.normpath(os.getcwd() + "/" + imageRoot +'_comp.gif')
   oldFileName = os.path.normpath(os.path.dirname(os.path.realpath(__file__))+'/imgData/'+imageRoot+'_old.png')
 
   new = Image.open(newFileName)
@@ -58,8 +64,7 @@ def compareImg(imageRoot):
 
   diff = ImageChops.difference(old,new)
   count = count_nonblack_pil(diff)
-
-  if count >= 3000:
+  if count >= 66000:
     # need to save as .gif to set transparency which is zeroed by difference.
     diff.save(compFileName,"GIF", transparency=255)
   # Output XML for Dart  Necessary for the upload of the image after
@@ -74,4 +79,5 @@ def compareImg(imageRoot):
     print"</DartMeasurementFile>"
     return False
   else:
+    diff.save(compFileName,"GIF", transparency=255)
     return True

@@ -38,7 +38,10 @@ Set-up
 Prerequistes
 ------------
 * Firefox
+  * *NOTE*:  The Selenium driver changed on the release of Firefox 47+.  We
+    recommend that the testing environment uses version 45 or 46 of Firefox
 * Python
+  * Install the PILLOW Python module(http://pillow.readthedocs.io/en/3.3.x/installation.html )
 * Latest version of Selenium (http://selenium-python.readthedocs.io/installation.html)
 
 Note: Tests can be run on Linux or Windows
