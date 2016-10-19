@@ -278,7 +278,7 @@ function createLegend() {
   var legend = legendTypeChart.svg()
   legend.append("text")
           .attr("x", 0)
-          .attr("y", -28 )
+          .attr("y", 10 )
           .attr("text-anchor", "left")
           .style("font-size", "16px")
           .text("Option Type Filter Menu");
