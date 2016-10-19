@@ -36,7 +36,24 @@
           // to be called 'option_autocomplete'.
           $("#option_autocomplete").autocomplete({
             source: sortedjson,
-            select: optionAutoCompleteChanged
+            select: optionAutoCompleteChanged,
+            //*****************************************************
+            // Adapted from http://jsfiddle.net/chukhanhvan/7HQym/
+            //*****************************************************
+            focus: function(event,ui) {
+
+              $(".ui-autocomplete .selecting").html(title);
+              $(".ui-autocomplete .selecting").removeClass('selecting');
+
+              // save the original title
+              title = ui.item.label;
+              q = $(".ui-state-focus").html();
+              $(".ui-state-focus").html("<b>Top Level Menu: "+ui.item.parent_name +"</b>");
+
+              // add class selecting to mark the item
+              $(".ui-state-focus").addClass('selecting');
+             //*******************************************************
+            }
           }).data('autocomplete')/*._trigger('select')*/;
         });
       });
@@ -203,7 +220,7 @@ function resetMenuFile(menuFile) {
 
     if(target_option != '') {
       openSpecificNode(target_option, chart.nodes());
-      setTimeout(highlightPath,300,chart,json);
+      setTimeout(highlightPath,300,chart);
     }
     else {
       clearAutocomplete();

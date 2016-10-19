@@ -68,73 +68,67 @@ function collapse(d) {
 }
 
 // Highlight path
-var target_node = null;
+var target_node = [];
 var target_path = [];
 
 function openSpecificNode(target, root) {
-  target_node = null;
+  target_node = [];
   target_path = [];
-
-  collapseAllNode(root);
+  expandAllNode(chart.nodes());
   searchForNode(target, root);
 }
 
 function searchForNode(target, d) {
-  if (d._children) {
-    for(var i=0; i<d._children.length;i++) {
-      var ret = searchForNode(target, d._children[i])
-      if (ret) {
-         expand(d);
-         return true;
-      }
-    }
+  var totalChildren=[]
+  if(d.children) {totalChildren = d.children; }
+  if(d._children) {totalChildren = $.merge(totalChildren,d._children);}
+  for(var i=0; i<totalChildren.length;i++) {
+    searchForNode(target, totalChildren[i])
   }
-
   if (d.name.toUpperCase() == target.toUpperCase()) {
-    expand(d);
-    target_node = d;
-    return true;
-  } else {
-    return false;
+    target_node.push(d);
   }
 }
 
-function highlightPath(chart) {
+function highlightPath(chart,json) {
   var tree = d3.layout.tree()
   var nodes = tree.nodes(chart.nodes());
   var links = tree.links(nodes);
-  var target = target_node;
-
-  while (target != null && target.name != nodes[0].name) {
-    var link = chart.svg().selectAll("path.link").data(links, function(d) {
-      if(d.target == target) {
-        target = d.source;
-        target_path.push(d)
+  collapseAllNode(chart.nodes());
+  target_node.forEach(function(targetNode) {
+    var target = targetNode
+    while (target != null && target.name != nodes[0].name) {
+      chart.svg().selectAll("path.link").data(links, function(d) {
+        if(d.target == target) {
+          target = d.source;
+          expand(d.source);
+          expand(d.target);
+          target_path.push(d)
+          }
+      });
+      if(target == targetNode) {
+        $("#option_autocomplete")[0].style.border="solid 4px blue";
+        $("#search_result").html("<h5>Target option found in menu, but couldn't be matched.</h5>");
+        resetAllNode(chart.nodes())
+        target_path = [];
+        break;
         }
-    });
-
-    if(target == target_node) {
-      $("#option_autocomplete")[0].style.border="solid 4px blue";
-      $("#search_result").html("<h5>Target option found in menu, but couldn't be matched.</h5>");
-      resetAllNode(chart.nodes())
-      target_path = [];
-      break;
-      }
-  }
+    }
+  });
 
   if (target_path.length) {
     $("#option_autocomplete")[0].style.border="";
     $("#search_result").html("");
   }
-
+  d3.select("#treeview_placeholder").datum(chart.nodes()).call(chart);
   chart.svg().selectAll("path.link").data(target_path).forEach(highlight);
   d3.select("#treeview_placeholder").datum(chart.nodes()).call(chart);
 }
 
 function highlight(d) {
-  for(var i = 0; i < d.length; i++) {
-    d[i].classList.add("target");
-  }
+  d.forEach(function(highlightLink) {
+    if(highlightLink.classList) {highlightLink.classList.add("target");};
+  });
 }
 
 function clearAutocomplete() {
