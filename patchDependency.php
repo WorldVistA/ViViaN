@@ -23,6 +23,7 @@
 
         d3.json('packages_autocomplete.json', function(json) {
           json.push("MultiBuild");
+          json.push("All Patches");
           var sortedjson = json.sort(function(a,b) { return a.localeCompare(b); });
           $("#package_autocomplete").autocomplete({
             source: sortedjson,
@@ -114,12 +115,11 @@ function packageAutocompleteChanged(eve, ui) {
   d3.json('install_information.json', function(json) {
     targetPackage = ui.item.label
     if(ui.item.label == "MultiBuild") {
-      console.log($("#installEntryAuto"));
       $("#installEntryAuto").hide();
       $("#installEntryDrop").show();
 
       $('#install_dropdown').selectmenu({
-        change: function(event,ui) { showDependency(ui.item.value);},
+        change: function(event,ui) { showDependency(targetPackage,ui.item.value);},
         appendTo: "#installEntryDrop",
         width: 400
       });
@@ -128,6 +128,19 @@ function packageAutocompleteChanged(eve, ui) {
            jqueryDropdown.append($("<option/>").val(key).text(key));
       })
     }
+    else if (ui.item.label == 'All Patches') {
+      var alljson = []
+      Object.keys(json).forEach(function(vistaPackage) {
+         Object.keys(json[vistaPackage]).forEach(function (vistaPatch) {
+          alljson = alljson.concat(json[vistaPackage][vistaPatch]);
+        });
+      });
+      $("#install_autocomplete").autocomplete({
+        source: alljson,
+        select: installAutocompleteChanged
+        })
+        .data('autocomplete')/*._trigger('select')*/;
+      }
     else {
       $("#installEntryAuto").show();
       $("#installEntryDrop").hide();
@@ -145,7 +158,8 @@ function packageAutocompleteChanged(eve, ui) {
 
 function installAutocompleteChanged(eve, ui) {
   $("#install_autocomplete").val(ui.item.label);
-  showDependency(ui.item.value);
+  if (typeof ui.item.parent === "undefined") ui.item.parent=targetPackage
+  showDependency(ui.item.parent,ui.item.label);
 }
 
 function appendPackageInformation (d,json){
@@ -213,7 +227,7 @@ function _centerDisplay() {
   chart.centerDisplay();
 }
 
-function showDependency(entryNo) {
+function showDependency(parent, entryNo) {
   d3.json("install_information.json", function(json) {
 
     chart.on("path", "event","click", chart.onNodeClick)
@@ -225,7 +239,7 @@ function showDependency(entryNo) {
       .on("text", "attr", "fill", change_node_color)
       .on("path", "style", "fill", change_circle_color)*/
       .on("path", "attr", "r", function(d) { return 7 - d.depth; });
-    var root = json[targetPackage][entryNo];
+    var root = json[parent][entryNo];
     if(root.hasOwnProperty("children")) {
       root.children = appendPackageInformation(root.children,json)
     }
@@ -239,8 +253,8 @@ function showDependency(entryNo) {
     
   });
 }
-$("#package_autocomplete").val(targetPackage);
-showDependency(initInstall)
+$("#package_autocomplete").val(initPackage);
+showDependency(initPackage,initInstall)
 
     </script>
   </body>
