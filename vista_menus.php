@@ -104,6 +104,7 @@
   <div id="buttons" style="position:relative; top:10px;">
     <button onclick="_collapseAllNode()">Collapse All</button>
     <button onclick="_resetAllNode()">Reset</button>
+    <button onclick="_centerDisplay()">Center</button>
   </div>
 </div>
 
@@ -118,6 +119,7 @@ var chart = d3.chart.treeview()
               .width(1280*2)
               .margins({top: 0, left: 200, bottom: 0, right: 0})
               .textwidth(300)
+              .pannableTree(true)
               .nodeTextHyperLink(getOptionDetailLink);
 var legendShapeChart = d3.chart.treeview()
               .height(50)
@@ -136,6 +138,7 @@ var shapeLegend = [{name: "Menu", shape: "triangle-up"},
                    {name: "Option", shape:"circle"}]
 
 chart.on("text","attr","fill",color_by_type);
+var originalTransform = [300,0];
 var selectedIndex=0;
 
 var target_option='';
@@ -166,6 +169,17 @@ function color_by_type(node) {
     return "#E0E0E0";
   }
 }
+// Updates for pannable tree
+function _centerDisplay() {
+  chart.centerDisplay();
+}
+
+function _resetAllNode() {
+  resetAllNode(chart.nodes());
+  _centerDisplay();
+  chart.update(chart.nodes());
+}
+// end updates
 
 function color_filter(d) {
   if(d) {
@@ -215,6 +229,7 @@ function resetMenuFile(menuFile) {
     d3.select("#legend_placeholder").datum(null).call(legendTypeChart);
     createShapeLegend();
     createLegend();
+    chart.svg().attr("transform","translate("+originalTransform+")")
     resetAllNode(chart.nodes());
     chart.update(chart.nodes())
 
