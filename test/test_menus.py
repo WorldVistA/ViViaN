@@ -14,6 +14,7 @@
 # limitations under the License.
 #---------------------------------------------------------------------------
 from selenium import webdriver
+from selenium.webdriver.common.action_chains import ActionChains
 import argparse
 import unittest
 import re
@@ -98,6 +99,85 @@ class test_menus(unittest.TestCase):
     display = driver.find_element_by_id("treeview_placeholder").find_element_by_tag_name('svg')
     Utils.take_screenshot(driver,"path_image_pass_new.png", display)
     self.assertTrue(Utils.compareImg("path_image_pass"))
+
+  def test_05_option_autocomplete_multipath(self):
+    global driver
+    driver.set_window_size(1024, 768)
+    target_menu_text = "PSD PURCHASE ORDER REVIEW"
+    ac_form = driver.find_element_by_id("option_autocomplete")
+    ac_form.clear()
+    ac_form.send_keys(target_menu_text)
+    time.sleep(1)
+    ac_list = driver.find_elements_by_class_name('ui-menu-item')
+    for option in ac_list:
+      if(re.search(target_menu_text,option.text)):
+        option.click()
+        break
+    time.sleep(1)
+    # Compare images to match paths
+    display = driver.find_element_by_id("treeview_placeholder").find_element_by_tag_name('svg')
+    Utils.take_screenshot(driver,"multi_path_image_pass_new.png", display)
+    self.assertTrue(Utils.compareImg("multi_path_image_pass"))
+
+  def test_06_option_autocomplete_menuDisplay(self):
+    global driver
+    driver.set_window_size(1024, 768)
+    target_menu_text = "PSD PURCHASE ORDER REVIEW"
+    target_menu_top_text = "Top Level Menu: Controlled Substances Menu"
+    ac_form = driver.find_element_by_id("option_autocomplete")
+    ac_form.clear()
+    ac_form.send_keys(target_menu_text)
+    time.sleep(1)
+    ac_list = driver.find_elements_by_class_name('ui-menu-item')
+    for option in ac_list:
+      if(re.search(target_menu_text,option.text)):
+        ActionChains(driver).move_to_element(option).perform()
+        # Capture the new text of the highlight and compare it to expected
+        self.assertEqual(option.text,target_menu_top_text,
+          "Option was not found in same menu: Expected "+ target_menu_top_text + " found: " +option.text )
+        break
+    time.sleep(1)
+
+  def test_07_panZoom(self):
+    global driver
+    # Check pan by dragging and dropping on display
+    menuTree = driver.find_element_by_id("treeview_placeholder").find_element_by_tag_name('svg')
+    menuTreeDisplay = menuTree.find_element_by_tag_name('g')
+    oldTrans =  menuTreeDisplay.get_attribute("transform")
+    ActionChains(driver).move_to_element(menuTree).drag_and_drop_by_offset(menuTree, 350, 200).perform()
+    time.sleep(1)
+    self.assertNotEqual(oldTrans, menuTreeDisplay.get_attribute("transform"), "Transform was the same after attempting drag and drop")
+
+    # Check zoom by double-clicking on display
+    oldTrans = menuTreeDisplay.get_attribute("transform")
+    ActionChains(driver).move_to_element_with_offset(menuTree, 10, 10).double_click(menuTreeDisplay).perform()
+    time.sleep(1)
+    self.assertNotEqual(oldTrans, menuTreeDisplay.get_attribute("transform"), "Transform was the same after attempting to zoom")
+
+  def test_08_panCenter(self):
+    global driver
+    menuTree = driver.find_element_by_id("treeview_placeholder").find_element_by_tag_name('svg')
+    menuTreeDisplay = menuTree.find_element_by_tag_name('g')
+    ActionChains(driver).move_to_element(menuTree).drag_and_drop_by_offset(menuTree, 300, 200).perform()
+    oldVal = menuTreeDisplay.get_attribute("transform")
+    button = driver.find_element_by_xpath("//button[contains(@onclick,'_centerDisplay()')]")
+    button.click()
+    time.sleep(1)
+    newVal = menuTreeDisplay.get_attribute("transform")
+    self.assertNotEqual(oldVal, newVal, "Centering the pan from drag-and-drop did not change the transform")
+
+  def test_09_panReset(self):
+    global driver
+    menuTree = driver.find_element_by_id("treeview_placeholder").find_element_by_tag_name('svg')
+    menuTreeDisplay = menuTree.find_element_by_tag_name('g')
+    ActionChains(driver).move_to_element(menuTree).drag_and_drop_by_offset(menuTree, 300, 200).perform()
+    oldval = menuTreeDisplay.get_attribute("transform")
+    button = driver.find_element_by_xpath("//button[contains(@onclick,'_resetAllNode')]")
+    button.click()
+    time.sleep(1)
+    newVal = menuTreeDisplay.get_attribute("transform")
+    self.assertNotEqual(oldval , newVal, "Resetting the pan from drag-and-drop did not change the transform")
+
 
 if __name__ == '__main__':
   parser = argparse.ArgumentParser(description="")

@@ -49,10 +49,10 @@ def count_nonblack_pil(img):
 def take_screenshot(driver, imageName, targetObj):
     loc = targetObj.location
     size = targetObj.size
-    driver.save_screenshot("path_image_pass_new1.png")
+    driver.save_screenshot("tmpImage.png")
     boundBox = (int(loc['x']),int(loc['y']),int(loc['x']+size['width']),int(loc['y']+size['height']))
-    tmpImage = Image.open("path_image_pass_new1.png")
-    tmpImage.crop(boundBox).save("path_image_pass_new.png")
+    tmpImage = Image.open("tmpImage.png")
+    tmpImage.crop(boundBox).save(imageName)
 
 def compareImg(imageRoot):
   newFileName = os.path.normpath(os.getcwd() + "/" + imageRoot +'_new.png')
