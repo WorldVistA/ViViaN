@@ -114,6 +114,9 @@ var originalTransform = [300,300];
 function packageAutocompleteChanged(eve, ui) {
   d3.json('install_information.json', function(json) {
     targetPackage = ui.item.label
+    $("#installEntryAuto").show();
+    $("#installEntryDrop").hide();
+    $("#install_autocomplete").val("");
     if(ui.item.label == "MultiBuild") {
       $("#installEntryAuto").hide();
       $("#installEntryDrop").show();
@@ -142,10 +145,6 @@ function packageAutocompleteChanged(eve, ui) {
         .data('autocomplete')/*._trigger('select')*/;
       }
     else {
-      $("#installEntryAuto").show();
-      $("#installEntryDrop").hide();
-      $("#install_autocomplete").val("");
-
       var sortedjson = Object.keys(json[ui.item.label]).sort(function(a,b) { return a.localeCompare(b); });
       $("#install_autocomplete").autocomplete({
         source: sortedjson,
