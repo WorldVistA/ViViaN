@@ -63,6 +63,9 @@ class test_installdep(unittest.TestCase):
 
   def test_03_expand_all(self):
     global driver
+    button = driver.find_element_by_xpath("//button[contains(@onclick,'_resetAllNode')]")
+    button.click()
+    time.sleep(1)
     oldSize = len(driver.find_elements_by_class_name('node'))
     button = driver.find_element_by_xpath("//button[contains(@onclick,'_expandAllNode')]")
     button.click()

@@ -85,7 +85,7 @@ class test_installscale(unittest.TestCase):
   def test_04_installBarHover(self):
     global driver
     graphBars = driver.find_elements_by_class_name("bar")
-    ActionChains(driver).move_to_element(graphBars[0]).perform()
+    ActionChains(driver).move_to_element(graphBars[-1]).perform()
     tooltip = driver.find_element_by_id("toolTip")
     self.assertTrue(re.search(" [A-Z]+\*[0-9.]+\*[0-9]+",  tooltip.find_element_by_id("header1").text),"Header of tool tip didn't match expected format")
     self.assertTrue(re.search("[0-9]+\-[0-9]+\-[0-9]+", tooltip.find_element_by_id("installDate").text),"Install date of tool tip didnt match expected format")
@@ -94,7 +94,7 @@ class test_installscale(unittest.TestCase):
   def test_05_installBarClick(self):
     global driver
     graphBars = driver.find_elements_by_class_name("bar")
-    graphBars[0].click()
+    graphBars[-1].click()
     driver.switch_to.window(driver.window_handles[1])
     time.sleep(1)
     self.assertTrue(re.search("/files/9.7-[0-9]+.html", driver.current_url),"URL of new window didnt match expected format")
