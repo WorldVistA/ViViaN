@@ -5,6 +5,7 @@ import glob
 
 outjson = []
 parent_id = ''
+parent_name= ''
 
 def recurse_info(inJSON):
     menuItem = {}
@@ -13,14 +14,17 @@ def recurse_info(inJSON):
     else:
       menuItem['label'] = 'UNK: ' + inJSON['name']
     menuItem['id'] = inJSON['ien']
-    menuItem['parent_id'] = parent_id;
-    outjson.append(menuItem)
+    menuItem['parent_id'] = parent_id
+    menuItem['parent_name'] = parent_name
+    if(not (menuItem in outjson)):
+      outjson.append(menuItem)
     if 'children' in inJSON:
       for child in inJSON['children']:
         recurse_info(child)
 
 def run():
   global parent_id
+  global parent_name
   output = "option_autocomplete.json"
   menuJsonFiles = glob.glob("menus/VistAMenu-*.json")
 
@@ -29,6 +33,7 @@ def run():
     with open(menuFile, 'r') as menuFp:
       menuJson = json.load(menuFp)
       parent_id = menuJson['ien']
+      parent_name = menuJson['name']
       recurse_info(menuJson)
 
   with open(output, 'w') as outFp:
