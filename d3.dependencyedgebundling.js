@@ -79,7 +79,8 @@ d3.chart.dependencyedgebundling = function(options) {
   // Return a list of depends for the given array of nodes.
   var packageDepends = function (nodes) {
     var map = {},
-        depends = [];
+        depends = [],
+        dependents =[];
 
     // Compute a map from name to node.
     nodes.forEach(function(d) {
@@ -91,9 +92,12 @@ d3.chart.dependencyedgebundling = function(options) {
       if (d.depends) d.depends.forEach(function(i) {
         depends.push({source: map[d.name], target: map[i]});
       });
+      if (d.dependents) d.dependents.forEach(function(i) {
+        dependents.push({source: map[i], target: map[d.name]});
+      });
     });
-
-    return depends;
+    var result = $.merge(depends,dependents)
+    return result;
   }
 
   function chart(selection) {
