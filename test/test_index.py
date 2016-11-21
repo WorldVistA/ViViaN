@@ -26,7 +26,7 @@ class test_index(unittest.TestCase):
   @classmethod
   def tearDownClass(cls):
     global driver
-    driver.quit()
+    driver.close()
 
   def test_01_reset(self):
     global driver
@@ -191,7 +191,7 @@ class test_index(unittest.TestCase):
     filter_elements = footer.find_elements_by_tag_name("th")
 
     ia_search_text = "35"
-    ia_search_element = filter_elements[0].find_elements_by_xpath("//*[@type='text']")[0]
+    ia_search_element = table.find_element_by_name("IA #")
     ia_search_element.clear()
     ia_search_element.send_keys(ia_search_text)
     time.sleep(1)
@@ -201,14 +201,21 @@ class test_index(unittest.TestCase):
     total_rows2 = odd_rows2 + even_rows2
     self.assertTrue(total_rows2 < total_rows1)
 
-    usage_select_element = filter_elements[7].find_elements_by_xpath("//select")[4]
-    usage_select = Select(usage_select_element)
+    usage_select = Select(table.find_element_by_name("Usage"))
     usage_select.select_by_value('Private')
 
     odd_rows3 = len(table.find_elements_by_class_name('odd'))
     even_rows3 = len(table.find_elements_by_class_name('even'))
     total_rows3 = odd_rows3 + even_rows3
     self.assertTrue(total_rows3 < total_rows2)
+
+    # Close current tab
+    driver.close()
+    time.sleep(1)
+
+    # Navigate back to the main page
+    driver.switch_to_window(driver.window_handles[-1])
+    time.sleep(1)
 
   def test_10_icr_clear(self):
     global driver
@@ -239,6 +246,14 @@ class test_index(unittest.TestCase):
     even_rows2 = len(table.find_elements_by_class_name('even'))
     total_rows2 = odd_rows2 + even_rows2
     self.assertEqual(total_rows, total_rows2)
+
+    # Close current tab
+    driver.close()
+    time.sleep(1)
+
+    # Navigate back to the main page
+    driver.switch_to_window(driver.window_handles[-1])
+    time.sleep(1)
 
   def navigate_to_icr_page(self):
     global driver
