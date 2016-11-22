@@ -97,7 +97,7 @@ class test_installscale(unittest.TestCase):
     graphBars[0].click()
     driver.switch_to.window(driver.window_handles[1])
     time.sleep(1)
-    self.assertTrue(re.search("/files/9.7-[0-9]+.html", driver.current_url),"URL of new window didnt match expected format")
+    self.assertTrue(re.search("/files/9_7/9.7-[0-9]+.html", driver.current_url),"URL of new window didnt match expected format")
     driver.close()
     driver.switch_to.window(driver.window_handles[0])
 

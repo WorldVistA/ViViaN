@@ -277,7 +277,7 @@ function getHIMLink(pkg) {
 }
 
 function getRPCLinkByPackageName(pkgName, linkUrl) {
-  var defLnk = "files";
+  var defLnk = "files/8994";
   if (linkUrl){
     defLnk = linkUrl + '/' + defLnk;
   }
@@ -285,7 +285,7 @@ function getRPCLinkByPackageName(pkgName, linkUrl) {
 }
 
 function getHL7LinkByPackageName(pkgName, linkUrl) {
-  var defLnk = "files";
+  var defLnk = "files/101";
   if (linkUrl){
     defLnk = linkUrl + '/' + defLnk;
   }
@@ -293,7 +293,7 @@ function getHL7LinkByPackageName(pkgName, linkUrl) {
 }
 
 function getProtocolLinkByPackageName(pkgName, linkUrl) {
-  var defLnk = "files";
+  var defLnk = "files/101";
   if (linkUrl){
     defLnk = linkUrl + '/' + defLnk;
   }
@@ -301,7 +301,7 @@ function getProtocolLinkByPackageName(pkgName, linkUrl) {
 }
 
 function getHLOLinkByPackageName(pkgName, linkUrl) {
-  var defLnk = "files";
+  var defLnk = "files/779_2";
   if (linkUrl){
     defLnk = linkUrl + '/' + defLnk;
   }
@@ -309,7 +309,7 @@ function getHLOLinkByPackageName(pkgName, linkUrl) {
 }
 
 function getICRLinkByPackageName(pkgName, linkUrl) {
-  var defLnk = "files";
+  var defLnk = "files/ICR";
   if (linkUrl){
     defLnk = linkUrl + '/' + defLnk;
   }

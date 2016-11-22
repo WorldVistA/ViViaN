@@ -1,1 +1,0 @@
-{"children": [{"type": "run routine", "name": "Routine Compare - Current with Previous", "option": "XTVR COMPARE", "ien": "438"}, {"type": "run routine", "name": "Update with current routines", "option": "XTVR UPDATE", "ien": "437"}], "type": "menu", "name": "Verifier Tools Menu", "option": "XTVR MENU", "ien": "489"}

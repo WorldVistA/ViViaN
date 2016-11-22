@@ -3,7 +3,7 @@ import glob
 
 def run():
   output = "menu_autocomplete.json"
-  menuJsonFiles = glob.glob("menus/VistAMenu-*.json")
+  menuJsonFiles = glob.glob("files/menus/VistAMenu-*.json")
   outjson = []
 
   for menuFile in menuJsonFiles:

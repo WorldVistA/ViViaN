@@ -1,1 +1,0 @@
-{"children": [{"lock": "XUPROGMODE", "type": "run routine", "name": "Clinical Reminders Index Build", "option": "PXRM INDEX BUILD", "ien": "10208"}, {"type": "run routine", "name": "Clinical Reminders Index Count", "option": "PXRM INDEX COUNT", "ien": "10209"}], "type": "menu", "name": "PXRM INDEX MANAGEMENT", "option": "PXRM INDEX MANAGEMENT", "ien": "10210"}

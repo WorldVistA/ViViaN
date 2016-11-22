@@ -3,7 +3,7 @@ import glob
 
 def run():
   output = "install_autocomplete.json"
-  installInformation = json.load(open("install_information.json", 'r'))
+  installInformation = json.load(open("files/install_information.json", 'r'))
 
   with open("install_autocomplete.json", 'w') as installAutocompleteOutputFile:
     packageNames = installInformation.keys();
