@@ -27,13 +27,17 @@ class test_bff(unittest.TestCase):
 
   def test_01_expand_collapse_nodes(self):
     global driver
+    time.sleep(5)
     nodes = driver.find_elements_by_class_name('node')
     # Page opens with some nodes expanded
     oldSize = len(nodes)
-    # Click on root node to collapse all nodes
-    nodes[-1].find_element_by_tag_name("path").click()
-    time.sleep(1)
+    # Click on root node to collapse all nodes"
+    try:
+        nodes[-1].find_element_by_tag_name("path").click()
+    except:
+        nodes[-1].find_element_by_tag_name("path").click()
     # Now, only the root node should be visible
+    time.sleep(1)
     nodes = driver.find_elements_by_class_name('node')
     self.assertNotEqual(len(nodes), oldSize)
     self.assertEqual(len(nodes), 1)
