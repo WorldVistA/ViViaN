@@ -65,7 +65,7 @@ class test_menus(unittest.TestCase):
 
   def test_04_menu_autocomplete(self):
     global driver
-    target_menu_text = "Core Applications"
+    target_menu_text = "TimeKeeper Main Menu"
     ac_form = driver.find_element_by_id("autocomplete")
     ac_form.clear()
     ac_form.send_keys(target_menu_text)
