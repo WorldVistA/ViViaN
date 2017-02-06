@@ -27,6 +27,7 @@ class test_links(unittest.TestCase):
     global driver
     driver.close()
 
+  # Join the Visualization Working Group
   def test_01_visualization_working_group(self):
     global driver
     nav_button = driver.find_element_by_xpath('//*[@id="navigation_buttons"]/nav/div/ul[2]/li[2]/a')
@@ -36,6 +37,7 @@ class test_links(unittest.TestCase):
     driver.back()
     time.sleep(1)
 
+  # VA Visualizations
   def test_02_business_information_model(self):
     global driver
     driver.find_element_by_id('va-visualizations').click()
@@ -51,6 +53,52 @@ class test_links(unittest.TestCase):
     driver.find_element_by_id('hybrid-information-model').click()
     time.sleep(1)
     self.assertEqual(driver.current_url, 'http://him.osehra.org/')
+    driver.back()
+    time.sleep(1)
+
+  # VistA Interfaces
+  def test_04_all_hl7(self):
+    global driver
+    driver.find_element_by_id('vista-interfaces').click()
+    driver.find_element_by_id('all_hl7').click()
+    time.sleep(1)
+    self.assertEqual(driver.current_url, 'http://code.osehra.org/vivian/files/All-HL7.html')
+    driver.back()
+    time.sleep(1)
+
+  def test_05_all_hlo(self):
+    global driver
+    driver.find_element_by_id('vista-interfaces').click()
+    driver.find_element_by_id('all_hlo').click()
+    time.sleep(1)
+    self.assertEqual(driver.current_url, 'http://code.osehra.org/vivian/files/All-HLO.html')
+    driver.back()
+    time.sleep(1)
+
+  def test_06_all_icr(self):
+    global driver
+    driver.find_element_by_id('vista-interfaces').click()
+    driver.find_element_by_id('all_icr').click()
+    time.sleep(1)
+    self.assertEqual(driver.current_url, 'http://code.osehra.org/vivian/files/All-ICR%20List.html')
+    driver.back()
+    time.sleep(1)
+
+  def test_07_all_protocols(self):
+    global driver
+    driver.find_element_by_id('vista-interfaces').click()
+    driver.find_element_by_id('all_protocols').click()
+    time.sleep(1)
+    self.assertEqual(driver.current_url, 'http://code.osehra.org/vivian/files/All-Protocols.html')
+    driver.back()
+    time.sleep(1)
+
+  def test_08_all_rpc(self):
+    global driver
+    driver.find_element_by_id('vista-interfaces').click()
+    driver.find_element_by_id('all_rpc').click()
+    time.sleep(1)
+    self.assertEqual(driver.current_url, 'http://code.osehra.org/vivian/files/All-RPC.html')
     driver.back()
     time.sleep(1)
 

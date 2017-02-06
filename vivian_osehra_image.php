@@ -32,6 +32,17 @@
               <li><a href="patchDependency.php">Install Dependency Tree</a></li>
             </ul>
           </li>
+          <li class="dropdown" id="vista-interfaces">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">VistA Interfaces<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="http://code.osehra.org/vivian/files/All-HL7.html" id="all_hl7">HL7</a></li>
+              <li><a href="http://code.osehra.org/vivian/files/All-HLO.html" id="all_hlo">HLO</a></li>
+              <li><a href="http://code.osehra.org/vivian/files/All-ICR%20List.html" id="all_icr">ICR</a></li>
+              <li><a href="http://code.osehra.org/vivian/files/All-Protocols.html" id="all_protocols">Protocols</a></li>
+              <li><a href="http://code.osehra.org/vivian/files/All-RPC.html" id="all_rpc">RPC</a></li>
+
+            </ul>
+          </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li><a href="javascript:aboutClicked();">About</a></li>
@@ -43,7 +54,7 @@
             </ul>
           </li>
           <li class="dropdown" id="va-visualizations">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">VA Visualizations <span class="caret"></span></a>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">VA Visualizations<span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><a href="http://bim.osehra.org" id="business-information-model">Business Information Model</a></li>
               <li><a href="http://him.osehra.org" id="hybrid-information-model">Hybrid Information Model</a></li>
