@@ -120,7 +120,7 @@ var chart = d3.chart.treeview()
               .margins({top: 0, left: 200, bottom: 0, right: 0})
               .textwidth(300)
               .pannableTree(true)
-              .nodeTextHyperLink(getOptionDetailLink);
+              .nodeTextHyperLink(function(d) { if (d.hasLink) return getOptionDetailLink(d);});
 var legendShapeChart = d3.chart.treeview()
               .height(50)
               .width(250)
