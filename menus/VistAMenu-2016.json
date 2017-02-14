@@ -1,1 +1,0 @@
-{"children": [{"type": "run routine", "name": "VBC Form By Admission Date", "option": "DG VBC ADMISSION", "ien": "2006"}, {"type": "run routine", "name": "VBC Form for Specific Patient", "option": "DG VBC PATIENT", "ien": "2005"}], "type": "menu", "name": "Veterans Benefits Counselor Menu", "option": "DG VBC MENU", "ien": "2016"}

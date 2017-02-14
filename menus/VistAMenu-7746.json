@@ -1,1 +1,0 @@
-{"children": [{"type": "action", "name": "Individual Patient Document", "option": "TIU BROWSE DOCUMENT READ ONLY", "ien": "7745"}, {"type": "action", "name": "Multiple Patient Documents", "option": "TIU REVIEW SCREEN READ ONLY", "ien": "7742"}], "type": "menu", "name": "Text Integration Utilities (Remote User)", "option": "TIU MAIN MENU REMOTE USER", "ien": "7746"}

@@ -164,7 +164,7 @@ function rect_onMouseOut(d) {
 */
 
 function rect_onClick(d) {
-  window.open("files/9.7-" + d.ien + ".html","_blank");
+  window.open("files/9_7/9.7-" + d.ien + ".html","_blank");
 }
 
 function pkgVersionData_gen(pkgInfo) {

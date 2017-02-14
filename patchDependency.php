@@ -202,7 +202,7 @@ function node_onMouseOut(d) {
 
 
 function getInstallDetailLink(node) {
-  return "files/9.7-" + node.ien + ".html";
+  return "files/9_7/9.7-" + node.ien + ".html";
 }
 
 
