@@ -62,7 +62,7 @@ class test_links(unittest.TestCase):
     driver.find_element_by_id('vista-interfaces').click()
     driver.find_element_by_id('all_hl7').click()
     time.sleep(1)
-    self.assertEqual(driver.current_url, 'http://code.osehra.org/vivian/files/All-HL7.html')
+    self.assertEqual(driver.current_url, 'http://code.osehra.org/vivian/files/101/All-HL7.html')
     driver.back()
     time.sleep(1)
 
@@ -71,7 +71,7 @@ class test_links(unittest.TestCase):
     driver.find_element_by_id('vista-interfaces').click()
     driver.find_element_by_id('all_hlo').click()
     time.sleep(1)
-    self.assertEqual(driver.current_url, 'http://code.osehra.org/vivian/files/All-HLO.html')
+    self.assertEqual(driver.current_url, 'http://code.osehra.org/vivian/files/779_2/All-HLO.html')
     driver.back()
     time.sleep(1)
 
@@ -80,7 +80,7 @@ class test_links(unittest.TestCase):
     driver.find_element_by_id('vista-interfaces').click()
     driver.find_element_by_id('all_icr').click()
     time.sleep(1)
-    self.assertEqual(driver.current_url, 'http://code.osehra.org/vivian/files/All-ICR%20List.html')
+    self.assertEqual(driver.current_url, 'http://code.osehra.org/vivian/files/ICR/All-ICR%20List.html')
     driver.back()
     time.sleep(1)
 
@@ -89,7 +89,7 @@ class test_links(unittest.TestCase):
     driver.find_element_by_id('vista-interfaces').click()
     driver.find_element_by_id('all_protocols').click()
     time.sleep(1)
-    self.assertEqual(driver.current_url, 'http://code.osehra.org/vivian/files/All-Protocols.html')
+    self.assertEqual(driver.current_url, 'http://code.osehra.org/vivian/files/101/All-Protocols.html')
     driver.back()
     time.sleep(1)
 
@@ -98,7 +98,7 @@ class test_links(unittest.TestCase):
     driver.find_element_by_id('vista-interfaces').click()
     driver.find_element_by_id('all_rpc').click()
     time.sleep(1)
-    self.assertEqual(driver.current_url, 'http://code.osehra.org/vivian/files/All-RPC.html')
+    self.assertEqual(driver.current_url, 'http://code.osehra.org/vivian/files/8994/All-RPC.html')
     driver.back()
     time.sleep(1)
 
