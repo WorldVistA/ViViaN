@@ -84,9 +84,11 @@ An example command to be run would look like this:
 
 ICRParser
 ~~~~~~~~~
-Creating ICR backend data is a two-part process.
+Creating Integration Control Registry (ICR) backend data is a two-part process.
 
-First, execute ICRParser.py. The file’s execution signature is as follows:
+First, download the FOIA released ICR_. Then execute ICRParser.py to
+convert the downloaded text file to JSON format. The script's execution
+signature is as follows:
 
 .. parsed-literal::
     usage: ICRParser.py [-h] icrfile outJson
@@ -107,7 +109,7 @@ An example command to be run would look like this:
   $ python ICRParser.py ICRTest.txt ICRTest.JSON
 
 Next, convert the JSON to html using ICRJsonToHtml.py.
-The file’s execution signature is as follows:
+The script’s execution signature is as follows:
 
 .. parsed-literal::
     usage: ICRJsonToHtml.py [-h] -mr MREPOSITDIR -pr PATCHREPOSITDIR
@@ -134,10 +136,11 @@ An example command to be run would look like this:
 
 .. parsed-literal::
 
-  $ python ICRJsonToHtml.py -mr ~/Work/OSEHRA/VistA-M -pr ~/work/osehra/VistA ICRTest.JSON ~/Work/OSEHRA/vivian-out
+  $ python ICRJsonToHtml.py -mr ~/Work/OSEHRA/VistA-M -pr ~/work/osehra/VistA ICRTest.JSON ~/Work/OSEHRA/vivian-out/ICR
 
-Where the VistA-M and VistA repositories and output directory are the same used
-with the FileManGlobalDataParser script.
+Where the VistA-M and VistA repositories are the same used with the
+FileManGlobalDataParser script. The output directory must be the ICR
+subdirectory of the outdir given to the FileManGlobalDataParser script.
 
 Link Backend Data with ViViaN
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -170,3 +173,4 @@ manually.
 
 .. _WampServer: http://www.wampserver.com/en/
 .. _`OSEHRA VistA-M repository`: http://github.com/OSEHRA/VistA-M
+.. _ICR: http://foia-vista.osehra.org/VistA_Integration_Agreement
