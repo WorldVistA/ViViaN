@@ -1,8 +1,6 @@
 import json
 import glob
 
-
-
 outjson = []
 parent_id = ''
 parent_name= ''
@@ -25,8 +23,8 @@ def recurse_info(inJSON):
 def run():
   global parent_id
   global parent_name
-  output = "option_autocomplete.json"
-  menuJsonFiles = glob.glob("files/menus/VistAMenu-*.json")
+  output = "../files/option_autocomplete.json"
+  menuJsonFiles = glob.glob("../files/menus/VistAMenu-*.json")
 
   for menuFile in menuJsonFiles:
     menuItem = {}

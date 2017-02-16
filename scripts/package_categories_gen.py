@@ -1,6 +1,5 @@
-""" Python script to parse the packages.json file 
-    and generate the package_categories.json.
-    This will replace the ProductDefinition.csv file
+""" Python script to parse the packages.json file
+    and generate the PackageCategories.json.
 """
 
 import json
@@ -15,11 +14,11 @@ def traverseChildren(node):
     for key in node.keys():
       if key != 'name':
         del node[key]
-    
+
 def main():
-  pkgjson = json.load(open("packages.json", 'rb'))
+  pkgjson = json.load(open("../files/packages.json", 'rb'))
   traverseChildren(pkgjson)
-  json.dump(pkgjson, open("PackageCategories.json", 'w'), indent=4)
+  json.dump(pkgjson, open("../files/PackageCategories.json", 'w'), indent=4)
 
 if __name__ == '__main__':
   main();

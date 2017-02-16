@@ -150,29 +150,26 @@ file manipulation steps are necessary to get all of the data into the correct
 places. All of these changes are made in the Visual directory of the
 Product-Management (ViViaN) repository.
 
-1. Generate a symbolic link  “files” pointing to the output directory specified above.
-2. Move all files with the VistAMenu* prefix from Visual/files to the Visual/menus directory.
-3. Move ``install_information.json`` from the Visual/files to the Visual directory
-4. Update Packages.csv or PackageCategories.json, if needed.
+1. Generate a symbolic link “files” pointing to the output directory specified above.
+2. Update ``PackageCategories.json`` , ``pkgdep.json``, ``Packages.csv``, or ``scripts/PackageDes.json`` if needed.
 
-Finally, execute the setup script from the Visual directory:  ``python setup.py``
-to generate other JSON and csv files. The script does not take any input
-parameters but requires:
+Finally, execute the setup script from the Visual/scripts directory:
+``python setup.py`` to generate other JSON and csv files. The script does not
+take any input parameters but requires:
 
-* Visual/files directory created in 1.
-* Visual/menus directory populated in 2.
-* ``Packages.csv``, ``PackageCategories.json``, and ``install_information.json``
-* A version of the 'VHA Business Function Framework' spreadsheet,
-  currently ``BFF_version_2-12.xlsx``
+* Visual/files directory created above
+* ``PackageCategories.json``, ``Packages.csv`` and ``scripts/PackageDes.json``
+* A version of the 'VHA Business Function Framework' spreadsheet in the
+  scripts/ directory, currently ``BFF_version_2-12.xlsx``
 * The xlrd_ package to be installed in the Python environment
 
-The setup script creates or updates: ``menu_autocomplete.json``,
-``option_autocomplete.json``, ``PackageInterface.csv``, ``packages.json``,
-``packages_autocomplete.json`` and ``install_autocomplete.json`` and ``bff.json``.
+The setup script creates the following in the Visual/files directory:
+``menu_autocomplete.json``, ``option_autocomplete.json``,
+``PackageInterface.csv``, ``packages.json``, ``packages_autocomplete.json``,
+``install_autocomplete.json`` and `bff.json`.
 
-Note: ``pkgdep.json`` is also required by the ViViaN pages.
-This files is included in the Product-Management repository and will be updated
-manually.
+Note: ``himData.json`` is also required by the ViViaN pages. This files is
+included in the ProductManagement repository.
 
 .. _WampServer: http://www.wampserver.com/en/
 .. _`OSEHRA VistA-M repository`: http://github.com/OSEHRA/VistA-M

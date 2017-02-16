@@ -21,7 +21,7 @@
           }
         });
 
-        d3.json('packages_autocomplete.json', function(json) {
+        d3.json('files/packages_autocomplete.json', function(json) {
           json.push("MultiBuild");
           json.push("All Patches");
           var sortedjson = json.sort(function(a,b) { return a.localeCompare(b); });
@@ -112,7 +112,7 @@ var originalTransform = [300,300];
 *  from the date selectors and the value of the new package
 */
 function packageAutocompleteChanged(eve, ui) {
-  d3.json('install_information.json', function(json) {
+  d3.json('files/install_information.json', function(json) {
     targetPackage = ui.item.label
     $("#installEntryAuto").show();
     $("#installEntryDrop").hide();
@@ -227,7 +227,7 @@ function _centerDisplay() {
 }
 
 function showDependency(parent, entryNo) {
-  d3.json("install_information.json", function(json) {
+  d3.json("files/install_information.json", function(json) {
 
     chart.on("path", "event","click", chart.onNodeClick)
       .on("node", "event", "mouseover", node_onMouseOver)

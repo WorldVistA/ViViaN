@@ -53,7 +53,7 @@ def run():
   #  json.dump(generated_packages, outfile)
 
   # Print summary of changes
-  with open('himData.json') as data_file:
+  with open('../himData.json') as data_file:
     data = json.load(data_file)
 
   new_packages = {}

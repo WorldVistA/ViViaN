@@ -21,7 +21,7 @@
           }
         });
 
-        d3.json('install_autocomplete.json', function(json) {
+        d3.json('files/install_autocomplete.json', function(json) {
           var sortedjson = json.sort(function(a,b) { return a.localeCompare(b); });
           $("#package_autocomplete").autocomplete({
             source: sortedjson,
@@ -188,7 +188,7 @@ function resetMenuFile(packageName,start,stop) {
   $("#package_autocomplete").val(packageName)
 
   //Read in the INSTALL JSON file
-  d3.json("install_information.json", function(json) {
+  d3.json("files/install_information.json", function(json) {
     /*
     *  Capture the package specific information.  The start date
     *  of the scale should be the install date of the first patch

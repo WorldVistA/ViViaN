@@ -78,7 +78,7 @@ var legendShapeChart = d3.chart.treeview()
 var shapeLegend = [{name: "Framework Grouping", shape: "triangle-up"},
                    {name: "Business Function", shape:"circle"}]
 
-d3.json("bff.json", function(json) {
+d3.json("files/bff.json", function(json) {
   resetAllNode(json);
   chart.on("node", "event", "mouseover", node_onMouseOver)
      .on("node", "event","mouseout", node_onMouseOut)

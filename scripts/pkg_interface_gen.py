@@ -3,12 +3,12 @@ import os
 import glob
 
 def run():
-  outputFile = "PackageInterface.csv"
-  pkgRPCFile = glob.glob("files/8994/*-RPC.html")
-  pkgHL7File = glob.glob("files/101/*-HL7.html")
-  pkgProtocolFile = glob.glob("files/101/*-Protocols.html")
-  pkgHLOFile = glob.glob("files/779_2/*-HLO.html")
-  pkgICRFile = glob.glob("files/ICR/*-ICR.html")
+  outputFile = "../files/PackageInterface.csv"
+  pkgRPCFile = glob.glob("../files/8994/*-RPC.html")
+  pkgHL7File = glob.glob("../files/101/*-HL7.html")
+  pkgProtocolFile = glob.glob("../files/101/*-Protocols.html")
+  pkgHLOFile = glob.glob("../files/779_2/*-HLO.html")
+  pkgICRFile = glob.glob("../files/ICR/*-ICR.html")
   header = ['Package','RPC','HL7','HLO','Protocols', 'ICR']
   outCsv = {}
   for rpcFile in pkgRPCFile:

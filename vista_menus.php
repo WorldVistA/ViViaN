@@ -21,7 +21,7 @@
             $(this).removeClass();
           }
         });
-        d3.json('menu_autocomplete.json', function(json) {
+        d3.json('files/menu_autocomplete.json', function(json) {
           var sortedjson = json.sort(function(a,b) { return a.label.localeCompare(b.label); });
           $("#autocomplete").autocomplete({
             source: sortedjson,
@@ -30,7 +30,7 @@
           }).val('EVE: Systems Manager Menu').data('autocomplete')/*._trigger('select')*/;
         });
 
-        d3.json('option_autocomplete.json', function(json) {
+        d3.json('files/option_autocomplete.json', function(json) {
           var sortedjson = json.sort(function(a,b) { return a.label.localeCompare(b.label); });
           // Note: vivian_tree_layout_common expects this control
           // to be called 'option_autocomplete'.
@@ -202,7 +202,7 @@ function autoCompleteChanged(eve, ui) {
 
 function optionAutoCompleteChanged(eve, ui) {
   var menuFile = "files/menus/VistAMenu-" + ui.item.parent_id + ".json";
-  d3.json('menu_autocomplete.json', function(json) {
+  d3.json('files/menu_autocomplete.json', function(json) {
     for ( var i = 0; i < json.length; i++) {
       if( json[i].id == ui.item.parent_id) {
       $("#autocomplete")[0].value = json[i].label;

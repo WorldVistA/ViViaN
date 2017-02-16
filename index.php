@@ -21,7 +21,7 @@
           }
         });
 
-        d3.json('packages_autocomplete.json', function(json) {
+        d3.json('files/packages_autocomplete.json', function(json) {
           // Note: vivian_tree_layout_common expects this control
           // to be called 'option_autocomplete'.
           $("#option_autocomplete").autocomplete({
@@ -125,7 +125,7 @@ var shapeLegend = [{name: "Package Category", shape: "triangle-up"},
                    {name: "Package", shape:"circle"}]
 var himInfoJSON;
 
-d3.json("packages.json", function(json) {
+d3.json("files/packages.json", function(json) {
   chart.on("node", "event","click", pkgLinkClicked)
      .on("node", "event", "mouseover", node_onMouseOver)
      .on("node", "event","mouseout", node_onMouseOut)
@@ -263,7 +263,7 @@ function getNamespaceHtml(pkg) {
 }
 
 function getHIMLink(pkg) {
-  d3.json("himData.json", function(json) {
+  d3.json("files/himData.json", function(json) {
 
     var himPath = json[pkg.name];
     if (himPath == null) {

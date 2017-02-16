@@ -11,12 +11,12 @@ pkgPrefixDic = dict()
 pkgAutocomple = set();
 
 def generate_packages_json():
-  pkgCatJson = json.load(open("PackageCategories.json", 'r'))
+  pkgCatJson = json.load(open("../PackageCategories.json", 'r'))
   pkgDesJson = json.load(open("PackageDes.json", 'r'))
   generate_output_json_dict(pkgCatJson, pkgDesJson)
-  with open("packages.json", 'w') as outputFile:
+  with open("../files/packages.json", 'w') as outputFile:
     json.dump(pkgCatJson, outputFile)
-  with open("packages_autocomplete.json", 'w') as autocompleteOutputFile:
+  with open("../files/packages_autocomplete.json", 'w') as autocompleteOutputFile:
     pkgAutocomple.add("Unknown")
     packageNames = list(pkgAutocomple)
     packageNames.sort()
@@ -24,7 +24,7 @@ def generate_packages_json():
 
 def generate_output_json_dict(pkgCatJson, pkgDesJson):
  # read package.csv file for more information
-  packages_csv = csv.DictReader(open("Packages.csv",'r'))
+  packages_csv = csv.DictReader(open("../Packages.csv",'r'))
   pkg = None
   for fields in packages_csv:
     if fields['Directory Name']:
@@ -40,7 +40,7 @@ def generate_output_json_dict(pkgCatJson, pkgDesJson):
         pkgPrefixDic[fields['Prefixes']] = pkg
 
   # read packageInterfaces.csv file for interface
-  interface_csv = csv.DictReader(open("PackageInterface.csv", 'r'))
+  interface_csv = csv.DictReader(open("../files/PackageInterface.csv", 'r'))
   for row in interface_csv:
     pkgName = row['Package']
     if pkgName and pkgName in pkgNameSet:
