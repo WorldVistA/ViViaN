@@ -56,7 +56,7 @@
     function. Click on an item to bring a modal window with detailed
     description and commentary.
     </p>
-    <p>This demo is based on BFF version 2.10.</p>
+    <p>This demo is based on BFF version 2.12.</p>
   </div>
   <div id="legend_placeholder" style="position:relative; left:20px; top:20px;"></div>
   <div id="treeview_placeholder"></div>

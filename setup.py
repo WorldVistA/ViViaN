@@ -9,6 +9,7 @@ import menu_autocomplete_gen
 import option_autocomplete_gen
 import pkg_interface_gen
 import pkgcsv_to_json
+import BFFExcel2Json
 
 def run():
   # input: menus/VistAMenu-*.json
@@ -37,6 +38,11 @@ def run():
   install_autocomplete_gen.run()
   print "*** Updated install_autocomplete.json"
 
+  # input: VHA_BFF_version2-10.xlsx
+  # output: bff.json
+  BFFExcel2Json.convertBFFExcelToJson("BFF_version_2-12.xlsx","bff.json")
+  print "*** Updated bff.json"
+  
 if __name__ == '__main__':
   run()
 

@@ -5,7 +5,7 @@ Install
 ^^^^^^^^
 
 The methods for installing the ViViaN tool are quite simple.  The code for the
-visualization can be cloned from the OSEHRA-Sandbox/Product_Management
+visualization can be cloned from the OSEHRA-Sandbox/Product-Management
 repository: https://github.com/OSEHRA-Sandbox/Product-Management.
 
 Once the code is acquired, two components are then necessary.  The first is a
@@ -148,7 +148,7 @@ Link Backend Data with ViViaN
 After the data parse scripts have been run successfully, a series of
 file manipulation steps are necessary to get all of the data into the correct
 places. All of these changes are made in the Visual directory of the
-Product_Management (ViViaN) repository.
+Product-Management (ViViaN) repository.
 
 1. Generate a symbolic link  “files” pointing to the output directory specified above.
 2. Move all files with the VistAMenu* prefix from Visual/files to the Visual/menus directory.
@@ -162,15 +162,19 @@ parameters but requires:
 * Visual/files directory created in 1.
 * Visual/menus directory populated in 2.
 * ``Packages.csv``, ``PackageCategories.json``, and ``install_information.json``
+* A version of the 'VHA Business Function Framework' spreadsheet,
+  currently ``BFF_version_2-12.xlsx``
+* The xlrd_ package to be installed in the Python environment
 
 The setup script creates or updates: ``menu_autocomplete.json``,
 ``option_autocomplete.json``, ``PackageInterface.csv``, ``packages.json``,
-``packages_autocomplete.json`` and ``install_autocomplete.json``.
+``packages_autocomplete.json`` and ``install_autocomplete.json`` and ``bff.json``.
 
-Note: ``bff.json`` and ``pkgdep.json`` are also required by the ViViaN pages.
-These files are included in the ProductManagement repository and are updated
+Note: ``pkgdep.json`` is also required by the ViViaN pages.
+This files is included in the Product-Management repository and will be updated
 manually.
 
 .. _WampServer: http://www.wampserver.com/en/
 .. _`OSEHRA VistA-M repository`: http://github.com/OSEHRA/VistA-M
 .. _ICR: http://foia-vista.osehra.org/VistA_Integration_Agreement
+.. _xlrd: https://pypi.python.org/pypi/xlrd
