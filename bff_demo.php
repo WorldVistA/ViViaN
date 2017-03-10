@@ -46,7 +46,7 @@
     </div>
   </br>
   </br>
-  <div id='description' class='hint'  style="position:relative; top:10px; left:20px; margin-right:200px;">
+  <div id='pageDescription' class='hint'  style="position:relative; top:10px; left:20px; margin-right:200px;">
     <p>
     This tree graph represents the VHA Business Function Framework (BFF).
     The BFF is a hierarchical construct that describes VHA business functions
