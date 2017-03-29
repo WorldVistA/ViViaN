@@ -4,6 +4,11 @@ OSEHRA ViViaN(TM)
 **Vi** sualizing **Vi** stA **a** nd **N** amespace
 This document contains the information about the OSEHRA ViViaN tool.
 
+User Guide
++++++++++++
+
+For an introduction to ViViaN for new users, see the ViViaN `User Guide`_.
+
 Generation of Backend Information
 ++++++++++++++++++++++++++++++++++
 
@@ -24,4 +29,5 @@ For instructions on how to run and generate new tests, see Testing_
 .. _GenerateData: GenerateData.rst
 .. _`How To Contribute`: howToSubmit.rst
 .. _Testing: testing.rst
+.. _`User Guide`: UserGuide.rst
 
