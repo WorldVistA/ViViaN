@@ -89,10 +89,10 @@ d3.chart.treeview = function(option) {
       (_height - _margins.top - _margins.bottom),
       (_width - _margins.left - _margins.right)
     ]).sort(function(a,b) {
+      // Sorts the visualizations (Every one but the menus) which transport the child nodes in the "children" attribute
       // Adapted from d3.ascending: https://github.com/d3/d3-3.x-api-reference/blob/master/Arrays.md#d3_ascending
       return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
     });
-
     _diagonal = d3.svg.diagonal()
             .projection(function (d) {
                 return [d.y, d.x];
@@ -160,13 +160,15 @@ d3.chart.treeview = function(option) {
   function renderNodes(nodes, source) {
     nodes.forEach(function (d) {
         d.y = d.depth * _textwidth;
+        // Sorts the Menu visualizations JSON values which transport the child nodes in the "_children" attribute
+        if(d._children) {
+          d._children.sort(function(a,b) {return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;});
+        }
     });
-
     var node = _svg.selectAll("g.node")
             .data(nodes, function (d) {
                 return d.id || (d.id = ++_i);
             });
-
     var nodeEnter = node.enter().append("svg:g")
             .attr("class", "node")
             .attr("transform", function (d) {
@@ -191,7 +193,6 @@ d3.chart.treeview = function(option) {
     var circleUpdate = nodeUpdate.select("path");
     _customization(circleUpdate, 'path', 'attr');
     _customization(circleUpdate, 'path', 'style');
-
     var nodeExit = node.exit().transition()
             .attr("transform", function (d) {
                 return "translate(" + source.y
