@@ -176,7 +176,7 @@ d3.chart.treeview = function(option) {
     _customization(nodeEnter, 'node', 'event');
 
     var circleEnter = nodeEnter.append("path")
-            .style("stroke","steelblue")
+            .style("stroke",findNodeStroke)
             .attr("d",d3.svg.symbol().type(find_node_shape))
             .attr("name", find_node_shape)
             .attr("r", 1e-6);
@@ -212,7 +212,9 @@ d3.chart.treeview = function(option) {
 
   function find_node_shape(d) {
     var shape = "circle";
-    if (d.children || d._children) {
+    if (d.isRequirement) {
+      shape = "cross"
+    } else if (d.children || d._children) {
       shape = "triangle-up";
     } else if (d.hasSubpackage) {
       shape = "diamond";
@@ -264,7 +266,8 @@ d3.chart.treeview = function(option) {
             .attr("d", function (d) {
                 var o = {x: source.x0, y: source.y0};
                 return _diagonal({source: o, target: o});
-            });
+            })
+            .style("stroke-dasharray",function(d) {if (d.target.isRequirement) return ("3, 3")});
 
     link.transition()
             .attr("d", _diagonal);
@@ -288,7 +291,14 @@ d3.chart.treeview = function(option) {
   }
 
   function fillNodeCircle(d) {
-    return d._children ? "lightsteelblue" : "#FFF";
+    var color = "lightsteelblue"
+    if (d.hasRequirements) { color = "MidnightBlue"}
+    return d._children ? color : "#FFF";
+  }
+  function findNodeStroke(d) {
+    var color = "lightsteelblue"
+    if (d.hasRequirements) { color = "MidnightBlue"}
+    return color
   }
 
   chart.width = function (w) {
