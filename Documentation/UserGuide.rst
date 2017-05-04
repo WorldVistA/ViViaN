@@ -325,30 +325,48 @@ The VistA Interfaces menu gives shortcuts to the following Dox tables:
     :align: center
     :alt:  VistA Interfaces menu
 
-All tables have the same sorting and searching options. HLO will be used as an
-example.
+All tables have the same toggling, sorting and searching options. HLO will be
+used as an example.
 
 .. figure::
-    http://code.osehra.org/content/named/SHA1/b2a16c-allhlolist.png
+    http://code.osehra.org/content/named/SHA1/977564-allhlolist.png
     :align: center
     :alt:  All HLO List
 
-Click on a column header to sort table by that column contents
+Toggle
+++++++
+
+The **Toggle Columns** button in the top-left of the table expands to display a
+list of all columns. Click on a column name to toggle visibility. By default,
+if available for the selected table, the *General Description* column is
+hidden.
+
+Use the **Reset Columns** button to return to the original column
+configuration.
+
+Sort
+++++
+
+Click on a column header to sort the table by that column's contents. Press the
+shift key to sort by multiple columns.
 
 .. figure::
     http://code.osehra.org/content/named/SHA1/a92c67-sortcolumn.png
     :align: center
     :alt:  Sort column
 
+Search
+++++++
+
 The **Search** box in the top-right of the table will perform a global search
-across all columns. If data is found matching in any column, then the whole row
-is matched and shown in the result set. Search individual columns using the
-search boxes or dropdown boxes underneath each column. Rows that match all
-global and individual searches are displayed. Use the **Clear Search** button
-to return to the unfiltered table.
+across *all* columns, even if they are hidden. If a match is found in any
+column, then the whole row is matched and shown in the result set. Search
+individual columns using the search boxes or dropdown boxes underneath each
+column. Rows that match all global *and* individual searches are displayed. Use
+the **Clear Search** button to clear all searches.
 
 .. figure::
-    http://code.osehra.org/content/named/SHA1/797979-search.png
+    http://code.osehra.org/content/named/SHA1/ff9b05-search.png
     :align: center
     :alt:  Search
 
