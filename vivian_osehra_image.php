@@ -23,6 +23,7 @@
             <ul class="dropdown-menu">
               <li><a href="vista_pkg_dep.php" id="circle-layout">Circular Layout</a></li>
               <li><a href="vista_pkg_dep_chart.php" id="bar-chart">Bar Chart</a></li>
+              <li><a href="package_dep_graph.php" id="force-directed-graph">Force-Directed Graph</a></li>
             </ul>
           </li>
           <li class="dropdown">
