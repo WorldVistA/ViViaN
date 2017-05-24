@@ -314,6 +314,7 @@ function plot(error, packages, categories) {
   }
 
   function toggleConnectedNodes() {
+    if (d3.event.defaultPrevented) return;  // ignore drag
     d = d3.select(this).node().__data__;
     toggleNode(d);
   }
