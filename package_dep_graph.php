@@ -84,10 +84,17 @@ function plot(error, packages, categories) {
       package_names = [],
       sorted_package_names = [];  // For autocomplete
   packages.forEach(function(pkg, num) {
+    var both = [];  // Get a list of links that are dependencies AND dependents
+    if (pkg.depends && pkg.dependents) {
+      both = pkg.depends.filter(function(n) {
+        return pkg.dependents.indexOf(n) != -1
+      });
+    }
+    var both_count = both.length;
     var dependencies_count = 0,
         dependents_count = 0;
-    if (pkg.depends) dependencies_count = pkg.depends.length
-    if (pkg.dependents) dependents_count = pkg.dependents.length;
+    if (pkg.depends) dependencies_count = pkg.depends.length - both_count;
+    if (pkg.dependents) dependents_count = pkg.dependents.length - both_count;
     // Only include packages that have at least one link
     if ((dependencies_count > 0) || (dependents_count > 0)) {
       package_names.push(pkg.name);
@@ -103,7 +110,8 @@ function plot(error, packages, categories) {
         dependencies: pkg.depends,
         dependencies_count: dependencies_count,
         dependents: pkg.dependents,
-        dependents_count: dependents_count
+        dependents_count: dependents_count,
+        both_count: both_count
       };
       nodes.push(node);
     }
@@ -220,6 +228,9 @@ function plot(error, packages, categories) {
       if (d.group) text += "\nGroup: " + d.group;
       if (d.dependencies_count > 0) {
         text += "\nDependencies: " + d.dependencies_count;
+      }
+      if (d.both_count> 0) {
+        text += "\nBoth: " + d.both_count;
       }
       if (d.dependents_count> 0) {
         text += "\nDependents: " + d.dependents_count;
