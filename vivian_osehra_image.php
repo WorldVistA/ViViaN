@@ -63,8 +63,8 @@
             <li><a href="files/Numberspace/Numberspace.html" id="all_number">Numberspace Listing</a></li>
           </ul>
         </li>
+        <li><a href="queryVis_stats.php" id="queryVis_stats">Classify Data</a></li>
       </ul>
-
       <ul class="nav navbar-nav navbar-right">
         <li><a href="javascript:aboutClicked();">About</a></li>
         <li class="dropdown">
