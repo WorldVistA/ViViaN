@@ -214,7 +214,7 @@ d3.chart.treeview = function(option) {
     var shape = "circle";
     if (d.isRequirement) {
       shape = "cross"
-    } else if (d.children || d._children) {
+    } else if ((d.children || d._children) && !d.leafFunction) {
       shape = "triangle-up";
     } else if (d.hasSubpackage) {
       shape = "diamond";
@@ -297,7 +297,7 @@ d3.chart.treeview = function(option) {
   }
   function findNodeStroke(d) {
     var color = "lightsteelblue"
-    if (d.hasRequirements) { color = "MidnightBlue"}
+    if (d.hasRequirements || d.isRequirement) { color = "MidnightBlue"}
     return color
   }
 

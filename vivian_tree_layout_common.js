@@ -132,10 +132,12 @@ function highlight(d) {
 }
 
 function clearAutocomplete() {
-  document.getElementById("option_autocomplete").value= '';
-  $("#option_autocomplete")[0].style.border="";
-  $("#search_result").html("");
-  clearHighlightedPath();
+  if (document.getElementById("option_autocomplete")) {
+    document.getElementById("option_autocomplete").value= '';
+    $("#option_autocomplete")[0].style.border="";
+    $("#search_result").html("");
+    clearHighlightedPath();
+  }
 }
 
 function clearHighlightedPath() {
