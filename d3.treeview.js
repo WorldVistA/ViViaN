@@ -242,9 +242,7 @@ d3.chart.treeview = function(option) {
             .attr("text-anchor", function (d) {
                 return d.children || d._children ? "end" : "start";
             })
-            .text(function (d) {
-                return d.name;
-            })
+            .text(function (d) { return d.name;})
             .style("fill-opacity", 1e-6);
     _customization(textEnter, "text", "attr");
     _customization(textEnter, "text", "event");
@@ -298,6 +296,7 @@ d3.chart.treeview = function(option) {
   function findNodeStroke(d) {
     var color = "lightsteelblue"
     if (d.hasRequirements || d.isRequirement) { color = "MidnightBlue"}
+    if (d.recentUpdate) {color = "darkorange"}
     return color
   }
 

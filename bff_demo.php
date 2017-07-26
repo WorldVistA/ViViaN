@@ -47,7 +47,9 @@
         <h3 id="needBFF_head" style="display:none"><a href="#">Business Need: BFF Links</a></h3>
         <div id="bnBFFLink"></div>
         <h3 id="bnNSR_head" style="display:none"><a href="#">Business Need: New Service Request</a></h3>
-        <div id="nsNSR"></div>
+        <div id="bnNSR"></div>
+        <h3 id="bnDofUpdate_head" style="display:none"><a href="#">Business Need: Date of Update</a></h3>
+        <div id="bnDofUpdate"></div>
         <h3 id="allReq" style="display:none"><a href="#">All Business Needs</a></h3>
         <div id="nsNSR"><a target='_blank' href="files/requirements/All-Requirement%20List.html">All Needs</a></div>
       </div>
@@ -87,21 +89,22 @@ var chart = d3.chart.treeview()
               .width(1880)
               .textwidth(280);
 var legendShapeChart = d3.chart.treeview()
-              .height(90)
+              .height(115)
               .width(1300)
               .margins({top:42, left:10, right:0, bottom:0})
               .textwidth(110);
 
 <?php include_once "vivian_tree_layout_common.js" ?>
 
-var shapeLegend = [{name: "Framework Grouping (Collapsed)", shape: "triangle-up","_children":[],"hasRequirements": false, "depth": -10},
-                   {name: "Framework Grouping (Expanded)", shape: "triangle-up", "depth": -10},
-                   {name: "Framework Grouping with Needs (Collapsed)", shape: "triangle-up","_children":[],"hasRequirements": true, "depth": -10},
-                   {name: "Framework Grouping with Needs (Expanded)", shape: "triangle-up","children":[],"hasRequirements": true, "depth": -10},
-                   {name: "Business Function", shape:"circle","hasRequirements": false, "depth": 20},
-                   {name: "Business Function with Needs (Collapsed)", shape:"circle","hasRequirements": true,"_children":[], "depth": 20},
-                   {name: "Business Function with Needs (Expanded)", shape:"circle","hasRequirements": true, "depth": 20},
-                   {name: "Business Need", shape:"cross", "isRequirement": true, "depth": 20}
+var shapeLegend = [{name: "Framework Grouping (Collapsed)", shape: "triangle-up","_children":[],"hasRequirements": false, "index":0, "depth": -10},
+                   {name: "Framework Grouping (Expanded)", shape: "triangle-up", "depth": -10,"index":1},
+                   {name: "Framework Grouping with Needs (Collapsed)", shape: "triangle-up","_children":[],"hasRequirements": true, "depth": -10,"index":2},
+                   {name: "Framework Grouping with Needs (Expanded)", shape: "triangle-up","children":[],"hasRequirements": true, "depth": -10,"index":3},
+                   {name: "Business Function", shape:"circle","hasRequirements": false, "depth": 20,"index":0},
+                   {name: "Business Function with Needs (Collapsed)", shape:"circle","hasRequirements": true,"_children":[], "depth": 20,"index":1},
+                   {name: "Business Function with Needs (Expanded)", shape:"circle","hasRequirements": true, "depth": 20,"index":2},
+                   {name: "Business Need", shape:"cross", "isRequirement": true, "depth": 50,"index":0},
+                   {name: "Business Need (Recently Updated)", shape:"cross", "isRequirement": true, "recentUpdate":true,"depth": 50,"index":1}
                    ]
 
 d3.json("files/bff.json", function(BFFjson) {
@@ -224,9 +227,12 @@ function modalForBusinessNeed(d) {
             $("#bnBFFLink").html(getRequirementsURL(d))
             $("#needBFF_head").show();
             $("#bnBFFLink").show();
-            $("#nsNSR").html(generateNSRURL(d))
+            $("#bnNSR").html(generateNSRURL(d))
             $("#bnNSR_head").show();
-            $("#nsNSR").show();
+            $("#bnNSR").show();
+            $("#bnDofUpdate_head").show();
+            $("#bnDofUpdate").html(d.dateUpdated);
+            $("#bnDofUpdate").show();
           }
           else {
             $('#busNeedLink').html('');
@@ -237,7 +243,10 @@ function modalForBusinessNeed(d) {
             $("#needBFF_head").hide();
             $("#bnBFFLink").hide();
             $("#bnNSR_head").hide();
-            $("#nsNSR").hide();
+            $("#bnNSR").hide();
+            $("#bnDofUpdate_head").hide();
+            $("#bnDofUpdate").html('');
+            $("#bnDofUpdate").hide();
           }
 
 }
@@ -297,7 +306,7 @@ function createShapeLegend() {
       .data(shapeLegend)
       .enter().append("svg:g")
       .attr("class", "shapeLegend")
-      .attr("transform", function(d, i) { return "translate("+(i% 4 * 310) +","+ d.depth+")"; })
+      .attr("transform", function(d, i) { return "translate("+(d.index * 310) +","+ d.depth+")"; })
   shapeLegendDisplay.append("path")
       .attr("class", function(d) {return d.name;})
       .attr("d", d3.svg.symbol().type(function(d) { return d.shape;}))
@@ -309,6 +318,7 @@ function createShapeLegend() {
       .style("stroke", function(d) {
         var color = "lightsteelblue"
         if (d.hasRequirements || d.isRequirement) { color = "MidnightBlue"}
+        if (d.recentUpdate) {color = "darkorange"}
         return color
       })
       //      "stroke": function(d) {chart.findNodeStroke(d)},
