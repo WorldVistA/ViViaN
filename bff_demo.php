@@ -77,6 +77,7 @@
   <div id="buttons" style="position:relative; top:10px; right:-20px">
     <button onclick="_collapseAllNode()">Collapse All</button>
     <button onclick="_resetAllNode()">Reset</button>
+    <input type="checkbox" id="showUpdates" onclick="renderWindow()"> Show only updated requirements</input>
   </div>
   <div id="legend_placeholder" style="position:relative; left:20px; top:20px;"></div>
   </br>
@@ -106,45 +107,80 @@ var shapeLegend = [{name: "Framework Grouping (Collapsed)", shape: "triangle-up"
                    {name: "Business Need", shape:"cross", "isRequirement": true, "depth": 50,"index":0},
                    {name: "Business Need (Recently Updated)", shape:"cross", "isRequirement": true, "recentUpdate":true,"depth": 50,"index":1}
                    ]
+renderWindow();
+function renderWindow() {
+  d3.json("files/bff.json", function(BFFjson) {
+    d3.json("files/Requirements.json", function(reqjson) {
+      resetAllNode(BFFjson);
+      chart.on("node", "event", "mouseover", node_onMouseOver)
+         .on("node", "event","mouseout", node_onMouseOut)
+         .on("node", "event","click", node_onClick)
+         .on("text", "attr", "cursor", function(d) {
+            return d.description !== undefined && d.description ? "pointer" : "hand";
+          })
+         .on("text", "event", "click", text_onMouseClick)
+         .on("path", "attr", "r", function(d) { return 7 - d.depth/2; });
 
-d3.json("files/bff.json", function(BFFjson) {
-  d3.json("files/Requirements.json", function(reqjson) {
-    resetAllNode(BFFjson);
-    chart.on("node", "event", "mouseover", node_onMouseOver)
-       .on("node", "event","mouseout", node_onMouseOut)
-       .on("node", "event","click", node_onClick)
-       .on("text", "attr", "cursor", function(d) {
-          return d.description !== undefined && d.description ? "pointer" : "hand";
-        })
-       .on("text", "event", "click", text_onMouseClick)
-       .on("path", "attr", "r", function(d) { return 7 - d.depth/2; });
-
-    var combinedJSON = combineData(BFFjson,reqjson,"children")
-    var test = d3.select("#treeview_placeholder").datum(combinedJSON).call(chart);
-    d3.select("#legend_placeholder").datum(null).call(legendShapeChart);
-    createShapeLegend();
+      var combinedJSON = combineData(BFFjson,reqjson,"children")
+      if($("#showUpdates").is(":checked")) {
+         combinedJSON = removeNonRequirementNodes(combinedJSON,"children")
+      }
+      var test = d3.select("#treeview_placeholder").datum(combinedJSON).call(chart);
+      d3.select("#legend_placeholder").datum(null).call(legendShapeChart);
+      createShapeLegend();
+    });
   });
-});
+}
 
 var toolTip = d3.select(document.getElementById("toolTip"));
 var header = d3.select(document.getElementById("head"));
+/*
+ *  Remove the nodes that do not contain any requirements
+ *  Should only be run when filtering to show only the "recently updated" requirements
+ */
+function removeNonRequirementNodes(bffData, parameter) {
+  //Go through combined data
+  bffData[parameter].forEach( function(child) {
+      // If child object is requirement, parent object is set to be shown
+      if (child.isRequirement) {bffData.filteredReq=true}
+      // Check child's children for objects
+      if (child.children) {
+         child = removeNonRequirementNodes(child,"children")
+         child.children = child.children.filter(function(test) {return test.filteredReq  || test.isRequirement})
+      }
+      if (child._children) {
+         child = removeNonRequirementNodes(child,"_children");
+         child._children = child._children.filter(function(test) {return test.filteredReq || test.isRequirement})
+      }
+      //If any "child of a child" is marked as having requirements, add the parent object as well
+      if (child.filteredReq) {bffData.filteredReq=true}
+  })
+  return bffData
+}
 
 function combineData(bffData, reqData,parameter) {
   bffData[parameter].forEach(function(d) {
     if(d3.keys(reqData).indexOf(d.name) != -1) {
-      d.hasRequirements = true;
-      if(d._children) {
-        d._children = d._children.concat(reqData[d.name])
+      var reqDataToShow = reqData[d.name]
+      d.hasRequirements = false;
+      if($("#showUpdates").is(":checked")) {
+        reqDataToShow = reqData[d.name].filter(function(d) {return d.recentUpdate})
       }
-      else {
-        d.leafFunction= true
-        d._children = reqData[d.name]
+      if (reqDataToShow.length) {
+        d.hasRequirements = true;
+        if(d._children) {
+          d._children = d._children.concat(reqDataToShow)
+        }
+        else {
+          d.leafFunction= true
+          d._children = reqDataToShow
+        }
       }
     }
-    else {
-      if (d.children)  { combineData(d, reqData,"children")}
-      if (d._children) { combineData(d, reqData,"_children")}
-    }
+    //compare objects to see if anything was added to the array
+    // i.e. requirements are found
+    if (d.children)  { combineData(d, reqData,"children")}
+    if (d._children) {combineData(d, reqData,"_children")}
   });
   return bffData
 }

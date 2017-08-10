@@ -48,6 +48,38 @@ class test_bff(unittest.TestCase):
     nodes = driver.find_elements_by_class_name('node')
     self.assertEqual(len(nodes), oldSize)
 
+  def test_02_collapse_all(self):
+    global driver
+    oldSize = len(driver.find_elements_by_class_name('node'))
+    button = driver.find_element_by_xpath("//button[contains(@onclick,'_collapseAllNode')]")
+    button.click()
+    time.sleep(1)
+    newSize = len(driver.find_elements_by_class_name('node'))
+    self.assertTrue(oldSize > newSize)
+    self.assertEqual(newSize, 1)
+
+  def test_03_reset(self):
+    global driver
+    oldSize = len(driver.find_elements_by_class_name('node'))
+    button = driver.find_element_by_xpath("//button[contains(@onclick,'_collapseAllNode')]")
+    button.click()
+    time.sleep(1)
+    button = driver.find_element_by_xpath("//button[contains(@onclick,'_resetAllNode')]")
+    button.click()
+    time.sleep(1)
+    newSize = len(driver.find_elements_by_class_name('node'))
+    self.assertTrue(oldSize < newSize)
+
+  def test_04_click_filter(self):
+    global driver
+    time.sleep(5)
+    oldSize = len(driver.find_elements_by_class_name('node'))
+    filterBox = driver.find_element_by_id("showUpdates")
+    filterBox.click()
+    time.sleep(1)
+    newSize = len(driver.find_elements_by_class_name('node'))
+    self.assertTrue(oldSize > newSize)
+
 if __name__ == '__main__':
   parser = argparse.ArgumentParser(description="")
   parser.add_argument("-r",dest = 'webroot', required=True, help="Web root of the ViViaN(TM) instance to test.  eg. http://code.osehra.org/vivian/")
