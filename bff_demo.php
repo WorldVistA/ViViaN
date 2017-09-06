@@ -77,7 +77,7 @@
   <div id="buttons" style="position:relative; top:10px; right:-20px">
     <button onclick="_collapseAllNode()">Collapse All</button>
     <button onclick="_resetAllNode()">Reset</button>
-    <input type="checkbox" id="showUpdates" onclick="renderWindow()"> Show only updated requirements</input>
+    <input type="checkbox" id="showUpdates" onclick="renderWindow()"> Show new and updated requirements</input>
   </div>
   <div id="legend_placeholder" style="position:relative; left:20px; top:20px;"></div>
   </br>
@@ -105,7 +105,8 @@ var shapeLegend = [{name: "Framework Grouping (Collapsed)", shape: "triangle-up"
                    {name: "Business Function with Needs (Collapsed)", shape:"circle","hasRequirements": true,"_children":[], "depth": 20,"index":1},
                    {name: "Business Function with Needs (Expanded)", shape:"circle","hasRequirements": true, "depth": 20,"index":2},
                    {name: "Business Need", shape:"cross", "isRequirement": true, "depth": 50,"index":0},
-                   {name: "Business Need (Recently Updated)", shape:"cross", "isRequirement": true, "recentUpdate":true,"depth": 50,"index":1}
+                   {name: "Business Need (Recently Updated)", shape:"cross", "isRequirement": true, "recentUpdate":"Update","depth": 50,"index":1},
+                   {name: "Business Need (New)", shape:"cross", "isRequirement": true, "recentUpdate":"New Requirement","depth": 50,"index":2}
                    ]
 renderWindow();
 function renderWindow() {
@@ -124,6 +125,7 @@ function renderWindow() {
       var combinedJSON = combineData(BFFjson,reqjson,"children")
       if($("#showUpdates").is(":checked")) {
          combinedJSON = removeNonRequirementNodes(combinedJSON,"children")
+         combinedJSON.children = combinedJSON.children.filter(function(object) {return object.filteredReq})
       }
       var test = d3.select("#treeview_placeholder").datum(combinedJSON).call(chart);
       d3.select("#legend_placeholder").datum(null).call(legendShapeChart);
@@ -164,7 +166,7 @@ function combineData(bffData, reqData,parameter) {
       var reqDataToShow = reqData[d.name]
       d.hasRequirements = false;
       if($("#showUpdates").is(":checked")) {
-        reqDataToShow = reqData[d.name].filter(function(d) {return d.recentUpdate})
+        reqDataToShow = reqData[d.name].filter(function(d) {return d.recentUpdate != "None"})
       }
       if (reqDataToShow.length) {
         d.hasRequirements = true;
@@ -354,7 +356,8 @@ function createShapeLegend() {
       .style("stroke", function(d) {
         var color = "lightsteelblue"
         if (d.hasRequirements || d.isRequirement) { color = "MidnightBlue"}
-        if (d.recentUpdate) {color = "darkorange"}
+        if (d.recentUpdate == "Update") {color = "darkorange"}
+        if (d.recentUpdate == "New Requirement") {color = "mediumorchid"}
         return color
       })
       //      "stroke": function(d) {chart.findNodeStroke(d)},
