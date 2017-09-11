@@ -84,49 +84,22 @@ An example command to be run would look like this:
 
 ICRParser
 ~~~~~~~~~
-Creating Integration Control Registry (ICR) backend data is a two-part process.
+First, download the FOIA released ICR_.
 
-First, download the FOIA released ICR_. Then execute ICRParser.py to
-convert the downloaded text file to JSON format. The script's execution
-signature is as follows:
+Then execute ICRParser.py to convert the downloaded text file to html. The
+script's execution signature is as follows:
 
 .. parsed-literal::
-    usage: ICRParser.py [-h] icrfile outJson
+    usage: ICRParser.py [-h] -mr MREPOSITDIR -pr PATCHREPOSITDIR icrfile outDir
 
     VistA ICR File Parser
 
     positional arguments:
       icrfile     path to the VistA ICR file
-      outJson     path to the output JSON file
+      outDir      path to the output web page directory
 
     optional arguments:
       -h, --help  show this help message and exit
-
-An example command to be run would look like this:
-
-.. parsed-literal::
-
-  $ python ICRParser.py ICRTest.txt ICRTest.JSON
-
-Next, convert the JSON to html using ICRJsonToHtml.py.
-The script’s execution signature is as follows:
-
-.. parsed-literal::
-    usage: ICRJsonToHtml.py [-h] -mr MREPOSITDIR -pr PATCHREPOSITDIR
-                            icrJsonFile outDir
-
-    VistA ICR JSON to Html
-
-    positional arguments:
-      icrJsonFile           path to the VistA ICR JSON file
-      outDir                path to the output web page directory
-
-    optional arguments:
-      -h, --help            show this help message and exit
-
-    Initial CrossReference Generator Arguments:
-      Argument for generating initial CrossReference
-
       -mr MREPOSITDIR, --MRepositDir MREPOSITDIR
                             VistA M Component Git Repository Directory
       -pr PATCHREPOSITDIR, --patchRepositDir PATCHREPOSITDIR
@@ -136,7 +109,7 @@ An example command to be run would look like this:
 
 .. parsed-literal::
 
-  $ python ICRJsonToHtml.py -mr ~/Work/OSEHRA/VistA-M -pr ~/work/osehra/VistA ICRTest.JSON ~/Work/OSEHRA/vivian-out/ICR
+  $ python ICRParser.py -mr ~/Work/OSEHRA/VistA-M -pr ~/work/osehra/VistA  ICRTest.txt ~/Work/OSEHRA/vivian-out/ICR
 
 Where the VistA-M and VistA repositories are the same used with the
 FileManGlobalDataParser script. The output directory must be the ICR
