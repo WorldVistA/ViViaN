@@ -230,8 +230,7 @@ function resetMenuFile(menuFile) {
     createShapeLegend();
     createLegend();
     chart.svg().attr("transform","translate("+originalTransform+")")
-    resetAllNode(chart.nodes());
-    chart.update(chart.nodes())
+    _resetAllNode();
 
     if(target_option != '') {
       openSpecificNode(target_option, chart.nodes());
