@@ -297,7 +297,8 @@ d3.chart.treeview = function(option) {
   function findNodeStroke(d) {
     var color = "lightsteelblue"
     if (d.hasRequirements || d.isRequirement) { color = "MidnightBlue"}
-    if (d.recentUpdate) {color = "darkorange"}
+    if (d.recentUpdate == "Update") {color = "darkorange"}
+    if (d.recentUpdate == "New Requirement") {color = "mediumorchid"}
     return color
   }
 
