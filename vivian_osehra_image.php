@@ -36,11 +36,11 @@
           <li class="dropdown" id="vista-interfaces">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">VistA Interfaces<span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="http://code.osehra.org/vivian/files/101/All-HL7.html" id="all_hl7">HL7</a></li>
-              <li><a href="http://code.osehra.org/vivian/files/779_2/All-HLO.html" id="all_hlo">HLO</a></li>
-              <li><a href="http://code.osehra.org/vivian/files/ICR/All-ICR%20List.html" id="all_icr">ICR</a></li>
-              <li><a href="http://code.osehra.org/vivian/files/101/All-Protocols.html" id="all_protocols">Protocols</a></li>
-              <li><a href="http://code.osehra.org/vivian/files/8994/All-RPC.html" id="all_rpc">RPC</a></li>
+              <li><a href="files/101/All-HL7.html" id="all_hl7">HL7</a></li>
+              <li><a href="files/779_2/All-HLO.html" id="all_hlo">HLO</a></li>
+              <li><a href="files/ICR/All-ICR%20List.html" id="all_icr">ICR</a></li>
+              <li><a href="files/101/All-Protocols.html" id="all_protocols">Protocols</a></li>
+              <li><a href="files/8994/All-RPC.html" id="all_rpc">RPC</a></li>
 
             </ul>
           </li>
