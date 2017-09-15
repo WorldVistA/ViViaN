@@ -38,9 +38,10 @@ The FileManGlobalDataParser.py file’s execution signature is as follows:
 
 .. parsed-literal::
 
+  $ python FileManGlobalDataParser.py -h
   usage: FileManGlobalDataParser.py [-h] -mr MREPOSITDIR -pr PATCHREPOSITDIR
-                                    [-outdir OUTDIR] -gp GITPATH [-all]
-                                    fileNos [fileNos ...]
+                                  -outdir OUTDIR -gp GITPATH
+                                  fileNos [fileNos ...]
 
   FileMan Global Data Parser
 
@@ -52,7 +53,6 @@ The FileManGlobalDataParser.py file’s execution signature is as follows:
     -outdir OUTDIR        top directory to generate output in html
     -gp GITPATH, --gitPath GITPATH
                           Path to the folder containing git excecutable
-    -all                  generate all dependency files as well
 
   Initial CrossReference Generator Arguments:
     Argument for generating initial CrossReference
@@ -63,8 +63,7 @@ The FileManGlobalDataParser.py file’s execution signature is as follows:
                           VistA Git Repository Directory
 
 To generate the expected data, use all options, including a directory to save
-the output to.  One should utilize the ‘-all’ flag and supply the following file
-numbers:
+the output to. Supply the following file numbers:
 
  ======================= =======================
          Numbers              Fileman File
@@ -80,7 +79,7 @@ An example command to be run would look like this:
 
 .. parsed-literal::
 
-  $ python FileManGlobalDataParser.py -mr ~/Work/OSEHRA/VistA-M -pr ~/work/osehra/VistA -gp /usr/local/bin -outdir ~/Work/OSEHRA/vivian-out -all 101 8994 19 779.2 9.7
+  $ python FileManGlobalDataParser.py -mr ~/Work/OSEHRA/VistA-M -pr ~/work/osehra/VistA -gp /usr/local/bin -outdir ~/Work/OSEHRA/vivian-out 101 8994 19 779.2 9.7
 
 ICRParser
 ~~~~~~~~~
