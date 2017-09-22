@@ -349,15 +349,15 @@ function createShapeLegend() {
       .attr("class", function(d) {return d.name;})
       .attr("d", d3.svg.symbol().type(function(d) { return d.shape;}))
       .style("fill", function(d) {
-          var color = "lightsteelblue"
-          if (d.hasRequirements) { color = "MidnightBlue"}
-          return d._children ? color : "#FFF";
+        var color = "#1bb15c"
+        if (d.hasRequirements) { color = "#7C84DE"}
+        return d._children ? color : "#FFF";
       })
       .style("stroke", function(d) {
-        var color = "lightsteelblue"
-        if (d.hasRequirements || d.isRequirement) { color = "MidnightBlue"}
-        if (d.recentUpdate == "Update") {color = "darkorange"}
-        if (d.recentUpdate == "New Requirement") {color = "mediumorchid"}
+        var color = "#1bb15c"
+        if (d.hasRequirements || d.isRequirement) { color = "#7C84DE"}
+        if (d.recentUpdate == "Update") {color = "#DC7A20"}
+        if (d.recentUpdate == "New Requirement") {color = "#B03A57 "}
         return color
       })
       //      "stroke": function(d) {chart.findNodeStroke(d)},

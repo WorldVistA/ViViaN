@@ -289,15 +289,15 @@ d3.chart.treeview = function(option) {
   }
 
   function fillNodeCircle(d) {
-    var color = "lightsteelblue"
-    if (d.hasRequirements) { color = "MidnightBlue"}
+    var color = "#1bb15c"
+    if (d.hasRequirements) { color = "#7C84DE"}
     return d._children ? color : "#FFF";
   }
   function findNodeStroke(d) {
-    var color = "lightsteelblue"
-    if (d.hasRequirements || d.isRequirement) { color = "MidnightBlue"}
-    if (d.recentUpdate == "Update") {color = "darkorange"}
-    if (d.recentUpdate == "New Requirement") {color = "mediumorchid"}
+    var color = "#1bb15c"
+    if (d.hasRequirements || d.isRequirement) { color = "#7C84DE"}
+    if (d.recentUpdate == "Update") {color = "#DC7A20"}
+    if (d.recentUpdate == "New Requirement") {color = "#B03A57 "}
     return color
   }
 
