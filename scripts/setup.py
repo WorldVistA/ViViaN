@@ -11,6 +11,8 @@ import pkg_interface_gen
 import pkgcsv_to_json
 import BFFExcel2Json
 
+import shutil
+
 def run():
   # input: ../files/menus/VistAMenu-*.json
   # output: ../files/menu_autocomplete.json
@@ -43,6 +45,9 @@ def run():
   # output: ../files/bff.json
   BFFExcel2Json.convertBFFExcelToJson("BFF_version_2-12.xlsx", "../files/bff.json")
   print "*** Updated ../files/bff.json"
+
+  # Move ../himData.json to ../files/himData.json
+  shutil.copyfile("../himData.json", "../files/himData.json")
 
 if __name__ == '__main__':
   run()
