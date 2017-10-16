@@ -41,7 +41,7 @@
 
     <div class="row" style="padding-left: 10px; padding-bottom: 10px; padding-top: 10px;">
       <button id="selectAll">Select All</button>
-      <button id="reset">Reset</button>
+      <button id="reset">Clear</button>
     </div>
 
     <div class="panel panel-default">
@@ -196,6 +196,12 @@ function plot(error, packages, categories) {
   var link = svg.selectAll(".link");
   var node = svg.selectAll(".node");
 
+  d3.selectAll(".group_checkbox").each(function(d, i) {
+    if (i === 0) {
+      cb = d3.select(this);
+      cb.property("checked", true);
+    }
+  });
   filterGroups();
 
   function getDependencyLinkColor() {
