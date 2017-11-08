@@ -69,7 +69,7 @@
   var jsonData = [];
 
   d3.json("PackageCategories.json", function(error, data) {
-    var localpath = "pkgdep.json";
+    var localpath = "files/pkgdep.json";
     d3.json(localpath, function(error, classes) {
       jsonData = classes;
       if (error){

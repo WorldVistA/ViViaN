@@ -181,7 +181,7 @@
                 .mouseOvered(mouseOvered)
                 .mouseOuted(mouseOuted)
                 .nodeTextHyperLink(getPackageDoxLink);
-    var localpath = "pkgdep.json";
+    var localpath = "files/pkgdep.json";
     d3.select("#legend_placeholder").datum(null).call(legendColorChart);
 
     d3.json(localpath, function(error, classes) {
