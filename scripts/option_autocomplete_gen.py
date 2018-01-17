@@ -16,8 +16,8 @@ def recurse_info(inJSON):
     menuItem['parent_name'] = parent_name
     if(not (menuItem in outjson)):
       outjson.append(menuItem)
-    if 'children' in inJSON:
-      for child in inJSON['children']:
+    if '_children' in inJSON:
+      for child in inJSON['_children']:
         recurse_info(child)
 
 def run():
