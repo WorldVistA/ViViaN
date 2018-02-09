@@ -44,6 +44,13 @@
 
             </ul>
           </li>
+          <li class="dropdown" id="vista-information">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Name and Number<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="files/Namespace/Namespace.html" id="all_name">Namespace Listing</a></li>
+              <li><a href="files/Numberspace/Numberspace.html" id="all_number">Numberspace Listing</a></li>
+            </ul>
+          </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li><a href="javascript:aboutClicked();">About</a></li>
