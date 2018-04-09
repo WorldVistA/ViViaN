@@ -196,12 +196,12 @@ function color_filter(d) {
 }
 
 function autoCompleteChanged(eve, ui) {
-  var menuFile = "files/menus/VistAMenu-" + ui.item.id + ".json";
+  var menuFile = "files/Menus/VistAMenu-" + ui.item.id + ".json";
   resetMenuFile(menuFile);
 }
 
 function optionAutoCompleteChanged(eve, ui) {
-  var menuFile = "files/menus/VistAMenu-" + ui.item.parent_id + ".json";
+  var menuFile = "files/Menus/VistAMenu-" + ui.item.parent_id + ".json";
   d3.json('files/menu_autocomplete.json', function(json) {
     for ( var i = 0; i < json.length; i++) {
       if( json[i].id == ui.item.parent_id) {
@@ -214,7 +214,7 @@ function optionAutoCompleteChanged(eve, ui) {
   resetMenuFile(menuFile);
 }
 
-resetMenuFile("files/menus/VistAMenu-9.json");
+resetMenuFile("files/Menus/VistAMenu-9.json");
 
 function resetMenuFile(menuFile) {
   d3.json(menuFile, function(json) {
