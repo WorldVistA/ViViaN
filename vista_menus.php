@@ -8,6 +8,13 @@
     ?>
     <!-- JQuery Buttons -->
     <script>
+      var pathDict = {
+                      "#19":{"prefix":"","fileLoc":"files/Menus/19", "sourceLoc":"files/19/19-", "initFile":"9"},
+                      "#101":{"prefix":"protocol_","fileLoc":"files/Menus/101","sourceLoc":"files/101/101-","initFile":"462"}
+      }
+      $(window).on('hashchange', function() {
+        location.reload();
+      });
       $(function() {
         $( "button" ).button().click(function(event){
           event.preventDefault();
@@ -16,16 +23,16 @@
         $('a[href="'+fileName+'"]').parents("#navigation_buttons li").each(function (i) {
             $(this).removeClass().addClass("active");
         });
-        d3.json('files/menu_autocomplete.json', function(json) {
+        d3.json('files/'+pathDict[location.hash]["prefix"]+'menu_autocomplete.json', function(json) {
           var sortedjson = json.sort(function(a,b) { return a.label.localeCompare(b.label); });
           $("#autocomplete").autocomplete({
             source: sortedjson,
             select: autoCompleteChanged
             //change: autoCompleteChanged
-          }).val('EVE: Systems Manager Menu').data('autocomplete')/*._trigger('select')*/;
+          }).data('autocomplete')/*._trigger('select')*/;
         });
 
-        d3.json('files/option_autocomplete.json', function(json) {
+        d3.json('files/'+pathDict[location.hash]["prefix"]+'option_autocomplete.json', function(json) {
           var sortedjson = json.sort(function(a,b) { return a.label.localeCompare(b.label); });
           // Note: vivian_tree_layout_common expects this control
           // to be called 'option_autocomplete'.
@@ -123,7 +130,7 @@ var legendShapeChart = d3.chart.treeview()
               .textwidth(110);
 var legendTypeChart = d3.chart.treeview()
               .height(50)
-              .width(1100)
+              .width(1300)
               .margins({top:10, left:10, right:0, bottom:0})
               .textwidth(110);
 
@@ -148,7 +155,8 @@ var menuType = [
   {iName: "print",color :"#9467bd",dName: "Print"},
   {iName: "action",color :"#8c564b",dName: "Action"},
   {iName: "ScreenMan",color :"#e377c2",dName: "ScreenMan"},
-  {iName: "inquire" , color : "#bcbd22",dName: "Inquire" }
+  {iName: "inquire" , color : "#bcbd22",dName: "Inquire" },
+  {iName: "extended action" , color : "cadetblue",dName: "Extended Action" }
 ];
 
 function color_by_type(node) {
@@ -191,12 +199,12 @@ function color_filter(d) {
 }
 
 function autoCompleteChanged(eve, ui) {
-  var menuFile = "files/Menus/VistAMenu-" + ui.item.id + ".json";
+  var menuFile = pathDict[location.hash]["fileLoc"]+"/VistAMenu-" + ui.item.id + ".json";
   resetMenuFile(menuFile);
 }
 
 function optionAutoCompleteChanged(eve, ui) {
-  var menuFile = "files/Menus/VistAMenu-" + ui.item.parent_id + ".json";
+  var menuFile = pathDict[location.hash]["fileLoc"]+"/VistAMenu-" + ui.item.parent_id + ".json";
   d3.json('files/menu_autocomplete.json', function(json) {
     for ( var i = 0; i < json.length; i++) {
       if( json[i].id == ui.item.parent_id) {
@@ -209,7 +217,7 @@ function optionAutoCompleteChanged(eve, ui) {
   resetMenuFile(menuFile);
 }
 
-resetMenuFile("files/Menus/VistAMenu-9.json");
+resetMenuFile(pathDict[location.hash]["fileLoc"]+"/VistAMenu-"+pathDict[location.hash]["initFile"]+".json");
 
 function resetMenuFile(menuFile) {
   d3.json(menuFile, function(json) {
@@ -254,7 +262,7 @@ function node_onMouseClick(d) {
 }
 
 function getOptionDetailLink(node) {
-  return "files/19/19-" + node.ien + ".html";
+  return pathDict[location.hash]["sourceLoc"]+ node.ien + ".html";
 }
 
 function node_onMouseOver(d) {

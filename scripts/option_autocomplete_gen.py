@@ -20,11 +20,13 @@ def recurse_info(inJSON):
       for child in inJSON['_children']:
         recurse_info(child)
 
-def run():
+def run(fileNo,outName):
+  global outjson
+  outjson=[]
   global parent_id
   global parent_name
-  output = "../files/option_autocomplete.json"
-  menuJsonFiles = glob.glob("../files/menus/VistAMenu-*.json")
+  output = "../files/%s" % outName
+  menuJsonFiles = glob.glob("../files/menus/%s/VistAMenu-*.json" % fileNo )
 
   for menuFile in menuJsonFiles:
     menuItem = {}
@@ -39,4 +41,5 @@ def run():
 
 
 if __name__ == '__main__':
-  run()
+  run("19","option_autocomplete.json")
+  run("101","protocol_option_autocomplete.json")
