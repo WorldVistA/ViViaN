@@ -9,12 +9,15 @@
     <!-- JQuery Buttons -->
     <script>
       var pathDict = {
-                      "#19":{"prefix":"","fileLoc":"files/Menus/19", "sourceLoc":"files/19/19-", "initFile":"9"},
-                      "#101":{"prefix":"protocol_","fileLoc":"files/Menus/101","sourceLoc":"files/101/101-","initFile":"462"}
+                      "#19":{"prefix":"","fileLoc":"files/Menus/19", "sourceLoc":"files/19/19-", "initFile":"9","desc":"This page is displaying the menu entries from the OPTION file"},
+                      "#101":{"prefix":"protocol_","fileLoc":"files/Menus/101","sourceLoc":"files/101/101-","initFile":"2590","desc":"This page is displaying the menu entries from the PROTOCOL file"}
       }
       $(window).on('hashchange', function() {
         location.reload();
       });
+      if (location.hash != "#19" && location.hash != "#101" ) {
+         location.hash="#19"
+      }
       $(function() {
         $( "button" ).button().click(function(event){
           event.preventDefault();
@@ -84,22 +87,23 @@
   <div class='hint' style="position:relative; left:20px; top:50px">
     <p>
     This tree visualization represents the menu hierarchy of VistA. Hover over
-    any of the entries in the tree to see the menu option name and the security
-    key (if any). Click on an item to see the menu option details.
+    any of the entries in the tree to see the menu entry name and the security
+    key (if any). Click on an item to see the menu entry details.
     </p>
   </div>
+  <h4 id="pageDesc" style="position:relative; left:20px; top:50px"></h4>
 
 <div id="legend_placeholder" style="position:relative; left:20px; top:50px;"></div>
 <div style="position:relative; left:20px; top:60px; width:400px;">
   <div id="packageSearch">
-    <div><label title="Show the structure of a top level menu by entering the name of the option."
+    <div><label title="Show the structure of a top level menu by entering the name of the entry."
                 for="autocomplete">Select a top level menu:</label></div>
     <div><input id="autocomplete" size="40"></div>
   </div>
   </br>
   <div>
-    <div><label title="Search for an option by entering the name of the option that you wish to find."
-                for="option_autocomplete">Search for an option:</label></div>
+    <div><label title="Search for an entry by entering the name of the entry that you wish to find."
+                for="option_autocomplete">Search for an entry:</label></div>
     <div><input id="option_autocomplete" size="40"></div>
     <div id="search_result"> </div>
   </div>
@@ -137,8 +141,8 @@ var legendTypeChart = d3.chart.treeview()
 <?php include_once "vivian_tree_layout_common.js" ?>
 
 var shapeLegend = [{name: "Menu", shape: "triangle-up"},
-                   {name: "Option", shape:"circle"}]
-
+                   {name: "Entry", shape:"circle"}]
+d3.select("#pageDesc").text(d3.select("#pageDesc").text() + pathDict[location.hash]['desc'] )
 chart.on("text","attr","fill",color_by_type);
 var originalTransform = [300,0];
 var selectedIndex=0;
@@ -266,7 +270,7 @@ function getOptionDetailLink(node) {
 }
 
 function node_onMouseOver(d) {
-  var headText = "Option Name: " + d.option;
+  var headText = "Entry Name: " + d.option;
   if (d.lock !== undefined){
     headText = headText + "<br>" + "Security Key: " + d.lock + "</br>";
   }
