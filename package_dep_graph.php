@@ -9,13 +9,9 @@
     <?php include_once "vivian_google_analytics.php" ?>
     <script>
       $(function() {
-        $('#navigation_buttons li').each(function (i) {
-          if (i === 3) {
+        fileName = window.location.href.substring(window.location.href.lastIndexOf('/')+1)
+        $('a[href="'+fileName+'"]').parents("#navigation_buttons li").each(function (i) {
             $(this).removeClass().addClass("active");
-          }
-          else {
-            $(this).removeClass();
-          }
         });
       });
     </script>
