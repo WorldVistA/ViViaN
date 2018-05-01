@@ -12,13 +12,9 @@
         $( "button" ).button().click(function(event){
           event.preventDefault();
         });
-        $('#navigation_buttons li').each(function (i) {
-          if (i === 4) {
-            $(this).removeClass("active").addClass("active");
-          }
-          else {
-            $(this).removeClass("active");
-          }
+        fileName = window.location.href.substring(window.location.href.lastIndexOf('/')+1)
+        $('a[href="'+fileName+'"]').parents("#navigation_buttons li").each(function (i) {
+            $(this).removeClass().addClass("active");
         });
 
         d3.json('files/packages_autocomplete.json', function(json) {

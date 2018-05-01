@@ -10,16 +10,9 @@
     <!-- JQuery Buttons -->
     <script>
       $(function() {
-        $( "button" ).button().click(function(event){
-          event.preventDefault();
-        });
-        $('#navigation_buttons li').each(function (i) {
-          if (i === 3) {
+        fileName = window.location.href.substring(window.location.href.lastIndexOf('/')+1)
+        $('a[href="'+fileName+'"]').parents("#navigation_buttons li").each(function (i) {
             $(this).removeClass().addClass("active");
-          }
-          else {
-            $(this).removeClass();
-          }
         });
       });
     </script>
