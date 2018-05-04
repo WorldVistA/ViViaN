@@ -89,9 +89,12 @@ d3.chart.treeview = function(option) {
       (_height - _margins.top - _margins.bottom),
       (_width - _margins.left - _margins.right)
     ]).sort(function(a,b) {
-      // Sorts the visualizations (Every one but the menus) which transport the child nodes in the "children" attribute
-      // Adapted from d3.ascending: https://github.com/d3/d3-3.x-api-reference/blob/master/Arrays.md#d3_ascending
-      return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
+        if (a.seq == b.seq) {
+            return a.name < b.name ? -1 : a.name > b.name ? 1  : 0;
+        }
+        else{
+            return a.seq < b.seq ? -1 : a.seq > b.seq ? 1  : 0;
+        }
     });
     _diagonal = d3.svg.diagonal()
             .projection(function (d) {
@@ -162,7 +165,14 @@ d3.chart.treeview = function(option) {
         d.y = d.depth * _textwidth;
         // Sorts the Menu visualizations JSON values which transport the child nodes in the "_children" attribute
         if(d._children) {
-          d._children.sort(function(a,b) {return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;});
+            d._children.sort(function(a,b) {
+                if (a.seq == b.seq) {
+                    return a.name < b.name ? -1 : a.name > b.name ? 1  : 0;
+                }
+                else{
+                    return a.seq < b.seq ? -1 : a.seq > b.seq ? 1  : 0;
+                }
+            });
         }
     });
     var node = _svg.selectAll("g.node")
