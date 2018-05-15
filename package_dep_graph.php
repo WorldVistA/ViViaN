@@ -7,8 +7,12 @@
     ?>
     <script src="https://d3js.org/d3-queue.v3.min.js"></script>
     <?php include_once "vivian_google_analytics.php" ?>
+    <!-- JQuery Buttons -->
     <script>
       $(function() {
+        $( "button" ).button().click(function(event){
+          event.preventDefault();
+        });
         $('#navigation_buttons li').each(function (i) {
           if (i === 3) {
             $(this).removeClass().addClass("active");
@@ -24,44 +28,72 @@
 <body>
 <?php include_once "vivian_osehra_image.php" ?>
 
-<div class="ui-widget" style="position:relative; left:5px; top:50px;">
-  <label for ="search" title="Select Package">Search:</label>
-  <input id="search" style="width: 400px;"
-  <div style="float: left; margin-left:15px; margin-right:35px;">
+<div class="grid" style="padding: 50px 10px 10px 10px;">
+  <div style="width: 20%; float: left;">
+    <div class="row" style="padding-left: 10px; padding-bottom: 10px;">
+      <div><label for ="search" title="Select Package">Search for a package:</label></div>
+      <div><input id="search" style="width: 300px;"></div>
+    </div>
+
     <label class="btn-primary btn-sm">
       <input type="checkbox" id="colorMode"> Colorblind Mode </input>
     </label>
+
+    <div class="row" style="padding-left: 10px; padding-bottom: 10px; padding-top: 10px;">
+      <button id="selectAll">Select All</button>
+      <button id="reset">Clear</button>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">Groups</div>
+      <div id="checkBoxDiv" class="panel-body" style="overflow:auto; overflow-x:hidden; height:400px; padding: 5px;"></div>
+    </div>
+
   </div>
+
+  <div id="chart_placeholder" style="width: 80%; height: 600; float: left;"></div>
+
 </div>
 
-<script>
+<script type="text/javascript">
 ///////////////////////////////////////////////////////////////////////////////
-  var width = 1000,
-      height = 550;
+  var svg = d3.select("#chart_placeholder")
+    .append("svg");
 
   //Set-up the force layout
   var force = d3.layout.force()
     .charge(-100)
-    .linkDistance(400)
-    .size([width, height]);
+    .linkDistance(400);
 
-  var svg = d3.select("body")
-    .append("svg")
-    .attr("width", width)
-    .attr("height", height)
-    .attr("transform", "translate(" + 5 + "," + 60 + ")");
-
+  resize();
+  d3.select(window).on("resize", resize);
+  
   // Read input files
   d3.queue()
     .defer(d3.json, 'pkgdep.json')
     .defer(d3.json, 'PackageCategories.json')
     .await(plot);
 
+function resize() {
+  // TODO: Where do these multipliers come from?
+  width = window.innerWidth * .80 - 28, height = window.innerHeight*.9 ;
+  svg.attr("width", width).attr("height", height);
+  force.size([width, height]).resume();
+}
+
 function plot(error, packages, categories) {
+  // Set-up the color scales
+  var color1 = d3.scale.category20();
+  var color2 = d3.scale.category20b();
+  function getNodeColor(d) {
+    if (d.group_index < 20) return color1(d.group_index);
+    else return color2(d.group_index - 20);
+  }
+
   // Organize input data into the expected format
 
   // First, get a mapping of package to group
-  var groups = [""],  // First entry reserved from packages without a group
+  var groups = [""],  // First entry reserved for packages without a group
       group_map = {}; // package name --> group index
 
   var parent;
@@ -79,44 +111,50 @@ function plot(error, packages, categories) {
   }
   getChildren(categories);
 
+  // Get a list of groups
+  var sortedGroups = groups.slice(1).sort();  // Skip first, empty element
+  d3.select("#checkBoxDiv").selectAll("input")
+      .data(sortedGroups)
+    .enter().append("div")
+      .append('label')
+        .attr("id", function(d,i) { return 'group_label'; })
+      .append("input")
+        .attr("class", function(d,i) { return 'group_checkbox'; })
+        .attr("value", function(d) { return d; })
+        .attr("type", "checkbox");
+  d3.selectAll(".group_checkbox").on("change", filterGroups);
+
+  d3.selectAll("#group_label")
+    .data(sortedGroups)
+    .append("text")
+      .text(function(d) { return d; })
+      .style("color", function(d) {
+        // TODO: Copy + paste
+        var group_index = groups.indexOf(d);
+        if (group_index < 20) return color1(group_index);
+        else return color2(group_index - 20);
+      });
+
   // Then, find the nodes (packages)
   var nodes = [],
       package_names = [],
       sorted_package_names = [];  // For autocomplete
   packages.forEach(function(pkg, num) {
-    var both = [];  // Get a list of links that are dependencies AND dependents
-    if (pkg.depends && pkg.dependents) {
-      both = pkg.depends.filter(function(n) {
-        return pkg.dependents.indexOf(n) != -1
-      });
-    }
-    var both_count = both.length;
-    var dependencies_count = 0,
-        dependents_count = 0;
-    if (pkg.depends) dependencies_count = pkg.depends.length - both_count;
-    if (pkg.dependents) dependents_count = pkg.dependents.length - both_count;
-    // Only include packages that have at least one link
-    if ((dependencies_count > 0) || (dependents_count > 0)) {
-      package_names.push(pkg.name);
-      sorted_package_names.push(pkg.name);
-      var group_index = group_map[pkg.name];
-      if (group_index === undefined) { group_index = 0; }
-      var group_name = groups[group_index];
-      var node = {
-        name: pkg.name,
-        package_num: package_names.indexOf(pkg.name),
-        group_index: group_index,
-        group: group_name,
-        dependencies: pkg.depends,
-        dependencies_count: dependencies_count,
-        dependents: pkg.dependents,
-        dependents_count: dependents_count,
-        both_count: both_count
-      };
-      nodes.push(node);
-    }
+    package_names.push(pkg.name);
+
+    var group_index = group_map[pkg.name];
+    if (group_index === undefined) { group_index = 0; }
+    var group_name = groups[group_index];
+    var node = {
+      name: pkg.name,
+      package_num: package_names.indexOf(pkg.name),
+      group_index: group_index,
+      group: group_name,
+      dependencies: pkg.depends,
+      dependents: pkg.dependents,
+    };
+    nodes.push(node);
   });
-  sorted_package_names.sort();
 
   // Finally, set-up the links between nodes
   var links = [];
@@ -155,43 +193,16 @@ function plot(error, packages, categories) {
     .links(links)
     .start();
 
-  var link = svg.selectAll(".link")
-    .data(links)
-    .enter().append("path")
-    .attr("class", "link")
-    // Assign a unique marker to each link object
-    .attr("marker-end", function(d) {
-      return "url(#marker" + d.link_index + ")";
-    });
+  var link = svg.selectAll(".link");
+  var node = svg.selectAll(".node");
 
-  var node = svg.selectAll(".node")
-    .data(nodes)
-    .enter().append("g")
-    .attr("class", "node")
-    .call(force.drag)
-    .on('click', toggleConnectedNodes);
-
-  // Node radius is determined by weight (number of links)
-  var minWeight = nodes.length * 2,
-      maxWeight = 0;
-  node.each(function(d) {
-    minWeight = Math.min(minWeight, d.weight);
-    maxWeight = Math.max(maxWeight, d.weight);
+  d3.selectAll(".group_checkbox").each(function(d, i) {
+    if (i === 0) {
+      cb = d3.select(this);
+      cb.property("checked", true);
+    }
   });
-
-  var minRadius = 8,
-      maxRadius = 24;
-  var scale = d3.scale.linear()
-    .domain([minWeight, maxWeight])
-    .range([minRadius,maxRadius]);
-
-  // Set-up the color scales
-  var color1 = d3.scale.category20();
-  var color2 = d3.scale.category20b();
-  function getNodeColor(d) {
-    if (d.group_index < 20) return color1(d.group_index);
-    else return color2(d.group_index - 20);
-  }
+  filterGroups();
 
   function getDependencyLinkColor() {
     if (palette == "rg") return "#d62728";  // red
@@ -205,38 +216,6 @@ function plot(error, packages, categories) {
 
   function getBothLinkColor() { return "#A02CA0"; } // purple
   function getUnselectedLinkColor() { return "#999"; } // gray
-
-  node.append("circle")
-    .attr("r", function(d) {
-      d.radius = scale(d.weight);
-      return d.radius;
-    })
-    .style("fill", function(d) { return getNodeColor(d); })
-
-  // Set-up labels
-  node.append("text")
-    .attr("dx", 12)
-    .attr("dy", ".35em")
-    .text(function(d) { return d.name })
-    .style("stroke", "black")
-    .style("opacity", 0);
-
-  // Set-up tooltips
-  node.append("title")
-    .text(function(d) {
-      var text = "Name: " + d.name;
-      if (d.group) text += "\nGroup: " + d.group;
-      if (d.dependencies_count > 0) {
-        text += "\nDependencies: " + d.dependencies_count;
-      }
-      if (d.both_count> 0) {
-        text += "\nBoth: " + d.both_count;
-      }
-      if (d.dependents_count> 0) {
-        text += "\nDependents: " + d.dependents_count;
-      }
-      return text;
-    });
 
   force.on("tick", function() {
     // Don't allow nodes to fall off the screen
@@ -272,6 +251,161 @@ function plot(error, packages, categories) {
     node.each(collide(0.5));
   });
 
+  var choices;
+  function filterGroups() {
+    // Get selected groups
+    choices = [];
+    d3.selectAll(".group_checkbox").each(function(d) {
+      cb = d3.select(this);
+      if (cb.property("checked")) {
+        choices.push(cb.property("value"));
+      }
+    });
+
+    newData = nodes.filter(function(d) { return choices.includes(d.group);});
+    newLinks = links.filter(function(d) {
+      return choices.includes(d.target.group) && choices.includes(d.source.group);
+    });
+
+    force.nodes(newData);
+    force.links(newLinks);
+    force.start();
+
+    // Create an array logging what is connected to what
+    linkedByIndex = {};
+    for (i = 0; i < newData.length; i++) {
+      linkedByIndex[i + "," + i] = 1;
+    };
+    newLinks.forEach(function(d) {
+      linkedByIndex[d.source.index + "," + d.target.index] = 1;
+    });
+
+    // Remove all links
+    link = link.data([]);
+    link.exit().remove();
+
+    // Add selected links
+    link = link.data(newLinks);
+    link = link.enter().append("path")
+      .attr("class", "link")
+      // Assign a unique marker to each link object
+      .attr("marker-end", function(d) {
+        return "url(#marker" + d.link_index + ")";
+      });
+
+    // Remove all of the nodes
+    node = node.data([]);
+    node.exit().remove();
+
+    // Add selected nodes
+    node = node.data(newData);
+    node.enter().append("g");
+    node.attr("class", "node")
+      .call(force.drag)
+      .on('click', toggleConnectedNodes);
+
+    // Node radius is determined by weight (number of links)
+    var minWeight = newData.length * 2,
+        maxWeight = 0;
+    node.each(function(d) {
+      minWeight = Math.min(minWeight, d.weight);
+      maxWeight = Math.max(maxWeight, d.weight);
+    });
+
+    var minRadius = 8,
+        maxRadius = 24;
+    var scale = d3.scale.linear()
+      .domain([minWeight, maxWeight])
+      .range([minRadius,maxRadius]);
+
+    node.append("circle")
+      .attr("r", function(d) {
+        d.radius = scale(d.weight);
+        return d.radius;
+      })
+      .style("fill", function(d) { return getNodeColor(d) });
+
+    // Set-up labels
+    node.append("text")
+      .attr("dx", 12)
+      .attr("dy", ".35em")
+      .attr("class", function(d) { return 'node-label'; })
+      .text(function(d) { return d.name })
+      .style("stroke", "black")
+      .style("opacity", 0);
+
+    var selected_packages = packages.filter(function(d) {
+      var group_index = group_map[d.name];
+      if (group_index === undefined) { group_index = 0; }
+      var group_name = groups[group_index];
+      return choices.includes(group_name);
+    });
+
+    var selected_package_names = [];
+    sorted_package_names.length = 0;  // clear array
+    selected_packages.forEach(function(pkg) {
+      selected_package_names.push(pkg.name);
+      sorted_package_names.push(pkg.name);
+    });
+    sorted_package_names.sort();
+
+    var package_map = {};
+    selected_packages.forEach(function(pkg, num) {
+      //if (pkg.name === d.name) {
+      var depends = [];
+      if (pkg.depends) {
+        depends = pkg.depends.filter(function(d) {
+          return selected_package_names.includes(d);
+        });
+      }
+      var dependents = [];
+      if (pkg.dependents) {
+        dependents = pkg.dependents.filter(function(d){
+          return selected_package_names.includes(d);
+        });
+      }
+      var both = [];  // Get a list of links that are dependencies AND dependents
+      if (depends && dependents) {
+        both = depends.filter(function(n) {
+          return dependents.indexOf(n) != -1
+        });
+      }
+      var both_count = both.length,
+          dependencies_count = 0,
+          dependents_count = 0;
+      if (depends) dependencies_count = depends.length - both_count;
+      if (dependents) dependents_count = dependents.length - both_count;
+
+      var p = {
+        both_count: both_count,
+        dependencies_count: dependencies_count,
+        dependents_count: dependents_count
+      };
+      package_map[pkg.name] = p;
+    });
+
+    // Set-up tooltips
+    node.append("title")
+      .text(function(d) {
+        var text = "Name: " + d.name;
+        if (d.group) {
+          text += "\nGroup: " + d.group;
+        }
+        if (package_map[d.name].dependencies_count > 0) {
+          text += "\nDependencies: " + package_map[d.name].dependencies_count;
+        }
+        if (package_map[d.name].both_count> 0) {
+          text += "\nBoth: " + package_map[d.name].both_count;
+        }
+        if (package_map[d.name].dependents_count> 0) {
+          text += "\nDependents: " + package_map[d.name].dependents_count;
+        }
+        return text;
+      });
+
+    clearSearch();
+  }
+
   var padding = 1;  // separation between circles;
 
   function collide(alpha) {
@@ -300,15 +434,7 @@ function plot(error, packages, categories) {
     };
   }
 
-  // Create an array logging what is connected to what
   var linkedByIndex = {};
-  for (i = 0; i < nodes.length; i++) {
-    linkedByIndex[i + "," + i] = 1;
-  };
-  links.forEach(function(d) {
-    linkedByIndex[d.source.index + "," + d.target.index] = 1;
-  });
-
   function neighboring(a, b) {
     return linkedByIndex[a.index + "," + b.index];
   }
@@ -350,7 +476,7 @@ function plot(error, packages, categories) {
       });
 
     // Show label for selected node
-    d3.selectAll("text")
+    d3.selectAll(".node-label")
       .style("opacity", function(d) {
         return selected_node === d ? 1 : 0;
       });
@@ -426,8 +552,9 @@ function plot(error, packages, categories) {
       .style("opacity", 1)
       .style("fill", function(d) { return getNodeColor(d); })
       .style("stroke", function(d) { return "#fff"; });
-    d3.selectAll("text")
-      .style("opacity", 0);
+
+   d3.selectAll(".node-label")
+     .style("opacity", 0);
     link
       .style("opacity", 0.6)
       .style("stroke", function(d) {
@@ -435,6 +562,16 @@ function plot(error, packages, categories) {
           .style("fill", getUnselectedLinkColor())
         return getUnselectedLinkColor(); })
       .style("stroke-width", 1);
+  }
+
+  function selectAll() {
+    d3.selectAll(".group_checkbox").property('checked', true);
+    filterGroups();
+  }
+
+  function reset(){
+    d3.selectAll(".group_checkbox").property('checked', false);
+    filterGroups();
   }
 
   var palette = "rg";
@@ -452,8 +589,8 @@ function plot(error, packages, categories) {
 
   document.getElementById("search").onfocus = function(){ clearSearch(); };
   document.getElementById("colorMode").onclick = function(){ swapColorScheme(); };
-
-  clearSearch();
+  document.getElementById("selectAll").onclick = function() { selectAll(); };
+  document.getElementById("reset").onclick = function() { reset(); };
 }
 
 </script>
