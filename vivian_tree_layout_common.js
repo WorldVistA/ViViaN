@@ -34,7 +34,7 @@ function resetAllNode(root) {
   if (root.children !== undefined && root.children) {
     root.children.forEach(collapseAll);
     // Initialize the display to show a few nodes.
-    expandAll(root.children[0]);
+    //expandAll(root.children[0]);
   }
 }
 

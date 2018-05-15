@@ -16,7 +16,14 @@
       <div class="container-fluid">
         <ul class="nav navbar-nav">
           <li><a class="brand" href="index.php"><img width="137" height="50" src="http://osehra.org/sites/default/files/vivian.png"></img></a></li>
-          <li><a href="vista_menus.php">VistA Menus</a></li>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">VistA Menus<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="vista_menus.php#19">VistA Option Menus</a></li>
+              <li><a href="vista_menus.php#101">VistA Protocol Menus</a></li>
+            </ul>
+          </li>
+
           <li><a href="bff_demo.php">VHA BFF & Requirements</a></li>
           <li class="dropdown" id="package-dependency">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">VistA Package Dependency<span class="caret"></span></a>

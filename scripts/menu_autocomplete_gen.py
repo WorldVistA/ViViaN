@@ -1,9 +1,9 @@
 import json
 import glob
 
-def run():
-  output = "../files/menu_autocomplete.json"
-  menuJsonFiles = glob.glob("../files/menus/VistAMenu-*.json")
+def run(fileNo,outName):
+  output = "../files/%s" % outName
+  menuJsonFiles = glob.glob("../files/menus/%s/VistAMenu-*.json" % fileNo )
   outjson = []
 
   for menuFile in menuJsonFiles:
@@ -18,4 +18,5 @@ def run():
     json.dump(outjson, outFp)
 
 if __name__ == '__main__':
-  run()
+  run("19","menu_autocomplete.json")
+  run("101","protocol_menu_autocomplete.json")
