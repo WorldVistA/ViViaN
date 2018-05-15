@@ -9,7 +9,7 @@ https://github.com/OSEHRA-Sandbox/Product-Management/tree/master/Visual/test.
 Tests
 +++++
 
-Each 'test' python file contains tests for one ViViaN page:
+Each 'test' python file contains tests for one ViViaN or DOX page:
 
 test_about.py
   ‘About’ dialog
@@ -17,37 +17,49 @@ test_about.py
 test_bff_demo.py
   ‘VHA BFF Demo’
 
+test_icrtable.py
+  ‘All-ICR‘ table
+
 test_index.py
   ‘ViViaN’
 
+test_installdep.py
+  ‘Install Dependency Tree’
+
+test_installscale.py
+  ‘Install Timeline‘
+
 test_links.py
-  * ‘Join the Visualization Working Group’
-  * ‘VA Visualizations/Business Information Model’
-  * ‘VA Visualizations/Hybrid Information Model’
+  All links under ‘VistA Interfaces‘ menu
 
 test_menus.py
   ‘VistA Menus’
 
 test_pkgdep.py
-  ‘VistA Package Dependency’
+  ‘VistA Package Dependency’ (Circular Layout and Bar Chart)
 
 
 Set-up
 +++++++
 
 Prerequistes
-------------
-* Firefox
-  * *NOTE*:  The Selenium driver changed on the release of Firefox 47+.  We
-    recommend that the testing environment uses version 45 or 46 of Firefox
-* Python
-  * Install the PILLOW Python module(http://pillow.readthedocs.io/en/3.3.x/installation.html )
+~~~~~~~~~~~~
+* Python 2.7
+* [OPTIONAL] Install the PILLOW Python module
+  (http://pillow.readthedocs.io/en/3.3.x/installation.html).
+  All of the PILLOW tests are currently disabled.
+* CMake2.8+ (https://cmake.org/download/)
+* Firefox or Chrome
 * Latest version of Selenium (http://selenium-python.readthedocs.io/installation.html)
+
+**NOTE**:
+Firefox 47+ is compatible with Selenium 3.5+ and geckodriver (**not recommended**).
+Firefox 46 or older must be used with Selenium 3.4 or older
 
 Note: Tests can be run on Linux or Windows
 
 Set-up Tests
-------------
+~~~~~~~~~~~~
 
 Run the following commands to set-up the testing suite:
 
@@ -60,11 +72,18 @@ Run the following commands to set-up the testing suite:
 Note: The <vivian_test> directory can be created anywhere that is convenient
 (best practice is not in the ViViaN source directory).
 
-Note: Use ccmake or cmake gui to change *VIVIAN_WEB_ROOT*:
+Use ccmake or cmake gui to configure tests.
+
+*VIVIAN_WEB_ROOT*
 
 * The default value is: http://code.osehra.org/vivian
 * To test the vivian-demo site, use: http://code.osehra.org/vivian-demo
-* To test local changes, point at a test instance (e.g http://localhost/vivian/Visual)
+* To test local changes, point at a test instance (e.g http://localhost/vivian)
+
+*BROWSER*
+
+* FireFox (default)
+* Chrome
 
 List Tests
 ++++++++++
@@ -73,14 +92,18 @@ Run the following command to see a list of all available tests:
 
 .. parsed-literal::
 
-  ctest -N
+  $ ctest -N
   Test project /home/betsy/vivian/vivian_test
     Test #1: VIVIAN_test_about
     Test #2: VIVIAN_test_bff_demo
-    Test #3: VIVIAN_test_index
-    Test #4: VIVIAN_test_links
-    Test #5: VIVIAN_test_menus
-    Test #6: VIVIAN_test_pkg_dependency
+    Test #3: VIVIAN_test_icrtable
+    Test #4: VIVIAN_test_index
+    Test #5: VIVIAN_test_installdep
+    Test #6: VIVIAN_test_installscale
+    Test #7: VIVIAN_test_links
+    Test #8: VIVIAN_test_menus
+    Test #9: VIVIAN_test_pkg_dependency
+
 
 Run All Tests
 +++++++++++++

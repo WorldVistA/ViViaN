@@ -16,16 +16,17 @@
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 import argparse
-import unittest
+import os
 import re
 import time
+import unittest
 
 class test_links(unittest.TestCase):
 
   @classmethod
   def tearDownClass(cls):
     global driver
-    driver.close()
+    driver.quit()
 
   # Join the Visualization Working Group
   def test_01_visualization_working_group(self):
@@ -59,54 +60,69 @@ class test_links(unittest.TestCase):
   # VistA Interfaces
   def test_04_all_hl7(self):
     global driver
+    global webroot
     driver.find_element_by_id('vista-interfaces').click()
     driver.find_element_by_id('all_hl7').click()
     time.sleep(1)
-    self.assertEqual(driver.current_url, 'http://code.osehra.org/vivian/files/101/All-HL7.html')
+    expected_url = os.path.join(webroot, 'files/101/All-HL7.html')
+    self.assertEqual(os.path.abspath(driver.current_url), os.path.abspath(expected_url))
     driver.back()
     time.sleep(1)
 
   def test_05_all_hlo(self):
     global driver
+    global webroot
     driver.find_element_by_id('vista-interfaces').click()
     driver.find_element_by_id('all_hlo').click()
     time.sleep(1)
-    self.assertEqual(driver.current_url, 'http://code.osehra.org/vivian/files/779_2/All-HLO.html')
+    expected_url = os.path.join(webroot, 'files/779_2/All-HLO.html')
+    self.assertEqual(os.path.abspath(driver.current_url), os.path.abspath(expected_url))
     driver.back()
     time.sleep(1)
 
   def test_06_all_icr(self):
     global driver
+    global webroot
     driver.find_element_by_id('vista-interfaces').click()
     driver.find_element_by_id('all_icr').click()
     time.sleep(1)
-    self.assertEqual(driver.current_url, 'http://code.osehra.org/vivian/files/ICR/All-ICR%20List.html')
+    expected_url = os.path.join(webroot, 'files/ICR/All-ICR%20List.html')
+    self.assertEqual(os.path.abspath(driver.current_url), os.path.abspath(expected_url))
     driver.back()
     time.sleep(1)
 
   def test_07_all_protocols(self):
     global driver
+    global webroot
     driver.find_element_by_id('vista-interfaces').click()
     driver.find_element_by_id('all_protocols').click()
     time.sleep(1)
-    self.assertEqual(driver.current_url, 'http://code.osehra.org/vivian/files/101/All-Protocols.html')
+    expected_url = os.path.join(webroot, 'files/101/All-Protocols.html')
+    self.assertEqual(os.path.abspath(driver.current_url), os.path.abspath(expected_url))
     driver.back()
     time.sleep(1)
 
   def test_08_all_rpc(self):
     global driver
+    global webroot
     driver.find_element_by_id('vista-interfaces').click()
     driver.find_element_by_id('all_rpc').click()
     time.sleep(1)
-    self.assertEqual(driver.current_url, 'http://code.osehra.org/vivian/files/8994/All-RPC.html')
+    expected_url = os.path.join(webroot, 'files/8994/All-RPC.html')
+    self.assertEqual(os.path.abspath(driver.current_url), os.path.abspath(expected_url))
     driver.back()
     time.sleep(1)
 
 if __name__ == '__main__':
   parser = argparse.ArgumentParser(description="Access the 'About' Text of the ViViaN(TM) webpage")
-  parser.add_argument("-r",dest = 'webroot', required=True, help="Web root of the ViViaN(TM) instance to test.  eg. http://code.osehra.org/vivian/")
+  parser.add_argument("-r", dest='webroot', required=True, help="Web root of the ViViaN(TM) instance to test.  eg. http://code.osehra.org/vivian/")
+  parser.add_argument("-b", dest='browser', default="FireFox", required=False, help="Web browser to use for testing [FireFox, Chrome]")
   result = vars(parser.parse_args())
-  driver = webdriver.Firefox()
-  driver.get(result['webroot'] + "/index.php")
+  if result['browser'].upper() == "CHROME":
+    driver = webdriver.Chrome()
+  else:
+    driver = webdriver.Firefox()
+  webroot = result['webroot']
+  driver.get(webroot + "/index.php")
   suite = unittest.TestLoader().loadTestsFromTestCase(test_links)
   unittest.TextTestRunner(verbosity=2).run(suite)
