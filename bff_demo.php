@@ -74,6 +74,8 @@
     <button onclick="_collapseAllNode()">Collapse All</button>
     <button onclick="_resetAllNode()">Reset</button>
     <input type="checkbox" id="showUpdates" onclick="renderWindow()"> Show new and updated requirements</input>
+    <!-- Hidden button for testing only. Add after active buttons. -->
+    <button onclick="_expandAllNode()" style="visibility: hidden;">DO NOT DISPLAY</button>
   </div>
   <div id="legend_placeholder" style="position:relative; left:20px; top:20px;"></div>
   </br>

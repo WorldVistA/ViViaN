@@ -14,6 +14,7 @@
 # limitations under the License.
 #---------------------------------------------------------------------------
 from selenium import webdriver
+from selenium.common.exceptions import ElementNotVisibleException
 import argparse
 import unittest
 import time
@@ -72,13 +73,27 @@ class test_bff(unittest.TestCase):
 
   def test_04_click_filter(self):
     global driver
-    time.sleep(5)
-    oldSize = len(driver.find_elements_by_class_name('node'))
+    button = driver.find_element_by_xpath("//button[contains(@onclick,'_expandAllNode')]")
+    try:
+      # First make sure the test-only button is hidden!
+       button.click()
+    except ElementNotVisibleException as exception:
+       pass
+    else:
+       self.fail("Expand All button should be hidden!")
+
+    # Make button visible and click to expand all nodes
+    driver.execute_script("arguments[0].setAttribute('style','visibility:visible;');", button)
+    button.click()
+    time.sleep(2)
+    expandedSize = len(driver.find_elements_by_class_name('node'))
+
+    # Click on filter
     filterBox = driver.find_element_by_id("showUpdates")
     filterBox.click()
-    time.sleep(1)
-    newSize = len(driver.find_elements_by_class_name('node'))
-    self.assertTrue(oldSize > newSize)
+    time.sleep(2)
+    filteredSize = len(driver.find_elements_by_class_name('node'))
+    self.assertTrue(expandedSize > filteredSize)
 
 if __name__ == '__main__':
   parser = argparse.ArgumentParser(description="")
