@@ -28,6 +28,19 @@ class test_links(unittest.TestCase):
     global driver
     driver.quit()
 
+  def go_to_interface_link(self, link_id, destination):
+    global driver
+    global webroot
+    driver.find_element_by_id('vista-interfaces').click()
+    driver.find_element_by_id(link_id).click()
+    time.sleep(1)
+    expected_url = os.path.join(webroot, destination)
+    expected_url = os.path.normpath(expected_url.replace("http://", "https://"))
+    current_url = os.path.normpath(driver.current_url)
+    self.assertEqual(current_url, expected_url)
+    driver.back()
+    time.sleep(1)
+
   # Join the Visualization Working Group
   def test_01_visualization_working_group(self):
     global driver
@@ -44,7 +57,7 @@ class test_links(unittest.TestCase):
     driver.find_element_by_id('va-visualizations').click()
     driver.find_element_by_id('business-information-model').click()
     time.sleep(1)
-    self.assertEqual(driver.current_url, 'http://bim.osehra.org/')
+    self.assertEqual(driver.current_url, 'https://bim.osehra.org/')
     driver.back()
     time.sleep(1)
 
@@ -53,68 +66,28 @@ class test_links(unittest.TestCase):
     driver.find_element_by_id('va-visualizations').click()
     driver.find_element_by_id('hybrid-information-model').click()
     time.sleep(1)
-    self.assertEqual(driver.current_url, 'http://him.osehra.org/')
+    self.assertEqual(driver.current_url, 'https://him.osehra.org/')
     driver.back()
     time.sleep(1)
 
   # VistA Interfaces
   def test_04_all_hl7(self):
-    global driver
-    global webroot
-    driver.find_element_by_id('vista-interfaces').click()
-    driver.find_element_by_id('all_hl7').click()
-    time.sleep(1)
-    expected_url = os.path.join(webroot, 'files/101/All-HL7.html')
-    self.assertEqual(os.path.abspath(driver.current_url), os.path.abspath(expected_url))
-    driver.back()
-    time.sleep(1)
+    self.go_to_interface_link('all_hl7', 'files/101/All-HL7.html')
 
   def test_05_all_hlo(self):
-    global driver
-    global webroot
-    driver.find_element_by_id('vista-interfaces').click()
-    driver.find_element_by_id('all_hlo').click()
-    time.sleep(1)
-    expected_url = os.path.join(webroot, 'files/779_2/All-HLO.html')
-    self.assertEqual(os.path.abspath(driver.current_url), os.path.abspath(expected_url))
-    driver.back()
-    time.sleep(1)
+    self.go_to_interface_link('all_hlo', 'files/779_2/All-HLO.html')
 
   def test_06_all_icr(self):
-    global driver
-    global webroot
-    driver.find_element_by_id('vista-interfaces').click()
-    driver.find_element_by_id('all_icr').click()
-    time.sleep(1)
-    expected_url = os.path.join(webroot, 'files/ICR/All-ICR%20List.html')
-    self.assertEqual(os.path.abspath(driver.current_url), os.path.abspath(expected_url))
-    driver.back()
-    time.sleep(1)
+    self.go_to_interface_link('all_icr', 'files/ICR/All-ICR%20List.html')
 
   def test_07_all_protocols(self):
-    global driver
-    global webroot
-    driver.find_element_by_id('vista-interfaces').click()
-    driver.find_element_by_id('all_protocols').click()
-    time.sleep(1)
-    expected_url = os.path.join(webroot, 'files/101/All-Protocols.html')
-    self.assertEqual(os.path.abspath(driver.current_url), os.path.abspath(expected_url))
-    driver.back()
-    time.sleep(1)
+    self.go_to_interface_link('all_protocols', 'files/101/All-Protocols.html')
 
   def test_08_all_rpc(self):
-    global driver
-    global webroot
-    driver.find_element_by_id('vista-interfaces').click()
-    driver.find_element_by_id('all_rpc').click()
-    time.sleep(1)
-    expected_url = os.path.join(webroot, 'files/8994/All-RPC.html')
-    self.assertEqual(os.path.abspath(driver.current_url), os.path.abspath(expected_url))
-    driver.back()
-    time.sleep(1)
+    self.go_to_interface_link('all_rpc', 'files/8994/All-RPC.html')
 
 if __name__ == '__main__':
-  parser = argparse.ArgumentParser(description="Access the 'About' Text of the ViViaN(TM) webpage")
+  parser = argparse.ArgumentParser(description="Test all links on navigation bar")
   parser.add_argument("-r", dest='webroot', required=True, help="Web root of the ViViaN(TM) instance to test.  eg. http://code.osehra.org/vivian/")
   parser.add_argument("-b", dest='browser', default="FireFox", required=False, help="Web browser to use for testing [FireFox, Chrome]")
   result = vars(parser.parse_args())

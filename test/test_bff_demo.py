@@ -70,7 +70,7 @@ class test_bff(unittest.TestCase):
     newSize = len(driver.find_elements_by_class_name('node'))
     self.assertTrue(oldSize < newSize)
 
-  def test_04_click_filter(self):
+  def DISABLE_test_04_click_filter(self):
     global driver
     time.sleep(5)
     oldSize = len(driver.find_elements_by_class_name('node'))

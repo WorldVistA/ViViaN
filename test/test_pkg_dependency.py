@@ -23,32 +23,41 @@ import re
 import time
 
 class test_pkgdep(unittest.TestCase):
-
   @classmethod
   def tearDownClass(cls):
     global driver
     driver.quit()
 
-  def test_01_chart_tooltip(self):
+  def test_01_tooltip(self):
     global driver
-    ActionChains(driver).move_to_element(driver.find_element_by_link_text("Uncategorized")).perform()
+    time.sleep(5)
+
+    # Choose a package that's visible when the screen is first loaded
+    package = "Lab Service"
+    group = "Laboratory"
+
+    ActionChains(driver).move_to_element(driver.find_element_by_link_text(package)).perform()
     tooltip = driver.find_element_by_id("toolTip")
     title = tooltip.find_element_by_id("header1").text
 
-    self.assertTrue(re.search("Name:",title))
-    self.assertTrue(re.search("Group:",title))
+    self.assertTrue(re.search("Name: " + package, title))
+    self.assertTrue(re.search("Group: " + group, title))
 
     depends = tooltip.find_element_by_id("dependency").text
-    self.assertTrue(re.search("Depends:",depends))
+    self.assertTrue(re.search("Depends:", depends))
 
     dependents = tooltip.find_element_by_id("dependents").text
-    self.assertTrue(re.search("Dependents:",dependents))
+    self.assertTrue(re.search("Dependents:", dependents))
 
-  def test_02_chart_highlight(self):
+    dependents = tooltip.find_element_by_id("bothDeps").text
+    self.assertTrue(re.search("Both:", dependents))
+
+  def test_02_highlight(self):
     global driver
 
-    # Values taken from local instance, not the most sustainable but works for now
-    PCE_values = [40,23]
+    # Values taken from most-recent code.osehra.org instance,
+    # not the most sustainable but works for now
+    PCE_values = [44,28]
     ETiR_values = [0,6]
     CS_values = [3,0]
 
@@ -74,92 +83,9 @@ class test_pkgdep(unittest.TestCase):
     self.assertEqual(source_size, CS_values[0])
     self.assertEqual(target_size, CS_values[1])
 
-  def test_04_dep_bar_content(self):
-    global driver
-
-    driver.find_element_by_id('package-dependency').click()
-    driver.find_element_by_id('bar-chart').click()
-    time.sleep(1)
-
-    chart_titles = ['VistA Packages Dependencies Chart','VistAPackageStatistics']
-    dep_chart_legend = ['depends','dependents']
-    dep_chart_top_entries = ['Kernel','Order Entry Results Reporting','Accounts Receivable']
-
-    # Ensure that the data and labels of chart are not empty
-    chart_container = driver.find_elements_by_class_name("highcharts-series")
-    for type in chart_container:
-      bar_array = type.find_elements_by_tag_name("rect")
-      self.assertTrue(len(bar_array) > 0)
-
-    chart_container = driver.find_elements_by_class_name("highcharts-data-labels")
-    for type in chart_container:
-      bar_array = type.find_elements_by_tag_name("text")
-      self.assertTrue(len(bar_array) > 0)
-
-    # Read title of graph
-    title_element = driver.find_element_by_class_name("highcharts-title")
-    self.assertTrue(title_element.text in chart_titles)
-    # Ensure that legends have proper information
-    chart_legend = driver.find_element_by_class_name("highcharts-legend")
-    legend_array = chart_legend.find_elements_by_tag_name("text")
-    for item in legend_array:
-       self.assertTrue(item.get_attribute("innerHTML") in dep_chart_legend)
-
-    # Check each of the "Sort By" selections to ensure that the first element is found in top_entries array
-    dep_pulldown = driver.find_element_by_id("list-dep")
-    pulldown_options = Select(dep_pulldown)
-    for option in pulldown_options.options:
-      pulldown_options.select_by_visible_text(option.text)
-      self.assertTrue(driver.find_element_by_xpath("//*[@id='highcharts-0']/div/span[1]").text in dep_chart_top_entries)
-      time.sleep(5)
-
-  def test_05_bar_switch(self):
-    global driver
-    btn_group = driver.find_element_by_class_name("btn-group")
-    for btn in btn_group.find_elements_by_tag_name("label"):
-      type = btn.text.split(' ')[0]
-      btn.click()
-      self.assertTrue("active" in btn.get_attribute("class"))
-      time.sleep(5)
-
-  def test_06_stat_bar_content(self):
-    global driver
-    chart_titles = ['VistA Packages Dependencies Chart','VistA Package Statistics', 'VistAPackageStatistics']
-    stat_chart_legend = ['routines','files','fields']
-    stat_chart_top_entries = ['Generic Code Sheet','Integrated Billing','Accounts Receivable']
-
-    #Ensure that the list of data and labels isn't empty
-    chart_container = driver.find_elements_by_class_name("highcharts-series")
-    for type in chart_container:
-      bar_array = type.find_elements_by_tag_name("rect")
-      self.assertTrue(len(bar_array) > 0)
-
-    chart_container = driver.find_elements_by_class_name("highcharts-data-labels")
-    for type in chart_container:
-      bar_array = type.find_elements_by_tag_name("text")
-      self.assertTrue(len(bar_array) > 0)
-
-    # Read title of graph
-    title_element = driver.find_element_by_class_name("highcharts-title")
-    self.assertTrue(title_element.text in chart_titles)
-
-    # Ensure that legends have proper information
-    chart_legend = driver.find_element_by_class_name("highcharts-legend")
-    legend_array = chart_legend.find_elements_by_tag_name("text")
-    for item in legend_array:
-       self.assertTrue(item.get_attribute("innerHTML") in stat_chart_legend)
-
-    # Check each of the "Sort By" selections to ensure that the first element is found in top_entries array
-    dep_pulldown = driver.find_element_by_id("list-stats")
-    pulldown_options = Select(dep_pulldown)
-    for option in pulldown_options.options:
-      pulldown_options.select_by_visible_text(option.text)
-      self.assertTrue(driver.find_element_by_xpath("//*[@id='highcharts-0']/div/span[1]").text in stat_chart_top_entries)
-      time.sleep(5)
-
 
 if __name__ == '__main__':
-  parser = argparse.ArgumentParser(description="")
+  parser = argparse.ArgumentParser(description="Test package dependency circulr layout")
   parser.add_argument("-r", dest='webroot', required=True, help="Web root of the ViViaN(TM) instance to test.  eg. http://code.osehra.org/vivian")
   parser.add_argument("-b", dest='browser', default="FireFox", required=False, help="Web browser to use for testing [FireFox, Chrome]")
   result = vars(parser.parse_args())

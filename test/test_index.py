@@ -127,7 +127,6 @@ class test_index(unittest.TestCase):
     except:
       pass
 
-
   def test_07_expand_collapse_nodes(self):
     global driver
     nodes = driver.find_elements_by_class_name('node')
@@ -192,7 +191,9 @@ class test_index(unittest.TestCase):
     driver.switch_to_window(driver.window_handles[-1])
     time.sleep(1)
     expected_url = os.path.join(webroot, 'files/ICR/Kernel-ICR.html')
-    self.assertEqual(os.path.abspath(driver.current_url), os.path.abspath(expected_url))
+    expected_url = os.path.normpath(expected_url.replace("http://", "https://"))
+    current_url = os.path.normpath(driver.current_url)
+    self.assertEqual(current_url, expected_url)
 
   def cleanup_icr_test(self):
     # Close current tab
