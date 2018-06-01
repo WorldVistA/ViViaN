@@ -22,16 +22,6 @@
   <?php include_once "vivian_osehra_image.php" ?>
 
   <div style="position:relative; left:20px; top:50px">
-    <div class="btn-group" data-toggle="buttons">
-      <label class="btn btn-primary btn-xs active">
-        <input type="radio" name="chart-option" id="option3" value="0" checked>Dependency Chart
-      </label>
-      <label class="btn btn-primary btn-xs">
-        <input type="radio" name="chart-option" value="1" id="option4">Stats Chart
-      </label>
-    </div>
-    </br>
-    </br>
     <div style="font-size:0.8em">
       <form id="frm-dep">
         <label for="list-dep">Sorted By:</label>
