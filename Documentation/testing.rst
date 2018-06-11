@@ -76,14 +76,18 @@ Use ccmake or cmake gui to configure tests.
 
 *VIVIAN_WEB_ROOT*
 
-* The default value is: http://code.osehra.org/vivian
-* To test the vivian-demo site, use: http://code.osehra.org/vivian-demo
+* The default value is: https://code.osehra.org/vivian
 * To test local changes, point at a test instance (e.g http://localhost/vivian)
 
 *BROWSER*
 
 * FireFox (default)
 * Chrome
+
+*LOCAL_INSTANCE*
+
+* Select when testing a local instance. Will expect pages to be prefixed with
+  'http://' instead of 'https://'
 
 List Tests
 ++++++++++

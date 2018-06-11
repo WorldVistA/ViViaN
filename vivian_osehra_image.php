@@ -15,16 +15,18 @@
     <nav class="navbar navbar-default navbar-static-top">
       <div class="container-fluid">
         <ul class="nav navbar-nav">
-          <li><a class="brand" href="index.php"><img width="137" height="50" src="http://osehra.org/sites/default/files/vivian.png"></img></a></li>
-          <li class="dropdown">
+          <li><a class="brand" href="index.php" id="vivian"><img width="137" height="50" src="http://osehra.org/sites/default/files/vivian.png"></img></a></li>
+
+          <li class="dropdown" id="vista-menus">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">VistA Menus<span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="vista_menus.php#19">VistA Option Menus</a></li>
-              <li><a href="vista_menus.php#101">VistA Protocol Menus</a></li>
+              <li><a href="vista_menus.php#19" id="option_menu">VistA Option Menus</a></li>
+              <li><a href="vista_menus.php#101" id="protocol_menu">VistA Protocol Menus</a></li>
             </ul>
           </li>
 
-          <li><a href="bff_demo.php">VHA BFF & Requirements</a></li>
+          <li><a href="bff_demo.php" id="bff-demo">VHA BFF & Requirements</a></li>
+
           <li class="dropdown" id="package-dependency">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">VistA Package Dependency<span class="caret"></span></a>
             <ul class="dropdown-menu">
@@ -33,13 +35,15 @@
               <li><a href="package_dep_graph.php" id="force-directed-graph">Force-Directed Graph</a></li>
             </ul>
           </li>
-          <li class="dropdown">
+
+          <li class="dropdown" id="vista-install">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">VistA Install<span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="installScale.php">Install Timeline</a></li>
-              <li><a href="patchDependency.php">Install Dependency Tree</a></li>
+              <li><a href="installScale.php" id="install-timeline">Install Timeline</a></li>
+              <li><a href="patchDependency.php" id="install-tree">Install Dependency Tree</a></li>
             </ul>
           </li>
+
           <li class="dropdown" id="vista-interfaces">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">VistA Interfaces<span class="caret"></span></a>
             <ul class="dropdown-menu">
@@ -48,9 +52,9 @@
               <li><a href="files/ICR/All-ICR%20List.html" id="all_icr">ICR</a></li>
               <li><a href="files/101/All-Protocols.html" id="all_protocols">Protocols</a></li>
               <li><a href="files/8994/All-RPC.html" id="all_rpc">RPC</a></li>
-
             </ul>
           </li>
+
           <li class="dropdown" id="vista-information">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Name and Number<span class="caret"></span></a>
             <ul class="dropdown-menu">
@@ -59,13 +63,14 @@
             </ul>
           </li>
         </ul>
+
         <ul class="nav navbar-nav navbar-right">
           <li><a href="javascript:aboutClicked();">About</a></li>
           <li><a href="http://www.osehra.org/content/visualization-open-source-project-group">Join the Visualization Working Group</a></li>
-          <li class="dropdown">
+          <li class="dropdown" id="foia-vista">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">FOIA VistA <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="vxvista">DSS vxVistA</a></li>
+              <li><a href="vxvista" id="vxvista">DSS vxVistA</a></li>
             </ul>
           </li>
           <li class="dropdown" id="va-visualizations">

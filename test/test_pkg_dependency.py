@@ -17,7 +17,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import Select
-import argparse
+from vivian_test_utils import setup_webdriver
 import unittest
 import re
 import time
@@ -83,17 +83,9 @@ class test_pkgdep(unittest.TestCase):
     self.assertEqual(source_size, CS_values[0])
     self.assertEqual(target_size, CS_values[1])
 
-
 if __name__ == '__main__':
-  parser = argparse.ArgumentParser(description="Test package dependency circulr layout")
-  parser.add_argument("-r", dest='webroot', required=True, help="Web root of the ViViaN(TM) instance to test.  eg. http://code.osehra.org/vivian")
-  parser.add_argument("-b", dest='browser', default="FireFox", required=False, help="Web browser to use for testing [FireFox, Chrome]")
-  result = vars(parser.parse_args())
-  if result['browser'].upper() == "CHROME":
-    driver = webdriver.Chrome()
-  else:
-    driver = webdriver.Firefox()
-  driver.maximize_window()
-  driver.get(result['webroot'] + "/vista_pkg_dep.php")
+  description = "Test package dependency circulr layout"
+  page = "vista_pkg_dep.php"
+  webroot, driver, browser, is_local = setup_webdriver(description, page)
   suite = unittest.TestLoader().loadTestsFromTestCase(test_pkgdep)
   unittest.TextTestRunner(verbosity=2).run(suite)

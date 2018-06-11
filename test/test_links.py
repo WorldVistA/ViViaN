@@ -15,34 +15,101 @@
 #---------------------------------------------------------------------------
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
-import argparse
+from vivian_test_utils import setup_webdriver
 import os
 import re
 import time
 import unittest
 
 class test_links(unittest.TestCase):
-
   @classmethod
   def tearDownClass(cls):
     global driver
     driver.quit()
 
   def go_to_interface_link(self, link_id, destination):
-    global driver
-    global webroot
-    driver.find_element_by_id('vista-interfaces').click()
-    driver.find_element_by_id(link_id).click()
-    time.sleep(1)
-    expected_url = os.path.join(webroot, destination)
-    expected_url = os.path.normpath(expected_url.replace("http://", "https://"))
-    current_url = os.path.normpath(driver.current_url)
-    self.assertEqual(current_url, expected_url)
+    self.go_to_vivian_link('vista-interfaces', link_id, destination)
     driver.back()
     time.sleep(1)
 
+  def go_to_vivian_link(self, menu_id, link_id, destination):
+    global is_local
+    expected_url = os.path.join(webroot, destination)
+    if not is_local:
+      expected_url = expected_url.replace("http://", "https://")
+    self.go_to_link(menu_id, link_id, expected_url)
+
+  def go_to_link(self, menu_id, link_id, expected_url):
+    global driver
+    global webroot
+    driver.find_element_by_id(menu_id).click()
+    if link_id is not None:
+      driver.find_element_by_id(link_id).click()
+    time.sleep(1)
+    expected_url = os.path.normpath(expected_url)
+    current_url = os.path.normpath(driver.current_url)
+    self.assertEqual(current_url, expected_url)
+
+  # Skip ViViaN button (index.php) for now
+
+  def test_01_protocol_menu(self):
+    self.go_to_vivian_link('vista-menus', 'protocol_menu', 'vista_menus.php#101')
+
+  def test_02_option_menu(self):
+    self.go_to_vivian_link('vista-menus', 'option_menu', 'vista_menus.php#19')
+
+  def test_03_bff_demo(self):
+    self.go_to_vivian_link('bff-demo', None, 'bff_demo.php')
+
+  def test_04_package_dependency(self):
+    self.go_to_vivian_link('package-dependency', 'circle-layout', 'vista_pkg_dep.php')
+
+  def test_05_package_dependency_chart(self):
+    self.go_to_vivian_link('package-dependency', 'bar-chart', 'vista_pkg_dep_chart.php')
+
+  def test_06_package_dependency_graph(self):
+    self.go_to_vivian_link('package-dependency', 'force-directed-graph', 'package_dep_graph.php')
+
+  def test_07_install_timeline(self):
+    self.go_to_vivian_link('vista-install', 'install-timeline', 'installScale.php')
+
+  def test_08_install_tree(self):
+    self.go_to_vivian_link('vista-install', 'install-tree', 'patchDependency.php')
+
+  # Now that we've navigated away from the main page, click on 'ViViaN' button
+  def test_16_vivian(self):
+    self.go_to_vivian_link('vivian', None, 'index.php')
+
+  # VistA Interfaces
+  def test_09_all_hl7(self):
+    self.go_to_interface_link('all_hl7', 'files/101/All-HL7.html')
+
+  def test_10_all_hlo(self):
+    self.go_to_interface_link('all_hlo', 'files/779_2/All-HLO.html')
+
+  def test_11_all_icr(self):
+    self.go_to_interface_link('all_icr', 'files/ICR/All-ICR%20List.html')
+
+  def test_12_all_protocols(self):
+    self.go_to_interface_link('all_protocols', 'files/101/All-Protocols.html')
+
+  def test_13_all_rpc(self):
+    self.go_to_interface_link('all_rpc', 'files/8994/All-RPC.html')
+
+  def test_14_all_name(self):
+    self.go_to_vivian_link('vista-information', 'all_name', 'files/Namespace/Namespace.html')
+    driver.back()
+    time.sleep(1)
+
+  def test_15_all_number(self):
+    self.go_to_vivian_link('vista-information', 'all_number', 'files/Numberspace/Numberspace.html')
+    driver.back()
+    time.sleep(1)
+
+  # 'About' is tested in 'test_about'
+
   # Join the Visualization Working Group
-  def test_01_visualization_working_group(self):
+  def test_17_visualization_working_group(self):
     global driver
     nav_button = driver.find_element_by_xpath('//*[@id="navigation_buttons"]/nav/div/ul[2]/li[2]/a')
     nav_button.click()
@@ -51,51 +118,26 @@ class test_links(unittest.TestCase):
     driver.back()
     time.sleep(1)
 
+  # FOIA VistA
+  def test_18_vxvista(self):
+    self.go_to_vivian_link('foia-vista', 'vxvista', 'vxvista')
+    driver.back()
+    time.sleep(1)
+
   # VA Visualizations
-  def test_02_business_information_model(self):
-    global driver
-    driver.find_element_by_id('va-visualizations').click()
-    driver.find_element_by_id('business-information-model').click()
-    time.sleep(1)
-    self.assertEqual(driver.current_url, 'https://bim.osehra.org/')
+  def test_19_business_information_model(self):
+    self.go_to_link('va-visualizations', 'business-information-model', 'https://bim.osehra.org/')
     driver.back()
     time.sleep(1)
 
-  def test_03_hybrid_information_model(self):
-    global driver
-    driver.find_element_by_id('va-visualizations').click()
-    driver.find_element_by_id('hybrid-information-model').click()
-    time.sleep(1)
-    self.assertEqual(driver.current_url, 'https://him.osehra.org/')
+  def test_20_hybrid_information_model(self):
+    self.go_to_link('va-visualizations', 'hybrid-information-model', 'https://him.osehra.org/')
     driver.back()
     time.sleep(1)
-
-  # VistA Interfaces
-  def test_04_all_hl7(self):
-    self.go_to_interface_link('all_hl7', 'files/101/All-HL7.html')
-
-  def test_05_all_hlo(self):
-    self.go_to_interface_link('all_hlo', 'files/779_2/All-HLO.html')
-
-  def test_06_all_icr(self):
-    self.go_to_interface_link('all_icr', 'files/ICR/All-ICR%20List.html')
-
-  def test_07_all_protocols(self):
-    self.go_to_interface_link('all_protocols', 'files/101/All-Protocols.html')
-
-  def test_08_all_rpc(self):
-    self.go_to_interface_link('all_rpc', 'files/8994/All-RPC.html')
 
 if __name__ == '__main__':
-  parser = argparse.ArgumentParser(description="Test all links on navigation bar")
-  parser.add_argument("-r", dest='webroot', required=True, help="Web root of the ViViaN(TM) instance to test.  eg. http://code.osehra.org/vivian/")
-  parser.add_argument("-b", dest='browser', default="FireFox", required=False, help="Web browser to use for testing [FireFox, Chrome]")
-  result = vars(parser.parse_args())
-  if result['browser'].upper() == "CHROME":
-    driver = webdriver.Chrome()
-  else:
-    driver = webdriver.Firefox()
-  webroot = result['webroot']
-  driver.get(webroot + "/index.php")
+  description = "Test all links on navigation bar"
+  page = "index.php"
+  webroot, driver, browser, is_local = setup_webdriver(description, page)
   suite = unittest.TestLoader().loadTestsFromTestCase(test_links)
   unittest.TextTestRunner(verbosity=2).run(suite)

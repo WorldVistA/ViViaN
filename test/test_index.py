@@ -15,7 +15,7 @@
 #---------------------------------------------------------------------------
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
-import argparse
+from vivian_test_utils import setup_webdriver
 import os
 import re
 import time
@@ -160,6 +160,7 @@ class test_index(unittest.TestCase):
 
   def test_09_navigate_to_icr_page(self):
     global driver
+    global is_local
     global webroot
 
     self.addCleanup(self.cleanup_icr_test)
@@ -190,8 +191,11 @@ class test_index(unittest.TestCase):
     # Navigate to the ICR table page
     driver.switch_to_window(driver.window_handles[-1])
     time.sleep(1)
+
     expected_url = os.path.join(webroot, 'files/ICR/Kernel-ICR.html')
-    expected_url = os.path.normpath(expected_url.replace("http://", "https://"))
+    if not is_local:
+      expected_url = expected_url.replace("http://", "https://")
+    expected_url = os.path.normpath(expected_url)
     current_url = os.path.normpath(driver.current_url)
     self.assertEqual(current_url, expected_url)
 
@@ -230,15 +234,8 @@ class test_index(unittest.TestCase):
       self.fail("Failed to find leaf node (" + package_name + ")")
 
 if __name__ == '__main__':
-  parser = argparse.ArgumentParser(description="Test the index page of the ViViaN(TM) tool, the VistA Package visualization")
-  parser.add_argument("-r", dest='webroot', required=True, help="Web root of the ViViaN(TM) instance to test.  eg. http://code.osehra.org/vivian/")
-  parser.add_argument("-b", dest='browser', default="FireFox", required=False, help="Web browser to use for testing [FireFox, Chrome]")
-  result = vars(parser.parse_args())
-  if result['browser'].upper() == "CHROME":
-    driver = webdriver.Chrome()
-  else:
-    driver = webdriver.Firefox()
-  webroot = result['webroot']
-  driver.get(webroot + "/index.php")
+  description = "Test the index page of the ViViaN(TM) tool, the VistA Package visualization"
+  page = "index.php"
+  webroot, driver, browser, is_local = setup_webdriver(description, page)
   suite = unittest.TestLoader().loadTestsFromTestCase(test_index)
   unittest.TextTestRunner(verbosity=2).run(suite)

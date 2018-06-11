@@ -15,7 +15,7 @@
 #---------------------------------------------------------------------------
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
-import argparse
+from vivian_test_utils import setup_webdriver
 import unittest
 import re
 import time
@@ -116,14 +116,8 @@ class test_icrtable(unittest.TestCase):
 
 
 if __name__ == '__main__':
-  parser = argparse.ArgumentParser(description="Test the ICR table pages of the ViViaN(TM) tool, the VistA Package visualization")
-  parser.add_argument("-r", dest='webroot', required=True, help="Web root of the ViViaN(TM) instance to test.  eg. http://code.osehra.org/vivian/")
-  parser.add_argument("-b", dest='browser', default="FireFox", required=False, help="Web browser to use for testing [FireFox, Chrome]")
-  result = vars(parser.parse_args())
-  if result['browser'].upper() == "CHROME":
-    driver = webdriver.Chrome()
-  else:
-    driver = webdriver.Firefox()
-  driver.get(result['webroot'] + "/files/ICR/All-ICR List.html")
+  description = "Test the ICR table pages of the ViViaN(TM) tool, the VistA Package visualization"
+  page = "files/ICR/All-ICR List.html"
+  webroot, driver, browser, is_local = setup_webdriver(description, page)
   suite = unittest.TestLoader().loadTestsFromTestCase(test_icrtable)
   unittest.TextTestRunner(verbosity=2).run(suite)

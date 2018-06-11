@@ -15,7 +15,7 @@
 #---------------------------------------------------------------------------
 from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
-import argparse
+from vivian_test_utils import setup_webdriver
 import unittest
 import re
 import time
@@ -121,14 +121,8 @@ class test_installdep(unittest.TestCase):
     self.assertNotEqual(len(outlist), 0, "Unable to find an active node when hovering over item")
 
 if __name__ == '__main__':
-  parser = argparse.ArgumentParser(description="Test the install dependency tree page of the ViViaN(TM) webpage")
-  parser.add_argument("-r",dest = 'webroot', required=True, help="Web root of the ViViaN(TM) instance to test.  eg. http://code.osehra.org/vivian/")
-  parser.add_argument("-b", dest='browser', default="FireFox", required=False, help="Web browser to use for testing [FireFox, Chrome]")
-  result = vars(parser.parse_args())
-  if result['browser'].upper() == "CHROME":
-    driver = webdriver.Chrome()
-  else:
-    driver = webdriver.Firefox()
-  driver.get(result['webroot'] + "/patchDependency.php")
+  description = "Test the install dependency tree page of the ViViaN(TM) webpage"
+  page = "patchDependency.php"
+  webroot, driver, browser, is_local = setup_webdriver(description, page)
   suite = unittest.TestLoader().loadTestsFromTestCase(test_installdep)
   unittest.TextTestRunner(verbosity=2).run(suite)
