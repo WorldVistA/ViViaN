@@ -48,7 +48,7 @@ Prerequistes
 * [OPTIONAL] Install the PILLOW Python module
   (http://pillow.readthedocs.io/en/3.3.x/installation.html).
   All of the PILLOW tests are currently disabled.
-* CMake2.8+ (https://cmake.org/download/)
+* CMake 2.8+ (https://cmake.org/download/)
 * Firefox or Chrome
 * Latest version of Selenium (http://selenium-python.readthedocs.io/installation.html)
 
@@ -131,3 +131,9 @@ A list of failing tests is printed to the screen and can be found here:
 
 More details are available here:
 <vivian_test>/Testing/Temporary/LastTest.log
+
+TroubleShooting
+~~~~~~~~~~~~~~~
+
+* If using Chrome, make sure chromedriver is up-to-date and on the path.
+  See https://sites.google.com/a/chromium.org/chromedriver/downloads

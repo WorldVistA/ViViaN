@@ -30,6 +30,7 @@ class test_menus(unittest.TestCase):
 
   def test_01_reset(self):
     global driver
+    time.sleep(1)
     oldSize = len(driver.find_elements_by_class_name('node'))
     button = driver.find_element_by_xpath("//button[contains(@onclick,'_collapseAllNode')]")
     button.click()
@@ -77,27 +78,26 @@ class test_menus(unittest.TestCase):
         break
     else:
       self.fail("Failed to find " + target_menu_text)
-    time.sleep(1)
+    time.sleep(2)
     node_list = driver.find_elements_by_class_name('node')
     self.assertEqual(node_list[0].text, target_menu_text)
 
   def test_05_option_autocomplete(self):
     global driver
-    target_option_text = "Monitor Taskman"
+    target_option_text = "XUTM ZTMON: [MTM]Monitor Taskman"
     ac_form = driver.find_element_by_id("option_autocomplete")
     ac_form.clear()
-    ac_form.send_keys(target_option_text)
+    ac_form.send_keys("monitor taskman")
     time.sleep(1)
     ac_list = driver.find_elements_by_class_name('ui-menu-item')
-    for option in ac_list:
-      if(re.search(target_option_text,option.text)):
-        option.click()
-        break
+    option_names = []
+    if len(ac_list) == 2:
+      ac_list[1].click()
     else:
       self.fail("Failed to find " + target_option_text)
     time.sleep(1)
     node_list = driver.find_elements_by_class_name('node')
-    self.assertEqual(node_list[0].text, target_option_text)
+    self.assertEqual(node_list[0].text, "Systems Manager Menu")
 
   def DISABLED_test_06_option_autocomplete_path(self):
     global driver
@@ -150,8 +150,8 @@ class test_menus(unittest.TestCase):
       if(re.search(target_option_text,option.text)):
         ActionChains(driver).move_to_element(option).perform()
         # Capture the new text of the highlight and compare it to expected
-        self.assertEqual(option.text, target_option_text,
-          "Option was not found in same menu: Expected "+ target_option_menu_text + " found: " + option.text )
+        self.assertEqual(option.text, target_option_menu_text,
+          "Option was not found in same menu: Expected '"+ target_option_menu_text + "' Found: '" + option.text +"'" )
         break
     else:
       self.fail("Failed to find " + target_option_text)
