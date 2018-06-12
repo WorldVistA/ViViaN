@@ -21,7 +21,6 @@ import re
 import time
 
 class test_installscale(unittest.TestCase):
-
   @classmethod
   def tearDownClass(cls):
     global driver
@@ -67,7 +66,6 @@ class test_installscale(unittest.TestCase):
     endDate = axisLabels[-1].find_element_by_tag_name('text').get_attribute("innerHTML")
     self.assertNotEqual(endDate, origDate, "Changing of the timeline_date_stop did not alter the timeline")
 
-
   def test_03_installDateRangeReset(self):
     global driver
     axisLabels = driver.find_elements_by_class_name("tick")
@@ -81,10 +79,11 @@ class test_installscale(unittest.TestCase):
     self.assertNotEqual(newStartDate, origStartDate, "Changes were not set by to the original via Reset")
     self.assertNotEqual(origEndDate ,newEndDate, "Changes were not set by to the original via Reset")
 
-
   def test_04_installBarHover(self):
     global driver
     graphBars = driver.find_elements_by_class_name("bar")
+    # Scroll bar into view
+    graphBars[-1].location_once_scrolled_into_view
     ActionChains(driver).move_to_element(graphBars[-1]).perform()
     tooltip = driver.find_element_by_id("toolTip")
     self.assertTrue(re.search(" [A-Z]+\*[0-9.]+\*[0-9]+",  tooltip.find_element_by_id("header1").text),"Header of tool tip didn't match expected format")

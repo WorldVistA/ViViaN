@@ -56,8 +56,12 @@ class test_menus(unittest.TestCase):
     color_options = ["#E0E0E0",'']
     legend_list = driver.find_elements_by_class_name('legend')
     for item in legend_list[1:]:
-      item.click()
-      color_options[1]=item.find_element_by_tag_name('text').get_attribute("fill")
+      text_element = item.find_element_by_tag_name('text')
+      # When using FireFox, need to click on text, not top-level element
+      # May be related to:
+      # https://github.com/mozilla/geckodriver/issues/653
+      text_element.click()
+      color_options[1] = text_element.get_attribute("fill")
       node_list = driver.find_elements_by_class_name('node')
       for node in node_list:
         node_fill = node.find_element_by_tag_name('text').get_attribute("fill")
@@ -92,6 +96,7 @@ class test_menus(unittest.TestCase):
     ac_list = driver.find_elements_by_class_name('ui-menu-item')
     option_names = []
     if len(ac_list) == 2:
+      ac_list[1].location_once_scrolled_into_view
       ac_list[1].click()
     else:
       self.fail("Failed to find " + target_option_text)
@@ -161,8 +166,8 @@ class test_menus(unittest.TestCase):
     global driver
 
     global browser
-    if browser == "CHROME":
-      return # Test fails on Chrome, skip it for now
+    if browser == "FIREFOX":
+      return # Test fails on FireFox, skip it for now
 
     # Check pan by dragging and dropping on display
     menuTree = driver.find_element_by_id("treeview_placeholder").find_element_by_tag_name('svg')
@@ -183,10 +188,6 @@ class test_menus(unittest.TestCase):
   def test_10_panCenter(self):
     global driver
 
-    global browser
-    if browser == "CHROME":
-      return # Test fails on Chrome, skip it for now
-
     menuTree = driver.find_element_by_id("treeview_placeholder").find_element_by_tag_name('svg')
     menuTreeDisplay = menuTree.find_element_by_tag_name('g')
     ActionChains(driver).move_to_element(menuTree).drag_and_drop_by_offset(menuTree, 300, 200).perform()
@@ -199,10 +200,6 @@ class test_menus(unittest.TestCase):
 
   def test_11_panReset(self):
     global driver
-
-    global browser
-    if browser == "CHROME":
-      return # Test fails on Chrome, skip it for now
 
     menuTree = driver.find_element_by_id("treeview_placeholder").find_element_by_tag_name('svg')
     menuTreeDisplay = menuTree.find_element_by_tag_name('g')
