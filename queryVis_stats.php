@@ -7,6 +7,17 @@
       include_once "vivian_tree_layout.css";
     ?>
     <!-- JQuery Buttons -->
+    <script>
+      $(function(){
+        $( "button" ).button().click(function(event){
+          event.preventDefault();
+        });
+        fileName = window.location.href.substring(window.location.href.lastIndexOf('/')+1)
+        $('a[href="'+fileName+'"]').parents("#navigation_buttons li").each(function (i) {
+            $(this).removeClass().addClass("active");
+        });
+      });
+    </script>
     <?php include_once "vivian_google_analytics.php" ?>
   </head>
 
@@ -28,7 +39,7 @@
 
 <div class="hint" style="position:relative;">
   <p>
-    This page will accept an uploaded JSON object and attempt to show the data in one of two forms: a pie chart and a DataTables display
+    This page will accept an JSON file and attempt to show the data in one of two forms: a pie chart and a filterable table.
     to allow searching and filtering of the uploaded information.
     For more information on the expected form of the uploaded JSON, see the following <a href="./Documentation/QueryVis_formatting.rst">file</a>
   </p>
