@@ -14,7 +14,7 @@
 # limitations under the License.
 #---------------------------------------------------------------------------
 from selenium import webdriver
-import argparse
+from vivian_test_utils import setup_webdriver
 import unittest
 import re
 import time
@@ -38,14 +38,8 @@ class test_about(unittest.TestCase):
     self.assertTrue(re.search("VHA Business Function Framework",about_para.text))
 
 if __name__ == '__main__':
-  parser = argparse.ArgumentParser(description="Access the 'About' Text of the ViViaN(TM) webpage")
-  parser.add_argument("-r", dest='webroot', required=True, help="Web root of the ViViaN(TM) instance to test.  eg. http://code.osehra.org/vivian/")
-  parser.add_argument("-b", dest='browser', default="FireFox", required=False, help="Web browser to use for testing [FireFox, Chrome]")
-  result = vars(parser.parse_args())
-  if result['browser'].upper() == "CHROME":
-    driver = webdriver.Chrome()
-  else:
-    driver = webdriver.Firefox()
-  driver.get(result['webroot'] + "/index.php")
+  description = "Access the 'About' Text of the ViViaN(TM) webpage"
+  page = "index.php"
+  webroot, driver, browser, is_local = setup_webdriver(description, page)
   suite = unittest.TestLoader().loadTestsFromTestCase(test_about)
   unittest.TextTestRunner(verbosity=2).run(suite)
