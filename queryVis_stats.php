@@ -58,11 +58,14 @@
       $("#vivSelect").append("<option val='"+filesArray[localFile]+"'>"+filesArray[localFile]+"</option>");
     }
   </script>
-<p>The information can be classified with by the following fields</p>
 <div>
-  <select id="attributeSelect"></select>
-  <img id="loadingImg" style="display:none;" src="./images/loading-big.gif" alt="Loading Data"></img>
+  <h4 id="displayedName"/>
 </div>
+<div id="attSelectDiv">
+  <p>The information can be classified with by the following fields</p>
+  <select id="attributeSelect"></select>
+</div>
+  <img id="loadingImg" style="display:none;" src="./images/loading-big.gif" alt="Loading Data"></img>
 <div id="dialog-modal" style="display:none;">
         <div id='filteredObjs'></div>
     </div>
@@ -205,7 +208,6 @@ $('#filteredObjs').accordion({heightStyle: 'content'}).show();
             }
           }
         })
-        console.log($('#tables_placeholder'))
         $('#tables_placeholder').append(tableHeader += "</tr>\n</thead>\n<tbody>\n</tbody>")
         $("#attributeSelect").append("<option selected disabled> -- select an option -- </option>")
         for (key in dataSummary) {
@@ -244,7 +246,6 @@ $('#filteredObjs').accordion({heightStyle: 'content'}).show();
     //  OSEHRA Modification to access different type of information
     selectValue = d3.select('#attributeSelect').property('value').split("(")[0].trim()
     for (object in jsonObj) {
-      console.log(object);
       var tableEntry = "<tr>"
       for (val in dataNameIENDict) {
         var tableEntryVal = " "
@@ -307,6 +308,7 @@ $('#filteredObjs').accordion({heightStyle: 'content'}).show();
   d3.select("#vivSelect").on("change", function(){
     $("#loadingImg").show()
     selectValue = d3.select('#vivSelect').property('value')
+    $("#displayedName").text("Displaying information from: "+ selectValue);
     d3.json(selectValue, function(error, data) {
       totalJSON = data
       parseJSON(data);
@@ -316,12 +318,12 @@ $('#filteredObjs').accordion({heightStyle: 'content'}).show();
   d3.select("#toggleDisplay").on("click", function(){
     if ($("#pie_placeholder").attr("style") == "display: block;" )  {
       $("#pie_placeholder").hide()
-      $("#attributeSelect").hide()
+      $("#attSelectDiv").hide()
       $("#tables_placeholder_wrapper").show()
       $("#tables_placeholder").show()
     } else {
       $("#pie_placeholder").show()
-      $("#attributeSelect").show()
+      $("#attSelectDiv").show()
       $("#tables_placeholder_wrapper").hide()
     }
   });
@@ -343,9 +345,15 @@ $('#filteredObjs').accordion({heightStyle: 'content'}).show();
           $("#tables_placeholder_wrapper").hide()
         }catch(err){
           window.alert("Error parsing uploaded file\nerror message: " + err.message);
+          $("#attributeSelect").empty()
+          $("#displayedName").empty()
+          var svg = d3.select('#pie_placeholder')
+          svg.selectAll("*").remove();
+          $("#loadingImg").hide()
           return;
         }
       };
+      $("#displayedName").text("Displaying information from: "+ uploadFile.name);
       filereader.readAsText(uploadFile);
 
     }

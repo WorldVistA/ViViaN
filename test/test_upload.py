@@ -16,6 +16,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import Select
+from vivian_test_utils import setup_webdriver
 import argparse
 import os
 import re
@@ -84,15 +85,8 @@ class test_upload(unittest.TestCase):
     time.sleep(1)
   
 if __name__ == '__main__':
-  parser = argparse.ArgumentParser(description="Test the upload_vis page of the ViViaN(TM) tool, the VistA Package visualization")
-  parser.add_argument("-r", dest='webroot', required=True, help="Web root of the ViViaN(TM) instance to test.  eg. http://code.osehra.org/vivian/")
-  parser.add_argument("-b", dest='browser', default="FireFox", required=False, help="Web browser to use for testing [FireFox, Chrome]")
-  result = vars(parser.parse_args())
-  if result['browser'].upper() == "CHROME":
-    driver = webdriver.Chrome()
-  else:
-    driver = webdriver.Firefox()
-  webroot = result['webroot']
-  driver.get(webroot + "/queryVis_stats.php")
+  description="Test the upload_vis page of the ViViaN(TM) tool, the VistA Package visualization"
+  page="queryVis_stats.php"
+  webroot, driver, browser, is_local = setup_webdriver(description, page)
   suite = unittest.TestLoader().loadTestsFromTestCase(test_upload)
   unittest.TextTestRunner(verbosity=2).run(suite)

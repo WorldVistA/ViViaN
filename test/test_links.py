@@ -106,6 +106,11 @@ class test_links(unittest.TestCase):
     driver.back()
     time.sleep(1)
 
+  def test_16_query_vis(self):
+    self.go_to_vivian_link('queryVis_stats', None, 'queryVis_stats.php')
+    driver.back()
+    time.sleep(1)
+
   # 'About' is tested in 'test_about'
 
   # Join the Visualization Working Group
