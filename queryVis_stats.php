@@ -39,8 +39,7 @@
 
 <div class="hint" style="position:relative;">
   <p>
-    This page will accept an JSON file and attempt to show the data in one of two forms: a pie chart and a filterable table.
-    to allow searching and filtering of the uploaded information.
+    This page will accept an JSON file and display the data in one of two forms: a pie chart or a table.
     For more information on the expected form of the uploaded JSON, see the following <a href="./Documentation/QueryVis_formatting.rst">file</a>
   </p>
 </div>
@@ -54,16 +53,28 @@
 
     var files = "<?php  foreach(glob('./files/dox/*.json') as $filename) { echo $filename.",";  };?>"
     filesArray = files.split(",")
+    filesArray.pop()
+    $("#vivSelect").append("<option selected disabled> -- select an local file -- </option>")
     for( var localFile in filesArray) {
       $("#vivSelect").append("<option val='"+filesArray[localFile]+"'>"+filesArray[localFile]+"</option>");
     }
+
+  function clearFilters() {
+    var table = $('#tables_placeholder').DataTable();
+    table
+      .search( '' )
+      .columns().search( '' )
+      .draw();
+    $("select").prop('selectedIndex', 0);
+    $('#tables_placeholder tfoot input').val('');
+  }
   </script>
 <div>
   <h4 id="displayedName"/>
 </div>
 <div id="attSelectDiv">
   <p>The information can be classified with by the following fields</p>
-  <select id="attributeSelect"></select>
+  <select id="attributeSelect"><option selected disabled> -- select an attribute -- </option></select>
 </div>
   <img id="loadingImg" style="display:none;" src="./images/loading-big.gif" alt="Loading Data"></img>
 <div id="dialog-modal" style="display:none;">
@@ -72,7 +83,7 @@
  </div>
 
 <svg style="display: block;" height=1000 width=1500 id="pie_placeholder"/>
-<table class="display dataTable" style="display: none;" height=1000 width=1500 id="tables_placeholder"/>
+<table class="display" style="display: none;" id="tables_placeholder"/>
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script type="text/javascript">
 
@@ -174,7 +185,7 @@ $('#filteredObjs').accordion({heightStyle: 'content'}).show();
         d3.select('#tables_placeholder_wrapper').remove()
         tableObj.destroy();
         tableObj = null;
-        $('<table class="display dataTable" height=1000 width=1500 id="tables_placeholder"/>').appendTo("body")
+        $('<table class="display" id="tables_placeholder"/>').appendTo("body")
     }
     tableHeader = "<thead>\n<tr>"
     if (Object.keys(parentJSONObj).length) {
@@ -209,13 +220,14 @@ $('#filteredObjs').accordion({heightStyle: 'content'}).show();
           }
         })
         $('#tables_placeholder').append(tableHeader += "</tr>\n</thead>\n<tbody>\n</tbody>")
-        $("#attributeSelect").append("<option selected disabled> -- select an option -- </option>")
+        $("#attributeSelect").append("<option selected disabled> -- select an attribute -- </option>")
         for (key in dataSummary) {
           $("#attributeSelect").append("<option>"+key+" (#"+dataNameIENDict[key]+")</option>")
         }
         renderTable(parentJSONObj);
     } else {
         alert("No data in JSON file.  Please try again!")
+        $("#file_selection").val('')
     }
     $("#loadingImg").hide()
     if ($("#pie_placeholder").attr("style") == "display: block;" )  {
@@ -244,7 +256,7 @@ $('#filteredObjs').accordion({heightStyle: 'content'}).show();
   }
   function renderTable(jsonObj) {
     //  OSEHRA Modification to access different type of information
-    selectValue = d3.select('#attributeSelect').property('value').split("(")[0].trim()
+    selectValue = d3.select('#displayedName').text().split(":")[1];
     for (object in jsonObj) {
       var tableEntry = "<tr>"
       for (val in dataNameIENDict) {
@@ -266,7 +278,20 @@ $('#filteredObjs').accordion({heightStyle: 'content'}).show();
               bAutoWidth: false,
               searchHighlight: true,
               buttons: [
-
+                {
+                  text: 'Toggle Columns',
+                  extend: 'colvis',
+                },
+                {
+                  text: 'Reset Columns',
+                  extend: 'colvisRestore',
+                },
+                {
+                  text: 'Clear Search',
+                  action: function ( e, dt, node, conf ) {
+                    clearFilters();
+                  }
+                },
                 {
                     extend: 'csv',
                     title: selectValue,
@@ -342,14 +367,21 @@ $('#filteredObjs').accordion({heightStyle: 'content'}).show();
           parentJSONObj = JSON.parse(txtRes);
           totalJSON = parentJSONObj
           parseJSON(parentJSONObj)
-          $("#tables_placeholder_wrapper").hide()
         }catch(err){
           window.alert("Error parsing uploaded file\nerror message: " + err.message);
+          // Empty Pie Chart information
           $("#attributeSelect").empty()
           $("#displayedName").empty()
+          $("#file_selection").val('')
           var svg = d3.select('#pie_placeholder')
           svg.selectAll("*").remove();
           $("#loadingImg").hide()
+
+            // Empty table information
+          d3.select('#tables_placeholder_wrapper').remove()
+          tableObj.destroy();
+          tableObj = null;
+          $('<table class="display" id="tables_placeholder"/>').appendTo("body")
           return;
         }
       };
