@@ -109,7 +109,7 @@ var shapeLegend = [{name: "Framework Grouping (Collapsed)", shape: "triangle-up"
 renderWindow();
 function renderWindow() {
   d3.json("files/bff.json", function(BFFjson) {
-    d3.json("files/Requirements.json", function(reqjson) {
+    d3.json("files/requirements.json", function(reqjson) {
       resetAllNode(BFFjson);
       chart.on("node", "event", "mouseover", node_onMouseOver)
          .on("node", "event","mouseout", node_onMouseOut)

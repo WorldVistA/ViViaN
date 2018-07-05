@@ -9,8 +9,8 @@
     <!-- JQuery Buttons -->
     <script>
       var pathDict = {
-                      "#19":{"prefix":"","fileLoc":"files/Menus/19", "sourceLoc":"files/19/19-", "initFile":"9","desc":"This page is displaying the menu entries from the OPTION file"},
-                      "#101":{"prefix":"protocol_","fileLoc":"files/Menus/101","sourceLoc":"files/101/101-","initFile":"2590","desc":"This page is displaying the menu entries from the PROTOCOL file"}
+                      "#19":{"prefix":"","fileLoc":"files/menus/19", "sourceLoc":"files/19/19-", "initFile":"9","desc":"This page is displaying the menu entries from the OPTION file"},
+                      "#101":{"prefix":"protocol_","fileLoc":"files/menus/101","sourceLoc":"files/101/101-","initFile":"2590","desc":"This page is displaying the menu entries from the PROTOCOL file"}
       }
       $(window).on('hashchange', function() {
         location.reload();
