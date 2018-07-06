@@ -68,6 +68,10 @@
     $("select").prop('selectedIndex', 0);
     $('#tables_placeholder tfoot input').val('');
   }
+  //Taken from https://stackoverflow.com/questions/3446170/escape-string-for-use-in-javascript-regex
+  function escapeRegExp(str) {
+    return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+  }
   </script>
 <div>
   <h4 id="displayedName"/>
@@ -144,7 +148,7 @@ function findObjects(d,attrOnly) {
     if(attrOnly) {
       return filteredJSON;
     }
-    filteredJSON = filteredJSON.filter(x => x[1][selectValue].indexOf(d.data.label) != -1)
+    filteredJSON = filteredJSON.filter(x => RegExp(escapeRegExp(d.data.label)+'($|[,}])',"g").test(x[1][selectValue]) )
     for (i in filteredJSON) {
       $("#filteredObjs").append("<h2>"+i+"</h2>")
       objDiv = "<div><ul>"
@@ -201,8 +205,9 @@ $('#filteredObjs').accordion({heightStyle: 'content'}).show();
                tableHeader += "<th>"+fieldName+"</th>\n"
             }
             if (parentJSONObj[d][entryVal].indexOf("{") != -1) {   //Checks to see if a multiple exists
-                var matchReg = new RegExp("[ ]?" + fieldName + ":[ ]+?.*?}","g")
-                var replaceReg = new RegExp(fieldName + "|^ |[:}{]","g")
+                //matchReg ensures that field name is found beyond the start of the string
+                var matchReg = new RegExp("(?<!^)"+fieldName + ":[ ]+?.+?[},]","g")
+                var replaceReg = new RegExp("^ |[}{]*","g")
                 foundEntries = parentJSONObj[d][entryVal].match(matchReg)
                 for (object in foundEntries) {
                     var tmp = foundEntries[object].replace(replaceReg,'')
