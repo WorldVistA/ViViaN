@@ -178,7 +178,23 @@ $('#filteredObjs').accordion({heightStyle: 'content'}).show();
        $('#dialog-modal').show();
   }
 
+  function resetSelectors() {
+      // Empty Pie Chart information
+      $("#attributeSelect").empty()
+      $("#attributeSelect").append("<option selected disabled> -- select an attribute -- </option>")
+      $("#displayedName").empty()
+      $("#vivSelect option:first").prop("selected", true);
+      $("#file_selection").val('')
+      var svg = d3.select('#pie_placeholder')
+      svg.selectAll("*").remove();
+      $("#loadingImg").hide()
 
+        // Empty table information
+      d3.select('#tables_placeholder_wrapper').remove()
+      tableObj = null;
+      $('<table class="display" id="tables_placeholder"/>').appendTo("body")
+      return;
+  }
   function parseJSON(parentJSONObj) {
     dataSummary = {}
     dataNameIENDict={}
@@ -232,7 +248,7 @@ $('#filteredObjs').accordion({heightStyle: 'content'}).show();
         renderTable(parentJSONObj);
     } else {
         alert("No data in JSON file.  Please try again!")
-        $("#file_selection").val('')
+        resetSelectors()
     }
     $("#loadingImg").hide()
     if ($("#pie_placeholder").attr("style") == "display: block;" )  {
@@ -337,6 +353,7 @@ $('#filteredObjs').accordion({heightStyle: 'content'}).show();
   });
   d3.select("#vivSelect").on("change", function(){
     $("#loadingImg").show()
+    $("#file_selection").val('')
     selectValue = d3.select('#vivSelect').property('value')
     $("#displayedName").text("Displaying information from: "+ selectValue);
     d3.json(selectValue, function(error, data) {
@@ -374,24 +391,14 @@ $('#filteredObjs').accordion({heightStyle: 'content'}).show();
           parseJSON(parentJSONObj)
         }catch(err){
           window.alert("Error parsing uploaded file\nerror message: " + err.message);
-          // Empty Pie Chart information
-          $("#attributeSelect").empty()
-          $("#displayedName").empty()
-          $("#file_selection").val('')
-          var svg = d3.select('#pie_placeholder')
-          svg.selectAll("*").remove();
-          $("#loadingImg").hide()
-
-            // Empty table information
-          d3.select('#tables_placeholder_wrapper').remove()
-          tableObj.destroy();
-          tableObj = null;
-          $('<table class="display" id="tables_placeholder"/>').appendTo("body")
-          return;
+          resetSelectors();
         }
       };
-      $("#displayedName").text("Displaying information from: "+ uploadFile.name);
-      filereader.readAsText(uploadFile);
+      if (this.files.length) {
+          $("#vivSelect option:first").prop("selected", true);
+          $("#displayedName").text("Displaying information from: "+ uploadFile.name);
+          filereader.readAsText(uploadFile);
+      } else { resetSelectors()}
 
     }
   });
