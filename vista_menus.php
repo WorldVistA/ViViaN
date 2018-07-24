@@ -84,17 +84,17 @@
       <div  class="tooltipTail"></div>
   </div>
 
-  <div class='hint' style="position:relative; left:20px; top:50px">
+  <div class='hint' style="position:relative; left:20px;">
     <p>
     This tree visualization represents the menu hierarchy of VistA. Hover over
     any of the entries in the tree to see the menu entry name and the security
     key (if any). Click on an item to see the menu entry details.
     </p>
   </div>
-  <h4 id="pageDesc" style="position:relative; left:20px; top:50px"></h4>
+  <h4 id="pageDesc" style="position:relative; left:20px;"></h4>
 
-<div id="legend_placeholder" style="position:relative; left:20px; top:50px;"></div>
-<div style="position:relative; left:20px; top:60px; width:400px;">
+<div id="legend_placeholder" style="position:relative; left:20px;"></div>
+<div style="position:relative; left:20px; width:400px;">
   <div id="packageSearch">
     <div><label title="Show the structure of a top level menu by entering the name of the entry."
                 for="autocomplete">Select a top level menu:</label></div>

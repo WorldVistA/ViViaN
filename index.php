@@ -57,8 +57,8 @@
     </div>
   </div>
 </div>
-<div id="legend_placeholder" style="position:relative; left:20px; top:50px;"></div>
-<div style="position:relative; width:400px; left:20px; top:65px;">
+<div id="legend_placeholder" style="position:relative; left:20px; margin-top: -10px;"></div>
+<div style="position:relative; width:400px; left:20px;">
   <div id="packageSearch">
     <div><label for="option_autocomplete"> Search for a package:</label></div>
     <div><input id="option_autocomplete" size="40" onfocus="clearAutocomplete()"></div>
@@ -422,7 +422,7 @@ function change_circle_color(d){
           return category.color;
         }
       }
-      else { 
+      else {
         return category.color;
       }
     }
@@ -487,7 +487,7 @@ function createLegend() {
       .attr("x", 13)
       .attr("dy", ".31em")
       .text(function(d) {
-        return  d.distribution; 
+        return  d.distribution;
       });
 
   var legend = legendDistChart.svg()

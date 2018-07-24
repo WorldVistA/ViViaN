@@ -21,7 +21,7 @@
 <body>
   <?php include_once "vivian_osehra_image.php" ?>
 
-  <div style="position:relative; left:20px; top:50px">
+  <div style="position:relative; left:20px;">
     <div style="font-size:0.8em">
       <form id="frm-dep">
         <label for="list-dep">Sorted By:</label>
@@ -43,7 +43,7 @@
     </div>
   </div>
 
-  <div id="container" style="position:relative; top:55px; width: 90%; height: 4200px; margin: 0 auto"></div>
+  <div id="container" style="position:relative; width: 90%; height: 4200px; margin: 0 auto"></div>
 
  <style type="text/css">
   ${demo.css}

@@ -21,7 +21,7 @@
 <body>
 <?php include_once "vivian_osehra_image.php" ?>
 
-<div class="grid" style="padding: 50px 10px 10px 10px;">
+<div class="grid" style="padding: 10px 10px 10px 10px;">
   <div style="width: 20%; float: left;">
     <div class="row" style="padding-left: 10px; padding-bottom: 10px;">
       <div><label for ="search" title="Select Package">Search for a package:</label></div>

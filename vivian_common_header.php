@@ -1,7 +1,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <link type="text/css" rel="stylesheet" href="style.css"/>
 <!-- Latest compiled and minified JavaScript -->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
@@ -10,3 +10,19 @@
 <script src="d3/d3.v3.min.js" charset="utf-8"></script>
 <script src="d3.treeview.js" charset="utf-8"></script>
 <script src="d3.dependencyedgebundling.js" charset="utf-8"></script>
+
+
+<link rel="stylesheet" type="text/css" href="./css/vivian.css"/>
+<link rel="stylesheet" type="text/css" href="./datatable/css/jquery.dataTables.css"/>
+<link rel="stylesheet" type="text/css" href="./datatable/css/buttons.dataTables.css"/>
+<link rel="stylesheet" type="text/css" href="./datatable/css/dataTables.searchHighlight.css"/>
+
+<script type="text/javascript" src="./datatable/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="./datatable/js/buttons.colVis.min.js"></script>
+<script type="text/javascript" src="./datatable/js/jquery.highlight.js"></script>
+<script type="text/javascript" src="./datatable/js/dataTables.searchHighlight.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script>

@@ -50,9 +50,7 @@
         <div id="nsNSR"><a target='_blank' href="files/requirements/All-Requirement%20List.html">All Needs</a></div>
       </div>
     </div>
-  </br>
-  </br>
-  <div id='pageDescription' class='hint'  style="position:relative; top:10px; left:20px; margin-right:200px;">
+  <div id='pageDescription' class='hint' style="position:relative; top: -10px; left:20px; margin-right:200px;">
     <p>
     This tree graph represents the VHA Business Function Framework (BFF).
     The BFF is a hierarchical construct that describes VHA business functions
@@ -70,15 +68,13 @@
     <p>The current information is based on BFF version 2.12.</p>
   </div>
 
-  <div id="buttons" style="position:relative; top:10px; right:-20px">
+  <div id="buttons" style="position:relative; right:-20px">
     <button onclick="_collapseAllNode()">Collapse All</button>
     <button onclick="_resetAllNode()">Reset</button>
     <input type="checkbox" id="showUpdates" onclick="renderWindow()"> Show new and updated requirements</input>
-    <!-- Hidden button for testing only. Add after active buttons. -->
-    <button onclick="_expandAllNode()" style="visibility: hidden;">DO NOT DISPLAY</button>
   </div>
-  <div id="legend_placeholder" style="position:relative; left:20px; top:20px;"></div>
   </br>
+  <div id="legend_placeholder" style="position:relative; left:20px;"></div>
   <div id="treeview_placeholder"></div>
 
 <script type="text/javascript">

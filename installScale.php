@@ -47,11 +47,8 @@
       <div class="tooltipTail"></div>
     </div>
   </div>
-  </br>
-  </br>
-  <div id="descrHeader" ></div>
-  </br>
-   <div>
+
+  <div style="position:relative; left:20px; top:-10px;">
     <label title="Search for an option by entering the name of the option that you wish to find."> Install information for package:</label>
     <input id="package_autocomplete" size="40"></br>
     <label title="Set the data parameters for the timeline.">Select date range to view:</label>
@@ -61,7 +58,6 @@
     <button id="timeline_date_reset">Reset</button>
   </div>
   <svg></svg>
-
 
 <div id="treeview_placeholder"/>
 

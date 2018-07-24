@@ -21,14 +21,14 @@
 <body>
   <?php include_once "vivian_osehra_image.php" ?>
 
-  <div class="hint" style="position:relative; left:20px; top:50px">
+  <div class="hint" style="position:relative; left:20px;">
     <p>This circle plot captures the interrelationships among VistA packages.</p>
     <p>Hover over any of the packages in this graph to see incoming links (dependents)
     in one color and the outgoing links (dependencies) in a second.
     Click on any of the packages to view package dependency details.</p>
   </div>
 
-  <div style="position:relative; top:75px; left:20px">
+  <div style="position:relative; left:20px">
     <div id="legend_placeholder" style="float: left;"></div>
     <div style="float: left; margin-left:15px; margin-right:35px;">
       <label class="btn-primary btn-sm">

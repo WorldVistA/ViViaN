@@ -48,9 +48,7 @@
       <div class="tooltipTail"></div>
     </div>
   </div>
-  </br>
-  </br>
-  <div id="descrHeader">
+  <div id="descrHeader" style="position:relative; left:20px; top: -10px;">
     <p>The information in this visualization is not complete.  The majority of the installs may
        not have dependency information.  For the best examples of the dependency display, select
        the following "Package" and "Install" pairs:
@@ -63,18 +61,20 @@
       <li> Integrated Billing: IB*2.0*497 </li>
     </ul>
     <p> The interaction below now contains the ability to pan, via a click-and-drag with the mouse, and zoom, via the scroll wheel.
-  </div>
-   <div>
-    <label title="Search for an option by entering the name of the option that you wish to find."> Install information for package:</label>
-    <input id="package_autocomplete" size="40"></br>
-    <div id="installEntryAuto">
-    <label for ="install_autocomplete" title="Select Patch"> Patch Dependency:</label>
-    <input id="install_autocomplete" size="40"></br>
+
+    <div>
+      <label title="Search for an option by entering the name of the option that you wish to find."> Install information for package:</label>
+      <input id="package_autocomplete" size="40"></br>
+    </div>
+    <div id="installEntryAuto" style="margin-top:10px;">
+      <label for ="install_autocomplete" title="Select Patch"> Patch Dependency:</label>
+      <input id="install_autocomplete" size="40"></br>
     </div>
     <div id="installEntryDrop" style="display: none">
       <label for ='install_dropdown' title="Select Patch"> Patch Dependency:</label>
       <select id="install_dropdown"></select>
     </div>
+    </br>
     <div id="buttons">
         <button onclick="_expandAllNode()">Expand All</button>
         <button onclick="_collapseAllNode()">Collapse All</button>
