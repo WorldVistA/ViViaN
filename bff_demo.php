@@ -200,7 +200,10 @@ function node_onMouseOver(d) {
     if (d.number !== undefined){
       header.text("" + d.number);
     }
-    else{
+    else if (d.isRequirement) {
+      header.html("Name: " + d.name + " </br></br> Type: " + d.type + "</br></br>Date of Update: " + d.dateUpdated);
+    }
+    else {
       return;
     }
     toolTip.style("left", (d3.event.pageX + 20) + "px")
@@ -219,6 +222,11 @@ function getRequirementsURL(d){
   }
 
   return outstring
+}
+
+function node_onMouseOut(d) {
+  header.text("");
+  toolTip.style("opacity", "0");
 }
 
 function generateNSRURL(d) {
