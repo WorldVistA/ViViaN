@@ -116,8 +116,7 @@ class test_links(unittest.TestCase):
   # Join the Visualization Working Group
   def test_17_visualization_working_group(self):
     global driver
-    nav_button = driver.find_element_by_xpath('//*[@id="navigation_buttons"]/nav/div/ul[2]/li[2]/a')
-    nav_button.click()
+    driver.find_element_by_id("workinggroup").click()
     time.sleep(1)
     self.assertEqual(driver.current_url, 'https://www.osehra.org/content/visualization-open-source-project-group')
     driver.back()

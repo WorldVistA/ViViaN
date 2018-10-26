@@ -6,7 +6,8 @@
     ViViaN<sup style="font-size: 12px;">TM</sup>(<u>Vi</u>sualizing <u>Vi</u>stA <u>a</u>nd <u>N</u>amespace)
   </p>
   <button style="font-size: 12px; margin-top: 5px; margin-bottom: 5px; margin-left: 500px; padding: 10px;"
-          onclick="window.location.href='http://www.osehra.org/content/visualization-open-source-project-group'">
+          onclick="window.location.href='http://www.osehra.org/content/visualization-open-source-project-group'"
+          id="workinggroup">
     Join the Visualization Working Group
   </button>
 </div>
@@ -15,16 +16,16 @@
   <nav class="navbar navbar-default navbar-static-top">
     <div class="container-fluid">
       <ul class="nav navbar-nav">
-        <li><a class="brand" href="index.php"  style="height:50px; padding: 0px;"><img width="137" height="50" src="http://osehra.org/sites/default/files/vivian.png"></img></a></li>
-        <li class="dropdown">
+        <li><a class="brand" href="index.php" id="vivian"  style="height:50px; padding: 0px;"><img width="137" height="50" src="http://osehra.org/sites/default/files/vivian.png"></img></a></li>
+        <li class="dropdown" id="vista-menus">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Menus<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="vista_menus.php#19">VistA Option Menus</a></li>
-            <li><a href="vista_menus.php#101">VistA Protocol Menus</a></li>
+            <li><a href="vista_menus.php#19" id="option_menu">VistA Option Menus</a></li>
+            <li><a href="vista_menus.php#101" id="protocol_menu">VistA Protocol Menus</a></li>
           </ul>
         </li>
 
-        <li><a href="bff_demo.php">VHA BFF & Requirements</a></li>
+        <li><a href="bff_demo.php" id="bff-demo">VHA BFF & Requirements</a></li>
 
         <li class="dropdown" id="package-dependency">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Package Dependency<span class="caret"></span></a>
@@ -35,11 +36,11 @@
           </ul>
         </li>
 
-        <li class="dropdown">
+        <li class="dropdown" id="vista-install">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Install<span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="installScale.php">Install Timeline</a></li>
-            <li><a href="patchDependency.php">Install Dependency Tree</a></li>
+          <ul class="dropdown-menu" id="vista-install">
+            <li><a href="installScale.php" id="install-timeline">Install Timeline</a></li>
+            <li><a href="patchDependency.php" id="install-tree">Install Dependency Tree</a></li>
           </ul>
         </li>
 
@@ -67,10 +68,10 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="javascript:aboutClicked();">About</a></li>
-        <li class="dropdown">
+        <li class="dropdown"  id="foia-vista">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">FOIA VistA <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="vxvista">DSS vxVistA</a></li>
+          <ul class="dropdown-menu" id="vxvista">
+            <li><a href="vxvista" id="vxvista">DSS vxVistA</a></li>
           </ul>
         </li>
 
