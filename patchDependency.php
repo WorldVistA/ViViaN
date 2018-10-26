@@ -18,7 +18,6 @@
         });
 
         d3.json('files/packages_autocomplete.json', function(json) {
-          json.push("MultiBuild");
           json.push("All Patches");
           var sortedjson = json.sort(function(a,b) { return a.localeCompare(b); });
           $("#package_autocomplete").autocomplete({
@@ -49,18 +48,28 @@
     </div>
   </div>
   <div id="descrHeader" style="position:relative; left:20px; top: -10px;">
-    <p>The information in this visualization is not complete.  The majority of the installs may
-       not have dependency information.  For the best examples of the dependency display, select
-       the following "Package" and "Install" pairs:
+    <p>The information in this visualization is not guaranteed to be complete.
+       <b>Please note: Patches without dependencies may actually have dependencies due to
+       page display limits.</b>
     </p>
+    <p>
+       For good examples of patches with a long history, select one of the following
+       package/build pairs:
+    </p>
+    <div id="dialog-modal">
+      <div id="accordion">
+        <h3>DOX Links</h3>
+        <div id="description"></div>
+      </div>
+    </div>
     <ul>
-      <li> Barcode Medication Administration: PSB*3.0*68  </li>
+      <li> Barcode Medication Administration: PSB*3.0*68 <== displayed on load</li>
       <li> Pharmacy Data Management: PSS*1.0*168 </li>
       <li> Scheduling: SD*5.3*581 </li>
       <li> Registration: DG*5.3*841 </li>
       <li> Integrated Billing: IB*2.0*497 </li>
     </ul>
-    <p> The interaction below now contains the ability to pan, via a click-and-drag with the mouse, and zoom, via the scroll wheel.
+    <div id="legend_placeholder" style="position:relative; left:20px;"></div>
 
     <div>
       <label title="Search for an option by entering the name of the option that you wish to find."> Install information for package:</label>
@@ -76,8 +85,6 @@
     </div>
     </br>
     <div id="buttons">
-        <button onclick="_expandAllNode()">Expand All</button>
-        <button onclick="_collapseAllNode()">Collapse All</button>
         <button onclick="_resetAllNode()">Reset</button>
         <button onclick="_centerDisplay()">Center</button>
     </div>
@@ -92,8 +99,12 @@ var chart = d3.chart.treeview()
               .width(2000)
               .margins({top:0, left:180, right:0, bottom:0})
               .textwidth(220)
-              .nodeTextHyperLink(getInstallDetailLink)
               .pannableTree(true);
+var legendShapeChart = d3.chart.treeview()
+              .height(50)
+              .width(1000)
+              .margins({top:10, left:10, right:0, bottom:0})
+              .textwidth(110);
 var initPackage = "Barcode Medication Administration";
 var initInstall = "PSB*3.0*68";
 var targetPackage = initPackage;
@@ -101,6 +112,12 @@ var toolTip = d3.select(document.getElementById("toolTip"));
 var header = d3.select(document.getElementById("header1"));
 var installDateTip = d3.select(document.getElementById("installDate"));
 var originalTransform = [300,300];
+var patchListing;
+var shapeLegend = [{name: "Build(with Dependencies)", shape: "triangle-up", color: "green", fill: "green"},
+                   {name: "Build(without Dependencies)", shape:"circle", color: "green", fill: "white"},
+                   {name: "Duplicate Build(with Dependencies)", shape:"diamond", color: "red", fill: "red"},
+                   {name: "Duplicate Build(without Dependencies)", shape:"diamond", color: "red", fill: "white"}]
+d3.select("#legend_placeholder").datum(null).call(legendShapeChart);
 <?php include_once "vivian_tree_layout_common.js" ?>
 /*
 *  Function to handle the graph when selecting a new package
@@ -157,8 +174,11 @@ function installAutocompleteChanged(eve, ui) {
   showDependency(ui.item.parent,ui.item.label);
 }
 
-function appendPackageInformation (d,json){
+function appendPackageInformation (d, json, depth){
   var id = ''
+  if(depth > 15) {
+      return d;
+  }
   d.forEach(function (child) {
       var target = '';
       var packageInformation = json[child.package];
@@ -166,8 +186,11 @@ function appendPackageInformation (d,json){
       if(target) {
         child.installDate= target.installDate;
         child.ien  = target.ien;
+        child['BUILD_ien']  = target['BUILD_ien'];
+        child.multi = target.multi;
         if (target.children) {
-          child.children = appendPackageInformation(target.children,json);
+          depth++
+          child.children = appendPackageInformation(target.children,json, depth);
         }
       }
   });
@@ -195,21 +218,19 @@ function node_onMouseOut(d) {
                 .filter( function (node) {return (node.name == d.name)})
                 .classed('active',false);
 }
+function toggle(d) {
+    if (d.children) {
+        d._children = d.children;
+        d.children = null;
+    } else {
+        d.children = d._children;
+        d._children = null;
+    }
+  }
 
-
-function getInstallDetailLink(node) {
-  return "files/9_7/9.7-" + node.ien + ".html";
-}
-
-
-function _expandAllNode() {
-  expandAllNode(chart.nodes());
-  chart.update(chart.nodes());
-}
-
-function _collapseAllNode() {
-  collapseAllNode(chart.nodes());
-  chart.update(chart.nodes());
+function  node_onNodeClick(d) {
+    toggle(d);
+    chart.update(chart.nodes())
 }
 
 function _resetAllNode() {
@@ -225,32 +246,103 @@ function _centerDisplay() {
 function showDependency(parent, entryNo) {
   d3.json("files/install_information.json", function(json) {
 
-    chart.on("path", "event","click", chart.onNodeClick)
+    chart.on("path", "event","click", node_onNodeClick)
       .on("node", "event", "mouseover", node_onMouseOver)
       .on("node", "event","mouseout", node_onMouseOut)
       /*.on("text", "attr", "cursor", function(d) {
          return d.hasLink !== undefined && d.hasLink ? "pointer" : "hand";
        })
       .on("text", "attr", "fill", change_node_color)
-      .on("path", "style", "fill", change_circle_color)*/
+      .on("path", "style", "fill", change_circle_color)
+      */
+      .on("text", "event", "click", text_onMouseClick)
       .on("path", "attr", "r", function(d) { return 7 - d.depth; });
     var root = json[parent][entryNo];
+    patchListing = []
     if(root.hasOwnProperty("children")) {
-      root.children = appendPackageInformation(root.children,json)
+      root.children = appendPackageInformation(root.children,json,0)
     }
 
     d3.select("#treeview_placeholder").datum(root).call(chart);
     chart.tree().nodeSize([15,0]);
-
+    var nodes = d3.selectAll('.node');
+    var nodeDepth = 0;
+    while (true) {
+      var newNames = []
+      var subset = nodes.filter(function(x) { return x.depth == nodeDepth })
+      if ((subset[0].length == 0)) {break;}
+      subset.each(function(d) {
+        if (patchListing.indexOf(d.name) == -1) {
+            newNames.push(d.name);
+        } else {
+            d.isDuplicate = true;
+        }
+      })
+      nodeDepth++
+      patchListing = patchListing.concat(newNames);
+    }
     chart.svg().attr("transform","translate("+originalTransform+")")
     resetAllNode(chart.nodes());
     chart.update(chart.nodes())
-    
+
   });
+}
+
+function text_onMouseClick(d) {
+  console.log(d)
+  var modalTitle = d.name;
+  if (d.number){modalTitle = "" + d.number + ": " + modalTitle }
+  var overlayDialogObj = {
+    autoOpen: true,
+    height: 'auto',
+    width: 700,
+    modal: true,
+    position: {my: "center center-50", of: window},
+    title: modalTitle,
+    open: function(){
+        $('#description').html(
+        `<a target="_blank"  href="files/9_6/9.6-${d['BUILD_ien']}.html">BUILD(#9.6) Information</a><br>
+        <a target="_blank"  href="files/9_7/9.7-${d.ien}.html">INSTALL(#9.7) Information</a>`
+        );
+    },
+  };
+  $('#dialog-modal').dialog(overlayDialogObj).show();
+  d3.event.preventDefault();
+  d3.event.stopPropagation();
+}
+function createShapeLegend() {
+  var shapeLegendDisplay = legendShapeChart.svg().selectAll("g.shapeLegend")
+      .data(shapeLegend)
+      .enter().append("svg:g")
+      .attr("class", "shapeLegend")
+      .attr("transform", function(d, i) { return "translate("+(i * 240) +", 25)"; });
+
+  shapeLegendDisplay.append("path")
+      .attr("class", function(d) {return d.name;})
+      .attr("d", d3.svg.symbol().type(function(d) { return d.shape;}))
+      .attr("fill",function(d) {return d.fill;})
+      .attr("stroke",function(d) {return d.color;})
+      .attr("r", 3);
+
+  shapeLegendDisplay.append("svg:text")
+      .attr("class", function(d) {return d.name;})
+      .attr("x", 13)
+      .attr("dy", ".31em")
+      .text(function(d) {
+        return  d.name;
+      });
+
+  var shapeLegendDisplay = legendShapeChart.svg();
+  shapeLegendDisplay.append("text")
+          .attr("x", 0)
+          .attr("y", 10 )
+          .attr("text-anchor", "left")
+          .style("font-size", "16px")
+          .text("Shape Legend");
 }
 $("#package_autocomplete").val(initPackage);
 showDependency(initPackage,initInstall)
-
+createShapeLegend()
     </script>
   </body>
 </html>

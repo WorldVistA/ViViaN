@@ -225,10 +225,10 @@ d3.chart.treeview = function(option) {
     var shape = "circle";
     if (d.isRequirement) {
       shape = "cross"
+    } else if (d.isDuplicate) {
+      shape = "diamond";
     } else if ((d.children || d._children) && !d.leafFunction) {
       shape = "triangle-up";
-    } else if (d.hasSubpackage) {
-      shape = "diamond";
     } else if (d.isSubpackage) {
       shape = "square";
     }
@@ -276,7 +276,8 @@ d3.chart.treeview = function(option) {
                 var o = {x: source.x0, y: source.y0};
                 return _diagonal({source: o, target: o});
             })
-            .style("stroke-dasharray",function(d) {if (d.target.isRequirement) return ("3, 3")});
+            .style("stroke-dasharray",function(d) {if (d.target.isRequirement) return ("3, 3")})
+            .style("stroke-dasharray",function(d) {if (d.source.multi > -1) return ("2, 2")});
 
     link.transition()
             .attr("d", _diagonal);
@@ -302,6 +303,7 @@ d3.chart.treeview = function(option) {
   function fillNodeCircle(d) {
     var color = "#1bb15c"
     if (d.hasRequirements) { color = "#7C84DE"}
+    if (d.isDuplicate) {  color = "#ED6F5B"}
     return d._children ? color : "#FFF";
   }
   function findNodeStroke(d) {
@@ -309,6 +311,7 @@ d3.chart.treeview = function(option) {
     if (d.hasRequirements || d.isRequirement) { color = "#7C84DE"}
     if (d.recentUpdate == "Update") {color = "#DC7A20"}
     if (d.recentUpdate == "New Requirement") {color = "#B03A57 "}
+    if (d.isDuplicate) {color = "#ED6F5B"}
     return color
   }
 
