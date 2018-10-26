@@ -28,6 +28,7 @@ class test_installscale(unittest.TestCase):
 
   def test_01_packageAutocomplete(self):
     global driver
+    time.sleep(10)
     packageAuto = driver.find_element_by_id('package_autocomplete')
     startDateBox = driver.find_element_by_id('timeline_date_start')
     origDate = startDateBox.get_attribute("value")

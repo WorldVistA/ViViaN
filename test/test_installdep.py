@@ -29,11 +29,11 @@ class test_installdep(unittest.TestCase):
 
   def test_01_collapse_all(self):
     global driver
-    time.sleep(2)
+    time.sleep(3)
     oldSize = len(driver.find_elements_by_class_name('node'))
     button = driver.find_element_by_xpath("//button[contains(@onclick,'_collapseAllNode')]")
     button.click()
-    time.sleep(1)
+    time.sleep(2)
     newSize = len(driver.find_elements_by_class_name('node'))
     self.assertTrue(oldSize > newSize, "Collapse all did not reduce the amount of nodes")
 
