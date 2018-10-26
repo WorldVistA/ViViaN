@@ -15,18 +15,19 @@
       $(window).on('hashchange', function() {
         location.reload();
       });
-      if (location.hash != "#19" && location.hash != "#101" ) {
-         location.hash="#19"
+      [hash,nameVal] = location.hash.split("?")
+      if (hash != "#19" && hash != "#101" ) {
+         hash="#19"
       }
       $(function() {
         $( "button" ).button().click(function(event){
           event.preventDefault();
         });
-        fileName = window.location.href.substring(window.location.href.lastIndexOf('/')+1)
+        fileName = window.location.href.substring(window.location.href.lastIndexOf('/')+1,window.location.href.lastIndexOf('?'))
         $('a[href="'+fileName+'"]').parents("#navigation_buttons li").each(function (i) {
             $(this).removeClass().addClass("active");
         });
-        d3.json('files/'+pathDict[location.hash]["prefix"]+'menu_autocomplete.json', function(json) {
+        d3.json('files/'+pathDict[hash]["prefix"]+'menu_autocomplete.json', function(json) {
           var sortedjson = json.sort(function(a,b) { return a.label.localeCompare(b.label); });
           $("#autocomplete").autocomplete({
             source: sortedjson,
@@ -35,7 +36,7 @@
           }).data('autocomplete')/*._trigger('select')*/;
         });
 
-        d3.json('files/'+pathDict[location.hash]["prefix"]+'option_autocomplete.json', function(json) {
+        d3.json('files/'+pathDict[hash]["prefix"]+'option_autocomplete.json', function(json) {
           var sortedjson = json.sort(function(a,b) { return a.label.localeCompare(b.label); });
           // Note: vivian_tree_layout_common expects this control
           // to be called 'option_autocomplete'.
@@ -60,6 +61,13 @@
              //*******************************************************
             }
           }).data('autocomplete')/*._trigger('select')*/;
+          if(nameVal !== undefined) {
+            $("#option_autocomplete").val(decodeURI(nameVal.substr(5)).replace(/[+]/g, ' '))
+            $("#option_autocomplete").autocomplete('search');
+            $(".ui-menu-item")[0].click()
+          } else {
+              resetMenuFile(pathDict[hash]["fileLoc"]+"/VistAMenu-"+pathDict[hash]["initFile"]+".json");
+          }
         });
       });
     </script>
@@ -142,7 +150,7 @@ var legendTypeChart = d3.chart.treeview()
 
 var shapeLegend = [{name: "Menu", shape: "triangle-up"},
                    {name: "Entry", shape:"circle"}]
-d3.select("#pageDesc").text(d3.select("#pageDesc").text() + pathDict[location.hash]['desc'] )
+d3.select("#pageDesc").text(d3.select("#pageDesc").text() + pathDict[hash]['desc'] )
 chart.on("text","attr","fill",color_by_type);
 var originalTransform = [300,0];
 var selectedIndex=0;
@@ -203,12 +211,12 @@ function color_filter(d) {
 }
 
 function autoCompleteChanged(eve, ui) {
-  var menuFile = pathDict[location.hash]["fileLoc"]+"/VistAMenu-" + ui.item.id + ".json";
+  var menuFile = pathDict[hash]["fileLoc"]+"/VistAMenu-" + ui.item.id + ".json";
   resetMenuFile(menuFile);
 }
 
 function optionAutoCompleteChanged(eve, ui) {
-  var menuFile = pathDict[location.hash]["fileLoc"]+"/VistAMenu-" + ui.item.parent_id + ".json";
+  var menuFile = pathDict[hash]["fileLoc"]+"/VistAMenu-" + ui.item.parent_id + ".json";
   d3.json('files/menu_autocomplete.json', function(json) {
     for ( var i = 0; i < json.length; i++) {
       if( json[i].id == ui.item.parent_id) {
@@ -220,8 +228,6 @@ function optionAutoCompleteChanged(eve, ui) {
   target_option = $.trim(ui.item.value.split(":")[1]);
   resetMenuFile(menuFile);
 }
-
-resetMenuFile(pathDict[location.hash]["fileLoc"]+"/VistAMenu-"+pathDict[location.hash]["initFile"]+".json");
 
 function resetMenuFile(menuFile) {
   d3.json(menuFile, function(json) {
@@ -266,7 +272,7 @@ function node_onMouseClick(d) {
 }
 
 function getOptionDetailLink(node) {
-  return pathDict[location.hash]["sourceLoc"]+ node.ien + ".html";
+  return pathDict[hash]["sourceLoc"]+ node.ien + ".html";
 }
 
 function node_onMouseOver(d) {
