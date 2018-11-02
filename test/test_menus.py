@@ -21,6 +21,21 @@ import re
 import time
 import selenium_utils as Utils
 
+pageExtension="19"
+targetedMenus = {
+  "19": {
+     '4': "TimeKeeper Main Menu",
+     '5': ("XUTM ZTMON: [MTM]Monitor Taskman", "Systems Manager Menu"),
+     '8': ( "PSD PURCHASE ORDER REVIEW","Top Level Menu: Controlled Substances Menu"),
+     '12': ( "PSD MENU", "Controlled Substances Menu")
+  },
+  "101": {
+     '4': "APAR Research Menu",
+     '5': ("BPS PRTCL RSCH VIEW INSURANCE","Research Menu"),
+     '8': ( "PSO REJECT DISPLAY ADD COMMENT","Top Level Menu: Reject TRICARE/CHAMPVA Hidden Menu"),
+     '12': ("PSO REJECT TRICARE HIDDEN MENU:", "Reject TRICARE/CHAMPVA Hidden Menu")
+  }
+}
 class test_menus(unittest.TestCase):
 
   @classmethod
@@ -70,7 +85,7 @@ class test_menus(unittest.TestCase):
 
   def test_04_menu_autocomplete(self):
     global driver
-    target_menu_text = "TimeKeeper Main Menu"
+    target_menu_text = targetedMenus[pageExtension]['4']
     ac_form = driver.find_element_by_id("autocomplete")
     ac_form.clear()
     ac_form.send_keys(target_menu_text)
@@ -88,10 +103,10 @@ class test_menus(unittest.TestCase):
 
   def test_05_option_autocomplete(self):
     global driver
-    target_option_text = "XUTM ZTMON: [MTM]Monitor Taskman"
+    (target_option_text, rootMenu) = targetedMenus[pageExtension]['5']
     ac_form = driver.find_element_by_id("option_autocomplete")
     ac_form.clear()
-    ac_form.send_keys("monitor taskman")
+    ac_form.send_keys(target_option_text)
     time.sleep(1)
     ac_list = driver.find_elements_by_class_name('ui-menu-item')
     option_names = []
@@ -102,7 +117,7 @@ class test_menus(unittest.TestCase):
       self.fail("Failed to find " + target_option_text)
     time.sleep(1)
     node_list = driver.find_elements_by_class_name('node')
-    self.assertEqual(node_list[0].text, "Systems Manager Menu")
+    self.assertEqual(node_list[0].text, rootMenu)
 
   def DISABLED_test_06_option_autocomplete_path(self):
     global driver
@@ -144,8 +159,7 @@ class test_menus(unittest.TestCase):
 
   def test_08_option_autocomplete_menuDisplay(self):
     global driver
-    target_option_text = "PSD PURCHASE ORDER REVIEW"
-    target_option_menu_text = "Top Level Menu: Controlled Substances Menu"
+    (target_option_text, target_option_menu_text) = targetedMenus[pageExtension]['8']
     ac_form = driver.find_element_by_id("option_autocomplete")
     ac_form.clear()
     ac_form.send_keys(target_option_text)
@@ -211,9 +225,18 @@ class test_menus(unittest.TestCase):
     newVal = menuTreeDisplay.get_attribute("transform")
     self.assertNotEqual(oldval , newVal, "Resetting the pan from drag-and-drop did not change the transform")
 
+  def test_12_directLink(self):
+    global driver
+    (urlParam, rootMenu) =  targetedMenus[pageExtension]['12']
+    driver.get("%s?name=%s" % (driver.current_url,urlParam) )
+    time.sleep(3)
+    node_list = driver.find_elements_by_class_name('node')
+    self.assertEqual(node_list[0].text, rootMenu)
 if __name__ == '__main__':
   description = "Test the Install Timeline page of the ViViaN(TM) webpage"
   page = "vista_menus.php"
-  webroot, driver, browser, is_local = setup_webdriver(description, page)
-  suite = unittest.TestLoader().loadTestsFromTestCase(test_menus)
-  unittest.TextTestRunner(verbosity=2).run(suite)
+
+  for pageExtension in ['19','101']:
+    webroot, driver, browser, is_local = setup_webdriver(description, page + "#%s" % pageExtension)
+    suite = unittest.TestLoader().loadTestsFromTestCase(test_menus)
+    unittest.TextTestRunner(verbosity=2).run(suite)
