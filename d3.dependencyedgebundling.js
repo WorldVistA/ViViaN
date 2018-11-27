@@ -20,6 +20,29 @@ d3.chart.dependencyedgebundling = function(options) {
   var _minTextWidth = 5.5;
   var _radialTextHeight = 12;
   var _mouseOvered, _mouseOuted;
+  var _mouseOverArc, _mouseOutArc;
+
+  function findStartAngle(children) {
+      var min;
+      children.forEach(function(d) {
+         if (!d.children) {
+            if (!min || d.x < min) min = d.x;
+         }
+      });
+      if (min) return min - 1;
+      else return 0;
+  }
+
+  function findEndAngle(children) {
+      var max;
+      children.forEach(function(d) {
+         if (!d.children) {
+            if (!max || d.x > max)  max = d.x;
+         }
+      });
+      if (max) return max + 1;
+      else return 0;
+  }
 
   function resetDimension() {
     _radius = _diameter / 2;
@@ -124,7 +147,7 @@ d3.chart.dependencyedgebundling = function(options) {
           .attr("width", _diameter)
           .attr("height", _diameter)
           .append("svg:g")
-          .attr("transform", "translate(" + _radius + "," + _radius + ")");
+          .attr("transform", "translate(" + 720 + "," + 620 + ")");
 
       // get all the link and node
       var link = svg.append("g").selectAll(".link"),
@@ -132,6 +155,25 @@ d3.chart.dependencyedgebundling = function(options) {
       var pkgNodes  = _packageHierarchy(root);
       var nodes = cluster.nodes(pkgNodes),
           links = packageDepends(nodes);
+
+      var groupData = nodes.filter(function(d) { return d.children; });
+      var groupArc = d3.svg.arc()
+          .innerRadius(_innerRadius + 25)
+          .outerRadius(_innerRadius + 5)
+          .startAngle(function(d) {
+              return findStartAngle(d.children) * Math.PI / 180;
+          })
+          .endAngle(function(d) {
+              return findEndAngle(d.children) * Math.PI / 180;
+          });
+
+      svg.selectAll("g.arc")
+          .data(groupData)
+        .enter().append("svg:path")
+          .attr("d", groupArc)
+          .attr("class", "groupArc")
+          .on("mouseover", mouseoverarc)
+          .on("mouseout", mouseoutarc);
 
       link = link
           .data(bundle(links))
@@ -155,6 +197,7 @@ d3.chart.dependencyedgebundling = function(options) {
       }
       node = node.attr("class", "node")
           .attr("dy", ".31em")
+          .attr("dx", function(d) { return d.x < 180 ? 25 : -25; })
           .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + (d.y + _txtLinkGap) + ",0)" + (d.x < 180 ? "" : "rotate(180)"); })
           .style("text-anchor", function(d) { return d.x < 180 ? "start" : "end"; })
           .text(function(d) { return d.name; })
@@ -227,6 +270,18 @@ d3.chart.dependencyedgebundling = function(options) {
           _mouseOuted(d);
         }
       }
+
+      function mouseoverarc(d) {
+        if (_mouseOverArc) {
+          _mouseOverArc(d);
+        }
+      }
+
+      function mouseoutarc(d) {
+        if (_mouseOutArc) {
+          _mouseOutArc(d);
+        }
+      }
     });
   }
 
@@ -281,6 +336,18 @@ d3.chart.dependencyedgebundling = function(options) {
   chart.mouseOuted = function (d) {
     if (!arguments.length) return d;
     _mouseOuted = d;
+    return chart;
+  };
+
+  chart.mouseOverArc = function (d) {
+    if (!arguments.length) return d;
+    _mouseOverArc = d;
+    return chart;
+  };
+
+  chart.mouseOutArc = function (d) {
+    if (!arguments.length) return d;
+    _mouseOutArc = d;
     return chart;
   };
 

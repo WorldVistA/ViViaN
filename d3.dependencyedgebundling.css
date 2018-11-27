@@ -12,20 +12,20 @@
   fill: #000;
 }
 
-.link {
-  stroke: steelblue;
-  stroke-opacity: .2;
-  fill: none;
-  pointer-events: none;
-  opacity: 0.2;
-}
-
 .node:hover,
 .node--source,
 .node--target {
   fill: #000;
   font-weight: 700;
   opacity: 1;
+}
+
+.link {
+  stroke: steelblue;
+  stroke-opacity: .2;
+  fill: none;
+  pointer-events: none;
+  opacity: 0.2;
 }
 
 .link--source,
@@ -75,5 +75,14 @@
 .link--target.link--source {
   stroke: #A02CA0;
   color: #A02CA0;
+}
+
+.groupArc {
+  fill: #1f77b4;
+  fill-opacity: 0.5;
+}
+
+.groupArc:hover {
+  fill-opacity: 0.9;
 }
 </style>
