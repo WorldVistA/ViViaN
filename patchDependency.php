@@ -58,7 +58,7 @@
     </p>
     <div id="dialog-modal">
       <div id="accordion">
-        <h3>DOX Links</h3>
+        <h3>FileMan Links</h3>
         <div id="description"></div>
       </div>
     </div>
