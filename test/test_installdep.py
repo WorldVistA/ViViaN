@@ -27,17 +27,6 @@ class test_installdep(unittest.TestCase):
     global driver
     driver.quit()
 
-  def test_01_collapse_all(self):
-    global driver
-    time.sleep(3)
-    oldSize = len(driver.find_elements_by_class_name('node'))
-    button = driver.find_element_by_xpath("//button[contains(@onclick,'_collapseAllNode')]")
-    button.click()
-    time.sleep(2)
-    newSize = len(driver.find_elements_by_class_name('node'))
-    self.assertTrue(oldSize > newSize, "Collapse all did not reduce the amount of nodes")
-
-
   def test_02_packageAutocomplete(self):
     global driver
     packageAuto = driver.find_element_by_id('package_autocomplete')
@@ -66,25 +55,12 @@ class test_installdep(unittest.TestCase):
     foundVal = driver.find_elements_by_class_name('node')[-1].text
     self.assertTrue(installVal == foundVal, "Expected first node to be %s, found %s instead" % (installVal, foundVal))
 
-  def test_03_expand_all(self):
-    global driver
-    button = driver.find_element_by_xpath("//button[contains(@onclick,'_resetAllNode')]")
-    button.click()
-    time.sleep(1)
-    oldSize = len(driver.find_elements_by_class_name('node'))
-    button = driver.find_element_by_xpath("//button[contains(@onclick,'_expandAllNode')]")
-    button.click()
-    time.sleep(1)
-    newSize = len(driver.find_elements_by_class_name('node'))
-    self.assertTrue(oldSize < newSize, "Expand all did not add additional nodes")
-
   def test_04_panZoom(self):
     global driver
-
     global browser
     if browser == "FIREFOX":
       return # Test fails on FireFox, skip it for now
-    patchTree = driver.find_element_by_tag_name('svg').find_element_by_tag_name('g')
+    patchTree = driver.find_element_by_id('treeview_placeholder').find_element_by_tag_name('g')
     oldTrans =  patchTree.get_attribute("transform")
     ActionChains(driver).move_to_element(patchTree).drag_and_drop_by_offset(patchTree, 300, 200).perform()
     time.sleep(1)
@@ -97,15 +73,14 @@ class test_installdep(unittest.TestCase):
 
   def test_05_panCenter(self):
     global driver
-
     global browser
     if browser == "FIREFOX":
       return # Test fails on FireFox, skip it for now
 
-    patchTree = driver.find_element_by_tag_name('svg').find_element_by_tag_name('g')
+    patchTree = driver.find_element_by_id('treeview_placeholder').find_element_by_tag_name('g')
+    button = driver.find_element_by_xpath("//button[contains(@onclick,'_centerDisplay()')]")
     ActionChains(driver).move_to_element(patchTree).drag_and_drop_by_offset(patchTree, 300, 200).perform()
     oldVal = patchTree.get_attribute("transform")
-    button = driver.find_element_by_xpath("//button[contains(@onclick,'_centerDisplay()')]")
     button.click()
     time.sleep(1)
     newVal = patchTree.get_attribute("transform")
@@ -113,12 +88,11 @@ class test_installdep(unittest.TestCase):
 
   def test_06_panReset(self):
     global driver
-
     global browser
     if browser == "FIREFOX":
       return # Test fails on FireFox, skip it for now
 
-    patchTree = driver.find_element_by_tag_name('svg').find_element_by_tag_name('g')
+    patchTree = driver.find_element_by_id('treeview_placeholder').find_element_by_tag_name('g')
     ActionChains(driver).move_to_element(patchTree).drag_and_drop_by_offset(patchTree, 300, 200).perform()
     oldval = patchTree.get_attribute("transform")
     button = driver.find_element_by_xpath("//button[contains(@onclick,'_resetAllNode')]")

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-  <title>VistA Patch Dependency Tree</title>
+  <title>Install Dependency Tree</title>
   <head>
     <?php
       include_once "vivian_common_header.php";
@@ -49,39 +49,18 @@
   </div>
   <div id="descrHeader" style="position:relative; left:20px; top: -10px;">
     <p>The information in this visualization is not guaranteed to be complete.
-       <b>Please note: Patches without dependencies may actually have dependencies due to
+       <b>Please note: Installs without dependencies may actually have dependencies due to
        page display limits.</b>
     </p>
-    <p>
-       For good examples of patches with a long history, select one of the following
-       package/build pairs:
-    </p>
-    <div id="dialog-modal">
-      <div id="accordion">
-        <h3>FileMan Links</h3>
-        <div id="description"></div>
-      </div>
-    </div>
-    <ul>
-      <li> Barcode Medication Administration: PSB*3.0*68 <== displayed on load</li>
-      <li> Pharmacy Data Management: PSS*1.0*168 </li>
-      <li> Scheduling: SD*5.3*581 </li>
-      <li> Registration: DG*5.3*841 </li>
-      <li> Integrated Billing: IB*2.0*497 </li>
-    </ul>
     <div id="legend_placeholder" style="position:relative; left:20px;"></div>
 
     <div>
-      <label title="Search for an option by entering the name of the option that you wish to find."> Install information for package:</label>
+      <label title="Search for an option by entering the name of the option that you wish to find.">Package:</label>
       <input id="package_autocomplete" size="40"></br>
     </div>
     <div id="installEntryAuto" style="margin-top:10px;">
-      <label for ="install_autocomplete" title="Select Patch"> Patch Dependency:</label>
+      <label for ="install_autocomplete" title="Select Entry">Install:</label>
       <input id="install_autocomplete" size="40"></br>
-    </div>
-    <div id="installEntryDrop" style="display: none">
-      <label for ='install_dropdown' title="Select Patch"> Patch Dependency:</label>
-      <select id="install_dropdown"></select>
     </div>
     </br>
     <div id="buttons">
@@ -113,10 +92,10 @@ var header = d3.select(document.getElementById("header1"));
 var installDateTip = d3.select(document.getElementById("installDate"));
 var originalTransform = [300,300];
 var patchListing;
-var shapeLegend = [{name: "Build(with Dependencies)", shape: "triangle-up", color: "green", fill: "green"},
-                   {name: "Build(without Dependencies)", shape:"circle", color: "green", fill: "white"},
-                   {name: "Duplicate Build(with Dependencies)", shape:"diamond", color: "red", fill: "red"},
-                   {name: "Duplicate Build(without Dependencies)", shape:"diamond", color: "red", fill: "white"}]
+var shapeLegend = [{name: "Install(with Dependencies)", shape: "triangle-up", color: "green", fill: "green"},
+                   {name: "Install(without Dependencies)", shape:"circle", color: "green", fill: "white"},
+                   {name: "Duplicate Install(with Dependencies)", shape:"diamond", color: "red", fill: "red"},
+                   {name: "Duplicate Install(without Dependencies)", shape:"diamond", color: "red", fill: "white"}]
 d3.select("#legend_placeholder").datum(null).call(legendShapeChart);
 <?php include_once "vivian_tree_layout_common.js" ?>
 /*
@@ -130,21 +109,7 @@ function packageAutocompleteChanged(eve, ui) {
     $("#installEntryAuto").show();
     $("#installEntryDrop").hide();
     $("#install_autocomplete").val("");
-    if(ui.item.label == "MultiBuild") {
-      $("#installEntryAuto").hide();
-      $("#installEntryDrop").show();
-
-      $('#install_dropdown').selectmenu({
-        change: function(event,ui) { showDependency(targetPackage,ui.item.value);},
-        appendTo: "#installEntryDrop",
-        width: 400
-      });
-      var jqueryDropdown = $('#install_dropdown')
-      Object.keys(json[ui.item.label]).forEach(function(key, value) {
-           jqueryDropdown.append($("<option/>").val(key).text(key));
-      })
-    }
-    else if (ui.item.label == 'All Patches') {
+    if (ui.item.label == 'All Patches') {
       var alljson = []
       Object.keys(json).forEach(function(vistaPackage) {
          Object.keys(json[vistaPackage]).forEach(function (vistaPatch) {
@@ -289,7 +254,6 @@ function showDependency(parent, entryNo) {
 }
 
 function text_onMouseClick(d) {
-  console.log(d)
   var modalTitle = d.name;
   if (d.number){modalTitle = "" + d.number + ": " + modalTitle }
   var overlayDialogObj = {
@@ -341,6 +305,8 @@ function createShapeLegend() {
           .text("Shape Legend");
 }
 $("#package_autocomplete").val(initPackage);
+packageAutocompleteChanged('', {item: {label: initPackage, value: initPackage}})
+$("#install_autocomplete").val(initInstall);
 showDependency(initPackage,initInstall)
 createShapeLegend()
     </script>
