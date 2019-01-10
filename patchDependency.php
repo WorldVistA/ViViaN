@@ -66,6 +66,7 @@
     <div id="buttons">
         <button onclick="_resetAllNode()">Reset</button>
         <button onclick="_centerDisplay()">Center</button>
+        <img id="loadingImg" style="display:none;" src="./images/loading-big.gif" alt="Loading Data"></img>
     </div>
   </div>
 
@@ -81,7 +82,7 @@ var chart = d3.chart.treeview()
               .pannableTree(true);
 var legendShapeChart = d3.chart.treeview()
               .height(50)
-              .width(1000)
+              .width(1050)
               .margins({top:10, left:10, right:0, bottom:0})
               .textwidth(110);
 var initPackage = "Barcode Medication Administration";
@@ -209,6 +210,7 @@ function _centerDisplay() {
 }
 
 function showDependency(parent, entryNo) {
+  $("#loadingImg").show()
   d3.json("files/install_information.json", function(json) {
 
     chart.on("path", "event","click", node_onNodeClick)
@@ -249,7 +251,8 @@ function showDependency(parent, entryNo) {
     chart.svg().attr("transform","translate("+originalTransform+")")
     resetAllNode(chart.nodes());
     chart.update(chart.nodes())
-
+    $("#loadingImg").hide()
+    $("#install_autocomplete").val(entryNo);
   });
 }
 
@@ -279,7 +282,7 @@ function createShapeLegend() {
       .data(shapeLegend)
       .enter().append("svg:g")
       .attr("class", "shapeLegend")
-      .attr("transform", function(d, i) { return "translate("+(i * 240) +", 25)"; });
+      .attr("transform", function(d, i) { return "translate("+(i * 250) +", 25)"; });
 
   shapeLegendDisplay.append("path")
       .attr("class", function(d) {return d.name;})
@@ -306,7 +309,6 @@ function createShapeLegend() {
 }
 $("#package_autocomplete").val(initPackage);
 packageAutocompleteChanged('', {item: {label: initPackage, value: initPackage}})
-$("#install_autocomplete").val(initInstall);
 showDependency(initPackage,initInstall)
 createShapeLegend()
     </script>
