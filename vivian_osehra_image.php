@@ -1,12 +1,12 @@
 <div style="display:inline-block; margin-left: 50px; font-size: 0;">
-  <a href="http://www.osehra.org" style="display:inline-block;">
-    <img src="http://www.osehra.org/profiles/drupal_commons/themes/commons_osehra_earth/logo.png" height="48" width="200" alt="OSEHRA Logo"/>
+  <a href="https://www.osehra.org" style="display:inline-block;">
+    <img src="https://www.osehra.org/profiles/drupal_commons/themes/commons_osehra_earth/logo.png" height="48" width="200" alt="OSEHRA Logo"/>
   </a>
   <p id="title" style="display:inline-block; font-size: 16px;">
     ViViaN<sup style="font-size: 12px;">TM</sup>(<u>Vi</u>sualizing <u>Vi</u>stA <u>a</u>nd <u>N</u>amespace)
   </p>
   <button style="font-size: 12px; margin-top: 5px; margin-bottom: 5px; margin-left: 500px; padding: 10px;"
-          onclick="window.location.href='http://www.osehra.org/content/visualization-open-source-project-group'"
+          onclick="window.location.href='https://www.osehra.org/content/visualization-open-source-project-group'"
           id="workinggroup">
     Join the Visualization Working Group
   </button>
@@ -16,7 +16,7 @@
   <nav class="navbar navbar-default navbar-static-top">
     <div class="container-fluid">
       <ul class="nav navbar-nav">
-        <li><a class="brand" href="index.php" id="vivian"  style="height:50px; padding: 0px;"><img width="137" height="50" src="http://osehra.org/sites/default/files/vivian.png"></img></a></li>
+        <li><a class="brand" href="index.php" id="vivian"  style="height:50px; padding: 0px;"><img width="137" height="50" src="https://osehra.org/sites/default/files/vivian.png"></img></a></li>
         <li class="dropdown" id="vista-menus">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Menus<span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -78,8 +78,8 @@
         <li class="dropdown" id="va-visualizations">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">VA Visualizations<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="http://bim.osehra.org" id="business-information-model">Business Information Model</a></li>
-            <li><a href="http://him.osehra.org" id="hybrid-information-model">Hybrid Information Model</a></li>
+            <li><a href="https://bim.osehra.org" id="business-information-model">Business Information Model</a></li>
+            <li><a href="https://him.osehra.org" id="hybrid-information-model">Hybrid Information Model</a></li>
           </ul>
         </li>
       </ul>
