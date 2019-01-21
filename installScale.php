@@ -46,18 +46,20 @@
       <div id="routinesTip" ></div>
       <div class="tooltipTail"></div>
     </div>
+    <div id="ctrlToolTip" class="tooltip" style="opacity:0;">
+      <div id="header1" class="header"></div>
+    </div>
   </div>
 
   <div style="position:relative; left:20px; top:-10px;">
     <label title="Search for an option by entering the name of the option that you wish to find."> Install information for package:</label>
     <input id="package_autocomplete" size="40"></br>
-    <label title="Set the data parameters for the timeline.">Select date range to view:</label>
-    <input type="text" id="timeline_date_start" >
-    <input type="text" id="timeline_date_stop">
-    <button id="timeline_date_update">Update</button>
+    <div id='timeCtl'></div>
     <button id="timeline_date_reset">Reset</button>
   </div>
-  <svg></svg>
+  <div id='timeline'>
+    <svg></svg>
+  </div>
 
 <div id="treeview_placeholder"/>
 
@@ -72,26 +74,14 @@ var y = d3.scale.linear()
     .range([chartHeight, 0]);
 var shownPackage;
 var index = 0
+var dateArray = [];
 colors = d3.scale.category20b()
 backgroundColors = d3.scale.category20()
 var currentDate = new Date();
 var endDate = "12/31/"+ currentDate.getFullYear()
-$("#timeline_date_start").datepicker()
-$("#timeline_date_stop").datepicker()
-
-/*
-*  Function to handle the updating of the time scale.
-*  takes the values of the two date boxes and uses that to
-*  redraw the graph, keeping the same package, with the values
-*/
-$("#timeline_date_update").click( function() {
-  if( $("#timeline_date_start")[0].value == $("#timeline_date_stop")[0].value) {
-    alert("Cannot show data that begins and ends on the same day")
-  }
-  else {
-  resetMenuFile(shownPackage, $("#timeline_date_start")[0].value, $("#timeline_date_stop")[0].value)
-  }
-})
+var pkgStart = ""
+var pkgStop = endDate
+var currentJSON = {};
 
 /*
 *  Function to handle the resetting of the time scale.
@@ -101,9 +91,8 @@ $("#timeline_date_update").click( function() {
 */
 
 $("#timeline_date_reset").click( function() {
-  $("#timeline_date_start")[0].value = ""
-  $("#timeline_date_stop")[0].value = ""
-  resetMenuFile(shownPackage,"","")
+  resetMenuFile(currentJSON,shownPackage,"","")
+  createControl();
 })
 
 /*
@@ -112,7 +101,12 @@ $("#timeline_date_reset").click( function() {
 *  from the date selectors and the value of the new package
 */
 function packageAutocompleteChanged(eve, ui) {
-  resetMenuFile(ui.item.label,"","");//$("#timeline_date_start")[0].value,$("#timeline_date_stop")[0].value)
+
+  //Read in the INSTALL JSON file
+  d3.json("files/install_information.json", function(json) {
+    resetMenuFile(currentJSON,ui.item.label,"","");//$("#timeline_date_start")[0].value,$("#timeline_date_stop")[0].value)
+    createControl();
+  });
 }
 
 /*
@@ -172,15 +166,76 @@ function pkgVersionData_gen(pkgInfo) {
     return pkgVersions;
 }
 
+function createControl() {
+
+        d3.select('#timeCtl').selectAll("*").remove();
+        // Creating the legend control
+        console.log(pkgStart);
+        console.log(pkgStop);
+        ctrlX = d3.time.scale()
+          .domain([new Date(pkgStart), new Date(pkgStop)])
+          .range([0, 750])
+          .clamp(true);
+        // Generate the xAxis for the above scale
+        var brush = d3.svg.brush()
+          .x(ctrlX)
+          .extent(ctrlX.domain())
+          .on("brush", ctlZoomFunc);
+        function ctlZoomFunc() {
+            var value = brush.extent()[0];
+            var header1Text = "Date: " + ctrlX.invert(d3.event.sourceEvent.x);
+            $('#ctrlToolTip div').html(header1Text);
+            d3.select("#ctrlToolTip").style("left", (d3.event.sourceEvent.pageX + 0) + "px")
+                    .style("top", (d3.event.sourceEvent.pageY - 0) + "px")
+                    .style("opacity", ".9");
+            d3.select(".extent").attr("height","7px").style("fill","steelblue")
+            resetMenuFile(currentJSON, shownPackage,
+                      brush.extent()[0],
+                      brush.extent()[1])
+        }
+        var axisTimeControl = d3.select('#timeCtl').insert("svg")
+                        .attr("height", 50)
+                        .attr("width",1500)
+                        .insert('g')
+                        .attr("height", 50)
+                        .attr("width",1500)
+                        .attr('class', 'x axis chart')
+                        .on('mousemove', function(d) {
+                            var header1Text = "Date: " + ctrlX.invert(d3.event.x);
+                            $('#ctrlToolTip div').html(header1Text);
+                            d3.select("#ctrlToolTip").style("left", (d3.event.pageX + 0) + "px")
+                                    .style("top", (d3.event.pageY - 0) + "px")
+                                    .style("opacity", ".9");
+                        }).on('mouseout', function(d) {
+                            $('#ctrlToolTip div').html();
+                            d3.select("#ctrlToolTip").style("opacity", "0");
+                        })
+
+        var ctrlXAxis = d3.svg.axis()
+          .scale(ctrlX)
+          .orient('middle')
+          .tickSize(10)
+          .tickPadding(8);
+        var activityHisto = d3.layout.histogram()
+                              .bins(ctrlX.ticks(d3.time.week,1))
+                              .value(function(d) {return new Date(d)})
+        d3.select('#timeCtl').select('g').selectAll('.histo').data(activityHisto(dateArray)).enter().append('rect')
+                       .attr('fill',"firebrick")
+                       .attr('x', 1)
+                       .attr('width', 1)
+                       .attr('height', function(d) { return d.y *3} )
+                       .attr("transform", function(d) { return "translate("+ctrlX(d.x)+",-"+ d.y *3+")"})
+        axisTimeControl.call(ctrlXAxis)
+                       .attr("transform", "translate(0,25)");
+        axisTimeControl.call(brush);
+}
 /*
 *  Main function to set up the scales and objects necessary to show
 *  the install information
 */
-function resetMenuFile(packageName,start,stop) {
+function resetMenuFile(json, packageName,start,stop) {
   $("#package_autocomplete").val(packageName)
 
-  //Read in the INSTALL JSON file
-  d3.json("files/install_information.json", function(json) {
     /*
     *  Capture the package specific information.  The start date
     *  of the scale should be the install date of the first patch
@@ -189,22 +244,23 @@ function resetMenuFile(packageName,start,stop) {
     */
     if (packageName in json) {
       var pkgInfo = json[packageName]
-      
+
       /*
       *  Pushes the JSON information into an array so that it can be sorted.
       *  First sort by install date to acquire the earliest install date
       *  and use that as the start of the default display time frame
       */
       var pkgInfoArray = [];
+      dateArray = []
       for (elem in pkgInfo) {
         pkgInfoArray.push(pkgInfo[elem])
+        dateArray.push(pkgInfo[elem].installDate)
       }
       pkgInfoArray.sort(function(a,b) { return a.installDate.localeCompare(b.installDate); });
-      if (start === "") { start = pkgInfoArray[0].installDate}
-      if (stop === "") { stop = endDate}
-      var svg = d3.select('body').select('svg')
+      if (start === "") { pkgStart = pkgInfoArray[0].installDate; start = pkgStart}
+      if (stop === "") { pkgStop = endDate; stop = pkgStop}
+      var svg = d3.select('#timeline').select('svg')
       svg.selectAll("*").remove();
-
       $("#timeline_date_start").datepicker("setDate",new Date(start))
       $("#timeline_date_stop").datepicker("setDate",new Date(stop))
 
@@ -314,14 +370,17 @@ function resetMenuFile(packageName,start,stop) {
       alert("No information for that package")
       $("#package_autocomplete").val(shownPackage)
     }
-  });
     // Capture the package name that is being displayed
-
-
 };
 
 // Start the visualization at the
-resetMenuFile('Accounts Receivable',"","")
+
+  //Read in the INSTALL JSON file
+  d3.json("files/install_information.json", function(json) {
+    currentJSON = json
+    resetMenuFile(currentJSON,'Accounts Receivable',"","")
+    createControl();
+  });
     </script>
   </body>
 </html>

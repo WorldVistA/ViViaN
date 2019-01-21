@@ -17,5 +17,8 @@
      stroke: black;
      stroke-width: .5px;
   }
+  #timeCtl .domain {
+     cursor: pointer;
+  }
 
   </style>
