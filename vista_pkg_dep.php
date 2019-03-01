@@ -21,14 +21,7 @@
 <body>
   <?php include_once "vivian_osehra_image.php" ?>
 
-  <div class="hint" style="position:relative; left:20px;">
-    <p>This circle plot captures the interrelationships among VistA packages.</p>
-    <p>Hover over any of the packages in this graph to see incoming links (dependents)
-    in one color and the outgoing links (dependencies) in a second.
-    Click on any of the packages to view package dependency details.</p>
-  </div>
-
-  <div style="position:relative; left:20px">
+  <div style="position:relative; left:20px; top:-15px;">
     <div id="legend_placeholder" style="float: left;"></div>
     <div style="float: left; margin-left:15px; margin-right:35px;">
       <label class="btn-primary btn-sm">
@@ -36,6 +29,14 @@
       </label>
     </div>
   </div>
+  <textarea class="hint" style="position:relative; top:-15px; resize:none;" rows="6" cols="75" readonly>
+This circle plot captures the interrelationships among VistA packages.
+
+Hover over any of the packages in this graph to see incoming links (dependents) in one color and the outgoing links (dependencies) in a second.
+
+Click on any of the packages to view package dependency details.
+  </textarea>
+
 
   <div id="chart_placeholder"></div>
 
@@ -44,6 +45,11 @@
     <div id="dependency" ></div>
     <div id="bothDeps"></div>
     <div id="dependents"></div>
+    <div class="tooltipTail"></div>
+  </div>
+
+  <div id="groupToolTip" class="tooltip" style="opacity:0;">
+    <div id="groupName" class="header"></div>
     <div class="tooltipTail"></div>
   </div>
 
@@ -159,8 +165,8 @@
         var dependents = "Dependents: " + (d.dependents.length - localDepends.length);
         $('#dependents').html(dependents).addClass(palette+"-link--target");
       }
-      d3.select("#toolTip").style("left", (d3.event.pageX + 40) + "px")
-              .style("top", (d3.event.pageY + 5) + "px")
+      d3.select("#toolTip").style("left", (d3.event.pageX) + "px")
+              .style("top", (d3.event.pageY) + "px")
               .style("opacity", ".9");
     }
 
@@ -172,10 +178,24 @@
       d3.select("#toolTip").style("opacity", "0");
     }
 
+    function mouseOverArc(d) {
+      $('#groupName').html("Group: " + d.name);
+      d3.select("#groupToolTip").style("left", (d3.event.pageX ) + "px")
+          .style("top", (d3.event.pageY + 5) + "px")
+          .style("opacity", ".9");
+    }
+
+    function mouseOutArc(d) {
+      $('#groupName').text("");
+      d3.select("#groupToolTip").style("opacity", "0");
+    }
+
     var chart = d3.chart.dependencyedgebundling()
                 .packageHierarchy(packageHierarchyByGroups)
                 .mouseOvered(mouseOvered)
                 .mouseOuted(mouseOuted)
+                .mouseOverArc(mouseOverArc)
+                .mouseOutArc(mouseOutArc)
                 .nodeTextHyperLink(getPackageDoxLink);
     var localpath = "files/pkgdep.json";
     d3.select("#legend_placeholder").datum(null).call(legendColorChart);
