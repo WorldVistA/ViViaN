@@ -79,7 +79,7 @@
 // to be called 'chart'.
 var chart = d3.chart.treeview()
               .height(1280)
-              .width(1200)
+              .width(1500)
               .margins({top:0, left:100, right:0, bottom:0})
               .textwidth(220);
 var legendShapeChart = d3.chart.treeview()
