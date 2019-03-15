@@ -195,21 +195,25 @@ function pkgLinkClicked(d) {
 }
 
 function getDescriptionHtml(d) {
+  var outtext = '';
   if (d.des) {
     if (d.des instanceof Array) {
-      var outtext = '';
       for (var idx=0, len=d.des.length; idx < len; idx++){
-        outtext += d.des[idx] + "<br />";
+        outtext += d.des[idx] + "<br/>";
       }
-      return outtext;
     }
     else {
-      return d.des;
+       outtext += d.des;
     }
   }
-  else {
-    return d.name;
+  if (d.description) {
+      outtext += "<br/><br/><b>From VDL:</b><br/>";
+      outtext += d.description;
   }
+  if (outtext === '') {
+    outtext = d.name
+  }
+  return outtext
 }
 
 function getPackageDoxLink(pkgName, node) {
