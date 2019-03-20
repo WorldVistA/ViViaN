@@ -43,18 +43,7 @@
   </div>
 
   <div id="dialog-modal">
-    <div id="accordion">
-        <h3><a href="#">Namespaces</a></h3>
-        <div id='namespaces' style="display:none"></div>
-        <h3><a href="#">Dependencies</a></h3>
-        <div id='dependencies' style="display:none"></div>
-        <h3><a href="#">Interfaces</a></h3>
-        <div id="interface"></div>
-        <h3><a href="#">HIM Info</a></h3>
-        <div id="himInfo"></div>
-        <h3><a href="#">Description</a></h3>
-        <div id="description"></div>
-    </div>
+    <div id="accordion"> </div>
   </div>
 </div>
 <div id="legend_placeholder" style="position:relative; left:20px; margin-top: -10px;"></div>
@@ -100,12 +89,12 @@ var package_link_url = "http://code.osehra.org/dox/";
 var toolTip = d3.select(document.getElementById("toolTip"));
 var header = d3.select(document.getElementById("header1"));
 var selectedIndex = 0;
+var himJSON  = {}
 var distProp = [ // constants to store property of each distribution
   { name: "All", color: "black", distribution: 'All', doxlink: package_link_url},
   { name: "OSEHRA", color: "#FF0000", distribution: 'OSEHRA VistA', doxlink: "http://code.osehra.org/OSEHRA_dox/"},
   { name: "VA", color: "#3300CC", distribution: 'VA FOIA VistA' ,doxlink: package_link_url},
   { name: "DSS", color: "#080", distribution: 'DSS vxVistA' , doxlink: "http://code.osehra.org/dox_alpha/vxvista/"}
-
   /**
   ,{
     name: "Medsphere",
@@ -116,7 +105,14 @@ var distProp = [ // constants to store property of each distribution
     color: "#660000"
   } **/
 ];
-
+var packageInfoProp = {
+  "namespaces": {"func": getNamespaceHtml, "title": "Namespaces"},
+  "dependencies": {"func": getDependencyContentHtml, "title": "Dependencies"},
+  "interface": {"func": getInterfaceHtml, "title": "Interfaces"},
+  "himInfo": {"func": getHIMLink, "title": "HIM Info"},
+  "description": {"func": getDescriptionHtml, "title": "Description"},
+  "status": {"func": getStatusHtml, "title": "Status"},
+}
 var shapeLegend = [{name: "Package Category", shape: "triangle-up"},
                    {name: "Package", shape:"circle"}]
 var himInfoJSON;
@@ -140,6 +136,9 @@ d3.json("files/packages.json", function(json) {
   clearAutocomplete();
   createLegend();
   createShapeLegend();
+  d3.json("files/himData.json", function(json) {
+    himJSON = json;
+  });
 });
 
 function packageAutoCompleteChanged(event, ui) {
@@ -163,19 +162,15 @@ function pkgLinkClicked(d) {
       position: {my: "center center", of: window},
       title: "Package: " + d.name,
       open: function(){
-          htmlLnk = getInterfaceHtml(d);
-          $('#interface').html(htmlLnk);
-          $('#namespaces').html(getNamespaceHtml(d))
-          $('#namespaces').show();
-          $('#description').html(getDescriptionHtml(d))
-          depLink = getDependencyContentHtml(d.name, d)
-          var depLink_html = "";
-          for(var i = 0; i < depLink.length;i++) {
-            depLink_html += depLink[i] + " ";
-          }
-          $('#dependencies').html(depLink_html);
-          $('#dependencies').show();
-          getHIMLink(d);
+          $('#accordion').empty()
+          Object.keys(packageInfoProp).forEach(function(key) {
+              var accordionText = packageInfoProp[key]["func"](d.name, d)
+              if (accordionText) {
+                $('#accordion').append("<h4>" + packageInfoProp[key]["title"]+ "</h4>");
+                $('#accordion').append("<div id="+key+"></div>");
+                $('#'+key).append(accordionText)
+              }
+          });
           $('#accordion').accordion("option", "active", 0);
           $('#accordion').accordion("refresh");
           $('#accordion').accordion({heightStyle: 'content'}).show();
@@ -194,7 +189,7 @@ function pkgLinkClicked(d) {
   }
 }
 
-function getDescriptionHtml(d) {
+function getDescriptionHtml(pkgName, d) {
   var outtext = '';
   if (d.des) {
     if (d.des instanceof Array) {
@@ -214,6 +209,10 @@ function getDescriptionHtml(d) {
     outtext = d.name
   }
   return outtext
+}
+
+function getStatusHtml(pkgName, d) {
+  return d.status
 }
 
 function getPackageDoxLink(pkgName, node) {
@@ -243,7 +242,7 @@ function getDistributionPropByName(distName){
   return null;
 }
 
-function getNamespaceHtml(pkg) {
+function getNamespaceHtml(pkgName, pkg) {
   var i=0, len=pkg.Posprefixes.length;
   var htmlLnk = "Includes:";
   for (; i<len-1; i++) {
@@ -262,19 +261,15 @@ function getNamespaceHtml(pkg) {
   return htmlLnk;
 }
 
-function getHIMLink(pkg) {
-  d3.json("files/himData.json", function(json) {
+function getHIMLink(pkgName, pkg) {
+    var htmlLnk = ''
+    var himPath = himJSON[pkg.name];
+    if (himPath != null) {
+      htmlLnk = "<a href='http://him.osehra.org/content/" + himPath +"'>HIM Visualization for "+ pkgName +"</a>";
+    }
+    return htmlLnk
+};
 
-    var himPath = json[pkg.name];
-    if (himPath == null) {
-      $("#himInfo").html("")
-    }
-    else {
-      var htmlLnk = "<a href='http://him.osehra.org/content/" + himPath +"'>HIM Visualization for "+ pkg.name +"</a>";
-      $("#himInfo").html(htmlLnk);
-    }
-  });
-}
 
 function getRPCLinkByPackageName(pkgName, linkUrl) {
   var defLnk = "files/8994";
@@ -316,7 +311,7 @@ function getICRLinkByPackageName(pkgName, linkUrl) {
   return "<a href=\"" + defLnk + "/" + pkgName + "-ICR.html\" target=\"_blank\">ICR</a>";
 }
 
-function getInterfaceHtml(node) {
+function getInterfaceHtml(pkgName, node) {
   pkgName = node.name
   var htmlLnk = "<ul>";
   var rpcLink = "";
