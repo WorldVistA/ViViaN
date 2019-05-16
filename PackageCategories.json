@@ -1,1192 +1,1776 @@
 {
-    "name": "VistA",
-    "children": [
+  "name": "VistA",
+  "children": [
+    {
+      "name": "Deliver Health Care",
+      "children": [
         {
-            "name": "Provider Services",
-            "children": [
+          "name": "Manage Health Records",
+          "children": [
+            {
+              "name": "Capture Patient Care Encounter Information",
+              "children": [
                 {
-                    "name": "Laboratory",
-                    "children": [
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Automated Lab Instruments"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Anatomic Pathology"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "National Laboratory Test"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Lab Service"
-                        }
-                    ]
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Automated Information Collection System",
+                  "description": "The module supports outpatient clinical efforts through the creation and printing of encounter forms that display relevant clinical information, and provides for the entry of clinical encounter data for local and national needs",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=30"
                 },
                 {
-                    "name": "Patient Care Data",
-                    "children": [
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Oncology"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Functional Independence"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Patient Assessment Documentation"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Health Summary"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Quasar"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "PCE Patient Care Encounter"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "General Medical Record - IO"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Imaging"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Problem List"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "General Medical Record - Generator"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "General Medical Record - Vitals"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Spinal Cord Dysfunction"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Text Integration Utility"
-                        }
-                    ]
-                },
-                {
-                    "name": "Pharmacy",
-                    "children": [
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Barcode Medication Administration"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Inpatient Medications"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Auto Replenishment Ward Stock"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Pharmacy Enterprise Customization System"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Outpatient Pharmacy"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Controlled Substances"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Pharmacy Prescription Practice"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Drug Accountability"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Pharmacy Product System - National"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Pharmacy Data Management"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "National Drug File"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "CMOP"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Pharmacy Benefits Management"
-                        }
-                    ]
-                },
-                {
-                    "name": "Patient Service Delivery",
-                    "children": [
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Clinical Reminders"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Visual Impairment Service Team"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Mental Health"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Womens Health"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Integrated Home Telehealth"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Emergency Department Integration Software"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Radiology Nuclear Medicine"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Dietetics"
-                        },
-                        {
-                            "distribution": [
-                                "DSS",
-                                "VA",
-                                "OSEHRA"
-                            ],
-                            "name": "Dental"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Nursing Service"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "VBECS"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Prosthetics"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Scheduling"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Immunization"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Social Work"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Medicine"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Surgery"
-                        }
-                    ]
-                },
-                {
-                    "name": "Order & Results Management",
-                    "children": [
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Clinical Procedures"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Order Entry Results Reporting"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Consult Request Tracking"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "CPRS Plugins"
-                        }
-                    ]
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Problem List",
+                  "description": "The module is used to document and track a patient’s problems.  It provides the clinician with a current and historical view of patient's health care problems, and allows each identified problem to be traced in terms of treatment, test results, and outcome",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=64"
                 }
-            ]
+              ]
+            },
+            {
+              "name": "Maintain Patient Summmary List",
+              "children": [
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Health Summary",
+                  "description": "The module is a clinically oriented and structured report that extracts many kinds of data from VistA and and displays it in a defined and standard format",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=63"
+                }
+              ]
+            },
+            {
+              "name": "Track Incomplete Records",
+              "children": [
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Incomplete Records Tracking",
+                  "description": "The module provides the medical center the ability to monitor incomplete records.  Interim summaries, discharge summaries, and both inpatient and outpatient operation reports are tracked.  Records may be incomplete or deficient for one or more of the following reasons - not dictated, not transcribed, not signed, or not reviewed",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=124"
+                }
+              ]
+            },
+            {
+              "name": "Manage Referrals",
+              "children": [
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Consult Request Tracking",
+                  "description": "The module provides an efficient way for clinicians to order consultations andprocedures from other providers or services within the VHA system, at their own facility or another facility.",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=62"
+                }
+              ]
+            },
+            {
+              "name": "Manage Notes",
+              "children": [
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Text Integration Utility",
+                  "description": "The module simplifies the use and management of clinical documents for both clinical and administrative medical facility personnel",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=65"
+                },
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Authorization Subscription",
+                  "description": "This module provides a method for identifying who is authorized to perform various actions on clinical documents.  These actions include signing, co-signing and amending",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=58"
+                }
+              ]
+            },
+            {
+              "name": "Release of Information",
+              "children": [
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Release Of Information - DSSI",
+                  "description": "This module (COTS product by DSS, inc.) is designed to expedite Release of Information (ROI) requests. It supports the tracking, fulfilling and releasing of ROI requests electronically",
+                  "vdl":"https://www.va.gov/vdl/application.asp?appid=132",
+                  "gui": "Windows application - Release of Information Manager v5.0"
+                }
+              ]
+            }
+          ]
         },
         {
-            "name": "Infrastructure",
-            "children": [
+          "name": "Provide Ancillary Services",
+          "children": [
+            {
+              "name": "Provide Blood Service",
+              "children": [
                 {
-                    "name": "Support",
-                    "children": [
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "National Online Information Sharing"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "National VistA Support"
-                        }
-                    ]
-                },
-                {
-                    "name": "Application Infrastructure",
-                    "children": [
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Electronic Signature"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Kernel"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Toolkit"
-                        },
-                        {
-                            "distribution": [
-                                "DSS"
-                            ],
-                            "name": "VPE Shell"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Patch Module"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Run Time Library"
-                        }
-                    ]
-                },
-                {
-                    "name": "Capacity Management",
-                    "children": [
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "SAGG Project"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Capacity Management - RUM"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Capacity Management Tools"
-                        }
-                    ]
-                },
-                {
-                    "name": "Interoperability",
-                    "children": [
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA"
-                            ],
-                            "name": "Enterprise Health Management Platform"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "National Health Information Network"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Health Level Seven"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "VDEF"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Patient Data Exchange"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Virtual Patient Record"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Master Patient Index VistA"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Network Health Exchange"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Foundations"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "VistALink"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "VistALink Security"
-                        }
-                    ]
-                },
-                {
-                    "name": "Architecture",
-                    "children": [
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Web Services Client"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "RPC Broker"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "CORBA Services"
-                        }
-                    ]
-                },
-                {
-                    "name": "Tools",
-                    "children": [
-                        {
-                            "distribution": [
-                                "OSEHRA"
-                            ],
-                            "name": "MASH Utilities"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "List Manager"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "M XML Parser"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "FileMan Delphi Components"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "MailMan"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "VA FileMan"
-                        }
-                    ]
-                },
-                {
-                    "name": "Data Standardization",
-                    "children": [
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Lexicon Utility"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Health Data and Informatics"
-                        }
-                    ]
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "VBECS",
+                  "description": "The main purpose of VistA Blood Establishment Computer Software (VBECS) is to automate the daily processing of blood inventory and patient transfusions in a hospital transfusion service",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=182"
                 }
-            ]
+              ]
+            },
+            {
+              "name": "Provide Extended Care",
+              "children": [
+                {
+                  "name": "Provide Extended Non-Institutional Care",
+                  "children": [
+                    {
+                      "distribution": [
+                        "OSEHRA",
+                        "VA",
+                        "DSS"
+                      ],
+                      "name": "Hospital Based Home Care",
+                      "description": "The Home Based Primary Care (HBPC) module is designed to allow for the local entry and verification and data management of HBPC patient-related data",
+                      "vdl": "https://www.va.gov/vdl/application.asp?appid=68"
+                    },
+                    {
+                      "distribution": [
+                        "OSEHRA",
+                        "VA",
+                        "DSS"
+                      ],
+                      "name": "Integrated Home Telehealth",
+                      "description": "The module integrates vendor-supported Home Telehealth services into the VistA medical information infrastructure.  VistA communicates patient info to third party vendor via HL7",
+                      "vdl":"https://www.va.gov/vdl/application.asp?appid=154"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Provide General Laboratory Services",
+              "children": [
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Automated Lab Instruments",
+                  "description": "The module provides the interface to automated lab instruments; this include the Laboratory Universal Interface which uses the HL7 to communicate with all instruments",
+                  "vdl":"https://www.va.gov/vdl/application.asp?appid=120"
+                },
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "National Laboratory Test",
+                  "description": "The National Laboratory Test Documents establish a standard coding across documents in an effort to unite laboratory records",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=119"
+                },
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Lab Service",
+                  "description": "The module is a clinically oriented system designed to provide lab data to health care personnel.  It assists the Pathology and Laboratory Medicine Service (P&LMS) in managing and automating the workload and reporting process",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=71",
+                  "primary-function": "Yes"
+                }
+              ]
+            },
+            {
+              "name": "Provide Imaging Services",
+              "children": [
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Imaging",
+                  "description": "The module facilitates medical decision-making by delivering complete multimedia patient information to the clinician’s desktop in an integrated manner. Windows-based workstations, which are interfaced to the main hospital system in a client-server architecture, make images and associated text data available at all times anywhere in the hospital or across VA",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=105",
+                  "gui": "Windows applications include VistARAD for radiologist, TeleReader, Clinical Display for clinician, and Clinical Capture.  Web browser include Advanced Web Image Viewer"
+                }
+              ]
+            },
+            {
+              "name": "Provide Nutrition and Food Services",
+              "children": [
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Dietetics",
+                  "description": "The Nutrition and Food Service (N&FS) software integrates the automation of many Clinical Nutrition, Food Management, and Management Reports functions. The Clinical N&FS activities of Nutrition Screening, Nutrition Assessment, Diet Order Entry, Tube Feeding and Supplemental Feeding Orders, Patient Food Preferences, Specific Diet Pattern Calculations,  Nutrient Analysis of meals, Consult Reporting, Encounter Tracking, and Quality Care Monitoring are all available in this program.",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=67"
+                }
+              ]
+            },
+            {
+              "name": "Provide Pathology Services",
+              "children": [
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Lab Service",
+                  "description": "The Anatomic Pathology module, part of the Lab Service package, automates record keeping and reporting for all areas of Anatomic Pathology (i.e., Surgical Pathology (SP), Cytopathology, Electron Microscopy (EM), and Autopsy)",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=72",
+                  "primary-function": "No"
+                }
+              ]
+            },
+            {
+              "name": "Provide Pharmacy Services",
+              "children": [
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Inpatient Medications",
+                  "description": "The module integrates functions from the Intravenous (IV) and Unit Dose (UD) modules. The IV module provides pharmacists and their staffs with IV labels, manufacturing worksheets, ward lists for order updates, and management reports.  The UD module provides a standard computerized system for dispensing and managing inpatient medications",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=88"
+                },
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Auto Replenishment Ward Stock",
+                  "description": "The Automatic Replenishment/Ward Stock (AR/WS) package provides a method to track drug distribution and inventory management within a medical center",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=83"
+                },
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Pharmacy Enterprise Customization System",
+                  "description": "PECS allows users to customize the contents of a number of pharmacy-related information sets.  It is used to research, review, report, and manage customized drug information from First Data Bank's (FDB) MedKnowledge Framework",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=204",
+                  "gui": "Browser based J2EE application"
+                },
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Outpatient Pharmacy",
+                  "description": "The module provides a method for managing the medications given to Veterans who have visited a clinic or who have received prescriptions upon discharge from the hospital",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=90"
+                },
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Controlled Substances",
+                  "description": "The module provides functionality to monitor and track the receipt, inventory, and dispensing of all controlled substances",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=86"
+                },
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Drug Accountability",
+                  "description": "The module works toward perpetual inventory for each VA medical facility pharmacy by tracking all drugs through pharmacy locations",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=87",
+                  "gui": "Mostly roll and scroll UI with a Windows GUI application - PSA_MCKESSON_UPLOAD GUI for upload McKesson invoice data to VistA"
+                },
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Pharmacy Product System - National",
+                  "description": "The module is a Web-based application that allows select members of the Department of Veterans Affairs (VA) Pharmacy Benefits Management (PBM) Services to create and revise pharmacy drug information",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=202",
+                  "gui": "Browser based Java application on Weblogic platform"
+                },
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Pharmacy Data Management",
+                  "description": "The Pharmacy Data Management (PDM) package provides tools for managing site configurable data in pharmacy files",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=93"
+                },
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "National Drug File",
+                  "description": "The National Drug File (NDF) package provides standardization of the local drug files in all VA medical facilities.  Standardization includes the adoption of new drug nomenclature and drug classification, as well as linking the local drug file entries to data in the National Drug files",
+                  "vdl":"https://www.va.gov/vdl/application.asp?appid=89"
+                },
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "CMOP",
+                  "description": "The Consolidated Mail Outpatient Pharmacy (CMOP) package provides a regional system resource to expedite the distribution of mail-out prescriptions to veteran patients. CMOP host facilities, regionally located, receive data from medical centers within the area of service.  Current CMOPs are designed to handle the dispensing and mailing of between 20,000 and 40,000 prescriptions in an 8-hour workday",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=85"
+                },
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Pharmacy Benefits Management",
+                  "description": "The module extracts medication dispensing data elements from numerous locations and makes reports available allowing projections of local drug usage and identification of potential accountability problem areas.  The extracted data is transmitted to the PBM using VA Mailman.  The Pharmacy Benefits Management (PBM) database that collects information on medication dispensed to both inpatient and outpatient veterans who receive care from the VA is housed at the Hines Information Technology Center (HITC)",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=91"
+                }
+              ]
+            },
+            {
+              "name": "Provide Radiology Services",
+              "children": [
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Radiology Nuclear Medicine",
+                  "description": "This module automates the entire range of diagnostic functions performed in imaging departments, including order entry of requests, registration of patients for exams, processing of exams, recording of reports/results, verification of reports on-line, displaying/printing results for clinical staff, automatic tracking of requests/exams/reports, and generation of management statistics/reports, both recurring and ad hoc",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=98"
+                }
+              ]
+            },
+            {
+              "name": "Provide Rehabilitation Services",
+              "children": [
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Functional Independence",
+                  "description": "The module provides an integration of Functional Independence Measures (FIM) assessments into the Computerized Patient Record System (CPRS) and into the Functional Status and Outcomes Database (FSOD) at the VA Austin Information Technology Center (AITC).  The FIM is an 18-item, 7-level functional assessment designed to evaluate the amount of assistance required by a person with a disability to perform basic life activities safely and effectively",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=134",
+                  "gui": "Windows Delphi client - FIM.exe"
+                },
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Prosthetics",
+                  "description": "The module automates purchasing.  The Prosthetics module enhances patient care by determining what prosthetic services and devices have been provided to the Veteran in the past, and decreasing the time required for the order, delivery, and/or repair of devices",
+                  "vdl":"https://www.va.gov/vdl/application.asp?appid=96",
+                  "gui": "Windows Delphi client - Prosthetics Application Suite - ProsMenu.exe"
+                },
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Visual Impairment Service Team",
+                  "description": "With this module, Visual Impairment Service Teams are able to easily manage and track activities and services provided to blind Veterans in their service area. This program integrates several fields of patient data to produce a variety of reports.  The VIST patient record printout can be used in place of VA Form (10-1371) and is a more versatile document than the card. Semi- annual Automated Management Information System (AMIS) reports can be run and Veterans can be added or deleted from the rolls as indicated",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=106"
+                },
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Quasar",
+                  "description": "Quality Audiology and Speech Analysis and Reporting (QUASAR) is a VistA software package written for the Audiology and Speech Pathology Service.  QUASAR is used to enter, edit, and retrieve data for each episode of care",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=97",
+                  "gui": "Windows Delphi client - ACKQROES3.exe & ACKQROES3E.exe"
+                }
+              ]
+            },
+            {
+              "name": "Provide Social Work Services",
+              "children": [
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Social Work",
+                  "description": "The module is designed to facilitate the Social Work Service functions within a medical facility and is composed of Case Management, Clinical Assessment, and Community Resource",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=101",
+                  "status":"Identified for decommissioning"
+                }
+              ]
+            }
+          ]
         },
         {
-            "name": "Management Functions",
-            "children": [
-                {
-                    "name": "Medical Records",
-                    "children": [
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Authorization Subscription"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Record Tracking"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Release Of Information - DSSI"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "CPT HCPCS Codes"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Generic Code Sheet"
-                        }
-                    ]
-                },
-                {
-                    "name": "Education",
-                    "children": [
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Library"
-                        }
-                    ]
-                },
-                {
-                    "name": "Financial",
-                    "children": [
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Remote Order Entry System"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Event Driven Reporting"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Fee Basis"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "E Claims Management Engine"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Integrated Billing"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Event Capture"
-                        }
-                    ]
-                },
-                {
-                    "name": "Care Planning & Management",
-                    "children": [
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Shift Handoff Tool"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Hospital Based Home Care"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "DSS Extracts"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Care Management"
-                        }
-                    ]
-                },
-                {
-                    "name": "Patient Administration",
-                    "children": [
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Automated Information Collection System"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Clinical Information Resource Network"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "DRG Grouper"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Integrated Patient Fund"
-                        }
-                    ]
-                },
-                {
-                    "name": "Medical Center Administration",
-                    "children": [
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "HINQ"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Police and Security"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Interim Management Support"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "IFCAP"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "PAID"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Voluntary Timekeeping"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Occupational Health Record-Keeping System"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Engineering"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Accounts Receivable"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Wounded Injured and Ill Warriors"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Automated Medical Information Exchange"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Equipment Turn-In Request"
-                        }
-                    ]
-                },
-                {
-                    "name": "Infectious Diseases",
-                    "children": [
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Clinical Case Registries"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Methicillin Resistant Staph Aurerus Initiative Reports"
-                        }
-                    ]
-                }
-            ]
+          "name": "Provide Care Management",
+          "children": [
+            {
+                "distribution": [
+                  "OSEHRA",
+                  "VA",
+                  "DSS"
+                ],
+                "name": "Care Management",
+                "description": "The module is the first application to offer a convenient way for health care providers to view on a single screen, pertinent information about multiple patients",
+                "vdl": "https://www.va.gov/vdl/application.asp?appid=138",
+                "gui": "Browser GUI (HealtheVetDesktopLauncher - shortcut) with Java backend"
+              }
+          ]
         },
         {
-            "name": "Safety & Quality",
-            "children": [
+          "name": "Provide Medical Services",
+          "children": [
+            {
+              "name": "Adminster Medication",
+              "children":[
                 {
-                    "distribution": [
-                        "OSEHRA",
-                        "VA",
-                        "DSS"
-                    ],
-                    "name": "Asists"
-                },
-                {
-                    "distribution": [
-                        "OSEHRA",
-                        "VA",
-                        "DSS"
-                    ],
-                    "name": "Occurrence Screen"
-                },
-                {
-                    "distribution": [
-                        "OSEHRA",
-                        "VA",
-                        "DSS"
-                    ],
-                    "name": "Adverse Reaction Tracking"
-                },
-                {
-                    "distribution": [
-                        "OSEHRA",
-                        "VA",
-                        "DSS"
-                    ],
-                    "name": "Incomplete Records Tracking"
-                },
-                {
-                    "distribution": [
-                        "OSEHRA",
-                        "VA",
-                        "DSS"
-                    ],
-                    "name": "Beneficiary Travel"
-                },
-                {
-                    "distribution": [
-                        "OSEHRA",
-                        "VA",
-                        "DSS"
-                    ],
-                    "name": "Clinical Monitoring System"
-                },
-                {
-                    "distribution": [
-                        "OSEHRA",
-                        "VA",
-                        "DSS"
-                    ],
-                    "name": "Survey Generator"
-                },
-                {
-                    "distribution": [
-                        "OSEHRA",
-                        "VA",
-                        "DSS"
-                    ],
-                    "name": "Patient Representative"
-                },
-                {
-                    "distribution": [
-                        "OSEHRA",
-                        "VA",
-                        "DSS"
-                    ],
-                    "name": "Incident Reporting"
-                },
-                {
-                    "distribution": [
-                        "OSEHRA",
-                        "VA",
-                        "DSS"
-                    ],
-                    "name": "Utilization Management Rollup"
-                },
-                {
-                    "distribution": [
-                        "OSEHRA",
-                        "VA",
-                        "DSS"
-                    ],
-                    "name": "Quality Assurance Integration"
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Barcode Medication Administration",
+                  "description": "Bar Code Medication Administration (BCMA) software provides a real-time, point-of- care solution for validating the administration of Unit Dose (UD) and Intravenous (IV) medications to inpatients and outpatients in Veterans Administration Medical Centers",
+                  "vdl":"https://www.va.gov/vdl/application.asp?appid=84",
+                  "gui":"Windows Delphi client - BCMA.exe & BCMApar.exe"
                 }
-            ]
+              ]
+            },
+            {
+              "name": "Manage Orders",
+              "children":[
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Order Entry Results Reporting",
+                  "description": "The module Computerized Patient Record System (CPRS) enables you to enter, review, and continuously update allinformation connected with any patient",
+                  "vdl":"https://www.va.gov/vdl/application.asp?appid=61",
+                  "gui":"Windows Delphi client - CPRSChart.exe, Anticoagulation Management Tool (AMT) - ANTICOAGULATE.EXE",
+                  "gui-vdl":"https://www.va.gov/vdl/application.asp?appid=188"
+                }
+              ]
+            },
+            {
+              "name": "Monitor Patient Clinical Measurements",
+              "children":[
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Clinical Procedures",
+                  "description": "The module passes final patient results, using Health Level 7 (HL7) messaging, between vendor clinical information systems (CIS) and VistA.  Patients’ test results or reports are displayed through the Computerized Patient Record System (CPRS)",
+                  "vdl":"https://www.va.gov/vdl/application.asp?appid=139",
+                  "gui":"Windows Delphi clients - CPFlowsheet.exe, CPConsole.exe, CPGatewayService.exe, Hemodialysis.exe"
+                },
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "General Medical Record - Vitals",
+                  "description": "The module is designed to store, in the patient's electronic health record, all vital signs and various measurements associated with a patient's hospital stay or outpatient clinic visit. Data entered can be accessed by several VistA applications (e.g., Health Summary) that interface with the Vitals/Measurements application",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=107",
+                  "gui": "Windows Delphi clients - Vitals.exe & VitalsManager.exe"
+                }
+              ]
+            },
+            {
+              "name": "Perform Compensation and Pension Medical Examinations",
+              "children":[
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Automated Medical Information Exchange",
+                  "description": "The Automated Medical Information Exchange (AMIE) module facilitates the electronic interchange of veteran information between Veteran Benefits Administration (VBA) Regional Offices (ROs) and VA medical facilities",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=31",
+                  "gui":"Windows Delphi client - Compensation and Pension Record Interchange (CAPRI) - CAPRI.exe",
+                  "gui-vdl": "https://www.va.gov/vdl/application.asp?appid=133"
+                }
+              ]
+            },
+            {
+              "name": "Perform Patient Care Encounter",
+              "children":[
+                {
+                  "name": "Provide Patient Assessment",
+                  "children": [
+                    {
+                      "distribution": [
+                        "OSEHRA",
+                        "VA",
+                        "DSS"
+                      ],
+                      "name": "Patient Assessment Documentation",
+                      "description": "The module enables Registered Nurses (RNs) to document, in a standardized format, patient care during an inpatient stay. Although the content is standardized for use across the VA system, some parameters can be set to support the unique processes at individual medical centers",
+                      "vdl":"https://www.va.gov/vdl/application.asp?appid=193",
+                      "status": "Class 3 software, not supported nationally"
+                    }
+                  ]
+                },
+                {
+                  "name": "Determine Allergies and Adverse Reactions",
+                  "children": [
+                    {
+                      "distribution": [
+                        "OSEHRA",
+                        "VA",
+                        "DSS"
+                      ],
+                      "name": "Adverse Reaction Tracking",
+                      "description": "The module provides a common and consistent data structure for adverse reaction data.  This module has options for data entry and validation, supported references for use by external software modules, and the ability to report adverse drug reaction data to the Food and Drug Administration (FDA)",
+                      "vdl":"https://www.va.gov/vdl/application.asp?appid=57",
+                      "gui":"Windows Delphi client - CPRSChart.exe"
+                    }
+                  ]
+                },
+                {
+                  "name": "Document Patient Encounter",
+                  "children": [
+                    {
+                      "distribution": [
+                      "OSEHRA",
+                      "VA",
+                      "DSS"
+                      ],
+                      "name": "PCE Patient Care Encounter",
+                      "description": "The Patient Care Encounter (PCE) captures clinical data resulting from ambulatory care patient encounters.  The data includes captured clinical data documents encounters and related encounter information, problems treated during the encounter, procedures done, immunizations, patient education, service connection, and skin tests",
+                      "vdl":"https://www.va.gov/vdl/application.asp?appid=82",
+                      "gui":"Windows Delphi client - CPRSChart.exe"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Provide Emergency Health Care",
+              "children":[
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Emergency Department Integration Software",
+                  "description": "Emergency Department Integration Software (EDIS) incorporates several Web-based views that extend the current Computerized Patient Record System (CPRS) to help healthcare professionals track and manage the flow of patient care in the emergency department setting",
+                  "vdl":"https://www.va.gov/vdl/application.asp?appid=179",
+                  "gui": "Web application based on Jave/WebLogic platform - brower GUI uses Adobe Flash Player"
+                }
+              ]
+            },
+            {
+              "name": "Provide Mental Health Services",
+              "children":[
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Mental Health",
+                  "description": "Psychiatrists and psychologists have directed this VistA module’s design with active input from all health care disciplines, guided by the principle of creating software that makes the clinician’s job easier and leads to better patient care. A by-product of this approach has been the creation of a clinical database, which is useful to mental health program managers in many ways, including evaluating clinical productivity, monitoring and improving the quality of care, and trending various patient care events. This clinical database package is comprehensive and accessible from workstations throughout medical facilities",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=78",
+                  "gui": "Windows Delphi client - YS_MHA.exe and Veteran Crisis Line - a .NET MDWS based web application"
+                }
+              ]
+            },
+            {
+              "name": "Provide Specialty Care",
+              "children": [
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Spinal Cord Dysfunction",
+                  "description": "The Spinal Cord Injury and Disorders Outcomes (SCIDO) 3.0 application converts the Spinal Cord Dysfunction (SCD) Registry from a legacy command line system to a client server platform with a graphical user interface (GUI) and enhanced capabilities",
+                  "vdl":"https://www.va.gov/vdl/application.asp?appid=196",
+                  "status": "Decommissioned",
+                  "gui": "Browser based web application"
+                },
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Medicine",
+                  "description": "The module serves clinical services and maximizes the use of the data within VistA VAMC database.  The module allows entry, edit, and viewing of data for many medical tests and procedures. Medicine components include:  Cardiology, Pulmonary, Gastrointestinal, Hematology, Pacemaker, Rheumatology, and Generalized Procedure.",
+                  "vdl":"https://www.va.gov/vdl/application.asp?appid=77"
+                }
+              ]
+            },
+            {
+              "name": "Provide Surgery",
+              "children":[
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Surgery",
+                  "description": "The module is designed to be used by Surgeons, Surgical Residents, Anesthetists, Operating Room Nurses and other surgical staff. The Surgery package is part of the patient information system that stores data on the VA patients who have, or are about to undergo, surgical procedures. This package integrates booking, clinical, and patient data to provide a variety of administrative and clinical reports",
+                  "vdl":"https://www.va.gov/vdl/application.asp?appid=103"
+                }
+              ]
+            }
+          ]
         },
         {
-            "name": "Registration/Enrollment/Eligibility",
-            "children": [
+          "name": "Provide Clinical Decision Support",
+          "children": [
+            {
+              "name": "Deliver Alerts for Patient Care",
+              "children": [
                 {
-                    "name": "Eligibility",
-                    "children": [
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Income Verification Match"
-                        }
-                    ]
+                  "name": "CDS - Clinical Reminders",
+                  "children": [
+                    {
+                      "distribution": [
+                        "OSEHRA",
+                        "VA",
+                        "DSS"
+                      ],
+                      "name": "Clinical Reminders",
+                      "description": "The module provides relevant information to providers at the point of care, for clinical decision-making",
+                      "vdl": "https://www.va.gov/vdl/application.asp?appid=60",
+                      "gui": "Windows Delphi client - CPRSChart.exe"
+                    }
+                  ]
                 },
                 {
-                    "name": "Encounter & Visit Management",
-                    "children": [
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Enrollment Application System"
-                        },
-                        {
-                            "distribution": [
-                                "OSEHRA",
-                                "VA",
-                                "DSS"
-                            ],
-                            "name": "Registration"
-                        },
-                        {
-                            "distribution": [
-                                "DSS"
-                            ],
-                            "name": "Sea Island Systems Registration"
-                        }
-                    ]
+                  "name": "Monitor Clinical Activity",
+                  "children": [
+                    {
+                      "distribution": [
+                        "OSEHRA",
+                        "VA",
+                        "DSS"
+                      ],
+                      "name": "Clinical Monitoring System",
+                      "description": "The module captures data for patients meeting specified conditions and alerts users when important thresholds or dates are met",
+                      "vdl": "https://www.va.gov/vdl/application.asp?appid=32"
+                    }
+                  ]
                 }
-            ]
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Provide Dentistry",
+          "children": [
+            {
+              "name": "Provide Dental Care Services",
+              "children": [
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Dental",
+                  "description": "The module AKA: Dental Record Manager (DRM) is a proprietary software from DSS.  It superceded the original DENT module in 2001.  It provides a customized user-friendly Windows interface for entering clinical encounter information and assisted with the assessment of ongoing care using current patient data for completed procedures",
+                  "vdl":"https://www.va.gov/vdl/application.asp?appid=66",
+                  "gui":"Windows Delphi client - dentalmrmtx.exe"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Provide Nursing Services",
+          "children": [
+            {
+              "distribution": [
+                "OSEHRA",
+                "VA",
+                "DSS"
+              ],
+              "name": "Nursing Service",
+              "description": "The module is comprised of multiple modules (i.e., Administration, Clinical, Education, Performance Improvement, and Research)",
+              "vdl":"https://www.va.gov/vdl/application.asp?appid=80"
+            },
+            {
+              "distribution": [
+                "OSEHRA",
+                "VA",
+                "DSS"
+              ],
+              "name": "General Medical Record - Generator",
+              "description": "The module, AKA Text Generator, provides utilities used by the Nursing package to create nursing care plans",
+              "vdl": "Not Available"
+            },
+            {
+              "distribution": [
+                "OSEHRA",
+                "VA",
+                "DSS"
+              ],
+              "name": "General Medical Record - IO",
+              "description": "The Intake and Output (I&O) module used by the nursing package is designed to store, in the patient's electronic health record, all patient intake (e.g., oral fluids, tube feedings, intravenous fluids, irrigations, etc.) and patient output (e.g., excreted patient material such as urine, nasogastric secretions, emesis, drainage, liquid feces/stool, etc.) information associated with a hospital stay or outpatient visit",
+              "vdl":"https://www.va.gov/vdl/application.asp?appid=70"
+            }
+          ]
         }
-    ]
+      ]
+    },
+    {
+      "name": "Manage Business Enabling Services",
+      "children": [
+        {
+          "name": "Manage Acquisitions",
+          "children": [
+            {
+              "name": "Acquire Assets, Equipment, and Supplies",
+              "children": [
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Engineering",
+                  "description": "Engineering, also known as Automated Engineering Management System/Medical Equipment Reporting System (AEMS/MERS), facilitates the management of information needed to effectively discharge key operational responsibilities normally assigned to VA engineering organizations, such as Work Orders, Equipment Management, Program Management and Space/Facility Management",
+                  "vdl":"https://www.va.gov/vdl/application.asp?appid=37"
+                },
+                {
+                    "distribution": [
+                      "OSEHRA",
+                      "VA",
+                      "DSS"
+                    ],
+                    "name": "Remote Order Entry System",
+                    "description": "The module is the front-end of the Denver Acquisition & Logistics Center (DALC) supply chain/order fulfillment production system.  ROES is used by clinicians to place orders for certain types of medical products and services that are maintained under contract by the DDC",
+                    "vdl": "Not Available"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Manage Human Resources",
+          "children": [
+            {
+              "distribution": [
+                "OSEHRA",
+                "VA",
+                "DSS"
+              ],
+              "name": "PAID",
+              "description": "This module is comprised of the Enhanced Time and Attendance system and the Education Tracking system",
+              "vdl":"https://www.va.gov/vdl/application.asp?appid=51",
+              "status": "Identified for decommissioning"
+            }
+          ]
+        },
+        {
+          "name": "Manage VHA-Wide Administrative Services",
+          "children": [
+            {
+              "name": "Provide Security Service",
+              "children": [
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Police and Security",
+                  "description": "Police Service personnel at all Veterans Affairs facilities nationwide are now using the national VA Police and Security (VAPS) system for their record keeping",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=52",
+                  "status": "Decommissioned as of 10/14/09"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Provide Enterprise Reporting",
+          "children": [
+            {
+              "distribution": [
+                "OSEHRA",
+                "VA",
+                "DSS"
+              ],
+              "name": "Event Driven Reporting",
+              "description": "No documentation exist.  The file 705 is a temporary repository for events that will be sent to the central system via HL7",
+              "vdl": "None",
+              "status": "Unknown - likely decommissioned sometime ago"
+            }
+          ]
+        },
+        {
+          "name": "Provide Financial Management",
+          "children": [
+            {
+              "name": "Manage Collections and Receivables",
+              "children": [
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Accounts Receivable",
+                  "description": "The module automates the debt collection process and a billing module is available to create statements for non-medical care debts",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=55"
+                },
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Integrated Billing",
+                  "description": "The module provides all the features necessary to create first party (patient) and third party (insurance carriers/Medicare) bills",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=45"
+                },
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "E Claims Management Engine",
+                  "description": "The module (AKA: ePharmacy) provides the ability to create and distribute electronic Outpatient Pharmacy claims to insurance companies on behalf of VHA Pharmacy prescription beneficiaries in a real-time environment",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=141"
+                },
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Fee Basis",
+                  "description": "The module supports VHA’s Fee for Service program, which is care authorized for veterans who are legally eligible and are in need of care that cannot feasibly be provided by a VA facility",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=40"
+                }
+              ]
+            },
+            {
+              "name": "Manage Payments",
+              "children": [
+                {
+                  "name": "Diagnostic Related Grouper",
+                  "children": [
+                    {
+                      "distribution": [
+                        "OSEHRA",
+                        "VA",
+                        "DSS"
+                      ],
+                      "name": "DRG Grouper",
+                      "description": "The module groups diagnostic and operation/procedure codes into the DRGs based on the combination of codes, age, sex, discharge status, and occurrence of death",
+                      "vdl": "https://www.va.gov/vdl/application.asp?appid=36"
+                    }
+                  ]
+                },
+                {
+                  "name": "Benefit Claims Processing",
+                  "children": [
+                    {
+                      "distribution": [
+                        "OSEHRA",
+                        "VA",
+                        "DSS"
+                      ],
+                      "name": "Beneficiary Travel",
+                      "description": "The module provides the ability to perform the functions involved in issuing beneficiary travel pay",
+                      "vdl": "https://www.va.gov/vdl/application.asp?appid=123",
+                      "status": "Identified for decommissioning"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Provide Accounting Services",
+              "children": [
+                {
+                  "name": "Provide Veteran Personal Finance Management",
+                  "children": [
+                    {
+                      "distribution": [
+                        "OSEHRA",
+                        "VA",
+                        "DSS"
+                      ],
+                      "name": "Integrated Patient Fund",
+                      "description": "The module (known as the Veterans Personal Finance System (VPFS)) automates the  (bank-like) functionality that VA provides for patients to manage their personal funds while hospitalized in a VA medical facility",
+                      "vdl": "https://www.va.gov/vdl/application.asp?appid=170",
+                      "status": "Replaced by the VPFS system",
+                      "gui": "Browser based J2EE application"
+                    }
+                  ]
+                },
+                {
+                  "name": "Provide Fund Control",
+                  "children": [
+                    {
+                      "distribution": [
+                        "OSEHRA",
+                        "VA",
+                        "DSS"
+                      ],
+                      "name": "IFCAP",
+                      "description": "The Integrated Funds Distribution, Control Point Activity, Accounting and Procurement (IFCAP) automates the written regulations and policy for VA funds and procurement",
+                      "vdl": "https://www.va.gov/vdl/application.asp?appid=42"
+                    },
+                    {
+                      "distribution": [
+                        "OSEHRA",
+                        "VA",
+                        "DSS"
+                      ],
+                      "name": "Equipment Turn-In Request",
+                      "description": "The module provides additional functionality within the IFCAP package, including the ability to enter an electronic request for new, non-expendable equipment and replacement equipment",
+                      "vdl":"https://www.va.gov/vdl/application.asp?appid=113"
+                    }
+                  ]
+                },
+                {
+                  "name": "Track and Report Data",
+                  "children": [
+                    {
+                      "distribution": [
+                        "OSEHRA",
+                        "VA",
+                        "DSS"
+                      ],
+                      "name": "Generic Code Sheet",
+                      "description": "The module allows code sheet data to be entered and transmitted electronically from the medical facility service level to the national database",
+                      "vdl": "https://www.va.gov/vdl/application.asp?appid=7"
+                    },
+                    {
+                      "distribution": [
+                        "OSEHRA",
+                        "VA",
+                        "DSS"
+                      ],
+                      "name": "Event Capture",
+                      "description": "The module provides a mechanism to track and account for procedures and delivered services that other VistA packages do not handle",
+                      "vdl":" https://www.va.gov/vdl/application.asp?appid=39",
+                      "gui":"Windows Delphi client - ECS GUI.EXE"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Provide Information Management/ Information Technology Services",
+          "children": [
+            {
+              "name": "Conduct Technology Assessments",
+              "children": [
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "SAGG Project",
+                  "description": "The Statistical Analysis of Global Growth (SAGG) software obtains more accurate information regarding the current and future VistA database growth rates at each site",
+                  "vdl":"https://www.va.gov/vdl/application.asp?appid=115"
+                },
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Capacity Management - RUM",
+                  "description": "The Resource Usage Monitor (RUM) allows staff to accomplish and monitor workload/usage information. System and VistA option information from the each site are automatically transfer via network mail to the Capacity Planning National Database",
+                  "vdl":"https://www.va.gov/vdl/application.asp?appid=130"               },
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Capacity Management Tools",
+                  "description": "The CM Tools are used to measure system performance, data growth, Computerized Patient Record System (CPRS) coversheet load times, option and protocol execution, and provide various data reports",
+                  "vdl":"https://www.va.gov/vdl/application.asp?appid=129",
+                  "gui": "Windows Delphi client - kmpdTool.exe"
+                }
+              ]
+            },
+            {
+              "name": "Provide Identity Management",
+              "children": [
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Clinical Information Resource Network",
+                  "description": "The module is a component of the software used in the Clinical Information Resource Network (CIRN) project to develop the MPI and the Health Data Repository",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=16"
+                },
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Master Patient Index VistA",
+                  "description": "The Master Veteran Index (MVI) database (formerly known as the Master Patient Index [MPI]) is the primary vehicle for assigning and maintaining unique patient identifiers",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=16"
+              },
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Electronic Signature",
+                  "description": "The service duplicates for Java applications Java 2 Enterprise Editiion (J2EE) the Kernel V.8.0 electronic signature functionality currently used by VistA/M applications.  ESig furnishes a standard, consistent set of APIs that VistA developers can use to provide users access to electronic signature data stored on VistA/M systems",
+                  "vdl":"https://www.va.gov/vdl/application.asp?appid=171"
+                }
+              ]
+            },
+            {
+              "name": "Provide Information Management",
+              "children": [
+                {
+                  "name": "Establish Standards for Data Exchange",
+                  "children": [
+                    {
+                      "distribution": [
+                        "OSEHRA",
+                        "VA",
+                        "DSS"
+                      ],
+                      "name": "Lexicon Utility",
+                      "description": "The module is a dictionary of medical terms which can be used by all clinical areas.  It provides the basis for a common language of terminology so that all members of a health care team may communicate with each other.  It provides a variety of coding schemes and the ability to update these coding systems",
+                      "vdl":"https://www.va.gov/vdl/application.asp?appid=76"
+                    },
+                    {
+                      "distribution": [
+                        "OSEHRA",
+                        "VA",
+                        "DSS"
+                      ],
+                      "name": "Health Data and Informatics",
+                      "description": "The module provides a basic method for seeding VHA Unique Identifiers (VUIDs) for reference data in existing VistA applications.  A VUID is a meaningless number, which is automatically assigned to concepts, properties, and relationships in a terminology to facilitate their access and manipulation by computers",
+                      "vdl":"https://www.va.gov/vdl/application.asp?appid=148"
+                    },
+                    {
+                      "distribution": [
+                        "OSEHRA",
+                        "VA",
+                        "DSS"
+                      ],
+                      "name": "CPT HCPCS Codes",
+                      "description": "This module provides the utility to udpate the CPT files.  The actual CPT codes are proprietary, hence, a separate installation is needed",
+                      "vdl": "https://www.va.gov/vdl/application.asp?appid=33"
+                    }
+                  ]
+                },
+                {
+                  "name": "Perform Record Retention",
+                  "children": [
+                    {
+                      "distribution": [
+                        "OSEHRA",
+                        "VA",
+                        "DSS"
+                      ],
+                      "name": "Record Tracking",
+                      "description": "The module provides for the maintenance and control of hardcopy health records and x-ray films to facilitate availability to a variety of users",
+                      "vdl": "https://www.va.gov/vdl/application.asp?appid=53"
+                    }
+                  ]
+                },
+                {
+                  "name": "Provide Information Technology Service",
+                  "children": [
+                    {
+                      "distribution": [
+                        "OSEHRA",
+                        "VA",
+                        "DSS"
+                      ],
+                      "name": "Kernel",
+                      "description": "Kernel provides a portability layer between the underlying operating system and application code",
+                      "vdl": "https://www.va.gov/vdl/application.asp?appid=10"
+                    },
+                    {
+                      "distribution": [
+                        "OSEHRA",
+                        "VA",
+                        "DSS"
+                      ],
+                      "name": "Toolkit",
+                      "description": "This module provides development and quality assessment tools and system management utilities",
+                      "vdl": "https://www.va.gov/vdl/application.asp?appid=12"
+                    },
+                    {
+                      "distribution": [
+                        "DSS"
+                      ],
+                      "name": "VPE Shell",
+                      "description": "VPE consists of a number of integrated programmer utilities that will increase productivity and decrease the number of key strokes required to complete normal programming tasks in the VISTA environment. Contrary to its name, VPE is not only for programmers. Many people perform technical tasks from programmer mode because it is so powerful. Think of VPE as enhanced programmer mode and then you will see that it is ideal for anyone who regularly operates in programmer mode",
+                      "vdl":"https://code.osehra.org/journal/journal/view/1094"
+                    },
+                    {
+                      "distribution": [
+                        "OSEHRA",
+                        "VA",
+                        "DSS"
+                      ],
+                      "name": "List Manager",
+                      "description": "The List Manager was developed to provide an efficient way for applications to present a list of items to the user for action",
+                      "vdl":"https://www.va.gov/vdl/application.asp?appid=14"
+                    },
+                    {
+                      "distribution": [
+                        "OSEHRA",
+                        "VA",
+                        "DSS"
+                      ],
+                      "name": "M XML Parser",
+                      "description": "The VistA Extensible Markup Language (XML) Parser is a full-featured, validating XML parser designed to interface with the VistA suite of M-based applications.  It is not a standalone product.  Rather, it acts as a server application that can provide XML parsing capabilities to any client application that subscribes to the XML Parser application programmer interface (API) implementations",
+                      "vdl":"https://www.va.gov/vdl/application.asp?appid=137"
+                    },
+                    {
+                      "distribution": [
+                        "OSEHRA",
+                        "VA",
+                        "DSS"
+                      ],
+                      "name": "FileMan Delphi Components",
+                      "description": "The FileMan Delphi Components make it easy for developers to work with VA FileMan data in Delphi applications. The components encapsulate the details of retrieving, validating and updating VA FileMan data within a Delphi application. This saves you from creating your own custom remote procedure calls (RPCs) when you need to access VA FileMan data",
+                      "vdl":"https://www.va.gov/vdl/application.asp?appid=6"
+                    },
+                    {
+                      "distribution": [
+                        "OSEHRA",
+                        "VA",
+                        "DSS"
+                      ],
+                      "name": "VA FileMan",
+                      "description": "VA FileMan is the VistA database management system (DBMS).  It runs in any American National Standards Institute (ANSI) environment.  The majority of VHA clinical data is stored in VA FileMan files and is retrieved and accessed through VA FileMan Application Program Interfaces (API) and user interfaces",
+                      "vdl":"https://www.va.gov/vdl/application.asp?appid=5"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Provide Systems Development Lifecyle Management",
+              "children": [
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Patch Module",
+                  "description": "This module provides a database for the distribution of software patches and updates to Veterans Health Information Systems and Technology Architecture (VistA)",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=20"
+                },
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "National Online Information Sharing",
+                  "description": " National On-Line Information Sharing (NOIS) is used to track requests for service on VistA applications.  It is used on Forum and can be implemented for local use",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=18",
+                  "gui": "Windows Delphi client v1.1 - nois.exe"
+                },
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "National VistA Support",
+                  "description": "This module consist of utilities used for IT customer support.  There are no documentation found in VDL",
+                  "status": "unknown"
+                }
+              ]
+            },
+            {
+              "name": "Share Enterprise Information",
+              "children": [
+                {
+                    "distribution": [
+                      "OSEHRA",
+                      "VA",
+                      "DSS"
+                    ],
+                    "name": "MailMan",
+                    "description": "The module is designed to allow users to send and receive mail from individuals or groups electronically through communication lines, modems, and other networks.  These electronic mail messages (i.e., e-mail) can range from personal letters to formal bulletins extracting data from VA FileMan",
+                    "vdl":"https://www.va.gov/vdl/application.asp?appid=15"
+                },
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "National Health Information Network",
+                  "description": "The VA NHIN Gateway Adapter is a HealtheVet-VistA application that acts as a gateway between the VA and other Health Information Exchanges (HIEs) to share patient clinical records. The VA NHIN Gateway Adapter is deployed as a single, national instance at AITC (Austin Information Technology Center). Payloads are standardsbased CDA (Clinical Document Architecture) XML documents. VistA data is retrieved through the use of VistALink-mediated RPC calls; HIE data retrieved by the NHIN Adapter is displayed by VistAWeb. The NHIN Adapter provides a read-only service: it does not create a clinical repository with the data it mediates.",
+                  "vdl":"https://www.va.gov/vdl/application.asp?appid=195"
+                },
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Health Level Seven",
+                  "description": "The module enables M- based (VistA) applications running on core facility computer systems to exchange health care information with other computer systems.  It provides messaging services and a single toolset for M- based VistA applications to create, send, receive, and process HL7 messages. Many VistA applications use VistA HL7 to exchange data in HL7 format with other facilities and/or applications, including Anesthesiology, Master Veteran Index/Patient Demographics (MVI/PD), Laboratory, Outpatient Pharmacy, Patient Management System (PMS), Radiology, and Veteran ID Card (VIC).  The VistA HL7 package is also used to integrate commercial off-the-shelf (COTS) health care applications with M-based core facility computer systems",
+                  "vdl":"https://www.va.gov/vdl/application.asp?appid=8"
+                },
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "VDEF",
+                  "description": "VistA Data Extraction Framework (VDEF) is a VistA package that uses hard-coded MUMPS (M) routines to create and deliver Health Level 7 (HL7) messages.  The VDEF package supports queuing requests for messages, control of the timing of message creation, monitoring of the request queue, and recording of errors encountered during message creation.  The hard-coded programs are M programs belonging to an application’s namespace.  Messages are delivered using the VistA HL7 package",
+                  "vdl":"https://www.va.gov/vdl/application.asp?appid=144"
+                },
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Patient Data Exchange",
+                  "description": "The module is designed to electronically request and receive patient demographics, episodes of care, medications, and diagnostic evaluations from other VA facilities.  Data is retrieved from files at the remote site and is assembled into a coherent, composite record, greatly enhancing the quality of care provided for the patient",
+                  "vdl":"https://www.va.gov/vdl/application.asp?appid=22"
+                },
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Virtual Patient Record",
+                  "description": "Virtual Patient Record (VPR) is a foundation software package component of the Health Management Platform architecture. This architecture is part of the scope of the Health Informatics Initiative and Healthshare.   The Joint Legacy Viewer is highly dependent on the payloads from the VPR routines",
+                  "vdl":"https://www.va.gov/vdl/application.asp?appid=197"
+                },
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Network Health Exchange",
+                  "description": "The NHE package accesses information concerning clinic visits, diagnoses, prescriptions, laboratory tests, radiology  exams, and hospital admissions. It enables clinicians to request medical or pharmacy records for a patient from a single site or several sites. NHE obtains Health Summary information through an interface with the Health Summary VistA module. NHE uses predefined formats, thus requiring less input by the user and resulting in simpler, faster access to patient data.  Patient data is displayed in a format similar to that of Health Summary and can be viewed on-screen or printed",
+                  "vdl":"https://www.va.gov/vdl/application.asp?appid=79"
+                },
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Foundations",
+                  "description": "The module provides a set of utilities under the XOBU namespace used by the VistALink",
+                  "vdl":"https://www.va.gov/vdl/application.asp?appid=163"
+                },
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "VistALink",
+                  "description": "VistALink consists of an M-side listener and Java-side adapter libraries compliant with the J2EE Connectors specification for Enterprise Information System (EIS) adapters.  VistALink comports to system architecture requirements, and supplements other alternatives for communication between M-based and JAVA-based applications, including Remote Procedure Call (RPC) Broke, HL7 interface messaging software, and Web Services",
+                  "vdl":"https://www.va.gov/vdl/application.asp?appid=163"
+                },
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "VistALink Security",
+                  "description": "he module provides a set of security related utilities under the XOBS namespace used by the VistALink",
+                  "vdl":"https://www.va.gov/vdl/application.asp?appid=163"
+                },
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Web Services Client",
+                  "description": "The M-based applications have a need to synchronously access VistA application services and data (e.g., in-process during an end-user’s session). The HealtheVet Web Service Client (HWSC) uses Caché’s Web Services Client to invoke Web service methods on external servers and retrieve results. It provides helper methods and classes to improve the use of Caché’s Web service client in a VistA environment",
+                  "vdl":"https://www.va.gov/vdl/application.asp?appid=180"
+                },
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "RPC Broker",
+                  "description": "RPC provides functionality so thats GUI clients can establish a connection from a client workstation to a VistA M Server, run RPCs on the VistA M Server, and return data to the client workstation",
+                  "vdl":"https://www.va.gov/vdl/application.asp?appid=23"
+                },
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "DSS Extracts",
+                  "description": "The module provides a means of exporting data from selected VistA software modules and transmitting it to a Decision Support System (DSS) resident at the Austin Information Technology Center (AITC)",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=35"
+                },
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Wounded Injured and Ill Warriors",
+                  "description": "The module provides accurate and timely personnel and health related data to the Defense Finance and Accounting Service (DoD/DFAS) supporting adequate maintenance of pay and entitlements for all wounded warriors",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=178"
+                },
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "VistA Web",
+                  "description": " VistAWeb is an intranet web application used to review remote patient information found in VistA, the BiDirectional Health Information Exchange (BHIE) system, the Health Data Repository II (HDR II) databases, and the Nationwide Health Information Network",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=147",
+                  "gui": "Browser based .NET web application"
+                }
+              ]
+            }
+          ]
+        }
+       ]
+    },
+    {
+      "name": "Provide Access to Health Care",
+      "children": [
+        {
+          "name": "Provide Communication and Outreach",
+          "children": [
+            {
+              "distribution": [
+                "OSEHRA",
+                "VA",
+                "DSS"
+              ],
+              "name": "Patient Representative",
+              "description": "The module supports the Patient Advocate with the collection and categorization of complaints and compliments that give the medical center an opportunity to meet and exceed the customer’s expectations",
+              "vdl": "https://www.va.gov/vdl/application.asp?appid=50"
+            }
+          ]
+        },
+        {
+          "name": "Provide Member Access",
+          "children": [
+            {
+              "name": "Determine Allowable Service",
+              "children": [
+              ]
+            },
+            {
+              "name": "Determine Eligibility",
+              "children": [
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Income Verification Match",
+                  "description": "The Income Verification Match (IVM) module is designed to extract patient-reported data and transmit it to the Enrollment System (ES)",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=44"
+                },
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "HINQ",
+                  "description": "The Hospital Inquiry (HINQ) module provides the capability to request and obtain veteran eligibility data via the VA National Telecommunications Network",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=41"
+                }
+              ]
+            },
+            {
+              "name": "Manage Appointments",
+              "children": [
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Scheduling",
+                  "description": "The module automates all aspects of the outpatient appointment process, including the ability to check in/check out patients, clinic set-up and maintenance, enrollment/scheduling/discharge of patients to and from various clinics, and the generation of managerial reports, statistical reports, patient letters, and workload reporting.  It provides for multiple-appointment booking, which enables the user to schedule, at one time, numerous appointments on a consecutive day/week basis",
+                  "vdl":"https://www.va.gov/vdl/application.asp?appid=100",
+                  "gui": "Windows Delphi client - PCMM.exe; VistA Schedulilng Enhancement (VSE 2.0) is a C# Windows client that improved the functionalities of the terminal interface",
+                  "gui-vdl":"https://www.va.gov/vdl/application.asp?appid=95"
+                }
+              ]
+            },
+            {
+              "name": "Perform Enrollment",
+              "children": [
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Enrollment Application System",
+                  "description": "The Enrollment Application System (EAS) package supports the mandate for collection of Long Term Care (LTC) copayments, as required by Public Law 106-117.  In addition to the LTC functionality, the EAS package provides support for  Health Level 7 (HL7) for processing of HL7 messages between VistA, the enterprise Enrollment System (ES) and data matching with the Internal Revenue Service (IRS) / Social Security Administration (SSA)",
+                  "vdl":"https://www.va.gov/vdl/application.asp?appid=121"
+                }
+              ]
+            },
+            {
+              "name": "Perform Registration",
+              "children": [
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Registration",
+                  "description": "The ADT/Registration module provides a comprehensive range of software dedicated to the support of administrative functions related to patient admission, discharge, transfer, and registration",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=55",
+                  "primary-function": "No"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Provide Health Care Administration",
+      "children": [
+        {
+          "name": "Manage Clinical Performance",
+          "children": [
+            {
+              "name": "Monitor Clinical Quality Performance Metrics and Measures",
+              "children": [
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Occurrence Screen",
+                  "description": "This module supports VHA policy by identifying patients' clinical events requiring follow-up review",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=49"
+                },
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Utilization Management Rollup",
+                  "description": "This module is used at the local facility for rollup of Utilization Management Rollup data to the National Database",
+                  "vdl": "None",
+                  "status": "Decommissioned - superseded by the National Utilization Management Integration (NUMI) application - https://www.va.gov/vdl/application.asp?appid=184"
+                },
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Quality Assurance Integration",
+                  "description": "The Quality Management Integration Module, (previously Quality Assurance Integration) contains utilities that are common to some or all of the QM software packages",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=117"
+                }
+
+              ]
+            }
+
+          ]
+        },
+        {
+          "name": "Manage Customer Relations",
+          "children": [
+            {
+              "name": "Manage Electronic Feedback System",
+              "children": [
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Survey Generator",
+                  "description": "This module allows creation and maintenance of computerized survey forms",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=27"
+                }
+              ]
+            }
+
+          ]
+        },
+        {
+          "name": "Perform Hospital Administration",
+          "children": [
+            {
+              "name": "Manage Health Care Resources",
+              "children": [
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Shift Handoff Tool",
+                  "description": "The module standardizes information exchanged between clinicians as they transfer patient care responsibilities incidental to changes of shifts",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=175",
+                  "gui": "Windows Delphi client - ShiftHandoffTool.exe"
+                },
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Interim Management Support",
+                  "description": "No documentation exist. Menu options include: VAMC space management, equipment, workload, quality assurance, etc.",
+                  "vdl": "None",
+                  "status": "Unknown - likely decommissioned sometime ago"
+                }
+              ]
+            },
+            {
+              "name": "Manage Hospital Safety Program",
+              "children": [
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Asists",
+                  "description": "The Auto Safety Incident Surv Track System (ASISTS) module was designed to manage the data from all employee accidents, create a Report of Accident (VA Form 2162) from the data, and produce both the Office of Worker's Compensation Programs Form CA-1 (Instructions for Completing Employee's Notice of Traumatic Injury and Claim for Continuation of Pay/Compensation) and Form CA-2 (Federal Employee's Notice of Occupational Disease and Claim for Compensation)",
+                  "vdl":"https://www.va.gov/vdl/application.asp?appid=56",
+                  "status": "Decommissioned",
+                  "gui": "Windows Delphi client - oops2_p29.exe"
+                }
+              ]
+            },
+            {
+              "name": "Manage Facility Volunteer Program",
+              "children": [
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Voluntary Timekeeping",
+                  "description": "The site-based Voluntary Timekeeping module has been replaced by the national-level Voluntary Service System (VSS) application; it is used to track and manage the hours of service contributed by volunteers and volunteer organizations at VA facilities",
+                  "vdl":"None",
+                  "status":"Decommissioned - replaced by the national-level Voluntary Service System (VSS) application - https://www.va.gov/vdl/application.asp?appid=135"
+                }
+              ]
+            },
+            {
+              "name": "Manage Patient Admission, Discharge and Transfer",
+              "children": [
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Registration",
+                  "description": "The ADT module provides a comprehensive range of software dedicated to the support of administrative functions related to patient admission, discharge, transfer, and registration",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=55",
+                  "primary-function": "Yes"
+                },
+                {
+                  "distribution": [
+                    "DSS"
+                  ],
+                  "name": "Sea Island Systems Registration",
+                  "description": "HL7 Interface software to integrate with third party ADT packages",
+                  "vdl": "None",
+                  "status": "Proprietary software"
+                }
+              ]
+            },
+            {
+              "name": "Manage Patient Safety",
+              "children": [
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Incident Reporting",
+                  "description": "The Incident Reporting module supports VHA policy by compiling data on patient incidents.  It organizes the data into defined categories for reporting and tracking at medical facility level and for transmission to the National Quality Assurance Database for Headquarters review and tracking",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=43",
+                  "status": "Identified for decommissioning"
+                },
+                {
+                  "distribution": [
+                    "OSEHRA",
+                    "VA",
+                    "DSS"
+                  ],
+                  "name": "Methicillin Resistant Staph Aurerus Initiative Reports",
+                  "description": "The MRSA Program Tools (MRSA-PT) application provides a method to extract data related to MRSA Nares screening, clinical cultures, and patient movements within the selected facility",
+                  "vdl": "https://www.va.gov/vdl/application.asp?appid=189"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Provide Library Services",
+          "children": [
+            {
+              "distribution": [
+                "OSEHRA",
+                "VA",
+                "DSS"
+              ],
+              "name": "Library",
+              "description": "P,atch LBR*2.5*15 retired the Library (LBR) version 2.5 package.  All national components associated with the Library package were removed as of compliance date, May 3, 2018",
+              "vdl": "https://www.va.gov/vdl/application.asp?appid=47",
+              "status": "Decommissioned"
+            }
+          ]
+        }
+     ]
+    },
+    {
+      "name": "Provide Public Health",
+      "children": [
+        {
+          "name": "Provide Medical Registry Service",
+          "children": [
+            {
+              "distribution": [
+                "OSEHRA",
+                "VA",
+                "DSS"
+              ],
+              "name": "Womens Health",
+              "description": "The module is a patient management tool for tracking the breast and gynecologic treatment needs of women, the procedures they receive, and the communications between healthcare staff and women regarding their treatment and follow-up. The application also provides some program-wide epidemiological reports which are of use to clinicians and program administrators",
+              "vdl":"https://www.va.gov/vdl/application.asp?appid=109"
+            },
+            {
+              "distribution": [
+                "OSEHRA",
+                "VA",
+                "DSS"
+              ],
+              "name": "Oncology",
+              "description": "The module automates the tumor registry and supports tumor registrars in abstracting cancer cases, following up on cancer patients and producing the Hospital Annual Report. Functions are grouped according to order of use:  Case Finding and Suspense; Abstracting, Printing and Quality Management; Follow-up; Registry Lists; Annual Reports; Statistical Reports; and Utilities",
+              "vdl":"https://www.va.gov/vdl/application.asp?appid=81"
+            },
+            {
+              "distribution": [
+                "OSEHRA",
+                "VA",
+                "DSS"
+              ],
+              "name": "Clinical Case Registries",
+              "description": "The Clinical Case Registries (CCR) application obtains demographic and clinical data on VHA patients with specific clinical conditions.  CCR is designed to search and provide reports on patient data in multiple registries.  This aides clinical staff in supporting a variety of clinical conditions or disease states in VHA patients",
+              "vdl":"https://www.va.gov/vdl/application.asp?appid=126",
+              "gui":"Windows Delphi client - ClinicalCaseRegistries.exe"
+            },
+            {
+              "distribution": [
+                "OSEHRA",
+                "VA",
+                "DSS"
+              ],
+              "name": "Methicillin Resistant Staph Aurerus Initiative Reports",
+              "description": "The MRSA Program Tools (MRSA-PT) application provides a method to extract data related to MRSA Nares screening, clinical cultures, and patient movements within the selected facility",
+              "vdl":"https://www.va.gov/vdl/application.asp?appid=189"
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }
+
