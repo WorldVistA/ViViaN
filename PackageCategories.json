@@ -200,7 +200,7 @@
                   "name": "Lab Service",
                   "description": "The module is a clinically oriented system designed to provide lab data to health care personnel.  It assists the Pathology and Laboratory Medicine Service (P&LMS) in managing and automating the workload and reporting process",
                   "vdl": "https://www.va.gov/vdl/application.asp?appid=71",
-                  "primary-function": "Yes"
+                  "primaryfunction": "Yes"
                 }
               ]
             },
@@ -247,7 +247,7 @@
                   "name": "Lab Service",
                   "description": "The Anatomic Pathology module, part of the Lab Service package, automates record keeping and reporting for all areas of Anatomic Pathology (i.e., Surgical Pathology (SP), Cytopathology, Electron Microscopy (EM), and Autopsy)",
                   "vdl": "https://www.va.gov/vdl/application.asp?appid=72",
-                  "primary-function": "No"
+                  "primaryfunction": "No"
                 }
               ]
             },
@@ -1511,7 +1511,7 @@
                   "name": "Registration",
                   "description": "The ADT/Registration module provides a comprehensive range of software dedicated to the support of administrative functions related to patient admission, discharge, transfer, and registration",
                   "vdl": "https://www.va.gov/vdl/application.asp?appid=55",
-                  "primary-function": "No"
+                  "primaryfunction": "No"
                 }
               ]
             }
@@ -1661,7 +1661,7 @@
                   "name": "Registration",
                   "description": "The ADT module provides a comprehensive range of software dedicated to the support of administrative functions related to patient admission, discharge, transfer, and registration",
                   "vdl": "https://www.va.gov/vdl/application.asp?appid=55",
-                  "primary-function": "Yes"
+                  "primaryfunction": "Yes"
                 },
                 {
                   "distribution": [
@@ -1687,16 +1687,6 @@
                   "description": "The Incident Reporting module supports VHA policy by compiling data on patient incidents.  It organizes the data into defined categories for reporting and tracking at medical facility level and for transmission to the National Quality Assurance Database for Headquarters review and tracking",
                   "vdl": "https://www.va.gov/vdl/application.asp?appid=43",
                   "status": "Identified for decommissioning"
-                },
-                {
-                  "distribution": [
-                    "OSEHRA",
-                    "VA",
-                    "DSS"
-                  ],
-                  "name": "Methicillin Resistant Staph Aurerus Initiative Reports",
-                  "description": "The MRSA Program Tools (MRSA-PT) application provides a method to extract data related to MRSA Nares screening, clinical cultures, and patient movements within the selected facility",
-                  "vdl": "https://www.va.gov/vdl/application.asp?appid=189"
                 }
               ]
             }

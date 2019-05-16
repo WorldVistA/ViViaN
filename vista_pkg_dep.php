@@ -124,10 +124,18 @@ Click on any of the packages to view package dependency details.
         if (data.children !== undefined && data.children) {
           var length = data.children.length;
           for (var i=0; i<length; i++) {
-            child_node = setCategory(data.children[i]);
-            if (child_node) {
-              child_node.parent = node;
-              node.children.push(child_node);
+            var primary_function = 'Yes';
+            if ('primaryfunction' in data.children[i]) {
+              primary_function = data.children[i].primaryfunction;
+            }
+            if (primary_function === 'Yes') {
+              child_node = setCategory(data.children[i]);
+              if (node && child_node) {
+                if (!child_node.children || child_node.children.length === 0) {
+                  child_node.parent = node;
+                  node.children.push(child_node);
+                }
+              }
             }
           }
         }
