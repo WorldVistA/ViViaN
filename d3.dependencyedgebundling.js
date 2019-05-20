@@ -156,7 +156,16 @@ d3.chart.dependencyedgebundling = function(options) {
       var nodes = cluster.nodes(pkgNodes),
           links = packageDepends(nodes);
 
-      var groupData = nodes.filter(function(d) { return d.children; });
+      var groupData = nodes.filter(function(d) {
+        if (!d.children) { return d.children; }
+        var groupNodes = [];
+        d.children.forEach(function(d) {
+         if (!d.children) {
+            groupNodes.push(d);
+         }
+        });
+        return groupNodes;
+      });
       var groupArc = d3.svg.arc()
           .innerRadius(_innerRadius + 25)
           .outerRadius(_innerRadius + 5)
