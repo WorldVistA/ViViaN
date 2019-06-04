@@ -2,17 +2,14 @@
 How to Contribute to ViViaN(TM)
 ================================
 
-The ViViaN visualization is gathering steam and is now gathering submissions
-from a wider range of developers. This introduces the need to codify the
-process of submitting an update or bug fix to the ViViaN repository. OSEHRA
-hosts two different copies of the ViViaN tool: one is considered the
-demonstration instance, which utilizes the vivian-demo branch, and the other
-is the main instance which follows the master branch of the repository.
-Changes to the ViViaN tool are expected to be made a part of the demonstration
-instance prior to being merged into the master branch. This document will
-describe the steps to submit a change to the demonstration instance of the
-ViViaN visualization and the process by which that change is moved to the
-master branch.
+When making bug-fixes or improvements to ViViaN, changes may be required to
+the `OSEHRA VistA repository`_ or to the files in this repository.
+
+In general, the scripts that create and organize the data behind the ViViaN and
+DOX pages can be found in the `Utilities\\Dox\\PythonScripts` directory of the
+OSEHRA VistA repository. Follow the `OSEHRA VistA Contributor Instructions`_ to
+update the generation scripts. This document describes how to develop and
+submit changes to the ViViaN visualizations themselves.
 
 Fork the repository
 ---------------------
@@ -21,7 +18,7 @@ first be forked via the Github website. This process generates a copy of the
 repository under the user's Github account where the user can push and pull
 branches . The fork is generated from the ViViaN repository web page, which can
 be found at https://github.com/OSEHRA-Sandbox/Product-Management. Once there,
-click on the the "Fork" button in the top left corner.
+click on the the "Fork" button in the top right corner.
 
 .. figure::
    http://code.osehra.org/content/named/SHA1/45b22c-vivianForkHighlight.png
@@ -38,7 +35,7 @@ repository in the top menu bar.
    :align: center
    :alt:  Github page of forked repository with connection information highlighted
 
-This connection information is then used to clone an instance of the
+This connection information can then used to clone an instance of the
 Product-Management repository to perform the development work on.  The
 OSEHRA-Sandbox will be used as the ``origin`` repository while the new
 fork will be added as an additional remote. If you already have an existing
@@ -48,11 +45,8 @@ section.
 Cloning from OSEHRA-Sandbox
 ++++++++++++++++++++++++++++
 
-In order to be able to push to the ``vivian-demo`` branch, the OSEHRA-Sandbox
-repository must be one of the Git remotes.  We will clone from the the
-OSEHRA-Sandbox to make it easier keep the ``master`` and ``vivian-demo``
-branches up-to-date.  Execute a ``git clone`` command to acquire the copy of
-the Product-Management repository.
+Execute a ``git clone`` command to acquire a copy of the Product-Management
+repository.
 
 .. parsed-literal::
 
@@ -84,27 +78,72 @@ new repository. An example of the git remote command is shown below:
   softhat@softhatvm /d/wamp/www/Product-Management/Visual (master)
   $ git remote add personal git://github.com/softhat/Product-Management.git
 
-Make changes on development branch
-----------------------------------
 
-After performing the development work, commit the change to a development
-branch. The commit message should describe the reason behind the change and any
+Workflow
+--------
+Our collaboration workflow, based on topic branches, consists of three main
+steps:
+
+1. Local Development
+
+  a. Update
+  b. Create a Topic
+  c. Run Tests
+
+2. Code Review
+
+  a. Share a Topic
+  b. Revise a Topic
+
+3. Integrate Changes
+
+  a. Merge a Topic (requires authorization by OSEHRA)
+
+Update
++++++++
+
+Update your local master branch:
+
+.. parsed-literal::
+
+  $ git checkout master
+  $ git pull
+
+Create a Topic
++++++++++++++++
+
+All new work must be committed on topic branches. Name topics like you might
+name functions: concise but precise. A reader should have a general idea of the
+feature or fix to be developed given just the branch name.
+
+To start a new topic branch:
+
+.. parsed-literal::
+
+  $ git fetch origin
+  $ git checkout -b add_new_file origin/master
+
+Edit files and create commits (repeat as needed):
+
+.. parsed-literal::
+
+  $ edit file1 file2 file3
+  $ git add file1 file2 file3
+  $ git commit
+
+The commit message should describe the reason behind the change and any
 necessary information to setup and use the change.
 
 Run tests
----------
++++++++++
 
 Run existing tests and add new tests, if needed. See Testing_ for detailed
 instructions. Commit any changes to the development branch.
 
+Share a Topic
+++++++++++++++
 
-Push the change
----------------
-
-The development branch needs be pushed to the personal fork and OSEHRA repository.
-
-To Personal Fork
-+++++++++++++++++
+The development branch needs be pushed to the personal fork.
 
 In this example, the branch "add_new_file" will be pushed to the personal fork
 generated earlier.
@@ -113,59 +152,10 @@ generated earlier.
 
   softhat@softhatvm /d/wamp/www/Product-Management/Visual (master)
   $ git push personal add_new_file
-  
-This branch will be not be used right away, but will be used when the change is
-submitted to the ``master`` branch
 
-To OSEHRA-Sandbox
-++++++++++++++++++
-
-Prior to submitting it to the OSEHRA repository, the development work should be
-merged with the vivian-demo branch. This should be done locally to allow for
-any conflicts to be determined prior to the push. The merge command takes only
-one argument, which is the name of the branch to be merged, and should be
-performed on the target branch. The example below checks out the 
-``vivian-demo`` branch and then merges the commits from add_new_file
-
-.. parsed-literal::
-
-  softhat@softhatvm /d/wamp/www/Product-Management/Visual (master)
-    $ git checkout vivian-demo
-    Switched to branch 'vivian-demo'
-    Your branch is up-to-date with 'origin/vivian-demo'.
-
-    softhat@softhatvm /d/wamp/www/Product-Management/Visual (master)
-
-    $ git merge add_new_file
-
-Once the merge is completed and any conflicts have been resolved, push the
-vivian-demo branch to the OSEHRA-Sandbox Repository.
-
-.. parsed-literal::
-
-  softhat@softhatvm /d/wamp/www/Product-Management/Visual (master)
-  $git push origin vivian-demo
-
-After pushing to the vivian-demo branch, send an email to the
-Visualization Open Source Project Group (visualization@groups.osehra.org )
-to request that the vivian-demo instance be updated.
-
-Making additional changes
-++++++++++++++++++++++++++
-
-If more changes are necessary, due to suggestions or bug reports, the above
-cycle should be repeated, being sure to keep the separate development branch
-up-to-date for the eventual merge to master.
-
-Submitting to master
----------------------
-
-At the end of the sprint, all the approved updates need to be moved from the
-vivian-demo branch to the master branch. This process is going to be completed
-through the use of pull requests on the Github website. The method for
-submitting a pull request is fairly straightforward. Once the branch or commit
-has been pushed to a personal fork, click on the "New pull request" button
-found on the webpage of the user’s fork.
+The method for submitting a pull request via GitHub is fairly straightforward.
+Once the branch has been pushed to a personal fork, click on the "New pull 
+request" button found on the webpage of the user’s fork.
 
 .. figure::
    http://code.osehra.org/content/named/SHA1/2f2763-vivianNewPullRequestHighlight.png
@@ -193,9 +183,9 @@ fork be merged into the master branch of the OSEHRA-Sandbox fork:
 target for the merge is the ``master`` branch.**
 
 When the information is set, click on the Create pull request button to
-generate the request. Below is an example using a different branch which shows
-both the places where the information is set and the button to generate the
-pull request.
+generate the request. Below is an example using a different development 
+branch which shows both the places where the information is set and the 
+button to generate the pull request.
 
 .. figure::
    http://code.osehra.org/content/named/SHA1/c56600-vivianCreatePullRequestHighlight.png
@@ -203,37 +193,32 @@ pull request.
    :alt:  Github page of forked repository with connection information highlighted
 
 
-When the pull request has been submitted, this change will then be reviewed by
-the members of the OSEHRA Visualization Open Source Project Group. At this
-point, the members of the project group, owners of the repository, and general
-public can leave comments and suggestions for improvement.
+When the pull request has been submitted, the change will be reviewed by
+the members of the OSEHRA Visualization Open Source Project Group. Members of 
+the project group, owners of the repository, and general public may leave 
+comments and suggestions for improvement.
 
-Now, there are two potential paths for the submission:
-
-Pull request approved
-++++++++++++++++++++++
-
-If the submission has been approved, the pull request will be accepted and the
-changes will be merged into the master branch. This master branch will then be
-updated on the display instance using that branch, found at
-http://code.osehra.org/vivian/.
-
-Changes requested
-+++++++++++++++++
+Revise a Topic
++++++++++++++++
 
 If a fix or further work is requested, the submitter should return to the
-development environment.  Once the updates are completed, the submission should
-re-enter the process. Any changes made should be made on the same development
-branch as the original one. As long as the pull request is open, any commits
-pushed to the pull request branch on Github will be automatically included as
-part of the pull request.
+development environment.  Any changes made should be made on the same 
+development branch as the original one. As long as the pull request is open, 
+any commits pushed to the pull request branch on Github will be automatically 
+included as part of the pull request.
 
-If major functionality is being changed or a large rewrite is necessary, it is
-recommended that the submission passes through the vivian-demo process before
-returning to update the pull request.
+Merge a Topic
++++++++++++++
 
-Minor or cosmetic changes simply be made to to the same branch and pushed to
-the remote as before.
+After a topic has been reviewed and approved in GitHub it may be submitted to
+the upstream repository.
+
+**Only developers authorized by OSEHRA may perform this step.**
+
+At the end of the OSEHRA Visualization Open Source Project Group sprint, all
+of the approved updates will be merged to the master branch.
 
 
+.. _`OSEHRA VistA repository`: https://github.com/OSEHRA/VistA/blob/master
 .. _Testing: testing.rst
+.. _`OSEHRA VistA Contributor Instructions`: https://github.com/OSEHRA/VistA/blob/master/Documentation/ContributorInstructions.rst
