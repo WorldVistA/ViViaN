@@ -122,6 +122,7 @@ Click on any of the packages to view package dependency details.
           }
         }
         if (data.children !== undefined && data.children) {
+
           var length = data.children.length;
           for (var i=0; i<length; i++) {
             var primary_function = 'Yes';
@@ -131,24 +132,28 @@ Click on any of the packages to view package dependency details.
             if (primary_function === 'Yes') {
               child_node = setCategory(data.children[i]);
               if (node && child_node) {
-                if (!child_node.children || child_node.children.length === 0) {
-                  child_node.parent = node;
-                  node.children.push(child_node);
-                }
+                child_node.parent = node;
+                node.children.push(child_node);
               }
+            }
+            else {
+              node.hasHiddenChildren = true;
             }
           }
         }
+
         return node;
       } // end setCategory()
 
       setCategory(categories);
+
       for (var node_name in map) {
         if (map[node_name].parent === undefined && node_name !== categories.name) {
           map[node_name].parent = map[categories.name];
           map[categories.name].children.push(map[node_name]);
         }
       }
+      
       return map[categories.name];
     } // end packageHierarchyByGroups
 
