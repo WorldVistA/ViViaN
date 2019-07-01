@@ -10,7 +10,6 @@ d3.chart = d3.chart || {};
  *   .call(chart);
  */
 d3.chart.dependencyedgebundling = function(options) {
-
   var _radius;
   var _diameter = 900;
   var _textRadius = 100;
@@ -25,7 +24,7 @@ d3.chart.dependencyedgebundling = function(options) {
   function findStartAngle(children) {
       var min;
       children.forEach(function(d) {
-         if (!d.children) {
+         if (!d.children && !d.hasHiddenChildren) {
             if (!min || d.x < min) min = d.x;
          }
       });
@@ -36,7 +35,7 @@ d3.chart.dependencyedgebundling = function(options) {
   function findEndAngle(children) {
       var max;
       children.forEach(function(d) {
-         if (!d.children) {
+         if (!d.children && !d.hasHiddenChildren) {
             if (!max || d.x > max)  max = d.x;
          }
       });
@@ -78,7 +77,6 @@ d3.chart.dependencyedgebundling = function(options) {
   // Lazily construct the package hierarchy
   var _packageHierarchy = function (classes) {
     var map = {};
-
     function setparent(name, data) {
       var node = map[name];
       if (!node) {
@@ -91,7 +89,7 @@ d3.chart.dependencyedgebundling = function(options) {
       }
     }
 
-    setparent("", null);
+    setparent("", null)
     classes.forEach(function(d) {
       setparent(d.name, d);
     });
@@ -160,12 +158,13 @@ d3.chart.dependencyedgebundling = function(options) {
         if (!d.children) { return d.children; }
         var groupNodes = [];
         d.children.forEach(function(d) {
-         if (!d.children) {
+         if (!d.children && !d.hasHiddenChildren) {
             groupNodes.push(d);
          }
         });
         return groupNodes;
       });
+
       var groupArc = d3.svg.arc()
           .innerRadius(_innerRadius + 25)
           .outerRadius(_innerRadius + 5)
@@ -192,7 +191,7 @@ d3.chart.dependencyedgebundling = function(options) {
           .attr("d", line);
 
       node = node
-          .data(nodes.filter(function(n) { return !n.children; }))
+          .data(nodes.filter(function(n) { return !n.children && !n.hasHiddenChildren; }))
         .enter();
       if (_nodeTextHyperLink) {
         node = node.append("a")
@@ -259,7 +258,7 @@ d3.chart.dependencyedgebundling = function(options) {
         node
             .classed(palette+"-node--target node--target", function(n) { return n.target; })
             .classed(palette+"-node--source node--source", function(n) { return n.source; });
-        
+
         if (_mouseOvered) {
           _mouseOvered(d);
         }
@@ -299,7 +298,7 @@ d3.chart.dependencyedgebundling = function(options) {
     _nodeTextHyperLink = n;
     return chart;
   };
-  
+
   chart.packageHierarchy = function (p) {
     if (!arguments.length) return p;
     _packageHierarchy = p;
@@ -335,7 +334,7 @@ d3.chart.dependencyedgebundling = function(options) {
     _radialTextHeight = n;
     return chart;
   };
-  
+
   chart.mouseOvered = function (d) {
     if (!arguments.length) return d;
     _mouseOvered = d;
