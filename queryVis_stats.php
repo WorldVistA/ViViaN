@@ -222,8 +222,12 @@ $('#filteredObjs').accordion({heightStyle: 'content'}).show();
             }
             if (parentJSONObj[d][entryVal].indexOf("{") != -1) {   //Checks to see if a multiple exists
                 //matchReg ensures that field name is found beyond the start of the string
-                var matchReg = new RegExp("(?<!^)"+fieldName + ":[ ]+?.+?[},]","g")
-                var replaceReg = new RegExp("^ |[}{]*","g")
+                var regexName = fieldName
+                if (fieldName.substr(fieldName.length -1) === "S") {
+                    regexName = fieldName.substr(0, fieldName.length -1) + "[S]?"
+                }
+                var matchReg = new RegExp("(?<!^)"+regexName + ":[ ]+?.+?[},]","gi")
+                var replaceReg = new RegExp("^ |[}{]*","gi")
                 foundEntries = parentJSONObj[d][entryVal].match(matchReg)
                 for (object in foundEntries) {
                     var tmp = foundEntries[object].replace(replaceReg,'')
