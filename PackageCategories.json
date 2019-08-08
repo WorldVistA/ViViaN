@@ -27,7 +27,7 @@
                     "DSS"
                   ],
                   "name": "Problem List",
-                  "description": "The module is used to document and track a patient’s problems.  It provides the clinician with a current and historical view of patient's health care problems, and allows each identified problem to be traced in terms of treatment, test results, and outcome",
+                  "description": "The module is used to document and track a patient's problems.  It provides the clinician with a current and historical view of patient's health care problems, and allows each identified problem to be traced in terms of treatment, test results, and outcome",
                   "vdl": "https://www.va.gov/vdl/application.asp?appid=64"
                 }
               ]
@@ -214,7 +214,7 @@
                     "DSS"
                   ],
                   "name": "Imaging",
-                  "description": "The module facilitates medical decision-making by delivering complete multimedia patient information to the clinician’s desktop in an integrated manner. Windows-based workstations, which are interfaced to the main hospital system in a client-server architecture, make images and associated text data available at all times anywhere in the hospital or across VA",
+                  "description": "The module facilitates medical decision-making by delivering complete multimedia patient information to the clinician's desktop in an integrated manner. Windows-based workstations, which are interfaced to the main hospital system in a client-server architecture, make images and associated text data available at all times anywhere in the hospital or across VA",
                   "vdl": "https://www.va.gov/vdl/application.asp?appid=105",
                   "gui": "Windows applications include VistARAD for radiologist, TeleReader, Clinical Display for clinician, and Clinical Capture.  Web browser include Advanced Web Image Viewer"
                 }
@@ -512,7 +512,7 @@
                     "DSS"
                   ],
                   "name": "Clinical Procedures",
-                  "description": "The module passes final patient results, using Health Level 7 (HL7) messaging, between vendor clinical information systems (CIS) and VistA.  Patients’ test results or reports are displayed through the Computerized Patient Record System (CPRS)",
+                  "description": "The module passes final patient results, using Health Level 7 (HL7) messaging, between vendor clinical information systems (CIS) and VistA.  Patients' test results or reports are displayed through the Computerized Patient Record System (CPRS)",
                   "vdl":"https://www.va.gov/vdl/application.asp?appid=139",
                   "gui":"Windows Delphi clients - CPFlowsheet.exe, CPConsole.exe, CPGatewayService.exe, Hemodialysis.exe"
                 },
@@ -625,7 +625,7 @@
                     "DSS"
                   ],
                   "name": "Mental Health",
-                  "description": "Psychiatrists and psychologists have directed this VistA module’s design with active input from all health care disciplines, guided by the principle of creating software that makes the clinician’s job easier and leads to better patient care. A by-product of this approach has been the creation of a clinical database, which is useful to mental health program managers in many ways, including evaluating clinical productivity, monitoring and improving the quality of care, and trending various patient care events. This clinical database package is comprehensive and accessible from workstations throughout medical facilities",
+                  "description": "Psychiatrists and psychologists have directed this VistA module's design with active input from all health care disciplines, guided by the principle of creating software that makes the clinician's job easier and leads to better patient care. A by-product of this approach has been the creation of a clinical database, which is useful to mental health program managers in many ways, including evaluating clinical productivity, monitoring and improving the quality of care, and trending various patient care events. This clinical database package is comprehensive and accessible from workstations throughout medical facilities",
                   "vdl": "https://www.va.gov/vdl/application.asp?appid=78",
                   "gui": "Windows Delphi client - YS_MHA.exe and Veteran Crisis Line - a .NET MDWS based web application"
                 }
@@ -903,7 +903,7 @@
                     "DSS"
                   ],
                   "name": "Fee Basis",
-                  "description": "The module supports VHA’s Fee for Service program, which is care authorized for veterans who are legally eligible and are in need of care that cannot feasibly be provided by a VA facility",
+                  "description": "The module supports VHA's Fee for Service program, which is care authorized for veterans who are legally eligible and are in need of care that cannot feasibly be provided by a VA facility",
                   "vdl": "https://www.va.gov/vdl/application.asp?appid=40"
                 }
               ]
@@ -1296,7 +1296,7 @@
                     "DSS"
                   ],
                   "name": "VDEF",
-                  "description": "VistA Data Extraction Framework (VDEF) is a VistA package that uses hard-coded MUMPS (M) routines to create and deliver Health Level 7 (HL7) messages.  The VDEF package supports queuing requests for messages, control of the timing of message creation, monitoring of the request queue, and recording of errors encountered during message creation.  The hard-coded programs are M programs belonging to an application’s namespace.  Messages are delivered using the VistA HL7 package",
+                  "description": "VistA Data Extraction Framework (VDEF) is a VistA package that uses hard-coded MUMPS (M) routines to create and deliver Health Level 7 (HL7) messages.  The VDEF package supports queuing requests for messages, control of the timing of message creation, monitoring of the request queue, and recording of errors encountered during message creation.  The hard-coded programs are M programs belonging to an application's namespace.  Messages are delivered using the VistA HL7 package",
                   "vdl":"https://www.va.gov/vdl/application.asp?appid=144"
                 },
                 {
@@ -1366,7 +1366,7 @@
                     "DSS"
                   ],
                   "name": "Web Services Client",
-                  "description": "The M-based applications have a need to synchronously access VistA application services and data (e.g., in-process during an end-user’s session). The HealtheVet Web Service Client (HWSC) uses Caché’s Web Services Client to invoke Web service methods on external servers and retrieve results. It provides helper methods and classes to improve the use of Caché’s Web service client in a VistA environment",
+                  "description": "The M-based applications have a need to synchronously access VistA application services and data (e.g., in-process during an end-user's session). The HealtheVet Web Service Client (HWSC) uses Cache's Web Services Client to invoke Web service methods on external servers and retrieve results. It provides helper methods and classes to improve the use of Cache's Web service client in a VistA environment",
                   "vdl":"https://www.va.gov/vdl/application.asp?appid=180"
                 },
                 {
@@ -1429,7 +1429,7 @@
                 "DSS"
               ],
               "name": "Patient Representative",
-              "description": "The module supports the Patient Advocate with the collection and categorization of complaints and compliments that give the medical center an opportunity to meet and exceed the customer’s expectations",
+              "description": "The module supports the Patient Advocate with the collection and categorization of complaints and compliments that give the medical center an opportunity to meet and exceed the customer's expectations",
               "vdl": "https://www.va.gov/vdl/application.asp?appid=50"
             }
           ]

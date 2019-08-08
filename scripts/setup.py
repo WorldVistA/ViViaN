@@ -33,45 +33,44 @@ def run():
   # input: ../files/menus/19/VistAMenu-*.json
   # output: ../files/menu_autocomplete.json
   menu_autocomplete_gen.run("19","menu_autocomplete.json")
-  print "*** Updated ../files/menu_autocomplete.json"
+  print("*** Updated ../files/menu_autocomplete.json")
 
   # input: ../files/menus/101/VistAMenu-*.json
   # output: ../files/protocol_menu_autocomplete.json
   menu_autocomplete_gen.run("101","protocol_menu_autocomplete.json")
-  print "*** Updated ../files/protocol_menu_autocomplete.json"
+  print("*** Updated ../files/protocol_menu_autocomplete.json")
 
   # input: ../files/menus/19/VistAMenu-*.json
   # output: ../files/option_autocomplete.json
   option_autocomplete_gen.run("19","option_autocomplete.json")
-  print "*** Updated ../files/option_autocomplete.json"
-
+  print("*** Updated ../files/option_autocomplete.json")
 
   # input: ../files/menus/101/VistAMenu-*.json
   # output: ../files/option_autocomplete.json
   option_autocomplete_gen.run("101","protocol_option_autocomplete.json")
-  print "*** Updated ../files/protocol_option_autocomplete.json"
+  print("*** Updated ../files/protocol_option_autocomplete.json")
 
   # input: ../files/[...]/*-RPC.html and files/[...]/*-HL7.html
   # output: ../files/PackageInterface.csv
   pkg_interface_gen.run()
-  print "*** Updated ../files/PackageInterface.csv"
+  print("*** Updated ../files/PackageInterface.csv")
 
   # input: PackageDes.json, ../PackageCategories.json, ../Packages.csv
   #        and ../files/PackageInterface.csv
   # output: ../files/packages.json and ../files/packages_autocomplete.json
   pkgcsv_to_json.generate_packages_json()
-  print "*** Updated ../files/packages.json"
-  print "*** Updated ../files/packages_autocomplete.json"
+  print("*** Updated ../files/packages.json")
+  print("*** Updated ../files/packages_autocomplete.json")
 
   # input: ../files/install_information.json
   # output: ../files/install_autocomplete.json
   install_autocomplete_gen.run()
-  print "*** Updated ../files/install_autocomplete.json"
+  print("*** Updated ../files/install_autocomplete.json")
 
   # input: VHA_BFF_version2-10.xlsx
   # output: ../files/bff.json
   BFFExcel2Json.convertBFFExcelToJson("BFF_version_2-12.xlsx", "../files/bff.json")
-  print "*** Updated ../files/bff.json"
+  print("*** Updated ../files/bff.json")
 
   # Move ../himData.json to ../files/himData.json
   shutil.copyfile("../himData.json", "../files/himData.json")

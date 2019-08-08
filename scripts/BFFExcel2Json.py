@@ -14,28 +14,14 @@
 # limitations under the License.
 #---------------------------------------------------------------------------
 
+from builtins import map
+from builtins import range
 import xlrd
 from xlrd import open_workbook,cellname,xldate_as_tuple
 from datetime import datetime, date, time
 import csv
 import logging
 import json
-
-def test_sheet(test_xls):
-  book = open_workbook(test_xls)
-  sheet0 = book.sheet_by_index(0)
-  for rx in range(sheet0.nrows):
-    for col_index in range(sheet0.ncols):
-      print sheet0.cell(rx, col_index)
-  # print sheet0.row(0)
-  # print sheet0.col(0)
-  # print
-  # print sheet0.row_slice(0,1)
-  # print sheet0.row_slice(0,1,2)
-  # print sheet0.row_values(0,1)
-  # print sheet0.row_values(0,1,2)
-  # print sheet0.row_types(0,1)
-  # print sheet0.row_types(0,1,2)
 
 typeDict = {
   xlrd.XL_CELL_NUMBER: "Number",
@@ -100,7 +86,7 @@ def convertBFFExcelToJson(input, output):
   all_bff_nodes = dict(); # all the nodes
   isHeader = True
   rootNode = ''
-  for row_index in xrange(sheet.nrows):
+  for row_index in range(sheet.nrows):
     isHeader = True
     row_types = sheet.row_types(row_index)
     assert len(row_types) == sheet.ncols
@@ -112,16 +98,16 @@ def convertBFFExcelToJson(input, output):
     if isHeader:
       data_row = row_index + 1
       fields = sheet.row_values(row_index)
-      fields = map(bffFieldsConvertFunc, fields)
+      fields = list(map(bffFieldsConvertFunc, fields))
       #print fields
       break
   if not isHeader:
     logging.error("No Valid Header From input file")
     return
   # Read rest of the BFF data from data_row
-  for row_index in xrange(data_row, sheet.nrows):
+  for row_index in range(data_row, sheet.nrows):
     curNode = dict()
-    for col_index in xrange(sheet.ncols):
+    for col_index in range(sheet.ncols):
       cell = sheet.cell(row_index, col_index)
       cType = cell.ctype
       if cType == xlrd.XL_CELL_BLANK or cType == xlrd.XL_CELL_EMPTY:
@@ -156,8 +142,6 @@ def main():
   parser.add_argument('input', help='input BFF excel spreadsheet')
   parser.add_argument('output', help='output JSON file')
   result = parser.parse_args()
-  #print (result)
-  # test_sheet(result.input);
   convertBFFExcelToJson(result.input, result.output)
 
 if __name__ == '__main__':
