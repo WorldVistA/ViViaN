@@ -20,7 +20,8 @@ import re
 def run():
   # Navigate to non-frame version
   driver = webdriver.Firefox()
-  driver.get("http://him.osehra.org/content/_Z.x.p.iA.l.y.vE.eGK.k79K-A.nV2A-top-summary.html")
+  #driver = webdriver.Chrome()
+  driver.get("https://him.osehra.org/content/_Z.x.p.iA.l.y.vE.eGK.k79K-A.nV2A-top-summary.html")
 
   # Get a list of all of the packages
   package_names = []
@@ -60,8 +61,10 @@ def run():
   for name, href in generated_packages.items():
     if not name in data.keys():
       new_packages[name] = href
-    elif 'http://him.osehra.org/content/' + data[name] != href:
-      print "Link is different for", name, href
+    elif 'https://him.osehra.org/content/' + data[name] != href:
+      print "Link is different for", name
+      print "    Found    ", href
+      print "    Expected ", 'https://him.osehra.org/content/',data[name]
 
   print "\nFound the following new packages:\n"
   to_skip = ["Barcoding", # Note: Using the link from Pharmacy/BCMA
