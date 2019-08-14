@@ -23,7 +23,7 @@ def run():
   installInformation = json.load(open(input, 'r'))
 
   with open(output, 'w') as installAutocompleteOutputFile:
-    packageNames = sorted(installAutocompleteOutputFile.keys())
+    packageNames = sorted(installInformation.keys())
     json.dump(packageNames, installAutocompleteOutputFile)
 
 if __name__ == '__main__':
