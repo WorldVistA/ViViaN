@@ -21,8 +21,8 @@ import re
 
 def run():
   # Navigate to non-frame version
-  driver = webdriver.Firefox()
-  #driver = webdriver.Chrome()
+  #driver = webdriver.Firefox()
+  driver = webdriver.Chrome()
   driver.get("https://him.osehra.org/content/_Z.x.p.iA.l.y.vE.eGK.k79K-A.nV2A-top-summary.html")
 
   # Get a list of all of the packages
