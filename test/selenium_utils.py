@@ -13,12 +13,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #---------------------------------------------------------------------------
+from __future__ import print_function
 
 # Requires the PILLOW Python library
 #
 # Installation instructions are found here:
 #    http://pillow.readthedocs.org/en/3.0.x/installation.html
 #
+
+from builtins import str
 from PIL import Image
 from PIL import ImageChops
 import os
@@ -67,16 +70,16 @@ def compareImg(imageRoot):
   if count >= 66000:
     # need to save as .gif to set transparency which is zeroed by difference.
     diff.save(compFileName,"GIF", transparency=255)
-  # Output XML for Dart  Necessary for the upload of the image after
-    print "<DartMeasurement name=\"ImageError\" type=\"numeric/double\">"+str(count)
-    print "</DartMeasurement>"
-    print "<DartMeasurement name=\"BaselineImage\" type=\"text/string\">Standard</DartMeasurement>"
-    print "<DartMeasurementFile name=\"TestImage\" type=\"image/jpeg\">" + newFileName
-    print"</DartMeasurementFile>"
-    print"<DartMeasurementFile name=\"DifferenceImage\" type=\"image/jpeg\">" + compFileName
-    print"</DartMeasurementFile>"
-    print"<DartMeasurementFile name=\"ValidImage\" type=\"image/jpeg\"> " + oldFileName
-    print"</DartMeasurementFile>"
+    # Output XML for Dart  Necessary for the upload of the image after
+    print("<DartMeasurement name=\"ImageError\" type=\"numeric/double\">"+str(count))
+    print("</DartMeasurement>")
+    print("<DartMeasurement name=\"BaselineImage\" type=\"text/string\">Standard</DartMeasurement>")
+    print("<DartMeasurementFile name=\"TestImage\" type=\"image/jpeg\">" + newFileName)
+    print("</DartMeasurementFile>")
+    print("<DartMeasurementFile name=\"DifferenceImage\" type=\"image/jpeg\">" + compFileName)
+    print("</DartMeasurementFile>")
+    print("<DartMeasurementFile name=\"ValidImage\" type=\"image/jpeg\"> " + oldFileName)
+    print("</DartMeasurementFile>")
     return False
   else:
     diff.save(compFileName,"GIF", transparency=255)

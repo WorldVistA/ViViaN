@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #---------------------------------------------------------------------------
+from builtins import str
+from builtins import range
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.action_chains import ActionChains
