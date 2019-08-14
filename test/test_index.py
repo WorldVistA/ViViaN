@@ -128,18 +128,26 @@ class test_index(unittest.TestCase):
     node.click()
     time.sleep(1)
     accordion = driver.find_element_by_id("accordion")
-    modalCategories = ['namespaces','dependencies','interface','himInfo', 'description']
-    modalRegex = ['Includes.+Excludes','Dependencies \&amp; Code View','M API.+Web Service API',
-                  'HIM Visualization for','[A-Za-z &/]+']
-    for i in range(1,6): # 1, 2, 3, 4, 5
+    modalCategories = {9: 'namespaces',
+                       10: 'dependencies',
+                       11: 'interface',
+                       12: 'himInfo',
+                       13: 'description'}
+    modalRegex = {9: 'Includes.+Excludes',
+                  10: 'Dependencies \&amp; Code View',
+                  11: 'M API.+Web Service API',
+                  12: 'HIM Visualization for',
+                  13: '[A-Za-z &/]+'}
+    for i in range(9,14):
       # Test accordion selection of each header
       modal_accordion = accordion.find_element_by_id('ui-id-'+str(i))
       modal_accordion.click()
+
       self.assertTrue(modal_accordion.get_attribute('aria-selected'))
       # Test accordion content
-      content = accordion.find_element_by_id(modalCategories[i-1]).get_attribute('innerHTML');
-      self.assertTrue(re.search(modalRegex[i-1], content),
-                      'Looking for "' + modalRegex[i-1] + '" Found "' + content + '" for node "' + node.text + '"')
+      content = accordion.find_element_by_id(modalCategories[i]).get_attribute('innerHTML');
+      self.assertTrue(re.search(modalRegex[i], content),
+                      'Looking for "' + modalRegex[i] + '" Found "' + content + '" for node "' + node.text + '"')
 
   def close_modal_dialog(self):
     global driver
@@ -203,7 +211,7 @@ class test_index(unittest.TestCase):
 
     # Expand "Interfaces" section
     accordion = driver.find_element_by_id("accordion")
-    modal_accordion = accordion.find_element_by_id('ui-id-'+str(3)) # Note: Numbered starting at 1
+    modal_accordion = accordion.find_element_by_id('ui-id-'+str(17))
     modal_accordion.click()
     time.sleep(1)
 

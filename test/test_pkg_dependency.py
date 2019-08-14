@@ -34,7 +34,7 @@ class test_pkgdep(unittest.TestCase):
 
     # Choose a package that's visible when the screen is first loaded
     package = "Lab Service"
-    group = "Laboratory"
+    group = "Provide General Laboratory Services"
 
     element = driver.find_element_by_xpath("//*[contains(text(),'" + package +"')]");
     ActionChains(driver).move_to_element(element).perform()
@@ -62,7 +62,7 @@ class test_pkgdep(unittest.TestCase):
 
     # Values taken from most-recent code.osehra.org instance,
     # not the most sustainable but works for now
-    PCE_values = [44,28]
+    PCE_values = [43,29]
     ETiR_values = [0,6]
     CS_values = [3,0]
 
