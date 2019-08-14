@@ -24,7 +24,7 @@ pkgPosNamePrefixes = dict()
 pkgNegNamePrefixes = dict()
 pkgNameInterface = dict()
 pkgPrefixDic = dict()
-pkgAutocomple = set();
+pkgAutocomple = set()
 
 def generate_packages_json():
   pkgCatJson = json.load(open("../PackageCategories.json", 'r'))
