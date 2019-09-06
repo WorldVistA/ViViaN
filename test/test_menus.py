@@ -26,13 +26,13 @@ targetedMenus = {
   "19": {
      '4': "TimeKeeper Main Menu",
      '5': ("XUTM ZTMON: [MTM]Monitor Taskman", "Systems Manager Menu"),
-     '8': ( "PSD PURCHASE ORDER REVIEW","Top Level Menu: Controlled Substances Menu"),
+     '8': ( "PSD PURCHASE ORDER REVIEW", "Top Level Menu: Controlled Substances Menu"),
      '12': ( "PSD MENU", "Controlled Substances Menu")
   },
   "101": {
      '4': "APAR Research Menu",
-     '5': ("BPS PRTCL RSCH VIEW INSURANCE","Research Menu"),
-     '8': ( "PSO REJECT DISPLAY ADD COMMENT","Top Level Menu: Reject TRICARE/CHAMPVA Hidden Menu"),
+     '5': ("BPS PRTCL RSCH VIEW INSURANCE", "Research Menu"),
+     '8': ( "PSO REJECT DISPLAY ADD COMMENT", "Top Level Menu: Reject TRICARE/CHAMPVA Hidden Menu"),
      '12': ("PSO REJECT TRICARE HIDDEN MENU:", "Reject TRICARE/CHAMPVA Hidden Menu")
   }
 }
@@ -68,7 +68,7 @@ class test_menus(unittest.TestCase):
 
   def test_03_legend(self):
     global driver
-    color_options = ["#E0E0E0",'']
+    color_options = ["#E0E0E0", '']
     legend_list = driver.find_elements_by_class_name('legend')
     for item in legend_list[1:]:
       text_element = item.find_element_by_tag_name('text')
@@ -129,13 +129,13 @@ class test_menus(unittest.TestCase):
     time.sleep(1)
     ac_list = driver.find_elements_by_class_name('ui-menu-item')
     for option in ac_list:
-      if(re.search(target_option_text,option.text)):
+      if(re.search(target_option_text, option.text)):
         option.click()
         break
     time.sleep(1)
     # Compare images to match paths
     display = driver.find_element_by_id("treeview_placeholder").find_element_by_tag_name('svg')
-    Utils.take_screenshot(driver,"path_image_pass_new.png", display)
+    Utils.take_screenshot(driver, "path_image_pass_new.png", display)
     self.assertTrue(Utils.compareImg("path_image_pass"))
 
   def DISABLED_test_07_option_autocomplete_multipath(self):
@@ -148,13 +148,13 @@ class test_menus(unittest.TestCase):
     time.sleep(1)
     ac_list = driver.find_elements_by_class_name('ui-menu-item')
     for option in ac_list:
-      if(re.search(target_menu_text,option.text)):
+      if(re.search(target_menu_text, option.text)):
         option.click()
         break
     time.sleep(1)
     # Compare images to match paths
     display = driver.find_element_by_id("treeview_placeholder").find_element_by_tag_name('svg')
-    Utils.take_screenshot(driver,"multi_path_image_pass_new.png", display)
+    Utils.take_screenshot(driver, "multi_path_image_pass_new.png", display)
     self.assertTrue(Utils.compareImg("multi_path_image_pass"))
 
   def test_08_option_autocomplete_menuDisplay(self):
@@ -166,7 +166,7 @@ class test_menus(unittest.TestCase):
     time.sleep(1)
     ac_list = driver.find_elements_by_class_name('ui-menu-item')
     for option in ac_list:
-      if(re.search(target_option_text,option.text)):
+      if(re.search(target_option_text, option.text)):
         ActionChains(driver).move_to_element(option).perform()
         # Capture the new text of the highlight and compare it to expected
         self.assertEqual(option.text, target_option_menu_text,
@@ -223,12 +223,12 @@ class test_menus(unittest.TestCase):
     button.click()
     time.sleep(1)
     newVal = menuTreeDisplay.get_attribute("transform")
-    self.assertNotEqual(oldval , newVal, "Resetting the pan from drag-and-drop did not change the transform")
+    self.assertNotEqual(oldval, newVal, "Resetting the pan from drag-and-drop did not change the transform")
 
   def test_12_directLink(self):
     global driver
     (urlParam, rootMenu) =  targetedMenus[pageExtension]['12']
-    driver.get("%s?name=%s" % (driver.current_url,urlParam) )
+    driver.get("%s?name=%s" % (driver.current_url, urlParam) )
     time.sleep(3)
     node_list = driver.find_elements_by_class_name('node')
     self.assertEqual(node_list[0].text, rootMenu)
@@ -236,7 +236,7 @@ if __name__ == '__main__':
   description = "Test the Install Timeline page of the ViViaN(TM) webpage"
   page = "vista_menus.php"
 
-  for pageExtension in ['19','101']:
+  for pageExtension in ['19', '101']:
     webroot, driver, browser, is_local = setup_webdriver(description, page + "#%s" % pageExtension)
     suite = unittest.TestLoader().loadTestsFromTestCase(test_menus)
     unittest.TextTestRunner(verbosity=2).run(suite)

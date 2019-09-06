@@ -47,7 +47,7 @@ class test_installscale(unittest.TestCase):
     ctrlAxisLabels = driver.find_element_by_id('timeCtl').find_elements_by_class_name("tick")
     displayAxisLabels = driver.find_element_by_id('timeline').find_elements_by_class_name("tick")
     origDate = displayAxisLabels[0].find_element_by_tag_name('text').get_attribute("innerHTML")
-    ActionChains(driver).move_to_element(ctrlAxisLabels[2]).drag_and_drop(ctrlAxisLabels[2].find_element_by_tag_name('line'),ctrlAxisLabels[4].find_element_by_tag_name('line')).perform()
+    ActionChains(driver).move_to_element(ctrlAxisLabels[2]).drag_and_drop(ctrlAxisLabels[2].find_element_by_tag_name('line'), ctrlAxisLabels[4].find_element_by_tag_name('line')).perform()
     time.sleep(3)
     displayAxisLabels = driver.find_element_by_id('timeline').find_elements_by_class_name("tick")
     endDate = displayAxisLabels[0].find_element_by_tag_name('text').get_attribute("innerHTML")
@@ -59,7 +59,7 @@ class test_installscale(unittest.TestCase):
     displayAxisLabels = driver.find_element_by_id('timeline').find_elements_by_class_name("tick")
     origDate = displayAxisLabels[0].find_element_by_tag_name('text').get_attribute("innerHTML")
     activeBox = driver.find_element_by_class_name("extent")
-    ActionChains(driver).move_to_element(activeBox).drag_and_drop_by_offset(activeBox,200,0).perform()
+    ActionChains(driver).move_to_element(activeBox).drag_and_drop_by_offset(activeBox, 200, 0).perform()
     time.sleep(3)
     displayAxisLabels = driver.find_element_by_id('timeline').find_elements_by_class_name("tick")
     endDate = displayAxisLabels[0].find_element_by_tag_name('text').get_attribute("innerHTML")
@@ -69,7 +69,7 @@ class test_installscale(unittest.TestCase):
     displayAxisLabels = driver.find_element_by_id('timeline').find_elements_by_class_name("tick")
     origDate = displayAxisLabels[-1].find_element_by_tag_name('text').get_attribute("innerHTML")
     activeBoxLeft = driver.find_elements_by_class_name("resize")[0]
-    ActionChains(driver).move_to_element(activeBoxLeft).drag_and_drop_by_offset(activeBoxLeft,50,0).perform()
+    ActionChains(driver).move_to_element(activeBoxLeft).drag_and_drop_by_offset(activeBoxLeft, 50, 0).perform()
     time.sleep(5)
     displayAxisLabels = driver.find_element_by_id('timeline').find_elements_by_class_name("tick")
     endDate = displayAxisLabels[-1].find_element_by_tag_name('text').get_attribute("innerHTML")
@@ -79,7 +79,7 @@ class test_installscale(unittest.TestCase):
     displayAxisLabels = driver.find_element_by_id('timeline').find_elements_by_class_name("tick")
     endDate = displayAxisLabels[0].find_element_by_tag_name('text').get_attribute("innerHTML")
     activeBoxRight = driver.find_elements_by_class_name("resize")[1]
-    ActionChains(driver).move_to_element(activeBoxRight).drag_and_drop_by_offset(activeBoxRight,-50,0).perform()
+    ActionChains(driver).move_to_element(activeBoxRight).drag_and_drop_by_offset(activeBoxRight, -50, 0).perform()
     time.sleep(3)
     displayAxisLabels = driver.find_element_by_id('timeline').find_elements_by_class_name("tick")
     endDate = displayAxisLabels[0].find_element_by_tag_name('text').get_attribute("innerHTML")
@@ -97,7 +97,7 @@ class test_installscale(unittest.TestCase):
     newStartDate = axisLabels[0].find_element_by_tag_name('text').get_attribute("innerHTML")
     newEndDate = axisLabels[-1].find_element_by_tag_name('text').get_attribute("innerHTML")
     self.assertNotEqual(newStartDate, origStartDate, "Changes were not set by to the original via Reset")
-    self.assertNotEqual(origEndDate ,newEndDate, "Changes were not set by to the original via Reset")
+    self.assertNotEqual(origEndDate, newEndDate, "Changes were not set by to the original via Reset")
 
   def test_05_installBarHover(self):
     global driver
@@ -106,8 +106,8 @@ class test_installscale(unittest.TestCase):
     graphBars[0].location_once_scrolled_into_view
     ActionChains(driver).move_to_element(graphBars[0]).perform()
     tooltip = driver.find_element_by_id("toolTip")
-    self.assertTrue(re.search(" [A-Z]+\*[0-9.]+\*[0-9]+",  tooltip.find_element_by_id("header1").text),"Header of tool tip didn't match expected format")
-    self.assertTrue(re.search("[0-9]+\-[0-9]+\-[0-9]+", tooltip.find_element_by_id("installDate").text),"Install date of tool tip didnt match expected format")
+    self.assertTrue(re.search(" [A-Z]+\*[0-9.]+\*[0-9]+",  tooltip.find_element_by_id("header1").text), "Header of tool tip didn't match expected format")
+    self.assertTrue(re.search("[0-9]+\-[0-9]+\-[0-9]+", tooltip.find_element_by_id("installDate").text), "Install date of tool tip didnt match expected format")
     time.sleep(1)
 
   def test_06_installBarClick(self):
@@ -116,7 +116,7 @@ class test_installscale(unittest.TestCase):
     graphBars[-1].click()
     driver.switch_to.window(driver.window_handles[1])
     time.sleep(1)
-    self.assertTrue(re.search("/files/9_7/9.7-[0-9]+.html", driver.current_url),"URL of new window didnt match expected format")
+    self.assertTrue(re.search("/files/9_7/9.7-[0-9]+.html", driver.current_url), "URL of new window didnt match expected format")
     driver.close()
     driver.switch_to.window(driver.window_handles[0])
 

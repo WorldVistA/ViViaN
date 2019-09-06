@@ -33,9 +33,9 @@ class test_about(unittest.TestCase):
     time.sleep(1)
 
     about_para = driver.find_element_by_id("dialog-modal-about")
-    self.assertTrue(re.search("Visualizing VistA and Namespace",about_para.text))
-    self.assertTrue(re.search("tree-based visualizations",about_para.text))
-    self.assertTrue(re.search("VHA Business Function Framework",about_para.text))
+    self.assertTrue(re.search("Visualizing VistA and Namespace", about_para.text))
+    self.assertTrue(re.search("tree-based visualizations", about_para.text))
+    self.assertTrue(re.search("VHA Business Function Framework", about_para.text))
 
 if __name__ == '__main__':
   description = "Access the 'About' Text of the ViViaN(TM) webpage"

@@ -62,9 +62,9 @@ class test_pkgdep(unittest.TestCase):
 
     # Values taken from most-recent code.osehra.org instance,
     # not the most sustainable but works for now
-    PCE_values = [43,29]
-    ETiR_values = [0,6]
-    CS_values = [3,0]
+    PCE_values = [43, 29]
+    ETiR_values = [0, 6]
+    CS_values = [3, 0]
 
     # Three menu entries: to match each combination of depends/dependents
     package = "PCE Patient Care Encounter"

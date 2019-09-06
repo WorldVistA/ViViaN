@@ -99,7 +99,7 @@ class test_installdep(unittest.TestCase):
     button.click()
     time.sleep(1)
     newVal = patchTree.get_attribute("transform")
-    self.assertNotEqual(oldval , newVal, "Reseting the pan from drag-and-drop did not change the transform")
+    self.assertNotEqual(oldval, newVal, "Reseting the pan from drag-and-drop did not change the transform")
 
   def test_07_node_highlighting(self):
     global driver

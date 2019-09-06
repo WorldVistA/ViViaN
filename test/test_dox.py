@@ -72,7 +72,7 @@ class DoxTestCase(unittest.TestCase):
 
   # Now that we've navigated away from the main page, click on 'Home' button
   def test_08_home(self):
-    self.go_to_index_page('home','index.html')
+    self.go_to_index_page('home', 'index.html')
 
   # ---------------------------------------------------------------------------
   # Packages

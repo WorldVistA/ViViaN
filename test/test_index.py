@@ -140,7 +140,7 @@ class test_index(unittest.TestCase):
                   11: 'M API.+Web Service API',
                   12: 'HIM Visualization for',
                   13: '[A-Za-z &/]+'}
-    for i in range(9,14):
+    for i in range(9, 14):
       # Test accordion selection of each header
       modal_accordion = accordion.find_element_by_id('ui-id-'+str(i))
       modal_accordion.click()

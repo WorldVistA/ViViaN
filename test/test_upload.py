@@ -48,7 +48,7 @@ class test_upload(unittest.TestCase):
     select.click()
     select.find_elements_by_tag_name("option")[1].click()
     time.sleep(5)
-    self.assertNotEqual(len(driver.find_elements_by_class_name('slice')),0)
+    self.assertNotEqual(len(driver.find_elements_by_class_name('slice')), 0)
     ActionChains(driver).move_to_element(driver.find_element_by_class_name('slice')).perform()
     modal_title = driver.find_element_by_id('toolTip').find_element_by_id('header1')
     self.assertTrue(re.search("ABBREVIATION:", modal_title.text))
