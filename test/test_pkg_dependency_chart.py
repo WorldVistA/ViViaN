@@ -43,7 +43,7 @@ class test_pkgdepchart(unittest.TestCase):
     for type in chart_container:  # depends, dependents
       rects = type.find_elements_by_tag_name("rect")
       for rect in rects:
-          if rect.get_attribute("height") > 0:
+          if int(rect.get_attribute("height")) > 0:
               break
       else:
           self.fail("Failed to find data in Dependency Chart")
