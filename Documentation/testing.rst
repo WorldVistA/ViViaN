@@ -47,7 +47,7 @@ Set-up
 
 Prerequistes
 ~~~~~~~~~~~~
-* Python 2.7
+* Python 2.7 or 3 (preferred)
 * CMake 2.8+ (https://cmake.org/download/)
 * Firefox or Chrome
 * Latest version of Selenium Python and driver to interface with the chosen
