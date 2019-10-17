@@ -88,7 +88,6 @@ var legendShapeChart = d3.chart.treeview()
 var initPackage = "Barcode Medication Administration";
 var initInstall = "PSB*3.0*68";
 var targetPackage = initPackage;
-var toolTip = d3.select(document.getElementById("toolTip"));
 var header = d3.select(document.getElementById("header1"));
 var installDateTip = d3.select(document.getElementById("installDate"));
 var originalTransform = [300,300];
@@ -166,10 +165,8 @@ function appendPackageInformation (d, json, depth){
 function node_onMouseOver(d) {
   header.text("Install Name: " + d.name + "\r\n");
   if (d.installDate) {  installDateTip.text("Install Date: " + d.installDate);}
-  toolTip.style("left", (d3.event.pageX + 20) + "px")
-         .style("top", (d3.event.pageY + 5) + "px")
-         .style("opacity", ".9");
 
+  $( document ).uitooltip('option', 'content', $("#toolTip").html())
   var nodes = d3.selectAll("g.node")
                 .filter( function (node) {return (node.name == d.name)})
                 .classed('active',true);
@@ -177,9 +174,6 @@ function node_onMouseOver(d) {
 }
 
 function node_onMouseOut(d) {
-  header.text("");
-  installDateTip.text("");
-  toolTip.style("opacity", "0");
   var nodes = d3.selectAll("g.node")
                 .filter( function (node) {return (node.name == d.name)})
                 .classed('active',false);

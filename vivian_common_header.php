@@ -2,11 +2,25 @@
 <link type="text/css" rel="stylesheet" href="style.css"/>
 <!-- Latest compiled and minified JavaScript -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+<script type="text/javascript"> 
+  $.widget.bridge('uitooltip', $.ui.tooltip);
+  $( document ).uitooltip({
+    classes: {
+        "ui-tooltip": "tooltip"
+    },
+    items: ".node",
+    track: "true",
+    show: false,
+    hide: false
+  })
+</script>
+
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
-<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/themes/smoothness/jquery-ui.css">
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
 <script src="d3/d3.v3.min.js" charset="utf-8"></script>
 <script src="d3.treeview.js" charset="utf-8"></script>
 <script src="d3.dependencyedgebundling.js" charset="utf-8"></script>

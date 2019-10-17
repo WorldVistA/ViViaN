@@ -84,7 +84,7 @@ a:hover {
 }
 /* Tooltip */
 
-div.tooltip {
+div.tooltip, div.ui-tooltip {
     position: absolute;			/* reference for measurement */
     text-align: left;
     pointer-events: none;			/* 'none' tells the mouse to ignore the rectangle */
@@ -102,7 +102,7 @@ div.tooltip {
     box-shadow: 0 1px 5px rgba(0,0,0,0.4);
     -moz-box-shadow: 0 1px 5px rgba(0,0,0,0.4);
     border:1px solid rgba(200,200,200,0.85);
-    z-index: 10000;
+    opacity: 1;
 }
 
 div.tooltipTail {
@@ -120,7 +120,7 @@ div.toolTipBody {
     width:230px;
 }
 
-#toolTip .header {
+#toolTip .header, .ui-tooltip-content .header {
     text-align: left;
     font-size: 14px;
     margin-bottom: 2px;
