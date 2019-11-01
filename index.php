@@ -390,15 +390,15 @@ function node_onMouseOver(d) {
     tooltipString = "Namespace: Includes: " + d.Posprefixes + "\r\n";
     tooltipString += "Excludes: " + d.Negprefixes;
     header.text(tooltipString)
-    toolTip.style("left", (d3.event.pageX + 20) + "px")
-           .style("top", (d3.event.pageY + 5) + "px")
-           .style("opacity", ".9");
+    $( document ).uitooltip('option', 'content', $("#toolTip").html())
+  }
+  else{
+    return;
   }
 }
 
 function node_onMouseOut(d) {
-  header.text("");
-  toolTip.style("opacity", "0");
+  $( document ).uitooltip('option', 'content', "")
 }
 
 function createLegend() {

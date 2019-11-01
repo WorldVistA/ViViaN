@@ -131,9 +131,7 @@ function rect_onMouseOver(d) {
     var depends = "Number of installed routines: " + d.numRoutines;
     $('#routinesTip').html(depends);
   }
-  d3.select("#toolTip").style("left", (d3.event.pageX + 0) + "px")
-          .style("top", (d3.event.pageY - 0) + "px")
-          .style("opacity", ".9");
+  $( document ).uitooltip('option', 'content', $("#toolTip").html())
 }
 
 /*
@@ -144,7 +142,7 @@ function rect_onMouseOut(d) {
   $('#installDate').text("");
   $('#routinesTip').text("");
   $('#filesTip').text("");
-  d3.select("#toolTip").style("opacity", "0");
+  $( document ).uitooltip('option', 'content', "")
 }
 
 /*

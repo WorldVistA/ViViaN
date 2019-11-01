@@ -178,9 +178,7 @@ Click on any of the packages to view package dependency details.
         var dependents = "Dependents: " + (d.dependents.length - localDepends.length);
         $('#dependents').html(dependents).addClass(palette+"-link--target");
       }
-      d3.select("#toolTip").style("left", (d3.event.pageX) + "px")
-              .style("top", (d3.event.pageY) + "px")
-              .style("opacity", ".9");
+      $( document ).uitooltip('option', 'content', $("#toolTip").html())
     }
 
     function mouseOuted(d) {
@@ -188,7 +186,6 @@ Click on any of the packages to view package dependency details.
       $('#dependents').text("").removeClass(palette+"-link--target");
       $('#dependency').text("").removeClass(palette+"-link--source");
       $('#bothDeps').text("").removeClass(palette+"-link--both");
-      d3.select("#toolTip").style("opacity", "0");
     }
 
     function mouseOverArc(d) {
@@ -200,6 +197,7 @@ Click on any of the packages to view package dependency details.
 
     function mouseOutArc(d) {
       $('#groupName').text("");
+      $( document ).uitooltip('option', 'content', "")
       d3.select("#groupToolTip").style("opacity", "0");
     }
 

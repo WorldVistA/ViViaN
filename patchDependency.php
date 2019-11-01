@@ -177,6 +177,7 @@ function node_onMouseOver(d) {
 }
 
 function node_onMouseOut(d) {
+  $( document ).uitooltip('option', 'content', "")
   var nodes = d3.selectAll("g.node")
                 .filter( function (node) {return (node.name == d.name)})
                 .classed('active',false);

@@ -10,7 +10,7 @@
     classes: {
         "ui-tooltip": "tooltip"
     },
-    items: ".node",
+    items: ".node,.bar",
     track: "true",
     show: false,
     hide: false

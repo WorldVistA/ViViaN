@@ -212,9 +212,7 @@ function node_onMouseOver(d) {
     else {
       return;
     }
-    toolTip.style("left", (d3.event.pageX + 20) + "px")
-           .style("top", (d3.event.pageY + 5) + "px")
-           .style("opacity", ".9");
+    $( document ).uitooltip('option', 'content', $("#toolTip").html())
 }
 
 function getRequirementsURL(d){
@@ -233,8 +231,8 @@ function getRequirementsURL(d){
 }
 
 function node_onMouseOut(d) {
+  $( document ).uitooltip('option', 'content', "")
   header.text("");
-  toolTip.style("opacity", "0");
 }
 
 function generateNSRURL(d) {
