@@ -26,19 +26,23 @@ pkgNameInterface = dict()
 pkgPrefixDic = dict()
 pkgAutocomple = set()
 
-def generate_packages_json():
+def run(filesDir):
   pkgCatJson = json.load(open("../PackageCategories.json", 'r'))
   pkgDesJson = json.load(open("PackageDes.json", 'r'))
-  generate_output_json_dict(pkgCatJson, pkgDesJson)
-  with open("../files/packages.json", 'w') as outputFile:
+  generate_output_json_dict(pkgCatJson, pkgDesJson, filesDir)
+  packagesFilename = "%s/packages.json" % filesDir
+  with open(packagesFilename, 'w') as outputFile:
     json.dump(pkgCatJson, outputFile)
-  with open("../files/packages_autocomplete.json", 'w') as autocompleteOutputFile:
+    print("*** Updated %s" % packagesFilename)
+  autocompleteFilename = "%s/packages_autocomplete.json" % filesDir
+  with open(autocompleteFilename, 'w') as autocompleteOutputFile:
     pkgAutocomple.add("Unknown")
     packageNames = list(pkgAutocomple)
     packageNames.sort()
     json.dump(packageNames, autocompleteOutputFile)
+    print("*** Updated %s" % autocompleteFilename)
 
-def generate_output_json_dict(pkgCatJson, pkgDesJson):
+def generate_output_json_dict(pkgCatJson, pkgDesJson, filesDir):
  # read package.csv file for more information
   packages_csv = csv.DictReader(open("../Packages.csv",'r'))
   pkg = None
@@ -56,7 +60,7 @@ def generate_output_json_dict(pkgCatJson, pkgDesJson):
         pkgPrefixDic[fields['Prefixes']] = pkg
 
   # read packageInterfaces.csv file for interface
-  interface_csv = csv.DictReader(open("../files/PackageInterface.csv", 'r'))
+  interface_csv = csv.DictReader(open("%s/PackageInterface.csv" % filesDir, 'r'))
   for row in interface_csv:
     pkgName = row['Package']
     if pkgName and pkgName in pkgNameSet:
@@ -93,9 +97,3 @@ def traverseChildren(package, pkgDesJson):
           break
     if pkgName in pkgNameInterface:
       package['interfaces'] = pkgNameInterface[pkgName]
-
-def main():
-  generate_packages_json()
-
-if __name__ == '__main__':
-  main()

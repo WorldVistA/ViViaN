@@ -16,9 +16,9 @@
 
 import json
 
-def run():
-  output = "../files/install_autocomplete.json"
-  input = "../files/install_information.json"
+def run(filesDir):
+  output = "%s/install_autocomplete.json" % filesDir
+  input = "%s/install_information.json" % filesDir
 
   installInformation = json.load(open(input, 'r'))
 
@@ -26,5 +26,4 @@ def run():
     packageNames = sorted(installInformation.keys())
     json.dump(packageNames, installAutocompleteOutputFile)
 
-if __name__ == '__main__':
-  run()
+  print("*** Updated %s" % output)

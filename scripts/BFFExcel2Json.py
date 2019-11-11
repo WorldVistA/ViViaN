@@ -20,7 +20,6 @@ import xlrd
 from xlrd import open_workbook,cellname,xldate_as_tuple
 from datetime import datetime, date, time
 import csv
-import logging
 import json
 
 typeDict = {
@@ -78,7 +77,7 @@ def bffFieldsConvertFunc(x):
     return bffFieldsConvert[x]
   return x
 
-def convertBFFExcelToJson(input, output):
+def run(input, output):
   book = open_workbook(input)
   sheet = book.sheet_by_index(0)
   data_row = 0
@@ -90,7 +89,7 @@ def convertBFFExcelToJson(input, output):
     isHeader = True
     row_types = sheet.row_types(row_index)
     assert len(row_types) == sheet.ncols
-    """ Try to identify the header of file by checking first row with non-empty type """
+    # Try to identify the header of file by checking first row with non-empty type """
     for idx,row_type in enumerate(row_types):
       if row_type == xlrd.XL_CELL_BLANK or row_type == xlrd.XL_CELL_EMPTY:
         isHeader = False
@@ -102,7 +101,7 @@ def convertBFFExcelToJson(input, output):
       #print fields
       break
   if not isHeader:
-    logging.error("No Valid Header From input file")
+    print "No Valid Header From input file"
     return
   # Read rest of the BFF data from data_row
   for row_index in range(data_row, sheet.nrows):
@@ -126,23 +125,14 @@ def convertBFFExcelToJson(input, output):
       parentName = curNode['parent']
       if parentName in all_bff_nodes:
         parentNode = all_bff_nodes[parentName]
-        logging.info('adding child: %s to %s' % (curNode['name'], parentName))
+        #print 'adding child: %s to %s' % (curNode['name'], parentName)
         parentNode.setdefault('children',[]).append(curNode)
       else:
-        logging.error('could not identify parent name: (%s)' % parentName)
+        print 'could not identify parent name: (%s)' % parentName
     else:
       rootNode = curNode
 
   with open(output, "w") as outputJson:
     json.dump(rootNode, outputJson)
 
-def main():
-  import argparse
-  parser = argparse.ArgumentParser("Convert BFF Excel SpreadSheet to JSON")
-  parser.add_argument('input', help='input BFF excel spreadsheet')
-  parser.add_argument('output', help='output JSON file')
-  result = parser.parse_args()
-  convertBFFExcelToJson(result.input, result.output)
-
-if __name__ == '__main__':
-  main()
+  print("*** Updated %s" % output)

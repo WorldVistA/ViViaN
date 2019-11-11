@@ -18,13 +18,13 @@ import csv
 import os
 import glob
 
-def run():
-  outputFile = "../files/PackageInterface.csv"
-  pkgRPCFile = glob.glob("../files/8994/*-RPC.html")
-  pkgHL7File = glob.glob("../files/101/*-HL7.html")
-  pkgProtocolFile = glob.glob("../files/101/*-Protocols.html")
-  pkgHLOFile = glob.glob("../files/779_2/*-HLO.html")
-  pkgICRFile = glob.glob("../files/ICR/*-ICR.html")
+def run(filesDir):
+  outputFile = "%s/PackageInterface.csv" % filesDir
+  pkgRPCFile = glob.glob("%s/8994/*-RPC.html" % filesDir)
+  pkgHL7File = glob.glob("%s/101/*-HL7.html" % filesDir)
+  pkgProtocolFile = glob.glob("%s/101/*-Protocols.html" % filesDir)
+  pkgHLOFile = glob.glob("%s/779_2/*-HLO.html" % filesDir)
+  pkgICRFile = glob.glob("%s/ICR/*-ICR.html" % filesDir)
   header = ['Package','RPC','HL7','HLO','Protocols', 'ICR']
   outCsv = {}
   for rpcFile in pkgRPCFile:
@@ -67,7 +67,4 @@ def run():
     for key in sorted(outCsv.keys()):
       outCsv[key].insert(0,key)
       csvWtr.writerow(outCsv[key])
-
-
-if __name__ == '__main__':
-  run()
+  print("*** Updated %s" % outputFile)
