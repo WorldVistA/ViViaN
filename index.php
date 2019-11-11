@@ -17,7 +17,7 @@
             $(this).removeClass().addClass("active");
         });
 
-        d3.json('files/packages_autocomplete.json', function(json) {
+        d3.json('../files/packages_autocomplete.json', function(json) {
           // Note: vivian_tree_layout_common expects this control
           // to be called 'option_autocomplete'.
           $("#option_autocomplete").autocomplete({
@@ -85,7 +85,7 @@ $("#accordion").accordion({heightStyle: 'content', collapsible: true}).hide();
 
 <?php include_once "vivian_tree_layout_common.js" ?>
 
-var package_link_url = "http://code.osehra.org/dox/";
+var package_link_url = "../dox/";
 var toolTip = d3.select(document.getElementById("toolTip"));
 var header = d3.select(document.getElementById("header1"));
 var selectedIndex = 0;
@@ -117,7 +117,7 @@ var shapeLegend = [{name: "Package Category", shape: "triangle-up"},
                    {name: "Package", shape:"circle"}]
 var himInfoJSON;
 
-d3.json("files/packages.json", function(json) {
+d3.json("../files/packages.json", function(json) {
   chart.on("node", "event","click", pkgLinkClicked)
      .on("node", "event", "mouseover", node_onMouseOver)
      .on("node", "event","mouseout", node_onMouseOut)
@@ -136,7 +136,7 @@ d3.json("files/packages.json", function(json) {
   clearAutocomplete();
   createLegend();
   createShapeLegend();
-  d3.json("files/himData.json", function(json) {
+  d3.json("../files/himData.json", function(json) {
     himJSON = json;
   });
 });
@@ -272,7 +272,7 @@ function getHIMLink(pkgName, pkg) {
 
 
 function getRPCLinkByPackageName(pkgName, linkUrl) {
-  var defLnk = "files/8994";
+  var defLnk = "../files/8994";
   if (linkUrl){
     defLnk = linkUrl + '/' + defLnk;
   }
@@ -280,7 +280,7 @@ function getRPCLinkByPackageName(pkgName, linkUrl) {
 }
 
 function getHL7LinkByPackageName(pkgName, linkUrl) {
-  var defLnk = "files/101";
+  var defLnk = "../files/101";
   if (linkUrl){
     defLnk = linkUrl + '/' + defLnk;
   }
@@ -288,7 +288,7 @@ function getHL7LinkByPackageName(pkgName, linkUrl) {
 }
 
 function getProtocolLinkByPackageName(pkgName, linkUrl) {
-  var defLnk = "files/101";
+  var defLnk = "../files/101";
   if (linkUrl){
     defLnk = linkUrl + '/' + defLnk;
   }
@@ -296,7 +296,7 @@ function getProtocolLinkByPackageName(pkgName, linkUrl) {
 }
 
 function getHLOLinkByPackageName(pkgName, linkUrl) {
-  var defLnk = "files/779_2";
+  var defLnk = "../files/779_2";
   if (linkUrl){
     defLnk = linkUrl + '/' + defLnk;
   }
@@ -304,7 +304,7 @@ function getHLOLinkByPackageName(pkgName, linkUrl) {
 }
 
 function getICRLinkByPackageName(pkgName, linkUrl) {
-  var defLnk = "files/ICR";
+  var defLnk = "../files/ICR";
   if (linkUrl){
     defLnk = linkUrl + '/' + defLnk;
   }

@@ -91,7 +91,7 @@ Click on any of the packages to view package dependency details.
   d3.json("PackageCategories.json", function(error, data) {
     var categories = data;
     function getPackageDoxLink(node) {
-      var package_link_url = "http://code.osehra.org/dox/Package_";
+      var package_link_url = "../dox/Package_";
       var doxLinkName = node.name.replace(/ /g, '_').replace(/-/g, '_')
       return package_link_url + doxLinkName + ".html";
     }
@@ -210,7 +210,7 @@ Click on any of the packages to view package dependency details.
                 .mouseOverArc(mouseOverArc)
                 .mouseOutArc(mouseOutArc)
                 .nodeTextHyperLink(getPackageDoxLink);
-    var localpath = "files/pkgdep.json";
+    var localpath = "../files/pkgdep.json";
     d3.select("#legend_placeholder").datum(null).call(legendColorChart);
 
     d3.json(localpath, function(error, classes) {

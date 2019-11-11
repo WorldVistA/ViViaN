@@ -51,7 +51,7 @@
 
   <script type="text/javascript">
 
-    var files = "<?php  foreach(glob('./files/dox/*.json') as $filename) { echo $filename.",";  };?>"
+    var files = "<?php  foreach(glob('../dox/*.json') as $filename) { echo $filename.",";  };?>"
     filesArray = files.split(",")
     filesArray.pop()
     $("#vivSelect").append("<option selected disabled> -- select an local file -- </option>")

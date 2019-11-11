@@ -31,9 +31,9 @@ process are available at
 https://github.com/OSEHRA/VistA/blob/master/Documentation/generateViViaNAndDox.rst
 
 To visit the version of ViViaN maintained by OSEHRA, navigate to
-https://code.osehra.org/vivian/index.php. While exploring ViViaN, you may
+https://code.osehra.org/vivian. While exploring ViViaN, you may
 find links into the DOX pages. To access the DOX pages directly, navigate
-to: https://code.osehra.org/vivian/files/dox/index.html.
+to: https://code.osehra.org/dox.
 
 The navigation bar at the top of ViViaN allows users to navigate to the
 different pages available in the ViViaN tool. The remainder of this document

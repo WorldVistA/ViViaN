@@ -47,7 +47,7 @@
         <h3 id="bnDofUpdate_head" style="display:none"><a href="#">Business Need: Date of Update</a></h3>
         <div id="bnDofUpdate"></div>
         <h3 id="allReq" style="display:none"><a href="#">All Business Needs</a></h3>
-        <div id="nsNSR"><a target='_blank' href="files/requirements/All-Requirement%20List.html">All Needs</a></div>
+        <div id="nsNSR"><a target='_blank' href="../files/requirements/All-Requirement%20List.html">All Needs</a></div>
       </div>
     </div>
   <div id='pageDescription' class='hint' style="position:relative; top: -10px; left:20px; margin-right:200px;">
@@ -63,8 +63,9 @@
     See the legend for an explanation of the symbols and colors of the display.
     The "collapsed" nodes can be expanded to show the "children" of that node.
     </p>
-    <p><b>Note:</b> Not all Business Needs can be found connected to a BFF Entry.  To see the listing
-    of all Business Needs, click <a target='_blank' href="files/requirements/All-Requirement%20List.html">here</a> </p>
+    <p><b>Note:</b> Not all Business Needs can be found connected to a BFF Entry.
+    To see the listing of all Business Needs, click
+    <a target='_blank' href="../files/requirements/All-Requirement%20List.html">here</a></p>
     <p>The current information is based on BFF version 2.12.</p>
   </div>
 
@@ -104,8 +105,8 @@ var shapeLegend = [{name: "Framework Grouping (Collapsed)", shape: "triangle-up"
                    ]
 renderWindow();
 function renderWindow() {
-  d3.json("files/bff.json", function(BFFjson) {
-    d3.json("files/requirements.json", function(reqjson) {
+  d3.json("../files/bff.json", function(BFFjson) {
+    d3.json("../files/requirements.json", function(reqjson) {
       resetAllNode(BFFjson);
       chart.on("node", "event", "mouseover", node_onMouseOver)
          .on("node", "event","mouseout", node_onMouseOut)
@@ -212,11 +213,11 @@ function node_onMouseOver(d) {
 }
 
 function getRequirementsURL(d){
-  var outstring = "<a target='_blank' href='files/requirements/"+d.name.replace('/','_')+"-Req.html'>Requirements for "+d.name+"</a>"
+  var outstring = "<a target='_blank' href='../files/requirements/"+d.name.replace('/','_')+"-Req.html'>Requirements for "+d.name+"</a>"
   if(d.isRequirement) {
     outstring="<ul>"
     d.BFFlink.forEach(function(d) {
-       outstring += "<li> <a target='_blank' href='files/requirements/"+d.replace('/','_')+"-Req.html'>Requirements for "+d+"</a></li>"
+       outstring += "<li> <a target='_blank' href='../files/requirements/"+d.replace('/','_')+"-Req.html'>Requirements for "+d+"</a></li>"
     });
     outstring += "</ul>"
   }
@@ -233,14 +234,14 @@ function generateNSRURL(d) {
   returnURLS = '<ul>'
   d.NSRLink.forEach(function(nsrEntry) {
     nsrVal = nsrEntry.split(":")[0]
-    returnURLS += "<li><a target='_blank' href='files/requirements/"+nsrVal+"-Req.html'>"+d.NSRLink+"</a></li>"
+    returnURLS += "<li><a target='_blank' href='../files/requirements/"+nsrVal+"-Req.html'>"+d.NSRLink+"</a></li>"
   });
   returnURLS += '</ul>'
   return returnURLS
 
 }
 function getBusinessNeedURL(d) {
-  return "<a target='_blank' href='files/requirements/BFFReq-"+d.busNeedId+".html'>"+d.busNeedId+"</a>"
+  return "<a target='_blank' href='../files/requirements/BFFReq-"+d.busNeedId+".html'>"+d.busNeedId+"</a>"
 }
 
 function modalForBFFGroup(d) {

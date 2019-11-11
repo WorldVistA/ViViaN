@@ -63,7 +63,7 @@
   
   // Read input files
   d3.queue()
-    .defer(d3.json, 'files/pkgdep.json')
+    .defer(d3.json, '../files/pkgdep.json')
     .defer(d3.json, 'PackageCategories.json')
     .await(plot);
 

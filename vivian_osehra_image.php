@@ -49,19 +49,19 @@
         <li class="dropdown" id="vista-interfaces">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">VistA Interfaces<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="files/101/All-HL7.html" id="all_hl7">HL7</a></li>
-            <li><a href="files/779_2/All-HLO.html" id="all_hlo">HLO</a></li>
-            <li><a href="files/ICR/All-ICR%20List.html" id="all_icr">ICR</a></li>
-            <li><a href="files/101/All-Protocols.html" id="all_protocols">Protocols</a></li>
-            <li><a href="files/8994/All-RPC.html" id="all_rpc">RPC</a></li>
+            <li><a href="../files/101/All-HL7.html" id="all_hl7">HL7</a></li>
+            <li><a href="../files/779_2/All-HLO.html" id="all_hlo">HLO</a></li>
+            <li><a href="../files/ICR/All-ICR%20List.html" id="all_icr">ICR</a></li>
+            <li><a href="../files/101/All-Protocols.html" id="all_protocols">Protocols</a></li>
+            <li><a href="../files/8994/All-RPC.html" id="all_rpc">RPC</a></li>
           </ul>
         </li>
 
         <li class="dropdown" id="vista-information">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Name and Number<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="files/Namespace/Namespace.html" id="all_name">Namespace Listing</a></li>
-            <li><a href="files/Numberspace/Numberspace.html" id="all_number">Numberspace Listing</a></li>
+            <li><a href="../files/Namespace/Namespace.html" id="all_name">Namespace Listing</a></li>
+            <li><a href="../files/Numberspace/Numberspace.html" id="all_number">Numberspace Listing</a></li>
           </ul>
         </li>
         <li><a href="queryVis_stats.php" id="queryVis_stats">Classify Data</a></li>
@@ -89,7 +89,7 @@
 
 <script>
   function aboutClicked(){
-    d3.json("files/filesInfo.json", function(json) {
+    d3.json("../files/filesInfo.json", function(json) {
       console.log($('#dialog-modal-dataVersion'))
       $('#dialog-modal-dataVersion').text("The information in this instance of ViViaN was generated on:  "+json["date"] +
                                           " from the OSEHRA VistA-M repository with a Git hash of:  "+ json["sha1"]);
