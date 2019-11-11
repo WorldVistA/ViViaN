@@ -27,7 +27,6 @@ import time
 class test_pkgdepchart(unittest.TestCase):
   @classmethod
   def tearDownClass(cls):
-    global driver
     driver.quit()
 
   # TODO: This test was written for the circular graph, create an equivalent
@@ -36,8 +35,6 @@ class test_pkgdepchart(unittest.TestCase):
     pass
 
   def test_02_dep_bar_content(self):
-    global driver
-
     # Ensure that the there is some data for both depends and dependents
     chart_container = driver.find_elements_by_class_name("highcharts-series")
     for type in chart_container:  # depends, dependents
@@ -77,8 +74,6 @@ class test_pkgdepchart(unittest.TestCase):
        self.assertTrue(item.get_attribute("innerHTML") in dep_chart_legend)
 
   def test_03_dep_bar_sort(self):
-    global driver
-
     # Check each of the "Sort By" selections to ensure that
     # the first element is found in top_entries array
     dep_pulldown = driver.find_element_by_id("list-dep")
@@ -100,8 +95,6 @@ class test_pkgdepchart(unittest.TestCase):
     self.assertEqual(driver.find_element_by_xpath("//*[@id='highcharts-0']/div/span[1]").text, "Kernel")
 
   def test_04_bar_switch(self):
-    global driver
-
     btn_group = driver.find_element_by_class_name("btn-group")
     for btn in btn_group.find_elements_by_tag_name("label"):
       type = btn.text.split(' ')[0]
@@ -113,8 +106,6 @@ class test_pkgdepchart(unittest.TestCase):
       pass
 
     def test_06_stats_bar_content(self):
-      global driver
-
       # Ensure that the there is some data for both routines, files and fields
       chart_container = driver.find_elements_by_class_name("highcharts-series")
       for type in chart_container:  # routines, files and fields
@@ -154,8 +145,6 @@ class test_pkgdepchart(unittest.TestCase):
          self.assertTrue(item.get_attribute("innerHTML") in stat_chart_legend)
 
     def test_03_dep_bar_sort(self):
-      global driver
-
       # Check each of the "Sort By" selections to ensure that
       # the first element is found in top_entries array
       dep_pulldown = driver.find_element_by_id("list-dep")
@@ -184,7 +173,7 @@ class test_pkgdepchart(unittest.TestCase):
 
 if __name__ == '__main__':
   description = "Test package dependency bar chart"
-  page = "vista_pkg_dep_chart.php"
-  webroot, driver, browser, is_local = setup_webdriver(description, page)
+  page = "vivian/vista_pkg_dep_chart.php"
+  webroot, driver, browser = setup_webdriver(description, page)
   suite = unittest.TestLoader().loadTestsFromTestCase(test_pkgdepchart)
   unittest.TextTestRunner(verbosity=2).run(suite)

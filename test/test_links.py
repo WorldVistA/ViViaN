@@ -24,24 +24,23 @@ import unittest
 class test_links(unittest.TestCase):
   @classmethod
   def tearDownClass(cls):
-    global driver
     driver.quit()
 
   def go_to_interface_link(self, link_id, destination):
-    self.go_to_vivian_link('vista-interfaces', link_id, destination)
+    self.go_to_files_link('vista-interfaces', link_id, destination)
+
+  def go_to_files_link(self, menu_id, link_id, destination):
+    expected_url = os.path.join(webroot, "files", destination)
+    self.go_to_link(menu_id, link_id, expected_url)
+
     driver.back()
     time.sleep(1)
 
   def go_to_vivian_link(self, menu_id, link_id, destination):
-    global is_local
-    expected_url = os.path.join(webroot, destination)
-    if not is_local:
-      expected_url = expected_url.replace("http://", "https://")
+    expected_url = os.path.join(webroot, "vivian", destination)
     self.go_to_link(menu_id, link_id, expected_url)
 
   def go_to_link(self, menu_id, link_id, expected_url):
-    global driver
-    global webroot
     driver.find_element_by_id(menu_id).click()
     if link_id is not None:
       driver.find_element_by_id(link_id).click()
@@ -82,29 +81,25 @@ class test_links(unittest.TestCase):
 
   # VistA Interfaces
   def test_09_all_hl7(self):
-    self.go_to_interface_link('all_hl7', 'files/101/All-HL7.html')
+    self.go_to_interface_link('all_hl7', '101/All-HL7.html')
 
   def test_10_all_hlo(self):
-    self.go_to_interface_link('all_hlo', 'files/779_2/All-HLO.html')
+    self.go_to_interface_link('all_hlo', '779_2/All-HLO.html')
 
   def test_11_all_icr(self):
-    self.go_to_interface_link('all_icr', 'files/ICR/All-ICR%20List.html')
+    self.go_to_interface_link('all_icr', 'ICR/All-ICR%20List.html')
 
   def test_12_all_protocols(self):
-    self.go_to_interface_link('all_protocols', 'files/101/All-Protocols.html')
+    self.go_to_interface_link('all_protocols', '101/All-Protocols.html')
 
   def test_13_all_rpc(self):
-    self.go_to_interface_link('all_rpc', 'files/8994/All-RPC.html')
+    self.go_to_interface_link('all_rpc', '8994/All-RPC.html')
 
   def test_14_all_name(self):
-    self.go_to_vivian_link('vista-information', 'all_name', 'files/Namespace/Namespace.html')
-    driver.back()
-    time.sleep(1)
+    self.go_to_files_link('vista-information', 'all_name', 'Namespace/Namespace.html')
 
   def test_15_all_number(self):
-    self.go_to_vivian_link('vista-information', 'all_number', 'files/Numberspace/Numberspace.html')
-    driver.back()
-    time.sleep(1)
+    self.go_to_files_link('vista-information', 'all_number', 'Numberspace/Numberspace.html')
 
   def test_16_query_vis(self):
     self.go_to_vivian_link('queryVis_stats', None, 'queryVis_stats.php')
@@ -115,7 +110,6 @@ class test_links(unittest.TestCase):
 
   # Join the Visualization Working Group
   def test_17_visualization_working_group(self):
-    global driver
     driver.find_element_by_id("workinggroup").click()
     time.sleep(1)
     self.assertEqual(driver.current_url, 'https://www.osehra.org/content/visualization-open-source-project-group')
@@ -141,7 +135,7 @@ class test_links(unittest.TestCase):
 
 if __name__ == '__main__':
   description = "Test all links on navigation bar"
-  page = "index.php"
-  webroot, driver, browser, is_local = setup_webdriver(description, page)
+  page = "vivian/index.php"
+  webroot, driver, browser = setup_webdriver(description, page)
   suite = unittest.TestLoader().loadTestsFromTestCase(test_links)
   unittest.TextTestRunner(verbosity=2).run(suite)

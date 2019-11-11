@@ -24,13 +24,9 @@ class test_bff(unittest.TestCase):
 
   @classmethod
   def tearDownClass(cls):
-    global driver
     driver.quit()
 
   def test_01_expand_collapse_nodes(self):
-    global driver
-
-    global browser
     if browser == "FIREFOX":
       return # Test fails on FireFox, skip it for now
     time.sleep(5)
@@ -55,7 +51,6 @@ class test_bff(unittest.TestCase):
     self.assertEqual(len(nodes), oldSize)
 
   def test_02_collapse_all(self):
-    global driver
     oldSize = len(driver.find_elements_by_class_name('node'))
     button = driver.find_element_by_xpath("//button[contains(@onclick,'_collapseAllNode')]")
     button.click()
@@ -65,7 +60,6 @@ class test_bff(unittest.TestCase):
     self.assertEqual(newSize, 1)
 
   def test_03_reset(self):
-    global driver
     oldSize = len(driver.find_elements_by_class_name('node'))
     button = driver.find_element_by_xpath("//button[contains(@onclick,'_collapseAllNode')]")
     button.click()
@@ -77,7 +71,6 @@ class test_bff(unittest.TestCase):
     self.assertTrue(oldSize < newSize)
 
   def DISABLE_test_04_click_filter(self):
-    global driver
     button = driver.find_element_by_xpath("//button[contains(@onclick,'_expandAllNode')]")
     try:
       # First make sure the test-only button is hidden!
@@ -102,7 +95,7 @@ class test_bff(unittest.TestCase):
 
 if __name__ == '__main__':
   description = ""
-  page = "bff_demo.php"
-  webroot, driver, browser, is_local = setup_webdriver(description, page)
+  page = "vivian/bff_demo.php"
+  webroot, driver, browser = setup_webdriver(description, page)
   suite = unittest.TestLoader().loadTestsFromTestCase(test_bff)
   unittest.TextTestRunner(verbosity=2).run(suite)

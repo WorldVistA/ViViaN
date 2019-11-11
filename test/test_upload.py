@@ -26,7 +26,6 @@ import unittest
 class test_upload(unittest.TestCase):
 
   def close_modal_dialog(self):
-    global driver
     try:
       modal_title = driver.find_element_by_class_name('ui-dialog-titlebar')
       modal_title.find_element_by_tag_name("button").click()
@@ -35,11 +34,9 @@ class test_upload(unittest.TestCase):
 
   @classmethod
   def tearDownClass(cls):
-    global driver
     driver.quit()
 
   def test_01_selectFile(self):
-    global driver
     time.sleep(1)
     select = driver.find_element_by_id('vivSelect')
     select.click()
@@ -54,7 +51,6 @@ class test_upload(unittest.TestCase):
     self.assertTrue(re.search("ABBREVIATION:", modal_title.text))
 
   def test_02_modalWindow(self):
-    global driver
     self.addCleanup(self.close_modal_dialog)
     time.sleep(1)
     select = driver.find_element_by_id('vivSelect')
@@ -71,13 +67,11 @@ class test_upload(unittest.TestCase):
     self.assertTrue(re.search("Filtered Object Information", modal_title.text))
     
   def test_03_showTable(self):
-    global driver
     time.sleep(1)
     driver.find_element_by_id('toggleDisplay').click()
     self.assertTrue(driver.find_element_by_id('tables_placeholder_wrapper').is_displayed())
   
   def test_04_tableWork(self):
-    global driver
     searchBox = driver.find_element_by_id('tables_placeholder_filter').find_element_by_tag_name('input').send_keys("black");
     self.assertTrue(re.search("3 entries", driver.find_element_by_id('tables_placeholder_info').text))
     for rowBox in driver.find_elements_by_class_name("sorting"):
@@ -86,7 +80,7 @@ class test_upload(unittest.TestCase):
   
 if __name__ == '__main__':
   description="Test the upload_vis page of the ViViaN(TM) tool, the VistA Package visualization"
-  page="queryVis_stats.php"
-  webroot, driver, browser, is_local = setup_webdriver(description, page)
+  page = "vivian/queryVis_stats.php"
+  webroot, driver, browser = setup_webdriver(description, page)
   suite = unittest.TestLoader().loadTestsFromTestCase(test_upload)
   unittest.TextTestRunner(verbosity=2).run(suite)

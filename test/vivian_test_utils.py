@@ -22,7 +22,6 @@ def parse_args(description):
     help="Web root of the ViViaN(TM) instance to test.  eg. https://code.osehra.org/vivian/")
   parser.add_argument("-b", dest='browser', default="FireFox", required=False,
     help="Web browser to use for testing [FireFox, Chrome]")
-  parser.add_argument('-local', default=False, action='store_true')
   return parser.parse_args()
 
 def setup_webdriver(description, page):
@@ -36,5 +35,5 @@ def setup_webdriver(description, page):
   webroot = result['webroot']
   driver.get(webroot + "/" + page)
   driver.maximize_window()
-  is_local = result['local']
-  return webroot, driver, browser.upper(), is_local
+
+  return webroot, driver, browser.upper()

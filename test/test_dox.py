@@ -25,19 +25,14 @@ import unittest
 class DoxTestCase(unittest.TestCase):
   @classmethod
   def tearDownClass(cls):
-    global driver
     driver.quit()
 
   def get_dox_url(self, page):
-    url = os.path.join(webroot, 'files', 'dox', page)
-    if not is_local:
-      url = url.replace("http://", "https://")
+    url = os.path.join(webroot, "dox", page)
     url = os.path.normpath(url)
     return url
 
   def go_to_index_page(self, id, expected_url):
-    global driver
-
     driver.find_element_by_id(id).click()
     time.sleep(1)
     current_url = os.path.normpath(driver.current_url)
@@ -163,7 +158,7 @@ class DoxTestCase(unittest.TestCase):
 
 if __name__ == '__main__':
   description = "Test DOX pages"
-  page = "files/dox"
-  webroot, driver, browser, is_local = setup_webdriver(description, page)
+  page = "dox"
+  webroot, driver, browser = setup_webdriver(description, page)
   suite = unittest.TestLoader().loadTestsFromTestCase(DoxTestCase)
   unittest.TextTestRunner(verbosity=2).run(suite)

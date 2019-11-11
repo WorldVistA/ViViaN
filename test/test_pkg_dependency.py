@@ -25,11 +25,9 @@ import time
 class test_pkgdep(unittest.TestCase):
   @classmethod
   def tearDownClass(cls):
-    global driver
     driver.quit()
 
   def test_01_tooltip(self):
-    global driver
     time.sleep(10)
 
     # Choose a package that's visible when the screen is first loaded
@@ -54,9 +52,6 @@ class test_pkgdep(unittest.TestCase):
     self.assertTrue(re.search("Both:", dependents))
 
   def test_02_highlight(self):
-    global driver
-
-    global browser
     if browser == "FIREFOX":
       return # Test fails on FireFox, skip it for now
 
@@ -96,7 +91,7 @@ class test_pkgdep(unittest.TestCase):
 
 if __name__ == '__main__':
   description = "Test package dependency circulr layout"
-  page = "vista_pkg_dep.php"
-  webroot, driver, browser, is_local = setup_webdriver(description, page)
+  page = "vivian/vista_pkg_dep.php"
+  webroot, driver, browser = setup_webdriver(description, page)
   suite = unittest.TestLoader().loadTestsFromTestCase(test_pkgdep)
   unittest.TextTestRunner(verbosity=2).run(suite)

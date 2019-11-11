@@ -24,11 +24,9 @@ class test_installdep(unittest.TestCase):
 
   @classmethod
   def tearDownClass(cls):
-    global driver
     driver.quit()
 
   def test_02_packageAutocomplete(self):
-    global driver
     packageAuto = driver.find_element_by_id('package_autocomplete')
     installAuto = driver.find_element_by_id('install_autocomplete')
 
@@ -56,10 +54,9 @@ class test_installdep(unittest.TestCase):
     self.assertTrue(installVal == foundVal, "Expected first node to be %s, found %s instead" % (installVal, foundVal))
 
   def test_04_panZoom(self):
-    global driver
-    global browser
     if browser == "FIREFOX":
       return # Test fails on FireFox, skip it for now
+
     patchTree = driver.find_element_by_id('treeview_placeholder').find_element_by_tag_name('g')
     oldTrans =  patchTree.get_attribute("transform")
     ActionChains(driver).move_to_element(patchTree).drag_and_drop_by_offset(patchTree, 300, 200).perform()
@@ -72,8 +69,6 @@ class test_installdep(unittest.TestCase):
     self.assertNotEqual(oldTrans, patchTree.get_attribute("transform"), "Transform was the same after attempting to zoom")
 
   def test_05_panCenter(self):
-    global driver
-    global browser
     if browser == "FIREFOX":
       return # Test fails on FireFox, skip it for now
 
@@ -87,8 +82,6 @@ class test_installdep(unittest.TestCase):
     self.assertNotEqual(oldVal, newVal, "Centering the pan from drag-and-drop did not change the transform")
 
   def test_06_panReset(self):
-    global driver
-    global browser
     if browser == "FIREFOX":
       return # Test fails on FireFox, skip it for now
 
@@ -102,7 +95,6 @@ class test_installdep(unittest.TestCase):
     self.assertNotEqual(oldval, newVal, "Reseting the pan from drag-and-drop did not change the transform")
 
   def test_07_node_highlighting(self):
-    global driver
     nodeList = driver.find_elements_by_class_name('node')
     ActionChains(driver).move_to_element(nodeList[-3]).perform()
     outlist = driver.find_elements_by_class_name("active")
@@ -110,7 +102,7 @@ class test_installdep(unittest.TestCase):
 
 if __name__ == '__main__':
   description = "Test the install dependency tree page of the ViViaN(TM) webpage"
-  page = "patchDependency.php"
-  webroot, driver, browser, is_local = setup_webdriver(description, page)
+  page = "vivian/patchDependency.php"
+  webroot, driver, browser = setup_webdriver(description, page)
   suite = unittest.TestLoader().loadTestsFromTestCase(test_installdep)
   unittest.TextTestRunner(verbosity=2).run(suite)

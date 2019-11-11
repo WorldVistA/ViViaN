@@ -23,11 +23,9 @@ class test_about(unittest.TestCase):
 
   @classmethod
   def tearDownClass(cls):
-    global driver
     driver.quit()
 
   def test_01_about_option(self):
-    global driver
     about_option = driver.find_element_by_xpath('//*[@id="navigation_buttons"]/nav/div/ul[2]/li[1]/a')
     about_option.click()
     time.sleep(1)
@@ -39,7 +37,7 @@ class test_about(unittest.TestCase):
 
 if __name__ == '__main__':
   description = "Access the 'About' Text of the ViViaN(TM) webpage"
-  page = "index.php"
-  webroot, driver, browser, is_local = setup_webdriver(description, page)
+  page = "vivian/index.php"
+  webroot, driver, browser = setup_webdriver(description, page)
   suite = unittest.TestLoader().loadTestsFromTestCase(test_about)
   unittest.TextTestRunner(verbosity=2).run(suite)

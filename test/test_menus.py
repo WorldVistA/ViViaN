@@ -40,11 +40,9 @@ class test_menus(unittest.TestCase):
 
   @classmethod
   def tearDownClass(cls):
-    global driver
     driver.quit()
 
   def test_01_reset(self):
-    global driver
     time.sleep(1)
     oldSize = len(driver.find_elements_by_class_name('node'))
     button = driver.find_element_by_xpath("//button[contains(@onclick,'_collapseAllNode')]")
@@ -57,7 +55,6 @@ class test_menus(unittest.TestCase):
     self.assertEqual(oldSize, newSize)
 
   def test_02_collapse_all(self):
-    global driver
     oldSize = len(driver.find_elements_by_class_name('node'))
     button = driver.find_element_by_xpath("//button[contains(@onclick,'_collapseAllNode')]")
     button.click()
@@ -67,7 +64,6 @@ class test_menus(unittest.TestCase):
     self.assertEqual(newSize, 1)
 
   def test_03_legend(self):
-    global driver
     color_options = ["#E0E0E0", '']
     legend_list = driver.find_elements_by_class_name('legend')
     for item in legend_list[1:]:
@@ -84,7 +80,6 @@ class test_menus(unittest.TestCase):
       time.sleep(1)
 
   def test_04_menu_autocomplete(self):
-    global driver
     target_menu_text = targetedMenus[pageExtension]['4']
     ac_form = driver.find_element_by_id("autocomplete")
     ac_form.clear()
@@ -102,7 +97,6 @@ class test_menus(unittest.TestCase):
     self.assertEqual(node_list[0].text, target_menu_text)
 
   def test_05_option_autocomplete(self):
-    global driver
     (target_option_text, rootMenu) = targetedMenus[pageExtension]['5']
     ac_form = driver.find_element_by_id("option_autocomplete")
     ac_form.clear()
@@ -120,7 +114,6 @@ class test_menus(unittest.TestCase):
     self.assertEqual(node_list[0].text, rootMenu)
 
   def DISABLED_test_06_option_autocomplete_path(self):
-    global driver
     driver.set_window_size(1024, 768)
     target_option_text = "Monitor Taskman"
     ac_form = driver.find_element_by_id("option_autocomplete")
@@ -139,7 +132,6 @@ class test_menus(unittest.TestCase):
     self.assertTrue(Utils.compareImg("path_image_pass"))
 
   def DISABLED_test_07_option_autocomplete_multipath(self):
-    global driver
     driver.set_window_size(1024, 768)
     target_menu_text = "PSD PURCHASE ORDER REVIEW"
     ac_form = driver.find_element_by_id("option_autocomplete")
@@ -158,7 +150,6 @@ class test_menus(unittest.TestCase):
     self.assertTrue(Utils.compareImg("multi_path_image_pass"))
 
   def test_08_option_autocomplete_menuDisplay(self):
-    global driver
     (target_option_text, target_option_menu_text) = targetedMenus[pageExtension]['8']
     ac_form = driver.find_element_by_id("option_autocomplete")
     ac_form.clear()
@@ -177,9 +168,6 @@ class test_menus(unittest.TestCase):
     time.sleep(1)
 
   def test_09_panZoom(self):
-    global driver
-
-    global browser
     if browser == "FIREFOX":
       return # Test fails on FireFox, skip it for now
 
@@ -200,8 +188,6 @@ class test_menus(unittest.TestCase):
                         "Transform was the same after attempting to zoom")
 
   def test_10_panCenter(self):
-    global driver
-
     menuTree = driver.find_element_by_id("treeview_placeholder").find_element_by_tag_name('svg')
     menuTreeDisplay = menuTree.find_element_by_tag_name('g')
     ActionChains(driver).move_to_element(menuTree).drag_and_drop_by_offset(menuTree, 300, 200).perform()
@@ -213,8 +199,6 @@ class test_menus(unittest.TestCase):
     self.assertNotEqual(oldVal, newVal, "Centering the pan from drag-and-drop did not change the transform")
 
   def test_11_panReset(self):
-    global driver
-
     menuTree = driver.find_element_by_id("treeview_placeholder").find_element_by_tag_name('svg')
     menuTreeDisplay = menuTree.find_element_by_tag_name('g')
     ActionChains(driver).move_to_element(menuTree).drag_and_drop_by_offset(menuTree, 300, 200).perform()
@@ -226,17 +210,16 @@ class test_menus(unittest.TestCase):
     self.assertNotEqual(oldval, newVal, "Resetting the pan from drag-and-drop did not change the transform")
 
   def test_12_directLink(self):
-    global driver
     (urlParam, rootMenu) =  targetedMenus[pageExtension]['12']
     driver.get("%s?name=%s" % (driver.current_url, urlParam) )
     time.sleep(3)
     node_list = driver.find_elements_by_class_name('node')
     self.assertEqual(node_list[0].text, rootMenu)
+
 if __name__ == '__main__':
   description = "Test the Install Timeline page of the ViViaN(TM) webpage"
-  page = "vista_menus.php"
-
+  page = "vivian/vista_menus.php"
   for pageExtension in ['19', '101']:
-    webroot, driver, browser, is_local = setup_webdriver(description, page + "#%s" % pageExtension)
+    webroot, driver, browser = setup_webdriver(description, page + "#%s" % pageExtension)
     suite = unittest.TestLoader().loadTestsFromTestCase(test_menus)
     unittest.TextTestRunner(verbosity=2).run(suite)

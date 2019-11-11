@@ -23,11 +23,9 @@ import time
 class test_installscale(unittest.TestCase):
   @classmethod
   def tearDownClass(cls):
-    global driver
     driver.quit()
 
   def test_01_packageAutocomplete(self):
-    global driver
     time.sleep(10)
     packageAuto = driver.find_element_by_id('package_autocomplete')
     startDateBox =  driver.find_element_by_id('timeCtl').find_elements_by_class_name("tick")[0].find_element_by_tag_name('text')
@@ -42,7 +40,6 @@ class test_installscale(unittest.TestCase):
 
 
   def test_02_installDateRangeSelect(self):
-    global driver
     # Check the changing of the start date
     ctrlAxisLabels = driver.find_element_by_id('timeCtl').find_elements_by_class_name("tick")
     displayAxisLabels = driver.find_element_by_id('timeline').find_elements_by_class_name("tick")
@@ -55,7 +52,6 @@ class test_installscale(unittest.TestCase):
 
   def test_03_installDateRangeSelectManip(self):
     # Use cursor to move bar
-    global driver
     displayAxisLabels = driver.find_element_by_id('timeline').find_elements_by_class_name("tick")
     origDate = displayAxisLabels[0].find_element_by_tag_name('text').get_attribute("innerHTML")
     activeBox = driver.find_element_by_class_name("extent")
@@ -86,7 +82,6 @@ class test_installscale(unittest.TestCase):
     self.assertNotEqual(endDate, origDate, "Shrinking of the 'Extent' box from the left did not alter the timeline")
 
   def test_04_installDateRangeReset(self):
-    global driver
     axisLabels = driver.find_element_by_id('timeline').find_elements_by_class_name("tick")
 
     origStartDate = axisLabels[0].find_element_by_tag_name('text').get_attribute("innerHTML")
@@ -100,7 +95,6 @@ class test_installscale(unittest.TestCase):
     self.assertNotEqual(origEndDate, newEndDate, "Changes were not set by to the original via Reset")
 
   def test_05_installBarHover(self):
-    global driver
     graphBars = driver.find_elements_by_class_name("bar")
     # Scroll bar into view
     graphBars[0].location_once_scrolled_into_view
@@ -111,7 +105,6 @@ class test_installscale(unittest.TestCase):
     time.sleep(1)
 
   def test_06_installBarClick(self):
-    global driver
     graphBars = driver.find_elements_by_class_name("bar")
     graphBars[-1].click()
     driver.switch_to.window(driver.window_handles[1])
@@ -123,7 +116,7 @@ class test_installscale(unittest.TestCase):
 
 if __name__ == '__main__':
   description = "Test the Install Timeline page of the ViViaN(TM) webpage"
-  page = "installScale.php"
-  webroot, driver, browser, is_local = setup_webdriver(description, page)
+  page = "vivian/installScale.php"
+  webroot, driver, browser = setup_webdriver(description, page)
   suite = unittest.TestLoader().loadTestsFromTestCase(test_installscale)
   unittest.TextTestRunner(verbosity=2).run(suite)

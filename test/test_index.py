@@ -28,11 +28,9 @@ class test_index(unittest.TestCase):
 
   @classmethod
   def tearDownClass(cls):
-    global driver
     driver.quit()
 
   def test_01_reset(self):
-    global driver
     time.sleep(1)
     oldSize = len(driver.find_elements_by_class_name('node'))
     button = driver.find_element_by_xpath("//button[contains(@onclick,'_expandAllNode')]")
@@ -45,7 +43,6 @@ class test_index(unittest.TestCase):
     self.assertEqual(oldSize, newSize)
 
   def test_02_expand_all(self):
-    global driver
     oldSize = len(driver.find_elements_by_class_name('node'))
     button = driver.find_element_by_xpath("//button[contains(@onclick,'_expandAllNode')]")
     button.click()
@@ -54,13 +51,10 @@ class test_index(unittest.TestCase):
     self.assertTrue(oldSize < newSize)
 
   def test_03_title(self):
-    global driver
     title = driver.find_element_by_id("title")
     self.assertTrue(re.search("Visualizing VistA and Namespace", title.text))
 
   def test_04_legend(self):
-    global driver
-
     # Expand all nodes
     button = driver.find_element_by_xpath("//button[contains(@onclick,'_expandAllNode')]")
     button.click()
@@ -90,9 +84,6 @@ class test_index(unittest.TestCase):
       prev = node_text.get_attribute("fill")
 
   def test_05_modal_title(self):
-    global driver
-
-    global browser
     if browser == "FIREFOX":
       return # Test fails on FireFox, skip it for now
 
@@ -115,9 +106,6 @@ class test_index(unittest.TestCase):
     self.assertTrue(re.search(leaf.text, modal_title.text))
 
   def test_06_modal_accordion(self):
-    global driver
-
-    global browser
     if browser == "FIREFOX":
       return # Test fails on FireFox, skip it for now
 
@@ -152,7 +140,6 @@ class test_index(unittest.TestCase):
                       'Looking for "' + modalRegex[i] + '" Found "' + content + '" for node "' + node.text + '"')
 
   def close_modal_dialog(self):
-    global driver
     try:
       modal_title = driver.find_element_by_class_name('ui-dialog-titlebar')
       modal_title.find_element_by_tag_name("button").click()
@@ -160,11 +147,9 @@ class test_index(unittest.TestCase):
       pass
 
   def test_07_expand_collapse_nodes(self):
-    global browser
     if browser == "FIREFOX":
       return # Test fails on FireFox, skip it for now
 
-    global driver
     nodes = driver.find_elements_by_class_name('node')
     oldSize = len(nodes)
 
@@ -185,7 +170,6 @@ class test_index(unittest.TestCase):
     self.assertEqual(len(nodes), oldSize)
 
   def test_08_collapse_all(self):
-    global driver
     oldSize = len(driver.find_elements_by_class_name('node'))
     button = driver.find_element_by_xpath("//button[contains(@onclick,'_collapseAllNode')]")
     button.click()
@@ -195,13 +179,8 @@ class test_index(unittest.TestCase):
     self.assertEqual(newSize, 1)
 
   def test_09_navigate_to_icr_page(self):
-    global browser
     if browser == "FIREFOX":
       return # Test fails on FireFox, skip it for now
-
-    global driver
-    global is_local
-    global webroot
 
     self.addCleanup(self.cleanup_icr_test)
 
@@ -233,8 +212,6 @@ class test_index(unittest.TestCase):
     time.sleep(1)
 
     expected_url = os.path.join(webroot, 'files/ICR/Kernel-ICR.html')
-    if not is_local:
-      expected_url = expected_url.replace("http://", "https://")
     expected_url = os.path.normpath(expected_url)
     current_url = os.path.normpath(driver.current_url)
     self.assertEqual(current_url, expected_url)
@@ -275,7 +252,7 @@ class test_index(unittest.TestCase):
 
 if __name__ == '__main__':
   description = "Test the index page of the ViViaN(TM) tool, the VistA Package visualization"
-  page = "index.php"
-  webroot, driver, browser, is_local = setup_webdriver(description, page)
+  page = "vivian/index.php"
+  webroot, driver, browser = setup_webdriver(description, page)
   suite = unittest.TestLoader().loadTestsFromTestCase(test_index)
   unittest.TextTestRunner(verbosity=2).run(suite)

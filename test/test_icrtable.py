@@ -24,11 +24,9 @@ class test_icrtable(unittest.TestCase):
 
   @classmethod
   def tearDownClass(cls):
-    global driver
     driver.quit()
 
   def test_01_max_rows(self):
-    global driver
     time.sleep(3)
     table = driver.find_element_by_id("ICR_List-All")
     odd_rows = len(table.find_elements_by_class_name('odd'))
@@ -40,8 +38,6 @@ class test_icrtable(unittest.TestCase):
 
 
   def test_02_filter(self):
-    global driver
-
     # Display up to 50 rows
     length_select = Select(driver.find_element_by_name("ICR_List-All_length"))
     length_select.select_by_value('50')
@@ -89,8 +85,6 @@ class test_icrtable(unittest.TestCase):
 
 
   def _test_03_clear(self):
-    global driver
-
     table = driver.find_element_by_id("ICR_List-All")
     odd_rows = len(table.find_elements_by_class_name('odd'))
     even_rows = len(table.find_elements_by_class_name('even'))
@@ -118,6 +112,6 @@ class test_icrtable(unittest.TestCase):
 if __name__ == '__main__':
   description = "Test the ICR table pages of the ViViaN(TM) tool, the VistA Package visualization"
   page = "files/ICR/All-ICR List.html"
-  webroot, driver, browser, is_local = setup_webdriver(description, page)
+  webroot, driver, browser = setup_webdriver(description, page)
   suite = unittest.TestLoader().loadTestsFromTestCase(test_icrtable)
   unittest.TextTestRunner(verbosity=2).run(suite)
