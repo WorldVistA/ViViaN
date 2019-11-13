@@ -26,13 +26,12 @@ import option_autocomplete_gen
 import pkg_interface_gen
 import pkgcsv_to_json
 import BFFExcel2Json
-import os
 
+import argparse
+import os
 import shutil
 
-def run():
-  files_dir = "../../files"
-
+def run(files_dir):
   # input: <files_dir>/menus/19/VistAMenu-*.json
   # output: <files_dir>/menu_autocomplete.json
   menu_autocomplete_gen.run("19", "menu_autocomplete.json", files_dir)
@@ -71,5 +70,7 @@ def run():
   print("*** Copied %s/himData.json" % files_dir)
 
 if __name__ == '__main__':
-  run()
-
+  parser = argparse.ArgumentParser(description='Setup ViViAN data')
+  parser.add_argument('filesDir', help='Full path to files directory')
+  args = parser.parse_args()
+  run(args.filesDir)
