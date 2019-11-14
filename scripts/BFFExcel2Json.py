@@ -14,6 +14,7 @@
 # limitations under the License.
 #---------------------------------------------------------------------------
 
+from __future__ import print_function
 from builtins import map
 from builtins import range
 import xlrd
@@ -101,7 +102,7 @@ def run(input, output):
       #print fields
       break
   if not isHeader:
-    print "No Valid Header From input file"
+    print("No Valid Header From input file")
     return
   # Read rest of the BFF data from data_row
   for row_index in range(data_row, sheet.nrows):
@@ -128,7 +129,7 @@ def run(input, output):
         #print 'adding child: %s to %s' % (curNode['name'], parentName)
         parentNode.setdefault('children',[]).append(curNode)
       else:
-        print 'could not identify parent name: (%s)' % parentName
+        print('could not identify parent name: (%s)' % parentName)
     else:
       rootNode = curNode
 
