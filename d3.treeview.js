@@ -250,6 +250,9 @@ d3.chart.treeview = function(option) {
                 return d.children || d._children ? -10 : 10;
             })
             .attr("dy", ".35em")
+            .attr("transform",  function (d) {
+              return d.children || d._children ? 'translate(-10)': '';
+            })
             .attr("text-anchor", function (d) {
                 return d.children || d._children ? "end" : "start";
             })
@@ -270,12 +273,32 @@ d3.chart.treeview = function(option) {
                 return d.target.id;
             });
 
+    // Introduce arrows on lines, taken from http://jsfiddle.net/tk7Wv/2/
+    _svg.append("svg:defs").selectAll("marker")
+      .data(["backward", "forward"])
+    .enter().append("svg:marker")
+      .attr("id", String)
+      .attr("viewBox", function (d) {
+        return d == 'forward' ? "-15 -5 10 10": "10 -5 10 10"})
+      .attr("refX", 5)
+      .attr("markerWidth", 6)
+      .attr("markerHeight", 6)
+      .attr("orient", "auto")
+    .append("svg:path")
+      .attr("class", "pointer")
+      .attr("d", function (d) {
+        return d == 'forward' ? "M0,-5L10,0L0,5":"M10,-5L0,0L10,5"} )
+      .attr("transform", function (d) {
+        return d == 'forward' ? "translate(-15,0)": "translate(10,0)";});
+
     link.enter().insert("svg:path", "g")
             .attr("class", "link")
             .attr("d", function (d) {
                 var o = {x: source.x0, y: source.y0};
                 return _diagonal({source: o, target: o});
             })
+            .attr("marker-start", function(d) {if(d.source.orientation == "backward") {return "url(#backward)"}})
+            .attr("marker-end",  function(d) { if(d.source.orientation == "forward") {return "url(#forward)"}})
             .style("stroke-dasharray",function(d) {if (d.target.isRequirement) return ("3, 3")})
             .style("stroke-dasharray",function(d) {if (d.source.multi > -1) return ("2, 2")});
 

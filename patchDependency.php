@@ -63,6 +63,9 @@
     <div id="installEntryAuto" style="margin-top:10px;">
       <label for ="install_autocomplete" title="Select Entry">Install:</label>
       <input id="install_autocomplete" size="40"></br>
+      <label class="btn-primary btn-sm">
+        <input type="checkbox" id="depPatches" onclick="javascript:swapDependencyScheme()"> Show dependent patches? </input>
+      </label>
     </div>
     </br>
     <div id="buttons">
@@ -95,6 +98,8 @@ var installDateTip = d3.select(document.getElementById("installDate"));
 var vivianDataPath = "../vivian-data/";
 var originalTransform = [300,300];
 var patchListing;
+var jsonFileVal = {"forward": vivianDataPath +"install_information.json","backward": vivianDataPath +"install_dependent_information.json"};
+var jsonFileValKey = "forward";
 var shapeLegend = [{name: "Install(with Dependencies)", shape: "triangle-up", color: "green", fill: "green"},
                    {name: "Install(without Dependencies)", shape:"circle", color: "green", fill: "white"},
                    {name: "Duplicate Install(with Dependencies)", shape:"diamond", color: "red", fill: "red"},
@@ -107,7 +112,7 @@ d3.select("#legend_placeholder").datum(null).call(legendShapeChart);
 *  from the date selectors and the value of the new package
 */
 function packageAutocompleteChanged(eve, ui) {
-  d3.json(vivianDataPath + 'install_information.json', function(json) {
+  d3.json(jsonFileVal[jsonFileValKey], function(json) {
     targetPackage = ui.item.label
     $("#installEntryAuto").show();
     $("#installEntryDrop").hide();
@@ -142,7 +147,14 @@ function installAutocompleteChanged(eve, ui) {
   showDependency(ui.item.parent,ui.item.label);
 }
 
-function appendPackageInformation (d, json, depth){
+function swapDependencyScheme() {
+  if (jsonFileValKey == "forward") { jsonFileValKey = "backward"}
+  else { jsonFileValKey = "forward"}
+  packageAutocompleteChanged('', {item: {label: targetPackage, value: targetPackage}})
+  showDependency(targetPackage,$('#install_autocomplete').val());
+}
+
+function appendPackageInformation (d, json, depth, orientation){
   var id = ''
   if(depth > 15) {
       return d;
@@ -154,11 +166,12 @@ function appendPackageInformation (d, json, depth){
       if(target) {
         child.installDate= target.installDate;
         child.ien  = target.ien;
+        child.orientation = orientation;
         child['BUILD_ien']  = target['BUILD_ien'];
         child.multi = target.multi;
         if (target.children) {
           depth++
-          child.children = appendPackageInformation(target.children,json, depth);
+          child.children = appendPackageInformation(target.children,json, depth, orientation);
         }
       }
   });
@@ -208,8 +221,7 @@ function _centerDisplay() {
 
 function showDependency(parent, entryNo) {
   $("#loadingImg").show()
-  d3.json(vivianDataPath + "install_information.json", function(json) {
-
+  d3.json(jsonFileVal[jsonFileValKey], function(json) {
     chart.on("path", "event","click", node_onNodeClick)
       .on("node", "event", "mouseover", node_onMouseOver)
       .on("node", "event","mouseout", node_onMouseOut)
@@ -223,33 +235,40 @@ function showDependency(parent, entryNo) {
       .on("path", "attr", "r", function(d) { return 7 - d.depth; });
     var root = json[parent][entryNo];
     patchListing = []
-    if(root.hasOwnProperty("children")) {
-      root.children = appendPackageInformation(root.children,json,0)
-    }
+    if(root) {
+      root.orientation = jsonFileValKey;
+      console.log(root)
+      if(root.hasOwnProperty("children")) {
+        root.children = appendPackageInformation(root.children,json,0,jsonFileValKey)
+      }
 
-    d3.select("#treeview_placeholder").datum(root).call(chart);
-    chart.tree().nodeSize([15,0]);
-    var nodes = d3.selectAll('.node');
-    var nodeDepth = 0;
-    while (true) {
-      var newNames = []
-      var subset = nodes.filter(function(x) { return x.depth == nodeDepth })
-      if ((subset[0].length == 0)) {break;}
-      subset.each(function(d) {
-        if (patchListing.indexOf(d.name) == -1) {
-            newNames.push(d.name);
-        } else {
-            d.isDuplicate = true;
-        }
-      })
-      nodeDepth++
-      patchListing = patchListing.concat(newNames);
+      d3.select("#treeview_placeholder").datum(root).call(chart);
+      chart.tree().nodeSize([15,0]);
+      var nodes = d3.selectAll('.node');
+      var nodeDepth = 0;
+      while (true) {
+        var newNames = []
+        var subset = nodes.filter(function(x) { return x.depth == nodeDepth })
+        if ((subset[0].length == 0)) {break;}
+        subset.each(function(d) {
+          if (patchListing.indexOf(d.name) == -1) {
+              newNames.push(d.name);
+          } else {
+              d.isDuplicate = true;
+          }
+        })
+        nodeDepth++
+        patchListing = patchListing.concat(newNames);
+      }
+      chart.svg().attr("transform","translate("+originalTransform+")")
+      resetAllNode(chart.nodes());
+      chart.update(chart.nodes())
+      $("#loadingImg").hide()
+      $("#install_autocomplete").val(entryNo);
+    } else {
+      alert("No information for that install.  Please select again")
+      $("#loadingImg").hide()
     }
-    chart.svg().attr("transform","translate("+originalTransform+")")
-    resetAllNode(chart.nodes());
-    chart.update(chart.nodes())
-    $("#loadingImg").hide()
-    $("#install_autocomplete").val(entryNo);
   });
 }
 
