@@ -72,7 +72,12 @@
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
+        <li class="divider-vertical"></li>
+
         <li><a href="javascript:aboutClicked();" class="qindex">About</a></li>
+
+        <li><a href="../dox" class="qindex">DOX</a></li>
+
         <li class="dropdown"  id="foia-vista">
           <a class="dropdown-toggle qindex" data-toggle="dropdown" href="#">FOIA VistA <span class="caret"></span></a>
           <ul class="dropdown-menu" id="vxvista">
