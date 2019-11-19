@@ -86,25 +86,27 @@ $("#accordion").accordion({heightStyle: 'content', collapsible: true}).hide();
 <?php include_once "vivian_tree_layout_common.js" ?>
 
 var package_link_url = "../dox/";
+var files_link_url = "../files/";
 var toolTip = d3.select(document.getElementById("toolTip"));
 var header = d3.select(document.getElementById("header1"));
-var selectedIndex = 0;
 var himJSON  = {}
+var selectedIndex = 0;
 var distProp = [ // constants to store property of each distribution
-  { name: "All", color: "black", distribution: 'All', doxlink: package_link_url},
-  { name: "OSEHRA", color: "#FF0000", distribution: 'OSEHRA VistA', doxlink: "http://code.osehra.org/OSEHRA_dox/"},
-  { name: "VA", color: "#3300CC", distribution: 'VA FOIA VistA' ,doxlink: package_link_url},
-  { name: "DSS", color: "#080", distribution: 'DSS vxVistA' , doxlink: "http://code.osehra.org/dox_alpha/vxvista/"}
+  { color: "black", distribution: 'All' },
+  { color: "#FF0000", distribution: 'OSEHRA VistA', doxlink: "http://code.osehra.org/OSEHRA_dox/" },
+  { color: "#3300CC", distribution: 'VA FOIA VistA', doxlink: "http://code.osehra.org/dox/" },
+  { color: "#080", distribution: 'DSS vxVistA'}
   /**
   ,{
-    name: "Medsphere",
+    distribution: "Medsphere",
     color: "#FF00FF"
   },
   {
-    name: "Oroville",
+    distribution: "Oroville",
     color: "#660000"
   } **/
 ];
+
 var packageInfoProp = {
   "namespaces": {"func": getNamespaceHtml, "title": "Namespaces"},
   "dependencies": {"func": getDependencyContentHtml, "title": "Dependencies"},
@@ -115,7 +117,6 @@ var packageInfoProp = {
 }
 var shapeLegend = [{name: "Package Category", shape: "triangle-up"},
                    {name: "Package", shape:"circle"}]
-var himInfoJSON;
 
 d3.json("../files/packages.json", function(json) {
   chart.on("node", "event","click", pkgLinkClicked)
@@ -124,8 +125,8 @@ d3.json("../files/packages.json", function(json) {
      .on("text", "attr", "cursor", function(d) {
         return d.hasLink !== undefined && d.hasLink ? "pointer" : "hand";
       })
-     .on("text", "attr", "fill", change_node_color)
-     .on("path", "style", "fill", change_circle_color)
+     .on("text", "attr", "fill", changeNodeColor)
+     .on("path", "style", "fill", changeCircleColor)
      .on("path", "attr", "r", function(d) { return 7 - d.depth; });
 
   d3.select("#treeview_placeholder").datum(json).call(chart);
@@ -177,9 +178,6 @@ function pkgLinkClicked(d) {
       },
    };
    $('#dialog-modal').dialog(overlayDialogObj).show();
-    // var pkgUrl = package_link_url + d.name.replace(/ /g, '_') + ".html";
-    // var win = window.open(pkgUrl, '_black');
-    // win.focus();
   }
   else {
     if (d.depth == 0) {
@@ -190,7 +188,7 @@ function pkgLinkClicked(d) {
 }
 
 function getDescriptionHtml(pkgName, d) {
-  var outtext = '';
+  var outtext = d.name;
   if (d.des) {
     if (d.des instanceof Array) {
       for (var idx=0, len=d.des.length; idx < len; idx++){
@@ -202,11 +200,8 @@ function getDescriptionHtml(pkgName, d) {
     }
   }
   if (d.description) {
-      outtext += "<br/><br/><b>From VDL:</b><br/>";
-      outtext += d.description;
-  }
-  if (outtext === '') {
-    outtext = d.name
+    outtext += "<br/><br/><b>From VDL:</b><br/>";
+    outtext += d.description;
   }
   return outtext
 }
@@ -215,32 +210,6 @@ function getStatusHtml(pkgName, d) {
   return d.status
 }
 
-function getPackageDoxLink(pkgName, node) {
-  var doxUrl = [];
-  var doxLinkName = pkgName.replace(/ /g, '_').replace(/-/g, '_')
-  var category = distProp[selectedIndex];
-  var index = node.distribution.indexOf(category.name);
-
-  if (category.name == "All") {
-    for(var i = 1; i < distProp.length;i++) {
-      doxUrl.push(distProp[i].doxlink + "Package_" + doxLinkName + ".html");
-    }
-  }
-  else if (index >= 0) {
-    doxUrl.push(category.doxlink + "Package_" + doxLinkName + ".html");
-  }
-  return doxUrl;  // + "Package_" + doxLinkName + ".html";
-}
-
-function getDistributionPropByName(distName){
-  var index = 0;
-  for (index = 0; index < distProp.length; index++) {
-    if (distProp[index].name === distName) {
-      return distProp[index];
-    }
-  }
-  return null;
-}
 
 function getNamespaceHtml(pkgName, pkg) {
   var i=0, len=pkg.Posprefixes.length;
@@ -261,170 +230,154 @@ function getNamespaceHtml(pkgName, pkg) {
   return htmlLnk;
 }
 
+function createLink(link, text) {
+  return "<a href=\"" + link + "\" target=\"_blank\">" + text + "</a>";
+}
+
 function getHIMLink(pkgName, pkg) {
     var htmlLnk = ''
     var himPath = himJSON[pkg.name];
     if (himPath != null) {
-      htmlLnk = "<a href='http://him.osehra.org/content/" + himPath +"'>HIM Visualization for "+ pkgName +"</a>";
+      var himLink = "http://him.osehra.org/content/" + himPath;
+      var himText = "HIM Visualization for " + pkgName;
+      htmlLnk = createLink(himLink, himText);
     }
     return htmlLnk
 };
 
-
-function getRPCLinkByPackageName(pkgName, linkUrl) {
-  var defLnk = "../files/8994";
-  if (linkUrl){
-    defLnk = linkUrl + '/' + defLnk;
-  }
-  return "<a href=\"" + defLnk + "/" + pkgName + "-RPC.html\" target=\"_blank\">Remote Procedure Call</a>";
+function getRPCLinkByPackageName(pkgName) {
+  var link = files_link_url + "8994" + "/" + pkgName + "-RPC.html";
+  var text = "Remote Procedure Call";
+  return "<li>" + createLink(link, text) +"</li>";
 }
 
-function getHL7LinkByPackageName(pkgName, linkUrl) {
-  var defLnk = "../files/101";
-  if (linkUrl){
-    defLnk = linkUrl + '/' + defLnk;
-  }
-  return "<a href=\"" + defLnk + "/" + pkgName + "-HL7.html\" target=\"_blank\">HL7</a>";
+function getHL7LinkByPackageName(pkgName) {
+  var link = files_link_url + "101" + "/" + pkgName + "-HL7.html";
+  var text = "HL7";
+  return "<li>" + createLink(link, text) +"</li>";
 }
 
-function getProtocolLinkByPackageName(pkgName, linkUrl) {
-  var defLnk = "../files/101";
-  if (linkUrl){
-    defLnk = linkUrl + '/' + defLnk;
-  }
-  return "<a href=\"" + defLnk + "/" + pkgName + "-Protocols.html\" target=\"_blank\">Protocols</a>";
+function getProtocolLinkByPackageName(pkgName) {
+  var link = files_link_url + "101" + "/" + pkgName + "-Protocols.html";
+  var text = "Protocols";
+  return "<li>" + createLink(link, text) +"</li>";
 }
 
-function getHLOLinkByPackageName(pkgName, linkUrl) {
-  var defLnk = "../files/779_2";
-  if (linkUrl){
-    defLnk = linkUrl + '/' + defLnk;
-  }
-  return "<a href=\"" + defLnk + "/" + pkgName + "-HLO.html\" target=\"_blank\">HLO</a>";
+function getHLOLinkByPackageName(pkgName) {
+  var link = files_link_url + "779_2" + "/" + pkgName + "-HLO.html";
+  var text = "HLO";
+  return "<li>" + createLink(link, text) +"</li>";
 }
 
-function getICRLinkByPackageName(pkgName, linkUrl) {
-  var defLnk = "../files/ICR";
-  if (linkUrl){
-    defLnk = linkUrl + '/' + defLnk;
+function getICRLinkByPackageName(pkgName) {
+  var link = files_link_url + "ICR" + "/" + pkgName + "-ICR.html";
+  var text = "ICR";
+  return "<li>" + createLink(link, text) +"</li>";
+}
+
+function getMAPILinkyByPackageName(pkgName) {
+  console.log(pkgName);
+  if (pkgName === 'Order Entry Results Reporting') {
+    var link = "http://www.osehra.org/content/vista-api?quicktabs_vista_api=0#quicktabs-vista_api";
+    var text = "M API";
+    return "<li>" + createLink(link, text) +"</li>";
+  } else {
+    return "";
   }
-  return "<a href=\"" + defLnk + "/" + pkgName + "-ICR.html\" target=\"_blank\">ICR</a>";
+}
+
+function getWebServiceAPILinkyByPackageName(pkgName) {
+  console.log(pkgName);
+  if (pkgName === 'Order Entry Results Reporting') {
+    var link = "http://www.osehra.org/content/vista-api?quicktabs_vista_api=2#quicktabs-vista_api";
+    var text = "Web Service API";
+    return "<li>" + createLink(link, text) +"</li>";
+  } else {
+    return "";
+  }
 }
 
 function getInterfaceHtml(pkgName, node) {
-  pkgName = node.name
   var htmlLnk = "<ul>";
-  var rpcLink = "";
-  var hl7Link = "";
-  var icrLink = "";
-  var protocolLink = "";
-  var hloLink = "";
-  var extraLink = "";
-  if (node.interfaces !== undefined){
-    if (selectedIndex === 3) {
-      category = distProp[selectedIndex].name;
-      if (node.distribution && node.distribution.indexOf(category) >=0) {
-        extraLink = "vxvista";
-      }
-    }
-    var index = node.interfaces.indexOf("RPC");
-    if (index >= 0){
-      rpcLink = getRPCLinkByPackageName(pkgName, extraLink);
-    }
-    index = node.interfaces.indexOf("HL7");
-    if (index >= 0){
-      hl7Link = getHL7LinkByPackageName(pkgName, extraLink);
-    }
-    index = node.interfaces.indexOf("Protocols");
-    if (index >= 0){
-      protocolLink = getProtocolLinkByPackageName(pkgName, extraLink);
-    }
-    index = node.interfaces.indexOf("HLO");
-    if (index >= 0){
-      hloLink = getHLOLinkByPackageName(pkgName, extraLink);
-    }
-    index = node.interfaces.indexOf("ICR");
-    if (index >= 0){
-      icrLink = getICRLinkByPackageName(pkgName);
+  htmlLnk += getMAPILinkyByPackageName(pkgName);
+  if (node.interfaces !== undefined) {
+    if (node.interfaces.includes("RPC")) {
+      htmlLnk += getRPCLinkByPackageName(pkgName);
     }
   }
-  if (pkgName === 'Order Entry Results Reporting'){
-    htmlLnk += "<li><a href=\"http://www.osehra.org/content/vista-api?quicktabs_vista_api=0#quicktabs-vista_api\" target=\"_blank\">M API</a></li>";
-    htmlLnk += "<li>" + rpcLink + "</li>";
-    htmlLnk += "<li><a href=\"http://www.osehra.org/content/vista-api?quicktabs_vista_api=2#quicktabs-vista_api\" target=\"_blank\">Web Service API</a></li>";
-    htmlLnk += "<li>" + hl7Link + "</li>";
-    htmlLnk += "<li>" + icrLink + "</li>";
-    htmlLnk += "</ul>";
+  htmlLnk += getWebServiceAPILinkyByPackageName(pkgName);
+  if (node.interfaces !== undefined) {
+    if (node.interfaces.includes("HL7")) {
+      htmlLnk += getHL7LinkByPackageName(pkgName);
+    }
+    if (node.interfaces.includes("Protocols")) {
+      htmlLnk += getProtocolLinkByPackageName(pkgName);
+    }
+    if (node.interfaces.includes("HLO")) {
+      htmlLnk += getHLOLinkByPackageName(pkgName);
+    }
+    if (node.interfaces.includes("ICR")) {
+      htmlLnk += getICRLinkByPackageName(pkgName);
+    }
   }
-  else{
-    htmlLnk += "<li>M API</li>";
-    if (rpcLink.length > 0) {
-      htmlLnk += "<li>" + rpcLink + "</li>";
-    }
-    htmlLnk += "<li>Web Service API</li>";
-    if (hl7Link.length > 0){
-      htmlLnk += "<li>" + hl7Link + "</li>";
-    }
-    if (protocolLink.length > 0){
-      htmlLnk += "<li>" + protocolLink + "</li>";
-    }
-    if (hloLink.length > 0){
-      htmlLnk += "<li>" + hloLink + "</li>";
-    }
-    if (icrLink.length > 0){
-      htmlLnk += "<li>" + icrLink + "</li>";
-    }
-    htmlLnk += "</ul>";
-  }
+  htmlLnk += "</ul>";
   return htmlLnk;
 }
 
 function getDependencyContentHtml(pkgName, node) {
-  var pkgUrl = getPackageDoxLink(pkgName, node)
-  var depLink = []
-  for(var i = 0; i < pkgUrl.length;i++) {
-    depLink_str = "<h4><a href=\"" + pkgUrl[i] + "\" target=\"_blank\">";
-    if( selectedIndex==0 ) {depLink_str += distProp[i+1].name +" Dependencies & Code View" + "</a></h4>";}
-    else {depLink_str += distProp[selectedIndex].name +" Dependencies & Code View" + "</a></h4>";}
-    depLink.push(depLink_str);
+  var packagePage = "Package_" + pkgName.replace(/ /g, '_').replace(/-/g, '_') + ".html";
+  var depLink = createLink(package_link_url + packagePage, "Dependencies & Code View");
+
+  var otherDistributions = "";
+  var category = distProp[selectedIndex];
+  if (category.distribution === "All") {
+    for(var i = 0; i < distProp.length; i++) {
+      if ("doxlink" in distProp[i]) {
+        otherDistributions += "<li>";
+        otherDistributions += createLink(distProp[i].doxlink + packagePage, distProp[i].distribution);
+        otherDistributions += "</li>";
+      }
+    }
+  } else if ("doxlink" in category) {
+    otherDistributions += "<li>";
+    otherDistributions += createLink(category.doxlink + packagePage, category.distribution);
+    otherDistributions += "</li>";
   }
+
+  if (otherDistributions) {
+    depLink += "<br><br>"
+    depLink += "Other Distributions"
+    depLink += "<ul>";
+    depLink += otherDistributions;
+    depLink += "</ul>";
+  }
+
   return depLink;
 }
 
-function change_node_color(node) {
-  if (distProp.length === 0) {
-    return "black";
-  }
+function changeNodeColor(node) {
   var category = distProp[selectedIndex];
-  if (category.name === "All" || node.hasLink === undefined) {
+  if (category.distribution === "All" || node.hasLink === undefined) {
     return "black";
   }
   if (node.distribution) {
-    var index = node.distribution.indexOf(category.name);
-    if (index >= 0) {
+    var category_name = category.distribution.split(" ")[0];
+    if (node.distribution.includes(category_name)) {
       return category.color;
     }
   }
   return "#E0E0E0";
 }
 
-function change_circle_color(d){
-  if (d._children){
+function changeCircleColor(d) {
+  if (d._children) {
     return "lightsteelblue";
   }
-  else {
-    if (d.hasLink !== undefined && selectedIndex > 0){
-      var category = distProp[selectedIndex];
-      if (d.distribution !== undefined){
-        var index = d.distribution.indexOf(category.name);
-        if (index >= 0) {
-          return category.color;
-        }
-      }
-      else {
-        return category.color;
-      }
-    }
+
+  var category = distProp[selectedIndex];
+  if (d.hasLink !== undefined && category.distribution != "All") {
+    return category.color;
+  } else {
     return "#fff";
   }
 }
@@ -432,20 +385,14 @@ function change_circle_color(d){
 function node_onMouseOver(d) {
   if (d.hasLink === undefined || !d.hasLink) {
     return;
-  }
-  if (d.Posprefixes !== undefined){
-    tooltipString = "Namespace: Includes: " + d.Posprefixes + ".\r\n";
-  }
-  if (d.Negprefixes !== undefined){
+  } else if (d.Posprefixes !== undefined && d.Negprefixes !== undefined) {
+    tooltipString = "Namespace: Includes: " + d.Posprefixes + "\r\n";
     tooltipString += "Excludes: " + d.Negprefixes;
+    header.text(tooltipString)
+    toolTip.style("left", (d3.event.pageX + 20) + "px")
+           .style("top", (d3.event.pageY + 5) + "px")
+           .style("opacity", ".9");
   }
-  else{
-    return;
-  }
-  header.text(tooltipString)
-  toolTip.style("left", (d3.event.pageX + 20) + "px")
-         .style("top", (d3.event.pageY + 5) + "px")
-         .style("opacity", ".9");
 }
 
 function node_onMouseOut(d) {
@@ -453,10 +400,7 @@ function node_onMouseOut(d) {
   toolTip.style("opacity", "0");
 }
 
-// var categories = ["All", "OSEHRA", "VA", "DSS", "Medsphere", "Oroville"];
-// Legend.
 function createLegend() {
-
   var legend = legendDistChart.svg().selectAll("g.legend")
       .data(distProp)
       .enter().append("svg:g")
@@ -467,22 +411,21 @@ function createLegend() {
         d3.selectAll("text")
           .filter(function (d) {if(d) { return d.hasLink != undefined;}})
           .attr("fill", function (node) {
-            return change_node_color(node);
+            return changeNodeColor(node);
           });
         d3.selectAll("path")
           .filter(function (d) { return d.hasLink != undefined;})
           .style("fill", function (d) {
-            return change_circle_color(d);
+            return changeCircleColor(d);
           });
 
       });
-
   legend.append("svg:circle")
-      .attr("class", function(d) {return d.name;})
+      .attr("class", function(d) {return d.distribution.split(" ")[0];})
       .attr("r", 3);
 
   legend.append("svg:text")
-      .attr("class", function(d) {return d.name;})
+      .attr("class", function(d) {return d.distribution.split(" ")[0];})
       .attr("x", 13)
       .attr("dy", ".31em")
       .text(function(d) {
@@ -526,7 +469,6 @@ function createShapeLegend() {
           .style("font-size", "16px")
           .text("Shape Legend");
 }
-
     </script>
   </body>
 </html>
