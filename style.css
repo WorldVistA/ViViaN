@@ -1,5 +1,5 @@
 body {
-  background: #efefef;
+  background: #fff;
   overflow: auto;
   margin: 0;
   font-size: 14px;
@@ -60,15 +60,6 @@ pre {
 
 .class, .special {
   color: #1181B8;
-}
-
-a:link, a:visited {
-  color: #000;
-  text-decoration: none;
-}
-
-a:hover {
-  color: #666;
 }
 
 .hint {
@@ -186,4 +177,30 @@ td.ellipsis {
 #legend_placeholder svg {
   border-style: solid;
   border-width: 1px;
+}
+
+A {
+  color: #428bca;
+  text-decoration: underline;
+}
+
+A.qindex {
+  text-decoration: none;
+  font-weight: bold;
+  color: #1A419D;
+}
+
+A.qindex:visited {
+  text-decoration: none;
+  font-weight: bold;
+  color: #1A419D
+}
+
+A.qindex:hover {
+  text-decoration: none;
+  background-color: #ddddff;
+}
+
+A.qindex-dropdown {
+  text-decoration: none;
 }

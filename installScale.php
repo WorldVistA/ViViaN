@@ -170,8 +170,6 @@ function createControl() {
 
         d3.select('#timeCtl').selectAll("*").remove();
         // Creating the legend control
-        console.log(pkgStart);
-        console.log(pkgStop);
         ctrlX = d3.time.scale()
           .domain([new Date(pkgStart), new Date(pkgStop)])
           .range([0, 750])
