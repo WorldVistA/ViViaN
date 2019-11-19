@@ -23,7 +23,7 @@
         $( "button" ).button().click(function(event){
           event.preventDefault();
         });
-        fileName = window.location.href.substring(window.location.href.lastIndexOf('/')+1,window.location.href.lastIndexOf('?'))
+        fileName = window.location.href.substring(window.location.href.lastIndexOf('/')+1);
         $('a[href="'+fileName+'"]').parents("#navigation_buttons li").each(function (i) {
             $(this).removeClass().addClass("active");
         });
