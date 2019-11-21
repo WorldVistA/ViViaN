@@ -17,7 +17,8 @@
             $(this).removeClass().addClass("active");
         });
 
-        d3.json('../files/packages_autocomplete.json', function(json) {
+        var vivianDataPath = "../vivian-data/";
+        d3.json(vivianDataPath + 'packages_autocomplete.json', function(json) {
           // Note: vivian_tree_layout_common expects this control
           // to be called 'option_autocomplete'.
           $("#option_autocomplete").autocomplete({
@@ -85,8 +86,6 @@ $("#accordion").accordion({heightStyle: 'content', collapsible: true}).hide();
 
 <?php include_once "vivian_tree_layout_common.js" ?>
 
-var package_link_url = "../dox/";
-var files_link_url = "../files/";
 var toolTip = d3.select(document.getElementById("toolTip"));
 var header = d3.select(document.getElementById("header1"));
 var himJSON  = {}
@@ -118,7 +117,9 @@ var packageInfoProp = {
 var shapeLegend = [{name: "Package Category", shape: "triangle-up"},
                    {name: "Package", shape:"circle"}]
 
-d3.json("../files/packages.json", function(json) {
+var doxPath = "../dox/";
+var vivianDataPath = "../vivian-data/";
+d3.json(vivianDataPath + "packages.json", function(json) {
   chart.on("node", "event","click", pkgLinkClicked)
      .on("node", "event", "mouseover", node_onMouseOver)
      .on("node", "event","mouseout", node_onMouseOut)
@@ -137,7 +138,7 @@ d3.json("../files/packages.json", function(json) {
   clearAutocomplete();
   createLegend();
   createShapeLegend();
-  d3.json("../files/himData.json", function(json) {
+  d3.json(vivianDataPath + "himData.json", function(json) {
     himJSON = json;
   });
 });
@@ -246,31 +247,31 @@ function getHIMLink(pkgName, pkg) {
 };
 
 function getRPCLinkByPackageName(pkgName) {
-  var link = files_link_url + "8994" + "/" + pkgName + "-RPC.html";
+  var link = vivianDataPath + "8994" + "/" + pkgName + "-RPC.html";
   var text = "Remote Procedure Call";
   return "<li>" + createLink(link, text) +"</li>";
 }
 
 function getHL7LinkByPackageName(pkgName) {
-  var link = files_link_url + "101" + "/" + pkgName + "-HL7.html";
+  var link = vivianDataPath + "101" + "/" + pkgName + "-HL7.html";
   var text = "HL7";
   return "<li>" + createLink(link, text) +"</li>";
 }
 
 function getProtocolLinkByPackageName(pkgName) {
-  var link = files_link_url + "101" + "/" + pkgName + "-Protocols.html";
+  var link = vivianDataPath + "101" + "/" + pkgName + "-Protocols.html";
   var text = "Protocols";
   return "<li>" + createLink(link, text) +"</li>";
 }
 
 function getHLOLinkByPackageName(pkgName) {
-  var link = files_link_url + "779_2" + "/" + pkgName + "-HLO.html";
+  var link = vivianDataPath + "779_2" + "/" + pkgName + "-HLO.html";
   var text = "HLO";
   return "<li>" + createLink(link, text) +"</li>";
 }
 
 function getICRLinkByPackageName(pkgName) {
-  var link = files_link_url + "ICR" + "/" + pkgName + "-ICR.html";
+  var link = vivianDataPath + "ICR" + "/" + pkgName + "-ICR.html";
   var text = "ICR";
   return "<li>" + createLink(link, text) +"</li>";
 }
@@ -326,7 +327,7 @@ function getInterfaceHtml(pkgName, node) {
 
 function getDependencyContentHtml(pkgName, node) {
   var packagePage = "Package_" + pkgName.replace(/ /g, '_').replace(/-/g, '_') + ".html";
-  var depLink = createLink(package_link_url + packagePage, "Dependencies & Code View");
+  var depLink = createLink(doxPath + packagePage, "Dependencies & Code View");
 
   var otherDistributions = "";
   var category = distProp[selectedIndex];

@@ -8,9 +8,18 @@
     ?>
     <!-- JQuery Buttons -->
     <script>
+      var vivianDataPath = "../vivian-data/";
       var pathDict = {
-                      "#19":{"prefix":"","fileLoc":"../files/menus/19", "sourceLoc":"../files/19/19-", "initFile":"9","desc":"This page is displaying the menu entries from the OPTION file"},
-                      "#101":{"prefix":"protocol_","fileLoc":"../files/menus/101","sourceLoc":"../files/101/101-","initFile":"2590","desc":"This page is displaying the menu entries from the PROTOCOL file"}
+                      "#19": {"prefix":"",
+                              "fileLoc":vivianDataPath + "menus/19",
+                              "sourceLoc":vivianDataPath + "19/19-",
+                              "initFile":"9",
+                              "desc":"This page is displaying the menu entries from the OPTION file"},
+                      "#101":{"prefix":"protocol_",
+                              "fileLoc":vivianDataPath + "menus/101",
+                              "sourceLoc":vivianDataPath + "101/101-",
+                              "initFile":"2590",
+                              "desc":"This page is displaying the menu entries from the PROTOCOL file"}
       }
       $(window).on('hashchange', function() {
         location.reload();
@@ -27,7 +36,7 @@
         $('a[href="'+fileName+'"]').parents("#navigation_buttons li").each(function (i) {
             $(this).removeClass().addClass("active");
         });
-        d3.json('../files/'+pathDict[hash]["prefix"]+'menu_autocomplete.json', function(json) {
+        d3.json(vivianDataPath + pathDict[hash]["prefix"] + 'menu_autocomplete.json', function(json) {
           var sortedjson = json.sort(function(a,b) { return a.label.localeCompare(b.label); });
           $("#autocomplete").autocomplete({
             source: sortedjson,
@@ -36,7 +45,7 @@
           }).data('autocomplete')/*._trigger('select')*/;
         });
 
-        d3.json('../files/'+pathDict[hash]["prefix"]+'option_autocomplete.json', function(json) {
+        d3.json(vivianDataPath + pathDict[hash]["prefix"] + 'option_autocomplete.json', function(json) {
           var sortedjson = json.sort(function(a,b) { return a.label.localeCompare(b.label); });
           // Note: vivian_tree_layout_common expects this control
           // to be called 'option_autocomplete'.
@@ -217,7 +226,7 @@ function autoCompleteChanged(eve, ui) {
 
 function optionAutoCompleteChanged(eve, ui) {
   var menuFile = pathDict[hash]["fileLoc"]+"/VistAMenu-" + ui.item.parent_id + ".json";
-  d3.json('../files/menu_autocomplete.json', function(json) {
+  d3.json(vivianDataPath + 'menu_autocomplete.json', function(json) {
     for ( var i = 0; i < json.length; i++) {
       if( json[i].id == ui.item.parent_id) {
       $("#autocomplete")[0].value = json[i].label;

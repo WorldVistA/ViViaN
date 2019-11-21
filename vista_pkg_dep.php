@@ -210,10 +210,11 @@ Click on any of the packages to view package dependency details.
                 .mouseOverArc(mouseOverArc)
                 .mouseOutArc(mouseOutArc)
                 .nodeTextHyperLink(getPackageDoxLink);
-    var localpath = "../files/pkgdep.json";
+
     d3.select("#legend_placeholder").datum(null).call(legendColorChart);
 
-    d3.json(localpath, function(error, classes) {
+    var vivianDataPath = "../vivian-data/"
+    d3.json(vivianDataPath + "pkgdep.json", function(error, classes) {
       jsonData = classes;
       if (error){
         errormsg = "json error " + error + " data: " + classes;

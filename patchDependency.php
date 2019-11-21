@@ -17,7 +17,9 @@
             $(this).removeClass().addClass("active");
         });
 
-        d3.json('../files/packages_autocomplete.json', function(json) {
+        var vivianDataPath = "../vivian-data/";
+
+        d3.json(vivianDataPath + 'packages_autocomplete.json', function(json) {
           json.push("All Patches");
           var sortedjson = json.sort(function(a,b) { return a.localeCompare(b); });
           $("#package_autocomplete").autocomplete({
@@ -104,7 +106,7 @@ d3.select("#legend_placeholder").datum(null).call(legendShapeChart);
 *  from the date selectors and the value of the new package
 */
 function packageAutocompleteChanged(eve, ui) {
-  d3.json('../files/install_information.json', function(json) {
+  d3.json(vivianDataPath + 'install_information.json', function(json) {
     targetPackage = ui.item.label
     $("#installEntryAuto").show();
     $("#installEntryDrop").hide();
@@ -205,7 +207,7 @@ function _centerDisplay() {
 
 function showDependency(parent, entryNo) {
   $("#loadingImg").show()
-  d3.json("../files/install_information.json", function(json) {
+  d3.json(vivianDataPath + "install_information.json", function(json) {
 
     chart.on("path", "event","click", node_onNodeClick)
       .on("node", "event", "mouseover", node_onMouseOver)
@@ -262,8 +264,8 @@ function text_onMouseClick(d) {
     title: modalTitle,
     open: function(){
         $('#description').html(
-        `<a target="_blank"  href="../files/9_6/9.6-${d['BUILD_ien']}.html">BUILD(#9.6) Information</a><br>
-        <a target="_blank"  href="../files/9_7/9.7-${d.ien}.html">INSTALL(#9.7) Information</a>`
+          ("<a target=\"_blank\"  href=\"" + vivianDataPath + "9_6/9.6-${d['BUILD_ien']}.html\">BUILD(#9.6) Information</a><br>"
+          "<a target=\"_blank\"  href=\"" + vivianDataPath + "9_7/9.7-${d.ien}.html\">INSTALL(#9.7) Information</a>");
         );
     },
   };

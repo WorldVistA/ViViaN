@@ -8,6 +8,8 @@
     ?>
     <!-- JQuery Buttons -->
     <script>
+      var vivianDataPath = "../vivian-data/";
+
       $(function() {
         $( "button" ).button().click(function(event){
           event.preventDefault();
@@ -17,7 +19,7 @@
             $(this).removeClass().addClass("active");
         });
 
-        d3.json('../files/install_autocomplete.json', function(json) {
+        d3.json(vivianDataPath + 'install_autocomplete.json', function(json) {
           var sortedjson = json.sort(function(a,b) { return a.localeCompare(b); });
           $("#package_autocomplete").autocomplete({
             source: sortedjson,
@@ -103,7 +105,7 @@ $("#timeline_date_reset").click( function() {
 function packageAutocompleteChanged(eve, ui) {
 
   //Read in the INSTALL JSON file
-  d3.json("../files/install_information.json", function(json) {
+  d3.json(vivianDataPath + "install_information.json", function(json) {
     resetMenuFile(currentJSON,ui.item.label,"","");//$("#timeline_date_start")[0].value,$("#timeline_date_stop")[0].value)
     createControl();
   });
@@ -150,7 +152,7 @@ function rect_onMouseOut(d) {
 */
 
 function rect_onClick(d) {
-  window.open("../files/9_7/9.7-" + d.ien + ".html","_blank");
+  window.open(vivianDataPath + "9_7/9.7-" + d.ien + ".html","_blank");
 }
 
 function pkgVersionData_gen(pkgInfo) {
@@ -374,7 +376,7 @@ function resetMenuFile(json, packageName,start,stop) {
 // Start the visualization at the
 
   //Read in the INSTALL JSON file
-  d3.json("../files/install_information.json", function(json) {
+  d3.json(vivianDataPath + "install_information.json", function(json) {
     currentJSON = json
     resetMenuFile(currentJSON,'Accounts Receivable',"","")
     createControl();
