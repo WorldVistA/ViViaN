@@ -111,7 +111,7 @@ class test_icrtable(unittest.TestCase):
 
 if __name__ == '__main__':
   description = "Test the ICR table pages of the ViViaN(TM) tool, the VistA Package visualization"
-  page = "files/ICR/All-ICR List.html"
+  page = "vivian-data/ICR/All-ICR List.html"
   webroot, driver, browser = setup_webdriver(description, page)
   suite = unittest.TestLoader().loadTestsFromTestCase(test_icrtable)
   unittest.TextTestRunner(verbosity=2).run(suite)

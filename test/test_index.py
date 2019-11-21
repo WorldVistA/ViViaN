@@ -125,7 +125,7 @@ class test_index(unittest.TestCase):
                        13: 'description'}
     modalRegex = {9: 'Includes.+Excludes',
                   10: 'Dependencies \&amp; Code View',
-                  11: 'M API.+Web Service API',
+                  11: 'Remote Procedure Call',
                   12: 'HIM Visualization for',
                   13: '[A-Za-z &/]+'}
     for i in range(9, 14):
@@ -211,7 +211,7 @@ class test_index(unittest.TestCase):
     driver.switch_to_window(driver.window_handles[-1])
     time.sleep(1)
 
-    expected_url = os.path.join(webroot, 'files/ICR/Kernel-ICR.html')
+    expected_url = os.path.join(webroot, 'vivian-data/ICR/Kernel-ICR.html')
     expected_url = os.path.normpath(expected_url)
     current_url = os.path.normpath(driver.current_url)
     self.assertEqual(current_url, expected_url)
