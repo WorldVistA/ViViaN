@@ -92,6 +92,7 @@ var initInstall = "PSB*3.0*68";
 var targetPackage = initPackage;
 var header = d3.select(document.getElementById("header1"));
 var installDateTip = d3.select(document.getElementById("installDate"));
+var vivianDataPath = "../vivian-data/";
 var originalTransform = [300,300];
 var patchListing;
 var shapeLegend = [{name: "Install(with Dependencies)", shape: "triangle-up", color: "green", fill: "green"},
@@ -264,8 +265,7 @@ function text_onMouseClick(d) {
     title: modalTitle,
     open: function(){
         $('#description').html(
-          ("<a target=\"_blank\"  href=\"" + vivianDataPath + "9_6/9.6-${d['BUILD_ien']}.html\">BUILD(#9.6) Information</a><br>"
-          "<a target=\"_blank\"  href=\"" + vivianDataPath + "9_7/9.7-${d.ien}.html\">INSTALL(#9.7) Information</a>");
+          "<a target=\"_blank\"  href=\"" + vivianDataPath + "9_6/9.6-${d['BUILD_ien']}.html\">BUILD(#9.6) Information</a><br><a target=\"_blank\"  href=\"" + vivianDataPath + "9_7/9.7-${d.ien}.html\">INSTALL(#9.7) Information</a>"
         );
     },
   };
