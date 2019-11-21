@@ -16,9 +16,12 @@
 from builtins import str
 from builtins import range
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.action_chains import ActionChains
+
 from vivian_test_utils import setup_webdriver
+
 import os
 import re
 import time
@@ -118,33 +121,32 @@ class test_index(unittest.TestCase):
     node.click()
     time.sleep(1)
     accordion = driver.find_element_by_id("accordion")
-    modalCategories = {9: 'namespaces',
-                       10: 'dependencies',
-                       11: 'interface',
-                       12: 'himInfo',
-                       13: 'description'}
-    modalRegex = {9: 'Includes.+Excludes',
-                  10: 'Dependencies \&amp; Code View',
-                  11: 'M API.+Web Service API',
-                  12: 'HIM Visualization for',
-                  13: '[A-Za-z &/]+'}
-    for i in range(9, 14):
-      # Test accordion selection of each header
-      modal_accordion = accordion.find_element_by_id('ui-id-'+str(i))
-      modal_accordion.click()
 
-      self.assertTrue(modal_accordion.get_attribute('aria-selected'))
+    children = accordion.find_elements_by_xpath(".//*")
+    for child in children:
+      id = child.get_attribute("id")
+      if "ui-id-" in id:
+        # Test accordion selection of each header
+        child.click()
+        self.assertTrue(child.get_attribute('aria-selected'))
+
+    modalCategories = {'namespaces' :'Includes.+Excludes',
+                       'dependencies' : 'Dependencies \&amp; Code View',
+                       'interface' : 'Remote Procedure Call',
+                       'himInfo' : 'HIM Visualization for',
+                       'description' : '[A-Za-z &/]+'
+                      }
+
+    for category, regex in modalCategories.items():
       # Test accordion content
-      content = accordion.find_element_by_id(modalCategories[i]).get_attribute('innerHTML');
-      self.assertTrue(re.search(modalRegex[i], content),
-                      'Looking for "' + modalRegex[i] + '" Found "' + content + '" for node "' + node.text + '"')
+      content = accordion.find_element_by_id(category).get_attribute('innerHTML');
+      self.assertTrue(re.search(regex, content),
+                      'Looking for "' + regex + '" Found "' + content + '" for node "' + node.text + '"')
 
   def close_modal_dialog(self):
-    try:
-      modal_title = driver.find_element_by_class_name('ui-dialog-titlebar')
-      modal_title.find_element_by_tag_name("button").click()
-    except:
-      pass
+    # The title bar might be hidden under navigation bar
+    # Use esc to close dialog
+    webdriver.ActionChains(driver).send_keys(Keys.ESCAPE).perform()
 
   def test_07_expand_collapse_nodes(self):
     if browser == "FIREFOX":
@@ -192,12 +194,19 @@ class test_index(unittest.TestCase):
 
     # Expand "Interfaces" section
     accordion = driver.find_element_by_id("accordion")
-    modal_accordion = accordion.find_element_by_id('ui-id-'+str(17))
-    modal_accordion.click()
+    children = accordion.find_elements_by_xpath(".//*")
+    for child in children:
+      id = child.get_attribute("id")
+      if "ui-id-" in id:
+        interface_header = child
+      elif "interface" in id:
+        interface = child
+        break
+
+    interface_header.click()
     time.sleep(1)
 
     # Click on "ICR" link
-    interface = driver.find_element_by_id("interface")
     elementList = interface.find_elements_by_tag_name("li")
     for element in elementList:
       if element.text == 'ICR':
@@ -208,10 +217,10 @@ class test_index(unittest.TestCase):
       self.fail("Failed to find ICR link")
 
     # Navigate to the ICR table page
-    driver.switch_to_window(driver.window_handles[-1])
+    driver.switch_to.window(driver.window_handles[-1])
     time.sleep(1)
 
-    expected_url = os.path.join(webroot, 'files/ICR/Kernel-ICR.html')
+    expected_url = os.path.join(webroot, 'vivian-data/ICR/Kernel-ICR.html')
     expected_url = os.path.normpath(expected_url)
     current_url = os.path.normpath(driver.current_url)
     self.assertEqual(current_url, expected_url)
@@ -222,7 +231,7 @@ class test_index(unittest.TestCase):
     time.sleep(1)
 
     # Navigate back to the main page
-    driver.switch_to_window(driver.window_handles[-1])
+    driver.switch_to.window(driver.window_handles[-1])
     time.sleep(1)
 
     self.close_modal_dialog()
