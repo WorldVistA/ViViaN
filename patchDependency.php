@@ -49,6 +49,11 @@
       <div class="tooltipTail"></div>
     </div>
   </div>
+  <div id="dialog-modal">
+    <div id="accordion">
+      <div id="description"></div>
+    </div>
+  </div>
   <div id="descrHeader" style="position:relative; left:20px; top: -10px;">
     <p>The information in this visualization is not guaranteed to be complete.
        <b>Please note: Installs without dependencies may actually have dependencies due to
@@ -285,7 +290,7 @@ function text_onMouseClick(d) {
     title: modalTitle,
     open: function(){
         $('#description').html(
-          "<a target=\"_blank\"  href=\"" + vivianDataPath + "9_6/9.6-${d['BUILD_ien']}.html\">BUILD(#9.6) Information</a><br><a target=\"_blank\"  href=\"" + vivianDataPath + "9_7/9.7-${d.ien}.html\">INSTALL(#9.7) Information</a>"
+          "<a target=\"_blank\"  href=\"" + vivianDataPath + `9_6/9.6-${d['BUILD_ien']}.html">BUILD(#9.6) Information</a><br><a target="_blank"  href="` + vivianDataPath + `9_7/9.7-${d.ien}.html">INSTALL(#9.7) Information</a>`
         );
     },
   };
