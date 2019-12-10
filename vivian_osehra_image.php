@@ -12,6 +12,7 @@
   </button>
 </div>
 
+<script src='./pathData.js'></script>
 <div id="navigation_buttons" style="font-size:1.0em;">
   <nav class="navbar navbar-default navbar-static-top">
     <div class="container-fluid">
@@ -52,19 +53,19 @@
         <li class="dropdown" id="vista-interfaces">
           <a class="dropdown-toggle qindex" data-toggle="dropdown" href="#">VistA Interfaces<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a class="qindex-dropdown" href="../vivian-data/101/All-HL7.html" id="all_hl7">HL7</a></li>
-            <li><a class="qindex-dropdown" href="../vivian-data/779_2/All-HLO.html" id="all_hlo">HLO</a></li>
-            <li><a class="qindex-dropdown" href="../vivian-data/ICR/All-ICR%20List.html" id="all_icr">ICR</a></li>
-            <li><a class="qindex-dropdown" href="../vivian-data/101/All-Protocols.html" id="all_protocols">Protocols</a></li>
-            <li><a class="qindex-dropdown" href="../vivian-data/8994/All-RPC.html" id="all_rpc">RPC</a></li>
+            <li><a class="qindex-dropdown" onclick="window.location.href=FILES_URL+'101/All-HL7.html'" id="all_hl7">HL7</a></li>
+            <li><a class="qindex-dropdown" onclick="window.location.href=FILES_URL+'779_2/All-HLO.html'" id="all_hlo">HLO</a></li>
+            <li><a class="qindex-dropdown" onclick="window.location.href=FILES_URL+'ICR/All-ICR%20List.html'" id="all_icr">ICR</a></li>
+            <li><a class="qindex-dropdown" onclick="window.location.href=FILES_URL+'101/All-Protocols.html'" id="all_protocols">Protocols</a></li>
+            <li><a class="qindex-dropdown" onclick="window.location.href=FILES_URL+'8994/All-RPC.html'" id="all_rpc">RPC</a></li>
           </ul>
         </li>
 
         <li class="dropdown" id="vista-information">
           <a class="dropdown-toggle qindex" data-toggle="dropdown" href="#">Name and Number<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a class="qindex-dropdown" href="../vivian-data/Namespace/Namespace.html" id="all_name">Namespace Listing</a></li>
-            <li><a class="qindex-dropdown" href="../vivian-data/Numberspace/Numberspace.html" id="all_number">Numberspace Listing</a></li>
+            <li><a class="qindex-dropdown" onclick="window.location.href=FILES_URL+'Namespace/Namespace.html'" id="all_name">Namespace Listing</a></li>
+            <li><a class="qindex-dropdown" onclick="window.location.href=FILES_URL+'Numberspace/Numberspace.html'" id="all_number">Numberspace Listing</a></li>
           </ul>
         </li>
 
@@ -76,7 +77,7 @@
 
         <li><a href="javascript:aboutClicked();" class="qindex">About</a></li>
 
-        <li><a href="../dox" class="qindex">DOX</a></li>
+        <li><a onclick="window.location.href=DOX_URL" class="qindex">DOX</a></li>
 
         <li class="dropdown"  id="foia-vista">
           <a class="dropdown-toggle qindex" data-toggle="dropdown" href="#">FOIA VistA <span class="caret"></span></a>

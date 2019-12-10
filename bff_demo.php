@@ -104,7 +104,7 @@ var shapeLegend = [{name: "Framework Grouping (Collapsed)", shape: "triangle-up"
                    {name: "Business Need (New)", shape:"cross", "isRequirement": true, "recentUpdate":"New Requirement","depth": 50,"index":2}
                    ]
 
-var vivianDataPath = "../vivian-data/";
+var vivianDataPath =  FILES_URL;
 var requirementsPath = vivianDataPath + "requirements/"
 
 renderWindow();

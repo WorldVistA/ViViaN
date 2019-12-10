@@ -50,8 +50,8 @@
   <select id="vivSelect"></select>
 
   <script type="text/javascript">
-
-    var files = "<?php  foreach(glob('../dox/*.json') as $filename) { echo $filename.",";  };?>"
+    document.cookie = 'url=' + DOX_URL + "*.json" + "; path=/";
+    var files = "<?php  foreach(glob($_COOKIE['url']) as $filename) { echo $filename.",";  };?>"
     filesArray = files.split(",")
     filesArray.pop()
     $("#vivSelect").append("<option selected disabled> -- select an local file -- </option>")

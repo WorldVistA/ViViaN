@@ -65,7 +65,7 @@
 <script type="text/javascript">
   var jsonData = [];
 
-  var vivianDataPath = "../vivian-data/";
+  var vivianDataPath = FILES_URL;
 
   d3.json("PackageCategories.json", function(error, data) {
     d3.json(vivianDataPath + "pkgdep.json", function(error, classes) {

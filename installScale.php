@@ -8,7 +8,7 @@
     ?>
     <!-- JQuery Buttons -->
     <script>
-      var vivianDataPath = "../vivian-data/";
+      var vivianDataPath =  FILES_URL;
 
       $(function() {
         $( "button" ).button().click(function(event){

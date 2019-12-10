@@ -8,7 +8,7 @@
     ?>
     <!-- JQuery Buttons -->
     <script>
-      var vivianDataPath = "../vivian-data/";
+      var vivianDataPath = FILES_URL;
       var pathDict = {
                       "#19": {"prefix":"",
                               "fileLoc":vivianDataPath + "menus/19",

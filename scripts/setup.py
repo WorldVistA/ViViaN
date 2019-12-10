@@ -31,7 +31,7 @@ import argparse
 import os
 import shutil
 
-def run(files_dir):
+def run(files_dir, dox_dir):
   # input: <files_dir>/menus/19/VistAMenu-*.json
   # output: <files_dir>/menu_autocomplete.json
   menu_autocomplete_gen.run("19", "menu_autocomplete.json", files_dir)
@@ -69,8 +69,18 @@ def run(files_dir):
   shutil.copyfile("../himData.json", "%s/himData.json" % files_dir)
   print("*** Copied %s/himData.json" % files_dir)
 
+  # create pathData.js with the relativepaths to each
+  with open("../pathData.js","w") as pathFile:
+    rel_dox_dir = os.path.relpath(dox_dir,files_dir).replace('\\','/')
+    rel_files_dir = os.path.relpath(files_dir,dox_dir).replace('\\','/')
+    pathFile.write("FILES_URL='%s/'\n\r" % rel_files_dir)
+    pathFile.write("DOX_URL='%s/'\n\r" % rel_dox_dir)
+  print("*** Created directory 'mapping' for ViViaN web pages ")
+
 if __name__ == '__main__':
   parser = argparse.ArgumentParser(description='Setup ViViAN data')
-  parser.add_argument('filesDir', help='Full path to files directory')
+  # Defaults need an extra step due to the setup.py residing in the subdirectory
+  parser.add_argument('-fd', '--files_dir', help='Path to files directory', required=False, default='../../vivian-data')
+  parser.add_argument('-dd', '--dox_dir', help='Path to dox directory', required=False, default='../../dox')
   args = parser.parse_args()
-  run(args.filesDir)
+  run(os.path.abspath(args.files_dir), os.path.abspath(args.dox_dir))
