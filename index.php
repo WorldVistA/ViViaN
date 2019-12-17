@@ -17,7 +17,7 @@
             $(this).removeClass().addClass("active");
         });
 
-        var vivianDataPath = "../vivian-data/";
+        var vivianDataPath =  FILES_URL;
         d3.json(vivianDataPath + 'packages_autocomplete.json', function(json) {
           // Note: vivian_tree_layout_common expects this control
           // to be called 'option_autocomplete'.
@@ -117,8 +117,8 @@ var packageInfoProp = {
 var shapeLegend = [{name: "Package Category", shape: "triangle-up"},
                    {name: "Package", shape:"circle"}]
 
-var doxPath = "../dox/";
-var vivianDataPath = "../vivian-data/";
+var doxPath = DOX_URL;
+var vivianDataPath = FILES_URL;
 d3.json(vivianDataPath + "packages.json", function(json) {
   chart.on("node", "event","click", pkgLinkClicked)
      .on("node", "event", "mouseover", node_onMouseOver)

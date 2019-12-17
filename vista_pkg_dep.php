@@ -91,7 +91,7 @@ Click on any of the packages to view package dependency details.
   d3.json("PackageCategories.json", function(error, data) {
     var categories = data;
     function getPackageDoxLink(node) {
-      var package_link_url = "../dox/Package_";
+      var package_link_url = DOX_URL+"/Package_";
       var doxLinkName = node.name.replace(/ /g, '_').replace(/-/g, '_')
       return package_link_url + doxLinkName + ".html";
     }
@@ -211,7 +211,7 @@ Click on any of the packages to view package dependency details.
 
     d3.select("#legend_placeholder").datum(null).call(legendColorChart);
 
-    var vivianDataPath = "../vivian-data/"
+    var vivianDataPath = FILES_URL
     d3.json(vivianDataPath + "pkgdep.json", function(error, classes) {
       jsonData = classes;
       if (error){

@@ -61,7 +61,7 @@
   resize();
   d3.select(window).on("resize", resize);
 
-  var vivianDataPath = "../vivian-data/";
+  var vivianDataPath = FILES_URL
 
   // Read input files
   d3.queue()
