@@ -100,7 +100,7 @@
 
 <script>
   function aboutClicked(){
-    d3.json("../vivian-data/filesInfo.json", function(json) {
+    d3.json(FILES_URL+"/filesInfo.json", function(json) {
       console.log($('#dialog-modal-dataVersion'))
       $('#dialog-modal-dataVersion').text("The information in this instance of ViViaN was generated on:  "+json["date"] +
                                           " from the OSEHRA VistA-M repository with a Git hash of:  "+ json["sha1"]);

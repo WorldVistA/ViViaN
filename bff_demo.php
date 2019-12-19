@@ -47,7 +47,7 @@
         <h3 id="bnDofUpdate_head" style="display:none"><a href="#">Business Need: Date of Update</a></h3>
         <div id="bnDofUpdate"></div>
         <h3 id="allReq" style="display:none"><a href="#">All Business Needs</a></h3>
-        <div id="nsNSR"><a target='_blank' href="../vivian-data/requirements/All-Requirement%20List.html">All Needs</a></div>
+        <div id="nsNSR"><a target='_blank' onclick="window.location.href=FILES_URL+'/requirements/All-Requirement%20List.html'">All Needs</a></div>
       </div>
     </div>
   <div id='pageDescription' class='hint' style="position:relative; top: -10px; left:20px; margin-right:200px;">
@@ -65,7 +65,7 @@
     </p>
     <p><b>Note:</b> Not all Business Needs can be found connected to a BFF Entry.
     To see the listing of all Business Needs, click
-    <a target='_blank' href="../vivian-data/requirements/All-Requirement%20List.html">here</a></p>
+    <a target='_blank' onclick="window.location.href=FILES_URL+'/requirements/All-Requirement%20List.html'">here</a></p>
     <p>The current information is based on BFF version 2.12.</p>
   </div>
 
