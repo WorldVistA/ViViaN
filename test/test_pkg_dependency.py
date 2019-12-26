@@ -27,7 +27,8 @@ class test_pkgdep(unittest.TestCase):
   def tearDownClass(cls):
     driver.quit()
 
-  def test_01_tooltip(self):
+  # Fix and renable in: https://issues.osehra.org/browse/VIVIAN-526
+  def DISABLE_test_01_tooltip(self):
     time.sleep(10)
 
     # Choose a package that's visible when the screen is first loaded
