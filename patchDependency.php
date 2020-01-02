@@ -17,7 +17,7 @@
             $(this).removeClass().addClass("active");
         });
 
-        var vivianDataPath = "../vivian-data/";
+        var vivianDataPath = FILES_URL;
 
         d3.json(vivianDataPath + 'packages_autocomplete.json', function(json) {
           json.push("All Patches");
@@ -100,7 +100,7 @@ var initInstall = "PSB*3.0*68";
 var targetPackage = initPackage;
 var header = d3.select(document.getElementById("header1"));
 var installDateTip = d3.select(document.getElementById("installDate"));
-var vivianDataPath = "../vivian-data/";
+var vivianDataPath = FILES_URL;
 var originalTransform = [300,300];
 var patchListing;
 var jsonFileVal = {"forward": vivianDataPath +"install_information.json","backward": vivianDataPath +"install_dependent_information.json"};

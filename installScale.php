@@ -69,7 +69,7 @@
 var margin = {top: 40, right: 40, bottom: 40, left:40},
         width = 1500,
         height =750;
-
+var vivianDataPath =  FILES_URL;
 var chartHeight = height - margin.top - margin.bottom;
 var chartWidth = width - margin.left - margin.right
 var y = d3.scale.linear()
