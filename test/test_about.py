@@ -26,7 +26,7 @@ class test_about(unittest.TestCase):
     driver.quit()
 
   def test_01_about_option(self):
-    about_option = driver.find_element_by_xpath('//*[@id="navigation_buttons"]/nav/div/ul[2]/li[1]/a')
+    about_option = driver.find_element_by_xpath('//*[@id="navigation_buttons"]/nav/div/ul[2]/li[2]/a')
     about_option.click()
     time.sleep(1)
 

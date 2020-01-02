@@ -30,7 +30,7 @@ class test_links(unittest.TestCase):
     self.go_to_files_link('vista-interfaces', link_id, destination)
 
   def go_to_files_link(self, menu_id, link_id, destination):
-    expected_url = os.path.join(webroot, "files", destination)
+    expected_url = os.path.join(webroot, "vivian-data", destination)
     self.go_to_link(menu_id, link_id, expected_url)
 
     driver.back()
