@@ -3,10 +3,9 @@
  <title>VistA Package Dependency Force-Directed Graph</title>
   <head>
   <?php
-      include_once "vivian_common_header.php";
+      include_once "vivian_common.php";
     ?>
     <script src="https://d3js.org/d3-queue.v3.min.js"></script>
-    <?php include_once "vivian_google_analytics.php" ?>
     <!-- JQuery Buttons -->
     <script>
       $(function() {
@@ -19,7 +18,6 @@
   </head>
 
 <body>
-<?php include_once "vivian_osehra_image.php" ?>
 
 <div class="grid" style="padding: 10px 10px 10px 10px;">
   <div style="width: 20%; float: left;">

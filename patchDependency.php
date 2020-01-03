@@ -3,8 +3,8 @@
   <title>Install Dependency Tree</title>
   <head>
     <?php
-      include_once "vivian_common_header.php";
       include_once "vivian_tree_layout.css";
+      include_once "vivian_common.php";
     ?>
     <!-- JQuery Buttons -->
     <script>
@@ -32,13 +32,12 @@
       });
 
     </script>
-    <?php include_once "vivian_google_analytics.php" ?>
   </head>
 
 <body>
   <script src="jquery-ui.min.js"></script>
   <div>
-    <?php include_once "vivian_osehra_image.php" ?>
+
     <!-- <select id="category"></select> -->
   </div>
   <!-- Tooltip -->
@@ -84,6 +83,8 @@
 
 <script type="text/javascript">
 
+<?php include_once "vivian_tree_layout_common.js" ?>
+
 var chart = d3.chart.treeview()
               .height(700)
               .width(2000)
@@ -110,7 +111,7 @@ var shapeLegend = [{name: "Install(with Dependencies)", shape: "triangle-up", co
                    {name: "Duplicate Install(with Dependencies)", shape:"diamond", color: "red", fill: "red"},
                    {name: "Duplicate Install(without Dependencies)", shape:"diamond", color: "red", fill: "white"}]
 d3.select("#legend_placeholder").datum(null).call(legendShapeChart);
-<?php include_once "vivian_tree_layout_common.js" ?>
+
 /*
 *  Function to handle the graph when selecting a new package
 *  from the package autocomplete.  Redraw the graph with the values

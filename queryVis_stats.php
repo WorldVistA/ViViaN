@@ -3,8 +3,8 @@
   <title>ViViaN</title>
   <head>
     <?php
-      include_once "vivian_common_header.php";
       include_once "vivian_tree_layout.css";
+      include_once "vivian_common.php";
     ?>
     <!-- JQuery Buttons -->
     <script>
@@ -18,12 +18,10 @@
         });
       });
     </script>
-    <?php include_once "vivian_google_analytics.php" ?>
   </head>
 
 <body >
   <div>
-    <?php include_once "vivian_osehra_image.php" ?>
     <!-- <select id="category"></select> -->
   </div>
 </br>

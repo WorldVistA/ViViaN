@@ -4,10 +4,9 @@
   <head>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700|Roboto:400,700' rel='stylesheet' type='text/css'>
     <?php
-      include_once "vivian_common_header.php";
       include_once "d3.dependencyedgebundling.css";
+      include_once "vivian_common.php";
     ?>
-    <?php include_once "vivian_google_analytics.php" ?>
     <script>
       $(function() {
         fileName = window.location.href.substring(window.location.href.lastIndexOf('/')+1)
@@ -19,8 +18,6 @@
   </head>
 
 <body>
-  <?php include_once "vivian_osehra_image.php" ?>
-
   <div style="position:relative; left:20px;">
 
     <div class="btn-group" data-toggle="buttons">
