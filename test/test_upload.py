@@ -17,8 +17,7 @@ from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import Select
 from vivian_test_utils import setup_webdriver
-import argparse
-import os
+
 import re
 import time
 import unittest

@@ -19,7 +19,6 @@ from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.action_chains import ActionChains
 from vivian_test_utils import setup_webdriver
-import os
 import re
 import time
 import unittest
@@ -211,10 +210,8 @@ class test_index(unittest.TestCase):
     driver.switch_to_window(driver.window_handles[-1])
     time.sleep(1)
 
-    expected_url = os.path.join(webroot, 'vivian-data/ICR/Kernel-ICR.html')
-    expected_url = os.path.normpath(expected_url)
-    current_url = os.path.normpath(driver.current_url)
-    self.assertEqual(current_url, expected_url)
+    expected_url = webroot + '/vivian-data/ICR/Kernel-ICR.html'
+    self.assertEqual(driver.current_url, expected_url)
 
   def cleanup_icr_test(self):
     # Close current tab

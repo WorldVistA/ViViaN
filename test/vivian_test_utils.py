@@ -32,7 +32,7 @@ def setup_webdriver(description, page):
     driver = webdriver.Chrome()
   else:
     driver = webdriver.Firefox()
-  webroot = result['webroot']
+  webroot = result['webroot'].rstrip("/") # remove trailing '/', if present
   driver.get(webroot + "/" + page)
   driver.maximize_window()
 

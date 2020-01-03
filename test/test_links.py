@@ -16,7 +16,7 @@
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 from vivian_test_utils import setup_webdriver
-import os
+
 import re
 import time
 import unittest
@@ -30,14 +30,14 @@ class test_links(unittest.TestCase):
     self.go_to_files_link('vista-interfaces', link_id, destination)
 
   def go_to_files_link(self, menu_id, link_id, destination):
-    expected_url = os.path.join(webroot, "vivian-data", destination)
+    expected_url = webroot + "/vivian-data/" + destination
     self.go_to_link(menu_id, link_id, expected_url)
 
     driver.back()
     time.sleep(1)
 
   def go_to_vivian_link(self, menu_id, link_id, destination):
-    expected_url = os.path.join(webroot, "vivian", destination)
+    expected_url = webroot + "/vivian/" + destination
     self.go_to_link(menu_id, link_id, expected_url)
 
   def go_to_link(self, menu_id, link_id, expected_url):
@@ -45,9 +45,7 @@ class test_links(unittest.TestCase):
     if link_id is not None:
       driver.find_element_by_id(link_id).click()
     time.sleep(1)
-    expected_url = os.path.normpath(expected_url)
-    current_url = os.path.normpath(driver.current_url)
-    self.assertEqual(current_url, expected_url)
+    self.assertEqual(driver.current_url, expected_url)
 
   # Skip ViViaN button (index.php) for now
 
@@ -118,7 +116,7 @@ class test_links(unittest.TestCase):
 
   # FOIA VistA
   def test_18_vxvista(self):
-    self.go_to_vivian_link('foia-vista', 'vxvista', 'vxvista')
+    self.go_to_vivian_link('foia-vista', 'vxvista', 'vxvista/')
     driver.back()
     time.sleep(1)
 

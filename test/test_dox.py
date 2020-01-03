@@ -17,7 +17,7 @@
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 from vivian_test_utils import setup_webdriver
-import os
+
 import re
 import time
 import unittest
@@ -27,17 +27,18 @@ class DoxTestCase(unittest.TestCase):
   def tearDownClass(cls):
     driver.quit()
 
-  def get_dox_url(self, page):
-    url = os.path.join(webroot, "dox", page)
-    url = os.path.normpath(url)
-    return url
+  def _get_dox_url(self, page):
+    return webroot + "/dox/" + page
+
+  def go_to_dox_page(self, page):
+    driver.get(self._get_dox_url(page))
+    self.assertFalse("not found" in driver.page_source)
 
   def go_to_index_page(self, id, expected_url):
     driver.find_element_by_id(id).click()
     time.sleep(1)
-    current_url = os.path.normpath(driver.current_url)
-    expected_url = self.get_dox_url(expected_url)
-    self.assertEqual(current_url, expected_url)
+    expected_url = self._get_dox_url(expected_url)
+    self.assertEqual(driver.current_url, expected_url)
 
   # ---------------------------------------------------------------------------
   # Index pages and navigation buttons
@@ -74,10 +75,10 @@ class DoxTestCase(unittest.TestCase):
   # ---------------------------------------------------------------------------
 
   def test_09_package_lexicon_utility(self):
-    driver.get(self.get_dox_url("Package_Lexicon_Utility.html"))
+    self.go_to_dox_page("Package_Lexicon_Utility.html")
 
   def test_10_package_va_fileman(self):
-    driver.get(self.get_dox_url("Package_VA_FileMan.html"))
+    self.go_to_dox_page("Package_VA_FileMan.html")
 
   # ---------------------------------------------------------------------------
   # Globals
@@ -85,76 +86,76 @@ class DoxTestCase(unittest.TestCase):
 
   # ^GMRD(120.57
   def test_11_global(self):
-    driver.get(self.get_dox_url("Global_XkdNUkQoMTIwLjU3.html"))
+    self.go_to_dox_page("Global_XkdNUkQoMTIwLjU3.html")
 
   # ^MDC(704.1161 (non-fileman)
   def test_12_global(self):
-    driver.get(self.get_dox_url("Global_Xk1EQyg3MDQuMTE2MQ==.html"))
+    self.go_to_dox_page("Global_Xk1EQyg3MDQuMTE2MQ==.html")
 
   # ^USR(8930.8
   def test_13_global(self):
-    driver.get(self.get_dox_url("Global_XlVTUig4OTMwLjg=.html"))
+    self.go_to_dox_page("Global_XlVTUig4OTMwLjg=.html")
 
   # ^ONCO(160 (ICR)
   def test_14_global(self):
-    driver.get(self.get_dox_url("Global_Xk9OQ08oMTYw.html"))
+    self.go_to_dox_page("Global_Xk9OQ08oMTYw.html")
 
   # ---------------------------------------------------------------------------
   # Routines
   # ---------------------------------------------------------------------------
 
   def test_15_routine_MCOBGC(self):
-    driver.get(self.get_dox_url("Routine_MCOBGC.html"))
+    self.go_to_dox_page("Routine_MCOBGC.html")
 
   def test_16_routine_XUOAAHL7(self):
-    driver.get(self.get_dox_url("Routine_XUOAAHL7.html"))
+    self.go_to_dox_page("Routine_XUOAAHL7.html")
 
   def test_17_routine_MCARAMLH(self):
-    driver.get(self.get_dox_url("Routine_MCARAMLH.html"))
+    self.go_to_dox_page("Routine_MCARAMLH.html")
 
   def test_18_routine_MCARAMLG(self):
-    driver.get(self.get_dox_url("Routine_MCARAMLG.html"))
+    self.go_to_dox_page("Routine_MCARAMLG.html")
 
   # Entry points
   def test_19_routine_SDAM1(self):
-    driver.get(self.get_dox_url("Routine_SDAM1.html"))
+    self.go_to_dox_page("Routine_SDAM1.html")
 
   # Interaction
   def test_20_routine_RGUTFTP(self):
-    driver.get(self.get_dox_url("Routine_RGUTFTP.html"))
+    self.go_to_dox_page("Routine_RGUTFTP.html")
 
   # Information
   def test_21_routine_MMRSIPC5(self):
-    driver.get(self.get_dox_url("Routine_MMRSIPC5.html"))
+    self.go_to_dox_page("Routine_MMRSIPC5.html")
 
   # Entry Points - DBIA/ICR
   def test_22_routine_MMRSIPC4(self):
-    driver.get(self.get_dox_url("Routine_MMRSIPC4.html"))
+    self.go_to_dox_page("Routine_MMRSIPC4.html")
 
   def test_23_routine_PSX550(self):
-    driver.get(self.get_dox_url("Routine_PSX550.html"))
+    self.go_to_dox_page("Routine_PSX550.html")
 
   # Platform Dependent Routine
   def test_24_platform_dependent_routine(self):
-    driver.get(self.get_dox_url("Routine_%25ZOSV1.html"))
+    self.go_to_dox_page("Routine_%25ZOSV1.html")
 
   # Source Code
   def test_25_source_code(self):
-    driver.get(self.get_dox_url("Routine_PSX550_source.html"))
+    self.go_to_dox_page("Routine_PSX550_source.html")
 
   # ---------------------------------------------------------------------------
   # Subfile
   # ---------------------------------------------------------------------------
 
   def test_26_subfile(self):
-    driver.get(self.get_dox_url("SubFile_.111.html"))
+    self.go_to_dox_page("SubFile_.111.html")
 
   # ---------------------------------------------------------------------------
   # Package Component
   # ---------------------------------------------------------------------------
 
   def test_27_remote_procedure(self):
-    driver.get(self.get_dox_url("Remote_Procedure_MAGQBP_PARM.html"))
+    self.go_to_dox_page("Remote_Procedure_MAGQBP_PARM.html")
 
 if __name__ == '__main__':
   description = "Test DOX pages"
