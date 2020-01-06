@@ -31,7 +31,7 @@ class test_installdep(unittest.TestCase):
     installAuto = driver.find_element_by_id('install_autocomplete')
 
     packageName = "Registration"
-    installVal  = "DG*5.3*841"
+    installVal  = "DG*5.3*397"
     packageAuto.clear()
     packageAuto.send_keys(packageName)
     time.sleep(1)
@@ -59,7 +59,7 @@ class test_installdep(unittest.TestCase):
 
     patchTree = driver.find_element_by_id('treeview_placeholder').find_element_by_tag_name('g')
     oldTrans =  patchTree.get_attribute("transform")
-    ActionChains(driver).move_to_element(patchTree).drag_and_drop_by_offset(patchTree, 300, 200).perform()
+    ActionChains(driver).move_to_element(patchTree).drag_and_drop_by_offset(patchTree, 100, -100).perform()
     time.sleep(1)
     self.assertNotEqual(oldTrans, patchTree.get_attribute("transform"), "Transform was the same after attempting drag and drop")
     oldTrans = patchTree.get_attribute("transform")
@@ -74,7 +74,7 @@ class test_installdep(unittest.TestCase):
 
     patchTree = driver.find_element_by_id('treeview_placeholder').find_element_by_tag_name('g')
     button = driver.find_element_by_xpath("//button[contains(@onclick,'_centerDisplay()')]")
-    ActionChains(driver).move_to_element(patchTree).drag_and_drop_by_offset(patchTree, 300, 200).perform()
+    ActionChains(driver).move_to_element(patchTree).drag_and_drop_by_offset(patchTree, 100, -100).perform()
     oldVal = patchTree.get_attribute("transform")
     button.click()
     time.sleep(1)
@@ -86,7 +86,7 @@ class test_installdep(unittest.TestCase):
       return # Test fails on FireFox, skip it for now
 
     patchTree = driver.find_element_by_id('treeview_placeholder').find_element_by_tag_name('g')
-    ActionChains(driver).move_to_element(patchTree).drag_and_drop_by_offset(patchTree, 300, 200).perform()
+    ActionChains(driver).move_to_element(patchTree).drag_and_drop_by_offset(patchTree, 100, -100).perform()
     oldval = patchTree.get_attribute("transform")
     button = driver.find_element_by_xpath("//button[contains(@onclick,'_resetAllNode')]")
     button.click()

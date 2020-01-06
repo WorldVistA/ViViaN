@@ -64,9 +64,9 @@ class test_installscale(unittest.TestCase):
     # Use cursor to shrink bar
     displayAxisLabels = driver.find_element_by_id('timeline').find_elements_by_class_name("tick")
     origDate = displayAxisLabels[-1].find_element_by_tag_name('text').get_attribute("innerHTML")
-    activeBoxLeft = driver.find_elements_by_class_name("resize")[0]
-    ActionChains(driver).move_to_element(activeBoxLeft).drag_and_drop_by_offset(activeBoxLeft, 50, 0).perform()
-    time.sleep(5)
+    activeBoxRight = driver.find_element_by_class_name('e')
+    ActionChains(driver).move_to_element(activeBoxRight).drag_and_drop_by_offset(activeBoxRight, 100, 0).perform()
+    time.sleep(3)
     displayAxisLabels = driver.find_element_by_id('timeline').find_elements_by_class_name("tick")
     endDate = displayAxisLabels[-1].find_element_by_tag_name('text').get_attribute("innerHTML")
     self.assertNotEqual(endDate, origDate, "Shrinking of the 'Extent' box from the right did not alter the timeline")
@@ -74,8 +74,8 @@ class test_installscale(unittest.TestCase):
     # Use cursor to shrink bar
     displayAxisLabels = driver.find_element_by_id('timeline').find_elements_by_class_name("tick")
     endDate = displayAxisLabels[0].find_element_by_tag_name('text').get_attribute("innerHTML")
-    activeBoxRight = driver.find_elements_by_class_name("resize")[1]
-    ActionChains(driver).move_to_element(activeBoxRight).drag_and_drop_by_offset(activeBoxRight, -50, 0).perform()
+    activeBoxLeft = driver.find_element_by_class_name('w')
+    ActionChains(driver).move_to_element(activeBoxLeft).drag_and_drop_by_offset(activeBoxLeft, -100, 0).perform()
     time.sleep(3)
     displayAxisLabels = driver.find_element_by_id('timeline').find_elements_by_class_name("tick")
     endDate = displayAxisLabels[0].find_element_by_tag_name('text').get_attribute("innerHTML")
@@ -99,9 +99,10 @@ class test_installscale(unittest.TestCase):
     # Scroll bar into view
     graphBars[0].location_once_scrolled_into_view
     ActionChains(driver).move_to_element(graphBars[0]).perform()
+    time.sleep(5)
     tooltip = driver.find_element_by_id("toolTip")
-    self.assertTrue(re.search(" [A-Z]+\*[0-9.]+\*[0-9]+",  tooltip.find_element_by_id("header1").text), "Header of tool tip didn't match expected format")
-    self.assertTrue(re.search("[0-9]+\-[0-9]+\-[0-9]+", tooltip.find_element_by_id("installDate").text), "Install date of tool tip didnt match expected format")
+    self.assertTrue(re.search(" [A-Z]+\*[0-9.]+\*[0-9]+",  tooltip.find_element_by_id("header1").get_attribute("innerHTML")), "Header of tool tip didn't match expected format")
+    self.assertTrue(re.search("[0-9]+\-[0-9]+\-[0-9]+", tooltip.find_element_by_id("installDate").get_attribute("innerHTML")), "Install date of tool tip didnt match expected format")
     time.sleep(1)
 
   def test_06_installBarClick(self):
