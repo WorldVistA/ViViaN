@@ -3,8 +3,8 @@
   <title>ViViaN</title>
   <head>
     <?php
-      include_once "vivian_common_header.php";
       include_once "vivian_tree_layout.css";
+      include_once "vivian_common.php";
     ?>
     <!-- JQuery Buttons -->
     <script>
@@ -29,12 +29,10 @@
       });
 
     </script>
-    <?php include_once "vivian_google_analytics.php" ?>
   </head>
 
 <body >
   <div>
-    <?php include_once "vivian_osehra_image.php" ?>
     <!-- <select id="category"></select> -->
   </div>
   <!-- Tooltip -->
@@ -65,6 +63,8 @@
 
 <script type="text/javascript">
 
+<?php include_once "vivian_tree_layout_common.js" ?>
+
 // Note: vivian_tree_layout_common expects this variable
 // to be called 'chart'.
 var chart = d3.chart.treeview()
@@ -83,8 +83,6 @@ var legendDistChart = d3.chart.treeview()
               .margins({top:42, left:10, right:0, bottom:0})
               .textwidth(110);
 $("#accordion").accordion({heightStyle: 'content', collapsible: true}).hide();
-
-<?php include_once "vivian_tree_layout_common.js" ?>
 
 var toolTip = d3.select(document.getElementById("toolTip"));
 var header = d3.select(document.getElementById("header1"));

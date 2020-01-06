@@ -12,7 +12,6 @@
   </button>
 </div>
 
-<script src='./pathData.js'></script>
 <div id="navigation_buttons" style="font-size:1.0em;">
   <nav class="navbar navbar-default navbar-static-top">
     <div class="container-fluid">

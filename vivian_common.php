@@ -4,7 +4,7 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 
-<script type="text/javascript"> 
+<script type="text/javascript">
   $.widget.bridge('uitooltip', $.ui.tooltip);
   $( document ).uitooltip({
     classes: {
@@ -41,3 +41,11 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script>
+
+
+<script src='./pathData.js'></script>
+
+<?php
+  include_once "vivian_google_analytics.php";
+  include_once "vivian_header.php";
+?>

@@ -3,8 +3,8 @@
   <title>VHA Business Function Framework and Requirements</title>
   <head>
     <?php
-      include_once "vivian_common_header.php";
       include_once "vivian_tree_layout.css";
+      include_once "vivian_common.php";
     ?>
     <!-- JQuery Buttons -->
     <script>
@@ -18,13 +18,10 @@
         });
       });
     </script>
-    <?php include_once "vivian_google_analytics.php" ?>
   </head>
 
 <body >
   <div>
-    <?php include_once "vivian_osehra_image.php" ?>
-
     <div id="toolTip" class="tooltip" style="opacity:0;">
         <div id="head" class="header"></div>
         <div  class="tooltipTail"></div>
@@ -79,6 +76,9 @@
   <div id="treeview_placeholder"></div>
 
 <script type="text/javascript">
+
+<?php include_once "vivian_tree_layout_common.js" ?>
+
 $("#accordion").accordion({heightStyle: 'content', collapsible: true}).hide();
 var chart = d3.chart.treeview()
               .height(2000)
@@ -90,7 +90,6 @@ var legendShapeChart = d3.chart.treeview()
               .margins({top:42, left:10, right:0, bottom:0})
               .textwidth(110);
 
-<?php include_once "vivian_tree_layout_common.js" ?>
 
 var shapeLegend = [{name: "Framework Grouping (Collapsed)", shape: "triangle-up","_children":[],"hasRequirements": false, "index":0, "depth": -10},
                    {name: "Framework Grouping (Expanded)", shape: "triangle-up", "depth": -10,"index":1},

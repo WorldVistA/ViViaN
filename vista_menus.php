@@ -3,8 +3,8 @@
   <title>VistA Menus</title>
   <head>
     <?php
-      include_once "vivian_common_header.php";
       include_once "vivian_tree_layout.css";
+      include_once "vivian_common.php";
     ?>
     <!-- JQuery Buttons -->
     <script>
@@ -80,7 +80,7 @@
         });
       });
     </script>
-    <?php include_once "vivian_google_analytics.php" ?>
+
     <style>
       .ui-autocomplete {
           max-height: 400px;
@@ -93,7 +93,6 @@
   </head>
 
   <body>
-    <?php include_once "vivian_osehra_image.php" ?>
 
   <!-- Tooltip -->
   <div id="toolTip" class="tooltip" style="opacity:0;">
@@ -135,6 +134,8 @@
 
 <script type="text/javascript">
 
+<?php include_once "vivian_tree_layout_common.js" ?>
+
 // Note: vivian_tree_layout_common expects this variable
 // to be called 'chart'.
 var chart = d3.chart.treeview()
@@ -154,8 +155,6 @@ var legendTypeChart = d3.chart.treeview()
               .width(1300)
               .margins({top:10, left:10, right:0, bottom:0})
               .textwidth(110);
-
-<?php include_once "vivian_tree_layout_common.js" ?>
 
 var shapeLegend = [{name: "Menu", shape: "triangle-up"},
                    {name: "Entry", shape:"circle"}]
