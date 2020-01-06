@@ -34,6 +34,8 @@ class test_installscale(unittest.TestCase):
     packageAuto.send_keys("Clinical Procedures")
     time.sleep(2)
     driver.find_elements_by_class_name("ui-menu-item")[0].click()
+    # Add delay to not capture old timeline objects before new ones are added.
+    time.sleep(2)
     startDateBox = driver.find_element_by_id('timeCtl').find_elements_by_class_name("tick")[0].find_element_by_tag_name('text')
     endDate = startDateBox.text
     self.assertTrue(endDate != origDate, "Start dates did not change")
