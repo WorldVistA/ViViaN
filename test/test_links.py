@@ -74,32 +74,41 @@ class test_links(unittest.TestCase):
     self.go_to_vivian_link('vista-install', 'install-tree', 'patchDependency.php')
 
   # Now that we've navigated away from the main page, click on 'ViViaN' button
-  def test_16_vivian(self):
+  def test_09_vivian(self):
     self.go_to_vivian_link('vivian', None, 'index.php')
 
   # VistA Interfaces
-  def test_09_all_hl7(self):
+  def test_10_all_hl7(self):
     self.go_to_interface_link('all_hl7', '101/All-HL7.html')
 
-  def test_10_all_hlo(self):
+  def test_12_all_hlo(self):
     self.go_to_interface_link('all_hlo', '779_2/All-HLO.html')
 
-  def test_11_all_icr(self):
+  def test_12_all_icr(self):
     self.go_to_interface_link('all_icr', 'ICR/All-ICR%20List.html')
 
-  def test_12_all_protocols(self):
+  def test_13_all_protocols(self):
     self.go_to_interface_link('all_protocols', '101/All-Protocols.html')
 
-  def test_13_all_rpc(self):
+  def test_14_all_rpc(self):
     self.go_to_interface_link('all_rpc', '8994/All-RPC.html')
 
-  def test_14_all_name(self):
+  def test_15_all_hl_logical(self):
+    self.go_to_interface_link('all_hl_logical', '870/870.html')
+
+  def test_16_all_web_server(self):
+    self.go_to_interface_link('all_web_server', '18_12/18.12.html')
+
+  def test_17_all_web_service(self):
+    self.go_to_interface_link('all_web_service', '18_02/18.02.html')
+
+  def test_18_all_name(self):
     self.go_to_files_link('vista-information', 'all_name', 'Namespace/Namespace.html')
 
-  def test_15_all_number(self):
+  def test_19_all_number(self):
     self.go_to_files_link('vista-information', 'all_number', 'Numberspace/Numberspace.html')
 
-  def test_16_query_vis(self):
+  def test_20_query_vis(self):
     self.go_to_vivian_link('queryVis_stats', None, 'queryVis_stats.php')
     driver.back()
     time.sleep(1)
@@ -107,7 +116,7 @@ class test_links(unittest.TestCase):
   # 'About' is tested in 'test_about'
 
   # Join the Visualization Working Group
-  def test_17_visualization_working_group(self):
+  def test_21_visualization_working_group(self):
     driver.find_element_by_id("workinggroup").click()
     time.sleep(1)
     self.assertEqual(driver.current_url, 'https://www.osehra.org/content/visualization-open-source-project-group')
@@ -115,18 +124,18 @@ class test_links(unittest.TestCase):
     time.sleep(1)
 
   # FOIA VistA
-  def test_18_vxvista(self):
+  def test_22_vxvista(self):
     self.go_to_vivian_link('foia-vista', 'vxvista', 'vxvista/')
     driver.back()
     time.sleep(1)
 
   # VA Visualizations
-  def test_19_business_information_model(self):
+  def test_23_business_information_model(self):
     self.go_to_link('va-visualizations', 'business-information-model', 'https://bim.osehra.org/')
     driver.back()
     time.sleep(1)
 
-  def test_20_hybrid_information_model(self):
+  def test_24_hybrid_information_model(self):
     self.go_to_link('va-visualizations', 'hybrid-information-model', 'https://him.osehra.org/')
     driver.back()
     time.sleep(1)
