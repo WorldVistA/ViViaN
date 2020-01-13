@@ -54,9 +54,12 @@
           <ul class="dropdown-menu">
             <li><a class="qindex-dropdown" onclick="window.location.href=FILES_URL+'101/All-HL7.html'" id="all_hl7">HL7</a></li>
             <li><a class="qindex-dropdown" onclick="window.location.href=FILES_URL+'779_2/All-HLO.html'" id="all_hlo">HLO</a></li>
+            <li><a class="qindex-dropdown" onclick="window.location.href=FILES_URL+'870/870.html'" id="all_hl_logical">HL Logical Link</a></li>
             <li><a class="qindex-dropdown" onclick="window.location.href=FILES_URL+'ICR/All-ICR%20List.html'" id="all_icr">ICR</a></li>
             <li><a class="qindex-dropdown" onclick="window.location.href=FILES_URL+'101/All-Protocols.html'" id="all_protocols">Protocols</a></li>
             <li><a class="qindex-dropdown" onclick="window.location.href=FILES_URL+'8994/All-RPC.html'" id="all_rpc">RPC</a></li>
+            <li><a class="qindex-dropdown" onclick="window.location.href=FILES_URL+'18_12/18.12.html'" id="all_web_server">Web Server</a></li>
+            <li><a class="qindex-dropdown" onclick="window.location.href=FILES_URL+'18_02/18.02.html'" id="all_web_service">Web Service</a></li>
           </ul>
         </li>
 
