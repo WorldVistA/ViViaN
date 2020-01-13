@@ -547,5 +547,6 @@ tfoot input.search_init {
 }
 
 #dt_example ul {
-  color: #4E6CA3;
+  padding-inline-start: 0px;
+  white-space: nowrap;
 }
