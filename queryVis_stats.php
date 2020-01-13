@@ -48,7 +48,7 @@
   <select id="vivSelect"></select>
 
   <script type="text/javascript">
-    document.cookie = 'url=' + DOX_URL + "*.json" + "; path=/";
+    document.cookie = 'url=' + FILES_URL + "*.json" + "; path=/";
     var files = "<?php  foreach(glob($_COOKIE['url']) as $filename) { echo $filename.",";  };?>"
     filesArray = files.split(",")
     filesArray.pop()
