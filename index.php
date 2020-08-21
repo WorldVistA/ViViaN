@@ -89,11 +89,11 @@ var header = d3.select(document.getElementById("header1"));
 var himJSON  = {}
 var selectedIndex = 0;
 var distProp = [ // constants to store property of each distribution
-  { color: "black", distribution: 'All' },
+  { color: "black", distribution: 'All' }
+  /**,
   { color: "#FF0000", distribution: 'OSEHRA VistA', doxlink: "http://code.osehra.org/OSEHRA_dox/" },
   { color: "#3300CC", distribution: 'VA FOIA VistA', doxlink: "http://code.osehra.org/dox/" },
   { color: "#080", distribution: 'DSS vxVistA'}
-  /**
   ,{
     distribution: "Medsphere",
     color: "#FF00FF"
