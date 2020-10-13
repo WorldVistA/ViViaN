@@ -1,15 +1,17 @@
 <div style="display:inline-block; margin-left: 50px; font-size: 0;">
-  <a href="https://www.osehra.org" style="display:inline-block;">
-    <img src="https://www.osehra.org/profiles/drupal_commons/themes/commons_osehra_earth/logo.png" height="48" width="200" alt="OSEHRA Logo"/>
+  <a href="https://www.worldvista.org" style="display:inline-block;">
+    <img src="https://opensourcevista.net/NancysVistAServer/WorldVistALogoSmall.jpg" height="48" width="200" alt="OSEHRA Logo"/>
   </a>
   <p id="title" style="display:inline-block; font-size: 16px;">
     ViViaN<sup style="font-size: 12px;">TM</sup>(<u>Vi</u>sualizing <u>Vi</u>stA <u>a</u>nd <u>N</u>amespace)
   </p>
+  <!--
   <button style="display:inline-block; font-size: 12px; margin-top: 5px; margin-bottom: 5px; margin-left: 350px; padding: 10px;"
           onclick="window.location.href='https://www.osehra.org/content/visualization-open-source-project-group'"
           id="workinggroup">
     Join the Visualization Working Group
   </button>
+  -->
 </div>
 
 <div id="navigation_buttons" style="font-size:1.0em;">
@@ -18,7 +20,7 @@
       <ul class="nav navbar-nav">
 
         <li><a class="brand" href="index.php" id="vivian"  style="height:50px; padding: 0px;">
-            <img width="137" height="50" src="https://osehra.org/sites/default/files/vivian.png"></img></a></li>
+            <img width="137" height="50" src="/vivian.png"></img></a></li>
 
         <li class="dropdown" id="vista-menus">
           <a class="dropdown-toggle qindex" data-toggle="dropdown" href="#">Menus<span class="caret"></span></a>
@@ -83,9 +85,11 @@
 
         <li class="dropdown"  id="foia-vista">
           <a class="dropdown-toggle qindex" data-toggle="dropdown" href="#">FOIA VistA <span class="caret"></span></a>
+          <!--
           <ul class="dropdown-menu" id="vxvista">
             <li><a class="qindex-dropdown" href="vxvista" id="vxvista">DSS vxVistA</a></li>
           </ul>
+          -->
         </li>
 
         <li class="dropdown" id="va-visualizations">
