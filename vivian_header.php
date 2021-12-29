@@ -1,17 +1,10 @@
 <div style="display:inline-block; margin-left: 50px; font-size: 0;">
   <a href="https://www.worldvista.org" style="display:inline-block;">
-    <img src="https://opensourcevista.net/NancysVistAServer/WorldVistALogoSmall.jpg" height="48" width="200" alt="OSEHRA Logo"/>
+    <img src="https://opensourcevista.net/NancysVistAServer/WorldVistALogoSmall.jpg" height="48" width="200" alt="WorldVistA Logo"/>
   </a>
   <p id="title" style="display:inline-block; font-size: 16px;">
     ViViaN<sup style="font-size: 12px;">TM</sup>(<u>Vi</u>sualizing <u>Vi</u>stA <u>a</u>nd <u>N</u>amespace)
   </p>
-  <!--
-  <button style="display:inline-block; font-size: 12px; margin-top: 5px; margin-bottom: 5px; margin-left: 350px; padding: 10px;"
-          onclick="window.location.href='https://www.osehra.org/content/visualization-open-source-project-group'"
-          id="workinggroup">
-    Join the Visualization Working Group
-  </button>
-  -->
 </div>
 
 <div id="navigation_buttons" style="font-size:1.0em;">
@@ -85,19 +78,6 @@
 
         <li class="dropdown"  id="foia-vista">
           <a class="dropdown-toggle qindex" data-toggle="dropdown" href="#">FOIA VistA <span class="caret"></span></a>
-          <!--
-          <ul class="dropdown-menu" id="vxvista">
-            <li><a class="qindex-dropdown" href="vxvista" id="vxvista">DSS vxVistA</a></li>
-          </ul>
-          -->
-        </li>
-
-        <li class="dropdown" id="va-visualizations">
-          <a class="dropdown-toggle qindex" data-toggle="dropdown" href="#">VA Visualizations<span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a class="qindex-dropdown" href="https://bim.osehra.org" id="business-information-model">Business Information Model</a></li>
-            <li><a class="qindex-dropdown" href="https://him.osehra.org" id="hybrid-information-model">Hybrid Information Model</a></li>
-          </ul>
         </li>
       </ul>
     </div>
@@ -108,8 +88,7 @@
   function aboutClicked(){
     d3.json(FILES_URL+"/filesInfo.json", function(json) {
       console.log($('#dialog-modal-dataVersion'))
-      $('#dialog-modal-dataVersion').text("The information in this instance of ViViaN was generated on:  "+json["date"] +
-                                          " from the OSEHRA VistA-M repository with a Git hash of:  "+ json["sha1"]);
+      $('#dialog-modal-dataVersion').text("The information in this instance of ViViaN was generated on:  " + json["date"])
     });
       var overlayDialogObj = {
         autoOpen: true,
@@ -126,8 +105,9 @@
 <div id="dialog-modal-about" style="display:none">
   <div id='About'>
     <p>
-    ViViaN(TM) (Visualizing VistA and Namespace) is an OSEHRA developed, web based
+    ViViaN(TM) (Visualizing VistA and Namespace) was an OSEHRA developed, web based
     tool for viewing and browsing relationships among hierarchical and connected entities.
+    Today.<a href="https://www.worldvista.org">WorldVistA</a> maintains it.
     </p>
     <p>
     Originally developed to allow browsing of the VistA code base via a tree-based
