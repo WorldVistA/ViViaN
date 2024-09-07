@@ -13,7 +13,7 @@
       <ul class="nav navbar-nav">
 
         <li><a class="brand" href="index.php" id="vivian"  style="height:50px; padding: 0px;">
-            <img width="137" height="50" src="/vivian.png"></img></a></li>
+            <img width="137" height="50" src="/vivian/vivian.png"></img></a></li>
 
         <li class="dropdown" id="vista-menus">
           <a class="dropdown-toggle qindex" data-toggle="dropdown" href="#">Menus<span class="caret"></span></a>
