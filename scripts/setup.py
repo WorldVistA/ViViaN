@@ -65,10 +65,6 @@ def run(files_dir, dox_dir):
   # output: <files_dir>/bff.json
   BFFExcel2Json.run("BFF_version_2-12.xlsx", "%s/bff.json" % files_dir)
 
-  # Move ../himData.json to <files_dir>/himData.json
-  shutil.copyfile("../himData.json", "%s/himData.json" % files_dir)
-  print("*** Copied %s/himData.json" % files_dir)
-
   # create pathData.js with the relativepaths to each
   with open("../pathData.js","w") as pathFile:
     rel_dox_dir = os.path.relpath(dox_dir,files_dir).replace('\\','/')

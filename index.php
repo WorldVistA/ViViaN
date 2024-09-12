@@ -108,7 +108,6 @@ var packageInfoProp = {
   "namespaces": {"func": getNamespaceHtml, "title": "Namespaces"},
   "dependencies": {"func": getDependencyContentHtml, "title": "Dependencies"},
   "interface": {"func": getInterfaceHtml, "title": "Interfaces"},
-  "himInfo": {"func": getHIMLink, "title": "HIM Info"},
   "description": {"func": getDescriptionHtml, "title": "Description"},
   "status": {"func": getStatusHtml, "title": "Status"},
 }
@@ -232,17 +231,6 @@ function getNamespaceHtml(pkgName, pkg) {
 function createLink(link, text) {
   return "<a href=\"" + link + "\" target=\"_blank\">" + text + "</a>";
 }
-
-function getHIMLink(pkgName, pkg) {
-    var htmlLnk = ''
-    var himPath = himJSON[pkg.name];
-    if (himPath != null) {
-      var himLink = "http://him.osehra.org/content/" + himPath;
-      var himText = "HIM Visualization for " + pkgName;
-      htmlLnk = createLink(himLink, himText);
-    }
-    return htmlLnk
-};
 
 function getRPCLinkByPackageName(pkgName) {
   var link = vivianDataPath + "8994" + "/" + pkgName + "-RPC.html";

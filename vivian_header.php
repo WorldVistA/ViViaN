@@ -74,11 +74,9 @@
 
         <li><a href="javascript:aboutClicked();" class="qindex">About</a></li>
 
-        <li><a onclick="window.location.href=DOX_URL" class="qindex">DOX</a></li>
+        <li><a onclick="window.location.href=DOX_URL" class="qindex" style="cursor: pointer">DOX</a></li>
 
-        <li class="dropdown"  id="foia-vista">
-          <a class="dropdown-toggle qindex" data-toggle="dropdown" href="#">FOIA VistA <span class="caret"></span></a>
-        </li>
+        <li><a class="qindex">FOIA VistA</a></li>
       </ul>
     </div>
   </nav>
@@ -107,7 +105,7 @@
     <p>
     ViViaN(TM) (Visualizing VistA and Namespace) was an OSEHRA developed, web based
     tool for viewing and browsing relationships among hierarchical and connected entities.
-    Today.<a href="https://www.worldvista.org">WorldVistA</a> maintains it.
+    Today <a href="https://www.worldvista.org">WorldVistA</a> maintains it.
     </p>
     <p>
     Originally developed to allow browsing of the VistA code base via a tree-based
